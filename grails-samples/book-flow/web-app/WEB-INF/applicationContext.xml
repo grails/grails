@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<bean id="grailsApplication" class="org.codehaus.groovy.grails.commons.GrailsApplicationFactoryBean">
+		<description>Grails application factory bean</description>
+		<property name="groovyFiles">
+			<value>classpath*:**/grails-app/**/*.groovy</value>
+		</property>
+		<property name="injectionOperation" ref="injectionOperation" />
+	</bean>
+
+	<bean id="pluginManager" class="org.codehaus.groovy.grails.plugins.GrailsPluginManagerFactoryBean">
+		<description>A bean that manages Grails plugins</description>
+		<property name="pluginFiles">
+			<value>classpath*:**/plugins/**/*GrailsPlugin.groovy</value>
+		</property>
+		<property name="application" ref="grailsApplication" />
+	</bean>    
+	
+	<bean id="grailsConfigurator" class="org.codehaus.groovy.grails.commons.spring.GrailsRuntimeConfigurator">
+        <constructor-arg>
+            <ref bean="grailsApplication" />
+        </constructor-arg>
+        <property name="pluginManager" ref="pluginManager" />
+    </bean>
+	
+    <bean id="grailsResourceHolder" scope="prototype" class="org.codehaus.groovy.grails.commons.spring.GrailsResourceHolder">
+        <property name="resources">
+              <value>classpath*:**/grails-app/**/*.groovy</value>
+        </property>
+    </bean>    
+    
+	<bean id="domainInjector" class="org.codehaus.groovy.grails.injection.DefaultGrailsDomainClassInjector">	
+	</bean>
+	
+	<bean id="injectionOperation" class="org.codehaus.groovy.grails.injection.GrailsInjectionOperation">	
+	</bean>    
+
+   <bean id="characterEncodingFilter"
+      class="org.springframework.web.filter.CharacterEncodingFilter">
+        <property name="encoding">
+          <value>utf-8</value>
+        </property>
+   </bean>    	
+</beans>
