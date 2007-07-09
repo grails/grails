@@ -1,8 +1,6 @@
-webflow.flow.storage="client"
-
 // log4j configuration
 log4j {
-    appender.stdout = "org.apache.log4j.ConsoleAppender")
+    appender.stdout = "org.apache.log4j.ConsoleAppender"
     appender."stdout.layout"="org.apache.log4j.PatternLayout"        
     rootLogger="info,stdout"
     logger {
@@ -11,7 +9,7 @@ log4j {
         org.codehaus.groovy.grails.commons="info,stdout"
         org.codehaus.groovy.grails.plugins="info,stdout"
         org.springframework="off,stdout"     
-        org."springframework.webflow"="debug,stdout"
+        org."springframework.webflow"="info,stdout"
         org.codehaus.groovy.grails.orm.hibernate="info,stdout"
 		org.hibernate="off,stdout"
     }                      
@@ -23,10 +21,4 @@ log4j {
 		org."springframework.webflow" = false
 		org.hibernate=false
     }
-}   
-
-environments {
-	"development" {
-		log4j.logger.org.springframework="debug,stdout"
-	}
-}       
+}

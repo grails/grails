@@ -16,7 +16,7 @@
 
     <context-param>
         <param-name>webAppRootKey</param-name>
-        <param-value>addressbook</param-value>
+        <param-value>book-flow</param-value>
     </context-param>
 
     <filter>

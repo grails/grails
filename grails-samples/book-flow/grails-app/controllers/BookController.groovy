@@ -9,12 +9,12 @@ class BookController {
 			on(Exception).to "handleError"
 		}
 		showCatalogue {
-			on("chooseBook") { ctx -> 
+			on("chooseBook") { ctx ->
 				if(!params.id)return error()
-				def items = ctx.flowScope.get("cartItems")
+				def items = ctx.flow.cartItems
 				if(!items) items = [] as HashSet
 				items << Book.get(params.id)
-				ctx.flowScope.put("cartItems", items)
+				ctx.flow.cartItems = items
 			}.to "showCart"
 		}       
 		showCart {
@@ -23,11 +23,9 @@ class BookController {
 		}
 		enterPersonalDetails {
 			on("submit") { ctx ->
-				def p = new Person(params)
-				ctx.flowScope.put("person",p)  
-				if(p.hasErrors() || !p.validate()) {
-				  return error()
-				} 
+				def p = new Person(params)                      
+				ctx.flow.person = p
+				if(p.hasErrors() || !p.validate())return error()				
 			}.to "enterShipping"    
 			on("return").to "showCart" 
 			on(Exception).to "handleError"
@@ -35,18 +33,16 @@ class BookController {
 		enterShipping  {
 			on("back").to "enterPersonalDetails"
 			on("submit") { ctx ->
-				def a = new Address(params)
-				ctx.flowScope.put("address",a)
-				if(a.hasErrors() || !a.validate()) {
-				  return error()
-				}
+				def a = new Address(params)				                        
+				ctx.flow.address = a
+				if(a.hasErrors() || !a.validate()) return error()				
 			}.to "enterPayment"
 		}                                
 		enterPayment  {
 			on("back").to "enterShipping"
 			on("submit") { ctx ->
-				def pd = new PaymentDetails(params)
-				ctx.flowScope.put("paymentDetails",pd)
+				def pd = new PaymentDetails(params)                
+				ctx.flow.paymentDetails = pd
 				if(pd.hasErrors() || !pd.validate()) return error()
 			}.to "confirmPurchase"
 		}                                   
@@ -56,12 +52,14 @@ class BookController {
 		}                                         
 		processPurchaseOrder  {
 			action { ctx ->                 
-				def a =  ctx.flowScope.remove("address")
-				def p = ctx.flowScope.remove("person")
-				def pd = ctx.flowScope.remove("paymentDetails")
+				def a =  ctx.flow.address
+				def p = ctx.flow.person
+				def pd = ctx.flow.paymentDetails
+				def cartItems = ctx.flow.cartItems
+				ctx.flow.clear()
+				
 				def o = new Order(person:p, shippingAddress:a, paymentDetails:pd)
-				o.invoiceNumber = new Random().nextInt(99999)
-				def cartItems = ctx.flowScope.remove("cartItems")
+				o.invoiceNumber = new Random().nextInt(9999999)								
 				cartItems.each { o.addToItems(it) }
 				[order:o]
 			}   
