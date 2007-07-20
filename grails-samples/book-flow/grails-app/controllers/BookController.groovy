@@ -1,30 +1,43 @@
-class BookController {   
+import org.springframework.context.*
+
+class BookController implements ApplicationContextAware  {   
+	ApplicationContext applicationContext
+	
+	def test = {  
+		GroovySystem.metaClassRegistry.removeMetaClass(String)   	           
+		render "${applicationContext.getBeanDefinition('bookService')}"
+	}                                                                  
+	
 	def index = {
 		redirect(action:'shoppingCart')
 	}    
 	def shoppingCartFlow = {   
 		getBooks {
-			action { [ bookList:Book.list() ]}   
+			action { 
+
+				[ bookList:Book.list() ]
+			}   
 			on("success").to "showCatalogue"
 			on(Exception).to "handleError"
 		}
-		showCatalogue {
-			on("chooseBook") { ctx ->
+		showCatalogue { 
+			on("chooseBook") { 
 				if(!params.id)return error()
-				def items = ctx.flow.cartItems
+				def items = flow.cartItems
 				if(!items) items = [] as HashSet
 				items << Book.get(params.id)
-				ctx.flow.cartItems = items
+				flow.cartItems = items
 			}.to "showCart"
 		}       
 		showCart {
-			on("checkout").to "enterPersonalDetails"
-			on("continueShopping").to "showCatalogue"
-		}
+	    	on("checkout").to "enterPersonalDetails"
+		    on("continueShopping").to "showCatalogue"
+		}                                          
 		enterPersonalDetails {
-			on("submit") { ctx ->
-				def p = new Person(params)                      
-				ctx.flow.person = p
+			on("submit") { 
+				def p = new Person(params)
+				flow.person = p  
+				def e = yes()
 				if(p.hasErrors() || !p.validate())return error()				
 			}.to "enterShipping"    
 			on("return").to "showCart" 
@@ -32,17 +45,17 @@ class BookController {
 		}               
 		enterShipping  {
 			on("back").to "enterPersonalDetails"
-			on("submit") { ctx ->
+			on("submit") { 
 				def a = new Address(params)				                        
-				ctx.flow.address = a
+				flow.address = a
 				if(a.hasErrors() || !a.validate()) return error()				
 			}.to "enterPayment"
 		}                                
 		enterPayment  {
 			on("back").to "enterShipping"
-			on("submit") { ctx ->
+			on("submit") { 
 				def pd = new PaymentDetails(params)                
-				ctx.flow.paymentDetails = pd
+				flow.paymentDetails = pd
 				if(pd.hasErrors() || !pd.validate()) return error()
 			}.to "confirmPurchase"
 		}                                   
@@ -51,12 +64,12 @@ class BookController {
 			on("confirm").to "processPurchaseOrder"
 		}                                         
 		processPurchaseOrder  {
-			action { ctx ->                 
-				def a =  ctx.flow.address
-				def p = ctx.flow.person
-				def pd = ctx.flow.paymentDetails
-				def cartItems = ctx.flow.cartItems
-				ctx.flow.clear()
+			action {                  
+				def a =  flow.address
+				def p = flow.person
+				def pd = flow.paymentDetails
+				def cartItems = flow.cartItems
+				flow.clear()
 				
 				def o = new Order(person:p, shippingAddress:a, paymentDetails:pd)
 				o.invoiceNumber = new Random().nextInt(9999999)								
