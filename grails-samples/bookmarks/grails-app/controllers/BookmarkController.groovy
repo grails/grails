@@ -87,14 +87,14 @@ class BookmarkController extends SecureController {
 				Tag t = Tag.findByName(it)
 				if(!t)t = new Tag(name:it).save()
 
-				b.addTagReference(new TagReference(bookmark:b, tag:t, user:b.user))
+				b.addToTags(new TagReference(bookmark:b, tag:t, user:b.user))
 			}
 		}
 		else {
 			Tag t = Tag.findByName(tags)
 			if(!t)t = new Tag(name:tags).save()
 
-			b.addTagReference( new TagReference(bookmark:b, tag:t, user:b.user) )
+			b.addToTags( new TagReference(bookmark:b, tag:t, user:b.user) )
 		}		
 	}    
 	
@@ -137,7 +137,7 @@ class BookmarkController extends SecureController {
 			//log.error("Error communication with del.icio.us service: ${e.message}",e)
 		}		
 		
-		render(view:'list',model:[ bookmarkList:bookmarks.adaptee.unique(),
+		render(view:'list',model:[ bookmarkList:bookmarks.unique(),
 		                           deliciousResults:fromDelicious] )
 	}
 	

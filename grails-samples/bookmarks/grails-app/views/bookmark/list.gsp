@@ -18,8 +18,11 @@
                        ${flash.message}
                  </div>
             </g:if>
-			
-			<g:render template="bookmark" var="bookmark" collection="${bookmarkList}" />
+			                          
+			<g:if test="${bookmarkList}">
+				<g:render template="bookmark" var="bookmark" collection="${bookmarkList}" />				
+			</g:if>
+
 		
 			<g:if test="${deliciousList}"> 
 				<h2>Latest from <a href="http://del.icio.us/${session.user.login}" target="_blank">del.icio.us</a></h2>

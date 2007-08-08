@@ -18,8 +18,11 @@
             </g:if>
 			<p>Below is a list of tags you are subscribed to. You will receive weekly notifications of 
 				new bookmarks that have been added by other users that have been tagged with the below:</p>
-			<ul id="subscriptions">
-				<g:render template="subscription" var="subscription" collection="${subscriptionList}" />
+			<ul id="subscriptions">    
+				<g:if test="${subscriptionList}">
+					<g:render template="subscription" var="subscription" 	collection="${subscriptionList}" />
+					
+				</g:if>
 			</ul>
 			<p>
 				<g:formRemote name="addTag" url="[action:'save']" update="subscriptions">
