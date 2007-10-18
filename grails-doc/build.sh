@@ -1,0 +1,1 @@
+groovy -cp "lib/plextile.jar" Generate.groovy 

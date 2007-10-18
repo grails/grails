@@ -1,0 +1,64 @@
+<html>
+	<head>
+		  <title>${title} ${version} - Reference Documentation</title>
+		  <style type="text/css" media="screen">
+				.body {
+					margin-left: 30px;
+					font-family: Tahoma, Verdana, Arial;
+					font-size:95%;
+				}  
+				#header .images {         
+					padding-bottom:40px;
+				} 
+				#header .message {
+					font-family:"Century Gothic", "Trebuchet MS", "Arial Narrow", Arial, sans-serif;
+					font-size:15px;
+					text-transform:uppercase;
+					text-align:right;
+					font-weight:normal;	
+					margin:0;
+					padding:0;
+					margin-right:40px;	
+					color:#000000;
+					border-bottom:1px solid #eeeeee;					
+				}  
+				pre {
+					border: 1px solid black;
+					padding-bottom:10px;
+					background-color: lightgrey;
+				}    
+				
+				#footer {
+					border-top:1px solid #eeeeee;										
+					text-align:center;
+				} 
+				.tocItem {
+					padding-bottom: 4px;
+				}
+		  </style>
+	</head>
+    <body class="body">
+		<div id="header">
+				<div class="images">
+				   <a href="http://grails.org"><img alt="The Grails Framework" src="img/grails.png" width="300" border="0"></a>
+				   <span style="right:30px; top:20px; position:absolute;"><a alt="G2One - The Groovy/Grails Company" href="http://g2one.com"><img src="img/g2one.png" width="130" border="0"></a></span>					
+				</div>
+				<div class="message">See the light - agile, industrial strength, rapid web application development made easy</div>
+				<h1>The Grails Framework - Reference Documentation</h1>
+				<h2>Authors</h2>
+				<p>Graeme Rocher</p>
+				<i>Copies of this document may be made for your own use and for distribution to others, provided that you do not charge any fee for such copies and further provided that each copy contains this Copyright Notice, whether distributed in print or electronically.</i>
+		</div>                       
+		
+		<div id="toc">  
+			<h2>Table of Contents</h2>
+			${toc}
+		</div>     
+		<div id="content">
+			${body}         			
+		</div>
+		<div id="footer">
+			  Sponsored by <a href="http://g2one.com">G2One Inc</a>
+		</div>	
+	</body>
+</html>
