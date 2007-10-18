@@ -6,7 +6,7 @@ ant = new AntBuilder()
 
 book = [:]
 for(f in files) {
-	def chapter = f.name[0..-5]      
+	def chapter = f.name[0..-9]      
 	println "Generating documentation for $chapter"
 	def contents = parser.parseTextile(f.text, true)
 	book[chapter] = contents
