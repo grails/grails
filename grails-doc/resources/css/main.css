@@ -1,0 +1,33 @@
+.body {
+	margin-left: 30px;
+	font-family: Tahoma, Verdana, Arial;
+	font-size:95%;
+}  
+#header .images {         
+	padding-bottom:40px;
+} 
+#header .message {
+	font-family:"Century Gothic", "Trebuchet MS", "Arial Narrow", Arial, sans-serif;
+	font-size:15px;
+	text-transform:uppercase;
+	text-align:right;
+	font-weight:normal;	
+	margin:0;
+	padding:0;
+	margin-right:40px;	
+	color:#000000;
+	border-bottom:1px solid #eeeeee;					
+}  
+pre {
+	border: 1px solid black;
+	padding-bottom:10px;
+	background-color: lightgrey;
+}    
+
+#footer {
+	border-top:1px solid #eeeeee;										
+	text-align:center;
+} 
+.tocItem {
+	padding-bottom: 4px;
+}
