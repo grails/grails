@@ -65,7 +65,7 @@ new File("resources/style/referenceItem.html").withReader { reader ->
 				def name = txt.name[0..-9]
 				menu << "<div class=\"menuItem\"><a href=\"${name}.html\" target=\"mainFrame\">${name}</a></div>"
 				def contents = parser.parseTextile(txt.text, true)			
-				
+				println "Generating reference item: ${name}"
 				new File("output/ref/${name}.html").withWriter { out ->
 				 	template.make(content:contents).writeTo(out)
 				}
