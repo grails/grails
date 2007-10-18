@@ -16,11 +16,24 @@ h2 {
 
 p {
 	margin-left:50px;
-}                   
+}     
+
+ul {
+	margin-left:50px;
+}                    
+
+ol {
+	margin-left:50px;
+}                    
+
+table {
+	margin-left:50px;
+}
 
 pre {
 	border: 1px solid black;
-	padding-bottom:10px;
+	padding-bottom:20px;
+	padding-left:20px;
 	background-color: lightgrey;
 	margin-left:50px;
 }

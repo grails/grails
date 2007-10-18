@@ -1,0 +1,21 @@
+h1. create-domain-class 
+
+h2. Purpose
+
+The _create-domain-class_ command will create a domain and associated integration test for the given base name. For example for a base name "book" a domain class called _Book_ will be created in the _grails-app/domain_ directory.   
+
+Note that this command is merely for convenience and you can also create domain classes in your favourite text editor or IDE if you choose.
+
+h2. Examples
+
+bc.
+grails create-domain-class book
+
+h2. Description
+
+Usage: grails create-domain-class _[name]_
+
+Fired Events: 
+
+* _CreatedFile_ - When the domain class is created
+

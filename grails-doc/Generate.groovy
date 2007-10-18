@@ -60,13 +60,22 @@ new File("resources/style/referenceItem.html").withReader { reader ->
 	for(f in files) {
 		if(f.directory && !f.name.startsWith(".")) {
 			menu << "<h1 class=\"menuTitle\">${f.name}</h1>"
+			new File("output/ref/${f.name}").mkdirs()
 			def textiles = f.listFiles().findAll { it.name.endsWith(".textile")}
+			def usageFile = new File("src/ref/${f.name}.textile")
+			if(usageFile.exists()) {
+				def contents = parser.parseTextile(usageFile.text, true)							
+				new File("output/ref/${f.name}/Usage.html").withWriter { out ->
+				 	template.make(content:contents).writeTo(out)
+				}				
+				menu << "<div class=\"menuUsageItem\"><a href=\"${f.name}/Usage.html\" target=\"mainFrame\">Usage</a></div>"								
+			}
 			for(txt in textiles) {                        
 				def name = txt.name[0..-9]
-				menu << "<div class=\"menuItem\"><a href=\"${name}.html\" target=\"mainFrame\">${name}</a></div>"
+				menu << "<div class=\"menuItem\"><a href=\"${f.name}/${name}.html\" target=\"mainFrame\">${name}</a></div>"
 				def contents = parser.parseTextile(txt.text, true)			
 				println "Generating reference item: ${name}"
-				new File("output/ref/${name}.html").withWriter { out ->
+				new File("output/ref/${f.name}/${name}.html").withWriter { out ->
 				 	template.make(content:contents).writeTo(out)
 				}
 			}

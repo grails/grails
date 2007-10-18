@@ -1,0 +1,23 @@
+h1. console
+
+h2. Purpose
+
+Starts an instance of the Swing graphical Groovy console with an initialized Grails runtime. Within the binding of the console an implicit __ctx__ variable is available that allows access to the Spring ApplicationContext instance.   
+
+h2. Examples
+
+bc.
+   grails console
+
+h2. Description
+
+Usage: grails [environment]* console        
+
+Fired Events:
+
+* _StatusFinal_ - When the console is loaded                    
+
+Screenshot:
+
+!../../img/console.png!
+

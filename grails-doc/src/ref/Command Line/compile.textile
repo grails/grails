@@ -1,0 +1,19 @@
+h1. compile 
+
+h2. Purpose
+
+The _compile_ command will execute the compile phase of the Grails pre-packaging process, which pre-compiles Groovy and Java sources.
+
+h2. Examples
+
+bc.
+grails compile
+
+h2. Description
+
+Usage: grails [environment]* compile
+
+Fired Events: 
+
+* _CompileStart_ - Before compilation begins
+* _CompileEnd_ - After compilation completes
