@@ -1,0 +1,26 @@
+h1 {
+	font-family: Arial, Verdana, Tahoma;
+	border-bottom:1px solid #eeeeee;  
+	font-size:1.2em;
+	margin-left:30px;
+	margin-top:50px;
+}                
+
+h2 {
+	font-family: Arial, Verdana, Tahoma;
+	font-weight:normal;
+	font-style: italic;
+	font-size:1.0em;
+	margin-left:30px;	
+}                
+
+p {
+	margin-left:50px;
+}                   
+
+pre {
+	border: 1px solid black;
+	padding-bottom:10px;
+	background-color: lightgrey;
+	margin-left:50px;
+}
