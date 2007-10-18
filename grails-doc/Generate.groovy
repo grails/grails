@@ -1,6 +1,6 @@
 import com.plink.plextile.*; 
 
-files = new File("./src").listFiles().findAll { it.name.endsWith(".txt") }
+files = new File("./src").listFiles().findAll { it.name.endsWith(".textile") }
 parser = new TextParser()
 ant = new AntBuilder()
 
