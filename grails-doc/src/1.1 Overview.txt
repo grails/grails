@@ -1,7 +1,0 @@
-h2. Some more text tile stuff
-
-going on *boo*! 
-
-Here is an image 
-
-!img/grails-icon.png!
