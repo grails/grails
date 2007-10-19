@@ -13,7 +13,7 @@ h2. Description
 
 Creates a domain class for the given base name. For example for a base name "book" a domain class called _Book_ will be created in the _grails-app/domain_ directory.         
 
-A domain class represents the core model behind in your application and is typically mapped onto database tables. For more information on domain models in Grails refer to the chapter on GORM in the "user guide":../../guide.html
+A domain class represents the core model behind in your application and is typically mapped onto database tables. For more information on domain models in Grails refer to the chapter on GORM in the "user guide":../../guide.html	
 
 Note that this command is merely for convenience and you can also create domain classes in your favourite text editor or IDE if you choose.
 

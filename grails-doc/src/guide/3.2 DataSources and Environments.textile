@@ -1,0 +1,15 @@
+The previous example configuration assumes you want the same config for all environments: production, test, development etc.
+
+Grails' DataSource definition is "environment aware", however, so you can do:
+
+bc.
+dataSource {
+	// common setting here
+}                     
+environments {
+  production {
+     dataSource {
+          url = "jdbc:mysql://liveip.com/liveDb"					
+     }			
+  }
+}

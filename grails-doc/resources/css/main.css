@@ -21,7 +21,8 @@
 pre {
 	border: 1px solid black;
 	padding-bottom:10px;
-	background-color: lightgrey;
+	background-color: lightgrey;    
+	padding-left:20px;  	
 }    
 
 #footer {

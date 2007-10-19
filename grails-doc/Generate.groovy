@@ -106,7 +106,7 @@ new File("./resources/style/menu.html").withReader { reader ->
 
 // Now generate PDF documentation   
 
-pdfParser =new PdfParser();
+/*pdfParser =new PdfParser();
 
 //Create a new document and set the pdf writer attributes
 doc = new Document()                                
@@ -169,7 +169,7 @@ h1. ${entry.key} Reference
 
 } finally {
 	doc.close()
-}
+}   */
 
 
 println "Done. Look at output/index.html"
