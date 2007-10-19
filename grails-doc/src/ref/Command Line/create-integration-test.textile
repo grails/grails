@@ -2,11 +2,7 @@ h1. create-integration-test
 
 h2. Purpose
 
-The _create-integration-test_ command will create an integration test for the given base name. For example for a base name "book" an integration test called _BookTests_ will be created in the _test/integration_ directory. 
-
-An integration test differs from a unit test in that the Grails environment is loaded for each test execution. Refer to section "x. Unit Testing":../../index.html of the user guide for information on unit vs. integration testing.
-
-Note that this command is merely for convenience and you can also create integration tests in your favourite text editor or IDE if you choose.
+The _create-integration-test_ command will create an integration test for the given base name. 
 
 h2. Examples
 
@@ -14,6 +10,12 @@ bc.
 grails create-integration-test book
 
 h2. Description
+
+Creates an integration test for the given base name. For example for a base name "book" an integration test called _BookTests_ will be created in the _test/integration_ directory. 
+
+An integration test differs from a unit test in that the Grails environment is loaded for each test execution. Refer to section "x. Unit Testing":../../guide.html of the user guide for information on unit vs. integration testing.
+
+Note that this command is merely for convenience and you can also create integration tests in your favourite text editor or IDE if you choose.
 
 Usage: grails create-integration-test _[name]_
 

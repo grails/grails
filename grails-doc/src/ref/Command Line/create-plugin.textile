@@ -2,16 +2,18 @@ h1. create-plugin
 
 h2. Purpose
 
-The _create-plugin_ command will create a Grails plug-in project. A Grails plug-in project is just like a regular Grails project except it contains a plug-in descriptor and can be packaged up as a plug-in and installed into other applications.
-
-Plug-ins are not just useful for plug-in developers, but also as a way to modularize large Grails applications. Refer to section "x. Plug-in Development":../../index.html in the user guide for more information on developing plug-ins for Grails.
+The _create-plugin_ command will create a Grails plug-in project.
 
 h2. Examples
 
 bc.
 grails create-plugin simple
 
-h2. Description
+h2. Description        
+
+Creates a Grails plug-in project. A Grails plug-in project is just like a regular Grails project except it contains a plug-in descriptor and can be packaged up as a plug-in and installed into other applications.
+
+Plug-ins are not just useful for plug-in developers, but also as a way to modularize large Grails applications. Refer to section "x. Plug-in Development":../../guide.html in the user guide for more information on developing plug-ins for Grails.
 
 Usage: grails create-plugin _[name]_
 

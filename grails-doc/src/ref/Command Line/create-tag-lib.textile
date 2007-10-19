@@ -1,0 +1,25 @@
+h1. create-tag-lib 
+
+h2. Purpose
+
+The _create-tag-lib_ command will create a tag library and associated integration test for the given base name. 
+
+h2. Examples
+
+bc.
+grails create-tag-lib book
+
+h2. Description         
+
+Creates a tag library for the give base name. For example for a base name "book" a tag library called _BookTagLib_ will be created in the _grails-app/taglib_ directory.   
+
+A tag library is a "view helper" that in MVC terms helps the view with rendering by providing a set of re-usable tags. For more information on tags refer to the section on "Tag Libraries" in the "user guide":../../guide.html.
+
+Note that this command is merely for convenience and you can also create controllers in your favourite text editor or IDE if you choose.
+
+Usage: grails create-tag-lib _[name]_
+
+Fired Events: 
+
+* _CreatedFile_ - When the tag library has been created
+

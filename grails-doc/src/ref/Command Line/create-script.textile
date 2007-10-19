@@ -1,0 +1,41 @@
+h1. create-script 
+
+h2. Purpose
+
+The _create-script_ command will create a new Grails executable script that can be run with the _grails_ command from a terminal window.
+
+
+h2. Examples
+
+The command:
+
+bc.
+grails create-script execute-report
+
+Creates a script called _scripts/ExecuteReport.groovy_ such as:
+
+bc.
+target('default': "The description of the script goes here!") {
+    doStuff()
+}
+target(doStuff: "The implementation task") {
+   // logic here   
+}
+
+The command can then be run with:
+
+bc.
+grails execute-report	
+
+h2. Description
+
+The command will translate lower case command names, separated by hyphens into a valid Groovy class name with camel case. For example _create-controller_ would become a script called _scripts/CreateController.groovy_ 
+
+The script generated is a "Gant":http://groovy.codehaus.org/Gant script which can use Gant's capabilities to depend on other scripts from Grails core. Refer to the section on "Command Line Scripting" in the "user guide":../../guide.html
+
+Usage: grails create-script _[name]_
+
+Fired Events: 
+
+* _CreatedFile_ - When the script has been created
+

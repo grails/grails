@@ -1,0 +1,25 @@
+h1. create-service 
+
+h2. Purpose
+
+The _create-service_ command will create a Grails service class for the given base name. 
+
+h2. Examples
+
+bc.
+grails create-service book
+
+h2. Description         
+
+Creates a service for the give base name. For example for a base name "book" a service called _BookService_ will be created in the _grails-app/services_ directory.   
+
+A service class encapsulates business logic and is delegated to by controllers to perform the core logic of a Grails application. For more information on tags refer to the section on "Services" in the "user guide":../../guide.html.
+
+Note that this command is merely for convenience and you can also create controllers in your favourite text editor or IDE if you choose.
+
+Usage: grails create-service _[name]_
+
+Fired Events: 
+
+* _CreatedFile_ - When the service has been created
+

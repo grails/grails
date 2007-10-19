@@ -1,0 +1,27 @@
+h1. doc 
+
+h2. Purpose
+
+Generates javadoc and groovydoc documentation from the current Grails project.
+
+h2. Examples
+
+bc.
+grails doc
+
+h2. Description
+          
+
+Since Grails is a mixed source framework it is useful to have both Java and Groovy documentation to cover the system. The doc command generates javadoc (the standard format for Java documentation) and groovydoc comments. 
+
+The documentation itself is generated into the following directories:
+
+* _docs/api_ - Location of javadoc comments
+* _docs/gapi_ - Location of groovydoc comments
+
+Usage: grails doc
+
+Fired Events: 
+
+* _DocStart_ - Before documentation generation begins
+* _DocEnd_ - After documentation generation completes

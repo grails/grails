@@ -2,16 +2,20 @@ h1. create-controller
 
 h2. Purpose
 
-The _create-controller_ command will create a controller and associated integration test for the given base name. For example for a base name "book" a controller called _BookController_ will be created in the _grails-app/controllers_ directory.   
-
-Note that this command is merely for convenience and you can also create controllers in your favourite text editor or IDE if you choose.
+The _create-controller_ command will create a controller and associated integration test for the given base name. 
 
 h2. Examples
 
 bc.
 grails create-controller book
 
-h2. Description
+h2. Description            
+
+Creates a controller for the given base name. For example for a base name "book" a controller called _BookController_ will be created in the _grails-app/controllers_ directory.        
+
+A controller is responsible for dealing with incoming web request and performing actions such as redirects, rendering views and so on. For more information on controllers refer to the section on "Controllers" in the "user guide":../../guide.html
+
+Note that this command is merely for convenience and you can also create controllers in your favourite text editor or IDE if you choose.
 
 Usage: grails create-controller _[name]_
 

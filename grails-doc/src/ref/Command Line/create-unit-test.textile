@@ -1,0 +1,27 @@
+h1. create-unit-test
+
+h2. Purpose
+
+The _create-unit-test_ command will create an unit test for the given base name. 
+
+h2. Examples
+
+bc.
+grails create-unit-test book
+
+h2. Description          
+
+Creates a unit test for the given base name. For example for a base name "book" an unit test called _BookTests_ will be created in the _test/unit_ directory. 
+
+An unit test differs from an integration test in that the Grails environment is not loaded for each test execution and it is left up to you to perform the appropriate Mocking using GroovyMock or a Mock library such as EasyMock. 
+
+Refer to section "x. Unit Testing":../../guide.html of the user guide for information on unit vs. integration testing.
+
+Note that this command is merely for convenience and you can also create integration tests in your favourite text editor or IDE if you choose.
+
+Usage: grails create-unit-test _[name]_
+
+Fired Events: 
+
+* _CreatedFile_ - When the unit test is created
+
