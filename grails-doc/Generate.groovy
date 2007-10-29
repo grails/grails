@@ -23,10 +23,15 @@ contents = new StringBuffer()
 
 for(entry in book) {     
 	def margin = entry.key.indexOf(' ')
+	def header = 2
+	if(margin > -1) {
+		def index = entry.key[0..margin]
+		header = index.split(/\./).size()
+	}
 	if(margin <=2) margin = 0
 	margin *=5
     toc << "<div class=\"tocItem\" style=\"margin-left:${margin}px\"><a href=\"#${entry.key}\">${entry.key}</a></div>"  	
-	contents << "<h2><a name=\"${entry.key}\">${entry.key}</a></h2>"
+	contents << "<h${header}><a name=\"${entry.key}\">${entry.key}</a></h2>"
 	contents << parser.parseTextile(entry.value, true)
 } 
 
