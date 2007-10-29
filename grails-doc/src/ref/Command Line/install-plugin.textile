@@ -18,6 +18,14 @@ Usage:
 @grails install-plugin [URL/File]@
 @grails install-plugin [name] [version]*@
 
+Fired Events: 
+
+* _StatusUpdate_ - Fired at various points during the plug-in installation
+* _StatusError_ - When an error occurs during plug-in installation
+* _StatusFinal_ - When the plug-in is installed successfully
+* _PluginInstalled_ - When the plug-in is installed successfully
+
+
 The @install-plugin@ command is a versatile command that allows the installation of plug-ins from a remote URL, a local file or from the Grails central SVN repository at http://plugins.grails.org
 
 To install from a URL simply specify the absolute URL to the plug-in package:

@@ -1,0 +1,37 @@
+h1. package
+
+h2. Purpose
+
+Runs the packaging phase of Grails' runtime. This is mainly useful when used by other scripts.
+
+h2. Examples
+
+
+As an include:
+
+bc.
+includeTargets << new File ( "${grailsHome}/scripts/Package.groovy" )
+
+As a command:
+
+bc.
+grails package
+
+h2. Description
+
+Usage: @grails package@
+
+When used as an include you need to supply the following at the top of your Gant script:
+
+bc.
+includeTargets << new File ( "${grailsHome}/scripts/Package.groovy" )
+
+Once this is in place there are a number of useful commands that can be re-used:
+
+* *loadPlugins* - Loads all of the Grails plug-ins and creates the GrailsPluginManager instance
+* *generateWebXml* - Generates the Grails web.xml deployment descriptor
+* *generateLog4j* - Generates the Grails log4j properties file
+* *packageApp* - Calls all of the above 3 targets in the appropriate order
+
+Typically @packageApp@ is the most useful as it performs all the necessary packaging steps
+

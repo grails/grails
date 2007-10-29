@@ -1,0 +1,31 @@
+h1. test-app
+
+h2. Purpose
+
+Runs all Grails unit and integration tests and outputs reports. The command will return appropriate response codes for embedding with continuous integration servers.
+
+h2. Examples
+
+bc.
+grails test-app
+grails test-app Foo
+grails test-app Foo Bar
+
+h2. Description
+
+Usage: @grails test-app [names]*@
+
+Fired Events:
+
+* _StatusFinal_ - When the test cycle completes
+
+Executes the Grails unit and integration tests located in the @test/unit@ and @test/integration@ directories. By default all tests are executed, but you can specify the names of the tests (without the "Tests" suffix) as argument to the command:
+
+bc.
+grails test-app Foo
+grails test-app Foo Bar
+
+The first example will execute a test called @FooTests.groovy@ whilst the second will execute @FooTests.groovy@ and @BarTests.groovy@ if they exist.
+
+
+

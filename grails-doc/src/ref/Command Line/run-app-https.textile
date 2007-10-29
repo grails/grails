@@ -1,0 +1,16 @@
+h1. run-app-https
+
+h2. Purpose
+
+Extended version of "run-app":run-app.html that runs Grails using a generated keystore and SSL certificate for HTTPS
+
+h2. Examples
+
+bc.
+grails run-app-https
+
+h2. Description
+
+Usage: 
+@grails run-app-https@
+

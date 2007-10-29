@@ -14,6 +14,11 @@ h2. Description
 Usage: 
 @grails install-templates@
 
+Fired Events: 
+
+* _StatusUpdate_ - When the templates are successfully installed
+
+
 The @install-plugin@ command will install the set of templates Grails uses for all code generation activities to the @src/templates@ directory. The templates installed are as follows:
 
 bc.

@@ -14,6 +14,12 @@ h2. Description
 Usage: 
 @grails list-plugins@
 
+Fired Events: 
+
+* _StatusUpdate_ - When the plug-in list is being refreshed
+* _StatusError_ - When there was an error updating the plug-in list
+
+
 Lists the plug-ins that are installable via the Grails standard repository. Note: This command can take a while to execute depending in your internet connectivity. Typical output looks like this:
 
 bc.

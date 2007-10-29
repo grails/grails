@@ -1,0 +1,32 @@
+h1. plugin-info
+
+h2. Purpose
+
+Displays detailed info about a given plug-in
+
+h2. Examples
+
+bc.
+grails plugin-info jsecurity
+
+h2. Description
+
+Usage: 
+@grails plugin-info [name]@
+
+This command will display more detailed info about a given plug-in such as the author, location of documentation and so on. An example of the output of the JSecurity plug-in can be seen below:
+
+bc.
+--------------------------------------------------------------------------
+Information about Grails plugin
+--------------------------------------------------------------------------
+Name: jsecurity | Latest release: 0.1.1
+--------------------------------------------------------------------------
+Security support via the JSecurity framework.
+--------------------------------------------------------------------------
+Author: Peter Ledbrook
+--------------------------------------------------------------------------
+Find more info here: http://grails.codehaus.org/JSecurity+Plugin
+--------------------------------------------------------------------------
+Adds a security layer to your Grails application, allowing you to
+protect pages based on a user's roles and/or permissions.
