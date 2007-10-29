@@ -1,0 +1,24 @@
+h1. generate-views
+
+h2. Purpose
+
+Generates a set if views for the given domain class
+
+h2. Examples
+
+bc.
+grails generate-views Book
+
+h2. Description
+          
+
+Grails supports a feature known as scaffolding which involves the generation of a CRUD (Create/Read/Update/Delete) interface for a given domain class.
+
+The generate-views command allows you to generate a set of views that implement CRUD for the given domain class. So for a domain class _Book_ views in _grails-app/views/book_ will be generated.
+
+Usage: grails generate-view _[domain class name]_
+
+Fired Events: 
+
+* _StatusUpdate_ - When generation begins
+* _StatusFinal_ - When generation completes
