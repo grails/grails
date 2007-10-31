@@ -1,0 +1,20 @@
+h1. params 
+
+h2. Purpose
+
+A mutable multi-dimensional map (hash) of request (CGI) parameters 
+
+h2. Examples
+
+bc.
+class BookController {
+	def index = {
+		flash.message = "Welcome!"
+		redirect(action:home)
+	}
+	def home = {}
+}
+
+h2. Description
+
+The standard Servlet API provides access to parameters via the @HttpServletRequest@ object

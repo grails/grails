@@ -1,20 +1,26 @@
-import com.plink.plextile.*;    
-import com.lowagie.text.*;
-import com.lowagie.text.rtf.*;
-import com.lowagie.text.pdf.PdfWriter;
+import org.radeox.engine.BaseRenderEngine;
+import org.radeox.api.engine.*;
+import org.radeox.engine.context.BaseRenderContext
+import org.grails.doc.DocEngine;
+
         
 title = "The Grails Framework"
 version = "1.0-RC1"
 authors = "Graeme Rocher, Guillaume LaForge, Steven Devijver"
 
-files = new File("./src/guide").listFiles().findAll { it.name.endsWith(".textile") }
-parser = new TextParser()
+files = new File("./src/guide").listFiles().findAll { it.name.endsWith(".gdoc") }.sort()
+context = new BaseRenderContext();
+
 ant = new AntBuilder()
+cache = [:]
+
+engine = new DocEngine()
+context.setRenderEngine(engine)
 
 book = [:]
 for(f in files) {
-	def chapter = f.name[0..-9]      
-	println "Generating documentation for $chapter"
+	def chapter = f.name[0..-6]
+	//println "Generating documentation for $chapter"
 	book[chapter] = f.text
 }
     
@@ -32,7 +38,7 @@ for(entry in book) {
 	margin *=5
     toc << "<div class=\"tocItem\" style=\"margin-left:${margin}px\"><a href=\"#${entry.key}\">${entry.key}</a></div>"  	
 	contents << "<h${header}><a name=\"${entry.key}\">${entry.key}</a></h2>"
-	contents << parser.parseTextile(entry.value, true)
+	contents << engine.render(entry.value, context)
 } 
 
 ant.mkdir(dir:"output")                      
@@ -56,43 +62,45 @@ vars = [
 			toc:toc.toString(),
 			body:contents.toString()
 			]
-engine = new groovy.text.SimpleTemplateEngine()
+templateEngine = new groovy.text.SimpleTemplateEngine()
 new File("./resources/style/layout.html").withReader { reader ->
-	template = engine.createTemplate(reader)	
+	template = templateEngine.createTemplate(reader)	
 	new File("output/guide.html").withWriter { out ->
 		template.make(vars).writeTo(out)		
 	}
 }    
 
 menu = new StringBuffer()
-files = new File("src/ref").listFiles()   
+files = new File("src/ref").listFiles().toList().sort()   
 reference = [:]
 new File("resources/style/referenceItem.html").withReader { reader ->
-	template = engine.createTemplate(reader)		
+	template = templateEngine.createTemplate(reader)		
 	for(f in files) {
 		if(f.directory && !f.name.startsWith(".")) {
 			def section = f.name
 			reference."${section}" = [:]
 			menu << "<h1 class=\"menuTitle\">${f.name}</h1>"
 			new File("output/ref/${f.name}").mkdirs()
-			def textiles = f.listFiles().findAll { it.name.endsWith(".textile")}
-			def usageFile = new File("src/ref/${f.name}.textile")
+			def textiles = f.listFiles().findAll { it.name.endsWith(".gdoc")}.sort()
+			def usageFile = new File("src/ref/${f.name}.gdoc")
 			if(usageFile.exists()) { 
 				def data = usageFile.text
-				reference."${section}".usage = data				
-				def contents = parser.parseTextile(data, true)							
+				reference."${section}".usage = data
+			    engine.contextPath = "../.."
+				def contents = engine.render(data, context)					
 				new File("output/ref/${f.name}/Usage.html").withWriter { out ->
 				 	template.make(content:contents).writeTo(out)
 				}			   
 				menu << "<div class=\"menuUsageItem\"><a href=\"${f.name}/Usage.html\" target=\"mainFrame\">Usage</a></div>"								
 			}
 			for(txt in textiles) {                        
-				def name = txt.name[0..-9]
+				def name = txt.name[0..-6]
 				menu << "<div class=\"menuItem\"><a href=\"${f.name}/${name}.html\" target=\"mainFrame\">${name}</a></div>"
 				def data = txt.text                    
-				reference."${section}"."$name" = data								
-				def contents = parser.parseTextile(data, true)			
-				println "Generating reference item: ${name}"
+				reference."${section}"."$name" = data
+				engine.contextPath = "../.."
+				def contents = engine.render(data, context)		
+				//println "Generating reference item: ${name}"
 				new File("output/ref/${f.name}/${name}.html").withWriter { out ->
 				 	template.make(content:contents).writeTo(out)
 				}
@@ -103,78 +111,13 @@ new File("resources/style/referenceItem.html").withReader { reader ->
 }
 vars.menu = menu
 new File("./resources/style/menu.html").withReader { reader ->
-	template = engine.createTemplate(reader)	
+	template = templateEngine.createTemplate(reader)	
 	new File("output/ref/menu.html").withWriter { out ->
 		template.make(vars).writeTo(out)		
 	}
 }         
 
-// Now generate PDF documentation   
 
-/*pdfParser =new PdfParser();
-
-//Create a new document and set the pdf writer attributes
-doc = new Document()                                
-try{                                                
-	contents = new StringBuffer()
-	contents << """
-h1. ${title} - Reference Documentation
-
-* *Version* - ${version}
-* *Authors* - ${authors}	
-
-"""
-	for(entry in book) {
-		contents << """ 
-
-h1. ${entry.key} 		
-
-
-"""
-		contents << entry.value
-	}
-
-contents << """
-
-h1. Reference
-
-"""	
-	for(entry in reference) {
-contents << """
-
-h1. ${entry.key}
-               
-
-"""		    
-		def usage = entry.value?.remove('usage')
-		if(usage) {
-			contents << usage
-		}   
-		contents << """
-
-h1. ${entry.key} Reference
-
-
-"""		
-		for(ref in entry.value) {
-			contents << ref.value
-			contents << """--------------------------------------------------------------------
-
-"""
-		}
-	}
-
-	println "Writing out PDF doc"
-	PdfWriter.getInstance(doc,new FileOutputStream("output/guide.pdf"));			
-	println "Writing out RTF doc"
-	RtfWriter2.getInstance(doc,new FileOutputStream("output/guide.rtf"));
-	doc.open();
-	//Write the source to a pdf
-	pdfParser.parseTextile(contents.toString(),doc);
-
-} finally {
-	doc.close()
-}   */
 
 
 println "Done. Look at output/index.html"

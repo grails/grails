@@ -1,0 +1,27 @@
+
+<project name="grails-build" default="package">
+
+
+    <property environment="env" />
+
+    <taskdef name="groovyc"  classname="org.codehaus.groovy.ant.Groovyc">
+            <classpath>
+                <fileset dir="${env.GROOVY_HOME}/lib" />
+                <fileset dir="lib" />
+            </classpath>
+    </taskdef>
+
+   <target name="package">
+       <delete dir="bin" />
+       <mkdir dir="bin" />
+        <groovyc  srcdir="src/groovy" destdir="bin">
+            <classpath>
+                <fileset dir="${env.GROOVY_HOME}/lib" />
+                <fileset dir="lib" />
+            </classpath>
+
+        </groovyc>
+   </target>
+
+
+</project>
