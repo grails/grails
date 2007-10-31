@@ -20,6 +20,11 @@ h2. Description
 Dynamic Properties:
 
 * *XML* - Provides an incoming XML request as a XmlSlurper GPathResult object
+
+{code}
+
+{code}
+
 * *JSON* -  Provides an incoming JSON request as a JSONObject
 
 Dynamic Methods:

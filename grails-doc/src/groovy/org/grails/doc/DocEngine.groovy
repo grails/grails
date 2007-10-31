@@ -16,6 +16,15 @@ import org.radeox.macro.MacroLoader
 
 class DocEngine extends BaseRenderEngine implements WikiRenderEngine {
     String contextPath = "."
+    static GRAILS_HOME = ""
+
+    static {
+	   def ant = new AntBuilder()
+	   ant.property(environment:"env")       
+	   GRAILS_HOME = ant.antProject.properties."env.GRAILS_HOME"	
+    }
+	
+
 
     boolean exists(String name) {
         int barIndex = name.indexOf('|')
@@ -32,9 +41,21 @@ class DocEngine extends BaseRenderEngine implements WikiRenderEngine {
                    return true 
                 }
                 else {
-                   println "WARNING: Link $name refers to non-existant page!"
+                   println "WARNING: Link $name refers to non-existant page $ref!"
                 }
             }
+			else if(refCategory.startsWith("api:")) {
+				def ref = refCategory[4..-1]
+				ref = ref.replace('.' as char, '/' as char) + ".html"
+				ref = "${GRAILS_HOME}/doc/api/$ref"
+				def file = new File(ref)
+                if(file.exists()) {
+                   return true 
+                }
+                else {
+                   println "WARNING: Javadoc Link $name refers to non-existant class ${ref}!"
+                }				
+			}
             else {
 
                 String dir = getNaturalName(refCategory)
@@ -44,7 +65,7 @@ class DocEngine extends BaseRenderEngine implements WikiRenderEngine {
                     return true
                 }
                 else {
-                    println "WARNING: Link $name refers to non-existant page!"
+                    println "WARNING: Link $name refers to non-existant page $ref!"
                 }
             }
         }
@@ -98,8 +119,14 @@ class DocEngine extends BaseRenderEngine implements WikiRenderEngine {
 
     void appendLink(StringBuffer buffer, String name, String view, String anchor) {
         if(name.startsWith("guide:")) {
-            buffer <<  "<a href=\"$contextPath/guide.html#${name[6..-1]}\" class=\"$name\">$view</a>"
+            buffer <<  "<a href=\"$contextPath/guide.html#${name[0..6]}\" class=\"$name\">$view</a>"
         }
+		else if(name.startsWith("api:")) {
+			def link = name[4..-1]
+			link =link.replace('.' as char, '/' as char) + ".html"
+			
+			buffer <<  "<a href=\"$contextPath/api/$link\" class=\"$name[0..3]\">$view</a>"
+		}
         else {
             String dir = getNaturalName(name)
             buffer <<  "<a href=\"$contextPath/ref/${dir}/${view}.html\" class=\"$name\">$view</a>"

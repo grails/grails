@@ -21,6 +21,12 @@
             </classpath>
 
         </groovyc>
+
+	  <mkdir dir="output" />
+	  <mkdir dir="output" />	
+	  <copy todir="output" failonerror="false">
+		  <fileset dir="${env.GRAILS_HOME}/doc" />
+      </copy>
    </target>
 
 
