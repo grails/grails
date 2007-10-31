@@ -32,7 +32,7 @@ The @params@ object can be indexed into via de-refrencing so given the URL @/hel
 bc.
 println params.foo
 
-The params object can also be used to bind request parameters onto the properties of a domain class using either the constructor or the [properties|domain classes] property:
+The params object can also be used to bind request parameters onto the properties of a domain class using either the constructor or the [properties|domainClasses] property:
 
 {code}
 def book = new Book(params)

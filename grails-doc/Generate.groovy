@@ -3,10 +3,22 @@ import org.radeox.api.engine.*;
 import org.radeox.engine.context.BaseRenderContext
 import org.grails.doc.DocEngine;
 
-        
-title = "The Grails Framework"
-version = "1.0-RC1"
-authors = "Graeme Rocher, Guillaume LaForge, Steven Devijver"
+def ant = new AntBuilder()
+ant.property(environment:"env")       
+GRAILS_HOME = ant.antProject.properties."env.GRAILS_HOME"	
+          
+props = new Properties()
+new File("./resources/doc.properties").withInputStream { input ->
+   props.load(input)	
+}                  
+new File("${GRAILS_HOME}/build.properties").withInputStream { input ->
+   props.load(input)	
+}
+
+title = props.title
+version = props."grails.version"
+authors = props.author
+
 
 files = new File("./src/guide").listFiles().findAll { it.name.endsWith(".gdoc") }.sort()
 context = new BaseRenderContext();
@@ -57,8 +69,13 @@ ant.copy(todir:"output/ref") {
 }                              
                        
 vars = [
-            title:"Grails",
-			version: "1.0-RC2",
+            title:props.title,
+			subtitle:props.subtitle,
+			footer:props.footer,
+			authors:props.authors,
+			version: props."grails.version",
+			copyright: props.copyright,
+			
 			toc:toc.toString(),
 			body:contents.toString()
 			]
