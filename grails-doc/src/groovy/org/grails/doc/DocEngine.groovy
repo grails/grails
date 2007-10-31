@@ -9,6 +9,10 @@ import org.radeox.filter.*
 import org.radeox.filter.regex.RegexTokenFilter
 import org.radeox.regex.MatchResult
 import org.radeox.filter.context.FilterContext
+import org.radeox.macro.parameter.MacroParameter
+import org.radeox.macro.BaseMacro
+import org.radeox.filter.regex.RegexFilter
+import org.radeox.macro.MacroLoader
 
 class DocEngine extends BaseRenderEngine implements WikiRenderEngine {
     String contextPath = "."
@@ -76,7 +80,15 @@ class DocEngine extends BaseRenderEngine implements WikiRenderEngine {
                             EscapeFilter]
 
             for(f in filters) {
-                fp.addFilter(f.newInstance())
+                RegexFilter filter = f.newInstance()
+                fp.addFilter(filter)
+                
+                if(filter instanceof MacroFilter) {
+                    MacroLoader loader = new MacroLoader()
+                    def repository = filter.getMacroRepository()                
+                    loader.add(repository, new WarningMacro())
+                    loader.add(repository, new NoteMacro())
+                }
             }
             fp.init();
 
@@ -145,6 +157,18 @@ class DocEngine extends BaseRenderEngine implements WikiRenderEngine {
 
         words.join(' ')
     }
+}
+public class WarningMacro extends BaseMacro {
+    String getName() {"warning"}
+    void execute(Writer writer, MacroParameter params) {
+    writer << '<blockquote class="warning">' << params.content << "</blockquote>"
+  }
+}
+public class NoteMacro extends BaseMacro {
+    String getName() {"note"}
+    void execute(Writer writer, MacroParameter params) {
+    writer << '<blockquote class="note">' << params.content << "</blockquote>"
+  }
 }
 class BlockQuoteFilter extends RegexTokenFilter {
     public BlockQuoteFilter() {

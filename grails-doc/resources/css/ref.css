@@ -1,3 +1,9 @@
+.body {
+	margin-left: 30px;
+	font-family: Tahoma, Verdana, Arial;
+	font-size:95%;
+}  
+
 h1 {
 	font-family: Arial, Verdana, Tahoma;
 	border-bottom:1px solid #eeeeee;  
@@ -15,22 +21,28 @@ h2 {
 }                
 
 p {
+	font-family: Arial, Verdana, Tahoma;	
 	margin-left:50px;
 }     
 
 ul {
+	font-family: Arial, Verdana, Tahoma;
 	margin-left:50px;
 }                    
 
 ol {
+	font-family: Arial, Verdana, Tahoma;
 	margin-left:50px;
 }                    
 
 table {
+	font-family: Arial, Verdana, Tahoma;
 	margin-left:50px;
 }
 
-
+blockquote {
+	font-family: Arial, Verdana, Tahoma;
+}
 
 /**
  * Wiki text stylesheet definitions.
@@ -107,6 +119,35 @@ img.float-right {
   font-size: inherit;
 }
 
+.warning {
+  background-image: url(../img/warning.gif);
+  background-repeat: no-repeat;
+  background-position: 7 7;
+  border: 1px solid #CC0000;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  margin-left:50px;
+  padding: 10px;
+  padding-left: 40px;
+  line-height: 100%;
+  width: 90%;	
+  background-color: #FFCCCC;
+}
+
+.note {
+  background-image: url(../img/note.gif);
+  background-repeat: no-repeat;
+  background-position: 7 7;
+  border: 1px solid #F0C000;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  margin-left:50px;
+  padding: 10px;
+  padding-left: 40px;
+  line-height: 100%;
+  width: 90%;	
+  background-color: #FFFFCE;
+}
 /************************************************/
 /* code formatting */
 .bq {

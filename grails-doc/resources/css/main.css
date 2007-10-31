@@ -18,6 +18,35 @@
 	color:#000000;
 	border-bottom:1px solid #eeeeee;					
 }  
+
+.warning {
+  background-image: url(../img/warning.gif);
+  background-repeat: no-repeat;
+  background-position: 7 7;
+  border: 1px solid #CC0000;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  padding: 10px;
+  padding-left: 40px;
+  line-height: 100%;
+  width: 90%;	
+  background-color: #FFCCCC;
+}
+
+.note {
+  background-image: url(../img/note.gif);
+  background-repeat: no-repeat;
+  background-position: 7 7;
+  border: 1px solid #F0C000;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  padding: 10px;
+  padding-left: 40px;
+  line-height: 100%;
+  width: 90%;	
+  background-color: #FFFFCE;
+}
+
 pre .code {
 	border: 1px solid black;
 	padding-bottom:10px;
