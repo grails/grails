@@ -6,7 +6,7 @@ Outputs basic statistics about the current Grails application, including number 
 
 h2. Examples
 
-bc.
+{code}
 > grails stats
 +----------------------+-------+-------+
 | Name                 | Files |  LOC  |
@@ -17,3 +17,4 @@ bc.
 +----------------------+-------+-------+
 | Totals               |     4 |    77 | 
 +----------------------+-------+-------+
+{code}

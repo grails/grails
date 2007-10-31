@@ -41,6 +41,7 @@ class LinkTestFilter extends RegexTokenFilter {
             Writer writer = new StringBufferWriter(buffer);
 
             String name = result.group(1);
+            String original = name
 
             if (name != null) {
                 // trim the name and unescape it
@@ -68,7 +69,7 @@ class LinkTestFilter extends RegexTokenFilter {
                 } else {
                     // internal link
 
-                    if (engine.exists(name)) {
+                    if (engine.exists(original)) {
                         String view = getWikiView(name);
                         if (-1 != pipeIndex) {
                             view = alias;
@@ -79,7 +80,7 @@ class LinkTestFilter extends RegexTokenFilter {
                         } else {
                             engine.appendLink(buffer, name, view);
                         }
-                    } else if (wikiEngine.showCreate()) {
+                    } else if (engine.showCreate()) {
                         engine.appendCreateLink(buffer, name, getWikiView(name));
                         // links with "create" are not cacheable because
                         // a missing wiki could be created

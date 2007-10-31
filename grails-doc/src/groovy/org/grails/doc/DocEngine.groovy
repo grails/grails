@@ -13,8 +13,42 @@ import org.radeox.filter.context.FilterContext
 class DocEngine extends BaseRenderEngine implements WikiRenderEngine {
     String contextPath = "."
 
-    boolean exists(String name) { true  }
-    boolean showCreate() { true }
+    boolean exists(String name) {
+        int barIndex = name.indexOf('|')
+        if(barIndex >-1) {
+            def refItem = name[0..barIndex-1]
+            def refCategory = name[barIndex+1..-1]
+
+
+            if(refCategory.startsWith("http://")) return true
+            else if(refCategory.startsWith("guide:")) {
+                def ref = "src/guide/${refCategory[6..-1]}.gdoc"
+                def file = new File(ref)
+                if(file.exists()) {
+                   return true 
+                }
+                else {
+                   println "WARNING: Link $name refers to non-existant page!"
+                }
+            }
+            else {
+
+                String dir = getNaturalName(refCategory)
+                def ref = "src/ref/${dir}/${refItem}.gdoc"
+                File file = new File(ref)
+                if(file.exists()) {
+                    return true
+                }
+                else {
+                    println "WARNING: Link $name refers to non-existant page!"
+                }
+            }
+        }
+
+         return false
+
+    }
+    boolean showCreate() { false }
 
     protected void init() {
         if (null == fp) {
@@ -51,17 +85,12 @@ class DocEngine extends BaseRenderEngine implements WikiRenderEngine {
     }
 
     void appendLink(StringBuffer buffer, String name, String view, String anchor) {
-
-        String dir = getNaturalName(name)
-
-
-        def ref = "src/ref/${dir}/${view}.textile"
-        File file = new File(ref)
-        if(file.exists()) {
-            buffer <<  "<a href=\"$contextPath/ref/${dir}/${view}.html\" class=\"$name\">$view</a>"
+        if(name.startsWith("guide:")) {
+            buffer <<  "<a href=\"$contextPath/guide.html#${name[6..-1]}\" class=\"$name\">$view</a>"
         }
         else {
-            buffer << name
+            String dir = getNaturalName(name)
+            buffer <<  "<a href=\"$contextPath/ref/${dir}/${view}.html\" class=\"$name\">$view</a>"
         }
     }
 

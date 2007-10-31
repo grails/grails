@@ -16,7 +16,7 @@ Usage:
 
 This command will display more detailed info about a given plug-in such as the author, location of documentation and so on. An example of the output of the JSecurity plug-in can be seen below:
 
-bc.
+{code}
 --------------------------------------------------------------------------
 Information about Grails plugin
 --------------------------------------------------------------------------
@@ -30,3 +30,4 @@ Find more info here: http://grails.codehaus.org/JSecurity+Plugin
 --------------------------------------------------------------------------
 Adds a security layer to your Grails application, allowing you to
 protect pages based on a user's roles and/or permissions.
+{code}
