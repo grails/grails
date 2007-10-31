@@ -6,7 +6,7 @@
 
     <taskdef name="groovyc"  classname="org.codehaus.groovy.ant.Groovyc">
             <classpath>
-                <fileset dir="${env.GROOVY_HOME}/lib" />
+                <fileset dir="${env.GRAILS_HOME}/lib" includes="*.jar" />
                 <fileset dir="lib" />
             </classpath>
     </taskdef>

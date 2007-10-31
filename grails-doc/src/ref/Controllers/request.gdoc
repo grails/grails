@@ -1,0 +1,29 @@
+h1. request 
+
+h2. Purpose
+
+An instance of the Servlet API's [javax.servlet.http.HttpServletRequest|http://java.sun.com/j2ee/sdk_1.3/techdocs/api/javax/servlet/http/HttpServletRequest.html] class
+
+h2. Examples
+
+bc.
+class BookController {
+	def list = {
+		log.info "Executing action $actionName"
+		
+		render(view:actionName)
+	}
+}
+
+h2. Description
+
+Dynamic Properties:
+
+* *XML* - Provides an incoming XML request as a XmlSlurper GPathResult object
+* *JSON* -  Provides an incoming JSON request as a JSONObject
+
+Dynamic Methods:
+
+* *find* - adfdsj
+
+

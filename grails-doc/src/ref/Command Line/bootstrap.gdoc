@@ -4,7 +4,7 @@ h2. Purpose
 
 The [bootstrap|commandLine] command is mainly intended to be used by other scripts and enables the ability to bootstrap a Grails application instance outside of the container for usage in tools that require a reference to Grails' ApplicationContext
 
-Examples of its usage include Grails' "shell":shell.html and "console":console.html
+Examples of its usage include Grails' [shell|commandLine] and [console|commandLine]
 
 h2. Examples
 
