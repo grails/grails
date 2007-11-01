@@ -1,0 +1,23 @@
+An example of the [delete|domainClasses] method can be seen below:
+
+{code}
+def p = Person.get(1)
+p.delete()
+{code}
+
+
+The [delete|domainClasses] method also allows control over flushing via a @flush@ argument:
+
+{code}
+def p = Person.get(1)
+p.delete(flush:true)
+{code}
+
+Note that Grails does not supply a @deleteAll@ method as deleting data is discouraged and can often be avoided through boolean flags/logic.
+
+If you really need to batch delete data you can use the [executeUpdate|domainClasses] method to do batch DML statements:
+
+{code}
+Customer.executeUpdate("delete Customer c where c.name = :oldName", [oldName:"Fred"])
+{code}
+

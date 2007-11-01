@@ -10,13 +10,16 @@ class Author {
 
 The books property that GORM injects is a @java.util.Set@. The problem with this is there is no ordering when accessing the collection, which may not be what you want. To get custom ordering you can say that the set is a @SortedSet@:
 
+{code}
 class Author {
    SortedSet books
    static hasMany = [books:Book]
 }
+{code}
 
 In this case a @java.util.SortedSet@ implementation is used which means you have to implement @java.lang.Comparable@ in your Book class:
 
+{code}
 class Book implements Comparable {
    String title
    Date releaseDate = new Date()
@@ -25,6 +28,7 @@ class Book implements Comparable {
        releaseDate.compareTo(obj.releaseDate)
    }
 }
+{code}
 
 The result of the above class is that the Book instances in the books collections of the Author class will be ordered by their release date.
 
