@@ -1,4 +1,4 @@
-To implement the typical "hello world!" example run the "create-controller":ref/Command%20Line/create-controller.html command:
+To implement the typical "hello world!" example run the [create-controller|commandLine] command:
 
 bc.
 grails create-controller hello  

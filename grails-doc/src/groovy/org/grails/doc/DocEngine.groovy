@@ -118,18 +118,20 @@ class DocEngine extends BaseRenderEngine implements WikiRenderEngine {
     }
 
     void appendLink(StringBuffer buffer, String name, String view, String anchor) {
+		
         if(name.startsWith("guide:")) {
-            buffer <<  "<a href=\"$contextPath/guide.html#${name[0..6]}\" class=\"$name\">$view</a>"
+            buffer <<  "<a href=\"$contextPath/guide.html#${name[6..-1]}\" class=\"guide\">$view</a>"
         }
 		else if(name.startsWith("api:")) {
 			def link = name[4..-1]
 			link =link.replace('.' as char, '/' as char) + ".html"
 			
-			buffer <<  "<a href=\"$contextPath/api/$link\" class=\"$name[0..3]\">$view</a>"
+			buffer <<  "<a href=\"$contextPath/api/$link\" class=\"api\">$view</a>"
 		}
         else {
             String dir = getNaturalName(name)
-            buffer <<  "<a href=\"$contextPath/ref/${dir}/${view}.html\" class=\"$name\">$view</a>"
+			def link = "$contextPath/ref/${dir}/${view}.html"
+            buffer <<  "<a href=\"$link\" class=\"$name\">$view</a>"
         }
     }
 

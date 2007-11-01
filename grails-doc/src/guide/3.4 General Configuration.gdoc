@@ -2,8 +2,9 @@ For general configuration Grails provides a file called @grails-app/conf/Config.
 
 You can add your own configuration in here, for example:
 
-bc.
+{code}
 foo.bar.hello = "world"
+{code}
 
 Then later in your application you can access these settings in one of two ways. The most common is via the GrailsApplication object, which is available as a variable in controllers and tag libraries:
 
