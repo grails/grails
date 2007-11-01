@@ -14,6 +14,11 @@
 
     <taskdef name="groovy"  classname="org.codehaus.groovy.ant.Groovy" classpathref="classpath"/>
 
+   <target name="clean">
+       <delete dir="bin" />
+       <delete dir="output" />
+   </target>
+    
    <target name="package">
        <mkdir dir="bin" />
         <groovyc  	srcdir="src/groovy" destdir="bin" 		

@@ -1,0 +1,72 @@
+A one-to-one relationship is the simplest kind, and is defined trivially using a property of the type of another domain class. Consider this example:
+
+h5. Example A
+
+{code}
+class Face {
+    Nose nose
+}
+class Nose {	
+}
+{code}
+
+In this case we have unidirectional one-to-one relationship from @Face@ to @Nose@. To make this relationship bidirectional you can use @belongsTo@:
+
+h5. Example B
+
+{code}
+class Face {
+    Nose nose
+}
+class Nose {	
+	Face face
+}
+{code}
+
+This is bidirectional relationship. However, in this case no updates are cascading from either side of the relationship.
+
+Consider this variation: 
+
+h5. Example C
+
+{code}
+class Face {
+    Nose nose
+}
+class Nose {	
+	static belongsTo = [face:Face]
+}
+{code}
+
+In this case because Nose "belongs to" Face we can create a Face and save it and the database updates/inserts will be _cascaded_ down to @Nose@:
+
+
+{code}
+new Face(nose:new Nose()).save()
+{code}
+
+The example above will save both face and nose. Note that the inverse _is not_ true and will result in an error due to a transient @Face@:
+
+{code}
+new Nose(face:new Face()).save() // will cause an error
+{code}
+
+{note}
+An important thing to understand is that their is *always* an owning side to a relationship when persisting relationships which is defined in Grails with @belongsTo@
+{note}
+
+You could keep the above relationship as unidirectional and allow saves/updates to cascade down by doing the following:
+
+{code}
+class Face {
+    Nose nose
+}
+class Nose {	
+	static belongsTo = Face
+}
+{code}
+
+Note in this case because we are not using the map syntax in the @belongsTo@ declaration and explicitly naming the association. Grails will assume it is unidirectional. The diagram below summarizes the 3 examples:
+
+
+!GORM-1to1.png!

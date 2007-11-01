@@ -1,0 +1,3 @@
+When building Grails applications you have to consider the problem domain you are trying to solve. For example if you were building an "Amazon":http://www.amazon.com/ bookstore you would be thinking about books, authors, customers and publishers to name a few.
+
+These are modeled in GORM as Groovy classes so a @Book@ class may have a title, a release date, an ISBN number and so on. The next few sections show how to model the domain in GORM.

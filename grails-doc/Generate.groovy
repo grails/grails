@@ -5,14 +5,15 @@ import org.grails.doc.DocEngine;
 
 def ant = new AntBuilder()
 ant.property(environment:"env")       
-GRAILS_HOME = ant.antProject.properties."env.GRAILS_HOME"	
-          
+GRAILS_HOME = ant.antProject.properties."env.GRAILS_HOME"
+CONTEXT_PATH = "contextPath"
+
 props = new Properties()
 new File("./resources/doc.properties").withInputStream { input ->
-   props.load(input)	
-}                  
+    props.load(input)
+}
 new File("${GRAILS_HOME}/build.properties").withInputStream { input ->
-   props.load(input)	
+    props.load(input)
 }
 
 title = props.title
@@ -20,25 +21,26 @@ version = props."grails.version"
 authors = props.author
 
 def compare = [compare: { o1, o2 ->
-				 def idx1 = o1.name[0..o1.name.indexOf(' ')-1]
-				 def idx2 = o2.name[0..o2.name.indexOf(' ')-1]				
-				 def nums1 = idx1.split(/\./).findAll { it.trim() != ''}*.toInteger() 
-				 def nums2 = idx2.split(/\./).findAll { it.trim() != ''}*.toInteger()
-				 def result = 0
-				 for(i in 0..<nums1.size()) {
-					if(nums2.size() > i) {
-						result = nums1[i].compareTo(nums2[i])
-						if(result != 0)break
-					}						
-				 }
-				 result 				
-			  },
-			  equals: { false }] as Comparator
+    def idx1 = o1.name[0..o1.name.indexOf(' ')-1]
+    def idx2 = o2.name[0..o2.name.indexOf(' ')-1]
+    def nums1 = idx1.split(/\./).findAll { it.trim() != ''}*.toInteger()
+    def nums2 = idx2.split(/\./).findAll { it.trim() != ''}*.toInteger()
+    def result = 0
+    for(i in 0..<nums1.size()) {
+                     if(nums2.size() > i) {
+                        result = nums1[i].compareTo(nums2[i])
+                        if(result != 0)break
+                    }
+                 }
+    result
+},
+        equals: { false }] as Comparator
 
 files = new File("./src/guide").listFiles()
-			.findAll { it.name.endsWith(".gdoc") }
-			.sort(compare)
+        .findAll { it.name.endsWith(".gdoc") }
+        .sort(compare)
 context = new BaseRenderContext();
+context.set(CONTEXT_PATH, ".")
 
 ant = new AntBuilder()
 cache = [:]
@@ -126,7 +128,8 @@ new File("resources/style/referenceItem.html").withReader { reader ->
 			if(usageFile.exists()) { 
 				def data = usageFile.text
 				reference."${section}".usage = data
-			    engine.contextPath = "../.."
+			    engine.configureContextPath "../.."
+			    context.set(CONTEXT_PATH, "../..")
 				def contents = engine.render(data, context)					
 				new File("output/ref/${f.name}/Usage.html").withWriter { out ->
 				 	template.make(content:contents).writeTo(out)
@@ -138,7 +141,8 @@ new File("resources/style/referenceItem.html").withReader { reader ->
 				menu << "<div class=\"menuItem\"><a href=\"${f.name}/${name}.html\" target=\"mainFrame\">${name}</a></div>"
 				def data = txt.text                    
 				reference."${section}"."$name" = data
-				engine.contextPath = "../.."
+				engine.configureContextPath "../.."
+				context.set(CONTEXT_PATH, "../..")
 				def contents = engine.render(data, context)		
 				//println "Generating reference item: ${name}"
 				new File("output/ref/${f.name}/${name}.html").withWriter { out ->

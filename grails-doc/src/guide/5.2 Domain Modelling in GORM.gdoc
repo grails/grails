@@ -1,0 +1,21 @@
+To create a domain class you can run the [create-domain-class|commandLine] target as follows:
+
+{code}
+grails create-domain-class Book
+{code}
+
+The result will be a class at @grails-app/domain/Book.groovy@:
+
+{code}
+class Book {	
+}
+{code}
+
+{note}
+If you wish to use packages you can move the Book.groovy class into a sub directory under the domain directory and add the appropriate @package@ declaration as per Groovy (and Java's) packaging rules.
+{note}
+
+The above class will map automatically to a table in the database called @book@ (the same name as the class). This behaviour is customizable through the [ORM Domain Specific Language|ormdsl]
+
+
+

@@ -23,7 +23,7 @@ This will start-up a server on port 8080 and you should now be able to access yo
 
 The result will look something like the below:
 
-!img/intropage.png!
+!intropage.png!
 
 This is the Grails intro page which is rendered by the @web-app/index.gsp@ file. You will note it has a detected the presence of your controller and clicking on the link to our controller we can see the text "Hello World!" printed to the browser window. 
 

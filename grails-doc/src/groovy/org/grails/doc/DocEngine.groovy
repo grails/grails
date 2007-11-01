@@ -20,6 +20,10 @@ class DocEngine extends BaseRenderEngine implements WikiRenderEngine {
     static EXTERNAL_DOCS = 	[:]
 	static ALIAS = [:]
 
+    void configureContextPath(path) {
+        contextPath = path
+    }
+
     static {
 	   def ant = new AntBuilder()
 	   ant.property(environment:"env")       
@@ -276,7 +280,9 @@ class ImageFilter  extends RegexTokenFilter {
 
 
     public void handleMatch(StringBuffer buffer, MatchResult result, FilterContext context) {
-        buffer << "<img border=\"0\" src=\"${result.group(1)}\"></img>"
+        def path = context.renderContext.get("contextPath")
+        if(!path) path = "."
+        buffer << "<img border=\"0\" class=\"center\" src=\"$path/img/${result.group(1)}\"></img>"
     }
 }
 class TextileLinkFilter extends RegexTokenFilter {
