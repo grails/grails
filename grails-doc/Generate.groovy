@@ -20,7 +20,7 @@ version = props."grails.version"
 authors = props.author
 
 
-files = new File("./src/guide").listFiles().findAll { it.name.endsWith(".gdoc") }.sort()
+files = new File("./src/guide").listFiles().findAll { it.name.endsWith(".gdoc") }.sort { it.name[0..it.name.indexOf('.')-1].toInteger() }
 context = new BaseRenderContext();
 
 ant = new AntBuilder()
@@ -44,9 +44,15 @@ for(entry in book) {
 	def header = 2
 	if(margin > -1) {
 		def index = entry.key[0..margin]
-		header = index.split(/\./).size()
+		def tokens = index.split(/\./)
+		margin = tokens.size()
+
+		if(margin == 2 && tokens[1].trim().size() == 0) {
+			margin = 1
+		}
 	}
-	if(margin <=2) margin = 0
+
+	if(margin <=1) margin = 0
 	margin *=5
     toc << "<div class=\"tocItem\" style=\"margin-left:${margin}px\"><a href=\"#${entry.key}\">${entry.key}</a></div>"  	
 	contents << "<h${header}><a name=\"${entry.key}\">${entry.key}</a></h2>"

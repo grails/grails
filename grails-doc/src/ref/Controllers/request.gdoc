@@ -2,11 +2,11 @@ h1. request
 
 h2. Purpose
 
-An instance of the Servlet API's [javax.servlet.http.HttpServletRequest|http://java.sun.com/j2ee/sdk_1.3/techdocs/api/javax/servlet/http/HttpServletRequest.html] class
+An instance of the Servlet API's [HttpServletRequest|api:javax.servlet.http.HttpServletRequest] class
 
 h2. Examples
 
-bc.
+{code}
 class BookController {
 	def list = {
 		log.info "Executing action $actionName"
@@ -14,6 +14,7 @@ class BookController {
 		render(view:actionName)
 	}
 }
+{code}
 
 h2. Description
 

@@ -17,6 +17,10 @@ import org.radeox.macro.MacroLoader
 class DocEngine extends BaseRenderEngine implements WikiRenderEngine {
     String contextPath = "."
     static GRAILS_HOME = ""
+    static EXTERNAL_DOCS = 	[  "org.hibernate":"http://www.hibernate.org/hib_docs/v3/api",
+								"org.springframework":"http://static.springframework.org/spring/docs/2.5.x/api",
+								"javax.servlet":"http://java.sun.com/j2ee/1.4/docs/api"								
+							]
 
     static {
 	   def ant = new AntBuilder()
@@ -46,6 +50,9 @@ class DocEngine extends BaseRenderEngine implements WikiRenderEngine {
             }
 			else if(refCategory.startsWith("api:")) {
 				def ref = refCategory[4..-1]
+				if(EXTERNAL_DOCS.keySet().find { ref.startsWith(it) }) {
+					return true
+				}
 				ref = ref.replace('.' as char, '/' as char) + ".html"
 				ref = "${GRAILS_HOME}/doc/api/$ref"
 				def file = new File(ref)
@@ -118,15 +125,22 @@ class DocEngine extends BaseRenderEngine implements WikiRenderEngine {
     }
 
     void appendLink(StringBuffer buffer, String name, String view, String anchor) {
-		
+
         if(name.startsWith("guide:")) {
             buffer <<  "<a href=\"$contextPath/guide.html#${name[6..-1]}\" class=\"guide\">$view</a>"
         }
 		else if(name.startsWith("api:")) {
 			def link = name[4..-1]
-			link =link.replace('.' as char, '/' as char) + ".html"
+
+			def externalKey = EXTERNAL_DOCS.keySet().find { link.startsWith(it) }								
+			link =link.replace('.' as char, '/' as char) + ".html"	
 			
-			buffer <<  "<a href=\"$contextPath/api/$link\" class=\"api\">$view</a>"
+			if(externalKey) {
+				buffer <<  "<a href=\"${EXTERNAL_DOCS[externalKey]}/$link\" class=\"api\">$view</a>"
+			}
+			else {
+				buffer <<  "<a href=\"$contextPath/api/$link\" class=\"api\">$view</a>"				
+			}
 		}
         else {
             String dir = getNaturalName(name)
