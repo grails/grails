@@ -4,18 +4,3 @@ If you've gone through the [Hello World!|guide:2.3 A Hello World Example] exampl
 grails create-app helloworld
 {code} 
 
-However, let's go through the structure of the app with pointers to where they're covered in the docs
-
-* @grails-app@ - top level directory for Groovy sources
-** @conf@ - Configuration sources. See [Configuration|guide:3. Configuration].
-** @controllers@ - Web controllers - The C in MVC. See [Controllers|guide:6.1 Controllers]
-** @domain@ - The application domain. See [GORM|guide:5. Object Relational Mapping (GORM)]    
-** @i18n@ - Support for internationalization (i18n). See [Internationalization (i18n)|guide:9. Internationalisation]
-** @services@ - The service layer. See [Services|guide:7. The Service Layer]
-** @taglib@ - Tag libraries. See [Tag Libraries|guide:6.4 Tag Libraries]
-** @views@ - Groovy Server Pages. See [GSP|guide:6.3 Groovy Server Pages]
-* @scripts@ - Gant scripts. See [Command Line Scripting|guide:4. The Command Line]  
-* @src@ - Supporting sources
-** @groovy@ - Other Groovy sources
-** @java@ - Other Java sources
-* @test@  - Unit and integration tests. See [Testing|guide:8. Testing]

@@ -17,15 +17,23 @@ import org.radeox.macro.MacroLoader
 class DocEngine extends BaseRenderEngine implements WikiRenderEngine {
     String contextPath = "."
     static GRAILS_HOME = ""
-    static EXTERNAL_DOCS = 	[  "org.hibernate":"http://www.hibernate.org/hib_docs/v3/api",
-								"org.springframework":"http://static.springframework.org/spring/docs/2.5.x/api",
-								"javax.servlet":"http://java.sun.com/j2ee/1.4/docs/api"								
-							]
+    static EXTERNAL_DOCS = 	[:]
+	static ALIAS = [:]
 
     static {
 	   def ant = new AntBuilder()
 	   ant.property(environment:"env")       
 	   GRAILS_HOME = ant.antProject.properties."env.GRAILS_HOME"	
+	   new File("./resources/doc.properties").withInputStream {
+			def props = new Properties()
+			props.load(it)
+			props.findAll { it.key.startsWith("api.")}.each {
+				EXTERNAL_DOCS[it.key[4..-1]] = it.value
+			}
+			props.findAll { it.key.startsWith("alias.")}.each {
+				ALIAS[it.key[6..-1]] = it.value
+			}			
+	   }
     }
 	
 
@@ -39,7 +47,13 @@ class DocEngine extends BaseRenderEngine implements WikiRenderEngine {
 
             if(refCategory.startsWith("http://")) return true
             else if(refCategory.startsWith("guide:")) {
-                def ref = "src/guide/${refCategory[6..-1]}.gdoc"
+				def alias = refCategory[6..-1]
+				
+
+				if(ALIAS[alias]) {
+					alias = ALIAS[alias]
+				}
+                def ref = "src/guide/${alias}.gdoc"
                 def file = new File(ref)
                 if(file.exists()) {
                    return true 
@@ -127,7 +141,12 @@ class DocEngine extends BaseRenderEngine implements WikiRenderEngine {
     void appendLink(StringBuffer buffer, String name, String view, String anchor) {
 
         if(name.startsWith("guide:")) {
-            buffer <<  "<a href=\"$contextPath/guide.html#${name[6..-1]}\" class=\"guide\">$view</a>"
+			def alias = name[6..-1]
+			if(ALIAS[alias]) {
+				alias = ALIAS[alias]
+			}
+	
+            buffer <<  "<a href=\"$contextPath/guide.html#${alias}\" class=\"guide\">$view</a>"
         }
 		else if(name.startsWith("api:")) {
 			def link = name[4..-1]
