@@ -19,8 +19,25 @@ title = props.title
 version = props."grails.version"
 authors = props.author
 
+def compare = [compare: { o1, o2 ->
+				 def idx1 = o1.name[0..o1.name.indexOf(' ')-1]
+				 def idx2 = o2.name[0..o2.name.indexOf(' ')-1]				
+				 def nums1 = idx1.split(/\./).findAll { it.trim() != ''}*.toInteger() 
+				 def nums2 = idx2.split(/\./).findAll { it.trim() != ''}*.toInteger()
+				 def result = 0
+				 for(i in 0..<nums1.size()) {
+					if(nums2.size() > i) {
+						result = nums1[i].compareTo(nums2[i])
+						if(result != 0)break
+					}						
+				 }
+				 result 				
+			  },
+			  equals: { false }] as Comparator
 
-files = new File("./src/guide").listFiles().findAll { it.name.endsWith(".gdoc") }.sort { it.name[0..it.name.indexOf('.')-1].toInteger() }
+files = new File("./src/guide").listFiles()
+			.findAll { it.name.endsWith(".gdoc") }
+			.sort(compare)
 context = new BaseRenderContext();
 
 ant = new AntBuilder()
@@ -53,7 +70,7 @@ for(entry in book) {
 	}
 
 	if(margin <=1) margin = 0
-	margin *=5
+	margin *=10
     toc << "<div class=\"tocItem\" style=\"margin-left:${margin}px\"><a href=\"#${entry.key}\">${entry.key}</a></div>"  	
 	contents << "<h${header}><a name=\"${entry.key}\">${entry.key}</a></h2>"
 	contents << engine.render(entry.value, context)
