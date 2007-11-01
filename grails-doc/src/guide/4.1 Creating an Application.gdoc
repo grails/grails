@@ -4,3 +4,5 @@ If you've gone through the [Hello World!|guide:2.3 A Hello World Example] exampl
 grails create-app helloworld
 {code} 
 
+This will create a new directory called helloworld with your application structure contained within it.
+

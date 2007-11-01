@@ -1,0 +1,13 @@
+Grails applications can be run with the built in Jetty server using the [run-app|commandLine] command which will load a server on port 8080 by default:
+
+{code}
+grails run-app
+{code}
+
+If you require running on a different port using the @server.port@ argument:
+
+{code}
+grails -Dserver.port=8090 run-app
+{code}
+
+More information on the [run-app|commandLine] command can be found in the reference guide.
