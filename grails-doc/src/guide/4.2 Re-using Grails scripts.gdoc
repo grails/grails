@@ -1,0 +1,25 @@
+Grails ships with a lot of command line functionality out of the box which is useful to re-use (See the command line reference in the reference guide for info on all the commands). Some of the most useful are the [compile|commandLine], [package|commandLine] and [bootstrap|commandLine] scripts.
+
+The [bootstrap|commandLine] script for example allows you to bootstrap a Spring [ApplicationContext|api:org.springframework.context.ApplicationContext] instance to get access to the data source and so on:
+
+{code}
+
+Ant.property(environment:"env")                             
+grailsHome = Ant.antProject.properties."env.GRAILS_HOME"    
+
+includeTargets << new File ( "${grailsHome}/scripts/Bootstrap.groovy" )
+
+
+target ('default': "Load the Grails interactive shell") {
+	depends( configureProxy, packageApp, classpath, loadApp, configureApp )
+	
+	Connection c 
+	try {
+		// do something with connection
+		c = appCtx.getBean('dataSource').getConnection()
+	}
+	finally {
+		c?.close()
+	}
+}
+{code} 

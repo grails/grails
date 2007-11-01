@@ -1,0 +1,41 @@
+Grails provides the ability to hook into scripting events. These are events triggered during execution of Grails target and plugin scripts.
+
+The mechanism is deliberately simple and loosely specified. The list of possible events is not fixed in any way, so it is possible to hook into events triggered by plugin scripts, for which there is no equivalent event in the core target scripts.
+
+h4. Defining event handlers
+
+Event handlers are defined in a script called @Events.groovy@ either in the @scripts/@ folder of a plugin, or in your @.grails/scripts/@ folder in your @USER_HOME@ directory. All events scripts are called whenever an event occurs, so you can have 10 plugins handling events and also a custom per-user script.
+
+Event handlers are blocks defined in @Events.groovy@, with a name beginning with "event". The following example can be put in your /scripts directory to demonstrate the feature:
+
+{code}
+eventCreatedArtefact = { type, name ->
+   println "Created $type $name"
+}
+
+eventStatusUpdate = { msg ->
+	println msg
+}
+
+eventStatusFinal = { msg ->
+	println msg
+}
+{code}
+
+You can see here the three handlers @eventCreatedArtefact@, @eventStatusUpdate@, @eventStatusFinal@. Grails provides some standard events, which are documented in the command line reference guide. For example the [compile|commandLine] command fires the following events:
+
+* @CompileStart@  - Called when compilation starts, passing the kind of compile - source or tests
+* @CompileEnd@ - Called when compilation is finished, passing the kind of compile - source or tests
+
+h4. Triggering events
+
+To trigger an event simply include the Init.groovy script and call the event() closure:
+
+{code}
+Ant.property(environment:"env")
+grailsHome = Ant.antProject.properties."env.GRAILS_HOME"
+includeTargets << new File ( "${grailsHome}/scripts/Init.groovy" )
+
+
+event("StatusFinal", ["Super duper plugin action complete!"])
+{code}
