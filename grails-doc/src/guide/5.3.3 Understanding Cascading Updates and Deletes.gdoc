@@ -1,0 +1,36 @@
+It is critical that you understand how cascading updates and deletes work when using GORM. The key part to remember is the @belongsTo@ setting which controls which class "owns" a relationship.
+
+Whether it is a one-to-one, one-to-many or many-to-many if you define @belongsTo@ updates and deletes will cascade from the owning class to its possessions (the other side of the relationship).
+
+If you _do not_ define @belongsTo@ than no cascades will happen and you will have to manually save each object.
+
+Here is an example:
+
+{code}
+class Airport {
+	String name
+	static hasMany = [flights:Flight]
+}
+class Flight {
+	String number
+	static belongsTo = [airport:Airport]
+}
+{code}
+
+If I now create and @Airport@ and add some @Flight@s to it I can save the @Airport@ and have the updates cascaded down to each flight, hence saving the whole object graph:
+
+{code}
+new Airport(name:"Gatwick")
+	 .addToFlights(new Flight(number:"BA3430"))
+	 .addToFlights(new Flight(number:"EZ0938"))
+	 .save()
+{code}
+
+Conversely if I later delete the @Airport@ all @Flight@s associated with it will also be deleted:
+
+{code}
+def airport = Airport.findByName("Gatwick")
+airport.delete()
+{code}
+
+However, if I were to remove @belongsTo@ then the above cascading deletion code _would not work_.
