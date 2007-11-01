@@ -46,6 +46,7 @@ ant = new AntBuilder()
 cache = [:]
 
 engine = new DocEngine()
+templateEngine = new groovy.text.SimpleTemplateEngine()
 context.setRenderEngine(engine)
 
 book = [:]
@@ -58,30 +59,41 @@ for(f in files) {
 toc = new StringBuffer()
 contents = new StringBuffer()
 
-for(entry in book) {     
-	def margin = entry.key.indexOf(' ')
-	def header = 2
-	if(margin > -1) {
-		def index = entry.key[0..margin]
-		def tokens = index.split(/\./)
-		margin = tokens.size()
+ant.mkdir(dir:"output/guide")         
+new File("resources/style/guideItem.html").withReader { reader ->
+	template = templateEngine.createTemplate(reader)		
+	for(entry in book) {     
+		def margin = entry.key.indexOf(' ')
+		def header = 2
+		if(margin > -1) {
+			def index = entry.key[0..margin]
+			def tokens = index.split(/\./)
+			margin = tokens.size()
 
-		if(margin == 2 && tokens[1].trim().size() == 0) {
-			margin = 1
+			if(margin == 2 && tokens[1].trim().size() == 0) {
+				margin = 1
+			}
 		}
-	}
 
-	if(margin <=1) margin = 0
-	margin *=10
-    toc << "<div class=\"tocItem\" style=\"margin-left:${margin}px\"><a href=\"#${entry.key}\">${entry.key}</a></div>"  	
-	contents << "<h${header}><a name=\"${entry.key}\">${entry.key}</a></h2>"
-	contents << engine.render(entry.value, context)
-} 
+		if(margin <=1) margin = 0
+		margin *=10
+	    toc << "<div class=\"tocItem\" style=\"margin-left:${margin}px\"><a href=\"#${entry.key}\">${entry.key}</a></div>"  	
+		contents << "<h${header}><a name=\"${entry.key}\">${entry.key}</a></h2>"
+		def body = engine.render(entry.value, context) 
+		contents << body
+
+		new File("output/guide/${entry.key}.html").withWriter { out ->
+			template.make(title:entry.key, content:body).writeTo(out)
+	    }
+	}
+}
+ 
 
 ant.mkdir(dir:"output")                      
 ant.mkdir(dir:"output/img")                      
 ant.mkdir(dir:"output/css")   
 ant.mkdir(dir:"output/ref")         
+
 ant.copy(file:"resources/style/index.html",todir:"output")
 ant.copy(todir:"output/img") {
 	fileset(dir:"resources/img")
@@ -104,7 +116,7 @@ vars = [
 			toc:toc.toString(),
 			body:contents.toString()
 			]
-templateEngine = new groovy.text.SimpleTemplateEngine()
+
 new File("./resources/style/layout.html").withReader { reader ->
 	template = templateEngine.createTemplate(reader)	
 	new File("output/guide.html").withWriter { out ->

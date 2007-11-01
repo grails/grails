@@ -10,7 +10,7 @@ class Nose {
 }
 {code}
 
-In this case we have unidirectional one-to-one relationship from @Face@ to @Nose@. To make this relationship bidirectional you can use @belongsTo@:
+In this case we have unidirectional one-to-one relationship from @Face@ to @Nose@. To make this relationship bidirectional define the other side as follows:
 
 h5. Example B
 
@@ -38,7 +38,7 @@ class Nose {
 }
 {code}
 
-In this case because Nose "belongs to" Face we can create a Face and save it and the database updates/inserts will be _cascaded_ down to @Nose@:
+In this case we use the @belongsTo@ setting to say that @Nose@ "belongs to" Face. The result of this is that we can create a Face and save it and the database updates/inserts will be _cascaded_ down to @Nose@:
 
 
 {code}
@@ -51,11 +51,26 @@ The example above will save both face and nose. Note that the inverse _is not_ t
 new Nose(face:new Face()).save() // will cause an error
 {code}
 
-{note}
-An important thing to understand is that their is *always* an owning side to a relationship when persisting relationships which is defined in Grails with @belongsTo@
-{note}
+Another important implication of @belongsTo@ is that if you delete a @Face@ instance the @Nose@ will be deleted to:
 
-You could keep the above relationship as unidirectional and allow saves/updates to cascade down by doing the following:
+{code}
+def f = Face.get(1)
+f.delete() // both Face and Nose deleted
+{code}
+
+Without @belongsTo@ deletes would *not* be cascading and you would get a foreign key constraint error unless you explicitly deleted the Nose:
+{code}
+// error here without belongsTo
+def f = Face.get(1)
+f.delete() 
+
+// no error as we explicitly delete both
+def f = Face.get(1)
+f.nose.delete()
+f.delete()
+{code}
+
+You could keep the previous relationship as unidirectional and allow saves/updates to cascade down by doing the following:
 
 {code}
 class Face {

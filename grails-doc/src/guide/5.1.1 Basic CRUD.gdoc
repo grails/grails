@@ -1,0 +1,43 @@
+Try performing some basic CRUD (Create/Read/Update/Delete) operations.
+
+h4. Create
+
+To create a domain class use the Groovy new operator, set its properties and called [save|domainClasses]:
+
+{code}
+def p = new Person(name:"Fred", age:40, lastVisit:new Date())
+p.save()
+{code}
+
+The [save|commandLine] method will persist your class to the database using the underlying Hibernate ORM layer.
+
+h4. Read
+
+Grails transparently adds an implicit @id@ property to your domain class which you can use for retrieval:
+
+{code}
+def p = Person.get(1)
+assert 1 == p.id
+{code}
+
+This uses the [get|domainClasses] method that expects a database identifier to read the @Person@ object back from the db.
+
+h4. Update
+
+To update an instance, set some properties and then simply call [save|domainClasses] again:
+
+{code}
+def p = Person.get(1)
+p.name = "Bob"
+p.save()
+{code}
+
+h4. Delete
+
+To delete an instance use the [delete|domainClasses] method:
+
+{code}
+def p = Person.get(1)
+p.delete()
+{code}
+
