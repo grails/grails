@@ -2,7 +2,7 @@ The previous example configuration assumes you want the same config for all envi
 
 Grails' DataSource definition is "environment aware", however, so you can do:
 
-bc.
+{code}
 dataSource {
 	// common setting here
 }                     
@@ -12,4 +12,5 @@ environments {
           url = "jdbc:mysql://liveip.com/liveDb"					
      }			
   }
-}
+}    
+{code}

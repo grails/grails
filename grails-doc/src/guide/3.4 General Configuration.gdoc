@@ -7,5 +7,6 @@ foo.bar.hello = "world"
 
 Then later in your application you can access these settings in one of two ways. The most common is via the GrailsApplication object, which is available as a variable in controllers and tag libraries:
 
-bc.
+{code}
 assert "world" == grailsApplication.config.foo.bar.hello
+{code}
