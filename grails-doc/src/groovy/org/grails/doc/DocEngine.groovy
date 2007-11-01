@@ -146,7 +146,7 @@ class DocEngine extends BaseRenderEngine implements WikiRenderEngine {
      * @param name The property name to convert
      * @return The converted property name
      */
-    String getNaturalName(String name) {
+    String getNaturalName(String name) { 
         List words = new ArrayList();
         int i = 0;
         char[] chars = name.toCharArray();

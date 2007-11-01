@@ -2,31 +2,36 @@
 <project name="grails-build" default="package">
 
 
-    <property environment="env" />
+    <property environment="env" />  
 
-    <taskdef name="groovyc"  classname="org.codehaus.groovy.ant.Groovyc">
-            <classpath>
-                <fileset dir="${env.GRAILS_HOME}/lib" includes="*.jar" />
-                <fileset dir="lib" />
-            </classpath>
-    </taskdef>
+    <path id="classpath">
+        <fileset dir="${env.GRAILS_HOME}/lib" includes="*.jar"  />
+        <fileset dir="lib" />  
+		<pathelement location="bin" />	
+	</path>
+
+    <taskdef name="groovyc"  classname="org.codehaus.groovy.ant.Groovyc" classpathref="classpath" />
+
+    <taskdef name="groovy"  classname="org.codehaus.groovy.ant.Groovy" classpathref="classpath"/>
 
    <target name="package">
-       <delete dir="bin" />
        <mkdir dir="bin" />
-        <groovyc  srcdir="src/groovy" destdir="bin">
-            <classpath>
-                <fileset dir="${env.GROOVY_HOME}/lib" />
-                <fileset dir="lib" />
-            </classpath>
-
-        </groovyc>
-
+        <groovyc  	srcdir="src/groovy" destdir="bin" 		
+					classpathref="classpath"/>
 	  <mkdir dir="output" />
 	  <mkdir dir="output" />	
 	  <copy todir="output" failonerror="false">
 		  <fileset dir="${env.GRAILS_HOME}/doc" />
-      </copy>
+      </copy> 
+
+	   <groovy classpathref="classpath">   
+		    def gcl = getClass().getClassLoader()
+	        def script = gcl
+							.parseClass(new File("./Generate.groovy"))
+							.newInstance()
+
+			script.run()
+		</groovy>
    </target>
 
 
