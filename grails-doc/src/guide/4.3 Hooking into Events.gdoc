@@ -14,11 +14,11 @@ eventCreatedArtefact = { type, name ->
 }
 
 eventStatusUpdate = { msg ->
-	println msg
+   println msg
 }
 
 eventStatusFinal = { msg ->
-	println msg
+   println msg
 }
 {code}
 
