@@ -13,6 +13,12 @@ import org.radeox.macro.parameter.MacroParameter
 import org.radeox.macro.BaseMacro
 import org.radeox.filter.regex.RegexFilter
 import org.radeox.macro.MacroLoader
+import java.util.regex.Pattern
+import org.radeox.macro.code.JavaCodeFilter
+import org.radeox.filter.context.BaseFilterContext
+import org.radeox.macro.CodeMacro
+import org.radeox.macro.parameter.BaseMacroParameter
+import org.radeox.util.Encoder
 
 class DocEngine extends BaseRenderEngine implements WikiRenderEngine {
     String contextPath = "."
@@ -131,9 +137,13 @@ class DocEngine extends BaseRenderEngine implements WikiRenderEngine {
                 
                 if(filter instanceof MacroFilter) {
                     MacroLoader loader = new MacroLoader()
-                    def repository = filter.getMacroRepository()                
+                    def repository = filter.getMacroRepository()
+
                     loader.add(repository, new WarningMacro())
                     loader.add(repository, new NoteMacro())
+                    SourceMacro macro = new SourceMacro(GRAILS_HOME)
+                    macro.setInitialContext(getInitialRenderContext()) 
+                    loader.add(repository, macro)
                 }
             }
             fp.init();
@@ -223,6 +233,50 @@ class DocEngine extends BaseRenderEngine implements WikiRenderEngine {
 
         words.join(' ')
     }
+}
+public class SourceMacro extends BaseMacro {
+
+    String base
+
+    public SourceMacro(basedir) {
+        super();
+        this.base = basedir
+    }
+
+    String getName() { "source" }
+    void execute(Writer out, MacroParameter params) {
+        def source = params.params.get("0")
+
+
+
+
+        def i = source.indexOf('=')
+        def type = source[0..i-1]
+        def name = source[i+1..-1]
+        String code
+
+        switch(type) {
+            case "tag":
+                def j = name.indexOf('.')
+                def className = name[0..j-1]
+                def tagName = name[j..-1]
+                Pattern regex = ~/\s*?(def\s+?actionSubmit\s*?=\s*?\{\s*?attrs\s*?,{0,1}\s*?(body){0,1}\s*?->(\n|.)+?)(\/\*\*|def\s*[a-zA-Z]+?\s*=\s*\{)/
+
+                def text = new File("${base}/src/groovy/org/codehaus/groovy/grails/plugins/web/taglib/${className}.groovy").text
+                def matcher = regex.matcher(text)
+                if(matcher.find()) {
+                   text =  Encoder.escape(matcher.group(1))
+
+                   def macro = new CodeMacro()
+                   macro.setInitialContext(this.initialContext)
+                   def macroParams = new BaseMacroParameter()
+                   macroParams.content = text
+                   macro.execute(out, macroParams)
+                }
+            break
+        }
+    }
+
 }
 public class WarningMacro extends BaseMacro {
     String getName() {"warning"}
