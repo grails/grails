@@ -1,0 +1,128 @@
+GORM supports the concept of _dynamic finders_. A dynamic finder looks like a static method invocation, but the methods themselves don't actually exist in any form at the code level.
+
+Instead a method is auto-magically generated at runtime based on the properties of a given class. Take for example the @Book@ class:
+
+{code} 
+class Book {
+	String title
+	Date releaseDate
+	Author author
+}                
+class Author {
+	String name
+}
+{code}         
+
+The @Book@ class has properties such as @title@, @releaseDate@ and @author@. These can be used by the [findBy|domainClasses] and [findAllBy|domainClasses] methods in the form of _method expressions_:
+
+{code}
+def book = Book.findByTitle("The Stand")
+
+book =
+   Book
+    .findByTitleLike("Harry Pot%")
+
+book =
+  Book
+    .findByReleaseDateBetween( firstDate, secondDate )
+
+book =
+  Book
+    .findByReleaseDateGreaterThan( someDate )                      
+
+book =
+  Book
+   .findByTitleLikeOrReleaseDateLessThan( "%Something%", someDate )
+{code}
+
+h4. Method Expressions
+
+A method expression in GORM is made up of the prefix such as [findBy|domainClasses] followed by an expression that combines one or more properties. The basic form is:
+
+{code}
+     Book.findBy[Property][Suffix]*[Boolean Operator]*[Property][Suffix]
+{code}
+
+The tokens marked with a * are optional. Each suffix changes the nature of the query. For example:
+
+{code}
+def book = Book.findByTitle("The Stand")
+
+book =  Book.findByTitleLike("Harry Pot%")
+{code}                                    
+
+In the above example the first query is equivalent to equality whilst the latter, due to the @Like@ suffix, is equivalent to a SQL @like@ expression.                                                    
+
+The possible suffixes include:
+
+* @LessThan@ - less than the given value
+* @LessThanEquals@ - less than or equal a give value
+* @GreaterThan@ - greater than a given value
+* @GreaterThanEquals@ - greater than or equal a given value
+* @Like@ - Equivalent to a SQL like expression
+* @Ilike@ - Similar to a @Like@, except case sensitive
+* @NOT_EQUAL@ - Negates equality
+* @Between@ - Between two values (requires two arguments)
+* @IsNotNull@ - Not a null value (doesn't require an argument)
+* @IsNull@ - Is a null value (doesn't require an argument)
+
+You'll notice the last 3 effect the number of arguments required to the method as demonstrated by the example:
+ 
+{code}
+def now = new Date()
+def lastWeek = now - 7
+def book =
+  Book
+    .findByReleaseDateBetween( lastWeek, now )
+
+{code}   
+
+Equally @isNull@ and @isNotNull@ require no arguments:
+
+{code}
+def books = Book.findAllByReleaseDateIsNull()
+{code}       
+
+h4. Boolean logic (AND/OR) 
+
+Method expressions can also use a boolean operator to combine two criteria:
+
+{code}
+def books = 
+	 Book
+	   .findAllByTitleLikeAndReleaseDateGreaterThan("%Java%", new Date()-30)
+{code}     
+
+In this case we're using @And@ in the middle of the query to make sure both conditions are satisfied, but you could equally use @Or@:
+ 
+{code}
+def books = 
+	 Book
+	   .findAllByTitleLikeOrReleaseDateGreaterThan("%Java%", new Date()-30)
+{code}
+
+Clearly method names can end up being quit long in which case you should consider using [Criteria|guide:5.4.2 Criteria]
+
+h4. Querying Associations
+
+Associations can also be used within queries:
+
+{code}
+def author = Author.findByName("Stephen King")
+
+def books = author ? Book.findAllByAuthor(author) : []
+{code}
+
+In this case if the @Author@ instance is not null we use it in a query to obtain all the @Book@ instances for the given @Author@.      
+
+h4. Pagination & Sorting
+
+The same pagination and sorting parameters available on the [list|domainClasses] method can also be used with dynamic finders by supplying a map as the final parameter:
+
+{code}
+def books = 
+  Book.findAllByTitleLike("Harry Pot%", [max:3, 
+                                         offset:2, 
+                                         sort:"asc", 
+                                         order:"title"])
+{code}
