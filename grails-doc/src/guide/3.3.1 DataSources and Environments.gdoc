@@ -4,7 +4,7 @@ Grails' DataSource definition is "environment aware", however, so you can do:
 
 {code}
 dataSource {
-	// common setting here
+	// common settings here
 }                     
 environments {
   production {
