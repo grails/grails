@@ -65,7 +65,7 @@ class LinkTestFilter extends RegexTokenFilter {
                 }
 
                 if (name.indexOf("http://")>-1) {
-                    buffer << "<a href=\"${name}\" target=\"blank\">${Encoder.escape(alias)}</a>"
+                    buffer << "<a href=\"${name}${hash ? '#'+hash:''}\" target=\"blank\">${Encoder.escape(alias)}</a>"
                 } else {
                     // internal link
 

@@ -1,0 +1,65 @@
+h4. Table names
+
+The database table name which the class maps to can be customized using a call to @table@:
+
+{code:java}
+class Person {
+  ..
+  static mapping = {
+      table 'people'
+  }
+}
+{code}
+
+In this case the class would be mapped to a table called @people@ instead of the default name of @person@.
+
+h4. Column names
+
+It is also possible to customize the mapping for individual columns onto the database. For example if its the name you want to change you can do:
+
+{code:java}
+class Person {
+  String firstName
+  static mapping = {
+      table 'people'
+      columns {
+          firstName column:'First_Name'
+      }
+  }
+}
+{code}
+
+In this case we  define a @columns@ block that contains method calls that match each property name (in this case @firstName@). We then use the @column@ named parameter to specify the column name to map onto.
+
+h4. Column type
+
+GORM supports configuration of Hibernate types via the DSL using the type attribute. This includes specifing user types that subclass the Hibernate [org.hibernate.types.UserType|api:org.hibernate.types.UserType] class. As an example
+if you had a @PostCodeType@ you could use it as follows:
+
+{code:java}
+class Address {
+   String number
+   String postCode
+   static mapping = {
+      columns {
+          postCode type:PostCodeType
+      }
+   }
+}
+{code}
+
+Alternatively if you just wanted to map it to one of Hibernate's basic types other than the default chosen by Grails you could use:
+
+{code:java}
+class Address {
+   String number
+   String postCode
+   static mapping = {
+      columns {
+          postCode type:'text'
+      }
+   }
+}
+{code}
+
+This would make the @postCode@ column map to the SQL TEXT or CLOB type depending on which database is being used.

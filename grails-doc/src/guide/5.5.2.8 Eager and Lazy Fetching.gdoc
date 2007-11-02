@@ -1,0 +1,18 @@
+As discussed in the section on [Eager and Lazy fetching|guide:fetching], by default GORM collections use lazy fetching and is is configurable through the @fetchMode@ setting. However, if you prefer to group all your mappings together inside the @mappings@ block you can also use the ORM DSL to configure fetching:
+
+{code:java}
+class Person {
+  String firstName
+  static hasMany = [addresses:Address]
+  static mapping = {
+      columns {
+          addresses lazy:false
+      }
+  }
+}
+class Address {
+  String street
+  String postCode
+}
+{code}
+

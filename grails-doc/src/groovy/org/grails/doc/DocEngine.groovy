@@ -259,19 +259,21 @@ public class SourceMacro extends BaseMacro {
             case "tag":
                 def j = name.indexOf('.')
                 def className = name[0..j-1]
-                def tagName = name[j..-1]
-                Pattern regex = ~/\s*?(def\s+?actionSubmit\s*?=\s*?\{\s*?attrs\s*?,{0,1}\s*?(body){0,1}\s*?->(\n|.)+?)(\/\*\*|def\s*[a-zA-Z]+?\s*=\s*\{)/
-
+                def tagName = name[j+1..-1]
+                Pattern regex = ~/(?s)(\s*?def\s+?$tagName\s*?=\s*?\{\s*?attrs\s*?,{0,1}\s*?(body){0,1}\s*?->.+?)(\/\*\*|def\s*[a-zA-Z]+?\s*=\s*\{)/
                 def text = new File("${base}/src/groovy/org/codehaus/groovy/grails/plugins/web/taglib/${className}.groovy").text
                 def matcher = regex.matcher(text)
                 if(matcher.find()) {
-                   text =  Encoder.escape(matcher.group(1))
+                    out << '<p><a href="#" onclick="document.getElementById(\''+tagName+'\').style.display=\'inline\'">Show Source</a></p>'
+                    out << "<div id=\"$tagName\" style=\"display:none;\">"
+                    text =  Encoder.escape(matcher.group(1))
 
                    def macro = new CodeMacro()
                    macro.setInitialContext(this.initialContext)
                    def macroParams = new BaseMacroParameter()
                    macroParams.content = text
                    macro.execute(out, macroParams)
+                   out << "</div>"
                 }
             break
         }
@@ -301,10 +303,10 @@ class BlockQuoteFilter extends RegexTokenFilter {
 }
 class ItalicFilter extends RegexTokenFilter {
     public ItalicFilter() {
-        super(/_([^\n]*?)_/);
+        super(/\s_([^\n]*?)_\s/);
     }
     public void handleMatch(StringBuffer buffer, MatchResult result, FilterContext context) {
-        buffer << "<em class=\"italic\">${result.group(1)}</em>"
+        buffer << " <em class=\"italic\">${result.group(1)}</em> "
     }
 }
 class BoldFilter extends RegexTokenFilter {
@@ -334,9 +336,15 @@ class ImageFilter  extends RegexTokenFilter {
 
 
     public void handleMatch(StringBuffer buffer, MatchResult result, FilterContext context) {
-        def path = context.renderContext.get("contextPath")
-        if(!path) path = "."
-        buffer << "<img border=\"0\" class=\"center\" src=\"$path/img/${result.group(1)}\"></img>"
+        def img = result.group(1)
+        if(img ==~ /.+\.(jpg|png|gif)/) {
+            def path = context.renderContext.get("contextPath")
+            if(!path) path = "."
+            buffer << "<img border=\"0\" class=\"center\" src=\"$path/img/${result.group(1)}\"></img>"
+        }
+        else {
+            buffer << img
+        }
     }
 }
 class TextileLinkFilter extends RegexTokenFilter {
