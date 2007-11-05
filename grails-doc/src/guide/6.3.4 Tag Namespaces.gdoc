@@ -2,7 +2,7 @@ By default, tags are added to the default Grails namespace and are used with the
 
 {code:java}
 class SimpleTagLib {
-    static namespace = 'my'
+    static namespace = "my"
 
     def example = { attrs ->
         ...
@@ -21,6 +21,8 @@ Where the prefix is the same as the value of the static @namespace@ property. Na
 
 Tags within namespaces can be invoked as methods using the namespace as a prefix to the method call:
 
+{code:java}
 out << my.example(name:"foo")
+{code}
 
 This works from GSP, controllers or tag libraries
