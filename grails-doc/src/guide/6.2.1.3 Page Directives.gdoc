@@ -1,0 +1,15 @@
+GSP also supports a few JSP-style page directives. For example the @import@ directive:
+
+{code:xml}
+<%@ page import="java.awt.*" %> 
+{code}
+
+The @import@ directive allows you to import classes into the page. However, it is rarely needed due to Groovy's default imports and [GSP Tags|guide:tags].
+
+GSP also supports the @contentType@ directive:
+
+{code:xml}
+<%@ page contentType="text/json" %> 
+{code}
+
+The @contentType@ directive allows using GSP to render other formats.

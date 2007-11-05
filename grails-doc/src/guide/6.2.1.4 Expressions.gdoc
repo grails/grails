@@ -1,0 +1,12 @@
+In GSP the @<%= %>@ syntax introduced earlier is rarely used due to the support for GSP expressions. It is present mainly to allow ASP and JSP developers to feel at home using GSP. A GSP expression is similar to a JSP EL expression or a Groovy GString and takes the form @${expr}@:
+
+{code:xml}
+<html>
+  <body>
+    Hello ${params.name}
+  </body>
+</html>
+{code}
+
+However, unlike JSP EL you can have any Groovy expression within the @${..}@ parenthesis.
+
