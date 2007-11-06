@@ -1,7 +1,7 @@
 Although Ajax features the X for XML there are a number of different ways to implement Ajax which are typically broken down into:
 
 * Content Centric Ajax - Where you merely use the HTML result of a remote call to update the page
-* Data Centric Ajax - Where you actually response an XML or JSON response from the server and programmatically update the page
+* Data Centric Ajax - Where you actually send an XML or JSON response from the server and programmatically update the page
 * Script Centric Ajax - Where the server sends down a stream of Javascript to be evaluated on the fly
 
 Most of the examples in the [Ajax|guide:ajax] section cover Content Centric Ajax where you are updating the page, but you may also want to use Data Centric or Script Centric. This guide covers the different styles of Ajax.

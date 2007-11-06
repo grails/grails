@@ -1,0 +1,98 @@
+Integration tests differ from unit tests in that you have full access to the Grails environment within the test. Grails will use an in-memory HSQLDB database for integration tests and clear out all the data from the database in between each test.
+
+h4. Testing Controllers
+
+To test controllers you first have to understand the Spring Mock Library
+
+Essentially Grails automatically configures each test with a [MockHttpServletRequest|api:org.springframework.mock.web.MockHttpServletRequest], [MockHttpServletResponse|api:org.springframework.mock.web.MockHttpServletResponse], and [MockHttpSession|api:org.springframework.mock.web.MockHttpSession] which you can then use to perform your tests. For example consider the following controller:
+
+{code:java}
+class FooController {
+
+	def text = {
+	    render "bar"
+	}
+
+	def someRedirect = {
+		redirect(action:"bar")
+	}
+}{code}
+
+The tests for this would be:
+
+{code:java}
+class FooControllerTests extends GroovyTestCase {
+
+  void testText() {
+		def fc = new FooController()
+		fc.text()
+		assertEquals "bar", fc.response.contentAsString
+	}
+
+	void testSomeRedirect() {
+
+		def fc = new FooController()
+		fc.someRedirect()
+		assertEquals "/foo/bar", fc.response.redirectedUrl
+	}
+}{code}
+
+In the above case the response is an instance of @MockHttpServletResponse@ which we can use to obtain the @contentAsString@ (when writing to the response) or the URL redirected to for example. These mocked versions of the Servlet API are, unlike the real versions, all completely mutable and hence you can set properties on the request such as the @contextPath@ and so on.
+
+h4. Testing Controller Command Objects
+
+With command objects you just supply parameters to the request and it will automatically do the command object work for you when you call your action with no parameters:
+
+Given a controller using a command object:
+
+{code:java}
+class AuthenticationController {
+  def signup = { SignupForm form -> ….. }
+}{code}
+
+You can then test it like this:
+
+{code:java}
+def controller = new AuthenticationController()
+controller.params.login = ‘marcpalmer’
+controller.params.password = ’secret’
+controller.params.passwordConfirm = ’secret’
+controller.signup()
+{code}
+
+Grails auto-magically sees your call to @signup()@ as a call to the action and populates the command object from the mocked request parameters. During controller testing, the @params@ are mutable with a mocked request supplied by Grails.
+
+h4. Testing Tag Libraries
+
+Testing tag libraries is actually pretty trivial because when a tag is invoked as a method it returns its result as a string. So for example if you have a tag library like this:
+
+{code:java}
+class FooTagLib {
+   def bar =  { attrs, body ->
+   	   out << "<p>Hello World!</p>"
+   }          
+
+   def bodyTag =  { attrs, body ->
+      out << "<${attrs.name}>"
+           out << body()
+      out << "</${attrs.name}>"   	
+   }
+}{code}
+
+The tests would look like:
+
+{code:java}
+class FooTagLibTests extends GroovyTestCase {
+
+  void testBarTag() {
+	   assertEquals "<p>Hello World!</p>", new FooTagLib().bar(null,null)
+   }
+	    
+   void testBodyTag() {
+	   assertEquals "<p>Hello World!</p>", new FooTagLib().bodyTag(name:"p") {
+	       "Hello World!" 
+       }
+    }
+}{code}
+
+Notice that for the second example, @testBodyTag@, we pass a block that returns the body of the tag. This is handy for representing the body as a String.

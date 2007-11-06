@@ -1,0 +1,36 @@
+Unit testing are tests at the "unit" level. In other words you are testing individual methods or blocks of code without considering for surrounding infrastructure. In Grails you need to be particularity aware of the difference between unit and integration tests because in unit tests Grails *does not* inject any of the dynamic methods present during integration tests and at runtime. 
+
+The reason for this is that it is left up to you to mock these methods using something like "Groovy Mock":http://docs.codehaus.org/display/GROOVY/Groovy+Mocks or "ExpandoMetaClass":http://groovy.codehaus.org/ExpandoMetaClass.
+
+For example say you have an action like the following in @BookController@:
+
+{code:java}
+def show = {
+    [ book : Book.get( params.id ) ]
+}
+
+{code}
+
+
+The [params|controllers] object and the [get|domainClasses] method are both provided at runtime by Grails and not available in the unit test, but that can be mocked out. To do this using @ExpandoMetaClass@ you could do as follows:
+
+{code:java}
+void testShow() {
+	// mock the static get method
+	Book.metaClass.static.get = { Long id -> 
+		assert id == 10
+		new Book(id:id,title:"The Stand")
+    } 
+    // mock the params object	
+	BookController.metaClass.getParams = {-> [id:10] }
+	def controller = new BookController()
+	def model = controller.show()
+	assert model
+	assert model.book
+	assertEquals 10, model.book.id
+	assertEquals "The Stand", model.book.title	
+}
+{code}
+
+Notice how we provide a custom implementation of the @get@ method that returns a mocked instance and how we can even use assertions within this implementation. Also note how we provide a mocked instance of the @params@ object using a map.
+
