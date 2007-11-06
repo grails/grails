@@ -1,0 +1,33 @@
+You'll notice from previous examples that we used a special object called @flow@ to store objects within "flow scope". Grails flows have 5 different scope you can utilize:
+
+* @request@ - Stores an object for the scope of the current request
+* @flash@ - Stores the object for the current and next request only
+* @flow@ - Stores objects for the scope of the flow, removing them when the flow reaches an end state
+* @conversation@ - Stores objects for the scope of the conversation including the root flow and nested subflows
+* @session@ - Stores objects inside the users session
+
+{note}
+Grails service classes can be automatically scoped to a web flow scope. See the documentation on [Services|guide:services] for more information.
+{note}
+
+Also returning a model map from an action will automatically result in the model being placed in flow scope. For example, using a transition action, you can place objects within @flow@ scope as follows:
+
+{code:java}
+enterPersonalDetails {
+   on("submit") {
+         [person:new Person(params)]
+   }.to "enterShipping"
+   on("return").to "showCart"
+}{code}
+
+Be aware that a new request is always created for each state, so an object placed in request scope in an action state (for example) will not be available in a subsequent view state. Use one of the other scopes to pass objects from one state to another. Also note that Web Flow: 
+
+# Moves objects from flash scope to request scope upon transition between states; 
+# Merges objects from the flow and conversation scopes into the view model before rendering (so you shouldn't include a scope prefix when referencing these objects within a view, e.g. GSP pages).
+	
+
+When placing objects in @flash@, @flow@ or @conversation@ scope they must implement @java.io.Serializable@ otherwise you will get an error.
+
+{note}
+You could argue that objects placed into the @session@ should also implement @java.io.Serializable@ as if you do any kind of http session clustering this will be a requirement.
+{note}
