@@ -47,16 +47,16 @@ Given a controller using a command object:
 
 {code:java}
 class AuthenticationController {
-  def signup = { SignupForm form -> ….. }
+  def signup = { SignupForm form -> .. }
 }{code}
 
 You can then test it like this:
 
 {code:java}
 def controller = new AuthenticationController()
-controller.params.login = ‘marcpalmer’
-controller.params.password = ’secret’
-controller.params.passwordConfirm = ’secret’
+controller.params.login = "marcpalmer"
+controller.params.password = "secret"
+controller.params.passwordConfirm = "secret"
 controller.signup()
 {code}
 
@@ -96,3 +96,29 @@ class FooTagLibTests extends GroovyTestCase {
 }{code}
 
 Notice that for the second example, @testBodyTag@, we pass a block that returns the body of the tag. This is handy for representing the body as a String.
+
+h4. Testing Domain Classes
+
+Testing domain classes is typically a simple matter of using the [GORM API|guide:GORM], however there are some things to be aware of. Firstly, if you are testing queries you will often need to "flush" in order to ensure the correct state has been persisted to the database. For example take the following example:
+
+{code:java}
+void testQuery() {
+	def books = [ new Book(title:"The Stand"), new Book(title:"The Shining")]
+	books*.save()
+	
+	assertEquals 2, Book.list().size()
+}
+{code}
+
+This test will actually fail, because calling [save|domainClasses] does not actually persist the @Book@ instances when called. Calling @save@ merely indicates to Hibernate that at some point in the future these instances should be persisted. If you wish to commit changes immediately you need to "flush" them:
+
+{code:java}
+void testQuery() {
+	def books = [ new Book(title:"The Stand"), new Book(title:"The Shining")]
+	books*.save(flush:true)
+	
+	assertEquals 2, Book.list().size()
+}
+{code}
+
+In this case since we're passing the argument @flush@ with a value of @true@ the updates will be persisted immediately and hence will be available to the query later on.
