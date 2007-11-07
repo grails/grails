@@ -1,0 +1,82 @@
+REST is not really a technology in itself, but more an architectural pattern. REST is extremely simple and just involves using plain XML or JSON as a communication medium, combined with URL patterns that are "representational" of the underlying system and HTTP methods such as GET, PUT, POST and DELETE.
+
+Each HTTP method maps to an action. For example GET for retrieving data, PUT for creating data, POST for updating and so on. In this sense REST fits quite well with [CRUD|guide:scaffolding]. 
+
+h4. URL patterns
+
+The first step to implementing REST with Grails is to provide RESTful [URL mappings|guide:mappings]:
+
+{code:java}
+static mappings = {
+   "/product/$id?"(controller:"product"){
+       action = [GET:"show", PUT:"update", DELETE:"delete", POST:"save"]
+   }	
+}
+{code}
+
+Here we have used the capability of URL Mappings to [map to HTTP methods|guide:6.4.5 Mapping to HTTP methods] to provide a RESTful API to our controller. Each HTTP method such as GET, PUT, POST and DELETE map to unique actions within the controller.
+
+h4. XML Marshaling - Reading
+
+The controller implementation itself can use Grails' [XML marshaling|guide:XML] support to implement the GET method:	
+
+{code:java}
+import grails.converters.*
+class ProductController {
+	def show = {
+		if(params.id && Product.exists(params.id)) {
+			def p = Product.findByName(params.id)
+			render p as XML
+		}
+		else {
+			def all = Product.list()
+			render all as XML
+		}
+	}
+	..
+}
+{code}
+
+Here what we do is if there is an @id@ we search for the @Product@ by name and return it otherwise we return all Products. This way if we go to @/products@ we get all products, otherwise if we go to @/product/MacBook@ we only get a MacBook.
+
+h4. XML Marshalling - Updating
+
+To support updates such as @PUT@ and @POST@ you can use the @request@ object which Grails enhances with the ability to read an incoming XML packet:
+
+{code:java}
+def save = {
+	def values = [:]
+	request.XML.children().each { values[it.name()] = it.text()  }
+	def p = new Product(values)
+	if(p.save()) {
+		render p as XML
+	}
+	else {
+		def errors = p.errors.allErrors.collect { g.message(error:it) }
+		render(contentType:"text/xml") {
+			error {
+				for(err in errors) {
+					message(error:err)
+				}
+			}
+		}
+	}
+}
+{code}
+
+This example will read an XML package in the form:
+
+{code:xml}
+<book>
+	<title>The Stand</title>
+	...
+</book>
+{code}
+
+This is done using the @request.XML@ property and populating the values inside the XML into a map which is then passed to construct of the @Product@ object. The @Product@ object is then saved and rendered as XML, otherwise an error message is produced in the form using Grails' [validation|guide:validation] capabilities:
+
+{code:xml}
+<error>
+   <message>The property 'title' of class 'Person' must be specified</message>
+</error>
+{code} 
