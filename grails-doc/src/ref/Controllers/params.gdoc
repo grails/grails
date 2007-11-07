@@ -15,7 +15,7 @@ class BookController {
 }
 {code}
 
-To perform data binding (see [Data Binding|guide:x.x Data Binding] in the user guide):
+To perform data binding (see [Data Binding|guide:dataBinding] in the user guide):
 
 {code}
 def save = {
@@ -40,4 +40,4 @@ book = Book.get(1)
 book.properties = params
 {code} 
 
-For further reading see [Data Binding|guide:x.x Data Binding] in the user guide.
+For further reading see [Data Binding|guide:dataBinding] in the user guide.

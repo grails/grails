@@ -2,7 +2,7 @@ Grails ships with a few convenience targets such as [create-controller|commandLi
 {note}
 These are merely for your convenience and you can just as easily use an IDE or your favourite text editor.
 {note}
-For example to create the basis of an application you typically need a [domain model|guide:Object Relational Mapping(GORM)]:
+For example to create the basis of an application you typically need a [domain model|guide:GORM]:
 
 {code}
 grails create-domain-class book
