@@ -39,3 +39,21 @@ includeTargets << new File ( "${grailsHome}/scripts/Init.groovy" )
 
 event("StatusFinal", ["Super duper plugin action complete!"])
 {code}
+
+h4. Common Events
+
+Below is a table of some of the common events that can be leveraged:
+
+Event | Parameters | Description 
+ StatusUpdate | message | Passed a string indicating current script status/progress 
+ StatusError | message | Passed a string indicating an error message from the current script 
+ StatusFinal | message | Passed a string indicating the final script status message, i.e. when completing a target, even if the target does not exit the scripting environment 
+ CreatedArtefact | artefactType,artefactName | Called when a create-xxxx script has completed and created an artefact 
+ CreatedFile | fileName | Called whenever a project source filed is created, not including files constantly managed by Grails 
+ Exiting | returnCode | Called when the scripting environment is about to exit cleanly 
+ PluginInstalled | pluginName | Called after a plugin has been installed
+ CompileStart | kind | Called when compilation starts, passing the kind of compile - source or tests 
+ CompileEnd | kind | Called when compilation is finished, passing the kind of compile - source or tests 
+ DocStart | kind | Called when documentation generation is about to start - javadoc or groovydoc
+ DocEnd | kind | Called when documentation generation has ended - javadoc or groovydoc
+ SetClasspath | rootLoader | Called during classpath initialization so plugins can augment the classpath with rootLoader.addURL(...). Note that this augments the classpath *after* event scripts are loaded so you cannot use this to load a class that your event script needs to import, although you can do this if you load the class by name. 

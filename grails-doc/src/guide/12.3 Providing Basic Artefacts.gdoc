@@ -1,0 +1,28 @@
+h4. Adding a new Script
+
+A plugin can add a new script simply by providing the relevant Gant script within the scripts directory of the plugin:
+
+{code:java}
++ MyPlugin.groovy
+   + scripts     <-- additional scripts here
+   + grails-app
+        + controllers
+        + services
+        + etc.
+    + lib
+{code}
+
+h4. Adding a new Controller, Tag Library or Service
+
+A plugin can add a new controller, tag libraries, service or whatever by simply creating the relevant file within the @grails-app@ tree. Note that when the plugin is installed it will be loaded from where it is installed and not copied into the main application tree.
+
+{code:java}
++ ExamplePlugin.groovy
+   + scripts
+   + grails-app
+        + controllers  <-- additional controllers here
+        + services <-- additional services here
+        + etc.  <-- additional XXX here
+    + lib
+{code}
+
