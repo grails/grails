@@ -1,4 +1,4 @@
-Grails supports the notion of property placeholder configuration through an extended version of Spring's [PropertyPlaceholderConfigurer|api:org.springframework.beans.factory.config.PropertyPlaceholderConfigurer], which is typically useful when used in combination with [externalized configuration|guide:3.3 Externalized Configuration].
+Grails supports the notion of property placeholder configuration through an extended version of Spring's [PropertyPlaceholderConfigurer|api:org.springframework.beans.factory.config.PropertyPlaceholderConfigurer], which is typically useful when used in combination with [externalized configuration|guide:3.4 Externalized Configuration].
 
 Settings defined in either "ConfigSlurper":http://groovy.codehaus.org/ConfigSlurper scripts of Java properties files can be used as placeholder values for Spring configuration in @grails-app/conf/spring/resources.xml@. For example given the following entries in @grails-app/conf/Config.groovy@ (or an externalized config):
 

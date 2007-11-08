@@ -1,4 +1,4 @@
-Grails supports the notion of property override configuration through an extended version of Spring's [PropertyOverrideConfigurer|api:org.springframework.beans.factory.config.PropertyOverrideConfigurer], which is often useful when used in combination with [externalized configuration|guide:3.3 Externalized Configuration].
+Grails supports the notion of property override configuration through an extended version of Spring's [PropertyOverrideConfigurer|api:org.springframework.beans.factory.config.PropertyOverrideConfigurer], which is often useful when used in combination with [externalized configuration|guide:3.4 Externalized Configuration].
 
 Essentially you can supply "ConfigSlurper":http://groovy.codehaus.org/ConfigSlurper scripts that define a @beans@ block that can override settings on a bean:
 
