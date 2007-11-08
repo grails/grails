@@ -12,6 +12,7 @@ Once you have the JAR in place you need to get familiar Grails' DataSource descr
 * @url@ - The JDBC URL of the database
 * @dbCreate@ - Whether to auto-generate the database from the domain model or not
 * @pooling@ - Whether to use a pool of connections (defaults to true)
+* @logSql@ - Enable SQL logging
 
 A typical configuration for MySQL may be something like:
 

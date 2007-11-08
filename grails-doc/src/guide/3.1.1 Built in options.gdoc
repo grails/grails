@@ -1,1 +1,5 @@
-TODO: document cli options
+Grails also provides the following configuration options:
+
+* @grails.enable.native2ascii@ - Set this to false if you do not require native2ascii conversion of Grails i18n properties files
+* @disable.auto.recompile@ - Set this to true if you do not require auto-reloading of Java sources and domain classes which is CPU intensive
+

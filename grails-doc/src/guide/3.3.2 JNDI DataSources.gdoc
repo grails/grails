@@ -1,4 +1,4 @@
-Since many Java EE containers typically supply @DataSource@ instances via the Java Naming and Directory Interface (JNDI). Sometimes you are required to look-up a @DataSource@ via JNDI. 
+Since many Java EE containers typically supply @DataSource@ instances via the "Java Naming and Directory Interface":http://java.sun.com/products/jndi/ (JNDI). Sometimes you are required to look-up a @DataSource@ via JNDI. 
 
 Grails supports the definition of JNDI data sources as follows:
 

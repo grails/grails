@@ -1,4 +1,4 @@
-h1. The Basics
+h4. The Basics
 
 Grails plugins allow you to register dynamic methods with any Grails managed or other class at runtime. New methods can only be added within a @doWithDynamicMethods@ closure of a plugin.
 
