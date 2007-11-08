@@ -6,10 +6,14 @@ The bug-report command will package up only the sources of your application (exc
 
 h2. Examples
 
-bc.
+{code:java}
 grails bug-report
+{code}
 
 h2. Description
 
-Usage: grails bug-report
+Usage: 
+{code:java}
+grails bug-report
+{code}
 

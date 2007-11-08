@@ -40,7 +40,7 @@ files = new File("./src/guide").listFiles()
         .findAll { it.name.endsWith(".gdoc") }
         .sort(compare)
 context = new BaseRenderContext();
-context.set(CONTEXT_PATH, ".")
+context.set(CONTEXT_PATH, "..")
 
 ant = new AntBuilder()
 cache = [:]
@@ -57,6 +57,7 @@ for(f in files) {
 }
     
 toc = new StringBuffer()
+soloToc = new StringBuffer()
 contents = new StringBuffer()
 
 ant.mkdir(dir:"output/guide")         
@@ -78,7 +79,11 @@ new File("resources/style/guideItem.html").withReader { reader ->
 		if(margin <=1) margin = 0
 		margin *=10
 	    toc << "<div class=\"tocItem\" style=\"margin-left:${margin}px\"><a href=\"#${entry.key}\">${entry.key}</a></div>"  	
+	    soloToc << "<div class=\"tocItem\" style=\"margin-left:${margin}px\"><a href=\"${entry.key}.html\">${entry.key}</a></div>"  	
 		contents << "<h${header}><a name=\"${entry.key}\">${entry.key}</a></h2>"
+	    engine.configureContextPath ".."
+	    context.set(CONTEXT_PATH, "..")
+		
 		def body = engine.render(entry.value, context) 
 		contents << body
 
@@ -119,7 +124,12 @@ vars = [
 
 new File("./resources/style/layout.html").withReader { reader ->
 	template = templateEngine.createTemplate(reader)	
-	new File("output/guide.html").withWriter { out ->
+	new File("output/guide/single.html").withWriter { out ->
+		template.make(vars).writeTo(out)		
+	}
+	 vars.toc = soloToc
+	 vars.body = ""
+	new File("output/guide/index.html").withWriter { out ->
 		template.make(vars).writeTo(out)		
 	}
 }    

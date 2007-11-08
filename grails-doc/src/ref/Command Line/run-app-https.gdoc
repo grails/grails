@@ -2,15 +2,18 @@ h1. run-app-https
 
 h2. Purpose
 
-Extended version of "run-app":run-app.html that runs Grails using a generated keystore and SSL certificate for HTTPS
+Extended version of [run-app|commandLine] that runs Grails using a generated keystore and SSL certificate for HTTPS
 
 h2. Examples
 
-bc.
+{code:java}
 grails run-app-https
+{code}
 
 h2. Description
 
 Usage: 
-@grails run-app-https@
+{code:java}
+grails run-app-https
+{code}
 

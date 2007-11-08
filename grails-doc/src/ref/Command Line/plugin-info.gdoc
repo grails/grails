@@ -6,13 +6,16 @@ Displays detailed info about a given plug-in
 
 h2. Examples
 
-bc.
+{code:java}
 grails plugin-info jsecurity
+{code}
 
 h2. Description
 
 Usage: 
-@grails plugin-info [name]@
+{code:java}
+grails plugin-info [name]
+{code}
 
 This command will display more detailed info about a given plug-in such as the author, location of documentation and so on. An example of the output of the JSecurity plug-in can be seen below:
 

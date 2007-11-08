@@ -2,18 +2,22 @@ h1. upgrade
 
 h2. Purpose
 
-The _upgrade_ command will upgrade the current Grails application to currently installed version of Grails if possible.
+The @upgrade@ command will upgrade the current Grails application to currently installed version of Grails if possible.
 
 h2. Examples
 
-bc.
+{code:java}
 grails upgrade
+{code}
 
 h2. Description
 
-Usage: @grails upgrade@
+Usage: 
+{code:java}
+grails upgrade
+{code}
 
 Fired Events: 
 
-* _StatusUpdate_ - During the upgrade process
-* _StatusFinal_ - After the upgrade completes
+* @StatusUpdate@ - During the upgrade process
+* @StatusFinal@ - After the upgrade completes

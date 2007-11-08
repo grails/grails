@@ -9,7 +9,7 @@ def p = new Person(name:"Fred", age:40, lastVisit:new Date())
 p.save()
 {code}
 
-The [save|commandLine] method will persist your class to the database using the underlying Hibernate ORM layer.
+The [save|domainClasses] method will persist your class to the database using the underlying Hibernate ORM layer.
 
 h4. Read
 

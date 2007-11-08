@@ -6,23 +6,28 @@ Packages a plug-in as a zip archive which can then be installed into another app
 
 h2. Examples
 
-bc.
+{code:java}
 grails package-plugin
+{code}
 
 h2. Description
 
-Usage: @grails package-plugin@
+Usage: 
+{code:java}
+grails package-plugin
+{code}
 
 Fired Events: 
 
-* _StatusError_ - When there was an error during packaging
+* @StatusError@ - When there was an error during packaging
 
 The plug-in archive will be named with the convention @grails-[name]-[version].zip@. The name and version are obtained from the plug-in descriptor (the Groovy class ending with the convention @GrailsPlugin.groovy@) in the root of the plug-in directory. For example the following plug-in:
 
-bc.
+{code:java}
 class SimpleGrailsPlugin {
 	def version = 0.1
 }
+{code}
 
-Will result in a zip archive called @grails-simple-0.1.zip@, which can then be installed into an application with the "install-plugin":install-plugin.html command.
+Will result in a zip archive called @grails-simple-0.1.zip@, which can then be installed into an application with the [install-plugin|commandLine] command.
 

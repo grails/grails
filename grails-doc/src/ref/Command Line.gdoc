@@ -4,8 +4,9 @@ Grails incorporates the powerful build system {link:Gant|http://groovy.codehaus.
 
 The basic usage scenario is:
 
-bc.
+{code:java}
 grails [environment]* [command name]
+{code}
 
 Grails will search for Gant scripts that match the given name in the following locations:
 
@@ -18,11 +19,12 @@ If Grails discovers multiple commands matching the name entered it will offer yo
 
 To specify an alternative environment to execute a particular command within you can specify an optional environment parameter either with one of the built in environments:
 
-bc.
+{code:java}
 grails dev run-app
 grails prod run-app
+{code}
 
 Or using an argument
 
-bc.
-grails -Dgrails.env=uat run-app
+{code:java}
+grails -Dgrails.env=uat run-app{code}

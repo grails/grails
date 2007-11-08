@@ -7,11 +7,15 @@ The starting point for Grails. This command creates a Grails application and req
 
 h2. Examples
 
-bc.
+{code:java}
 grails create-app bookstore
 cd bookstore
+{code}
 
 h2. Description
 
-Usage: grails create-app _[name]_
+Usage: 
+{code:java}
+grails create-app [name]
+{code}
 

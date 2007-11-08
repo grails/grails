@@ -6,8 +6,9 @@ Generates javadoc and groovydoc documentation from the current Grails project.
 
 h2. Examples
 
-bc.
+{code:java}
 grails doc
+{code}
 
 h2. Description
           
@@ -16,12 +17,15 @@ Since Grails is a mixed source framework it is useful to have both Java and Groo
 
 The documentation itself is generated into the following directories:
 
-* _docs/api_ - Location of javadoc comments
-* _docs/gapi_ - Location of groovydoc comments
+* @docs/api@ - Location of javadoc comments
+* @docs/gapi@ - Location of groovydoc comments
 
-Usage: grails doc
+Usage: 
+{code:java}
+grails doc
+{code}
 
 Fired Events: 
 
-* _DocStart_ - Before documentation generation begins
-* _DocEnd_ - After documentation generation completes
+* @DocStart@ - Before documentation generation begins
+* @DocEnd@ - After documentation generation completes

@@ -2,31 +2,34 @@ h1. run-app
 
 h2. Purpose
 
-Runs Grails uses an embedded "Jetty":http://www.mortbay.org/ container on port 8080
+Runs Grails uses an embedded "Jetty":http://www.mortbay.org/ container on port @8080@
 
 h2. Examples
 
-bc.
+{code:java}
 grails run-app
 grails test run-app
 grails -Dserver.port=8090 -Denable.jndi=true -Ddisable.auto.recompile=true run-app
+{code}
 
 h2. Description
 
 Usage: 
-@grails run-app@
+{code:java}
+grails [env]* run-app
+{code}
 
 Arguments:
 
-* *disable.auto.recompile* - Disables auto-recompilation of Java sources, which can be processor intensive (defaults to false)
-* *server.port* - Specifies the port to run the server on (defaults to 8080)
-* *server.host* - Specifies the host name to run the server on (defaults to localhost)
-* *enable.jndi* - Specifies whether Jetty should run with the Java Naming and Directory Interface (JNDI) enabled
+* @disable.auto.recompile@ - Disables auto-recompilation of Java sources, which can be processor intensive (defaults to false)
+* @server.port@ - Specifies the port to run the server on (defaults to 8080)
+* @server.host@ - Specifies the host name to run the server on (defaults to localhost)
+* @enable.jndi@ - Specifies whether Jetty should run with the Java Naming and Directory Interface (JNDI) enabled
 
 Fired Events:
 
-* _StatusFinal_ - When the container has been started
-* _StatusUpdate_ - When the container is reloading
+* @StatusFinal@ - When the container has been started
+* @StatusUpdate@ - When the container is reloading
 
 This command will start Grails up in an embedded Jetty Container that can serve HTTP requests. This target is not intended for deployment as the container in development mode is configured to auto-reload changes at runtime which has an overhead attached to it and will not scale well.
 

@@ -6,28 +6,32 @@ Installs the templates used by Grails during code generation
 
 h2. Examples
 
-bc.
+{code:java}
 grails install-templates
+{code}
 
 h2. Description
 
 Usage: 
-@grails install-templates@
+
+{code:java}
+grails install-templates
+{code}
 
 Fired Events: 
 
-* _StatusUpdate_ - When the templates are successfully installed
+* @StatusUpdate@ - When the templates are successfully installed
 
 
 The @install-plugin@ command will install the set of templates Grails uses for all code generation activities to the @src/templates@ directory. The templates installed are as follows:
 
-bc.
+{code:java}
 src
    templates
        artifacts
 	   scaffolding
 	   war
-
+{code}
 
 The @artifacts@ directory contains the templates used by the @create-* @ commands.
 The @scaffolding@ directory contains templates used by the @generate-* @ commands.

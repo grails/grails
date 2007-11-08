@@ -6,24 +6,29 @@ Runs all Grails unit and integration tests and outputs reports. The command will
 
 h2. Examples
 
-bc.
+{code:java}
 grails test-app
 grails test-app Foo
 grails test-app Foo Bar
+{code}
 
 h2. Description
 
-Usage: @grails test-app [names]*@
+Usage: 
+{code:java}
+grails [environment]* test-app [names]*
+{code}
 
 Fired Events:
 
-* _StatusFinal_ - When the test cycle completes
+* @StatusFinal@ - When the test cycle completes
 
 Executes the Grails unit and integration tests located in the @test/unit@ and @test/integration@ directories. By default all tests are executed, but you can specify the names of the tests (without the "Tests" suffix) as argument to the command:
 
-bc.
+{code:java}
 grails test-app Foo
 grails test-app Foo Bar
+{code}
 
 The first example will execute a test called @FooTests.groovy@ whilst the second will execute @FooTests.groovy@ and @BarTests.groovy@ if they exist.
 

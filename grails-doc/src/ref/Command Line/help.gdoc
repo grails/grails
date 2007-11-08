@@ -6,11 +6,15 @@ Displays Grails command line help
 
 h2. Examples
 
-bc.
+{code:java}
 grails help
 grails help run-app
+{code}
 
 h2. Description
 
-Usage: grails help [command name]
+Usage: 
+{code:java}
+grails help [command name]*
+{code}
 

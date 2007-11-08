@@ -2,40 +2,47 @@ h1. create-script
 
 h2. Purpose
 
-The _create-script_ command will create a new Grails executable script that can be run with the _grails_ command from a terminal window.
+The @create-script@ command will create a new Grails executable script that can be run with the @grails@ command from a terminal window.
 
 
 h2. Examples
 
 The command:
 
-bc.
+{code:java}
 grails create-script execute-report
+{code}
 
-Creates a script called _scripts/ExecuteReport.groovy_ such as:
+Creates a script called @scripts/ExecuteReport.groovy@ such as:
 
-bc.
+{code:java}
 target('default': "The description of the script goes here!") {
     doStuff()
 }
 target(doStuff: "The implementation task") {
    // logic here   
 }
+{code}
 
 The command can then be run with:
 
-bc.
+{code:java}
 grails execute-report	
+{code}
 
 h2. Description
 
-The command will translate lower case command names, separated by hyphens into a valid Groovy class name with camel case. For example _create-controller_ would become a script called _scripts/CreateController.groovy_ 
+The command will translate lower case command names, separated by hyphens into a valid Groovy class name with camel case. For example @create-controller@ would become a script called @scripts/CreateController.groovy@. 
 
-The script generated is a "Gant":http://groovy.codehaus.org/Gant script which can use Gant's capabilities to depend on other scripts from Grails core. Refer to the section on "Command Line Scripting" in the "user guide":../../guide.html
+The script generated is a "Gant":http://groovy.codehaus.org/Gant script which can use Gant's capabilities to depend on other scripts from Grails core. Refer to the section on [Command Line Scripting|guide:commandLine] in the user guide.
 
-Usage: grails create-script _[name]_
+Usage: 
+
+{code:java}
+grails create-script [name]
+{code}
 
 Fired Events: 
 
-* _CreatedFile_ - When the script has been created
+* @CreatedFile@ - When the script has been created
 

@@ -16,17 +16,17 @@ includeTargets << new File ( "${grailsHome}/scripts/Bootstrap.groovy" )
 
 Once this is in place you can bootstrap Grails using two distinct methods:
 
-* *loadApp* - Loads and creates the GrailsApplication instance
-* *configureApp* - Loads all the Grails plug-ins and creates the Spring ApplicationContext
+* @loadApp@ - Loads and creates the GrailsApplication instance
+* @configureApp@ - Loads all the Grails plug-ins and creates the Spring ApplicationContext
 
-The _loadApp_ command will create a _grailsApp_ variable which you can the evaluate:
+The @loadApp@ command will create a @grailsApp@ variable which you can the evaluate:
 
 {code:java}                                                                            
 loadApp()
 grailsApp.allClasses.each { println it }
 {code}
 
-The _configureApp_ command will create _pluginManager_ and _appCtx_ variables representing the _GrailsPluginManager_ instance and the Spring _ApplicationContext_
+The @configureApp@ command will create @pluginManager@ and @appCtx@ variables representing the [GrailsPluginManager|api:org.codehaus.groovy.grails.plugins.GrailsPluginManager] instance and the Spring @ApplicationContext@
 
 {code:java}
 configureApp()
@@ -36,5 +36,8 @@ Connection c = appCtx.getBean('dataSource').getConnection()
 
 h2. Description
 
-Usage: grails bootstrap
+Usage: 
+{code:java}
+grails bootstrap
+{code}
 
