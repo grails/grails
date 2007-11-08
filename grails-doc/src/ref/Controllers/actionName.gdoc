@@ -6,7 +6,7 @@ Returns the name of the currently executing action
 
 h2. Examples
 
-bc.
+{code:java}
 class BookController {
 	def list = {
 		log.info "Executing action $actionName"
@@ -14,6 +14,7 @@ class BookController {
 		render(view:actionName)
 	}
 }
+{code}
 
 h2. Description
 

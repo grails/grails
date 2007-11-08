@@ -160,7 +160,7 @@ class DocEngine extends BaseRenderEngine implements WikiRenderEngine {
 				alias = ALIAS[alias]
 			}
 	
-            buffer <<  "<a href=\"$contextPath/guide.html#${alias}\" class=\"guide\">$view</a>"
+            buffer <<  "<a href=\"$contextPath/guide/single.html#${alias}\" class=\"guide\">$view</a>"
         }
 		else if(name.startsWith("api:")) {
 			def link = name[4..-1]

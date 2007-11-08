@@ -2,14 +2,14 @@ h1. request
 
 h2. Purpose
 
-An instance of the Servlet API's [HttpServletRequest|api:javax.servlet.http.HttpServletRequest] class
+The [request|servletAPI] object is an instance of the Servlet API's [HttpServletRequest|api:javax.servlet.http.HttpServletRequest] class
 
 h2. Examples
 
 {code}
 class BookController {
 	def list = {
-		log.info "Executing action $actionName"
+		log.info "User agent: " + request.getHeader("User-Agent")
 		
 		render(view:actionName)
 	}
@@ -18,18 +18,9 @@ class BookController {
 
 h2. Description
 
-Dynamic Properties:
+The [HttpServletRequest|api:javax.servlet.http.HttpServletRequest] class is useful for, amongst other things, obtaining request headers, storing request scoped attributes and establishing information about the client. Refer to the Servlet API's javadocs for further information.
 
-* *XML* - Provides an incoming XML request as a XmlSlurper GPathResult object
-
-{code}
-
-{code}
-
-* *JSON* -  Provides an incoming JSON request as a JSONObject
-
-Dynamic Methods:
-
-* *find* - adfdsj
-
+{note}
+The additional methods added to the [request|servletAPI] object are documented in the Grails Servlet API reference guide
+{note}
 

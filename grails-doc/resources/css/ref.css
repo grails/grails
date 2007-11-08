@@ -34,10 +34,6 @@ ol {
 	margin-left:50px;
 }                    
 
-table {
-
-	margin-left:50px;
-}
 
 blockquote {
 	margin-left:50px;
@@ -129,7 +125,7 @@ img.float-right {
   padding: 10px;
   padding-left: 40px;
   line-height: 100%;
-  width: 90%;	
+  width: 85%;	
   background-color: #FFCCCC;
 }
 
@@ -144,7 +140,7 @@ img.float-right {
   padding: 10px;
   padding-left: 40px;
   line-height: 100%;
-  width: 90%;	
+  width: 85%;	
   background-color: #FFFFCE;
 }
 /************************************************/
@@ -184,7 +180,9 @@ img.float-right {
   overflow: scroll -moz-scrollbars-horizontal;
   overflow-x: auto;
 }
-
+table .code {
+	margin-left:0px;
+}
 
 .java-keyword {
   font-weight: bold;

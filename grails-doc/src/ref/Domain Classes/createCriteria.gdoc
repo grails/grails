@@ -1,0 +1,99 @@
+h1. createCriteria 
+
+h2. Purpose
+
+Creates an returns an instance of Grails' [HibernateCriteriaBuilder|api:grails.orm.HibernateCriteriaBuilder] that can be used to construct criteria queries
+
+h2. Examples
+
+{code:java}
+def c = Account.createCriteria()
+def results = c.list {
+	like("holderFirstName", "Fred%")
+	and {
+		between("balance", 500, 1000)
+		eq("branch", "London")
+	}
+	maxResults(10)
+	order("holderLastName", "desc")
+}
+{code}
+
+h2. Description
+
+Criteria queries are a type safe, advanced way to query that uses a Groovy builder to construct potentially complex queries. It is a much better alternative to using StringBuffer.
+
+Refer to the user guide section on [Criteria|guide:criteria] for usage instructions. Below is a node reference for each criterion method:
+
+{table}
+ Node | Description | Example    
+ *between* | Where the property value is between to distinct values | {code}
+between("balance", 500, 1000)
+{code}       
+ *eq* | Where a property equals a particular value | {code}
+eq("branch", "London")
+{code}       
+ *eqProperty* | Where one property must equal another | {code}
+eqProperty("lastTransaction","firstTransaction")
+{code}       
+ *gt* | Where a property is greater than a particular value | {code}
+gt("balance",1000)
+{code}       
+ *gtProperty* | Where a one property must be greater than another | {code}
+gtProperty("balance","overdraft")
+{code}       
+ *ge* | Where a property is greater than or equal to a particular value | {code}
+ge("balance",1000)
+{code}       
+ *geProperty* | Where a one property must be greater than or equal to another | {code}
+geProperty("balance","overdraft")
+{code}       
+ *idEq* | Where an objects id equals the specified value | {code}
+idEq(1)
+{code}       
+ *ilike* | A case-insensitive 'like' expression | {code}
+ilike("holderFirstName","Steph%")
+{code}       
+ *in* | Where a one property is contained within the specified list of values note: 'in' is a groovy reserve word, we must escape it by quotes. | {code}
+'in'("holderAge",[18..65])
+{code}       
+ *isEmpty* | Where a collection property is empty | {code}
+isEmpty("transactions")
+{code}       
+ *isNotEmpty* | Where a collection property is not empty | {code}
+isNotEmpty("transactions")
+{code}       
+ *isNull* | Where a property is null | {code}
+isNull("holderGender")
+{code}       
+ *isNotNull* | Where a property is not null | {code}
+isNotNull("holderGender")
+{code}       
+ *lt* | Where a property is less than a particular value | {code}
+lt("balance",1000)
+{code}       
+ *ltProperty* | Where a one property must be less than another | {code}
+ltProperty("balance","overdraft")
+{code}       
+ *le* | Where a property is less than or equal to a particular value | {code}
+le("balance",1000)
+{code}       
+ *leProperty* | Where a one property must be less than or equal to another | {code}
+leProperty("balance","overdraft")
+{code}       
+ *like* | Equivalent to SQL like expression | {code}
+like("holderFirstName","Steph%")
+{code}       
+ *ne* | Where a property does not equals a particular value | {code}
+ne("branch", "London")
+{code}       
+ *neProperty* | Where one property does not equal another | {code}
+neProperty("lastTransaction","firstTransaction")
+{code}       
+ *order* | Order the results by a particular property | {code}
+order("holderLastName", "desc")
+{code}       
+ *sizeEq* | Where a collection property's size equals a particular value | {code}
+sizeEq("transactions", 10)
+{code}       
+{table}

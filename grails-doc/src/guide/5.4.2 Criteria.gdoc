@@ -15,6 +15,35 @@ def results = c {
 }
 {code}
 
+h4. Conjunctions and Disjunctions
+
+As demonstrated in the previous example you can group criteria in a logical AND using a @and { }@ block:
+
+{code:java}
+and {
+	between("balance", 500, 1000)
+	eq("branch", "London")
+}
+{code}
+
+This also works with logical OR:
+
+{code:java}
+or {
+	between("balance", 500, 1000)
+	eq("branch", "London")
+}
+{code}
+
+And you can also negate using logical NOT:
+
+{code:java}
+not {
+	between("balance", 500, 1000)
+	eq("branch", "London")
+}
+{code}
+
 h4. Querying Associations
 
 Associations can be queried by having a node that matches the property name. For example say the @Account@ class had many @Transaction@ objects:
