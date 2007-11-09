@@ -1,0 +1,41 @@
+h1. form 
+
+h2. Purpose
+
+Creates a form that submits to a controller, action, and/or id. Beyond what is below all the usual HTML attributes apply.
+
+h2. Examples
+
+Example controller for an application called "shop":
+
+{code:java}
+class Book {
+     def list = { [ books: Book.list( params ) ] }
+     def show = { [ book : Book.get( params['id'] ) ] }
+}
+{code}
+
+Example usages for above controller:
+
+{code:xml}
+<g:form name="myForm" action="myaction" id="1">...</g:form>
+<g:form name="myForm" url="[action:'list',controller:'book']">...</g:form>
+{code}
+
+
+h2. Description
+
+Attributes
+
+* @action@ (optional) - the name of the action to use in the link, if not specified the default action will be linked
+* @controller@ (optional) - the name of the controller to use in the link, if not specified the current controller will be linked
+* @id@ (optional) - The id to use in the link
+* @url@ (optional) - A map containing the action,controller,id etc.
+
+
+h2. Source
+
+{source:tag=FormTagLib.form}
+{source}
+
+

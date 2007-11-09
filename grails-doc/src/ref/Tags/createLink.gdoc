@@ -1,0 +1,56 @@
+h1. createLink
+
+h2. Purpose
+
+Creates a link that can be used where necessary (for example in an href, javascript, ajax call etc.)
+
+h2. Examples
+
+Example controller for an application called "shop":
+
+{code:java}
+class BookController {
+     def defaultAction="list"
+     def list = { [ books: Book.list( params ) ] }
+     def show = { [ book : Book.get( params['id'] ) ] }
+}
+{code}
+
+Example usages for above controller:
+
+{code:xml}
+<g:createLink action="show" id="1" /> == /shop/book/show/1
+<g:createLink controller="book" /> == /shop/book
+<g:createLink controller="book" action="list" /> == /shop/book/list
+<g:createLink url="[action:'list',controller:'book']" /> == /shop/book/list
+{code}
+
+Example as a method call in GSP:
+
+{code:java}
+<a href="${createLink(action:'list')}">my link</a>
+{code}
+
+Results in:
+
+{code:xml}
+<a href="/shop/book/list">my link</a>
+{code}
+
+
+
+h2. Description
+
+Attributes
+
+* @action@ (optional) - the name of the action to use in the link, if not specified the default action will be linked
+* @controller@ (optional) - the name of the controller to use in the link, if not specified the current controller will be linked
+* @id@ (optional) - The id to use in the link
+* @url@ (optional) - A map containing the action,controller,id etc.
+
+h2. Source
+
+{source:tag=ApplicationTagLib.createLink}
+{source}
+
+

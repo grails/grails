@@ -2,15 +2,29 @@ h1. actionSubmit
 
 h2. Purpose
 
-TODO
+Creates a submit button with the indicated value.  Javascript event handlers can be added using the same parameter names as in HTML.
+
 
 h2. Examples
 
-TODO
+{code:xml}
+<g:actionSubmit value="Update" />
+<!--'Update' is action, label is 'Some update label'-->
+<g:actionSubmit value="Some update label" action="Update" /> 
+<!--label derived from message bundle-->
+<g:actionSubmit value="${message(code:'label.update')}" action="Update" /> 
+<g:actionSubmit value="Delete" />
+<g:actionSubmit value="DeleteAll" onclick="return confirm('Are you sure???')" />
+{code}
 
 h2. Description
 
-Usage: @grails clean@
+Attributes
+
+* @value@ (required) - The title of the button and name of action when not explicitly defined.
+* @action@ (optional) - The name of the action to be executed, otherwise it is derived from the value.
+
+
 
 h2. Source
 

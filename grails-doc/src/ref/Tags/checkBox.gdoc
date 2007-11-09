@@ -1,0 +1,26 @@
+h1. checkBox
+
+h2. Purpose
+
+Creates a checkbox form field. All the usual HTML elements apply.
+
+
+h2. Examples
+
+{code:xml}
+     <g:checkBox name="myCheckbox" value="${true}" />
+{code}
+
+h2. Description
+
+Attributes
+
+* @name@ - The name of the checkbox
+* @value@ (optional) - The value of the checkbox, if evaluates to @true@ sets to checkbox to checked
+
+h2. Source
+
+{source:tag=FormTagLib.checkBox}
+{source}
+
+
