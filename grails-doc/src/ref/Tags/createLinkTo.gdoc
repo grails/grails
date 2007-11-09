@@ -1,0 +1,42 @@
+h1. createLinkTo
+
+h2. Purpose
+
+Creates a link that can be used where necessary (for example in an href, javascript, ajax call etc.)
+
+h2. Examples
+
+Example controller for an application called "shop":
+
+Example usages for the "shop" app:
+
+{code:xml}
+<g:createLinkTo dir="css" file="main.css" /> == /shop/css/main.css{code}
+
+Example as a method call in GSP only:
+
+{code:xml}
+<link type="text/css" href="${createLinkTo(dir:'css',file:'main.css')}" />{code}
+
+Results in:
+
+{code:xml}
+<link type="text/css" href="/shop/css/main.css" />{code}
+
+
+
+
+
+h2. Description
+
+Attributes
+
+* @dir@ (optional) - the name of the directory within the grails app to link to
+* @file@ (optional) - the name of the file within the grails app to link to
+
+h2. Source
+
+{source:tag=ApplicationTagLib.createLinkTo}
+{source}
+
+
