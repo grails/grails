@@ -37,6 +37,12 @@
 
 			script.run()
 		</groovy>
+		
+		 <property file="${env.GRAILS_HOME}/build.properties"/>
+		 <mkdir dir="dist" />
+		 <zip destfile="dist/grails-${grails.version}-docs.zip"
+		       basedir="output"
+		  />
    </target>
 
 
