@@ -28,6 +28,6 @@ h2. Description
 The Servlet API's [ServletContext|api:javax.servlet.ServletContext] is useful for, amongst other things, storing global application attributes, reading local server resources and establishing information about the servlet container.
 
 {note}
-Grails adds additional methods to the standard Servlet API's @ServletContext@ object which are documented [here|servletAPI]
+Grails adds additional methods to the standard Servlet API's [servletContext|servletAPI] object. See link for details.
 {note}
 

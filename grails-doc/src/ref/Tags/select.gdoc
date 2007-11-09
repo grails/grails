@@ -1,0 +1,54 @@
+h1. select 
+
+h2. Purpose
+
+Helper tag for creating HTML selects.
+
+h2. Examples
+
+{code:xml}
+// create a select from a range
+<g:select name="user.age" from="${18..65}" value="${age}"
+          noSelection="['':'-Choose your age-']"/>
+
+// create select from a list of companies
+// note the 'optionKey' is set to the id of each company element
+<g:select name="user.company.id"
+          from="${Company.list()}"
+          value="${user?.company.id}"
+          optionKey="id" />
+
+// create select with internationalized labels (this is useful for small static lists and the inList constraint)
+// expected properties in messages.properties:
+// book.category.M=Mystery
+// book.category.T=Thriller
+// book.category.F=Fantasy
+<g:select name="book.category" from="${['M', 'T', 'F']}" valueMessagePrefix="book.category" />
+{code}
+
+Example as a method call in GSP only:
+
+{code:xml}
+${select(from:aList,value:aValue)}
+{code}
+
+
+
+h2. Description
+
+Attributes
+
+* @from@ (required) - The list or range to select from
+* @value@ (optional) - The current selected value that evaluates equals() to true for one of the elements in the from list.
+* @optionKey@ (optional) - By default the value attribute of each "option" element will be the result of a "toString()" call on each element in the "from" attribute list. Setting this allows the value of the attribute to be a bean property of each element in the list
+* @optionValue@ (optional) - By default the value "option" element will be the result of a "toString()" call on each element in the "from" attribute list. Setting this allows the value to be a bean property of each element in the list.
+* @keys@ (optional) - A list of values to be used for the value attribute of each "option" element.
+* @noSelection@ (optional) - A single-entry map detailing the key and value to use for the "no selection made" choice in the select box. If there is no current selection this will be shown as it is first in the list, and if submitted with this selected, the key that you provide will be submitted. Typically this will be blank.
+* @valueMessagePrefix@ (Optional) - By default the value "option" element will be the result of a "toString()" call on each element in the "from" attribute list. Setting this allows the value to be resolved from the I18n messages. The valueMessagePrefix will be suffixed with a dot ('.') and then the value attribute of the option to resolve the message. If the message could not be resolved, the value is presented.
+
+h2. Source
+
+{source:tag=FormTagLib.select}
+{source}
+
+

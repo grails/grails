@@ -19,7 +19,7 @@ The @save@ method informs the persistence context that an instance should be sav
 b.save(flush:true)
 {code}
 
-The @save@ method returns @null@ if [validation|guide:Validation] failed and the instance was not saved and the instance itself if successful. This allows you to write code like the following:
+The @save@ method returns @null@ if [validation|guide:validation] failed and the instance was not saved and the instance itself if successful. This allows you to write code like the following:
 
 {code:java}
 if( !b.save() ) {
