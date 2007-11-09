@@ -12,7 +12,7 @@ Configured Spring Beans:
 
 * @classLoader@ - A bean that refers to the GroovyClassLoader used to load this GrailsApplication
 * @classEditor@ - A PropertyEditor that allows conversion of String's to classes using the @classLoader@ bean
-* @customEditors@ - An instance of @org.springframework.beans.factory.config.CustomEditorConfigurer@, that uses allows the @classEditor@ bean to be used as a PropertyEditor
+* @customEditors@ - An instance of [org.springframework.beans.factory.config.CustomEditorConfigurer|api:org.springframework.beans.factory.config.CustomEditorConfigurer], that uses allows the @classEditor@ bean to be used as a PropertyEditor
 
 
 

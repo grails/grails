@@ -20,7 +20,7 @@ assert "<p>Hello World!</p>" == "&lt;p&gt;Hello World!&lt;/p&gt;".decodeHTML()
 
 h2. Description
 
-This plug-in searches for classes that end in the convention @Codec@ and dynamically registers @encodeAs[Codec]@ and @decode[Codec]@ methods on @java.lang.Object@ so that any data can be encoded and decoded.
+This plug-in searches for classes that end in the convention @Codec@ and dynamically registers @encodeAs[Codec]@ and @decode[Codec]@ methods on @java.lang.Object@ so that any data can be encoded and decoded. For more information refer to the section of [Encoding and Decoding Strings|guide:codecs] in the user guide.
 
 Provided Codecs:
 
