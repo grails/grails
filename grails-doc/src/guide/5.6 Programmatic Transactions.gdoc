@@ -27,4 +27,6 @@ def transferFunds = {
 
 In this example we rollback the transactions if the destination account is not active and if any exception are thrown during the process the transaction will automatically be rolled back.
 
+You can also use "save points" to rollback a transaction to a particular point in time if you don't want to rollback the entire transaction. This can be achieved through the use of Spring's [SavePointManager|api:org.springframework.transaction.SavepointManager] interface.
+
 The [withTransaction|domainClasses] method deals with the begin/commit/rollback logic for you within the scope of the block.
