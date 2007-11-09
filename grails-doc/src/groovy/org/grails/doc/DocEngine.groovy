@@ -141,7 +141,7 @@ class DocEngine extends BaseRenderEngine implements WikiRenderEngine {
 
                     loader.add(repository, new WarningMacro())
                     loader.add(repository, new NoteMacro())
-                    SourceMacro macro = new SourceMacro(GRAILS_HOME)
+                    SourceMacro macro = new SourceMacro(GRAILS_HOME) 
                     macro.setInitialContext(getInitialRenderContext()) 
                     loader.add(repository, macro)
                 }
@@ -169,10 +169,10 @@ class DocEngine extends BaseRenderEngine implements WikiRenderEngine {
 			link =link.replace('.' as char, '/' as char) + ".html"	
 			
 			if(externalKey) {
-				buffer <<  "<a href=\"${EXTERNAL_DOCS[externalKey]}/$link\" class=\"api\">$view</a>"
+				buffer <<  "<a href=\"${EXTERNAL_DOCS[externalKey]}/$link${anchor ? '#' + anchor : ''}\" class=\"api\">$view</a>"
 			}
 			else {
-				buffer <<  "<a href=\"$contextPath/api/$link\" class=\"api\">$view</a>"				
+				buffer <<  "<a href=\"$contextPath/api/$link${anchor ? '#' + anchor : ''}\" class=\"api\">$view</a>"				
 			}
 		}
         else {
@@ -195,43 +195,50 @@ class DocEngine extends BaseRenderEngine implements WikiRenderEngine {
      * @param name The property name to convert
      * @return The converted property name
      */
+    static final nameCache = [:]
     String getNaturalName(String name) { 
-        List words = new ArrayList();
-        int i = 0;
-        char[] chars = name.toCharArray();
-        for (int j = 0; j < chars.length; j++) {
-            char c = chars[j];
-            String w;
-            if(i >= words.size()) {
-                w = "";
-                words.add(i, w);
-            }
-            else {
-                w = (String)words.get(i);
-            }
+	    if(nameCache[name]) {
+			return nameCache[name]
+     	}
+		else {
+	        List words = new ArrayList();
+	        int i = 0;
+	        char[] chars = name.toCharArray();
+	        for (int j = 0; j < chars.length; j++) {
+	            char c = chars[j];
+	            String w;
+	            if(i >= words.size()) {
+	                w = "";
+	                words.add(i, w);
+	            }
+	            else {
+	                w = (String)words.get(i);
+	            }
 
-            if(Character.isLowerCase(c) || Character.isDigit(c)) {
-                if(Character.isLowerCase(c) && w.length() == 0)
-                    c = Character.toUpperCase(c);
-                else if(w.length() > 1 && Character.isUpperCase(w.charAt(w.length() - 1)) ) {
-                    w = "";
-                    words.add(++i,w);
-                }
+	            if(Character.isLowerCase(c) || Character.isDigit(c)) {
+	                if(Character.isLowerCase(c) && w.length() == 0)
+	                    c = Character.toUpperCase(c);
+	                else if(w.length() > 1 && Character.isUpperCase(w.charAt(w.length() - 1)) ) {
+	                    w = "";
+	                    words.add(++i,w);
+	                }
 
-                words.set(i, w + c);
-            }
-            else if(Character.isUpperCase(c)) {
-                if((i == 0 && w.length() == 0) || Character.isUpperCase(w.charAt(w.length() - 1)) ) 	{
-                    words.set(i, w + c);
-                }
-                else {
-                    words.add(++i, String.valueOf(c));
-                }
-            }
+	                words.set(i, w + c);
+	            }
+	            else if(Character.isUpperCase(c)) {
+	                if((i == 0 && w.length() == 0) || Character.isUpperCase(w.charAt(w.length() - 1)) ) 	{
+	                    words.set(i, w + c);
+	                }
+	                else {
+	                    words.add(++i, String.valueOf(c));
+	                }
+	            }
 
-        }
+	        }
 
-        words.join(' ')
+	        nameCache[name] = words.join(' ')
+			return nameCache[name]			
+		}
     }
 }
 public class SourceMacro extends BaseMacro {
