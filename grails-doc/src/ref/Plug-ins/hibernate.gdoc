@@ -28,7 +28,7 @@ Configured Spring Beans:
 * @lobHandlerDetector@ - An instance of [org.codehaus.groovy.grails.orm.hibernate.support.SpringLobHandlerDetectorFactoryBean] that attempts to automatically detect the Spring LobHandler to use based on the database.
 * @sessionFactory@ - An instance of the Hibernate's [org.hibernate.SessionFactory|api:org.hibernate.SessionFactory] class that.
 * @transactionManager@ - An instance of Spring's [org.springframework.orm.hibernate.HibernateTransactionManager|api:org.springframework.orm.hibernate.HibernateTransactionManager] class
-* @persistenceInterceptor@ - An instance of [org.codehaus.groovy.grails.orm.hibernate.support.HibernatePersistenceContextInterceptor] that abstracts away how persistence is used from the controller/view layer so that Grails can be used without GORM.
-* @openSessionInViewInterceptor@ - An instance of [org.codehaus.groovy.grails.orm.hibernate.support.GrailsOpenSessionInViewFilter] that deals with Grails' [Session|api:org.hibernate.Session] management.
+* @persistenceInterceptor@ - An instance of [org.codehaus.groovy.grails.orm.hibernate.support.HibernatePersistenceContextInterceptor|api:org.codehaus.groovy.grails.orm.hibernate.support.HibernatePersistenceContextInterceptor] that abstracts away how persistence is used from the controller/view layer so that Grails can be used without GORM.
+* @openSessionInViewInterceptor@ - An instance of [org.codehaus.groovy.grails.orm.hibernate.support.GrailsOpenSessionInViewFilter|api:org.codehaus.groovy.grails.orm.hibernate.support.GrailsOpenSessionInViewFilter] that deals with Grails' [Session|api:org.hibernate.Session] management.
 
 

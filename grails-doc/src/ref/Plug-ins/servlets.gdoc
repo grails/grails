@@ -1,0 +1,24 @@
+h1. servlets 
+
+h2. Purpose
+
+The @servlets@ plug-in enhances with Servlet API with new methods
+
+h2. Examples
+
+Attributes from the [request|controllers], [session|controllers], and [servletContext|controllers] can be access with the de-reference operator:
+
+{code:java}
+class BookController {
+    def find = {
+        def findBy = params.findBy
+        def foo = request.foo
+        def loggedUser = session.logged_user
+		...
+    }
+}
+{code}
+
+
+
+

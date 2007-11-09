@@ -28,3 +28,5 @@ Or using an argument
 
 {code:java}
 grails -Dgrails.env=uat run-app{code}
+
+Refer to the user guide section on [The Command Line|guide:commandLine] for more information.

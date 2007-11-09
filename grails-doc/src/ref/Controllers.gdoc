@@ -1,6 +1,6 @@
 h1. Controller Usage
 
-A controller fulfills the C in the Model View Controller (MVC) pattern and is responsible for handling web requests. In Grails a controller is a classed that ends in the convention "Controller" and lives in the @grails-app/controllers@ directory. A controller can be created with the [create-controller|commandLine] command:
+A controller fulfills the C in the Model View Controller (MVC) pattern and is responsible for handling web requests. In Grails a controller is a class that ends in the convention "Controller" and lives in the @grails-app/controllers@ directory. A controller can be created with the [create-controller|commandLine] command:
 
 {code:java}
 grails create-controller hello
@@ -16,4 +16,6 @@ class HelloController {
 }
 {code}
 
-Each action in the controller is a callable block (for example the @world@ action above) that has access to a number of implicit variables and methods which are covered in this reference documentation
+Each action in the controller is a callable block (for example the @world@ action above) that has access to a number of implicit variables and methods which are covered in this reference documentation. 
+
+Refer to the user guide topic on [Controllers|guide:controllers] for more information.

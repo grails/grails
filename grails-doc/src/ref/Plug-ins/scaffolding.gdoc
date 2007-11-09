@@ -1,0 +1,31 @@
+h1. scaffolding 
+
+h2. Purpose
+
+The @scaffolding@ plug-in sets up Grails' support for CRUD via [Scaffolding|guide:scaffolding].
+
+h2. Examples
+
+An example of enabling "dynamic" scaffolding:
+
+{code:java}
+class BookController {
+   def scaffold = true
+}
+{code}
+
+h2. Description
+
+Refer to the section on [Scaffolding|guide:i18n] in the Grails user guide which details how Grails' scaffolding support works.
+
+Configured Spring Beans for each scaffolded domain class @Book@:
+
+* @BookDomain@ - An instance the [GrailsScaffoldDomain|api:org.codehaus.groovy.grails.scaffolding.GrailsScaffoldDomain] class that knows how to perform the persistence side of CRUD.
+* @BookResponseHandler@ - An instance the [TemplateGeneratingResponseHandler|api:org.codehaus.groovy.grails.scaffolding.TemplateGeneratingResponseHandler] class that generates views at runtime from GSP templates.
+* @BookResponseHandlerFactory@ - An instance of [DefaultGrailsResponseHandlerFactory|api:org.codehaus.groovy.grails.scaffolding.DefaultGrailsResponseHandlerFactory] that is a factory class that returns different @ResponseHandler@ instance, the default is a @TemplateGeneratingResponseHandler@, but could be customized to return XML, RSS etc. responses.
+* @BookScaffolder@ - An instance of the [DefaultGrailsScaffolder|api:org.codehaus.groovy.grails.scaffolding.DefaultGrailsScaffolder] that works at the meta-programming level to enhance controllers for scaffolding.
+
+
+
+
+
