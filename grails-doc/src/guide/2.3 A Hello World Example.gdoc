@@ -3,7 +3,7 @@ To implement the typical "hello world!" example run the [create-controller|comma
 bc.
 grails create-controller hello  
 
-This will create a new controller (Refer to the section on Controllers for more information) in the @grails-app/controllers@ directory called @HelloController.groovy@.
+This will create a new controller (Refer to the section on [Controllers|guide:controllers] for more information) in the @grails-app/controllers@ directory called @HelloController.groovy@.
 
 Controllers are capable of dealing with web requests and to fulfil the "hello world!" use case our implementation needs to look like the following:
 
