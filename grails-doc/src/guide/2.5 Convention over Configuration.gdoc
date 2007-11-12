@@ -1,4 +1,4 @@
-Grails uses "convention over configuration" to configure itself. Hence you need to familiarize yourself with the directory structure provided by Grails.
+Grails uses "convention over configuration" to configure itself. This typically means that the name and location of files is used instead of explicit configuration, hence you need to familiarize yourself with the directory structure provided by Grails.
 
 Here is a breakdown and links to the relevant sections:
 
