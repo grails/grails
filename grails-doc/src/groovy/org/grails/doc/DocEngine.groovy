@@ -77,7 +77,11 @@ class DocEngine extends BaseRenderEngine implements WikiRenderEngine {
 				if(EXTERNAL_DOCS.keySet().find { ref.startsWith(it) }) {
 					return true
 				}
-				ref = ref.replace('.' as char, '/' as char) + ".html"
+				ref = ref.replace('.' as char, '/' as char)
+				if(ref.indexOf('#') > -1) {
+					ref = ref[0..ref.indexOf("#")-1]
+				} 
+				ref += ".html"
 				ref = "${GRAILS_HOME}/doc/api/$ref"
 				def file = new File(ref)
                 if(file.exists()) {

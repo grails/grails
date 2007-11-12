@@ -44,6 +44,7 @@ h4. Common Events
 
 Below is a table of some of the common events that can be leveraged:
 
+{table}
 Event | Parameters | Description 
  StatusUpdate | message | Passed a string indicating current script status/progress 
  StatusError | message | Passed a string indicating an error message from the current script 
@@ -57,3 +58,4 @@ Event | Parameters | Description
  DocStart | kind | Called when documentation generation is about to start - javadoc or groovydoc
  DocEnd | kind | Called when documentation generation has ended - javadoc or groovydoc
  SetClasspath | rootLoader | Called during classpath initialization so plugins can augment the classpath with rootLoader.addURL(...). Note that this augments the classpath *after* event scripts are loaded so you cannot use this to load a class that your event script needs to import, although you can do this if you load the class by name. 
+{table}
