@@ -28,7 +28,7 @@ Be aware that a new request is always created for each state, so an object place
 # Merges objects from the flow and conversation scopes into the view model before rendering (so you shouldn't include a scope prefix when referencing these objects within a view, e.g. GSP pages).
 	
 
-h4. Scopes and Serialization
+h4. Flow Scopes and Serialization
 
 When placing objects in @flash@, @flow@ or @conversation@ scope they must implement @java.io.Serializable@ otherwise you will get an error. This has an impact on [domain classes|guide:GORM] in that domain classes are typically placed within a scope so that they can be rendered in a view. For example consider the following domain class:
 
@@ -55,7 +55,7 @@ class Book implements Serializable {
 }
 {code}
 
-Here if the @Author@ association is not @Serializable@ you will also get an error. This also impacts closures used in [GORM events|guide:5.5.1 Events and Auto Timestamping] such as @onLoad@, @onSave@ and so on. The following domain class will cause an error if placed in a flow scope:
+Here if the @Author@ association is not @Serializable@ you will also get an error. This also impacts closures used in [GORM events|guide:5.5.1 Events and Auto Timestamping] such as @onLoad@, @onSave@ and so on. The following domain class will cause an error if an instance is placed in a flow scope:
 
 {code:java}
 class Book implements Serializable {
