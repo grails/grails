@@ -1,3 +1,5 @@
+h4. Scope Basics
+
 You'll notice from previous examples that we used a special object called @flow@ to store objects within "flow scope". Grails flows have 5 different scope you can utilize:
 
 * @request@ - Stores an object for the scope of the current request
@@ -26,8 +28,51 @@ Be aware that a new request is always created for each state, so an object place
 # Merges objects from the flow and conversation scopes into the view model before rendering (so you shouldn't include a scope prefix when referencing these objects within a view, e.g. GSP pages).
 	
 
-When placing objects in @flash@, @flow@ or @conversation@ scope they must implement @java.io.Serializable@ otherwise you will get an error.
+h4. Scopes and Serialization
 
-{note}
-You could argue that objects placed into the @session@ should also implement @java.io.Serializable@ as if you do any kind of http session clustering this will be a requirement.
-{note}
+When placing objects in @flash@, @flow@ or @conversation@ scope they must implement @java.io.Serializable@ otherwise you will get an error. This has an impact on [domain classes|guide:GORM] in that domain classes are typically placed within a scope so that they can be rendered in a view. For example consider the following domain class:
+
+{code:java}
+class Book {
+	String title
+}
+{code}
+
+In order to place an instance of the @Book@ class in a flow scope you will need to modify it as follows:
+
+{code:java}
+class Book implements Serializable {
+	String title
+}
+{code}
+
+This also impacts associations and closures you declare within a domain class. For example consider this:
+
+{code:java}
+class Book implements Serializable {
+	String title
+	Author author
+}
+{code}
+
+Here if the @Author@ association is not @Serializable@ you will also get an error. This also impacts closures used in [GORM events|guide:5.5.1 Events and Auto Timestamping] such as @onLoad@, @onSave@ and so on. The following domain class will cause an error if placed in a flow scope:
+
+{code:java}
+class Book implements Serializable {
+	String title
+	def onLoad = {
+		println "I'm loading"
+	}
+}
+{code}
+
+The reason is that the assigned block on the @onLoad@ event cannot be serialized. To get around this you should declare all events as @transient@:
+
+{code:java}
+class Book implements Serializable {
+	String title
+	transient onLoad = {
+		println "I'm loading"
+	}
+}
+{code}
