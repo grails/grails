@@ -62,6 +62,30 @@ controller.signup()
 
 Grails auto-magically sees your call to @signup()@ as a call to the action and populates the command object from the mocked request parameters. During controller testing, the @params@ are mutable with a mocked request supplied by Grails.
 
+h4. Testing Controllers and the render Method
+
+The [render|controllers] method allows you to render a custom view at any point within the body of an action. For instance, consider the example below:
+
+{code:java}
+def save = {
+	def book = Book(params)
+	if(book.save()) {
+		// handle
+	}
+	else {
+		render(view:"create", model:[book:book])
+	}
+}
+{code}
+
+In the above example the result of the model of the action is not available as the return value, but instead is stored within the @modelAndView@ property of the controller. The @modelAndView@ property is an instance of Spring MVC's [ModelAndView|http://static.springframework.org/spring/docs/1.2.x/api/org/springframework/web/servlet/ModelAndView.html] class and you can use it to the test the result of an action:
+
+{code:java}
+def bookController = new BookController()
+bookController.save()
+def model = bookController.modelAndView.model.book
+{code} 
+
 h4. Testing Tag Libraries
 
 Testing tag libraries is actually pretty trivial because when a tag is invoked as a method it returns its result as a string. So for example if you have a tag library like this:
