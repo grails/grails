@@ -8,5 +8,15 @@ In GSP the @<%= %>@ syntax introduced earlier is rarely used due to the support 
 </html>
 {code}
 
-However, unlike JSP EL you can have any Groovy expression within the @${..}@ parenthesis.
+However, unlike JSP EL you can have any Groovy expression within the @${..}@ parenthesis. Variables within the ${..} are also automatically HTML escaped if the @contentType@ of the page is 'text/html'. If you were to change the content type with a page directive this behaviour would be disabled:
+
+{code:java}
+<%@page contentType="text/xml" %>
+{code}
+
+If you prefer to disable HTML escaping globally (not recommended), you can use the @grails.views.autoEscapeHtml@ setting in @grails-app/conf/Config.groovy@:
+
+{code:java}
+grails.views.autoEscapeHtml=false 
+{code}
 
