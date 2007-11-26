@@ -1,0 +1,48 @@
+h1. withFormat 
+
+h2. Purpose
+
+Used to execute different responses based on the incoming request @Accept@ header, format parameter or URI extension. See [content negotiation|guide:6.8 Content Negotiation] for more information.
+
+h2. Examples
+
+{code:java}
+import grails.converters.*
+
+class BookController {
+	def books
+	def list = {
+		this.books = Book.list()
+		withFormat {
+			html bookList:books
+			js { render "alert('hello')" } 
+			xml { render books as XML }
+		}
+	}
+}
+{code}
+
+h2. Description
+
+The @withFormat@ method takes a block within the scope of which you can execute different methods whose names match the content type you want to respond to. For example:
+
+{code:java}
+withFormat {
+	html bookList:books
+	js { render "alert('hello')" } 
+	xml { render books as XML }
+}
+{code}
+
+Here we invoke three methods called @html@, @js@ and @xml@ that use mime type names configured in @grails-app/conf/Config.groovy@ (See [content negotiation|guide:6.8 Content Negotiation] for more information). The call to @html@ accepts a model (a map) which is passed on to the view. Grails will first search for a view called @grails-app/views/book/list.html.gsp@ and if that is not found fallback to @grails-app/views/book/list.gsp@.
+
+If you require the model the be lazily executed you can pass a closure or block instead of a map:
+
+{code:java}
+withFormat {
+	html { [bookList:Book.list()] }
+    ...
+}
+{code}
+
+The block will only get executed if the @html@ format is matched. 

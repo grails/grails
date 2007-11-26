@@ -30,6 +30,7 @@ Grails enhances the @HttpServletRequest@ instance by adding the following new pr
 * @each@ - Implementation of Groovy's @each@ method for iterating over request attributes.
 * @find@ - Implementation of Groovy's default @find@ method for searching request attributes.
 * @findAll@ - Implementation of Groovy's default @findAll@ method for searching request attributes.
+* @format@ - The request format, used for [content negotiation|guide:6.8 Content Negotiation].
 
 The @XML@ and @JSON@ properties are useful for XML APIs and can be used to parse incoming XML or JSON packages. For example given a request body of:
 {code:xml}
