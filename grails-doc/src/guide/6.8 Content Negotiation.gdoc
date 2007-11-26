@@ -101,3 +101,29 @@ Grails will shave off the extension and map it to @/book/list@ instead whilst si
 {code:java}
 grails.mime.file.extensions = true
 {code}
+
+h4. Testing Content Negotiation
+
+To test content negotiation in an integration test (see the section on [Testing|guide:testing]) you can either manipulate the incoming request headers:
+
+{code:java}
+void testJavascriptOutput() {
+	def controller = new TestController()
+	controller.request.addHeader "Accept", "text/javascript, text/html, application/xml, text/xml, */*"
+	
+	controller.testAction()
+	assertEquals "alert('hello')", controller.response.contentAsString
+}
+{code} 
+
+Or you can set the format parameter to achieve a similar effect:
+
+{code:java}
+void testJavascriptOutput() {
+	def controller = new TestController()
+	controller.params.format = 'js'
+	
+	controller.testAction()
+	assertEquals "alert('hello')", controller.response.contentAsString
+}
+{code}
