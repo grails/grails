@@ -41,13 +41,24 @@ Here what we do is if there is an @id@ we search for the @Product@ by name and r
 
 h4. XML Marshalling - Updating
 
-To support updates such as @PUT@ and @POST@ you can use the @request@ object which Grails enhances with the ability to read an incoming XML packet:
+To support updates such as @PUT@ and @POST@ you can use the [params|controllers] object which Grails enhances with the ability to read an incoming XML packet. Given an incoming XML packet of:
+
+{code:xml}
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<product>
+	<name>MacBook</name>
+	<vendor id="12">
+		<name>Apple</name>
+     </vender>
+</product>
+{code}
+
+You can read this XML packet using the same techniques described in the [Data Binding|guide:dataBinding] section via the [params|controllers] object:
 
 {code:java}
 def save = {
-	def values = [:]
-	request.XML.children().each { values[it.name()] = it.text()  }
-	def p = new Product(values)
+	def p = new Product(params['product'])
+	
 	if(p.save()) {
 		render p as XML
 	}
@@ -64,16 +75,17 @@ def save = {
 }
 {code}
 
-This example will read an XML package in the form:
-
-{code:xml}
-<book>
-	<title>The Stand</title>
-	...
-</book>
+In this example we by indexing into the @params@ object using the key @'product'@ we can automatically create and bind the XML using the constructor of the @Product@ class. An interesting aspect of the line:
+{code:java}
+def p = new Product(params['product'])
 {code}
+Is that it requires no code changes to deal with a form submission that submits form data than it does to deal with an XML request. The exact same technique can be used with a JSON request too.
 
-This is done using the @request.XML@ property and populating the values inside the XML into a map which is then passed to construct of the @Product@ object. The @Product@ object is then saved and rendered as XML, otherwise an error message is produced in the form using Grails' [validation|guide:validation] capabilities:
+{note}
+If you require different responses to different clients (REST, HTML etc.) you can use [content negotation|6.8 Content Negotiation]
+{note}
+
+The @Product@ object is then saved and rendered as XML, otherwise an error message is produced using Grails' [validation|guide:validation] capabilities in the form:
 
 {code:xml}
 <error>
