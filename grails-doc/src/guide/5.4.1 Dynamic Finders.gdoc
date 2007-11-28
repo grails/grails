@@ -60,7 +60,7 @@ The possible suffixes include:
 * @GreaterThan@ - greater than a given value
 * @GreaterThanEquals@ - greater than or equal a given value
 * @Like@ - Equivalent to a SQL like expression
-* @Ilike@ - Similar to a @Like@, except case sensitive
+* @Ilike@ - Similar to a @Like@, except case insensitive
 * @NotEqual@ - Negates equality
 * @Between@ - Between two values (requires two arguments)
 * @IsNotNull@ - Not a null value (doesn't require an argument)
