@@ -86,6 +86,56 @@ bookController.save()
 def model = bookController.modelAndView.model.book
 {code} 
 
+h4. Simulating Request Data
+
+If you're testing an action that requires request data such as a REST web service you can use the Spring [MockHttpServletRequest|api:org.springframework.mock.web.MockHttpServletRequest] object to do so. For example consider this action which performs data binding from an incoming request:
+
+{code:java}
+def create = {
+	[book: new Book(params['book']) ]	
+}
+{code}
+
+If you wish the simulate the 'book' parameter as an XML request you could do something like the following:
+
+{code:java}
+void testSaveWithXML() {
+	def controller = new BookController()
+	controller.request.contentType = 'text/xml'
+	controller.request.contents = '''<?xml version="1.0" encoding="ISO-8859-1"?>
+	<book>
+		<title>The Stand</title>
+		...
+	</book>	
+	'''.getBytes() // note we need the bytes
+	
+	def model = controller.create()
+	assert model.book
+	assertEquals "The Stand", model.book.title
+}
+{code}
+
+The same can be achieved with a JSON request:
+
+{code:java}
+void testSaveWithJSON() {
+	def controller = new BookController()	
+ 	controller.request.contentType = "text/json"
+ 	controller.request.content = '{"id":1,"class":"Book","title":"The Stand"}'.getBytes()	
+
+	def model = controller.create()
+	assert model.book
+	assertEquals "The Stand", model.book.title
+	
+}
+{code}
+
+{note}
+With JSON don't forget the @class@ property to specify the name the target type to bind too. In the XML this is implicit within the name of the @<book>@ node, but with JSON you need this property as part of the JSON packet.
+{note}
+
+For more information on the subject of REST web services see the section on [REST|guide:REST].
+
 h4. Testing Tag Libraries
 
 Testing tag libraries is actually pretty trivial because when a tag is invoked as a method it returns its result as a string. So for example if you have a tag library like this:
