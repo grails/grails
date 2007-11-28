@@ -112,7 +112,7 @@ h4. Data Binding and Security concerns
 
 When batch updating properties from request parameters you need to be careful not to allow clients to bind malicious data to domain classes that end up being persisted to the database.
 
-This problem can be circumvented in a couple of ways, one way it to use [Command Objects|guide:commandObjects] another way, covered here, is to use the flexible [bindData|controllers] method.
+This problem can be circumvented in a couple of ways, one way it to use [Command Objects|guide:commandObjects]. Another way, covered here, is to use the flexible [bindData|controllers] method.
 
 The @bindData@ method allows the same data binding capability, but to arbitrary objects:
 
