@@ -99,7 +99,7 @@ def create = {
 If you wish the simulate the 'book' parameter as an XML request you could do something like the following:
 
 {code:java}
-void testSaveWithXML() {
+void testCreateWithXML() {
 	def controller = new BookController()
 	controller.request.contentType = 'text/xml'
 	controller.request.contents = '''<?xml version="1.0" encoding="ISO-8859-1"?>
@@ -118,7 +118,7 @@ void testSaveWithXML() {
 The same can be achieved with a JSON request:
 
 {code:java}
-void testSaveWithJSON() {
+void testCreateWithJSON() {
 	def controller = new BookController()	
  	controller.request.contentType = "text/json"
  	controller.request.content = '{"id":1,"class":"Book","title":"The Stand"}'.getBytes()	
