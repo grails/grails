@@ -86,12 +86,14 @@ Rendering a Response
 
 Sometimes its easier (typically with Ajax applications) to render snippets of text or code to the response directly from the controller. For this the highly flexible "render" method can be used:
 
+{code:java}
 render "Hello World!"
-
+{code}
 
 
 The above code writes the text "Hello World!" to the response, other examples include:
 
+{code:java}
 // write some markup
 render {
    for(b in books) {
@@ -104,6 +106,6 @@ render(view:'show')
 render(template:'book_template', collection:Book.list())
 // render some text with encoding and content type
 render(text:"<xml>some xml</xml>",contentType:"text/xml",encoding:"UTF-8")
-
+{code}
 
 
