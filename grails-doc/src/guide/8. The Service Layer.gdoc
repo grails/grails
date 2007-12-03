@@ -1,6 +1,6 @@
-As well as the [Web layer|guide:6. The Web Layer], Grails defines the notion of a service layer. The Grails team discourage embedding of core application logic instead controllers as it does not promote re-use and a clean separation of concerns.
+As well as the [Web layer|guide:6. The Web Layer], Grails defines the notion of a service layer. The Grails team discourages the embedding of core application logic inside controllers, as it does not promote re-use and a clean separation of concerns.
 
-Services in Grails are seen as the place to put the majority of the logic in your application, leaving controllers responsible for controlling request flow via redirects and so on. 
+Services in Grails are seen as the place to put the majority of the logic in your application, leaving controllers responsible for handling request flow via redirects and so on. 
 
 h4. Creating a Service
 

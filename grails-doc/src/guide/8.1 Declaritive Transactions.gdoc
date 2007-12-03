@@ -1,6 +1,6 @@
-Services typically are involved in co-ordinating logic between [domain classes|guide:GORM] and hence often involved with persistence that spans large operations. Given the nature of services they frequently require transactional behaviour. You can of course use programmatic transactions with the [withTransaction|domainClasses] method, however this is repetitive and doesn't fully leverage the underlying power of the underlying Spring transaction abstraction.
+Services are typically involved with co-ordinating logic between [domain classes|guide:GORM], and hence often involved with persistence that spans large operations. Given the nature of services they frequently require transactional behaviour. You can of course use programmatic transactions with the [withTransaction|domainClasses] method, however this is repetitive and doesn't fully leverage the power of Spring's underlying transaction abstraction.
 
-Services allow the enablement of transaction demarcation, which is essentially a declarative way of saying all methods within this service are to be made transactional. To enable transaction demarcation simply setting the @transactional@ property to @true@:
+Services allow the enablement of transaction demarcation, which is essentially a declarative way of saying all methods within this service are to be made transactional. To enable transaction demarcation simply set the @transactional@ property to @true@:
 
 {code:java}
 class CountryService {

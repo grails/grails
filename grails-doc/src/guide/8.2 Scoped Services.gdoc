@@ -1,4 +1,4 @@
-By default access to service methods is not synchronised, so nothing prevents concurrent execution of those functions. In fact, because the service is a singleton and may be used concurrently, you should be very careful about storing state in a service. Or take the easy (and better) road and never store state in a service.
+By default, access to service methods is not synchronised, so nothing prevents concurrent execution of those functions. In fact, because the service is a singleton and may be used concurrently, you should be very careful about storing state in a service. Or take the easy (and better) road and never store state in a service.
 
 You can change this behaviour by placing a service in a particular scope. The supported scopes are:
 
@@ -15,7 +15,7 @@ You can change this behaviour by placing a service in a particular scope. The su
 If your service is @flash@, @flow@ or @conversation@ scoped it will need to implement @java.io.Serializable@ and can only be used in the context of a [Web Flow|guide:webflow]
 {note}
       
-To enable one of the scopes add a static scope property to your class whose value is one of the above:
+To enable one of the scopes, add a static scope property to your class whose value is one of the above:
 
 {code:java}
 static scope = "flow"
