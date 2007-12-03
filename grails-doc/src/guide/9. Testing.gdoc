@@ -1,4 +1,4 @@
-Automated testing is seen as a key part of Grails and hence Grails provides many ways to making testing easier from low level unit testing to high level functional tests. This section details the different capabilities that Grails offers in terms of testing.
+Automated testing is seen as a key part of Grails, implemented using [Groovy Tests|http://groovy.codehaus.org/Testing+Guide]. Hence, Grails provides many ways to making testing easier from low level unit testing to high level functional tests. This section details the different capabilities that Grails offers in terms of testing.
 
 The first thing to be aware of is that all of the @create-*@ commands actually end up creating @integration@ tests automatically for you. For example say you run the [create-controller|commandLine] command as follows:
 

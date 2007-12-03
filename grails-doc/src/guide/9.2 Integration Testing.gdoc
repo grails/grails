@@ -39,6 +39,36 @@ class FooControllerTests extends GroovyTestCase {
 
 In the above case the response is an instance of @MockHttpServletResponse@ which we can use to obtain the @contentAsString@ (when writing to the response) or the URL redirected to for example. These mocked versions of the Servlet API are, unlike the real versions, all completely mutable and hence you can set properties on the request such as the @contextPath@ and so on.
 
+Grails *does not* invoke [interceptors|guide:interceptors] automatically when calling actions during integration testing. You should test interceptors in isolation, and via [functional testing|guide:functionalTesting] if necessary.
+
+h4. Testing Controllers with Services
+
+If your controller references a service, you have to explicitly initialise the service from your test.
+
+Given a controller using a service:
+
+{code:java}
+class FilmStarsController {
+    def popularityService
+    
+    def update = {
+        // do something with popularityService
+    }
+}{code}
+
+The test for this would be:
+
+{code:java}
+class FilmStarsTests extends GroovyTestCase {
+    def popularityService
+
+    public void testInjectedServiceInController () {
+        def fsc = new FilmStarsController()
+        fsc.popularityService = popularityService
+        fsc.update()
+    }
+}{code}
+
 h4. Testing Controller Command Objects
 
 With command objects you just supply parameters to the request and it will automatically do the command object work for you when you call your action with no parameters:
