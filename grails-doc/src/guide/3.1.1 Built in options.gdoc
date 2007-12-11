@@ -1,7 +1,4 @@
 Grails also provides the following configuration options:
 
-* @server.port@ - Set this to the port number that the embedded servlet container should run on. By default, the container runs on port 8080.
 * @grails.enable.native2ascii@ - Set this to false if you do not require native2ascii conversion of Grails i18n properties files
-* @disable.auto.recompile@ - Set this to true if you do not require auto-reloading of Java sources and domain classes which is CPU intensive
-* @recompile.frequency@ - Specify this with the @run-app@ Grails command to set how frequently (in seconds) Grails checks for changes to Java and Groovy sources in your project. If this property is not set and recompilation is enabled, Grails defaults to 3s.
 

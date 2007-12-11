@@ -22,6 +22,7 @@ grails [env]* run-app
 Arguments:
 
 * @disable.auto.recompile@ - Disables auto-recompilation of Java sources, which can be processor intensive (defaults to false)
+* @recompile.frequency@ - Specifies how frequently (in seconds) Grails checks for changes to Java and Groovy sources in your project (defaults to 3).
 * @server.port@ - Specifies the port to run the server on (defaults to 8080)
 * @server.host@ - Specifies the host name to run the server on (defaults to localhost)
 * @enable.jndi@ - Specifies whether Jetty should run with the Java Naming and Directory Interface (JNDI) enabled
