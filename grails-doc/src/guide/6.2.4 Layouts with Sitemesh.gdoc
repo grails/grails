@@ -1,6 +1,6 @@
 h4. Creating Layouts
 
-Grails leverages "Sitemesh":http://www.opensymphony.com/sitemesh/, a decorator engine, to support view layouts. Layouts are located in the @grails-app/views/layouts@ directory. A typical layout can be seen below:
+Grails leverages [Sitemesh|http://www.opensymphony.com/sitemesh/], a decorator engine, to support view layouts. Layouts are located in the @grails-app/views/layouts@ directory. A typical layout can be seen below:
 
 {code:xml}
 <html>
