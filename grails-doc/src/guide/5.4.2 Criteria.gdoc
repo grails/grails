@@ -148,7 +148,7 @@ If a node within the builder tree doesn't match a particular criterion it will a
 
 h4. Querying with Eager Fetching
 
-In the section on [Eager and Lazy Fetching|guide:5.3.4 Eager and Lazy Fetching] we discussed out to declaratively specify fetching to avoid the N+1 SELECT problem. However, this can also be achieved using a criteria query:
+In the section on [Eager and Lazy Fetching|guide:5.3.4 Eager and Lazy Fetching] we discussed how to declaratively specify fetching to avoid the N+1 SELECT problem. However, this can also be achieved using a criteria query:
 
 {code:java}
 import org.hibernate.FetchMode as FM
