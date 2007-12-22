@@ -1,4 +1,4 @@
 Grails also provides the following configuration options:
 
 * @grails.enable.native2ascii@ - Set this to false if you do not require native2ascii conversion of Grails i18n properties files
-
+* @grails.views.default.codec@ - Sets the default encoding regime for GSPs - can be one of 'none', 'html', or 'base64' (default: 'none'). To reduce risk of XSS attacks, set this to 'html'.
