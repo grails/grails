@@ -96,10 +96,10 @@ Grails also supports content negotiation via URI extensions. For example given t
 /book/list.xml
 {code}
 
-Grails will shave off the extension and map it to @/book/list@ instead whilst simultaneously setting the content format to @xml@ based on this extension. For this to work you must have the @grails.mime.file.extensions@ setting in @grails-app/conf/Config.groovy@ set to @true@:
+Grails will shave off the extension and map it to @/book/list@ instead whilst simultaneously setting the content format to @xml@ based on this extension. This behaviour is enabled by default, so if you wish to turn it off, you must set the @grails.mime.file.extensions@ property in @grails-app/conf/Config.groovy@ to @false@:
 
 {code:java}
-grails.mime.file.extensions = true
+grails.mime.file.extensions = false
 {code}
 
 h4. Testing Content Negotiation
