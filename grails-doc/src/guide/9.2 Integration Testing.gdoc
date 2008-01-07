@@ -166,6 +166,76 @@ With JSON don't forget the @class@ property to specify the name the target type 
 
 For more information on the subject of REST web services see the section on [REST|guide:REST].
 
+h4. Testing Web Flows
+
+Testing [Web Flows|guide:webflow] requires a special test harness called @grails.test.WebFlowTestCase@ which sub classes Spring Web Flow's [AbstractFlowExecutionTests|api:org.springframework.webflow.test.execution.AbstractFlowExecutionTests] class.
+
+{note}
+Subclasses of @WebFlowTestCase@ *must* be integration tests
+{note}
+
+For example given this trivial flow:
+
+{code}
+class ExampleController {
+	def exampleFlow = {
+		start {
+			on("go") {
+				flow.hello = "world"
+			}.to "next"
+		}
+		next {
+			on("back").to "start"
+			on("go").to "end"
+		}
+		end()
+	}	
+}
+{code}
+
+You need to tell the test harness what to use for the "flow definition". This is done via overriding the abstract @getFlow@
+ method:
+
+{code}
+class ExampleFlowTests extends grails.test.WebFlowTestCase {
+	def getFlow() { new ExampleController().exampleFlow }
+	...
+}
+{code}
+
+If you need to specify the flow id you can do so by overriding the getFlowId method otherwise the default is @test@:
+{code}
+class ExampleFlowTests extends grails.test.WebFlowTestCase {
+	String getFlowId() { "example" }
+	...
+}
+{code}
+
+Once this is done in your test you need to kick off the flow with the @startFlow@ method which returns a @ViewSelection@ object:
+
+{code}
+void testExampleFlow() {
+	def viewSelection = startFlow()
+	
+	assertEquals "start", viewSelection.viewName
+	...
+}
+{code}
+
+As demonstrated above you can check you're on the right state using the @viewName@ property of the @ViewSelection@ object. To trigger and event you need to use the @signalEvent@ method:
+
+{code}
+void testExampleFlow() {
+	...
+	viewSelection = signalEvent("go")
+	assertEquals "next", viewSelection.viewName
+	assertEquals "world", viewSelection.model.hello
+}
+{code} 
+
+Here we have signaled to the flow to execute the event "go" this causes a transition to the "next" state. In the example a transition action placed a @hello@ variable into the flow scope. We can test the value of this variable by inspecting the @model@ property of the @ViewSelection@ as above.
+
+
 h4. Testing Tag Libraries
 
 Testing tag libraries is actually pretty trivial because when a tag is invoked as a method it returns its result as a string. So for example if you have a tag library like this:
@@ -200,6 +270,54 @@ class FooTagLibTests extends GroovyTestCase {
 }{code}
 
 Notice that for the second example, @testBodyTag@, we pass a block that returns the body of the tag. This is handy for representing the body as a String.
+
+h4. Testing Tag Libraries with GroovyPagesTestCase
+
+In addition to doing simply testing of tag libraries like the above you can also use the @grails.test.GroovyPagesTestCase@ class to test tag libraries. 
+
+The @GroovyPagesTestCase@ class is a sub class of the regular @GroovyTestCase@ class and provides utility methods for testing the output of a GSP rendering.
+
+{note}
+@GroovyPagesTestCase@ can only be used in an integration test.
+{note}
+
+As an example given a date formatting tag library such as the one below:
+
+{code}
+class FormatTagLib {
+	def dateFormat = { attrs, body -> 
+		out << new java.text.SimpleDateFormat(attrs.format) << attrs.date
+	}
+}
+{code}
+
+This can be easily tested as follows:
+
+{code}
+class FormatTagLibTests extends GroovyPagesTestCase {
+	void testDateFormat() {
+		def template = '<g:dateFormat format="dd-MM-yyyy" date="${myDate}" />'
+		
+		def testDate = ... // create the date
+		assertOutputEquals( '01-01-2008', template, [myDate:testDate] )
+	}
+}
+{code}
+
+You can also obtain the result of a GSP using the @applyTemplate@ method of the @GroovyPagesTestCase@ class:
+
+{code}
+class FormatTagLibTests extends GroovyPagesTestCase {
+	void testDateFormat() {
+		def template = '<g:dateFormat format="dd-MM-yyyy" date="${myDate}" />'
+		
+		def testDate = ... // create the date
+		def result = applyTemplate( template, [myDate:testDate] )
+		
+		assertEquals '01-01-2008', result
+	}
+}
+{code}
 
 h4. Testing Domain Classes
 

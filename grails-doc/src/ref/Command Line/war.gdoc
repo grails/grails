@@ -33,6 +33,7 @@ The @war@ command will create a web application archive (WAR) file using the app
 grails test war
 grails dev war
 grails prod war
+grails war /foo/bar/mywar.war
 {code}
 
 You can also specify a custom environment:

@@ -39,4 +39,24 @@ class LoginController {
 }
 {code}
 
+h4. Command Objects and Dependency Injection
+
+Command objects can participate in dependency injection. This is useful if your command object has some custom validation logic which may need to interact with Grails [services|guide:services]:
+
+{code}
+class LoginCommand {
+    def loginService
+
+	String username
+	String password
+	static constraints = {
+		username(validator: {
+			loginService.canLogin(username, password)
+		})
+	}
+}
+{code}
+
+In this example the command object interacts with a bean injected by name from the Spring @ApplicationContext@.
+
 

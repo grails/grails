@@ -59,8 +59,12 @@ for(f in files) {
 toc = new StringBuffer()
 soloToc = new StringBuffer()
 contents = new StringBuffer()
+chapterContents = new StringBuffer()
+chapterStart = false
+chapterTitle = null
 
-ant.mkdir(dir:"output/guide")         
+ant.mkdir(dir:"output/guide")
+ant.mkdir(dir:"output/guide/pages")
 new File("resources/style/guideItem.html").withReader { reader ->
 	template = templateEngine.createTemplate(reader)		
 	for(entry in book) {     
@@ -77,17 +81,37 @@ new File("resources/style/guideItem.html").withReader { reader ->
 		}
 
 		if(margin <=1) margin = 0
-		margin *=10
-	    toc << "<div class=\"tocItem\" style=\"margin-left:${margin}px\"><a href=\"#${entry.key}\">${entry.key}</a></div>"  	
-	    soloToc << "<div class=\"tocItem\" style=\"margin-left:${margin}px\"><a href=\"${entry.key}.html\">${entry.key}</a></div>"  	
-		contents << "<h${header}><a name=\"${entry.key}\">${entry.key}</a></h2>"
+
+		if(margin == 0 && !chapterStart) {
+            chapterStart = true
+            chapterTitle = entry.key
+            soloToc << "<div class=\"tocItem\" style=\"margin-left:${margin}px\"><a href=\"${chapterTitle}.html\">${chapterTitle}</a></div>"
+        }
+        else if(margin == 0 && chapterStart) {
+            String chapterFile = "output/guide/${chapterTitle}.html"
+            new File(chapterFile).withWriter { out ->
+                template.make(title:chapterTitle, content:chapterContents.toString()).writeTo(out)
+            }
+            chapterTitle = entry.key
+            soloToc << "<div class=\"tocItem\" style=\"margin-left:${margin}px\"><a href=\"${chapterTitle}.html\">${chapterTitle}</a></div>"
+            chapterContents.delete(0,chapterContents.size()) // clear buffer
+        }
+        margin *=10
+
+        toc << "<div class=\"tocItem\" style=\"margin-left:${margin}px\"><a href=\"#${entry.key}\">${entry.key}</a></div>"
+		String chapterHeader = "<h${header}><a name=\"${entry.key}\">${entry.key}</a></h2>"
+        contents << chapterHeader
+        chapterContents << chapterHeader
 	    engine.configureContextPath ".."
 	    context.set(CONTEXT_PATH, "..")
 		
 		def body = engine.render(entry.value, context) 
 		contents << body
+		chapterContents << body
 
-		new File("output/guide/${entry.key}.html").withWriter { out ->
+
+
+		new File("output/guide/pages/${entry.key}.html").withWriter { out ->
 			template.make(title:entry.key, content:body).writeTo(out)
 	    }
 	}
