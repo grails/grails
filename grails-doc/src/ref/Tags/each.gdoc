@@ -24,6 +24,16 @@ With a named item:
 </g:each>
 {code}
 
+With a range literal - note how the literal must be enclosed in parentheses:
+
+{code:xml}
+<ul>
+  <g:each var="i" in="${ (0..<100) }>
+    <li>Item ${i}</li>
+  </g:each>
+</ul>
+{code}
+
 Another example, where a named item is necessary (otherwise the access to the title property will fail):
 
 {code:xml}
@@ -49,6 +59,8 @@ Using the status parameter to alternate the coloring of a table's rows:
 {code}
 
 
+
+
 h2. Description
 
 Attributes
@@ -60,7 +72,3 @@ Attributes
 {note}
 Note that @var@ attribute must be specified when the iterator value is to be used from within the body of a GSP Dynamic Tag, such as in @<g:link>@.
 {note}
-
-
-
-
