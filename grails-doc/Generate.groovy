@@ -4,8 +4,8 @@ import org.radeox.engine.context.BaseRenderContext
 import org.grails.doc.DocEngine;
 
 def ant = new AntBuilder()
-ant.property(environment:"env")       
-GRAILS_HOME = ant.antProject.properties."env.GRAILS_HOME"
+       
+GRAILS_HOME = "checkout/grails"
 CONTEXT_PATH = "contextPath"
 
 props = new Properties()
