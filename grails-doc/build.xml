@@ -2,34 +2,81 @@
 <project name="grails-build" default="package">
 
 
-    <property environment="env" />  
+   <taskdef name="svn" classname="org.tigris.subversion.svnant.SvnTask" >
+        <classpath>
+            <fileset dir="lib" includes="*.jar" />
+        </classpath>
+   </taskdef>
 
-    <path id="classpath">
-        <fileset dir="${env.GRAILS_HOME}/lib" includes="*.jar"  />
-        <fileset dir="lib" />  
-		<pathelement location="bin" />	
-	</path>
+    <target name="-checkout-grails" unless="checkout.grails">
+        <echo>Checking out Grails</echo>
+        <svn>
+            <checkout url="http://svn.codehaus.org/grails/trunk/grails/" destPath="checkout/grails" />
+        </svn>
+    </target>
 
-    <taskdef name="groovyc"  classname="org.codehaus.groovy.ant.Groovyc" classpathref="classpath" />
+    <target name="-update-grails" if="checkout.grails">
+         <echo>Updating Grails</echo>
+        <svn>
+            <update dir="checkout/grails" />
+        </svn>
+    </target>
 
-    <taskdef name="groovy"  classname="org.codehaus.groovy.ant.Groovy" classpathref="classpath"/>
+    <target name="update-grails">
+        <condition property="checkout.grails">
+            <available file="checkout/grails">
+            </available>
+        </condition>
+         <antcall target="-checkout-grails" />
+         <antcall target="-update-grails" />
+
+    </target>
+
+    <property environment="env" />
+
+
 
    <target name="clean">
        <delete dir="bin" />
        <delete dir="output" />
    </target>
-    
-   <target name="package">
-       <mkdir dir="bin" />
-        <groovyc  	srcdir="src/groovy" destdir="bin" 		
-					classpathref="classpath"/>
-	  <mkdir dir="output" />
-	  <mkdir dir="output" />	
-	  <copy todir="output" failonerror="false">
-		  <fileset dir="${env.GRAILS_HOME}/doc" />
-      </copy> 
 
-	   <groovy classpathref="classpath">   
+    <target name="grails-javadoc" depends="update-grails">
+        <ant dir="checkout/grails" target="javadoc" />
+    </target>
+
+    <target name="package" depends="grails-javadoc">
+        <taskdef name="groovyc"  classname="org.codehaus.groovy.ant.Groovyc">
+            <classpath>
+                <fileset dir="checkout/grails/lib" includes="*.jar"  />
+                <fileset dir="lib" />
+                <pathelement location="bin" />
+            </classpath>
+        </taskdef>
+
+
+        <mkdir dir="bin" />
+        <groovyc srcdir="src/groovy" destdir="bin">
+            <classpath>
+                <fileset dir="checkout/grails/lib" includes="*.jar"  />
+                <fileset dir="lib" />
+                <pathelement location="bin" />
+            </classpath>
+        </groovyc>
+        <mkdir dir="output" />
+        <mkdir dir="output" />
+        <copy todir="output" failonerror="false">
+            <fileset dir="checkout/grails/doc" />
+        </copy>
+
+        <taskdef name="groovy"  classname="org.codehaus.groovy.ant.Groovy">
+            <classpath>
+                <fileset dir="checkout/grails/lib" includes="*.jar"  />
+                <fileset dir="lib" />
+                <pathelement location="bin" />
+            </classpath>
+        </taskdef>
+        <groovy>
 		    def gcl = getClass().getClassLoader()
 	        def script = gcl
 							.parseClass(new File("./Generate.groovy"))
@@ -37,11 +84,14 @@
 
 			script.run()
 		</groovy>
-		
-		 <property file="${env.GRAILS_HOME}/build.properties"/>
+
+		 <property file="checkout/grails/build.properties"/>
 		 <mkdir dir="dist" />
-		
-		 <zip destfile="dist/grails-docs-${grails.version}.zip"
+        <delete failonerror="false">
+            <fileset dir="dist" includes="*.zip" />
+        </delete>
+
+         <zip destfile="dist/grails-${grails.version}-docs.zip"
 		       basedir="output"
 		  />
    </target>
