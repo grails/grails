@@ -69,21 +69,14 @@
             <fileset dir="checkout/grails/doc" />
         </copy>
 
-        <taskdef name="groovy"  classname="org.codehaus.groovy.ant.Groovy">
-            <classpath>
+        <java classname="groovy.ui.GroovyMain" failonerror="true">
+            <arg value="Generate" />
+           <classpath>
                 <fileset dir="checkout/grails/lib" includes="*.jar"  />
                 <fileset dir="lib" />
                 <pathelement location="bin" />
-            </classpath>
-        </taskdef>
-        <groovy>
-		    def gcl = getClass().getClassLoader()
-	        def script = gcl
-							.parseClass(new File("./Generate.groovy"))
-							.newInstance()
-
-			script.run()
-		</groovy>
+            </classpath>            
+        </java>
 
 		 <property file="checkout/grails/build.properties"/>
 		 <mkdir dir="dist" />
