@@ -1,0 +1,98 @@
+
+<project name="groovy-grails-build" default="build">
+
+   <taskdef name="svn" classname="org.tigris.subversion.svnant.SvnTask" >
+        <classpath>
+            <fileset dir="lib" includes="*.jar" />
+        </classpath>
+   </taskdef>
+    
+   <target name="build-groovy">
+       <condition property="checkout.groovy">
+           <available file="checkout/groovy">
+           </available>
+       </condition>
+        <antcall target="-checkout-groovy" />
+        <antcall target="-update-groovy" />
+       <antcall target="-build-groovy" />
+   </target>
+
+    <target name="-checkout-groovy" unless="checkout.groovy">
+         <echo>Checking out Groovy</echo>
+        <svn>
+            <checkout url="http://svn.codehaus.org/groovy/trunk/groovy/groovy-core/" destPath="checkout/groovy" />
+        </svn>
+    </target>
+
+    <target name="-update-groovy" if="checkout.groovy">
+         <echo>Updating Groovy</echo>
+        <svn>
+            <update dir="checkout/groovy" />
+        </svn>
+    </target>
+
+    <target name="-build-groovy">
+        <ant dir="checkout/groovy" antfile="build.xml" target="clean" />
+        <ant dir="checkout/groovy" antfile="build.xml" target="createJars">
+            <property name="skipTests" value="true"/>
+            <property name="skipExamples" value="true"/>
+        </ant>
+    </target>
+
+    <target name="-checkout-grails" unless="checkout.grails">
+        <echo>Checking out Grails</echo>
+        <svn>
+            <checkout url="http://svn.codehaus.org/grails/trunk/grails/" destPath="checkout/grails" />
+        </svn>
+    </target>
+
+    <target name="-update-grails" if="checkout.grails">
+         <echo>Updating Grails</echo>
+        <svn>
+            <update dir="checkout/grails" />
+        </svn>
+    </target>
+
+    <target name="update-grails">
+        <condition property="checkout.grails">
+            <available file="checkout/grails">
+            </available>
+        </condition>
+         <antcall target="-checkout-grails" />
+         <antcall target="-update-grails" />
+
+    </target>
+
+    <target name="replace-jar">
+          <delete>
+              <fileset dir="checkout/grails/lib" includes="groovy-all-*.jar" />
+          </delete>
+          <copy todir="checkout/grails/lib">
+              <fileset dir="checkout/groovy/target/dist">
+                  <include name="groovy-all-*.jar" />
+                  <exclude name="groovy-all-*-sources.jar" />
+                  <exclude name="groovy-all-minimal-*.jar" />
+              </fileset>
+          </copy>
+
+
+         <move tofile="checkout/grails/lib/groovy-all-test.jar">
+             <fileset dir="checkout/grails/lib" includes="groovy-all-*.jar"/>
+         </move>
+        <taskdef name="groovy" classname="org.codehaus.groovy.ant.Groovy">
+            <classpath location="checkout/grails/lib/groovy-all-test.jar" />
+        </taskdef>
+        <groovy>
+            f = new File("checkout/grails/.classpath")
+            text = f.text
+            text = text.replaceFirst(/groovy-all-\S+?.jar/, "groovy-all-test.jar")
+            f.write(text)
+        </groovy>
+    </target>
+    <target name="test-grails">
+        <ant dir="checkout/grails" antfile="build.xml" target="clean" />
+        <exec dir="checkout/grails" command="ant test" failonerror="true" />
+    </target>
+    <target name="build" depends="build-groovy, update-grails, replace-jar, test-grails" />
+   
+</project>
