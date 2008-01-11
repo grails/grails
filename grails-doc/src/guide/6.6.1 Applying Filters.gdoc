@@ -19,7 +19,7 @@ sampleFilter(controller:'*', action:'*') {
 The scope of the filter can be one of the following things:
 
 * A controller and/or action name pairing with optional wildcards
-* A URI
+* A URI, with Ant path matching syntax
 
 Some examples of filters include:
 
@@ -37,13 +37,13 @@ justBook(controller:'book', action:'*') {
 {code}
 * Applied to a URI space
 {code:java}
-someURIs(uri:'/book/*') {
+someURIs(uri:'/book/**') {
 
 }
 {code}
 * Applied to all URIs
 {code:java}
-allURIs(uri:'/*') {
+allURIs(uri:'/**') {
 
 }
 {code}
