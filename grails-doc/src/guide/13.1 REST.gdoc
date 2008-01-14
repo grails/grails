@@ -82,7 +82,7 @@ def p = new Product(params['product'])
 Is that it requires no code changes to deal with a form submission that submits form data than it does to deal with an XML request. The exact same technique can be used with a JSON request too.
 
 {note}
-If you require different responses to different clients (REST, HTML etc.) you can use [content negotation|6.8 Content Negotiation]
+If you require different responses to different clients (REST, HTML etc.) you can use [content negotation|guide:contentNegotiation]
 {note}
 
 The @Product@ object is then saved and rendered as XML, otherwise an error message is produced using Grails' [validation|guide:validation] capabilities in the form:

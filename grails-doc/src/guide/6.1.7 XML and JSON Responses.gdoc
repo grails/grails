@@ -104,7 +104,7 @@ The result of this code would look something like the below:
 </list>                          
 {code}     
 
-An alternative to using the converts is to use the [codecs|guide:codecs]                       feature of Grails. The codecs feature provides [encodeAsXML|codecs] and [encodeAsJSON|codecs] methods:
+An alternative to using the converts is to use the [codecs|guide:codecs] feature of Grails. The codecs feature provides [encodeAsXML|guide:codecs] and [encodeAsJSON|guide:codecs] methods:
 
 {code}
 def xml = Book.list().encodeAsXML()
