@@ -22,7 +22,7 @@
         </svn>
     </target>
 
-    <target name="update-grails">
+    <target name="update-grails" unless="_skipJavadoc_">
         <condition property="checkout.grails">
             <available file="checkout/grails">
             </available>
@@ -41,7 +41,11 @@
        <delete dir="output" />
    </target>
 
-    <target name="grails-javadoc" depends="update-grails">
+   <condition property="_skipJavadoc_">
+       <istrue value="${skipJavadoc}"/>
+   </condition>
+
+    <target name="grails-javadoc" depends="update-grails" unless="_skipJavadoc_">
         <ant dir="checkout/grails" target="javadoc" />
     </target>
 

@@ -2,6 +2,7 @@ package org.grails.doc
 
 import org.radeox.engine.BaseRenderEngine
 import org.radeox.api.engine.WikiRenderEngine
+import org.radeox.api.engine.context.InitialRenderContext
 import org.grails.doc.filters.HeaderFilter
 import org.grails.doc.filters.LinkTestFilter
 import org.grails.doc.filters.ListFilter
@@ -21,14 +22,12 @@ import org.radeox.macro.parameter.BaseMacroParameter
 import org.radeox.util.Encoder
 
 class DocEngine extends BaseRenderEngine implements WikiRenderEngine {
-    String contextPath = "."
+    static final CONTEXT_PATH = "contextPath"
+    static final SOURCE_FILE = "sourceFile"
+
     static GRAILS_HOME = ""
     static EXTERNAL_DOCS = 	[:]
 	static ALIAS = [:]
-
-    void configureContextPath(path) {
-        contextPath = path
-    }
 
     static {
 	   def ant = new AntBuilder()
@@ -46,6 +45,7 @@ class DocEngine extends BaseRenderEngine implements WikiRenderEngine {
 	   }
     }
 	
+    DocEngine(InitialRenderContext context) { super(context) }
 
 
     boolean exists(String name) {
@@ -66,10 +66,10 @@ class DocEngine extends BaseRenderEngine implements WikiRenderEngine {
                 def ref = "src/guide/${alias}.gdoc"
                 def file = new File(ref)
                 if(file.exists()) {
-                   return true 
+                    return true 
                 }
                 else {
-                   println "WARNING: Link $name refers to non-existant page $ref!"
+                    emitWarning(name,ref,"page")
                 }
             }
 			else if(refCategory.startsWith("api:")) {
@@ -81,18 +81,16 @@ class DocEngine extends BaseRenderEngine implements WikiRenderEngine {
 				if(ref.indexOf('#') > -1) {
 					ref = ref[0..ref.indexOf("#")-1]
 				} 
-				ref += ".html"
-				ref = "${GRAILS_HOME}/doc/api/$ref"
+				ref = "${GRAILS_HOME}/doc/api/${ref}.html"
 				def file = new File(ref)
                 if(file.exists()) {
-                   return true 
+                    return true 
                 }
                 else {
-                   println "WARNING: Javadoc Link $name refers to non-existant class ${ref}!"
-                }				
+                    emitWarning(name,ref,"class")
+                }
 			}
             else {
-
                 String dir = getNaturalName(refCategory)
                 def ref = "src/ref/${dir}/${refItem}.gdoc"
                 File file = new File(ref)
@@ -100,7 +98,7 @@ class DocEngine extends BaseRenderEngine implements WikiRenderEngine {
                     return true
                 }
                 else {
-                    println "WARNING: Link $name refers to non-existant page $ref!"
+                    emitWarning(name,ref,"page")
                 }
             }
         }
@@ -108,6 +106,11 @@ class DocEngine extends BaseRenderEngine implements WikiRenderEngine {
          return false
 
     }
+
+    private void emitWarning(String name, String ref, String type) {
+        println "WARNING: ${initialContext.get(SOURCE_FILE)}: Link '$name' refers to non-existant $type $ref!"
+    }
+
     boolean showCreate() { false }
 
     protected void init() {
@@ -157,6 +160,7 @@ class DocEngine extends BaseRenderEngine implements WikiRenderEngine {
     }
 
     void appendLink(StringBuffer buffer, String name, String view, String anchor) {
+        def contextPath = initialContext.get(CONTEXT_PATH)
 
         if(name.startsWith("guide:")) {
 			def alias = name[6..-1]

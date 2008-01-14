@@ -1,12 +1,13 @@
 import org.radeox.engine.BaseRenderEngine;
 import org.radeox.api.engine.*;
-import org.radeox.engine.context.BaseRenderContext
+import org.radeox.engine.context.BaseInitialRenderContext
 import org.grails.doc.DocEngine;
 
 def ant = new AntBuilder()
        
 GRAILS_HOME = "checkout/grails"
-CONTEXT_PATH = "contextPath"
+CONTEXT_PATH = DocEngine.CONTEXT_PATH
+SOURCE_FILE = DocEngine.SOURCE_FILE
 
 props = new Properties()
 new File("./resources/doc.properties").withInputStream { input ->
@@ -39,13 +40,13 @@ def compare = [compare: { o1, o2 ->
 files = new File("./src/guide").listFiles()
         .findAll { it.name.endsWith(".gdoc") }
         .sort(compare)
-context = new BaseRenderContext();
+context = new BaseInitialRenderContext();
 context.set(CONTEXT_PATH, "..")
 
 ant = new AntBuilder()
 cache = [:]
 
-engine = new DocEngine()
+engine = new DocEngine(context)
 templateEngine = new groovy.text.SimpleTemplateEngine()
 context.setRenderEngine(engine)
 
@@ -53,7 +54,7 @@ book = [:]
 for(f in files) {
 	def chapter = f.name[0..-6]
 	//println "Generating documentation for $chapter"
-	book[chapter] = f.text
+	book[chapter] = f
 }
     
 toc = new StringBuffer()
@@ -102,10 +103,10 @@ new File("resources/style/guideItem.html").withReader { reader ->
 		String chapterHeader = "<h${header}><a name=\"${entry.key}\">${entry.key}</a></h2>"
         contents << chapterHeader
         chapterContents << chapterHeader
-	    engine.configureContextPath ".."
+	    context.set(SOURCE_FILE, entry.value)
 	    context.set(CONTEXT_PATH, "..")
 		
-		def body = engine.render(entry.value, context) 
+		def body = engine.render(entry.value.text, context) 
 		contents << body
 		chapterContents << body
 
@@ -174,8 +175,8 @@ new File("resources/style/referenceItem.html").withReader { reader ->
 			if(usageFile.exists()) { 
 				def data = usageFile.text
 				reference."${section}".usage = data
-			    engine.configureContextPath "../.."
-			    context.set(CONTEXT_PATH, "../..")
+				context.set(SOURCE_FILE, usageFile.name)
+				context.set(CONTEXT_PATH, "../..")
 				def contents = engine.render(data, context)					
 				new File("output/ref/${f.name}/Usage.html").withWriter { out ->
 				 	template.make(content:contents).writeTo(out)
@@ -187,7 +188,7 @@ new File("resources/style/referenceItem.html").withReader { reader ->
 				menu << "<div class=\"menuItem\"><a href=\"${f.name}/${name}.html\" target=\"mainFrame\">${name}</a></div>"
 				def data = txt.text                    
 				reference."${section}"."$name" = data
-				engine.configureContextPath "../.."
+				context.set(SOURCE_FILE, txt.name)
 				context.set(CONTEXT_PATH, "../..")
 				def contents = engine.render(data, context)		
 				//println "Generating reference item: ${name}"
