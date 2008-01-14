@@ -346,20 +346,14 @@ class CodeFilter extends RegexTokenFilter {
 class ImageFilter  extends RegexTokenFilter {
 
     public ImageFilter() {
-        super(/!([^\n]*?)!/);
+        super(/!([^\n]*?\.(jpg|png|gif))!/);
     }
 
 
     public void handleMatch(StringBuffer buffer, MatchResult result, FilterContext context) {
         def img = result.group(1)
-        if(img ==~ /.+\.(jpg|png|gif)/) {
-            def path = context.renderContext.get("contextPath")
-            if(!path) path = "."
-            buffer << "<img border=\"0\" class=\"center\" src=\"$path/img/${result.group(1)}\"></img>"
-        }
-        else {
-            buffer << img
-        }
+        def path = context.renderContext.get("contextPath") ?: "."
+        buffer << "<img border=\"0\" class=\"center\" src=\"$path/img/$img\"></img>"
     }
 }
 class TextileLinkFilter extends RegexTokenFilter {
