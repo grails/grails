@@ -53,88 +53,82 @@ context.setRenderEngine(engine)
 book = [:]
 for(f in files) {
 	def chapter = f.name[0..-6]
-	//println "Generating documentation for $chapter"
 	book[chapter] = f
 }
     
 toc = new StringBuffer()
 soloToc = new StringBuffer()
-contents = new StringBuffer()
+fullContents = new StringBuffer()
 chapterContents = new StringBuffer()
-chapterStart = false
 chapterTitle = null
+
+void writeChapter(String title, StringBuffer content) {
+    new File("output/guide/${title}.html").withWriter {
+        template.make(title:title, content:content.toString()).writeTo(it)
+    }
+    content.delete(0,content.size()) // clear buffer
+}
 
 ant.mkdir(dir:"output/guide")
 ant.mkdir(dir:"output/guide/pages")
 new File("resources/style/guideItem.html").withReader { reader ->
-	template = templateEngine.createTemplate(reader)		
-	for(entry in book) {     
-		def margin = entry.key.indexOf(' ')
-		def header = 2
-		if(margin > -1) {
-			def index = entry.key[0..margin]
-			def tokens = index.split(/\./)
-			margin = tokens.size()
+    template = templateEngine.createTemplate(reader)		
 
-			if(margin == 2 && tokens[1].trim().size() == 0) {
-				margin = 1
-			}
-		}
+    for(entry in book) {
+        //println "Generating documentation for $entry.key"
+        def title = entry.key
+        def level = 0
+        def matcher = (title =~ /^(\S+?)\.? /) // drops last '.' of "xx.yy. "
+        if (matcher.find()) {
+            level = matcher.group(1).split(/\./).size() - 1
+        }
+        def margin = level*10
 
-		if(margin <=1) margin = 0
+        if(level == 0) {
+            if (chapterTitle) // initially null, to collect sections
+                writeChapter(chapterTitle, chapterContents)
 
-		if(margin == 0 && !chapterStart) {
-            chapterStart = true
-            chapterTitle = entry.key
+            chapterTitle = title // after previous used to write prev chapter
+
             soloToc << "<div class=\"tocItem\" style=\"margin-left:${margin}px\"><a href=\"${chapterTitle}.html\">${chapterTitle}</a></div>"
         }
-        else if(margin == 0 && chapterStart) {
-            String chapterFile = "output/guide/${chapterTitle}.html"
-            new File(chapterFile).withWriter { out ->
-                template.make(title:chapterTitle, content:chapterContents.toString()).writeTo(out)
-            }
-            chapterTitle = entry.key
-            soloToc << "<div class=\"tocItem\" style=\"margin-left:${margin}px\"><a href=\"${chapterTitle}.html\">${chapterTitle}</a></div>"
-            chapterContents.delete(0,chapterContents.size()) // clear buffer
+        // level 0=h1, (1..n)=h2
+        def hLevel = level==0 ? 1 : 2
+        def header = "<h$hLevel><a name=\"${title}\">${title}</a></h$hLevel>"
+
+        context.set(SOURCE_FILE, entry.value)
+        context.set(CONTEXT_PATH, "..")
+        def body = engine.render(entry.value.text, context) 
+
+        toc << "<div class=\"tocItem\" style=\"margin-left:${margin}px\"><a href=\"#${title}\">${title}</a></div>"
+        fullContents << header << body
+        chapterContents << header << body
+
+        new File("output/guide/pages/${title}.html").withWriter {
+            template.make(title:title, content:body).writeTo(it)
         }
-        margin *=10
-
-        toc << "<div class=\"tocItem\" style=\"margin-left:${margin}px\"><a href=\"#${entry.key}\">${entry.key}</a></div>"
-		String chapterHeader = "<h${header}><a name=\"${entry.key}\">${entry.key}</a></h2>"
-        contents << chapterHeader
-        chapterContents << chapterHeader
-	    context.set(SOURCE_FILE, entry.value)
-	    context.set(CONTEXT_PATH, "..")
-		
-		def body = engine.render(entry.value.text, context) 
-		contents << body
-		chapterContents << body
-
-
-
-		new File("output/guide/pages/${entry.key}.html").withWriter { out ->
-			template.make(title:entry.key, content:body).writeTo(out)
-	    }
-	}
+    }
 }
- 
+if (chapterTitle) // write final chapter collected (if any seen)
+    writeChapter(chapterTitle, chapterContents)
 
-ant.mkdir(dir:"output")                      
-ant.mkdir(dir:"output/img")                      
-ant.mkdir(dir:"output/css")   
-ant.mkdir(dir:"output/ref")         
+
+ant.mkdir(dir:"output")
+ant.mkdir(dir:"output/img")
+ant.mkdir(dir:"output/css")
+ant.mkdir(dir:"output/ref")
 
 ant.copy(file:"resources/style/index.html",todir:"output")
 ant.copy(todir:"output/img") {
 	fileset(dir:"resources/img")
-}       
+}
 ant.copy(todir:"output/css") {
 	fileset(dir:"resources/css")
-}                              
+}
 ant.copy(todir:"output/ref") {
 	fileset(dir:"resources/style/ref")
-}                              
-                       
+}
+
 vars = [
             title:props.title,
 			subtitle:props.subtitle,
@@ -144,7 +138,7 @@ vars = [
 			copyright: props.copyright,
 			
 			toc:toc.toString(),
-			body:contents.toString()
+			body:fullContents.toString()
 			]
 
 new File("./resources/style/layout.html").withReader { reader ->
