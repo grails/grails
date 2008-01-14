@@ -1,55 +1,61 @@
 
-<project name="grails-build" default="package">
+<project name="grails-build" default="dist">
 
-
-   <taskdef name="svn" classname="org.tigris.subversion.svnant.SvnTask" >
+    <taskdef name="svn" classname="org.tigris.subversion.svnant.SvnTask" >
         <classpath>
             <fileset dir="lib" includes="*.jar" />
         </classpath>
-   </taskdef>
+    </taskdef>
 
-    <target name="-checkout-grails" unless="checkout.grails">
-        <echo>Checking out Grails</echo>
-        <svn>
-            <checkout url="http://svn.codehaus.org/grails/trunk/grails/" destPath="checkout/grails" />
-        </svn>
+    <target name="grails-check">
+        <condition property="has.grails">
+            <available file="checkout/grails" />
+        </condition>
     </target>
 
-    <target name="-update-grails" if="checkout.grails">
-         <echo>Updating Grails</echo>
+    <target name="grails-update" if="has.grails" depends="grails-check">
+        <echo>Updating Grails</echo>
         <svn>
             <update dir="checkout/grails" />
         </svn>
     </target>
 
-    <target name="update-grails" unless="_skipJavadoc_">
-        <condition property="checkout.grails">
-            <available file="checkout/grails">
-            </available>
-        </condition>
-         <antcall target="-checkout-grails" />
-         <antcall target="-update-grails" />
+    <target name="grails-checkout" unless="has.grails" depends="grails-update">
+        <echo>Checking out Grails</echo>
+        <mkdir dir="checkout/grails" />
+        <svn>
+            <checkout url="http://svn.codehaus.org/grails/trunk/grails/" destPath="checkout/grails" />
+        </svn>
+        <property name="has.grails" value="true"/>
+    </target>
 
+    <target name="grails-javadoc" depends="grails-checkout" if="has.grails"
+            description="Generate most current javadoc for Grails">
+        <ant dir="checkout/grails" target="javadoc" />
+
+        <mkdir dir="output" />
+        <copy todir="output" failonerror="false">
+            <fileset dir="checkout/grails/doc" />
+        </copy>
     </target>
 
     <property environment="env" />
 
 
 
-   <target name="clean">
-       <delete dir="bin" />
-       <delete dir="output" />
-   </target>
-
-   <condition property="_skipJavadoc_">
-       <istrue value="${skipJavadoc}"/>
-   </condition>
-
-    <target name="grails-javadoc" depends="update-grails" unless="_skipJavadoc_">
-        <ant dir="checkout/grails" target="javadoc" />
+    <target name="clean" description="Delete output">
+        <delete dir="output" />
     </target>
 
-    <target name="package" depends="grails-javadoc">
+    <target name="distclean" depends="clean"
+            description="Delete everything generated and retrieved">
+        <delete dir="bin" />
+        <delete dir="checkout" />
+        <delete dir="dist" />
+    </target>
+
+    <target name="docs" depends="grails-check" if="has.grails"
+            description="Generate the Grails Guide and Reference docs">
         <taskdef name="groovyc"  classname="org.codehaus.groovy.ant.Groovyc">
             <classpath>
                 <fileset dir="checkout/grails/lib" includes="*.jar"  />
@@ -67,31 +73,29 @@
                 <pathelement location="bin" />
             </classpath>
         </groovyc>
-        <mkdir dir="output" />
-        <mkdir dir="output" />
-        <copy todir="output" failonerror="false">
-            <fileset dir="checkout/grails/doc" />
-        </copy>
 
+        <mkdir dir="output" />
         <java classname="groovy.ui.GroovyMain" failonerror="true">
             <arg value="Generate" />
-           <classpath>
+            <classpath>
                 <fileset dir="checkout/grails/lib" includes="*.jar"  />
                 <fileset dir="lib" />
                 <pathelement location="bin" />
-            </classpath>            
+            </classpath>
         </java>
 
-		 <property file="checkout/grails/build.properties"/>
-		 <mkdir dir="dist" />
+        <property file="checkout/grails/build.properties"/>
+    </target>
+
+    <target name="dist" depends="grails-javadoc,docs"
+            description="Build documentation and create a zip for distibution">
+        <mkdir dir="dist" />
         <delete failonerror="false">
             <fileset dir="dist" includes="*.zip" />
         </delete>
 
-         <zip destfile="dist/grails-${grails.version}-docs.zip"
-		       basedir="output"
-		  />
-   </target>
+        <zip destfile="dist/grails-${grails.version}-docs.zip" basedir="output"/>
+    </target>
 
 
 </project>
