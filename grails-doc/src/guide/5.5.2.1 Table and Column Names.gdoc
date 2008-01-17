@@ -22,9 +22,7 @@ class Person {
   String firstName
   static mapping = {
       table 'people'
-      columns {
-          firstName column:'First_Name'
-      }
+      firstName column:'First_Name'
   }
 }
 {code}
@@ -41,9 +39,7 @@ class Address {
    String number
    String postCode
    static mapping = {
-      columns {
-          postCode type:PostCodeType
-      }
+      postCode type:PostCodeType
    }
 }
 {code}
@@ -55,9 +51,7 @@ class Address {
    String number
    String postCode
    static mapping = {
-      columns {
-          postCode type:'text'
-      }
+      postCode type:'text'
    }
 }
 {code}
@@ -74,10 +68,8 @@ class Person {
   Address address
   static mapping = {
       table 'people'
-      columns {
-          firstName column:'First_Name'
-		  address column:'Person_Adress_Id'
-      }
+      firstName column:'First_Name'
+	  address column:'Person_Adress_Id'
   }
 }
 {code}
@@ -94,10 +86,8 @@ class Person {
   static hasMany = [addresses:Address]
   static mapping = {
       table 'people'
-      columns {
-          firstName column:'First_Name'
-		  addresses column:'Person_Address_Id'
-      }
+      firstName column:'First_Name'
+	  addresses column:'Person_Address_Id'
   }
 }
 {code}
@@ -110,10 +100,8 @@ class Person {
   static hasMany = [addresses:Address]
   static mapping = {
       table 'people'
-      columns {
-          firstName column:'First_Name'
-		  addresses joinTable:[name:'Person_Addresses', key:'Person_Id', column:'Address_Id']
-      }
+      firstName column:'First_Name'
+      addresses joinTable:[name:'Person_Addresses', key:'Person_Id', column:'Address_Id']
   }
 }
 {code}
@@ -140,17 +128,13 @@ In this case Grails will create a join table called @group_person@ containing fo
 class Group {
    ...
    static mapping = {
-       columns {
-           people column:'Group_Person_Id'
-       }
+       people column:'Group_Person_Id'
    }	
 }
 class Person {
    ...
    static mapping = {
-       columns {
-           groups column:'Group_Group_Id'
-       }
+       groups column:'Group_Group_Id'
    }	
 }
 {code}
@@ -161,17 +145,13 @@ You can also specify the name of the join table to use:
 class Group {
    ...
    static mapping = {
-       columns {
-           people column:'Group_Person_Id',joinTable:'PERSON_GROUP_ASSOCIATIONS'
-       }
+       people column:'Group_Person_Id',joinTable:'PERSON_GROUP_ASSOCIATIONS'
    }	
 }
 class Person {
    ...
    static mapping = {
-       columns {
-           groups column:'Group_Group_Id',joinTable:'PERSON_GROUP_ASSOCIATIONS'
-       }
+       groups column:'Group_Group_Id',joinTable:'PERSON_GROUP_ASSOCIATIONS'
    }	
 }
 {code}

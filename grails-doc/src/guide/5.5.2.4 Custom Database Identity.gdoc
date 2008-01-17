@@ -28,9 +28,7 @@ class Person {
   static mapping = {
       table 'people'
       version false
-	  columns {
-			id column:'person_id'
-	  }      
+      id column:'person_id'
   }
 }
 {code}

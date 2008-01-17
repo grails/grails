@@ -53,9 +53,7 @@ class Person {
   static mapping = {
       table 'people'
       version false
-      columns {
-          addresses column:'Address', cache:true
-      }
+      addresses column:'Address', cache:true
   }
 }
 class Address {

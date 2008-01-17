@@ -8,10 +8,8 @@ class Person {
       table 'people'
       version false
       id column:'person_id'
-      columns {
-          firstName column:'First_Name', index:'Name_Idx'
-          address column:'Address', index:'Name_Idx, Address_Index'
-      }
+      firstName column:'First_Name', index:'Name_Idx'
+      address column:'Address', index:'Name_Idx, Address_Index'
   }
 }
 {code}
