@@ -21,7 +21,7 @@ As well as this syntax you can also use the @<%= %>@ syntax to output values:
 {code}
 
 
-GSP also supports JSP-style server-side comments using @<%-- --%>@:
+GSP also supports JSP-style server-side comments as the following example demonstrates:
 
 {code:xml}
 <html>

@@ -66,7 +66,7 @@ In this case the result would be something along the lines of:
 {code}
 [
 	{title:"The Stand"}, 
-	{title:"The Shinig"}
+	{title:"The Shining"}
 ]
 {code}
 
@@ -74,7 +74,7 @@ Again the same dangers with naming conflicts apply to JSON building.
 
 h4. Automatic XML Marshalling
 
-Grails also supports automatic marshalling of [domain classes|guide:gorm] to XML via special converters.
+Grails also supports automatic marshaling of [domain classes|guide:gorm] to XML via special converters.
 
 To start off with import the @grails.converters@ package into your controller:                                     
                           
@@ -88,7 +88,7 @@ Now you can use the following highly readable syntax to automatically convert do
 render Book.list() as XML
 {code}
 
-The result of this code would look something like the below:
+The resulting output would look something like the following::
 
 {code}
 <?xml version="1.0" encoding="ISO-8859-1"?>
@@ -104,24 +104,24 @@ The result of this code would look something like the below:
 </list>                          
 {code}     
 
-An alternative to using the converts is to use the [codecs|guide:codecs] feature of Grails. The codecs feature provides [encodeAsXML|guide:codecs] and [encodeAsJSON|guide:codecs] methods:
+An alternative to using the converters is to use the [codecs|guide:codecs] feature of Grails. The codecs feature provides [encodeAsXML|guide:codecs] and [encodeAsJSON|guide:codecs] methods:
 
 {code}
 def xml = Book.list().encodeAsXML()
 render xml
 {code}
 
-For more information on XML marshalling see the section on [REST|guide:REST]
+For more information on XML marshaling see the section on [REST|guide:REST]
 
 h4. Automatic JSON Marshalling
 
-Grails also supports automatic marshalling to JSON via the same mechanism. Simply use subsitute @XML@ with @JSON@:
+Grails also supports automatic marshaling to JSON via the same mechanism. Simply substitute @XML@ with @JSON@:
 
 {code}
 render Book.list() as JSON
 {code}
 
-The resulting output will look like the below:
+The resulting output would look something like the following:
 
 {code}
 [

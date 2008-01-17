@@ -1,4 +1,4 @@
-Grails controllers support the concept of command objects. A command object is similar to a form bean in something like Struts and they are useful in circumstances when you want to populate a subset of the properties needed to update a domain class. Or where their is no domain class required for the interaction, but you need features such as [data binding|guide:dataBinding] and [validation|guide:validation].
+Grails controllers support the concept of command objects. A command object is similar to a form bean in something like Struts and they are useful in circumstances when you want to populate a subset of the properties needed to update a domain class. Or where there is no domain class required for the interaction, but you need features such as [data binding|guide:dataBinding] and [validation|guide:validation].
 
 h4. Declaring Command Objects
 

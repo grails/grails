@@ -67,7 +67,7 @@ With this mapping all of the below URLs would match with only the relevant param
 
 h4. Arbitrary Variables
 
-You can also pass arbitrary parameters from the URL mapping into the controller by merely settings them in the block passed to the mapping:
+You can also pass arbitrary parameters from the URL mapping into the controller by merely setting them in the block passed to the mapping:
 
 {code:java}
 "/holiday/win" {

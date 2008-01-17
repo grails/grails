@@ -1,4 +1,4 @@
-If you have collections of objects you often need to sort and filter then in some way. GSP supports the [findAll|tags] and [grep|tags] for this task:
+If you have collections of objects you often need to sort and filter them in some way. GSP supports the [findAll|tags] and [grep|tags] for this task:
 
 {code:xml}
 Stephen King's Books:

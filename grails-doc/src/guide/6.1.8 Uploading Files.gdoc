@@ -47,7 +47,7 @@ Now if you create an image and pass in the @params@ object such as the below exa
 def img = new Image(params)
 {code}
 
-It is also possible to set the contents of the file as a string bychanging the type of the @myFile@ property on the image to a String type:
+It is also possible to set the contents of the file as a string by changing the type of the @myFile@ property on the image to a String type:
 
 {code:java}
 class Image {
