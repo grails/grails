@@ -30,6 +30,13 @@ grails test-app Foo
 grails test-app Foo Bar
 {code}
 
+You can also choose to only run the unit or integration tests:
+
+{code:java}
+grails test-app -unit
+grails test-app -integration
+{code}
+
 The first example will execute a test called @FooTests.groovy@ whilst the second will execute @FooTests.groovy@ and @BarTests.groovy@ if they exist.
 
 
