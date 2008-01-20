@@ -2,7 +2,7 @@ Try performing some basic CRUD (Create/Read/Update/Delete) operations.
 
 h4. Create
 
-To create a domain class use the Groovy new operator, set its properties and called [save|domainClasses]:
+To create a domain class use the Groovy new operator, set its properties and call [save|domainClasses]:
 
 {code}
 def p = new Person(name:"Fred", age:40, lastVisit:new Date())

@@ -123,6 +123,6 @@ The same pagination and sorting parameters available on the [list|domainClasses]
 def books = 
   Book.findAllByTitleLike("Harry Pot%", [max:3, 
                                          offset:2, 
-                                         sort:"asc", 
-                                         order:"title"])
+                                         sort:"title",
+                                         order:"desc"])
 {code}

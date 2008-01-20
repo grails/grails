@@ -32,7 +32,3 @@ class Book {
 {code}
 
 Each property is mapped to a column in the database, where the convention for column names is all lower case separated by underscores. For example @releaseDate@ maps onto a column @release_date@. The SQL types are auto-detected from the Java types, but can be customized via [Constraints|guide:constraints] or the [ORM DSL|guide:ormdsl].
-
-
-
-
