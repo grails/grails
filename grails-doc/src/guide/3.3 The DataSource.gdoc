@@ -13,6 +13,7 @@ Once you have the JAR in place you need to get familiar Grails' DataSource descr
 * @dbCreate@ - Whether to auto-generate the database from the domain model or not
 * @pooling@ - Whether to use a pool of connections (defaults to true)
 * @logSql@ - Enable SQL logging
+* @dialect@ - A String or Class that represents the Hibernate dialect used to communicate with the database. See the [org.hibernate.dialect|http://www.hibernate.org/hib_docs/v3/api/org/hibernate/dialect/package-summary.html] package for available dialects.
 
 A typical configuration for MySQL may be something like:
 

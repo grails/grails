@@ -34,7 +34,7 @@ Which simply means anything. However, on newer browser something all together mo
 text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
 {code}
 
-Grails parses this incoming format and adds a [format|request] property to the @request@ object that outlines the preferred request format. For the above example the following assertion would pass:
+Grails parses this incoming format and adds a @property@ to the [request|servletAPI] object that outlines the preferred request format. For the above example the following assertion would pass:
 
 {code:java}
 assert 'html' == request.format
