@@ -4,7 +4,7 @@ import org.radeox.engine.context.BaseInitialRenderContext
 import org.grails.doc.DocEngine;
 
 def ant = new AntBuilder()
-       
+
 GRAILS_HOME = "checkout/grails"
 CONTEXT_PATH = DocEngine.CONTEXT_PATH
 SOURCE_FILE = DocEngine.SOURCE_FILE
@@ -55,7 +55,7 @@ for(f in files) {
 	def chapter = f.name[0..-6]
 	book[chapter] = f
 }
-    
+
 toc = new StringBuffer()
 soloToc = new StringBuffer()
 fullContents = new StringBuffer()
@@ -72,7 +72,7 @@ void writeChapter(String title, StringBuffer content) {
 ant.mkdir(dir:"output/guide")
 ant.mkdir(dir:"output/guide/pages")
 new File("resources/style/guideItem.html").withReader { reader ->
-    template = templateEngine.createTemplate(reader)		
+    template = templateEngine.createTemplate(reader)
 
     for(entry in book) {
         //println "Generating documentation for $entry.key"
@@ -92,13 +92,17 @@ new File("resources/style/guideItem.html").withReader { reader ->
 
             soloToc << "<div class=\"tocItem\" style=\"margin-left:${margin}px\"><a href=\"${chapterTitle}.html\">${chapterTitle}</a></div>"
         }
-        // level 0=h1, (1..n)=h2
+		else {
+			soloToc << "<div class=\"tocItem\" style=\"margin-left:${margin}px\"><a href=\"${chapterTitle}.html#${entry.key}\">${entry.key}</a></div>"
+		}        // level 0=h1, (1..n)=h2
+
+		
         def hLevel = level==0 ? 1 : 2
         def header = "<h$hLevel><a name=\"${title}\">${title}</a></h$hLevel>"
 
         context.set(SOURCE_FILE, entry.value)
         context.set(CONTEXT_PATH, "..")
-        def body = engine.render(entry.value.text, context) 
+        def body = engine.render(entry.value.text, context)
 
         toc << "<div class=\"tocItem\" style=\"margin-left:${margin}px\"><a href=\"#${title}\">${title}</a></div>"
         fullContents << header << body
@@ -136,28 +140,28 @@ vars = [
 			authors:props.authors,
 			version: props."grails.version",
 			copyright: props.copyright,
-			
+
 			toc:toc.toString(),
 			body:fullContents.toString()
 			]
 
 new File("./resources/style/layout.html").withReader { reader ->
-	template = templateEngine.createTemplate(reader)	
+	template = templateEngine.createTemplate(reader)
 	new File("output/guide/single.html").withWriter { out ->
-		template.make(vars).writeTo(out)		
+		template.make(vars).writeTo(out)
 	}
 	 vars.toc = soloToc
 	 vars.body = ""
 	new File("output/guide/index.html").withWriter { out ->
-		template.make(vars).writeTo(out)		
+		template.make(vars).writeTo(out)
 	}
-}    
+}
 
 menu = new StringBuffer()
-files = new File("src/ref").listFiles().toList().sort()   
+files = new File("src/ref").listFiles().toList().sort()
 reference = [:]
 new File("resources/style/referenceItem.html").withReader { reader ->
-	template = templateEngine.createTemplate(reader)		
+	template = templateEngine.createTemplate(reader)
 	for(f in files) {
 		if(f.directory && !f.name.startsWith(".")) {
 			def section = f.name
@@ -166,21 +170,21 @@ new File("resources/style/referenceItem.html").withReader { reader ->
 			new File("output/ref/${f.name}").mkdirs()
 			def textiles = f.listFiles().findAll { it.name.endsWith(".gdoc")}.sort()
 			def usageFile = new File("src/ref/${f.name}.gdoc")
-			if(usageFile.exists()) { 
+			if(usageFile.exists()) {
 				def data = usageFile.text
 				reference."${section}".usage = data
 				context.set(SOURCE_FILE, usageFile.name)
 				context.set(CONTEXT_PATH, "../..")
-				def contents = engine.render(data, context)					
+				def contents = engine.render(data, context)
 				new File("output/ref/${f.name}/Usage.html").withWriter { out ->
 				 	template.make(content:contents).writeTo(out)
-				}			   
-				menu << "<div class=\"menuUsageItem\"><a href=\"${f.name}/Usage.html\" target=\"mainFrame\">Usage</a></div>"								
+				}
+				menu << "<div class=\"menuUsageItem\"><a href=\"${f.name}/Usage.html\" target=\"mainFrame\">Usage</a></div>"
 			}
-			for(txt in textiles) {                        
+			for(txt in textiles) {
 				def name = txt.name[0..-6]
 				menu << "<div class=\"menuItem\"><a href=\"${f.name}/${name}.html\" target=\"mainFrame\">${name}</a></div>"
-				def data = txt.text                    
+				def data = txt.text
 				reference."${section}"."$name" = data
 				context.set(SOURCE_FILE, txt.name)
 				context.set(CONTEXT_PATH, "../..")
