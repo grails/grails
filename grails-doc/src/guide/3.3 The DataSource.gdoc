@@ -4,7 +4,7 @@ Essentially, if you are using another database other than HSQLDB you need to hav
 
 Drivers typically come in the form of a JAR archive. Drop the JAR into your projects @lib@ directory.
 
-Once you have the JAR in place you need to get familiar Grails' DataSource descriptor file located at @grails-app/conf/DataSource.groovy@. This files contains the dataSource definition which includes the following settings:
+Once you have the JAR in place you need to get familiar Grails' DataSource descriptor file located at @grails-app/conf/DataSource.groovy@. This file contains the dataSource definition which includes the following settings:
 
 * @driverClassName@ - The class name of the JDBC driver
 * @username@ - The username used to establish a JDBC connection

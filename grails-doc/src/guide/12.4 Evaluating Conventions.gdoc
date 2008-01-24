@@ -28,7 +28,7 @@ The @GrailsClass@ interface itself provides a number of useful methods that allo
 * @newInstance@ - Creates a new instance of this class.
 * @getName@ -  Returns the logical name of the class in the application without the trailing convention part if applicable
 * @getShortName@ - Returns the short name of the class without package prefix
-* @getFullName@ - Returns the full name of the class in the application with the the trailing convention part and with the package name
+* @getFullName@ - Returns the full name of the class in the application with the trailing convention part and with the package name
 * @getPropertyName@ - Returns the name of the class as a property name
 * @getLogicalPropertyName@ - Returns the logical property name of the class in the application without the trailing convention part if applicable
 * @getNaturalName@ - Returns the name of the property in natural terms (eg. 'lastName' becomes 'Last Name')

@@ -51,7 +51,7 @@ The example above will save both face and nose. Note that the inverse _is not_ t
 new Nose(face:new Face()).save() // will cause an error
 {code}
 
-Another important implication of @belongsTo@ is that if you delete a @Face@ instance the @Nose@ will be deleted to:
+Another important implication of @belongsTo@ is that if you delete a @Face@ instance the @Nose@ will be deleted too:
 
 {code}
 def f = Face.get(1)

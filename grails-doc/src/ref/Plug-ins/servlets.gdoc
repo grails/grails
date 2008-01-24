@@ -6,7 +6,7 @@ The @servlets@ plug-in enhances with Servlet API with new methods
 
 h2. Examples
 
-Attributes from the [request|controllers], [session|controllers], and [servletContext|controllers] can be access with the de-reference operator:
+Attributes from the [request|controllers], [session|controllers], and [servletContext|controllers] can be accessed with the de-reference operator:
 
 {code:java}
 class BookController {

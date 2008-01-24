@@ -3,15 +3,15 @@ Grails uses "convention over configuration" to configure itself. This typically 
 Here is a breakdown and links to the relevant sections:
 
 * @grails-app@ - top level directory for Groovy sources
-** @conf@ - Configuration sources. See [Configuration|guide:3. Configuration].
-** @controllers@ - Web controllers - The C in MVC. See [Controllers|guide:6.1 Controllers]
-** @domain@ - The application domain. See [GORM|guide:5. Object Relational Mapping (GORM)]    
-** @i18n@ - Support for internationalization (i18n). See [Internationalization (i18n)|guide:10. Internationalization]
-** @services@ - The service layer. See [Services|guide:8. The Service Layer]
-** @taglib@ - Tag libraries. See [Tag Libraries|guide:6.3 Tag Libraries]
-** @views@ - Groovy Server Pages. See [GSP|guide:6.2 Groovy Server Pages]
-* @scripts@ - Gant scripts. See [Command Line Scripting|guide:4. The Command Line]  
+** @conf@ - [Configuration sources|guide:3. Configuration]. 
+** @controllers@ - [Web controllers|guide:6.1 Controllers] - The C in MVC. 
+** @domain@ - The [application domain|guide:5. Object Relational Mapping (GORM)].     
+** @i18n@ - Support for [internationalization (i18n)|guide:10. Internationalization]. 
+** @services@ - The [service layer|guide:8. The Service Layer].
+** @taglib@ - [Tag libraries|guide:6.3 Tag Libraries]. 
+** @views@ - [Groovy Server Pages|guide:6.2 Groovy Server Pages]. 
+* @scripts@ - [Gant scripts|guide:4. The Command Line].
 * @src@ - Supporting sources
 ** @groovy@ - Other Groovy sources
 ** @java@ - Other Java sources
-* @test@  - Unit and integration tests. See [Testing|guide:9. Testing]
+* @test@  - [Unit and integration tests|guide:9. Testing]. 

@@ -14,7 +14,7 @@ class Person {
 
 {code}
 
-In this case we're using one of Hibernate's built in 'hilo' generators that uses a separate table to generate ids. There are many different generators that can be configured, refer to the hibernate docs on the subject for more.
+In this case we're using one of Hibernate's built in 'hilo' generators that uses a separate table to generate ids. 
 
 {note}
 For more information on  the different Hibernate generators refer to the [Hibernate reference documentation|http://www.hibernate.org/hib_docs/reference/en/html/mapping.html#mapping-declaration-id-generator]

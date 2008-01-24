@@ -2,7 +2,7 @@ h1. flash
 
 h2. Purpose
 
-A temporary storage map that stores objects within the session for the next request and the next request only, automatically clearing our the objects held there after the next request completes.
+A temporary storage map that stores objects within the session for the next request and the next request only, automatically clearing out the objects held there after the next request completes.
 
 h2. Examples
 
@@ -19,4 +19,4 @@ h2. Description
 
 The flash object is essentially a map (a hash) which you can use to store key value pairs. These values are transparently stored inside the session and then cleared at the end of the next request. 
 
-This pattern allows you to use HTTP redirects (which is useful for "redirect after post":http://www.theserverside.com/tt/articles/article.tss?l=RedirectAfterPost) and retain values that can retrieved from the flash object.
+This pattern allows you to use HTTP redirects (which is useful for "redirect after post":http://www.theserverside.com/tt/articles/article.tss?l=RedirectAfterPost ) and retain values that can retrieved from the flash object.

@@ -1,6 +1,6 @@
 Criteria is a type safe, advanced way to query that uses a Groovy builder to construct potentially complex queries. It is a much better alternative to using StringBuffer.
 
-Criteria can be used either via the [createCriteria|domainClasses] or [withCriteria|domainClasses] methods. The builder uses Hibernate's Criteria API, the nodes on this builder map the the static methods found in the [Restrictions|api:org.hibernate.criterion.Restrictions] class of the Hibernate Criteria API. Example Usage:
+Criteria can be used either via the [createCriteria|domainClasses] or [withCriteria|domainClasses] methods. The builder uses Hibernate's Criteria API, the nodes on this builder map the static methods found in the [Restrictions|api:org.hibernate.criterion.Restrictions] class of the Hibernate Criteria API. Example Usage:
 
 {code}
 def c = Account.createCriteria()

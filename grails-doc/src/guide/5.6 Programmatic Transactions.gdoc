@@ -1,6 +1,6 @@
 Grails is built on Spring and hence uses Spring's Transaction abstraction for dealing with programmatic transactions. However, GORM classes have been enhanced to make this more trivial through the [withTransaction|domainClasses] method which accepts a block the first argument to which is the Spring [TransactionStatus|api:org.springframework.transaction.TransactionStatus] object.
 
-A typically usage scenario is as follows:
+A typical usage scenario is as follows:
 
 {code:java}
 def transferFunds = {

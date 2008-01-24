@@ -21,7 +21,7 @@ catch(Exception e) {
 
 h2. Description
 
-Refer to the section on [Logging|guide:logging] in the Grails user guide which details how Grails' logging support.
+Refer to the section on [Logging|guide:logging] in the Grails user guide which details Grails' logging support.
 
 
 

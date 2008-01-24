@@ -4,4 +4,3 @@ To get started quickly with Grails it is often useful to use a feature called [S
 grails generate-all Book
 {code}
 
-For more information on scaffolding see the later section in the user guide

@@ -28,7 +28,7 @@ a.books.each {
 {code}
 
 {note}
-The default fetch strategy used by Grails is "lazy", which means that the the collection will be lazily initialized. This can lead to the [n+1 problem|http://www.javalobby.org/java/forums/t20533.html] if you are not careful.
+The default fetch strategy used by Grails is "lazy", which means that the collection will be lazily initialized. This can lead to the [n+1 problem|http://www.javalobby.org/java/forums/t20533.html] if you are not careful.
 
 If you need "eager" fetching you can use the [ORM DSL|guide:ormdsl] or specify eager fetching as part of a [query|guide:querying]
 {note}

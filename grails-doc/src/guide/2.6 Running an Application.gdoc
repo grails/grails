@@ -4,7 +4,7 @@ Grails applications can be run with the built in Jetty server using the [run-app
 grails run-app
 {code}
 
-If you require running on a different port using the @server.port@ argument:
+You can specify a different port by using the @server.port@ argument:
 
 {code}
 grails -Dserver.port=8090 run-app

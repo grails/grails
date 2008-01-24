@@ -17,7 +17,7 @@ class Flight {
 }
 {code}
 
-If I now create and @Airport@ and add some @Flight@s to it I can save the @Airport@ and have the updates cascaded down to each flight, hence saving the whole object graph:
+If I now create an @Airport@ and add some @Flight@s to it I can save the @Airport@ and have the updates cascaded down to each flight, hence saving the whole object graph:
 
 {code}
 new Airport(name:"Gatwick")

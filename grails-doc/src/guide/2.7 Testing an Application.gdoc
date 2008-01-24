@@ -10,4 +10,4 @@ Grails also automatically generates an Ant @build.xml@ which can also run the te
 ant test
 {code}
 
-This is useful when you need to build Grails applications as part of a continuation integration platform such as CruiseControl.
+This is useful when you need to build Grails applications as part of a continuous integration platform such as CruiseControl.

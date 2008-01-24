@@ -21,7 +21,7 @@ grails run-app
 
 This will start-up a server on port 8080 and you should now be able to access your application with the URL: @http://localhost:8080/helloworld@
 
-The result will look something like the below:
+The result will look something like the following screenshot:
 
 !intropage.png!
 

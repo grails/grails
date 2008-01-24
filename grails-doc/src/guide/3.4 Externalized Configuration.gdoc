@@ -1,6 +1,6 @@
 The default configuration file @Config.groovy@ in @grails-app/conf@ is fine in the majority of cases, but there may be circumstances where you want to maintain the configuration in a file _outside_ the main application structure. For example if you are deploying to a WAR some administrators prefer the configuration of the application to be externalized to avoid having to re-package the WAR due to a change of configuration.
 
-In order to support deployments such as the configuration can be externalized. To do so you need to point Grails at the locations of the configuration files Grails should be using by adding a @grails.config.locations@ setting in @Config.groovy@:
+In order to support deployment scenarios such as these the configuration can be externalized. To do so you need to point Grails at the locations of the configuration files Grails should be using by adding a @grails.config.locations@ setting in @Config.groovy@:
 
 {code:java}
 grails.config.locations = [ "classpath:${appName}-config.properties",

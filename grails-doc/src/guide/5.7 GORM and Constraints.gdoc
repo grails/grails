@@ -1,14 +1,15 @@
-Although constraints are covered in the [Validation|guide:constraints] section, it is important to mention them here as some of the constraints can effect the way in which the database schema is generated.
+Although constraints are covered in the [Validation|guide:constraints] section, it is important to mention them here as some of the constraints can affect the way in which the database schema is generated.
 
-Where feasible, Grails uses a domain class's constraints to influence the database columns generated for the corresponding domain class property.
+Where feasible, Grails uses a domain class's constraints to influence the database columns generated for the corresponding domain class properties.
 
 Consider the following example.  Suppose we have a domain model with the following property.
 
 {code}
+String name
 String description
 {code}
 
-By default, in MySQL, Grails would define this columns as...
+By default, in MySQL, Grails would define these columns as...
 
 {code:java}
  column name | data type 
@@ -22,7 +23,7 @@ But perhaps the business rules for this domain class state that a description ca
  description | TEXT 
 {code}
 
-Chances are we'd also want to have some application-based validation to make sure we don't exceed that 1000 character limit _before_ we persist any records.  In Grails, we achieve this validation via [contraints|guide:constraints].  We'd add the following constraint declaration to the domain class.
+Chances are we'd also want to have some application-based validation to make sure we don't exceed that 1000 character limit _before_ we persist any records.  In Grails, we achieve this validation via [constraints|guide:constraints].  We'd add the following constraint declaration to the domain class.
 
 {code}
 static constraints = {

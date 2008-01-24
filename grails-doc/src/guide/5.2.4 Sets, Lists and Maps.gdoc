@@ -71,7 +71,7 @@ If you want a simple map of string/value pairs GORM can map this with the follow
 
 {code}
 class Author {
-   Map books // my of ISBN:book names
+   Map books // map of ISBN:book names
 }
 
 def a = new Author()
