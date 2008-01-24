@@ -7,8 +7,8 @@ For Grails managed classes like controllers, tag libraries and so forth you can 
 {code:java}
 class ExamplePlugin {
   def doWithDynamicMethods = { applicationContext ->
-        application.controllerClasses.metaClass.each { metaClass ->
-             metaClass.myNewMethod = {-> println "hello world" }
+        application.controllerClasses.each { controllerClass ->
+             controllerClass.metaClass.myNewMethod = {-> println "hello world" }
         }
   }
 }
@@ -50,9 +50,9 @@ class ExampleHibernatePlugin {
 
    def doWithDynamicMethods = { applicationContext ->
 
-       application.domainClasses.metaClass.each { metaClass ->
+       application.domainClasses.each { domainClass ->
      
-           metaClass.static.load = { Long id-> 
+           domainClass.metaClass.static.load = { Long id-> 
                 def sf = applicationContext.sessionFactory
                 def template = new HibernateTemplate(sf)
 				template.load(delegate, id)
