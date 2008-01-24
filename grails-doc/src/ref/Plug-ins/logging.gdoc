@@ -2,7 +2,7 @@ h1. logging
 
 h2. Purpose
 
-The @logging@ plug-in sets up Grails' support for [Logging|guide:logging] with "Log4j":http://logging.apache.org/log4j/1.2/index.html.
+The @logging@ plug-in sets up Grails' support for [Logging|guide:logging] with [Log4j|http://logging.apache.org/log4j/1.2/index.html].
 
 h2. Examples
 

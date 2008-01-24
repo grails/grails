@@ -4,7 +4,7 @@ Currently by far the most mature and comprehensive Groovy & Grails IDE is [Intel
 
 h4. TextMate
 
-Since Grails' focus is on simplicity it is often possible to utilize more simple editors and "TextMate":http://macromates.com/ on the Mac has an excellent Groovy/Grails bundle available from the "Texmate bundles SVN":http://macromates.com/wiki/Main/SubversionCheckout.
+Since Grails' focus is on simplicity it is often possible to utilize more simple editors and "TextMate":http://macromates.com/ on the Mac has an excellent Groovy/Grails bundle available from the [Texmate bundles SVN|http://wiki.macromates.com/Main/SubversionCheckout].
 
 h4. Eclipse
 
