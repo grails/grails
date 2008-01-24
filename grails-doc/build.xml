@@ -66,6 +66,7 @@
 
 
         <mkdir dir="bin" />
+        <copy todir="bin" file="resources/log4j.properties"/>
         <groovyc srcdir="src/groovy" destdir="bin">
             <classpath>
                 <fileset dir="checkout/grails/lib" includes="*.jar"  />
@@ -83,12 +84,12 @@
                 <pathelement location="bin" />
             </classpath>
         </java>
-
-        <property file="checkout/grails/build.properties"/>
     </target>
 
     <target name="dist" depends="grails-javadoc,docs"
             description="Build documentation and create a zip for distibution">
+        <property file="checkout/grails/build.properties"/>
+
         <mkdir dir="dist" />
         <delete failonerror="false">
             <fileset dir="dist" includes="*.zip" />
