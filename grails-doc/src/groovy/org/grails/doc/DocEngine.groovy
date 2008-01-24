@@ -359,7 +359,7 @@ class ImageFilter  extends RegexTokenFilter {
 class TextileLinkFilter extends RegexTokenFilter {
 
     public TextileLinkFilter() {
-        super(/"([^"]+?)":(.+?)(\s)/);
+        super(/"([^"]+?)":(\S+?)(\s)/);
     }
 
 
