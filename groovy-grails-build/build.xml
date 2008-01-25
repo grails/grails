@@ -17,10 +17,11 @@
        <antcall target="-build-groovy" />
    </target>
 
+	<property name="groovy.checkout.url" value="http://svn.codehaus.org/groovy/trunk/groovy/groovy-core/"></property>
     <target name="-checkout-groovy" unless="checkout.groovy">
-         <echo>Checking out Groovy</echo>
+         <echo>Checking out Groovy from :${groovy.checkout.url}</echo>
         <svn>
-            <checkout url="http://svn.codehaus.org/groovy/trunk/groovy/groovy-core/" destPath="checkout/groovy" />
+            <checkout url="${groovy.checkout.url}" destPath="checkout/groovy" />
         </svn>
     </target>
 
