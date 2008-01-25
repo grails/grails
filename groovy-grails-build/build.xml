@@ -6,6 +6,10 @@
             <fileset dir="lib" includes="*.jar" />
         </classpath>
    </taskdef>
+
+	<target name="clean">
+		<delete dir="checkout" failonerror="false"/>
+	</target>
     
    <target name="build-groovy">
        <condition property="checkout.groovy">
