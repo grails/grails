@@ -31,13 +31,13 @@
         <antcall target="-checkout-specific-groovy" />
     </target>
 
-	<target name="-checkout-groovy-head" unless="${env.GROOVY_CHECKOUT_URL}">
+	<target name="-checkout-groovy-head" unless="env.GROOVY_CHECKOUT_URL">
         <svn>
             <checkout url="${groovy.checkout.url}" destPath="checkout/groovy" />
         </svn>		
 	</target>
 
-	<target name="-checkout-specific-groovy" if="${env.GROOVY_CHECKOUT_URL}">
+	<target name="-checkout-specific-groovy" if="env.GROOVY_CHECKOUT_URL">
         <svn>
             <checkout url="${env.GROOVY_CHECKOUT_URL}" destPath="checkout/groovy" />
         </svn>		
