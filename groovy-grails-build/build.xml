@@ -18,12 +18,26 @@
    </target>
 
 	<property name="groovy.checkout.url" value="http://svn.codehaus.org/groovy/trunk/groovy/groovy-core/"></property>
-    <target name="-checkout-groovy" unless="checkout.groovy">
+	<property environment="env" />
+	
+    <target name="-checkout-groovy" unless="checkout.groovy">		
          <echo>Checking out Groovy from :${groovy.checkout.url}</echo>
+
+        <antcall target="-checkout-groovy-head"  />
+        <antcall target="-checkout-specific-groovy" />
+    </target>
+
+	<target name="-checkout-groovy-head" unless="${env.GROOVY_CHECKOUT_URL}">
         <svn>
             <checkout url="${groovy.checkout.url}" destPath="checkout/groovy" />
-        </svn>
-    </target>
+        </svn>		
+	</target>
+
+	<target name="-checkout-specific-groovy" if="${env.GROOVY_CHECKOUT_URL}">
+        <svn>
+            <checkout url="${env.GROOVY_CHECKOUT_URL}" destPath="checkout/groovy" />
+        </svn>		
+	</target>
 
     <target name="-update-groovy" if="checkout.groovy">
          <echo>Updating Groovy</echo>
