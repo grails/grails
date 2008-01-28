@@ -11,7 +11,7 @@ Once you have the JAR in place you need to get familiar Grails' DataSource descr
 * @password@ - The password used to establish a JDBC connection
 * @url@ - The JDBC URL of the database
 * @dbCreate@ - Whether to auto-generate the database from the domain model or not
-* @pooling@ - Whether to use a pool of connections (defaults to true)
+* @pooled@ - Whether to use a pool of connections (defaults to true)
 * @logSql@ - Enable SQL logging
 * @dialect@ - A String or Class that represents the Hibernate dialect used to communicate with the database. See the [org.hibernate.dialect|http://www.hibernate.org/hib_docs/v3/api/org/hibernate/dialect/package-summary.html] package for available dialects.
 
@@ -19,7 +19,7 @@ A typical configuration for MySQL may be something like:
 
 bc.                             
 dataSource {
-	pooling = true
+	pooled = true
 	dbCreate = "update"
 	url = "jdbc:mysql://localhost/yourDB"
 	driverClassName = "com.mysql.jdbc.Driver"

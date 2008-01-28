@@ -4,7 +4,7 @@ Grails supports the concept of per environment configuration. Both the @Config.g
 
 {code:java}
 dataSource {
-    pooling = false                          
+    pooled = false                          
     driverClassName = "org.hsqldb.jdbcDriver"	
     username = "sa"
     password = ""				
