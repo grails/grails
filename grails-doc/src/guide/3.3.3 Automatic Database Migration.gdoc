@@ -1,8 +1,12 @@
 The @dbCreate@ property of the @DataSource@ definition is important as it dictates what Grails should do at runtime with regards to automatically generating the database tables from [GORM|guide:gorm] classes. The options are:
 
 * @create-drop@ - Drop and re-create the database when Grails is run
-* @create@ - Create the database if it doesn't exist, but don't modify it if it does
+* @create@ - Create the database if it doesn't exist, but don't modify it if it does. Deletes existing data.
 * @update@ - Create the database if it doesn't exist, and modify it if it does exist
+
+{warning}
+Both @create-drop@ and @create@ will destroy all existing data hence use with caution!
+{warning}
 
 In [development|guide:envs] mode @dbCreate@ is by default set to "create-drop":
 
