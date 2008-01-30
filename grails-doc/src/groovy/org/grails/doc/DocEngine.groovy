@@ -335,12 +335,15 @@ class BoldFilter extends RegexTokenFilter {
 class CodeFilter extends RegexTokenFilter {
 
     public CodeFilter() {
-        super(/(\{\{|@)([^\n]*?)(\}\}|@)/);
+        super(/@([^\n]*?)@/);
     }
 
 
     public void handleMatch(StringBuffer buffer, MatchResult result, FilterContext context) {
-        buffer << "<code>${result.group(2)}</code>"
+		def text = result.group(1)
+		// are we inside a code block?
+		if(text.indexOf('class="code"') > -1) buffer << "@$text@"
+		else buffer << "<code>${text}</code>"
     }
 }
 class ImageFilter  extends RegexTokenFilter {
