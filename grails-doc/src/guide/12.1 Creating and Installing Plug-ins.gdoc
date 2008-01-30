@@ -82,6 +82,18 @@ If the plugin is hosted on a remote HTTP server you can also do:
 grails install-plugin http://myserver.com/plugins/grails-example-0.1.zip
 {code}
 
+h4. Notes on excluded Artefacts
+
+Although the [create-plugin|commandLine] command creates certain files for you so that the plug-in can be run as a Grails application, not all of these files are included when packaging a plug-in. The following is a list of artefacts created, but not included by [package-plugin|commandLine]:
+
+* @grails-app/conf/DataSource.groovy@
+* @grails-app/conf/UrlMappings.groovy@
+* @grails-app/conf/DataSource.groovy@
+* @build.xml@
+* Everything within @/web-app/WEB-INF@
+
+If you need artefacts within @WEB-INF@ it is recommended you use the @_Install.groovy@ script (covered later), which is executed when a plug-in is installed, to provide such artefacts. In addition, although @UrlMappings.groovy@ is excluded you are allowed to include a @UrlMappings@ definition with a different name, such as @FooUrlMappings.groovy@
+
 h4. Distributing Plugins in Grails Plugins Repository
 
 The preferred way of plugin distributing is to publish it under Grails Plugins Repository. This will make your plugin visible to the [list-plugins|commandLine] command:
