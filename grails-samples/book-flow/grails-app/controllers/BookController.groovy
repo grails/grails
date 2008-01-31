@@ -69,8 +69,6 @@ class BookController implements ApplicationContextAware  {
 				def p = flow.person
 				def pd = flow.paymentDetails
 				def cartItems = flow.cartItems
-				flow.clear()
-				
 				def o = new Order(person:p, shippingAddress:a, paymentDetails:pd)
 				o.invoiceNumber = new Random().nextInt(9999999)								
 				cartItems.each { o.addToItems(it) }
