@@ -67,10 +67,10 @@ The closure can return:
 
 * @null@ or @true@ to indicate that the value is valid
 * @false@ to indicate an invalid value and use the default message code
-* a string to indicate the error code to append to the "classname.propertName." string to display an error
+* a string to indicate the error code to append to the "classname.propertName." string used to resolve the error message. If a field specific message cannot be resolved, the error code itself will be resolved allowing for global error messages.
 * a list containing a string as above, and then any number of arguments following it, which can be used as formatted message arguments indexed at 3 onwards. See @grails-app/i18n/message.properties@ to see how the default error message codes use the arguments.
 
 If the closure is a three-parameter closure the return value is ignored and the closure is expected to populate the errors object.
 
-Error Code: @className.propertyName.email.invalid@
+Error Code: @className.propertyName.validator.error@
 
