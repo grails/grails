@@ -1,6 +1,6 @@
 <project name="grails-functional-test" default="functional-test">
                                                                 
-    <property name="grails.home" location="grails"/>
+    <property environment="env"/>
     <property name="checkoutDir" location="apps"/>
     <property name="app.checkout.url" value="http://svn.codehaus.org/grails/trunk/grails-functional-tests/apps/"/>
     <property name="grails.checkout.url" value="http://svn.codehaus.org/grails/trunk/grails/"/>
@@ -12,6 +12,11 @@
     <taskdef name="svn" classname="org.tigris.subversion.svnant.SvnTask" classpathref="classpath"/>
     <taskdef name="groovy" classname="org.codehaus.groovy.ant.Groovy" classpathref="classpath"/>
 
+    <target name="init" depends="-checkout-grails">
+        <!-- will only take effect if we didn't check out -->
+        <property name="grails.home" value="${env.GRAILS_HOME}"/>
+    </target>
+
     <macrodef name="grails">
         <attribute name="grailsStarter"
                    default="org.codehaus.groovy.grails.cli.support.GrailsStarter"/>
@@ -19,16 +24,11 @@
                    default="org.codehaus.groovy.grails.cli.GrailsScriptRunner"/>
         <attribute name="command" default="help"/>
         <attribute name="projectName" default=""/>
+        <attribute name="resultID" default="0"/>
         <sequential>
-            <echo message="Project is @{projectName}"/>
-            <echo message="Command is @{command}"/>
-            <echo message="Basedir is ${basedir}"/>
-            <property name="grails.home" location="."/>
-            <echo message="Grails home is ${grails.home}"/>
-
-            <java fork="true" classname="@{grailsStarter}" dir="${checkoutDir}/@{projectName}" resultproperty="testResult">
+            <java fork="true" classname="@{grailsStarter}" dir="${checkoutDir}/@{projectName}" resultproperty="testResult_@{resultID}">
                 <env key="GRAILS_HOME" value="${grails.home}"/>
-                <env key="JAVA_OPTS" value="-XX:MaxPermSize=256m -Xmx512m"/>
+                <env key="JAVA_OPTS" value="-XX:MaxPermSize=256m -Xmx800m"/>
                 <sysproperty key="grails.home" value="${grails.home}"/>
                 <sysproperty key="groovy.starter.conf"
                              value="${grails.home}/conf/groovy-starter.conf"/>
@@ -54,7 +54,8 @@
         </sequential>
     </macrodef>
 
-    <target name="-checkout-grails">
+    <target name="-checkout-grails" unless="grails.home.env">
+        <property name="grails.home" location="grails"/>
         <delete dir="${grails.home}"/>
         <svn>
             <checkout url="${grails.checkout.url}" destPath="grails"/>
@@ -62,8 +63,8 @@
     </target>
 
     <target name="-build-grails">
-        <ant dir="grails" antfile="build.xml" target="clean" />
-        <ant dir="grails" antfile="build.xml" target="jar">
+        <ant dir="${grails.home}" antfile="build.xml" target="clean" />
+        <ant dir="${grails.home}" antfile="build.xml" target="jar">
             <property name="skipTests" value="true"/>
             <property name="skipExamples" value="true"/>
         </ant>
@@ -71,48 +72,83 @@
 
     <target name="functional-test"
             description="Runs functional tests for one or more test applications from SVN"
-            depends="-checkout-grails,-build-grails">
-        <property name="projectName" value="HelloWorld"/>
-        <condition property="update.app">
-            <available file="${checkoutDir}/${projectName}">
-            </available>
-        </condition>
-        <condition property="checkout.app">
-            <not>
-                <available file="${checkoutDir}/${projectName}">
-                </available>
-            </not>
-        </condition>
-        <antcall target="-checkout-app">
-            <param name="projectName" value="${projectName}"/>
-        </antcall>
-        <antcall target="-update-app">
-            <param name="projectName" value="${projectName}"/>
-        </antcall>
-        <groovy>
-            ant.grails(command:"install-plugin webtest", projectName:properties.projectName)
-            println "Result 1 was: ${properties.testResult}"
+            depends="init,-build-grails">
 
-            ant.grails(command:"run-webtest", projectName:"HelloWorld")
-            println "Result 2 was: ${properties.testResult}"
-            if (properties.testResult.toInteger() != 0) {
-                ant.fail(message:"Application functional tests failed")
+        <groovy><![CDATA[
+            def outcomes = []
+            def failure = false
+
+            // Collate the app names
+            def listPage = new URL(properties['app.checkout.url']).text
+            def appNames = []
+            listPage.eachMatch(/>(\w*)\/</) {
+                if (it[1] != "..") {
+                    appNames << it[1]
+                    println "Test will include application ${it[1]}"
+                }
             }
+
+            def grailsInvocationCounter = 0
+
+            appNames.each() {
+
+                properties.projectName = it
+
+                if (new File("${properties.checkoutDir}/${properties.projectName}").exists()) {
+                    ant.antcall(target:"-update-app") {
+                        param(name:"projectName", value:properties.projectName)
+                    }
+                } else {
+                    ant.antcall(target:"-checkout-app") {
+                        param(name:"projectName", value:properties.projectName)
+                    }
+                }
+
+                // First upgrade
+                ant.grails(command:"upgrade -force", projectName:properties.projectName, resultID:grailsInvocationCounter++)
+                if (properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) {
+                    outcomes << "Couldn't upgrade application ${properties.projectName}"
+                    failure = true
+                }
+
+                // Install webtest
+                ant.grails(command:"install-plugin webtest", projectName:properties.projectName, resultID:grailsInvocationCounter++)
+                if (properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) {
+                    outcomes << "Couldn't install webtest plugin into application ${properties.projectName}"
+                    failure = true
+                }
+
+                // Run webtest
+                ant.grails(command:"run-webtest", projectName:properties.projectName, resultID:grailsInvocationCounter++)
+                outcomes << "Functional tests in application ${properties.projectName}: " +
+                    ((properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) ? "Failed" : "OK")
+                if (properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) {
+                    failure = true
+                }
+            }
+
+            println "Grails Functional Test Results"
+            println "======================================================"
+            outcomes.each() {
+                println it
+            }
+
+            if (failure) ant.fail(message:"At least one of the tests failed")
+            ]]>
         </groovy>
     </target>
-
 
     <target name="clean">
         <delete dir="${checkoutDir}" failonerror="false"/>
     </target>
 
-    <target name="-checkout-app" unless="update.app">
+    <target name="-checkout-app">
         <echo>Checking out functional test application from :${app.checkout.url}${projectName}</echo>
 
         <antcall target="-checkout-app-head"/>
     </target>
 
-    <target name="-update-app" unless="checkout.app">
+    <target name="-update-app">
         <echo>Updating local copy of functional test application from :${app.checkout.url}${projectName}</echo>
 
         <antcall target="-update-app-head"/>
