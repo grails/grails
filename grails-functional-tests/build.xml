@@ -12,7 +12,15 @@
     <taskdef name="svn" classname="org.tigris.subversion.svnant.SvnTask" classpathref="classpath"/>
     <taskdef name="groovy" classname="org.codehaus.groovy.ant.Groovy" classpathref="classpath"/>
 
-    <target name="init" depends="-checkout-grails">
+    <target name="init">
+      <condition property="dont.checkout.grails">
+   		    <or>
+		       <available file="checkout/grails" />
+			   <isset property="env.GRAILS_HOME" />
+	        </or>	
+       </condition>	
+		<antcall target="-checkout-grails" />
+		<antcall target="-update-grails" />
         <!-- will only take effect if we didn't check out -->
         <property name="grails.home" value="${env.GRAILS_HOME}"/>
     </target>
@@ -54,15 +62,22 @@
         </sequential>
     </macrodef>
 
-    <target name="-checkout-grails" unless="grails.home.env">
-        <property name="grails.home" location="grails"/>
-        <delete dir="${grails.home}"/>
+    <target name="-checkout-grails" unless="dont.checkout.grails">
+        <property name="grails.home" location="checkout/grails"/>
         <svn>
-            <checkout url="${grails.checkout.url}" destPath="grails"/>
+grails"/>
+        </svn>
+    </target>
+
+    <target name="-update-grails" if="dont.checkout.grails">
+         <echo>Updating Grails</echo>
+        <svn>
+            <update dir="checkout/grails" />
         </svn>
     </target>
 
     <target name="-build-grails">
+		<echo>GRAILS_HOME=${grails.home}</echo>
         <ant dir="${grails.home}" antfile="build.xml" target="clean" />
         <ant dir="${grails.home}" antfile="build.xml" target="jar">
             <property name="skipTests" value="true"/>
@@ -72,8 +87,9 @@
 
     <target name="functional-test"
             description="Runs functional tests for one or more test applications from SVN"
-            depends="init,-build-grails">
+            depends="clean-reports,init,-build-grails">
 
+		<mkdir dir="reports" />
         <groovy><![CDATA[
             def outcomes = []
             def failure = false
@@ -125,6 +141,12 @@
                 if (properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) {
                     failure = true
                 }
+
+				// Copy reports
+				ant.mkdir(dir:"reports/${properties.projectName}")
+				ant.copy(todir:"reports/${properties.projectName}") {
+					fileset(dir:"${properties.checkoutDir}/${properties.projectName}/webtest/reports")
+				}
             }
 
             println "Grails Functional Test Results"
@@ -138,9 +160,15 @@
         </groovy>
     </target>
 
-    <target name="clean">
+    <target name="clean" depends="clean-reports">
         <delete dir="${checkoutDir}" failonerror="false"/>
+        <delete dir="checkout/grails" failonerror="false"/>
+        <delete dir="reports" failonerror="false"/>
     </target>
+
+	<target name="clean-reports">
+		<delete dir="reports" failonerror="false"/>
+	</target>
 
     <target name="-checkout-app">
         <echo>Checking out functional test application from :${app.checkout.url}${projectName}</echo>
