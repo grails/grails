@@ -13,16 +13,27 @@
     <taskdef name="groovy" classname="org.codehaus.groovy.ant.Groovy" classpathref="classpath"/>
 
     <target name="init">
-      <condition property="dont.checkout.grails">
-   		    <or>
-		       <available file="checkout/grails" />
-			   <isset property="env.GRAILS_HOME" />
-	        </or>	
-       </condition>	
-		<antcall target="-checkout-grails" />
-		<antcall target="-update-grails" />
-        <!-- will only take effect if we didn't check out -->
-        <property name="grails.home" value="${env.GRAILS_HOME}"/>
+        <!--
+            If -Duse.grails.home is specified, GRAILS_HOME will be svn updated and used
+            Else, if checkout/grails exists it will svn update unless -Dforce.checkout is set
+            Else, grails will check out to checkout/grails and be used
+        -->
+        <groovy>
+            if (properties['use.grails.home']) {
+                ant.property(name:"grails.home", value:properties['env.GRAILS_HOME'])
+                properties['dont.checkout.grails'] = "true"
+            } else {
+                ant.property(name:"grails.home", location:"checkout/grails")
+                if (properties['force.checkout']) {
+                    ant.delete(dir:properties['grails.home'], failonerror:"false")
+                }
+                if (new File(properties['grails.home']).exists()) {
+                    properties['dont.checkout.grails'] = "true"
+                }
+            }
+        </groovy>
+
+        <antcall target="-get-grails" />
     </target>
 
     <macrodef name="grails">
@@ -62,17 +73,21 @@
         </sequential>
     </macrodef>
 
+    <target name="-get-grails" depends="-checkout-grails,-update-grails"/>
+
     <target name="-checkout-grails" unless="dont.checkout.grails">
-        <property name="grails.home" location="checkout/grails"/>
+        <echo>Checking out Grails</echo>
+        <property name="checked.out.grails" value="true"/>
+        <delete dir="${grails.home}"/>
         <svn>
-grails"/>
+            <checkout url="${grails.checkout.url}" destPath="${grails.home}"/>
         </svn>
     </target>
 
-    <target name="-update-grails" if="dont.checkout.grails">
-         <echo>Updating Grails</echo>
+    <target name="-update-grails" unless="checked.out.grails">
+        <echo>Updating Grails</echo>
         <svn>
-            <update dir="checkout/grails" />
+            <update dir="${grails.home}" />
         </svn>
     </target>
 
