@@ -1,4 +1,9 @@
 Grails also provides the following configuration options:
 
+* @grails.config.locations@  - The location of properties files or addition Grails Config files that should be merged with main configuration
 * @grails.enable.native2ascii@ - Set this to false if you do not require native2ascii conversion of Grails i18n properties files
 * @grails.views.default.codec@ - Sets the default encoding regime for GSPs - can be one of 'none', 'html', or 'base64' (default: 'none'). To reduce risk of XSS attacks, set this to 'html'.
+* @grails.views.gsp.encoding@ - The file encoding used for GSP source files (default is 'utf-8')
+* @grails.war.destFile@ - Sets the location where the [war|commandLine] command should place the generated WAR file
+* @grails.mime.file.extensions@ - Whether to use the file extension to dictate the mime type in [Content Negotiation|guide:contentNegotiation]
+* @grails.mime.types@ - A map of supported mime types used for [Content Negotiation|guide:contentNegotiation]

@@ -1,7 +1,8 @@
 To create a Grails application you first need to familiarize yourself with the usage of the @grails@ command which is used in the following manner:
 
-bc.
+{code}
 grails [command name]
+{code}
 
 In this case the command you need to execute is [create-app|commandLine]:
 

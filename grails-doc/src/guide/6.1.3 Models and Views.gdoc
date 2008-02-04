@@ -44,7 +44,7 @@ def index = {
 
 h4. Selecting the View
 
-In both the previous two example there was no code that specified which [view:guide:GSP] to render. So how does Grails know which view to pick? The answer lies in the conventions. For the action:
+In both the previous two example there was no code that specified which [view|guide:GSP] to render. So how does Grails know which view to pick? The answer lies in the conventions. For the action:
 
 {code:java}
 class BookController {
@@ -77,14 +77,9 @@ def show = {
 In this case Grails will attempt to render a view at the location @grails-app/views/shared/display.gsp@.
 
 
+h4. Rendering a Response
 
-
-
-
-
-Rendering a Response
-
-Sometimes its easier (typically with Ajax applications) to render snippets of text or code to the response directly from the controller. For this the highly flexible "render" method can be used:
+Sometimes its easier (typically with Ajax applications) to render snippets of text or code to the response directly from the controller. For this the highly flexible [render|controllers] method can be used:
 
 {code:java}
 render "Hello World!"

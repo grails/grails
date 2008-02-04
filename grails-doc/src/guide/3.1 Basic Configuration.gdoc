@@ -11,3 +11,12 @@ Then later in your application you can access these settings in one of two ways.
 {code}
 assert "world" == grailsApplication.config.foo.bar.hello
 {code}
+
+The other way involves getting a reference to the [ConfigurationHolder|api:org.codehaus.groovy.grails.commons.ConfigurationHolder] class that holds a reference to the configuration object:
+
+{code}
+import org.codehaus.groovy.grails.commons.*
+...
+def config = ConfigurationHolder.config
+assert "world" == config.foo.bar.hello
+{code}

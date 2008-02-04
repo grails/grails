@@ -24,7 +24,7 @@ as well as sorting:
 def books = Book.list(sort:"title", order:"asc")
 {code}
 
-Here, the @sort@ argument is the name of the domain class property that you wish to sort on, and the @order@ argument is either @asc@ for <em>asc</em>ending or @desc@ for <em>desc</em>ending.
+Here, the @sort@ argument is the name of the domain class property that you wish to sort on, and the @order@ argument is either @asc@ for *asc*ending or @desc@ for *desc*ending.
 
 h4. Retrieval by Database  Identifier
 

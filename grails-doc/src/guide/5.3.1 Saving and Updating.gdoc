@@ -5,7 +5,7 @@ def p = Person.get(1)
 p.save()
 {code}
 
-A major difference with Hibernate is when you call [save|domainClasses] it does not necessarily perform any SQL operations _at that point_. Hibernate typically batches up SQL statements and executes them at the end. This is typically done for you automatically by Grails, which manages your Hibernate session.
+A major difference with Hibernate is when you call [save|domainClasses] it does not necessarily perform any SQL operations *at that point*. Hibernate typically batches up SQL statements and executes them at the end. This is typically done for you automatically by Grails, which manages your Hibernate session.
 
 There are occasions, however, when you may want to control when those statements are executed or, in Hibernate terminology, when the session is "flushed". To do so you can use the flush argument to the save method:
 

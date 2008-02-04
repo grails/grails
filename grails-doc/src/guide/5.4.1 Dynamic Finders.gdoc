@@ -1,6 +1,6 @@
-GORM supports the concept of _dynamic finders_. A dynamic finder looks like a static method invocation, but the methods themselves don't actually exist in any form at the code level.
+GORM supports the concept of *dynamic finders*. A dynamic finder looks like a static method invocation, but the methods themselves don't actually exist in any form at the code level.
 
-Instead a method is auto-magically generated at runtime based on the properties of a given class. Take for example the @Book@ class:
+Instead a method is auto-magically generated using code synthesis at runtime based on the properties of a given class. Take for example the @Book@ class:
 
 {code} 
 class Book {
@@ -13,7 +13,7 @@ class Author {
 }
 {code}         
 
-The @Book@ class has properties such as @title@, @releaseDate@ and @author@. These can be used by the [findBy|domainClasses] and [findAllBy|domainClasses] methods in the form of _method expressions_:
+The @Book@ class has properties such as @title@, @releaseDate@ and @author@. These can be used by the [findBy|domainClasses] and [findAllBy|domainClasses] methods in the form of "method expressions":
 
 {code}
 def book = Book.findByTitle("The Stand")
@@ -101,7 +101,7 @@ def books =
 	   .findAllByTitleLikeOrReleaseDateGreaterThan("%Java%", new Date()-30)
 {code}
 
-Clearly method names can end up being quit long in which case you should consider using [Criteria|guide:5.4.2 Criteria]
+Clearly method names can end up being quite long in which case you should consider using [Criteria|guide:5.4.2 Criteria]
 
 h4. Querying Associations
 

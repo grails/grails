@@ -11,9 +11,9 @@ The first step to getting up and running with Grails is to install the distribut
 If Grails is working correctly you should now be able to type @grails@ in the terminal window and see output similar to the below:
 
 bc.
-Welcome to Grails 1.0-RC1 - http://grails.org/
+Welcome to Grails 1.0 - http://grails.org/
 Licensed under Apache Standard License 2.0
-Grails home is set to: /Developer/grails-dev/releases/grails-1.0-RC1
+Grails home is set to: /Developer/grails-1.0
 No script name specified. Use 'grails help' for more info
 
 

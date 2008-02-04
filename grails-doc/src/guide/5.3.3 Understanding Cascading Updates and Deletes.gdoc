@@ -33,4 +33,4 @@ def airport = Airport.findByName("Gatwick")
 airport.delete()
 {code}
 
-However, if I were to remove @belongsTo@ then the above cascading deletion code _would not work_.
+However, if I were to remove @belongsTo@ then the above cascading deletion code *would not work*. Note that if you need further control over cascading behaviour, you can use the [ORM DSL|guide:ormdsl].
