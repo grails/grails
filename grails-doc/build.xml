@@ -94,8 +94,7 @@
         <delete failonerror="false">
             <fileset dir="dist" includes="*.zip" />
         </delete>
-
-        <zip destfile="dist/grails-${grails.version}-docs.zip" basedir="output"/>
+        <zip destfile="dist/grails-docs-${grails.version}.zip" basedir="output"/>
     </target>
 
 
