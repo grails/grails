@@ -41,5 +41,5 @@ You can also perform pagination and sorting whilst using HQL queries. To do so s
 {code:java}
 def results =
       Book.findAll("from Book as b where b.title like 'Lord of the%'", 
-                   [max:10, offset:20, sort:"asc", order:"title"])
+                   [max:10, offset:20, sort:"title", order:"asc"])
 {code}
