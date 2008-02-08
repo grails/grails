@@ -8,7 +8,7 @@ enterPersonalDetails {
    on("return").to "showCart"
 }{code}
 
-It will look for a view called @grails-app/views/book/shoppingCart/enterPersonalDetails.gsp@ by default. Note that the @enterPersonalDetails@ state defines two events: @submit@ and @return@. The vie is responsible for [triggering|guide:6.5.3 Flow Execution Events] these events. If you want to change the view to be rendered you can do so with the render method:
+It will look for a view called @grails-app/views/book/shoppingCart/enterPersonalDetails.gsp@ by default. Note that the @enterPersonalDetails@ state defines two events: @submit@ and @return@. The view is responsible for [triggering|guide:6.5.3 Flow Execution Events] these events. If you want to change the view to be rendered you can do so with the render method:
 
 {code:java}
 enterPersonalDetails {
