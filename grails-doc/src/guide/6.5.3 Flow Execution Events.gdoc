@@ -30,7 +30,7 @@ The form must submit back to the @shoppingCart@ flow. The name attribute of each
 
 h4. Triggering Events from an Action
 
-To trigger an event from an @action@ you need to invoke a method. For example there is the built in @error()@ and @success()@ methods. The example below triggers a the @error()@ event on validation failure in a transition action:
+To trigger an event from an @action@ you need to invoke a method. For example there is the built in @error()@ and @success()@ methods. The example below triggers the @error()@ event on validation failure in a transition action:
 
 {code:java}
 enterPersonalDetails {
