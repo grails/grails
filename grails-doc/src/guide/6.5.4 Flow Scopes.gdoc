@@ -1,6 +1,6 @@
 h4. Scope Basics
 
-You'll notice from previous examples that we used a special object called @flow@ to store objects within "flow scope". Grails flows have 5 different scope you can utilize:
+You'll notice from previous examples that we used a special object called @flow@ to store objects within "flow scope". Grails flows have 5 different scopes you can utilize:
 
 * @request@ - Stores an object for the scope of the current request
 * @flash@ - Stores the object for the current and next request only
