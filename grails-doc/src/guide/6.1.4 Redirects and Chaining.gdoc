@@ -9,7 +9,7 @@ class OverviewController {
     def find = {
         if(!session.user)
            redirect(action:login)
-        .....
+        ...
     }
 }    
 {code}
@@ -94,7 +94,7 @@ class ChainController {
 
     def nextInChain = {
         def model = chainModel.myModel
-        .....
+        ...
     }
 }
 {code}

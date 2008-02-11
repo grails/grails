@@ -48,11 +48,10 @@ In this case a layout called @grails-app/views/layouts/main.gsp@ will be used to
           <title>An Example Page</title>
       </head>
       <body onload="">
-            <div class="menu"><!--my common menu goes here--></menu>
+        <div class="menu"><!--my common menu goes here--></div>
                  <div class="body">
 					This is my content!
                  </div>
-            </div>
       </body>
 </html>
 {code}

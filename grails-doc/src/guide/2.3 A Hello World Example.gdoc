@@ -7,12 +7,13 @@ This will create a new controller (Refer to the section on [Controllers|guide:co
 
 Controllers are capable of dealing with web requests and to fulfil the "hello world!" use case our implementation needs to look like the following:
 
-bc.
+{code:java}
 class HelloController {
 	def world = {
 		render "Hello World!"
 	}
 }                           
+{code}
 
 Job done. Now start-up the container with another new command called [run-app|commandLine]:
 

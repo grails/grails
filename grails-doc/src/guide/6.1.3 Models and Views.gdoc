@@ -31,7 +31,6 @@ A more advanced approach is to return an instance of the Spring [ModelAndView|ap
 
 {code:java}
 import org.springframework.web.servlet.ModelAndView
-...
 
 def index = {
     def favoriteBooks = ... // get some books just for the index page, perhaps your favorites
@@ -79,7 +78,7 @@ In this case Grails will attempt to render a view at the location @grails-app/vi
 
 h4. Rendering a Response
 
-Sometimes its easier (typically with Ajax applications) to render snippets of text or code to the response directly from the controller. For this the highly flexible [render|controllers] method can be used:
+Sometimes its easier (typically with Ajax applications) to render snippets of text or code to the response directly from the controller. For this, the highly flexible @render@ method can be used:
 
 {code:java}
 render "Hello World!"

@@ -27,7 +27,7 @@ class Person {
 }
 {code}
 
-In this case we define method calls that match each property name (in this case @firstName@). We then use the @column@ named parameter to specify the column name to map onto.
+In this case we define method calls that match each property name (in this case @firstName@). We then use the named parameter @column@, to specify the column name to map onto.
 
 h4. Column type
 

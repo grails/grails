@@ -19,7 +19,7 @@ In the above example we have a parent @Content@ class and then various child cla
 
 h4. Considerations
 
-At the database level Grails by default uses table-per-hierarchy mapping with a discriminator column called @class@ so the parent class @Content@ and it the sub classes (@BlogEntry@, @Book@ etc.) share the *same* table.
+At the database level Grails by default uses table-per-hierarchy mapping with a discriminator column called @class@ so the parent class (@Content@) and its sub classes (@BlogEntry@, @Book@ etc.), share the *same* table.
 
 Table-per-hierarchy mapping has a down side in that you *cannot* have non-nullable properties with inheritance mapping. An alternative is to use table-per-subclass which can be enabled via the [ORM DSL|guide:ormdsl]
 

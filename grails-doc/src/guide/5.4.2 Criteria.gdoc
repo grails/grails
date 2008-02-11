@@ -138,7 +138,7 @@ If a node within the builder tree doesn't match a particular criterion it will a
 
 {code:java}
 	import org.hibernate.FetchMode as FM
-	....
+	...
 	def results = c.list {
 		maxResults(10)
 		firstResult(50)
@@ -152,7 +152,7 @@ In the section on [Eager and Lazy Fetching|guide:5.3.4 Eager and Lazy Fetching] 
 
 {code:java}
 import org.hibernate.FetchMode as FM
-// ......
+...
 
 def criteria = Task.createCriteria()
 def tasks = criteria.list{

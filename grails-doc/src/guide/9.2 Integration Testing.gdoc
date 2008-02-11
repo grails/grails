@@ -77,7 +77,9 @@ Given a controller using a command object:
 
 {code:java}
 class AuthenticationController {
-  def signup = { SignupForm form -> .. }
+    def signup = { SignupForm form ->
+        ...
+    }
 }{code}
 
 You can then test it like this:

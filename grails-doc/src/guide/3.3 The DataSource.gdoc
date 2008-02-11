@@ -17,7 +17,7 @@ Once you have the JAR in place you need to get familiar Grails' DataSource descr
 
 A typical configuration for MySQL may be something like:
 
-bc.                             
+{code:java}
 dataSource {
 	pooled = true
 	dbCreate = "update"
@@ -26,12 +26,13 @@ dataSource {
 	username = "yourUser"
 	password = "yourPassword"	
 }
+{code}
 
 {warning}
 When configuring the DataSource do not include the type or the def keyword before any of the configuration settings as Groovy will treat these as local variable definitions and they will not be processed. For example the following is invalid:
 {warning}
 
-{code}
+{code:java}
 dataSource {
 	boolean pooled = true // type declaration results in local variable
 	...

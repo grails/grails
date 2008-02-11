@@ -16,6 +16,7 @@ class ServicesGrailsPlugin {
            "$serviceName"(serviceClass.getClazz()) { bean ->
                bean.autowire =  true
       }
+            }
       if(event.ctx) {
         event.ctx.registerBeanDefinition(serviceName,
                                        beans.getBeanDefinition(serviceName))

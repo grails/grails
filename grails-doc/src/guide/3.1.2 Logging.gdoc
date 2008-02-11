@@ -18,6 +18,7 @@ log4j {
             ...
         }
 }
+}
 {code}
 
 If you prefer to use standard Log4j properties file style configuration you can use a Groovy multiline String instead:

@@ -45,7 +45,7 @@ You can also render templates from controllers using the [render|controllers] me
 
 {code:java}
 def show = {
-	de b = Book.get(params.id)
+    def b = Book.get(params.id)
 	render(template:"bookTemplate", model:[book:b])
 }
 {code}
@@ -55,14 +55,10 @@ The [render|controllers] method within controllers writes directly to the respon
 
 {code:java}
 def show = {
-	de b = Book.get(params.id)
+    def b = Book.get(params.id)
 	String content = g.render(template:"bookTemplate", model:[book:b])
 	render content
 }
 {code}
 
 Notice the usage of the @g.@ namespace which tells Grails we want to use the [tag as method call|guide:6.2.2.6 Tags as Method Calls] instead of the [render|controllers] method.
-
- 
-
-

@@ -1,6 +1,6 @@
 GORM supports the concept of *dynamic finders*. A dynamic finder looks like a static method invocation, but the methods themselves don't actually exist in any form at the code level.
 
-Instead a method is auto-magically generated using code synthesis at runtime based on the properties of a given class. Take for example the @Book@ class:
+Instead, a method is auto-magically generated using code synthesis at runtime, based on the properties of a given class. Take for example the @Book@ class:
 
 {code} 
 class Book {
@@ -18,21 +18,13 @@ The @Book@ class has properties such as @title@, @releaseDate@ and @author@. The
 {code}
 def book = Book.findByTitle("The Stand")
 
-book =
-   Book
-    .findByTitleLike("Harry Pot%")
+book = Book.findByTitleLike("Harry Pot%")
 
-book =
-  Book
-    .findByReleaseDateBetween( firstDate, secondDate )
+book = Book.findByReleaseDateBetween( firstDate, secondDate )
 
-book =
-  Book
-    .findByReleaseDateGreaterThan( someDate )                      
+book = Book.findByReleaseDateGreaterThan( someDate )
 
-book =
-  Book
-   .findByTitleLikeOrReleaseDateLessThan( "%Something%", someDate )
+book = Book.findByTitleLikeOrReleaseDateLessThan( "%Something%", someDate )
 {code}
 
 h4. Method Expressions
@@ -71,9 +63,7 @@ You'll notice the last 3 effect the number of arguments required to the method a
 {code}
 def now = new Date()
 def lastWeek = now - 7
-def book =
-  Book
-    .findByReleaseDateBetween( lastWeek, now )
+def book = Book.findByReleaseDateBetween( lastWeek, now )
 
 {code}   
 
@@ -89,19 +79,17 @@ Method expressions can also use a boolean operator to combine two criteria:
 
 {code}
 def books = 
-	 Book
-	   .findAllByTitleLikeAndReleaseDateGreaterThan("%Java%", new Date()-30)
+    Book.findAllByTitleLikeAndReleaseDateGreaterThan("%Java%", new Date()-30)
 {code}     
 
 In this case we're using @And@ in the middle of the query to make sure both conditions are satisfied, but you could equally use @Or@:
  
 {code}
 def books = 
-	 Book
-	   .findAllByTitleLikeOrReleaseDateGreaterThan("%Java%", new Date()-30)
+    Book.findAllByTitleLikeOrReleaseDateGreaterThan("%Java%", new Date()-30)
 {code}
 
-Clearly method names can end up being quite long in which case you should consider using [Criteria|guide:5.4.2 Criteria]
+Clearly, method names can end up being quite long, in which case you should consider using [Criteria|guide:5.4.2 Criteria].
 
 h4. Querying Associations
 

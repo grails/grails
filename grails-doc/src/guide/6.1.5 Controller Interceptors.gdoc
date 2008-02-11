@@ -1,7 +1,7 @@
 Often it is useful to intercept processing based on either request, session or application state. This can be achieved via action interceptors. There are currently 2 types of interceptors: before and after.
 
 {note}
-	If your interceptor is likely to apply to more than one controller you are almost certainly better of writing a [Filter|guide:filters], which can be applied to multiple controllers or URIs in a cross cutting manner without the need to change the logic of each controller
+If your interceptor is likely to apply to more than one controller, you are almost certainly better off writing a [Filter|guide:filters]. Filters can be applied to multiple controllers or URIs, without the need to change the logic of each controller
 {note}
 
 h4. Before Interception

@@ -16,7 +16,7 @@ class BookController {
       redirect(action:"shoppingCart")
    }
    def shoppingCartFlow = {
-             ..
+        ...
    }
 }
 {code}
