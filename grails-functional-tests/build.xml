@@ -33,9 +33,15 @@
             }
         </groovy>
 
+		<condition property="grailsCmd" value="grails.bat" else="grails">
+			<os family="windows"/>
+		</condition>
+		<property name="grailsCmd.absolute" location="${grails.home}/bin/${grailsCmd}"/>
+
         <antcall target="-get-grails" />
     </target>
 
+	
     <macrodef name="grails">
         <attribute name="grailsStarter"
                    default="org.codehaus.groovy.grails.cli.support.GrailsStarter"/>
@@ -45,31 +51,11 @@
         <attribute name="projectName" default=""/>
         <attribute name="resultID" default="0"/>
         <sequential>
-            <java fork="true" classname="@{grailsStarter}" dir="${checkoutDir}/@{projectName}" resultproperty="testResult_@{resultID}">
-                <env key="GRAILS_HOME" value="${grails.home}"/>
-                <env key="JAVA_OPTS" value="-XX:MaxPermSize=256m -Xmx800m"/>
-                <sysproperty key="grails.home" value="${grails.home}"/>
-                <sysproperty key="groovy.starter.conf"
-                             value="${grails.home}/conf/groovy-starter.conf"/>
-
-                <sysproperty key="disable.auto.recompile" value="false"/>
-                <sysproperty key="server.port" value="8080"/>
-                <sysproperty key="enable.jndi" value="true"/>
-                <sysproperty key="prj.home" value="${checkoutDir}/@{projectName}"/>
-                <sysproperty key="base.dir" value="${checkoutDir}/@{projectName}"/>
-
-                <classpath>
-                    <path refid="classpath"/>
-                    <!-- Mac Only but should do no harm -->
-                    <pathelement path="/System/Library/Java"/>
-                </classpath>
-
-                <arg line="--main org.codehaus.groovy.grails.cli.GrailsScriptRunner"/>
-                <arg line="--conf ${grails.home}/conf/groovy-starter.conf"/>
-                <arg line="--classpath ${grails.home}/lib/groovy-all-1.5.2.jar:${grails.home}/dist/grails-cli-1.0-final-SNAPSHOT.jar"/>
-
-                <arg value="@{command}"/>
-            </java>
+			<echo message="Executing: grails @{command}"/>
+			<exec executable="${grailsCmd.absolute}" dir="${checkoutDir}/@{projectName}" resultproperty="testResult_@{resultID}">
+				<arg line="@{command}"/>
+				<env key="GRAILS_HOME" path="${grails.home}"/>
+			</exec>
         </sequential>
     </macrodef>
 
@@ -93,7 +79,7 @@
 
     <target name="-build-grails">
 		<echo>GRAILS_HOME=${grails.home}</echo>
-        <ant dir="${grails.home}" antfile="build.xml" target="clean" />
+
         <ant dir="${grails.home}" antfile="build.xml" target="jar">
             <property name="skipTests" value="true"/>
             <property name="skipExamples" value="true"/>
@@ -106,71 +92,80 @@
 
 		<mkdir dir="reports" />
         <groovy><![CDATA[
-            def outcomes = []
-            def failure = false
+			try {
+		           def outcomes = []
+		           def failure = false
 
-            // Collate the app names
-            def listPage = new URL(properties['app.checkout.url']).text
-            def appNames = []
-            listPage.eachMatch(/>(\w*)\/</) {
-                if (it[1] != "..") {
-                    appNames << it[1]
-                    println "Test will include application ${it[1]}"
-                }
-            }
+		           // Collate the app names
+		           def listPage = new URL(properties['app.checkout.url']).text
+		           def appNames = []
+		           listPage.eachMatch(/>(\w*)\/</) {
+		               if (it[1] != "..") {
+		                   appNames << it[1]
+		                   println "Test will include application ${it[1]}"
+		               }
+		           }
 
-            def grailsInvocationCounter = 0
+		           def grailsInvocationCounter = 0
 
-            appNames.each() {
+		           appNames.each() {
 
-                properties.projectName = it
+		               properties.projectName = it
 
-                if (new File("${properties.checkoutDir}/${properties.projectName}").exists()) {
-                    ant.antcall(target:"-update-app") {
-                        param(name:"projectName", value:properties.projectName)
-                    }
-                } else {
-                    ant.antcall(target:"-checkout-app") {
-                        param(name:"projectName", value:properties.projectName)
-                    }
-                }
+		               if (new File("${properties.checkoutDir}/${properties.projectName}").exists()) {
+		                   ant.antcall(target:"-update-app") {
+		                       param(name:"projectName", value:properties.projectName)
+		                   }
+		               } else {
+		                   ant.antcall(target:"-checkout-app") {
+		                       param(name:"projectName", value:properties.projectName)
+		                   }
+		               }
 
-                // First upgrade
-                ant.grails(command:"upgrade -force", projectName:properties.projectName, resultID:grailsInvocationCounter++)
-                if (properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) {
-                    outcomes << "Couldn't upgrade application ${properties.projectName}"
-                    failure = true
-                }
+		               // First upgrade
+		               ant.grails(command:"upgrade -force", projectName:properties.projectName, resultID:grailsInvocationCounter++)
+		               if (properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) {
+		                   outcomes << "Couldn't upgrade application ${properties.projectName}"
+		                   failure = true
+		               }
 
-                // Install webtest
-                ant.grails(command:"install-plugin webtest", projectName:properties.projectName, resultID:grailsInvocationCounter++)
-                if (properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) {
-                    outcomes << "Couldn't install webtest plugin into application ${properties.projectName}"
-                    failure = true
-                }
+		               // Install webtest
+		               ant.grails(command:"install-plugin webtest", projectName:properties.projectName, resultID:grailsInvocationCounter++)
+		               if (properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) {
+		                   outcomes << "Couldn't install webtest plugin into application ${properties.projectName}"
+		                   failure = true
+		               }
 
-                // Run webtest
-                ant.grails(command:"run-webtest", projectName:properties.projectName, resultID:grailsInvocationCounter++)
-                outcomes << "Functional tests in application ${properties.projectName}: " +
-                    ((properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) ? "Failed" : "OK")
-                if (properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) {
-                    failure = true
-                }
+		               // Run webtest
+		               ant.grails(command:"run-webtest", projectName:properties.projectName, resultID:grailsInvocationCounter++)
+		               outcomes << "Functional tests in application ${properties.projectName}: " +
+		                   ((properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) ? "Failed" : "OK")
+		               if (properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) {
+		                   failure = true
+		               }
 
-				// Copy reports
-				ant.mkdir(dir:"reports/${properties.projectName}")
-				ant.copy(todir:"reports/${properties.projectName}") {
-					fileset(dir:"${properties.checkoutDir}/${properties.projectName}/webtest/reports")
-				}
-            }
+					// Copy reports
+					ant.mkdir(dir:"reports/${properties.projectName}")
+					ant.copy(todir:"reports/${properties.projectName}") {
+						fileset(dir:"${properties.checkoutDir}/${properties.projectName}/webtest/reports")
+					}
+		           }
 
-            println "Grails Functional Test Results"
-            println "======================================================"
-            outcomes.each() {
-                println it
-            }
+		           println "Grails Functional Test Results"
+		           println "======================================================"
+		           outcomes.each() {
+		               println it
+		           }
 
-            if (failure) ant.fail(message:"At least one of the tests failed")
+		           if (failure) ant.fail(message:"At least one of the tests failed")
+			
+			}
+			catch(Exception e) {
+				println e.message
+				e.printStackTrace()
+				
+				ant.fail(message:"functional tests failed due to error")
+			}
             ]]>
         </groovy>
     </target>
