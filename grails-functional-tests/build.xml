@@ -4,6 +4,9 @@
     <property name="checkoutDir" location="apps"/>
     <property name="app.checkout.url" value="http://svn.codehaus.org/grails/trunk/grails-functional-tests/apps/"/>
     <property name="grails.checkout.url" value="http://svn.codehaus.org/grails/trunk/grails/"/>
+	
+	<property name="newWebApp" value="myTestWebApp"/>
+	<property name="target" value="target"/>
 
     <path id="classpath">
         <fileset dir="lib" includes="*.jar"/>
@@ -38,21 +41,18 @@
 		</condition>
 		<property name="grailsCmd.absolute" location="${grails.home}/bin/${grailsCmd}"/>
 
-        <antcall target="-get-grails" />
     </target>
 
 	
     <macrodef name="grails">
-        <attribute name="grailsStarter"
-                   default="org.codehaus.groovy.grails.cli.support.GrailsStarter"/>
-        <attribute name="grailsScriptRunner"
-                   default="org.codehaus.groovy.grails.cli.GrailsScriptRunner"/>
-        <attribute name="command" default="help"/>
+        <attribute name="command" description="the command line to execute"/>
         <attribute name="projectName" default=""/>
         <attribute name="resultID" default="0"/>
+    	<attribute name="dir" default="${checkoutDir}/@{projectName}"/>
+    	<attribute name="failonerror" default="false"/>
         <sequential>
 			<echo message="Executing: grails @{command}"/>
-			<exec executable="${grailsCmd.absolute}" dir="${checkoutDir}/@{projectName}" resultproperty="testResult_@{resultID}">
+			<exec executable="${grailsCmd.absolute}" dir="@{dir}" resultproperty="testResult_@{resultID}" failonerror="@{failonerror}">
 				<arg line="@{command}"/>
 				<env key="GRAILS_HOME" path="${grails.home}"/>
 			</exec>
@@ -88,7 +88,7 @@
 
     <target name="functional-test"
             description="Runs functional tests for one or more test applications from SVN"
-            depends="clean-reports,init,-build-grails">
+            depends="clean-reports,init,-get-grails,-build-grails, -testsWithNewApp">
 
 		<mkdir dir="reports" />
         <groovy><![CDATA[
@@ -170,7 +170,30 @@
         </groovy>
     </target>
 
-    <target name="clean" depends="clean-reports">
+		
+	<target name="-testsWithNewApp">
+        <echo>Creating new Grails app ${newWebApp} and running some tests on it</echo>
+		<property name="newWebApp.dir" value="${target}/${newWebApp}"/>
+        <delete dir="${newWebApp.dir}"/>
+		<mkdir dir="${target}"/>
+		<grails command="create-app ${newWebApp}" dir="${target}" failonerror="true"/>
+		<grails command="clean" dir="${newWebApp.dir}" failonerror="true"/>
+		<grails command="compile" dir="${newWebApp.dir}" failonerror="true"/>
+		<grails command="generate-all blog" dir="${newWebApp.dir}" failonerror="true"/>
+		
+		<parallel>
+			<daemons>
+				<grails command="run-app" dir="${newWebApp.dir}" failonerror="true"/>
+			</daemons>
+			<sequential>
+				<waitfor maxwait="1" maxwaitunit="minute" checkevery="500">
+				    <http url="http://localhost:8080/${newWebApp}"/>
+				</waitfor>
+			</sequential>
+		</parallel>
+	</target>
+
+	<target name="clean" depends="clean-reports">
         <delete dir="${checkoutDir}" failonerror="false"/>
         <delete dir="checkout/grails" failonerror="false"/>
         <delete dir="reports" failonerror="false"/>
