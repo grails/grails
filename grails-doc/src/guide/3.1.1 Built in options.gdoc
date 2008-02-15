@@ -7,3 +7,4 @@ Grails also provides the following configuration options:
 * @grails.war.destFile@ - Sets the location where the [war|commandLine] command should place the generated WAR file
 * @grails.mime.file.extensions@ - Whether to use the file extension to dictate the mime type in [Content Negotiation|guide:contentNegotiation]
 * @grails.mime.types@ - A map of supported mime types used for [Content Negotiation|guide:contentNegotiation]
+* @grails.serverURL@ - A string specifying the server URL portion of absolute links, including server name e.g. grails.serverURL="http://my.yourportal.com". See [createLink|Tags].
