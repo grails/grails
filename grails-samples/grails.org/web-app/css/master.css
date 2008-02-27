@@ -1,0 +1,253 @@
+/*
+-------------------------------------------------------
+Grails.org Master Screen Stylesheet
+Author:   Ben Edwards  // refactr.com
+Version:  02 Feb 2008
+------------------------------------------------------
+
+/* browser cleansing elements 
+------------------------------------------------------- */
+/* purpose: undo some of the default styling of common 
+  (X)HTML browsers (CC) 2004 Tantek Celik. 		   		*/
+
+	:link,:visited { text-decoration: none; } /* link underlines tend to make hypertext less readable, because underlines obscure the shapes of the lower halves of words */
+
+	h1,h2,h3,h4,h5,h6,pre,code { font-size: 1em; } /* avoid browser default inconsistent heading font-sizes; and pre/code too */
+
+	h1,h2,h3,h4,h5,h6,pre,form,body,html,p,blockquote,fieldset,input { margin: 0px; padding: 0px; } /* remove the inconsistent (among browsers) default ul,ol padding or margin; the default spacing on headings does not match nor align with normal interline spacing at all, so let's get rid of it; zero out the spacing around pre, form, body, html, p, blockquote as well; form elements are oddly inconsistent, and not quite CSS emulatable; nonetheless strip their margin and padding as well */
+		
+	img { behavior: url(http://grails.org/css/iepngfix.htc); } /* gives png support to IE 6 (in conjunction with iepngfix.htc and blak.gif in the CSS directory) */
+
+	a img,:link img,:visited img { border: none; } /* whoever thought blue linked image borders were a good idea? */
+
+	address { font-style: normal; } /* de-italicize address */
+
+	body { opacity: 0.99999; /* to solve the firefox mac overweight font issue */ }
+
+/* global style elements 													
+------------------------------------------------------- */
+
+html, body {
+	height: 100%;
+	width:99.99%;
+	margin: 0px;
+	padding: 0px;
+}
+
+body {
+	background: #001325 url('../images/page-bg.gif') top left repeat-x;	
+	text-align: center;
+	font: 300 12px/16px Arial, sans-serif;
+}
+
+a:link,
+a:visited {
+	text-decoration: none;
+	border-width: 0px 0px 1px 0px;
+	border-style: solid;
+	color: #014684;
+}
+
+a:hover,
+a:active {
+	text-decoration: none;
+	border-width: 0px 0px 1px 0px;
+	border-style: solid;
+	color: #014684;
+}
+
+form {
+	margin: 0px;
+	padding: 0px;
+}
+
+/* layout styles 													
+------------------------------------------------------- */
+
+#container {
+	background: #ddd url('../images/masthead-bg.jpg') top left no-repeat;
+	position: relative;
+	width: 981px;
+	min-height: 100%;
+	margin: 0px auto 0px auto;
+	padding: 0px 0px 20px 0px;
+	text-align: left;
+}
+
+.inlineIcon {
+	vertical-align: text-top;
+}
+
+.push, #footer {
+	height: 7em; 
+}
+
+/* navigation styles 													
+------------------------------------------------------- */
+
+#nav {
+	width: 225px;
+	padding: 0px 20px 10px 20px;
+}
+
+#nav ul {
+	margin: 0px;
+	padding: 0px;
+}
+
+#nav ul li {
+	list-style-type: none;
+	font: 700 1.2em/1.5em Arial, sans-serif;
+	text-transform: uppercase;
+}
+
+#nav ul li a:link,
+#nav ul li a:visited {
+	color: #666;
+	text-decoration: none;
+	border: none;
+}
+
+#nav ul li a:hover,
+#nav ul li a:active {
+	text-decoration: underline;
+}
+
+#nav ul li ul {
+	margin: 0px 0px 0px 15px;
+}
+
+#nav ul li ul li {
+	font-size: 0.95em;
+	text-transform: capitalize;
+}
+
+#nav ul li ul li a:link,
+#nav ul li ul li a:visited {
+	color: #014684;
+	text-decoration: none;
+}
+
+#nav ul li ul li a:hover,
+#nav ul li ul li a:active {
+	color: #014684;
+	text-decoration: underline;
+}
+
+/* sidebar styles 													
+------------------------------------------------------- */
+
+#search {
+	background-color: #bbb;
+	-moz-border-radius: 18px 18px 0px 0px;
+	text-align: center;
+	padding: 4px;
+}
+
+#search input {
+	color: #666;
+	border: none;
+	font-size: 1.2em;
+	padding: 4px;
+	margin: 0px;
+}
+
+/* footer styles 													
+------------------------------------------------------- */
+
+
+#footer {
+	background: #82866b url('../images/footer-bg.gif') top center no-repeat;
+	position: relative;
+	margin: -5.5em auto 0px auto;
+	padding: 0px;
+	width: 100%;
+	color: #333;
+	font-size: 0.95em;
+}
+
+#partners {
+	position: relative;
+	top: -70px;
+	left: 300px;
+	width: 300px;
+	margin: 0px auto;	
+}
+
+#partners ul {
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+	width: 120px;
+}
+
+#partners ul li {
+	display: inline;
+	margin: 0px;
+	padding: 0px 4px;
+}
+
+#partners ul li img {
+	vertical-align: middle;
+}
+
+div .errors {
+    margin: 3px;
+    width:550px;
+    border:2px solid red;
+}
+
+div .message {
+    margin: 5px;
+    padding: 5px;
+    width:550px;
+    border:2px solid yellow;
+}
+
+.actionIcon {
+    text-decoration:none;
+}
+
+.dialog {
+    background-colour:white;
+    padding:10px;
+}
+
+.diffOutput {
+    padding:10px;
+    margin:10px;
+    margin-top:40px;
+    border:2px solid #265c8f;
+    width:600px;
+}
+.userForm {
+    padding:10px;
+    padding-top:20px;
+    margin:10px;
+    margin-top:20px;
+    border:2px solid #265c8f;
+    width:600px;    
+}
+
+.inputForm label {
+		text-align: left;
+		padding: 0 1em;
+		width: 175px; /* Use to move most form content left/right on page. */
+		position:absolute;
+		clear: left;
+}
+/* Set the width for 'input' elements: */
+.inputForm input {
+    margin-left: 130px;
+    color: #333;
+    border: 1px solid #555;
+    border-bottom: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    padding: 1px;
+    width: 150px;
+}
+.formButtons {
+    margin: 20px;
+}
+
+

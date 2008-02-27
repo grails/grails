@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module relativePaths="false" type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="Grails" name="Grails">
+      <configuration />
+    </facet>
+    <facet type="Spring" name="Spring" implicit="true">
+      <configuration>
+        <options>
+          <option name="enableValidation" value="true" />
+          <option name="reportErrorsAsWarnings" value="true" />
+        </options>
+        <customNs />
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file:///Developer/grails-dev/site/grails.org/site">
+      <sourceFolder url="file:///Developer/grails-dev/site/grails.org/site/grails-app/conf" isTestSource="false" />
+      <sourceFolder url="file:///Developer/grails-dev/site/grails.org/site/grails-app/controllers" isTestSource="false" />
+      <sourceFolder url="file:///Developer/grails-dev/site/grails.org/site/grails-app/domain" isTestSource="false" />
+      <sourceFolder url="file:///Developer/grails-dev/site/grails.org/site/grails-app/realms" isTestSource="false" />
+      <sourceFolder url="file:///Developer/grails-dev/site/grails.org/site/grails-app/services" isTestSource="false" />
+      <sourceFolder url="file:///Developer/grails-dev/site/grails.org/site/grails-app/taglib" isTestSource="false" />
+      <sourceFolder url="file:///Developer/grails-dev/site/grails.org/site/grails-app/utils" isTestSource="false" />
+      <sourceFolder url="file:///Developer/grails-dev/site/grails.org/site/plugins/jsecurity-0.1.1/grails-app/controllers" isTestSource="false" />
+      <sourceFolder url="file:///Developer/grails-dev/site/grails.org/site/plugins/jsecurity-0.1.1/grails-app/taglib" isTestSource="false" />
+      <sourceFolder url="file:///Developer/grails-dev/site/grails.org/site/plugins/jsecurity-0.1.1/src/groovy" isTestSource="false" />
+      <sourceFolder url="file:///Developer/grails-dev/site/grails.org/site/plugins/jsecurity-0.1.1/src/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/groovy" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/java" isTestSource="false" />
+      <sourceFolder url="file:///Developer/grails-dev/site/grails.org/site/test/integration" isTestSource="true" />
+      <sourceFolder url="file:///Developer/grails-dev/site/grails.org/site/test/unit" isTestSource="true" />
+    </content>
+    <orderEntry type="library" name="GRAILS" level="application" />
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library name="Radeox">
+        <CLASSES>
+          <root url="jar:///Developer/grails-dev/site/grails.org/site/lib/radeox-1.0b2-oro.jar!/" />
+          <root url="jar:///Developer/grails-dev/site/grails.org/site/lib/radeox-1.0b2-api.jar!/" />
+          <root url="jar:///Developer/grails-dev/site/grails.org/site/lib/radeox-1.0b2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="JSecurity">
+        <CLASSES>
+          <root url="jar:///Developer/grails-dev/site/grails.org/site/plugins/jsecurity-0.1.1/lib/jug.jar!/" />
+          <root url="jar:///Developer/grails-dev/site/grails.org/site/plugins/jsecurity-0.1.1/lib/quartz.jar!/" />
+          <root url="jar:///Developer/grails-dev/site/grails.org/site/plugins/jsecurity-0.1.1/lib/grails-jsecurity-annotations.jar!/" />
+          <root url="jar:///Developer/grails-dev/site/grails.org/site/plugins/jsecurity-0.1.1/lib/jug-native.zip!/" />
+          <root url="jar:///Developer/grails-dev/site/grails.org/site/plugins/jsecurity-0.1.1/lib/jsecurity-jdk14.jar!/" />
+          <root url="jar:///Developer/grails-dev/site/grails.org/site/plugins/jsecurity-0.1.1/lib/commons-codec.jar!/" />
+          <root url="jar:///Developer/grails-dev/site/grails.org/site/plugins/jsecurity-0.1.1/lib/retroweaver-rt.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntryProperties />
+  </component>
+</module>
+
