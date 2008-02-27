@@ -1,4 +1,3 @@
-import org.codehaus.groovy.grails.plugins.searchable.compass.SearchableCompassUtils
 import org.codehaus.groovy.grails.commons.ApplicationHolder
 
 /**
@@ -13,7 +12,7 @@ class SearchableConfiguration {
      *
      * Examples: "/home/app/compassindex", "ram://app-index" or null to use the default
      */
-    String compassConnection = SearchableCompassUtils.getDefaultConnection(ApplicationHolder.getApplication())
+    String compassConnection = org.codehaus.groovy.grails.plugins.searchable.compass.SearchableCompassUtils.getDefaultConnection(ApplicationHolder.getApplication())
 
     /**
      * Any settings you wish to pass to Compass
