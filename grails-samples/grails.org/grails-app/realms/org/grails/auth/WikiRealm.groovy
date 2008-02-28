@@ -1,3 +1,5 @@
+package org.grails.auth
+
 import org.jsecurity.authc.AccountException
 import org.jsecurity.authc.IncorrectCredentialException
 import org.jsecurity.authc.UnknownAccountException
@@ -21,7 +23,7 @@ class WikiRealm {
         // found, then they don't have an account and we throw an
         // exception.
         def user = User.findByLogin(username)
-        log.info "Found user '${user.login}' in DB"
+        log.info "Found user '${user?.login}' in DB"
         if (!user) {
             throw new UnknownAccountException("No account found for user [${username}]")
         }
@@ -39,7 +41,7 @@ class WikiRealm {
     def hasRole(principal, roleName) {
         def user = User.findByLogin(principal.name)
 
-        return null != user?.roles.find { it.name == roleName }
+        return null != user?.roles?.find { it.name == roleName }
     }
 
     def hasAllRoles(principal, roles) {

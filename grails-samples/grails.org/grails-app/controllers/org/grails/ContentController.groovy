@@ -49,18 +49,17 @@ class ContentController {
         if(pageName && 'Home'!=pageName) { 
             def wikiPage = getCachedOrReal(pageName)
             if(wikiPage) {
-                if(params.xhr) {
-
+                if(request.xhr) {
                     render(template:"wikiShow", model:[content:wikiPage])
                 }
                 else
                     render(view:"contentPage", model:[content:wikiPage])
             }
             else
-                render(view:"homePage", model:[blogEntries:BlogEntry.list()])
+                render(view:"homePage")
 		}
 		else {
-			render(view:"homePage", model:[blogEntries:BlogEntry.list()])
+			render(view:"homePage")
 		}
 	}
 
@@ -129,7 +128,7 @@ class ContentController {
     def saveWikiPage = {
       if(request.method == 'POST') {
           if(!params.id) {
-                render(template:"/shared/remoteError", [code:"page.id.missing"])
+                render(template:"/shared/remoteError", model:[code:"page.id.missing"])
             }
             else {
                 WikiPage page = WikiPage.findByTitle(params.id)

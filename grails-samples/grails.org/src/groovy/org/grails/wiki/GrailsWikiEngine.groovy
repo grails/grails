@@ -16,6 +16,8 @@ import org.radeox.macro.MacroLoader
 import org.radeox.api.engine.context.InitialRenderContext
 import org.radeox.filter.*
 import org.radeox.util.Encoder
+import org.springframework.beans.BeanWrapperImpl
+import java.lang.reflect.Field
 
 /**
 * @author Graeme Rocher
@@ -76,9 +78,15 @@ class GrailsWikiEngine extends BaseRenderEngine implements WikiRenderEngine{
                 }
             }
             localFP.init();
-            fp = localFP
+            setFilterPipe localFP
 
         }
+    }
+
+    void setFilterPipe(FilterPipe filterPipe) {
+        Field field = getClass().getSuperclass().getDeclaredField("fp")
+        field.setAccessible true
+        field.set(this, filterPipe)
     }
 
     
