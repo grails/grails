@@ -66,7 +66,7 @@ class ContentController {
 	private getCachedOrReal(id) {
          def wikiPage = cacheService.getContent(id)
             if(!wikiPage) {
-                wikiPage = WikiPage.findByTitle(id)
+                wikiPage = WikiPage.findByTitle(id.decodeURL())
                 if(wikiPage) cacheService.putContent(id, wikiPage)
             }
          return wikiPage
