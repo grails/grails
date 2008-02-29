@@ -64,16 +64,18 @@ class ContentController {
 	}
 
 	private getCachedOrReal(id) {
+         id = id.decodeURL()
+
          def wikiPage = cacheService.getContent(id)
             if(!wikiPage) {
-                wikiPage = WikiPage.findByTitle(id.decodeURL())
+                wikiPage = WikiPage.findByTitle(id)
                 if(wikiPage) cacheService.putContent(id, wikiPage)
             }
          return wikiPage
     }
 
     def showWikiVersion = {
-        def page = WikiPage.findByTitle(params.id)
+        def page = WikiPage.findByTitle(params.id.decodeURL())
         def version
         if(page) {
             version = Version.findByCurrentAndNumber(page, params.number.toLong())
@@ -89,7 +91,7 @@ class ContentController {
     }
 
     def markupWikiPage = {
-        def page = WikiPage.findByTitle(params.id)
+        def page = WikiPage.findByTitle(params.id.decodeURL())
 
         if(page) {
             render(template:"wikiFields", model:[wikiPage:page])
@@ -97,7 +99,7 @@ class ContentController {
     }
 
 	def infoWikiPage = {
-        def page = WikiPage.findByTitle(params.id)
+        def page = WikiPage.findByTitle(params.id.decodeURL())
 
         if(page) {
 
@@ -114,7 +116,7 @@ class ContentController {
             render(template:"/shared/remoteError", [code:"page.id.missing"])
         }
         else {
-            def page = WikiPage.findByTitle(params.id)
+            def page = WikiPage.findByTitle(params.id.decodeURL())
 
             render(template:"wikiEdit",model:[wikiPage:page])
         }
@@ -131,7 +133,7 @@ class ContentController {
                 render(template:"/shared/remoteError", model:[code:"page.id.missing"])
             }
             else {
-                WikiPage page = WikiPage.findByTitle(params.id)
+                WikiPage page = WikiPage.findByTitle(params.id.decodeURL())
                 if(!page) {
                     page = new WikiPage(params)
                     page.save()
@@ -178,6 +180,7 @@ class ContentController {
     }
 
     private evictFromCache(id) {
+        id = id.decodeURL()
         cacheService.removeWikiText(id)
         cacheService.removeContent(id)
 
@@ -185,7 +188,7 @@ class ContentController {
 
     def rollbackWikiVersion = {
         if(request.method == 'POST') {
-            def page = WikiPage.findByTitle(params.id)
+            def page = WikiPage.findByTitle(params.id.decodeURL())
             if(page) {
                 def version = Version.findByCurrentAndNumber(page, params.number.toLong())
                 if(!version) {
@@ -221,7 +224,7 @@ class ContentController {
 
     def diffWikiVersion = {
 
-        def page = WikiPage.findByTitle(params.id)
+        def page = WikiPage.findByTitle(params.id.decodeURL())
         if(page) {
             def leftVersion = params.number.toLong()
             def left = Version.findByCurrentAndNumber(page, leftVersion)

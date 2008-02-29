@@ -18,6 +18,26 @@ import org.codehaus.groovy.grails.plugins.codecs.URLCodec
 */
 class ContentControllerTests extends GroovyTestCase {
 
+    protected void setUp() {
+        super.setUp();
+
+        String.metaClass.decodeURL = { URLCodec.decode delegate }
+        String.metaClass.encodeAsURL = { URLCodec.encode delegate }
+    }
+
+    protected void tearDown() {
+        def remove = GroovySystem.metaClassRegistry.&removeMetaClass
+        remove ContentController
+        remove NewsItem
+        remove WikiPage
+        remove BlogEntry
+        remove Content
+        remove Version
+        remove ContentController
+    }
+
+
+
     void testShowNews() {
         NewsItem item
         NewsItem.metaClass.static.get = { id -> item  = new NewsItem() }
