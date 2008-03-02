@@ -1,37 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module relativePaths="false" type="JAVA_MODULE" version="4">
+<module relativePaths="true" type="JAVA_MODULE" version="4">
   <component name="FacetManager">
     <facet type="Grails" name="Grails">
       <configuration />
     </facet>
-    <facet type="Spring" name="Spring" implicit="true">
-      <configuration>
-        <options>
-          <option name="enableValidation" value="true" />
-          <option name="reportErrorsAsWarnings" value="true" />
-        </options>
-        <customNs />
-      </configuration>
-    </facet>
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
-    <content url="file:///Developer/grails-dev/site/grails.org/grails.org">
-      <sourceFolder url="file:///Developer/grails-dev/site/grails.org/grails.org/grails-app/controllers" isTestSource="false" />
-      <sourceFolder url="file:///Developer/grails-dev/site/grails.org/grails.org/grails-app/domain" isTestSource="false" />
-      <sourceFolder url="file:///Developer/grails-dev/site/grails.org/grails.org/grails-app/realms" isTestSource="false" />
-      <sourceFolder url="file:///Developer/grails-dev/site/grails.org/grails.org/grails-app/services" isTestSource="false" />
-      <sourceFolder url="file:///Developer/grails-dev/site/grails.org/grails.org/grails-app/taglib" isTestSource="false" />
-      <sourceFolder url="file:///Developer/grails-dev/site/grails.org/grails.org/grails-app/utils" isTestSource="false" />
-      <sourceFolder url="file:///Developer/grails-dev/site/grails.org/grails.org/plugins/jsecurity-0.1.1/src/groovy" isTestSource="false" />
-      <sourceFolder url="file:///Developer/grails-dev/site/grails.org/grails.org/plugins/jsecurity-0.1.1/src/java" isTestSource="false" />
-      <sourceFolder url="file:///Developer/grails-dev/site/grails.org/grails.org/plugins/searchable-0.4-SNAPSHOT/src/groovy" isTestSource="false" />
-      <sourceFolder url="file:///Developer/grails-dev/site/grails.org/grails.org/plugins/searchable-0.4-SNAPSHOT/src/java" isTestSource="false" />
-      <sourceFolder url="file:///Developer/grails-dev/site/grails.org/grails.org/plugins/searchable-0.4-SNAPSHOT/src/test/java" isTestSource="false" />
+    <content url="file://$MODULE_DIR$/..">
+      <sourceFolder url="file://$MODULE_DIR$/../grails-app/controllers" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../grails-app/domain" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../grails-app/realms" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../grails-app/services" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../grails-app/taglib" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../grails-app/utils" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../plugins/jsecurity-0.1.1/src/groovy" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../plugins/jsecurity-0.1.1/src/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../plugins/searchable-0.4-SNAPSHOT/src/groovy" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../plugins/searchable-0.4-SNAPSHOT/src/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/groovy" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/java" isTestSource="false" />
-      <sourceFolder url="file:///Developer/grails-dev/site/grails.org/grails.org/test/integration" isTestSource="true" />
-      <sourceFolder url="file:///Developer/grails-dev/site/grails.org/grails.org/test/unit" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../test/integration" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../test/unit" isTestSource="true" />
     </content>
     <orderEntry type="library" name="GRAILS" level="application" />
     <orderEntry type="inheritedJdk" />
@@ -39,9 +29,9 @@
     <orderEntry type="module-library">
       <library name="Radeox">
         <CLASSES>
-          <root url="jar:///Developer/grails-dev/site/grails.org/site/lib/radeox-1.0b2-oro.jar!/" />
-          <root url="jar:///Developer/grails-dev/site/grails.org/site/lib/radeox-1.0b2-api.jar!/" />
-          <root url="jar:///Developer/grails-dev/site/grails.org/site/lib/radeox-1.0b2.jar!/" />
+          <root url="jar://$MODULE_DIR$/../lib/radeox-1.0b2.jar!/" />
+          <root url="jar://$MODULE_DIR$/../lib/radeox-1.0b2-oro.jar!/" />
+          <root url="jar://$MODULE_DIR$/../lib/radeox-1.0b2-api.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -50,13 +40,11 @@
     <orderEntry type="module-library">
       <library name="JSecurity">
         <CLASSES>
-          <root url="jar:///Developer/grails-dev/site/grails.org/grails.org/plugins/jsecurity-0.1.1/lib/jug.jar!/" />
-          <root url="jar:///Developer/grails-dev/site/grails.org/grails.org/plugins/jsecurity-0.1.1/lib/jug-native.zip!/" />
-          <root url="jar:///Developer/grails-dev/site/grails.org/grails.org/plugins/jsecurity-0.1.1/lib/commons-codec.jar!/" />
-          <root url="jar:///Developer/grails-dev/site/grails.org/grails.org/plugins/jsecurity-0.1.1/lib/retroweaver-rt.jar!/" />
-          <root url="jar:///Developer/grails-dev/site/grails.org/grails.org/plugins/jsecurity-0.1.1/lib/quartz.jar!/" />
-          <root url="jar:///Developer/grails-dev/site/grails.org/grails.org/plugins/jsecurity-0.1.1/lib/grails-jsecurity-annotations.jar!/" />
-          <root url="jar:///Developer/grails-dev/site/grails.org/grails.org/plugins/jsecurity-0.1.1/lib/jsecurity-jdk14.jar!/" />
+          <root url="jar://$MODULE_DIR$/../plugins/jsecurity-0.1.1/lib/jsecurity-jdk14.jar!/" />
+          <root url="jar://$MODULE_DIR$/../plugins/jsecurity-0.1.1/lib/commons-codec.jar!/" />
+          <root url="jar://$MODULE_DIR$/../plugins/jsecurity-0.1.1/lib/retroweaver-rt.jar!/" />
+          <root url="jar://$MODULE_DIR$/../plugins/jsecurity-0.1.1/lib/grails-jsecurity-annotations.jar!/" />
+          <root url="jar://$MODULE_DIR$/../plugins/jsecurity-0.1.1/lib/quartz.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -65,14 +53,14 @@
     <orderEntry type="module-library">
       <library name="Searchable">
         <CLASSES>
-          <root url="jar:///Developer/grails-dev/site/grails.org/grails.org/plugins/searchable-0.4-SNAPSHOT/lib/lucene-queries.jar!/" />
-          <root url="jar:///Developer/grails-dev/site/grails.org/grails.org/plugins/searchable-0.4-SNAPSHOT/lib/jmock-1.1.0.jar!/" />
-          <root url="jar:///Developer/grails-dev/site/grails.org/grails.org/plugins/searchable-0.4-SNAPSHOT/lib/lucene-snowball.jar!/" />
-          <root url="jar:///Developer/grails-dev/site/grails.org/grails.org/plugins/searchable-0.4-SNAPSHOT/lib/lucene-analyzers.jar!/" />
-          <root url="jar:///Developer/grails-dev/site/grails.org/grails.org/plugins/searchable-0.4-SNAPSHOT/lib/lucene-core.jar!/" />
-          <root url="jar:///Developer/grails-dev/site/grails.org/grails.org/plugins/searchable-0.4-SNAPSHOT/lib/easymock.jar!/" />
-          <root url="jar:///Developer/grails-dev/site/grails.org/grails.org/plugins/searchable-0.4-SNAPSHOT/lib/compass.jar!/" />
-          <root url="jar:///Developer/grails-dev/site/grails.org/grails.org/plugins/searchable-0.4-SNAPSHOT/lib/lucene-highlighter.jar!/" />
+          <root url="jar://$MODULE_DIR$/../plugins/searchable-0.4-SNAPSHOT/lib/lucene-queries.jar!/" />
+          <root url="jar://$MODULE_DIR$/../plugins/searchable-0.4-SNAPSHOT/lib/jmock-1.1.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/../plugins/searchable-0.4-SNAPSHOT/lib/lucene-highlighter.jar!/" />
+          <root url="jar://$MODULE_DIR$/../plugins/searchable-0.4-SNAPSHOT/lib/lucene-snowball.jar!/" />
+          <root url="jar://$MODULE_DIR$/../plugins/searchable-0.4-SNAPSHOT/lib/lucene-analyzers.jar!/" />
+          <root url="jar://$MODULE_DIR$/../plugins/searchable-0.4-SNAPSHOT/lib/lucene-core.jar!/" />
+          <root url="jar://$MODULE_DIR$/../plugins/searchable-0.4-SNAPSHOT/lib/easymock.jar!/" />
+          <root url="jar://$MODULE_DIR$/../plugins/searchable-0.4-SNAPSHOT/lib/compass.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
