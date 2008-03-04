@@ -7,7 +7,7 @@ Ensures a value's size does not fall below the given minimum value.
 h2. Examples
 
 {code:java}
-children(maxSize:25)
+children(minSize:25)
 {code}
 
 h2. Description
