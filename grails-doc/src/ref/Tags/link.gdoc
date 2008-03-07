@@ -28,7 +28,7 @@ Example usages for above controller:
      Book List
 </g:link>
 <g:link controller="book" absolute="true">Book Home</g:link>
-<g:link controller="book" base="http://admin.mysite.com">Book Home</g:link>
+<g:link controller="book" base="http://admin.mygreatsite.com">Book Home</g:link>
 {code}
 
 
