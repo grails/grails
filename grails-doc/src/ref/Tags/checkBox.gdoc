@@ -16,7 +16,8 @@ h2. Description
 Attributes
 
 * @name@ - The name of the checkbox
-* @value@ (optional) - The value of the checkbox, if evaluates to @true@ sets to checkbox to checked
+* @value@ (optional) - The value of the checkbox
+* @checked@ (optional) - Expression if evaluates to @true@ sets to checkbox to checked
 
 h2. Source
 
