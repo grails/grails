@@ -18,10 +18,13 @@ In this example we define a one-to-many relationship between the @Author@ class 
 h2. Description
 
 By default GORM will create a property of type @java.util.Set@ using the key inside the definition of the @hasMany@ map. For example consider this definition:
+
 {code}
    static hasMany = [books:Book]
 {code}
+
 Here a property of type @java.util.Set@ called @books@ will be created within the defining class. These can then be iterated over and manipulated:
+
 {code:java}
 def a = Author.get(1)
 a.books.each { println it.title }
