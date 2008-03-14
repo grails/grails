@@ -25,7 +25,7 @@ Loop through each error in the title field of the "book" bean:
 Loop through each error in model:
 
 {code:xml}
-<g:eachError bean="[book1:book1,book2:book2]" field="title">
+<g:eachError model="${[book1:book1,book2:book2]}" field="title">
     <li>${it}</li>
 </g:eachError>
 {code}
