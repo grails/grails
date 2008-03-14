@@ -2,7 +2,7 @@ h1. nullable
 
 h2. Purpose
 
-Ensures that a property is not equal to the specified value
+Ensures the property value cannot be @null@ when set to @false@
 
 h2. Examples
 
