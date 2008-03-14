@@ -180,6 +180,10 @@ img.float-right {
   overflow: scroll -moz-scrollbars-horizontal;
   overflow-x: auto;
 }
+/* Paragraphs are created inside code blocks after blank lines */
+.code p {
+	margin-left: 0px;
+}
 table .code {
 	margin-left:0px;
 }
