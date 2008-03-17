@@ -11,6 +11,12 @@ h2. Examples
 <g:select name="user.age" from="${18..65}" value="${age}"
           noSelection="['':'-Choose your age-']"/>
 
+// use a no selection with a nullable Object property (use 'null' as key)
+ <g:select id="type" name='type.id' value="${person?.type?.id}"
+    noSelection="${['null':'Select One...']}"
+    from='${PersonType.list()}'
+    optionKey="id" optionValue="name"></g:select>
+
 // create select from a list of companies
 // note the 'optionKey' is set to the id of each company element
 <g:select name="user.company.id"
@@ -43,7 +49,7 @@ Attributes
 * @optionKey@ (optional) - By default the value attribute of each "option" element will be the result of a "toString()" call on each element in the "from" attribute list. Setting this allows the value of the attribute to be a bean property of each element in the list
 * @optionValue@ (optional) - By default the value "option" element will be the result of a "toString()" call on each element in the "from" attribute list. Setting this allows the value to be a bean property of each element in the list.
 * @keys@ (optional) - A list of values to be used for the value attribute of each "option" element.
-* @noSelection@ (optional) - A single-entry map detailing the key and value to use for the "no selection made" choice in the select box. If there is no current selection this will be shown as it is first in the list, and if submitted with this selected, the key that you provide will be submitted. Typically this will be blank.
+* @noSelection@ (optional) - A single-entry map detailing the key and value to use for the "no selection made" choice in the select box. If there is no current selection this will be shown as it is first in the list, and if submitted with this selected, the key that you provide will be submitted. Typically this will be blank - but you can also use 'null' in the case that you're passing the ID of an object
 * @valueMessagePrefix@ (Optional) - By default the value "option" element will be the result of a "toString()" call on each element in the "from" attribute list. Setting this allows the value to be resolved from the I18n messages. The valueMessagePrefix will be suffixed with a dot ('.') and then the value attribute of the option to resolve the message. If the message could not be resolved, the value is presented.
 
 h2. Source
