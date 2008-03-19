@@ -1,4 +1,6 @@
-Plug-ins often depend on the presence of other plugins and can also adapt depending on the presence of others. To cover this, a plugin can define two properties. The first is called dependsOn. For example, take a look at this snippet from the Grails Hibernate plugin:
+h4. Controlling Plug-in Dependencies
+
+Plug-ins often depend on the presence of other plugins and can also adapt depending on the presence of others. To cover this, a plugin can define two properties. The first is called @dependsOn@. For example, take a look at this snippet from the Grails Hibernate plugin:
 
 {code:java}
 class HibernateGrailsPlugin {
@@ -15,7 +17,25 @@ As the above example demonstrates the Hibernate plugin is dependent on the prese
 
 Essentially the dependencies will be loaded first and then the Hibernate plugin. If all dependencies do not load, then the plugin will not load.
 
-However, this is a "hard" dependency in that if the dependency is not resolved, the plugin will give up and won't load.  It is possible though to have a "weaker" dependency using the @loadAfter@ property:
+The @dependsOn@ property also supports a mini expression language for specifying version ranges. A few examples of the syntax can be seen below:
+
+{code:java}
+def dependsOn = [foo:"* > 1.0"]
+def dependsOn = [foo:"1.0 > 1.1"]
+def dependsOn = [foo:"1.0 > *"]
+{code}
+
+When the wildcard * character is used it denotes "any" version. The expression syntax also excludes any suffixes such as -BETA, -ALPHA etc. so for example the expression "1.0 > 1.1" would match any of the following versions:
+
+* 1.1
+* 1.0
+* 1.0.1
+* 1.0.3-SNAPSHOT
+* 1.1-BETA2
+
+h4. Controlling Load Order 
+
+Using @dependsOn@ establishes a "hard" dependency in that if the dependency is not resolved, the plugin will give up and won't load.  It is possible though to have a "weaker" dependency using the @loadAfter@ property:
 
 {code:java}
 def loadAfter = ['controllers']
