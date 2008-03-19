@@ -26,3 +26,14 @@ A plugin can add a new controller, tag libraries, service or whatever by simply 
     + lib
 {code}
 
+h4. Excluded Artefacts
+
+Note that by default, when packaging a plug-in, Grails will excludes the following files from the packaged plug-in:
+
+* grails-app/conf/DataSource.groovy
+* grails-app/conf/UrlMappings.groovy
+* Everything under web-app/WEB-INF
+
+If your plug-in does require files under the @web-app/WEB-INF@ directory it is recommended that you modify the plug-in's @scripts/_Install.groovy@ Gant script to install these artefacts into the target project's directory tree.
+
+In addition, the default @UrlMappings.groovy@ file is excluded to avoid naming conflicts, however you are free to add a UrlMappings definition under a different name which *will* be included. For example a file called @grails-app/conf/BlogUrlMappings.groovy@ is fine.
