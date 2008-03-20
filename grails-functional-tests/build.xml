@@ -53,7 +53,8 @@
         <sequential>
 			<echo message="Executing: grails @{command}"/>
 			<exec executable="${grailsCmd.absolute}" dir="@{dir}" resultproperty="testResult_@{resultID}" failonerror="@{failonerror}">
-				<arg line="@{command}"/>
+				<arg value="-Dserver.port=8083" />
+				<arg value="@{command}"/>
 				<env key="GRAILS_HOME" path="${grails.home}"/>
 			</exec>
         </sequential>
@@ -187,7 +188,7 @@
 			</daemons>
 			<sequential>
 				<waitfor maxwait="1" maxwaitunit="minute" checkevery="500">
-				    <http url="http://localhost:8080/${newWebApp}"/>
+				    <http url="http://localhost:8083/${newWebApp}"/>
 				</waitfor>
 			</sequential>
 		</parallel>
