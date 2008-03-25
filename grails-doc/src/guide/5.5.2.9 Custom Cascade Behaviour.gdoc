@@ -20,7 +20,6 @@ It is advisable to read the section in the Hibernate documentation on [transitiv
 
 To specific the cascade attribute simply define one or many (comma-separated) of the aforementioned settings as its value:
 
-{code}
 {code:java}
 class Person {
   String firstName
