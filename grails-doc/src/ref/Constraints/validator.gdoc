@@ -2,7 +2,7 @@ h1. validator
 
 h2. Purpose
 
-Set to a closure or block to use as a custom validation. 
+Adds custom validation to a field.
 
 h2. Examples
 
@@ -71,6 +71,11 @@ The closure can return:
 * a list containing a string as above, and then any number of arguments following it, which can be used as formatted message arguments indexed at 3 onwards. See @grails-app/i18n/message.properties@ to see how the default error message codes use the arguments.
 
 If the closure is a three-parameter closure the return value is ignored and the closure is expected to populate the errors object.
+
+The closure also has access to the name of the field that the constraint applies to via @propertyName@:
+{code:java}
+myField(validator: { val, obj -> return propertyName == "myField" })
+{code}
 
 Error Code: @className.propertyName.validator.error@
 
