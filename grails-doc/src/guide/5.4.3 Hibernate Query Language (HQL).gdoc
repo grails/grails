@@ -28,7 +28,12 @@ h4. Multiline Queries
 
 If you need to separate the query across multiple lines you can use a line continuation character:
 
-!multilinehql.png!
+{code:java}
+def results = Book.findAll("\\\
+from Book as b, \\\
+     Author as a \\\
+where b.author = a and a.surname = ?", ['Smith'])
+{code}
 
 {note}
 Groovy multiline strings will NOT work with HQL queries
