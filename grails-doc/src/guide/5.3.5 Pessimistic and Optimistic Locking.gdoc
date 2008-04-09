@@ -34,7 +34,7 @@ h4. Pessimistic Locking
 
 Pessimistic locking is equivalent to doing a SQL "SELECT * FOR UPDATE" statement and locking a row in the database. This has the implication that other read operations will be blocking until the lock is released.
 
-In Grails pessimistic locking is performed via the [lock|domainClasses] method:
+In Grails pessimistic locking is performed on an existing instance via the [lock|domainClasses] method:
 
 {code}
 def airport = Airport.get(10)
@@ -43,4 +43,19 @@ airport.name = "Heathrow"
 airport.save()
 {code}
 
-Grails' will automatically deal with releasing the lock for you once the transaction has been committed.
+Grails will automatically deal with releasing the lock for you once the transaction has been committed. However, in the above case what we are doing is "upgrading" from a regular SELECT to a SELECT..FOR UPDATE and another thread could still have updated the record in between the call to get() and the call to lock().
+
+To get around this problem you can use the static [lock|domainClasses] method that takes an id just like [get|domainClasses]:
+
+{code}
+def airport = Airport.lock(10) // lock for update
+airport.name = "Heathrow"
+airport.save()
+{code}
+
+In this case only SELECT..FOR UPDATE is issued.
+
+{warning}
+Though Grails, through Hibernate, supports pessimistic locking, the embedded HSQLDB shipped with Grails which is used as the default in-memory database *does not*. If you need to test pessimistic locking you will need to do so against a database that does have support such as MySQL.
+{warning}
+
