@@ -18,18 +18,34 @@ class BookController {
 Example usages for above controller:
 
 {code:xml}
-<g:formRemote name="myForm" on404="alert('not found!')" update="updateMe" action="show" url="${[action:'show']}">
+<g:formRemote name="myForm" on404="alert('not found!')" update="updateMe" url="[action:'show']">
     Login: <input name="login" type="text"></input>
 </g:formRemote>
 <div id="updateMe">this div is updated by the form</div>
 {code}
 
+{code:xml}
+<g:formRemote name="myForm" update="updateMe"
+              url="[ controller: 'book', action: 'list', params: [ sort: 'title', order: 'desc' ]]">
+    Login: <input name="login" type="text"></input>
+</g:formRemote>
+<div id="updateMe">this div is updated by the form</div>
+{code}
+
+You can override both the form method and action to use when javascript is unavailable by providing @method@ and @action@ attributes. This example will submit the form to @/<context>/book/oldList@ using a GET if javascript is unavailable:
+
+{code:xml}
+<g:formRemote name="myForm" method="GET" action="${createLink(controller: 'book', action: 'oldList')}"
+              url="[ controller: 'book', action: 'list', params: [ sort: 'title', order: 'desc' ]]">
+    Login: <input name="login" type="text"></input>
+</g:formRemote>
+{code}
 
 h2. Description
 
 Attributes
 
-* @url@ - The url to submit to, either a map contraining keys for the action,controller and id or string value
+* @url@ - The url to submit to as either a map (containing values for the controller, action, id, and params) or a URL string
 * @action@ (optional) - The action to execute as a fallback, defaults to the url if non specified
 * @update@ (optional) - Either a map containing the elements to update for 'success' or 'failure' states, or a string with the element to update in which cause failure events would be ignored
 * @before@ (optional) - The javascript function to call before the remote function call
