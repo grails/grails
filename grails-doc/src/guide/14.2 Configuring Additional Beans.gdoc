@@ -73,7 +73,7 @@ h4. Using the Spring DSL
 If you want to use the [Spring DSL|guide:springdsl] that Grails provides then you need to create a @grails-app/conf/spring/resources.groovy@ file and define a method call called @beans@ that takes a block:
 
 {code:java}
-beans {
+beans = {
 	// beans here
 }
 {code}
@@ -81,7 +81,7 @@ beans {
 The same configuration for the XML example could be represented as:
 
 {code:java}
-beans {
+beans = {
 	myBean(my.company.MyBeanImpl) {
 		bookService = ref("bookService")
 	}	
@@ -92,7 +92,7 @@ The main advantage of this way is that you can now mix logic in within your bean
 
 {code:java}
 import grails.util.*
-beans {
+beans = {
 	switch(GrailsUtil.environment) {
 		case "production":
 			myBean(my.company.MyBeanImpl) {
