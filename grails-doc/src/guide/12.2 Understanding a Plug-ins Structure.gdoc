@@ -30,6 +30,6 @@ To make this easier there is a special @pluginContextPath@ variable available th
 {code:xml}
 <g:createLinkTo dir="${pluginContextPath}/js" file="mycode.js" />{code}
 
-At runtime the @pluginContextPath@ will either evaluate to @/@ or @/plugins/example@ depending on whether the plugin is running standalone or has been installed in an application
+At runtime the @pluginContextPath@ will either evaluate to an empty string or @/plugins/example@ depending on whether the plugin is running standalone or has been installed in an application
 
 Java & Groovy code that the plugin provides within the lib and @src/java@ and @src/groovy@ directories will be compiled into the main project's @web-app/WEB-INF/classes@ directory so that they are made available at runtime.
