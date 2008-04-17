@@ -75,7 +75,7 @@ def save = {
 }
 {code}
 
-In this example we by indexing into the @params@ object using the key @'product'@ we can automatically create and bind the XML using the constructor of the @Product@ class. An interesting aspect of the line:
+In this example by indexing into the @params@ object using the key @'product'@ we can automatically create and bind the XML using the constructor of the @Product@ class. An interesting aspect of the line:
 {code:java}
 def p = new Product(params['product'])
 {code}
