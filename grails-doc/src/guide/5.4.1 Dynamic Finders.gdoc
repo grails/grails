@@ -32,10 +32,10 @@ h4. Method Expressions
 A method expression in GORM is made up of the prefix such as [findBy|domainClasses] followed by an expression that combines one or more properties. The basic form is:
 
 {code}
-     Book.findBy[Property][Suffix]*[Boolean Operator]*[Property][Suffix]
+Book.findBy([Property][Comparator][Boolean Operator])?[Property][Comparator]
 {code}
 
-The tokens marked with a * are optional. Each suffix changes the nature of the query. For example:
+The tokens marked with a '?' are optional. Each comparator changes the nature of the query. For example:
 
 {code}
 def book = Book.findByTitle("The Stand")
@@ -43,9 +43,9 @@ def book = Book.findByTitle("The Stand")
 book =  Book.findByTitleLike("Harry Pot%")
 {code}                                    
 
-In the above example the first query is equivalent to equality whilst the latter, due to the @Like@ suffix, is equivalent to a SQL @like@ expression.                                                    
+In the above example the first query is equivalent to equality whilst the latter, due to the @Like@ comparator, is equivalent to a SQL @like@ expression.
 
-The possible suffixes include:
+The possible comparators include:
 
 * @LessThan@ - less than the given value
 * @LessThanEquals@ - less than or equal a give value
@@ -58,19 +58,15 @@ The possible suffixes include:
 * @IsNotNull@ - Not a null value (doesn't require an argument)
 * @IsNull@ - Is a null value (doesn't require an argument)
 
-You'll notice the last 3 effect the number of arguments required to the method as demonstrated by the example:
+Notice that the last 3 require different numbers of method arguments compared to the rest, as demonstrated in the following example:
  
 {code}
 def now = new Date()
 def lastWeek = now - 7
 def book = Book.findByReleaseDateBetween( lastWeek, now )
 
-{code}   
-
-Equally @isNull@ and @isNotNull@ require no arguments:
-
-{code}
-def books = Book.findAllByReleaseDateIsNull()
+books = Book.findAllByReleaseDateIsNull()
+books = Book.findAllByReleaseDateIsNotNull()
 {code}       
 
 h4. Boolean logic (AND/OR) 
@@ -89,7 +85,7 @@ def books =
     Book.findAllByTitleLikeOrReleaseDateGreaterThan("%Java%", new Date()-30)
 {code}
 
-Clearly, method names can end up being quite long, in which case you should consider using [Criteria|guide:5.4.2 Criteria].
+At the moment, you can only use dynamic finders with a maximum of two criteria, i.e. the method name can only have one boolean operator. If you need to use more, you should consider using either [Criteria|guide:5.4.2 Criteria] or the [HQL|guide:5.4.3 Hibernate Query Language (HQL)].
 
 h4. Querying Associations
 
