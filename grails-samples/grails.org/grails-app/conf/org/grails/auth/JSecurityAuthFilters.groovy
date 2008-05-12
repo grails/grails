@@ -73,8 +73,9 @@ class JSecurityAuthFilters {
 			userInRequest(controller:"*", action:"*") {
 				before = {
 					def subject = SecurityUtils.getSubject() 
-					
-					request.user = User.findByLogin(subject.principal)
+					if(subject) {
+						request.user = User.findByLogin(subject.principal)						
+					}
 				}
 			}
 	}
