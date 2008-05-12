@@ -4,7 +4,7 @@ import org.grails.auth.User
 import org.jsecurity.authc.UsernamePasswordToken
 import org.jsecurity.authc.AuthenticationException
 import org.apache.commons.codec.digest.DigestUtils
-import org.jsecurity.SecurityUtils
+
 
 /**
 * @author Graeme Rocher
@@ -86,7 +86,6 @@ class UserController {
                 }
             }
             catch (AuthenticationException ex){
-				println "EXCEPTION IS $ex.message"
                 if(request.xhr) {
                     render(template:"loginForm", model:[originalURI:params.originalURI,
                                                         formData:params,
