@@ -47,26 +47,27 @@ log4j {
     appender.stdout = "org.apache.log4j.ConsoleAppender"
     appender.'stdout.layout'="org.apache.log4j.PatternLayout"
     appender.'stdout.layout.ConversionPattern'='[%r] %c{2} %m%n'
-    appender.errors = "org.apache.log4j.FileAppender"
-    appender.'errors.layout'="org.apache.log4j.PatternLayout"
-    appender.'errors.layout.ConversionPattern'='[%r] %c{2} %m%n'
-    appender.'errors.File'="stacktrace.log"
-    rootLogger="error,stdout"
+    appender.file = "org.apache.log4j.FileAppender"
+    appender.'file.layout'="org.apache.log4j.PatternLayout"
+    appender.'file.layout.ConversionPattern'='[%r] %c{2} %m%n'
+    appender.'file.File'="stacktrace.log"
+    rootLogger="info,stdout"
     logger {
-        grails="error"
-        StackTrace="error,errors"
+        grails="info"
+        StackTrace="info,file"
         org {
-            codehaus.groovy.grails.web.servlet="error"  //  controllers
-            codehaus.groovy.grails.web.pages="error" //  GSP
-            codehaus.groovy.grails.web.sitemesh="error" //  layouts
-            codehaus.groovy.grails."web.mapping.filter"="error" // URL mapping
-            codehaus.groovy.grails."web.mapping"="error" // URL mapping
+            codehaus.groovy.grails.web.servlet="info"  //  controllers
+            codehaus.groovy.grails.web.pages="info" //  GSP
+            codehaus.groovy.grails.web.sitemesh="info" //  layouts
+            codehaus.groovy.grails."web.mapping.filter"="info" // URL mapping
+            codehaus.groovy.grails."web.mapping"="info" // URL mapping
             codehaus.groovy.grails.commons="info" // core / classloading
-            codehaus.groovy.grails.plugins="error" // plugins
-            codehaus.groovy.grails.orm.hibernate="error" // hibernate integration
+            codehaus.groovy.grails.plugins="info" // plugins
+            codehaus.groovy.grails.orm.hibernate="info" // hibernate integration
             springframework="off"
-            hibernate="off"
         }
+		org.hibernate.SQL="off"
+		org.hibernate.type="off"		
     }
     additivity.StackTrace=false
 }

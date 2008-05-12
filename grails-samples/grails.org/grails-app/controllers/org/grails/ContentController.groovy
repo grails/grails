@@ -10,7 +10,6 @@ import org.codehaus.groovy.grails.commons.ConfigurationHolder
 import org.grails.wiki.WikiPage
 import org.grails.content.Version
 import org.grails.blog.BlogEntry
-import org.jsecurity.context.support.ThreadLocalSecurityContext
 import org.grails.auth.User
 import org.grails.news.NewsItem
 
@@ -46,6 +45,7 @@ class ContentController {
 
     def index = {
         def pageName = params.id
+
         if(pageName && 'Home'!=pageName) { 
             def wikiPage = getCachedOrReal(pageName)
             if(wikiPage) {
@@ -68,7 +68,9 @@ class ContentController {
 
          def wikiPage = cacheService.getContent(id)
             if(!wikiPage) {
+				println "FINDING FOR ID $id"
                 wikiPage = WikiPage.findByTitle(id)
+				println "FOUND $wikiPage"
                 if(wikiPage) cacheService.putContent(id, wikiPage)
             }
          return wikiPage
@@ -165,7 +167,8 @@ class ContentController {
 
                             Version v = page.createVersion()
                             v.author = request.user                            
-                            assert v.save()
+							assert v.save()
+
                             evictFromCache(params.id)
                             render(template:"wikiShow", model:[content:page, message:"wiki.page.updated"])
                         }

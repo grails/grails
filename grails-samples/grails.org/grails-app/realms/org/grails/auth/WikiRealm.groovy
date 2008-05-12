@@ -1,8 +1,10 @@
 package org.grails.auth
 
 import org.jsecurity.authc.AccountException
-import org.jsecurity.authc.IncorrectCredentialException
+import org.jsecurity.authc.IncorrectCredentialsException
 import org.jsecurity.authc.UnknownAccountException
+import org.jsecurity.authc.SimpleAccount
+
 import org.grails.auth.User
 
 class WikiRealm {
@@ -30,16 +32,17 @@ class WikiRealm {
 
         // Now check the user's password against the hashed value stored
         // in the database.
-        if (!credentialMatcher.doCredentialsMatch(authToken.password, user.password)) {
+        def account = new SimpleAccount(username, user.password, "WikiRealm")
+        if (!credentialMatcher.doCredentialsMatch(authToken, account)) {
             log.info 'Invalid password (DB realm)'
-            throw new IncorrectCredentialException("Invalid password for user '${username}'")
+            throw new IncorrectCredentialsException("Invalid password for user '${username}'")
         }
 
         return username
     }
 
     def hasRole(principal, roleName) {
-        def user = User.findByLogin(principal.name)
+        def user = User.findByLogin(principal)
 
         return null != user?.roles?.find { it.name == roleName }
     }
@@ -50,7 +53,7 @@ class WikiRealm {
             roles {
                 'in'('name', roles)
             }
-            eq('login', principal.name)
+            eq('login', principal)
         }
 
         return r.size() == roles.size()

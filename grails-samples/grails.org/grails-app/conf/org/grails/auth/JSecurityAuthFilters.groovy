@@ -1,9 +1,9 @@
 package org.grails.auth
 
-import org.jsecurity.context.support.ThreadLocalSecurityContext
 import org.codehaus.groovy.grails.commons.ApplicationHolder
 import org.codehaus.groovy.grails.commons.ArtefactHandler
 import org.codehaus.groovy.grails.commons.ControllerArtefactHandler
+import org.jsecurity.SecurityUtils
 
 /**
 * @author Graeme Rocher
@@ -12,64 +12,71 @@ import org.codehaus.groovy.grails.commons.ControllerArtefactHandler
 * Created: Feb 26, 2008
 */
 class JSecurityAuthFilters {
+	
+    /**
+     * Called when an unauthenticated user trys to access a secured
+     * page.
+     */
+    def onNotAuthenticated(subject, d) {
+        if (d.request.xhr) {
+            d.render(template:"/user/loginForm", model:[originalURI:d.request.forwardURI,
+                                                        formData:d.params,
+                                                        async:true,
+                                                        message:"auth.not.logged.in"])
+        }
+        else {
+            // Redirect to login page.
+            def targetUri = d.request.forwardURI - d.request.contextPath
+            if (d.request.queryString) {
+                targetUri = "${targetUri}?${d.request.queryString}"
+            }
+
+            d.redirect(
+                    controller: 'user',
+                    action: 'login')
+        }
+    }	
 
     static filters = {
-        loginFilter(controller:"*", action:"*") {
-            before = {
-                def securityContext = new ThreadLocalSecurityContext()
-                def application = ApplicationHolder.getApplication()
-                def controllerClass = application.getArtefactByLogicalPropertyName(ControllerArtefactHandler.TYPE, controllerName)
-                def roleMap = controllerClass?.reference?.wrappedInstance.roleMap
+	   // Ensure that all controllers and actions require an authenticated user,
+	        // except for the "public" controller
+	        auth(controller: "*", action: "*") {
+	            before = {
+	                // Exclude the "public" controller.
+	                if (controllerName == "user") return true
+					else if(controllerName == "content" && !actionName) return true
+	                // This just means that the user must be authenticated. He does
+	                // not need any particular role or permission.
+	                accessControl { true } 
+	            }
+	        }
 
-                // Is this action configured for access control?
-                if (!roleMap?.containsKey(actionName)
-                        && !roleMap?.containsKey('*')) {
-                    return true
-                }
+	        // Creating, modifying, or deleting a book requires the "Administrator"
+	        // role.
+	        wikiEditing(controller: "content", action: "(createNews|markupWikiPage|editWikiPage|createWikiPage|saveWikiPage|rollbackWikiVersion)") {
+	            before = {
+	                accessControl {
+	                    role("Editor") || role("Administrator")
+	                }
+	            }
+	        }
 
-                if(!securityContext.isAuthenticated()) {
-                    // User is not authenticated, so redirect to the
-                    // login page.
-                    if(request.xhr) {
-                        render(template:"/user/loginForm", model:[originalURI:request.forwardURI,
-                                                                  formData:params,
-                                                                  async:true,
-                                                                  message:"auth.not.logged.in"])
-                    }
-                    else {
-                        redirect(controller: 'user', action: 'login')
-                    }
-                    return false
-                }
-
-                try {
-                    request.user = User.findByLogin(securityContext.getPrincipal().getName())
-                } catch (Exception e) {
-                    def threadContext = ThreadLocalSecurityContext.current()
-                    threadContext.invalidate()
-                    flash.message = "auth.user.not.found.for.credentials"
-                    redirect(controller: 'user', action: 'login')
-                    return false
-                }
-
-                def requiredRoles = roleMap[actionName]
-                if (requiredRoles == null) requiredRoles = []
-                if (roleMap['*']) {
-                    // Add any roles that apply to all actions.
-                    requiredRoles.addAll(roleMap['*'])
-                }
-
-                if (!requiredRoles.isEmpty() && !securityContext.hasAllRoles(requiredRoles)) {
-                    // User does not have the required roles. Redirect
-                    // to an error page?
-                    response.sendError(403)
-                    return false
-                }
-
-
-                return true                
-            }
-        }
-    }
+	        // Showing a book requires the "Administrator" *or* the "User" roles.
+	        wikiShow(controller: "content", action: "(index|showNews|showWikiVersion|infoWikiPage|diffWikiVersion)") {
+	            before = {
+	                accessControl {
+	                    role("Editor") || role("User") || role("Administrator")
+	                }
+	            }
+	        }	
+	
+			userInRequest(controller:"*", action:"*") {
+				before = {
+					def subject = SecurityUtils.getSubject() 
+					
+					request.user = User.findByLogin(subject.principal)
+				}
+			}
+	}
 
 }

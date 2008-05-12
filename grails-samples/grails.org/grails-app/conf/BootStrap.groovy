@@ -23,7 +23,9 @@ During the first run you must specify a password to use for the admin account. F
 grails -Dinitial.admin.password=changeit run-app""")
                 }
                 else {
-                    assert new User(login:"admin", email:"info@g2one.com",password:DigestUtils.shaHex(password))
+					def user = new User(login:"admin", email:"info@g2one.com",password:DigestUtils.shaHex(password))
+					assert user.email
+                    assert user
                             .addToRoles(name:Role.ADMINSITRATOR)
                             .addToRoles(name:Role.EDITOR)
                             .addToRoles(name:Role.OBSERVER)

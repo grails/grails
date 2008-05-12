@@ -1,10 +1,10 @@
 package org.grails.auth
 
 import org.grails.auth.User
-import org.jsecurity.context.support.ThreadLocalSecurityContext
 import org.jsecurity.authc.UsernamePasswordToken
 import org.jsecurity.authc.AuthenticationException
 import org.apache.commons.codec.digest.DigestUtils
+import org.jsecurity.SecurityUtils
 
 /**
 * @author Graeme Rocher
@@ -70,10 +70,6 @@ class UserController {
     }
 
     def logout = {
-        def threadContext = ThreadLocalSecurityContext.current()
-        if (threadContext != null){
-            threadContext.invalidate()
-        }
         redirect(uri:"")
     }
 
@@ -81,7 +77,7 @@ class UserController {
         if(request.method == 'POST') {
             def authToken = new UsernamePasswordToken(params.login, params.password)
             try{
-                this.jsecSecurityManager.authenticate(authToken)
+                this.jsecSecurityManager.login(authToken)
                 if(params.originalURI) {
                     redirect(url:params.originalURI, params:params)
                 }
@@ -90,6 +86,7 @@ class UserController {
                 }
             }
             catch (AuthenticationException ex){
+				println "EXCEPTION IS $ex.message"
                 if(request.xhr) {
                     render(template:"loginForm", model:[originalURI:params.originalURI,
                                                         formData:params,
