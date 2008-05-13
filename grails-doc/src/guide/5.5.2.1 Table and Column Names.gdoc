@@ -58,6 +58,8 @@ class Address {
 
 This would make the @postCode@ column map to the SQL TEXT or CLOB type depending on which database is being used.
 
+See the Hibernate documentation regarding [Basic Types|http://www.hibernate.org/hib_docs/core/reference/en/html/mapping.html#mapping-types-basictypes] for further information.
+
 h4. One-to-One Mapping
 
 In the case of associations it is also possible to change the foreign keys used to map associations. In the case of a one-to-one association this is exactly the same as any regular column. For example consider the below:
