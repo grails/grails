@@ -19,7 +19,16 @@ Example usages for above controller:
 
 {code:xml}
 <g:form name="myForm" action="myaction" id="1">...</g:form>
+results in:
+<form action="/shop/book/myaction/1" method="post" name="myForm" id="myForm" >...</form>
+
 <g:form name="myForm" url="[action:'list',controller:'book']">...</g:form>
+results in:
+<form action="/shop/book/list" method="post" name="myForm" id="myForm" >...</form>
+
+<g:form action="show">...</g:form>
+results in:
+<form action="/shop/book/show" method="post" >...</form>
 {code}
 
 
@@ -31,6 +40,7 @@ Attributes
 * @controller@ (optional) - the name of the controller to use in the link, if not specified the current controller will be linked
 * @id@ (optional) - The id to use in the link
 * @url@ (optional) - A map containing the action,controller,id etc.
+* @name@ (optional) - A value to use for both the name and id attribute of the form tag
 
 
 h2. Source
