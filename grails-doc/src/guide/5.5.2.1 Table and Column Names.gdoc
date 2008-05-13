@@ -31,7 +31,7 @@ In this case we define method calls that match each property name (in this case 
 
 h4. Column type
 
-GORM supports configuration of Hibernate types via the DSL using the type attribute. This includes specifing user types that subclass the Hibernate [org.hibernate.types.UserType|api:org.hibernate.types.UserType] class, which allows complete customization of how a type is persisted. As an example
+GORM supports configuration of Hibernate types via the DSL using the type attribute. This includes specifing user types that subclass the Hibernate [org.hibernate.usertype.UserType|api:org.hibernate.usertype.UserType] class, which allows complete customization of how a type is persisted. As an example
 if you had a @PostCodeType@ you could use it as follows:
 
 {code:java}
