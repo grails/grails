@@ -38,65 +38,6 @@ class ContentControllerTests extends GroovyTestCase {
 
 
 
-    void testShowNews() {
-        NewsItem item
-        NewsItem.metaClass.static.get = { id -> item  = new NewsItem() }
-
-        ContentController.metaClass.getParams = {-> [id:10] }
-
-
-        def controller = new ContentController()
-        def model = controller.showNews()
-
-        assert item
-
-        assertEquals item, model.content
-    }
-
-    void testCreateNewsItemGET() {
-        ContentController.metaClass.getRequest ={-> [method:"GET"] }
-        ContentController.metaClass.getParams ={-> [title:"New Item", body:"Some news"] }
-
-
-        def controller = new ContentController()
-        def model = controller.createNews()
-
-        assert model.newsItem
-        assertEquals "New Item", model.newsItem.title
-        assertEquals "Some news", model.newsItem.body
-    }
-
-    void testCreateNewsItemValidationError() {
-        ContentController.metaClass.getRequest ={-> [method:"POST"] }
-        ContentController.metaClass.getParams ={-> [title:"New Item", body:"Some news"] }
-
-        NewsItem.metaClass.save = {-> null }
-
-
-        def controller = new ContentController()
-        def model = controller.createNews()
-
-        assert model.newsItem
-        assertEquals "New Item", model.newsItem.title
-        assertEquals "Some news", model.newsItem.body
-    }
-
-    void testCreateNewsItemValidationSuccess() {
-        ContentController.metaClass.getRequest ={-> [method:"POST"] }
-        ContentController.metaClass.getParams ={-> [title:"New Item", body:"Some news"] }
-        def redirectParams = [:]
-
-        ContentController.metaClass.redirect = { Map args -> redirectParams = args }
-
-        NewsItem.metaClass.save = {-> delegate }
-
-
-        def controller = new ContentController()
-        controller.createNews()
-
-        assertEquals "", redirectParams.uri
-    }
-
 
     void testIndexNoId() {
         ContentController.metaClass.getRequest ={-> [method:"POST"] }

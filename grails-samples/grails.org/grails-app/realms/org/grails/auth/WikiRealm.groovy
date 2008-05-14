@@ -6,11 +6,12 @@ import org.jsecurity.authc.UnknownAccountException
 import org.jsecurity.authc.SimpleAccount
 
 import org.grails.auth.User
+import org.jsecurity.authc.credential.CredentialsMatcher
 
 class WikiRealm {
     static authTokenClass = org.jsecurity.authc.UsernamePasswordToken
 
-    def credentialMatcher
+    CredentialsMatcher credentialMatcher
 
     def authenticate(authToken) {
         log.info "Attempting to authenticate ${authToken.username} in DB realm..."

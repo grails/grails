@@ -2,6 +2,7 @@ package org.grails.auth
 
 import org.jsecurity.authc.*
 import org.apache.commons.logging.LogFactory
+import org.jsecurity.authc.credential.CredentialsMatcher
 
 /**
 * @author Graeme Rocher
@@ -25,17 +26,17 @@ class WikiRealmTests extends GroovyTestCase {
             realm.authenticate username:"Fred"
         }
 
-        realm.credentialMatcher = [doCredentialsMatch:{ String username, String password -> false }]
+        realm.credentialMatcher = [doCredentialsMatch:{ org.jsecurity.authc.AuthenticationToken authenticationToken, org.jsecurity.authc.Account account-> false }] as CredentialsMatcher
 
         User.metaClass.static.findByLogin = { String s -> new User(login:"Fred") }
 
-        shouldFail(IncorrectCredentialException) {
-            realm.authenticate username:"Fred"
+        shouldFail(IncorrectCredentialsException) {
+            realm.authenticate( new UsernamePasswordToken("Fred", "Frog" ) )
         }
 
-        realm.credentialMatcher = [doCredentialsMatch:{ String username, String password -> true }]
+        realm.credentialMatcher = [doCredentialsMatch:{ org.jsecurity.authc.AuthenticationToken authenticationToken, org.jsecurity.authc.Account account-> true }] as CredentialsMatcher
 
-        assertEquals "Fred", realm.authenticate(username:"Fred")
+        assertEquals "Fred", realm.authenticate(new UsernamePasswordToken("Fred", "Frog" ))
     }
 
     void testHasRole() {
@@ -44,16 +45,16 @@ class WikiRealmTests extends GroovyTestCase {
         WikiRealm.metaClass.getLog = {-> LogFactory.getLog(WikiRealm) }
         def realm = new WikiRealm()
 
-        assertFalse realm.hasRole([name:"Fred"], "Administrator")
+        assertFalse realm.hasRole("Fred", "Administrator")
 
         User.metaClass.getRoles={-> [] }
         User.metaClass.static.findByLogin = { String s -> new User(login:"Fred") }
 
-        assertFalse realm.hasRole([name:"Fred"], "Administrator")
+        assertFalse realm.hasRole("Fred", "Administrator")
 
         User.metaClass.getRoles={-> [[name:"Administrator"]] }
 
-        assertTrue realm.hasRole([name:"Fred"], "Administrator")
+        assertTrue realm.hasRole("Fred", "Administrator")
 
     }
 
