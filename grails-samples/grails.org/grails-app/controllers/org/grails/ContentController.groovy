@@ -12,6 +12,7 @@ import org.grails.content.Version
 import org.grails.blog.BlogEntry
 import org.grails.auth.User
 import org.grails.news.NewsItem
+import org.grails.content.notifications.ContentAlertStack
 
 class ContentController {
     
@@ -22,6 +23,8 @@ class ContentController {
     }
 
     def cacheService
+
+    ContentAlertStack contentToMessage
 
     def showNews = {
         [content:NewsItem.get(params.id)]
@@ -68,9 +71,7 @@ class ContentController {
 
          def wikiPage = cacheService.getContent(id)
             if(!wikiPage) {
-				println "FINDING FOR ID $id"
                 wikiPage = WikiPage.findByTitle(id)
-				println "FOUND $wikiPage"
                 if(wikiPage) cacheService.putContent(id, wikiPage)
             }
          return wikiPage
@@ -143,6 +144,9 @@ class ContentController {
                         render(view:"createWikiPage", model:[pageName:params.id, wikiPage:page])
                     }
                     else {
+                        Thread.start {
+                            contentToMessage?.pushOnStack page
+                        }
                         Version v = page.createVersion()
                         v.author = request.user
                         assert v.save()
@@ -164,6 +168,9 @@ class ContentController {
                             render(template:"wikiEdit",model:[wikiPage:page])
                         }
                         else {
+                            Thread.start {
+                                contentToMessage?.pushOnStack page
+                            }
 
                             Version v = page.createVersion()
                             v.author = request.user                            
@@ -244,6 +251,30 @@ class ContentController {
         else {
             return [message: "Page not found to diff" ]
         }
+    }
+
+    def previousWikiVersion = {
+        def page = WikiPage.findByTitle(params.id.decodeURL())
+        if(page) {
+            def leftVersion = params.number.toLong()
+            def left = Version.findByCurrentAndNumber(page, leftVersion)
+
+            List allVersions = Version.findAllByCurrent(page).sort { it.number }
+            def right = allVersions[allVersions.indexOf(left)-1]
+            def rightVersion = right.number
+
+            if(left && right) {
+                render(view:"diffView",model:[content:page,message: "Showing difference between version ${leftVersion} and ${rightVersion}", text1:right.body.encodeAsHTML(), text2: left.body.encodeAsHTML()])
+            }
+            else {
+                render(view:"diffView",model:[message: "Version not found in diff"])
+            }
+
+        }
+        else {
+            render(view:"diffView",model: [message: "Page not found to diff" ] )
+        }
+
     }
 
 

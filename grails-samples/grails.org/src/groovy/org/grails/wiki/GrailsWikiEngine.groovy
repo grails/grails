@@ -107,16 +107,20 @@ class GrailsWikiEngine extends BaseRenderEngine implements WikiRenderEngine{
     public void appendLink(StringBuffer buffer, String name, String view, String anchor) {
         def contextPath = initialContext.get(CONTEXT_PATH)
         contextPath = contextPath ?: ""
-
-        buffer <<  "<a href=\"$contextPath/$name\" class=\"$name\">$view</a>"
+        if(name.startsWith("http:")||name.startsWith("https:"))
+            buffer <<  "<a href=\"$name#$anchor\" class=\"$name\">$view</a>"
+        else
+            buffer <<  "<a href=\"$contextPath/$name#$anchor\" class=\"$name\">$view</a>"
     }
 
     public void appendLink(StringBuffer buffer, String name, String view) {
         def contextPath = initialContext.get(CONTEXT_PATH)
         contextPath = contextPath ?: ""
 
-        
-        buffer <<  "<a href=\"$contextPath/$name\" class=\"$name\">$view</a>"
+        if(name.startsWith("http:")||name.startsWith("https:"))
+            buffer <<  "<a href=\"$name\" class=\"$name\">$view</a>"
+        else
+            buffer <<  "<a href=\"$contextPath/$name\" class=\"$name\">$view</a>"
     }
 
     public void appendCreateLink(StringBuffer buffer, String name, String view) {
@@ -216,7 +220,7 @@ class LinkTestFilter extends RegexTokenFilter {
 
                 def link = name.startsWith("http:") ? name : java.net.URLEncoder.encode(name,'utf-8')
 
-                if(wikiEngine.exists(name) )
+                if(wikiEngine.exists(name) || (link.startsWith("http:")||link.startsWith("https:")))
                     wikiEngine.appendLink(buffer, link, alias)
                 else {
                     wikiEngine.appendCreateLink(buffer, link, alias)

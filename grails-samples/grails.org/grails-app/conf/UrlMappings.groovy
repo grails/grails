@@ -16,6 +16,7 @@ class UrlMappings {
       "/version/$id/$number"(controller:"content", action:"showWikiVersion")
       "/rollback/$id/$number"(controller:"content", action:"rollbackWikiVersion")
       "/diff/$id/$number/$diff"(controller:"content", action:"diffWikiVersion")
+      "/previous/$id/$number"(controller:"content", action:"previousWikiVersion")
       
       "/$id?"(controller:"content")
 

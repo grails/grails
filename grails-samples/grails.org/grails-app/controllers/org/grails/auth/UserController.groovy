@@ -4,6 +4,7 @@ import org.grails.auth.User
 import org.jsecurity.authc.UsernamePasswordToken
 import org.jsecurity.authc.AuthenticationException
 import org.apache.commons.codec.digest.DigestUtils
+import org.grails.meta.UserInfo
 
 
 /**
@@ -40,8 +41,13 @@ class UserController {
                             .addToRoles(name:"Observer")
 
                     if(!user.hasErrors() && user.save()) {
+                        def userInfo = new UserInfo(user:user)
+                        userInfo.properties = params['info']
+                        userInfo.save()
+                        
                         def authToken = new UsernamePasswordToken(user.login, params.password)
-                        this.jsecSecurityManager.authenticate(authToken)
+                        this.jsecSecurityManager.login(authToken)
+
                         if(params.originalURI) {
                             redirect(url:params.originalURI, params:params)
                         }

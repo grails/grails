@@ -232,7 +232,7 @@ div .message {
 .inputForm label {
 		text-align: left;
 		padding: 0 1em;
-		width: 175px; /* Use to move most form content left/right on page. */
+		width: 105px; /* Use to move most form content left/right on page. */
 		position:absolute;
 		clear: left;
 }

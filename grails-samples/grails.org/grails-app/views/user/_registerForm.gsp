@@ -20,6 +20,10 @@
             <p>
                  <span class="label"><label for="email">Email:</label></span> <g:textField name="email" value="${params.email}"/>
             </p>
+           <p>
+                <span class="label"><label for="email">Content Alerts?:</label></span> <g:checkBox name="info.emailSubscribed" value="${false}"/>
+           </p>
+
         </div>
 
 
