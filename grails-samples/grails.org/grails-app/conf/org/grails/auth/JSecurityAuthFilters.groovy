@@ -44,7 +44,8 @@ class JSecurityAuthFilters {
 	            before = {
 	                // Exclude the "public" controller.
 	                if (controllerName == "user") return true
-					else if(controllerName == "content" && !actionName) return true
+                    else if (controllerName == "news") return true
+                    else if(controllerName == "content" && !actionName) return true
 	                // This just means that the user must be authenticated. He does
 	                // not need any particular role or permission.
 	                accessControl { true } 

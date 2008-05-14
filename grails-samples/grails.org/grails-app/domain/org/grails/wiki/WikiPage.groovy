@@ -16,6 +16,10 @@ class WikiPage extends Content {
 	
 	static hasMany = [versions:Version]
 
-    static searchable = [only: ['body', 'title']]    
+    static searchable = [only: ['body', 'title']]
+
+    static mapping = {
+        cache true
+    }
 
 }

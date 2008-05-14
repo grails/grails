@@ -15,9 +15,9 @@
             </div>
         </g:hasErrors>
 
-        <g:form name="createNews" url="[controller:'content', action:'createNews']">
+        <g:form name="createNews" url="[controller:'news', action:'createNews']">
             Enter Title:&nbsp;&nbsp;&nbsp;<g:textField id="title" name="title" value="${newsItem?.title}" /> <br /><br/>
-            Enter Body (300 characters max, if you need more link off to another wiki page)<br />
+            Enter Body (300 characters max, wiki text supported)<br />
             <g:textArea id="body" name="body" rows="20" cols="75" value="${newsItem?.body}" /> <br />
             <g:submitButton name="save" value="Save" />
         </g:form>

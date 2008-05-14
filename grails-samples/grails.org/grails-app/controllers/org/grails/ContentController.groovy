@@ -1,17 +1,11 @@
 package org.grails
 
 
-import org.xml.sax.InputSource
-import org.radeox.engine.context.BaseInitialRenderContext
-import org.grails.wiki.GrailsWikiEngine
 import javax.servlet.ServletContext
 import org.springframework.web.multipart.MultipartFile
 import org.codehaus.groovy.grails.commons.ConfigurationHolder
 import org.grails.wiki.WikiPage
 import org.grails.content.Version
-import org.grails.blog.BlogEntry
-import org.grails.auth.User
-import org.grails.news.NewsItem
 import org.grails.content.notifications.ContentAlertStack
 
 class ContentController {
@@ -26,25 +20,7 @@ class ContentController {
 
     ContentAlertStack contentToMessage
 
-    def showNews = {
-        [content:NewsItem.get(params.id)]
-    }
 
-    def createNews = {
-        def newsItem = new NewsItem(params)
-        if(request.method == 'POST') {
-            newsItem.author = request.user
-            if(newsItem.save()) {
-                redirect(uri:"")
-            }
-            else {
-                return [newsItem:newsItem]    
-            }
-        }
-        else {
-            return [newsItem:newsItem]
-        }
-    }
 
     def index = {
         def pageName = params.id

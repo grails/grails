@@ -15,4 +15,9 @@ class NewsItem extends Content {
     static constraints = {
         body(size:1..300)
     }
+
+
+    static mapping = {
+        cache true
+    }
 }

@@ -9,13 +9,13 @@
 <body>
     <g:each var="newsItem" in="${NewsItem.list(sort:'dateCreated', max:2)}">
         <div class="blogpost" style="margin-bottom: 30px">
-            <div><g:link controller="content" action="showNews" id="${newsItem.id}">${newsItem.title}</g:link></div>
+            <div><g:link controller="news" action="showNews" id="${newsItem.id}">${newsItem.title}</g:link></div>
 
             <div class="pagesubheading">
                             </div>
                 <div class="wiki-content">                    
                     <g:if test="${newsItem.body.size() > 150}">
-                      <wiki:text>${newsItem.body[0..150]} ... [click for more|${createLink(controller:'content', action:'showNews', id:newsItem.id)}]</wiki:text> 
+                      <wiki:text>${newsItem.body[0..150]} ... [click for more|${createLink(controller:'news', action:'showNews', id:newsItem.id)}]</wiki:text> 
                     </g:if>
                     <g:else>
                         <wiki:text>${newsItem.body}</wiki:text>
@@ -30,7 +30,7 @@
     </g:each>
 
     <div>
-        <g:link controller="content" action="createNews">Click here</g:link> to add news
+        <g:link controller="news" action="createNews">Click here</g:link> to add news
     </div>
 
 </body>

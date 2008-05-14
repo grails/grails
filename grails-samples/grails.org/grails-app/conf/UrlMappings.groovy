@@ -1,8 +1,9 @@
 class UrlMappings {
     static mappings = {
 	  "/auth/$action"(controller:"auth")
-      "/news/$id"(controller:"content", action:"showNews")
-      "/news/create"(controller:"content", action:"createNews")
+      "/news/$id"(controller:"news", action:"showNews")
+      "/news/create"(controller:"news", action:"createNews")
+      "/news/latest"(controller:"news", action:"latest")
       "/search"(controller:"searchable")
       "/upload/$id?"(controller:"content", action:"uploadImage")
       "/register"(controller:"user", action:"register")
