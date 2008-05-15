@@ -22,7 +22,7 @@ class CacheService {
     }
 
     def putContent(key,value) {
-        def old = getContent(key)?.value
+        def old = getContent(key)
         contentCache.put(new Element(key,value))
         return old
     }
