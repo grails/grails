@@ -136,7 +136,7 @@ class ContentController extends BaseWikiController{
     }
 
     def createWikiPage = {
-           [pageName:params.id]
+           [pageName:params.id?.decodeURL()]
     }
 
 
