@@ -17,13 +17,14 @@
                 </li>
                 <li><g:link controller="content" id="Reference">Reference</g:link>
                 <ul>
-                    <li><g:link controller="content" id="User Guide">User Guide</g:link></li>
+                    <li><g:link controller="content" id="Documentation">Documentation</g:link></li>
                     <li><g:link controller="content" id="FAQ">FAQs</g:link></li>
                     <li><g:link controller="content" id="Roadmap">Roadmap</g:link></li>
                 </ul>
                 </li>
                 <li><g:link controller="content" id="Community">Community</g:link>
                 <ul>
+                    <li><g:link controller="content" id="Testimonials">Testimonials</g:link></li>
                     <li><g:link controller="content" id="Community">Contributing</g:link></li>
                     <li><g:link controller="content" id="Plugins">Plugins</g:link></li>
                     <li><g:link controller="content" id="Developer+Blogs">Developer Blogs</g:link></li>

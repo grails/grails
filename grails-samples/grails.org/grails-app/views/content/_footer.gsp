@@ -8,7 +8,6 @@
             <li><a href="Installation">Getting Started</a></li>
             <li><a href="http://grails.org/doc/1.0.x">Reference</a></li>
             <li><a href="Community">Community</a></li>
-            <li><a href="http://docs.codehaus.org/pages/viewrecentblogposts.action?key=GRAILS">Weblog</a></li>
         </ul><!-- / footerNav -->
 
         <div id="partners">

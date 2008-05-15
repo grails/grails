@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-	<title>Grails - The search is over.</title>
+	<title>Grails - <g:layoutTitle default="The search is over." /></title>
 
 	<link rel="stylesheet" href="${createLinkTo(dir:'css', file:'master.css')}" type="text/css" media="screen" title="Master screen stylesheet" charset="utf-8" />
 	<style type="text/css">@import url("${createLinkTo(dir:'css', file:'subpage.css')}");</style>
