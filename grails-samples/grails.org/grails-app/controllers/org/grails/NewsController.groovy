@@ -13,6 +13,8 @@ import org.grails.wiki.BaseWikiController
  */
 class NewsController extends BaseWikiController{
 
+    def scaffold = NewsItem
+
     def cacheService
 
     def latest = {
