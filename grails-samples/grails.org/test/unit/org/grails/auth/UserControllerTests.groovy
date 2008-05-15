@@ -37,9 +37,7 @@ public class UserControllerTests extends GroovyTestCase {
         def controller = new UserController()
         controller.register()
 
-        assertEquals "registerForm", renderParams.template
-        assertEquals "auth.invalid.login", renderParams?.model?.message
-        assertEquals true, renderParams?.model?.async
+        assertEquals "register", renderParams.view        
         assertEquals  "/foo/bar", renderParams.model?.originalURI
         assertEquals  params, renderParams.model?.formData
 
@@ -59,9 +57,8 @@ public class UserControllerTests extends GroovyTestCase {
         def controller = new UserController()
         controller.register()
 
-        assertEquals "registerForm", renderParams.template
-        assertEquals "auth.user.already.exists", renderParams?.model?.message
-        assertEquals true, renderParams?.model?.async
+        assertEquals "register", renderParams.view
+        assertEquals "auth.user.already.exists", renderParams?.model?.message       
         assertEquals  "/foo/bar", renderParams.model?.originalURI
         assertEquals  params, renderParams.model?.formData
          
@@ -81,8 +78,8 @@ public class UserControllerTests extends GroovyTestCase {
         def controller = new UserController()
         controller.register()
 
-        assertEquals "registerForm", renderParams.template
-        assertEquals true, renderParams?.model?.async
+        assertEquals "register", renderParams.view
+        
         assertEquals  "/foo/bar", renderParams.model?.originalURI
         assertEquals  params, renderParams.model?.formData
     }
@@ -95,17 +92,18 @@ public class UserControllerTests extends GroovyTestCase {
         UserController.metaClass.getRequest = {-> [method:"POST"] }
         UserController.metaClass.render = { Map args -> renderParams = args }
         UserController.metaClass.getParams = {->  params}
+        Role.metaClass.static.findByName = { String n -> new Role(name:n) }
 
         User.metaClass.static.findByLogin = {String login-> null }
-        User.metaClass.addToRoles = { Map m -> delegate }
+        User.metaClass.addToRoles = { Role r -> delegate }
         User.metaClass.hasErrors = {-> true }
 
         def controller = new UserController()
         controller.register()
 
-        assertEquals "registerForm", renderParams.template
+        assertEquals "register", renderParams.view
         assert  renderParams?.model?.user
-        assertEquals true, renderParams?.model?.async
+        
         assertEquals  "/foo/bar", renderParams.model?.originalURI
         assertEquals  params, renderParams.model?.formData
     }
@@ -119,12 +117,14 @@ public class UserControllerTests extends GroovyTestCase {
           UserController.metaClass.getRequest = {-> [method:"POST"] }
           UserController.metaClass.getParams = {->  params}
 
+          Role.metaClass.static.findByName = { String n -> new Role(name:n) }
           User.metaClass.static.findByLogin = {String login-> null }
-          User.metaClass.addToRoles = { Map m -> delegate }
+          User.metaClass.addToRoles = { Role r -> delegate }
           User.metaClass.hasErrors = {-> false }
-          User.metaClass.save = {-> delegate }
+          User.metaClass.save = { delegate }
           UserInfo.metaClass.setProperties = {Map m->}
           UserInfo.metaClass.save = {}
+          UserInfo.metaClass.constructor << { Map m -> UserInfo.newInstance() }
 
             def controller = new UserController()
             def authenticateCalled = false
@@ -148,10 +148,11 @@ public class UserControllerTests extends GroovyTestCase {
           UserController.metaClass.getParams = {->  params}
 
           User.metaClass.static.findByLogin = {String login-> null }
-          User.metaClass.addToRoles = { Map m -> delegate }
+        Role.metaClass.static.findByName = { String n -> new Role(name:n) }
+          User.metaClass.addToRoles = { Role r -> delegate }
           User.metaClass.hasErrors = {-> false }
-          User.metaClass.save = {-> delegate }
-        UserInfo.metaClass.setProperties = {Map m->}
+          User.metaClass.save = {delegate }
+        UserInfo.metaClass.constructor << { Map m -> UserInfo.newInstance() }
         UserInfo.metaClass.save = {}
 
             def controller = new UserController()
