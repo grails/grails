@@ -5,7 +5,7 @@
     <style type="text/css">
 
         #content-container {
-            height:600px;
+            height:750px;
         }
     </style>
 </head>
