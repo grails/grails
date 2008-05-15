@@ -56,6 +56,17 @@ class ContentController extends BaseWikiController{
         }
     }
 
+    def previewWikiPage = {
+        def page = WikiPage.findByTitle(params.id?.decodeURL())
+        if(page) {
+            def engine = createWikiEngine()
+            page.discard()
+            page.properties = params
+
+            render( engine.render(page.body, context) )
+        }
+    }
+
     def index = {
         def pageName = params.id
 

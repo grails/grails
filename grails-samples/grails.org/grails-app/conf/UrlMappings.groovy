@@ -12,6 +12,7 @@ class UrlMappings {
       "/logout"(controller:"user", action:"logout")
       "/edit/$id"(controller:"content", action:"editWikiPage")
       "/save/$id"(controller:"content", action:"saveWikiPage")
+      "/preview/$id"(controller:"content", action:"previewWikiPage")
       "/create/$id"(controller:"content", action:"createWikiPage")
       "/info/$id"(controller:"content", action:"infoWikiPage")
       "/markup/$id"(controller:"content", action:"markupWikiPage")

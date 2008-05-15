@@ -5,6 +5,22 @@
     <g:javascript library="scriptaculous" />
     <g:javascript library="diff_match_patch" />
 
+    <style type="text/css">
+
+        .previewPane {
+
+            z-index:999;
+            position:absolute;
+            background:white;
+            border:2px solid black;
+            top:100px;
+            width:600px;
+            height:500px;
+            overflow-y:auto;
+            overflow-x:hidden;
+        }
+    </style>
+
     <script type="text/javascript">
         var dmp = new diff_match_patch();
 
@@ -23,12 +39,23 @@
             Effect.Appear('diffOutputDiv')
         }
 
-        function getAjaxOptions() {
+        function getAjaxOptions(after) {
+            if(after ==null)  {
+                after = function() {}
+            }
             return {asynchronous:true,
                 evalScripts:true,
                 parameters:Form.serialize($('wikiEditForm')),
-                method:"POST"
+                method:"POST",
+                onComplete:after
             }
+        }
+
+        function hidePreview() {           
+           Effect.Fade('previewContainer')
+        }
+        function showPreview() {
+           Effect.Appear('previewContainer')
         }
     </script>
 </head>
@@ -40,7 +67,12 @@
                 ${content?.body}
             </wiki:text>
         </div>
+    </div>
+    <div id="previewContainer" class="previewPane" style="display:none;">
+        <div style="padding:5px;margin-left:530px;"><a href="#" onclick="hidePreview();">Close</a> </div>
+        <div id="previewPane" style="margin:10px; ">
 
+        </div>
     </div>
 </body>
 </html>
