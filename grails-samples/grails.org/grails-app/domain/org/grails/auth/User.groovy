@@ -16,4 +16,10 @@ class User {
     static mapping = {
         cache true
     }
+
+    String toString() {
+        login
+    }
+
+
 }

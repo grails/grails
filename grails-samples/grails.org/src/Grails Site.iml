@@ -40,11 +40,13 @@
     <orderEntry type="module-library">
       <library name="JSecurity">
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../plugins/jsecurity-0.1.1/lib/jsecurity-jdk14.jar!/" />
-          <root url="jar://$MODULE_DIR$/../plugins/jsecurity-0.1.1/lib/commons-codec.jar!/" />
-          <root url="jar://$MODULE_DIR$/../plugins/jsecurity-0.1.1/lib/retroweaver-rt.jar!/" />
-          <root url="jar://$MODULE_DIR$/../plugins/jsecurity-0.1.1/lib/grails-jsecurity-annotations.jar!/" />
-          <root url="jar://$MODULE_DIR$/../plugins/jsecurity-0.1.1/lib/quartz.jar!/" />
+          <root url="jar://$MODULE_DIR$/../plugins/jsecurity-0.2/lib/jug.jar!/" />
+          <root url="jar://$MODULE_DIR$/../plugins/jsecurity-0.2/lib/quartz.jar!/" />
+          <root url="jar://$MODULE_DIR$/../plugins/jsecurity-0.2/lib/jsecurity-jdk14.jar!/" />
+          <root url="jar://$MODULE_DIR$/../plugins/jsecurity-0.2/lib/commons-codec.jar!/" />
+          <root url="jar://$MODULE_DIR$/../plugins/jsecurity-0.2/lib/grails-jsecurity-annotations.jar!/" />
+          <root url="jar://$MODULE_DIR$/../plugins/jsecurity-0.2/lib/retroweaver-rt.jar!/" />
+          <root url="jar://$MODULE_DIR$/../plugins/jsecurity-0.2/lib/jug-native.zip!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

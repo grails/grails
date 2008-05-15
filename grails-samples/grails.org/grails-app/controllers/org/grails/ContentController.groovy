@@ -7,8 +7,9 @@ import org.codehaus.groovy.grails.commons.ConfigurationHolder
 import org.grails.wiki.WikiPage
 import org.grails.content.Version
 import org.grails.content.notifications.ContentAlertStack
+import org.grails.wiki.BaseWikiController
 
-class ContentController {
+class ContentController extends BaseWikiController{
     
     static accessControl = {
         // Alternatively, several actions can be specified.
@@ -21,6 +22,39 @@ class ContentController {
     ContentAlertStack contentToMessage
 
 
+   def latest = {
+
+         def engine = createWikiEngine()
+
+         def feedOutput = {
+            def now = new Date()
+
+            def top5 = WikiPage.listOrderByLastUpdated(order:'desc', max:5)
+            title = "Grails.org Wiki Updates"
+            link = "http://grails.org/wiki/latest.${request.format}"
+            description = "Latest wiki updates Grails framework community"
+
+            for(item in top5) {
+                entry(item.title) {
+                    link = "http://grails.org/${item.title.encodeAsURL()}"
+                    publishedDate = item.dateCreated
+                    engine.render(item.body, context)
+                }
+            }
+         }
+
+        withFormat {
+            html {
+                redirect(uri:"")
+            }
+            rss {
+                render(feedType:"rss",feedOutput)
+            }
+            atom {
+                render(feedType:"atom", feedOutput)
+            }
+        }
+    }
 
     def index = {
         def pageName = params.id

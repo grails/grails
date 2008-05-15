@@ -12,4 +12,10 @@ class Role {
     static final OBSERVER = "Observer"
     
     String name
+
+    String toString() {
+        name
+    }
+
+
 }

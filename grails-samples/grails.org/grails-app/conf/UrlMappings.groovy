@@ -1,6 +1,7 @@
 class UrlMappings {
     static mappings = {
-	  "/auth/$action"(controller:"auth")
+      "/wiki/latest"(controller:"content", action:"latest")
+      "/auth/$action"(controller:"auth")
       "/news/$id"(controller:"news", action:"showNews")
       "/news/create"(controller:"news", action:"createNews")
       "/news/latest"(controller:"news", action:"latest")
@@ -21,7 +22,9 @@ class UrlMappings {
       
       "/$id?"(controller:"content")
 
+      "/admin/$controller/$action?"()
 
-	  "500"(view:'/error')
+
+      "500"(view:'/error')
 	}
 }

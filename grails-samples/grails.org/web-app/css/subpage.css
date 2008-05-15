@@ -126,7 +126,7 @@ body.subpage {
 /* code styles
 ------------------------------------------------------- */
 
-.code .code-keyword {
+.java-keyword {
     font-weight: bold;
     color: darkblue;
 }
@@ -136,7 +136,7 @@ body.subpage {
     color: purple;
 }
 
-.code .code-quote, .code .code-quote * {
+.java-quote {
     color: darkred;
     font-weight: normal;
 }

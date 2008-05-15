@@ -20,9 +20,7 @@ class NewsController extends BaseWikiController{
          def engine = createWikiEngine() 
 
          def feedOutput = {
-                    def total = NewsItem.count()
-                    def offset = total <= 5 ? 0 : total-5
-                    def top5 = NewsItem.list(offset:offset,max:5, sort:"dateCreated", order:"asc")
+                    def top5 = NewsItem.listOrderByDateCreated(order:'desc', max:5)
                     title = "Grails.org News Feed"
                     link = "http://grails.org/news/latest.${request.format}"
                     description = "Latest news and announcements from the Grails framework community"

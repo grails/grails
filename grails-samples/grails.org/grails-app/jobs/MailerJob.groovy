@@ -33,7 +33,7 @@ class MailerJob {
                      def text = new StringBuffer()
                      def titleUrlEscaped = content.title.encodeAsURL()
 
-                     def pageVersions = Version.findAllByCurrent(page)
+                     def pageVersions = Version.findAllByCurrent(content)
                      pageVersions = pageVersions.sort { it.number }
 
 

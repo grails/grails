@@ -4,10 +4,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-    <meta content="main" name="layout" />
+    <meta content="homepage" name="layout" />
 </head
 <body>
-    <g:each var="newsItem" in="${NewsItem.list(sort:'dateCreated', max:2)}">
+    <g:set var="newsItems" value="${NewsItem.listOrderByDateCreated(sort:'dateCreated', max:2, order:'desc')}" />
+    <g:each var="newsItem" in="${newsItems}">
         <div class="blogpost" style="margin-bottom: 30px">
             <div><g:link controller="news" action="showNews" id="${newsItem.id}">${newsItem.title}</g:link></div>
 
@@ -15,7 +16,7 @@
                             </div>
                 <div class="wiki-content">                    
                     <g:if test="${newsItem.body.size() > 150}">
-                      <wiki:text>${newsItem.body[0..150]} ... [click for more|${createLink(controller:'news', action:'showNews', id:newsItem.id)}]</wiki:text> 
+                      <wiki:text>${newsItem.body[0..150]} </wiki:text> ... <g:link controller="news" action="showNews" id="${newsItem.id}">click for more</g:link> 
                     </g:if>
                     <g:else>
                         <wiki:text>${newsItem.body}</wiki:text>

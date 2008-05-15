@@ -15,6 +15,8 @@ import org.grails.meta.UserInfo
 */
 class UserController {
 
+    def scaffold = User
+
     def jsecSecurityManager
 
     def register = {
@@ -37,8 +39,8 @@ class UserController {
                 else {
 
                     user = new User(login:params.login, password: DigestUtils.shaHex(params.password), email:params.email)
-                            .addToRoles(name:"Editor")
-                            .addToRoles(name:"Observer")
+                            .addToRoles(Role.findByName(Role.EDITOR))
+                            .addToRoles(Role.findByName(Role.OBSERVER))
 
                     if(!user.hasErrors() && user.save()) {
                         def userInfo = new UserInfo(user:user)
