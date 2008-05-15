@@ -53,6 +53,7 @@ class NewsController extends BaseWikiController{
     }
 
     def createNews = {
+
         def newsItem = new NewsItem(params)
         if(request.method == 'POST') {
             newsItem.author = request.user
@@ -64,7 +65,12 @@ class NewsController extends BaseWikiController{
             }
         }
         else {
-            return [newsItem:newsItem]
+            if(params.async) {
+                render(template:"newsForm", model:[newsItem:newsItem])
+            }
+            else {
+                return [newsItem:newsItem]
+            }
         }
     }
 

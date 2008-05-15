@@ -8,7 +8,7 @@ class User {
     static hasMany = [roles:Role]
 
     static constraints = {
-        email(email:true, unique:true)
+        email(email:true, unique:true, blank:false)
         login(blank:false, size:5..15)
 		password(blank:false)
 	}

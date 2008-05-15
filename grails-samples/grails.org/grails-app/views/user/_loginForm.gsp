@@ -39,7 +39,11 @@
 
      <div>
 
-         If you do not have an account <a href="#" onclick="new Ajax.Updater('contentPane','${createLink(controller:'user', action:'register')}',{method:'GET',asynchronous:true,evalScripts:true,parameters:Form.serialize('login')});return false;">click here</a>  to register.
+         <g:set var="registerLink">
+            <g:if test="${true == async}"><a href="#" onclick="new Ajax.Updater('contentPane','${createLink(controller:'user', action:'register')}',{method:'GET',asynchronous:true,evalScripts:true,parameters:Form.serialize('login')});return false;">click here</a></g:if>
+            <g:else><g:link controller="user" action="register">click here</g:link></g:else>
+         </g:set>
+         If you do not have an account ${registerLink} to register.
      </div>
 </div>
 

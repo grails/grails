@@ -1,10 +1,11 @@
 
 <g:render template="/common/messages" model="${pageScope.getVariables() + [bean:user]}" />
 
+
+
 <h1>Site Registration</h1>
 <div id="registerForm" class="userForm">
-
-    <g:formRemote name="login" url="[controller:'user',action:'register']" update="contentPane">
+    <g:set var="formBody">
        <div  class="inputForm">
 
 
@@ -21,7 +22,7 @@
                  <span class="label"><label for="email">Email:</label></span> <g:textField name="email" value="${params.email}"/>
             </p>
            <p>
-                <span class="label"><label for="email">Content Alerts?:</label></span> <g:checkBox name="info.emailSubscribed" value="${false}"/>
+                <span class="label"><label for="email">Content Alerts?:</label></span> <g:checkBox name="emailSubscribed" value="${false}"/>
            </p>
 
         </div>
@@ -37,7 +38,21 @@
        <div class="formButtons">
             <g:submitButton name="Submit" value="Register" />
         <div class="formButtons">
-    </g:formRemote>
+    </g:set>
+
+
+    <g:if test="${true == async}">
+        <g:formRemote name="register" url="[controller:'user',action:'register']" update="contentPane">
+              ${formBody}
+        </g:formRemote>
+    </g:if>
+    <g:else>
+        <g:form name="register" url="[controller:'user',action:'register']" update="contentPane">
+              ${formBody}
+        </g:form>
+    </g:else>
+
+
 
 </div>
 

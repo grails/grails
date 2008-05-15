@@ -1,4 +1,9 @@
-<div id="infoLinks" style="margin-left:550px;">
+<div id="infoLinks" style="margin-left:500px;">
+    <g:remoteLink class="actionIcon" action="editWikiPage" id="${wikiPage?.title}" update="contentPane">
+        <img border="0" src="${createLinkTo(dir:'images/','icon-edit.png')}" width="15" height="15" alt="Icon Edit" class="inlineIcon" border="0" />
+    </g:remoteLink>
+    <g:remoteLink action="editWikiPage" id="${wikiPage?.title}" update="contentPane">Edit</g:remoteLink>
+    
     <g:remoteLink update="contentPane" controller="content" id="${wikiPage?.title}" params="[xhr:true]"><img src="${createLinkTo(dir:'images/','icon-edit.png')}" width="15" height="15" alt="Icon Edit" class="inlineIcon" border="0" /></g:remoteLink>
     <g:remoteLink update="contentPane" controller="content" id="${wikiPage?.title}" params="[xhr:true]">View Page</g:remoteLink>
 </div>

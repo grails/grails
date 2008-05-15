@@ -20,20 +20,26 @@ class UserController {
     def jsecSecurityManager
 
     def register = {
+        def renderParams = [ model:[originalURI:params.originalURI,
+                      formData:params,
+                      async:request.xhr] ]
+        
+        if(request.xhr)
+            renderParams.template = "registerForm"
+        else
+            renderParams.view = "register"
+
         if(request.method == 'POST') {
             def user = User.findByLogin(params.login)
             if(user) {
-                render(template:"registerForm", model:[originalURI:params.originalURI,
-                        formData:params,
-                        async:true,
-                        message:"auth.user.already.exists"])
+
+                renderParams.model.message= "auth.user.already.exists"
+                render(renderParams)
             }
             else {
                 if(params.password != params.password2) {
-                    render(template:"registerForm", model:[originalURI:params.originalURI,
-                            formData:params,
-                            async:true,
-                            message:"auth.password.mismatch"])
+                    renderParams.model.message= "auth.password.mismatch"
+                    render(renderParams)
 
                 }
                 else {
@@ -42,15 +48,16 @@ class UserController {
                             .addToRoles(Role.findByName(Role.EDITOR))
                             .addToRoles(Role.findByName(Role.OBSERVER))
 
-                    if(!user.hasErrors() && user.save()) {
-                        def userInfo = new UserInfo(user:user)
-                        userInfo.properties = params['info']
+                    if(!user.hasErrors() && user.save(flush:true)) {
+                        def userInfo = new UserInfo(params)
+                        userInfo.user = user
                         userInfo.save()
                         
                         def authToken = new UsernamePasswordToken(user.login, params.password)
                         this.jsecSecurityManager.login(authToken)
 
                         if(params.originalURI) {
+
                             redirect(url:params.originalURI, params:params)
                         }
                         else {
@@ -58,10 +65,8 @@ class UserController {
                         }
                     }
                     else {
-                        render(template:"registerForm", model:[originalURI:params.originalURI,
-                                formData:params,
-                                async:true,
-                                user:user])
+                        renderParams.model.user = user
+                        render(renderParams)
                     }
                 }
 
@@ -69,10 +74,7 @@ class UserController {
             }
         }
         else {
-            render(template:"registerForm", model:[originalURI:params.originalURI,
-                    formData:params,
-                    async:true,
-                    message:"auth.invalid.login"])
+            render(renderParams)
         }
 
     }
