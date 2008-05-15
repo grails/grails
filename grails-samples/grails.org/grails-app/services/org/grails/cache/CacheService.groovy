@@ -40,7 +40,7 @@ class CacheService {
     }
 
     def putWikiText(key,value) {
-        def old = getWikiText(key)?.value
+        def old = getWikiText(key)
         wikiCache.put(new Element(key,value))
         return old
     }
