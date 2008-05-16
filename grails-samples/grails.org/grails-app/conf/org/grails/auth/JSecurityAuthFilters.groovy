@@ -50,6 +50,13 @@ class JSecurityAuthFilters {
 	                }
 	            }
 	        }
+            jobPosting(controller:"job", action:"(delete|edit|update|editJobs|save|create)") {
+	            before = {
+	                accessControl {
+	                    role("Editor") || role("Administrator")
+	                }
+	            }                
+            }
             wikiManagement(controller:"content", action:"rollbackWikiVersion") {
                 before = {
                     accessControl {

@@ -20,6 +20,10 @@ class UrlMappings {
       "/rollback/$id/$number"(controller:"content", action:"rollbackWikiVersion")
       "/diff/$id/$number/$diff"(controller:"content", action:"diffWikiVersion")
       "/previous/$id/$number"(controller:"content", action:"previousWikiVersion")
+
+      "/jobs/$action?"(controller:"job") {
+          layout = "subpage"
+      }
       
       "/$id?"(controller:"content")
 

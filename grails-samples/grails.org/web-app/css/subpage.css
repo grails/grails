@@ -80,13 +80,24 @@ body.subpage {
 	line-height: 1.6em;
 }
 
+#statusbox {
+    right:30px;
+    top:5px;
+    color:white;
+    position:absolute;
+    font: 300 0.95em Arial, sans-serif;
+}
+#statusbox a:link, a:visited {
+    color: #fff;    
+}
+
 #floatBox {
 	position: relative;
 	float: right;
 	background-color: #ddd;
 	width: 265px;
 	z-index: 100;
-	margin: 20px 15px 20px 20px;
+	margin: 30px 15px 20px 20px;
 	-moz-border-radius: 18px;
 	border: 2px solid #fff;
 }

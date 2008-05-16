@@ -20,7 +20,9 @@
 <body class="subpage">
 
 	<div id="container">
-
+        <jsec:isLoggedIn>
+            <div id="statusbox">Welcome <strong><jsec:principal /></strong> | <g:link controller="user" action="logout">Logout</g:link></div>    
+        </jsec:isLoggedIn>
 		<div id="floatBox">
             <g:render template="/content/nav" />
 		</div><!-- / floatBox -->
@@ -30,8 +32,10 @@
 		<!-- logo -->
 		<g:link controller="content" id="Home"><img src="${createLinkTo(dir:'images',file:'grails-logo-sm.png')}" width="196" height="53" alt="Smaller Grails Logo" class="logo" border="0" /></g:link>
 		<!-- / logo -->
-
-		<h1><g:layoutTitle /></h1>
+        <g:set var="title" value="${layoutTitle()}" />
+        <g:if test="${title?.size() < 20}">
+            <h1>${title}</h1>
+        </g:if>
 
 		<div id="breadcrumb">
 		<ul>

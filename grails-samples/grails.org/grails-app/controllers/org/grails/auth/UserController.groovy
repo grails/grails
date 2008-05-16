@@ -43,7 +43,7 @@ class UserController {
 
                 }
                 else {
-                     
+
                     user = new User(login:params.login, password: (params.password ? DigestUtils.shaHex(params.password) : null), email:params.email)
                             .addToRoles(Role.findByName(Role.EDITOR))
                             .addToRoles(Role.findByName(Role.OBSERVER))
@@ -80,7 +80,8 @@ class UserController {
     }
 
     def logout = {
-        redirect(uri:"")
+        org.jsecurity.SecurityUtils.getSubject().logout()
+        redirect(uri:"/")
     }
 
     def login = {
