@@ -310,10 +310,15 @@ class ContentController extends BaseWikiController{
                 File targetFile = new File("$path/${file.getOriginalFilename()}")
                 if(!targetFile.parentFile.exists()) targetFile.parentFile.mkdirs()
                 
-                file.transferTo(targetFile);
-                render(view:"/common/iframeMessage", model:[pageId:"upload",
-                                                            frameSrc: g.createLink(controller:'content', action:'uploadImage', id:params.id),
-                                                            message: "Upload complete. Use the syntax !${params.id? params.id + '/' : ''}${file.getOriginalFilename()}! to refer to your file"])
+                try {
+                    file.transferTo(targetFile)
+                    render(view:"/common/iframeMessage", model:[pageId:"upload",
+                            frameSrc: g.createLink(controller:'content', action:'uploadImage', id:params.id),
+                            message: "Upload complete. Use the syntax !${params.id? params.id + '/' : ''}${file.getOriginalFilename()}! to refer to your file"])
+                } catch (Exception e) {
+                    log.error(e.message, e)
+                    render(view:"/common/uploadDialog",model:[category:params.id,message:"Error uploading file!"])
+                }
             }
             else {
                 render(view:"/common/uploadDialog",model:[category:params.id,message:"File type not in list of supported types: ${config.wiki.supported.upload.types?.join(',')}"])
