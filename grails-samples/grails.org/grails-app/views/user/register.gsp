@@ -5,6 +5,12 @@
       <title>Registration</title>
       <meta content="subpage" name="layout" />
       <g:javascript library="scriptaculous" />
+      <style type="text/css">
+          #content-container {
+              height:700px;
+          }
+
+      </style>
   </head>
   <body>
         <div id="contentPane">

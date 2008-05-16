@@ -22,7 +22,7 @@
                  <span class="label"><label for="email">Email:</label></span> <g:textField name="email" value="${params.email}"/>
             </p>
            <p>
-                <span class="label"><label for="email">Content Alerts?:</label></span> <g:checkBox name="emailSubscribed" value="${false}"/>
+                <span class="label"><label for="email">Receive E-mail Updates for Content Changes?:</label></span> <g:checkBox name="emailSubscribed" value="${false}"/>
            </p>
 
         </div>
@@ -35,7 +35,7 @@
             </g:if>
         </g:each>
 
-       <div class="formButtons">
+       <div class="formButtons" style="margin-top:100px;">
             <g:submitButton name="Submit" value="Register" />
         <div class="formButtons">
     </g:set>

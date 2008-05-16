@@ -39,7 +39,7 @@ class NewsController extends BaseWikiController{
 
         withFormat {
             html {
-                redirect(uri:"")
+                redirect(uri:"/")
             }
             rss {
                 render(feedType:"rss",feedOutput) 
@@ -60,7 +60,7 @@ class NewsController extends BaseWikiController{
         if(request.method == 'POST') {
             newsItem.author = request.user
             if(newsItem.save()) {
-                redirect(uri:"")
+                redirect(uri:"/")
             }
             else {
                 return [newsItem:newsItem]
