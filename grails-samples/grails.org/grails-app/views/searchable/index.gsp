@@ -50,7 +50,7 @@
       <span>
         <g:if test="${haveQuery && haveResults}">
           Showing <strong>${searchResult.offset + 1}</strong> - <strong>${searchResult.results.size() + searchResult.offset}</strong> of <strong>${searchResult.total}</strong>
-          results for <strong>${params.q}</strong>
+          results for <strong>${params.q?.encodeAsHTML()}</strong>
         </g:if>
         <g:else>
         &nbsp;
