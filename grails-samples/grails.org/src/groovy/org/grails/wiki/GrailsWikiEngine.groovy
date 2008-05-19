@@ -52,6 +52,7 @@ class GrailsWikiEngine extends BaseRenderEngine implements WikiRenderEngine{
                             TextileLinkFilter,
                             HeaderFilter,
                             ListFilter,
+                            //TableFilter,
                             LineFilter,
                             StrikeThroughFilter,
                             NewlineFilter,
@@ -64,7 +65,8 @@ class GrailsWikiEngine extends BaseRenderEngine implements WikiRenderEngine{
                             MarkFilter,
                             KeyFilter,
                             TypographyFilter,
-                            EscapeFilter]
+                            EscapeFilter
+                            ]
 
             for(f in filters) {
                 RegexFilter filter = f.newInstance()
@@ -75,6 +77,7 @@ class GrailsWikiEngine extends BaseRenderEngine implements WikiRenderEngine{
                     def repository = filter.getMacroRepository()
                     loader.add(repository, new WarningMacro())
                     loader.add(repository, new NoteMacro())
+                    loader.add(repository, new InfoMacro())
                 }
             }
             localFP.init();
@@ -127,7 +130,7 @@ class GrailsWikiEngine extends BaseRenderEngine implements WikiRenderEngine{
         def contextPath = initialContext.get(CONTEXT_PATH)
         contextPath = contextPath ?: "."
         
-        buffer <<  "<a href=\"$contextPath/create/$name\" class=\"$name\">$view</a>"
+        buffer <<  "<a href=\"$contextPath/create/$name\" class=\"$name\">$view (+)</a>"
     }
 
 }
@@ -142,6 +145,13 @@ public class NoteMacro extends BaseMacro {
     String getName() {"note"}
     void execute(Writer writer, MacroParameter params) {
     writer << '<blockquote class="note">' << params.content << "</blockquote>"
+  }
+}
+
+public class InfoMacro extends BaseMacro {
+    String getName() {"info"}
+    void execute(Writer writer, MacroParameter params) {
+    writer << '<blockquote class="info">' << params.content << "</blockquote>"
   }
 }
 
@@ -266,6 +276,40 @@ class HeaderFilter extends RegexTokenFilter{
           def header = matchResult.group(1)
           def content = matchResult.group(2)
           out << "<h$header>$content</h$header>"
+    }
+
+
+}
+class TableFilter extends RegexTokenFilter {
+
+    public TableFilter() {
+        super(/(?m)^(\|(.|\n)+\|\n[^\|])/)
+    }
+
+    public void handleMatch(StringBuffer stringBuffer, MatchResult matchResult, FilterContext filterContext) {
+        def result = matchResult.group(1)
+        stringBuffer << '<table class="wikiTable">'
+        result.eachMatch(/(?m)^\|(.+)\|\n/ ) {
+           def current = it[0].trim()
+           def colCount = 0
+           if(current.startsWith("||")) {
+               def tokens = current[2..-3].split(/\|\|/)
+               stringBuffer << '<tr class="wikiHeaderRow">'
+               for(t in tokens ) {
+                   stringBuffer << "<th>${t}</th>"
+               }
+               stringBuffer << '</tr>'
+           }
+           else if(current.startsWith("|")) {
+               def tokens = current[1..-1].split(/\|/)
+               stringBuffer << '<tr class="wikiRow">'
+               for(t in tokens ) {
+                   stringBuffer << "<td>${t}</td>"
+               }
+               stringBuffer << '</tr>'
+           }
+        }
+        stringBuffer << '</table>'
     }
 
 

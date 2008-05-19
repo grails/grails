@@ -5,19 +5,6 @@
 <head>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <meta content="homepage" name="layout" />
-    <style type="text/css">
-        #feedLink {
-            float:right;
-            border:none;
-        }
-        #feedLink a:active, a:visited, a:link {
-            text-decoration:none;
-            border:none;
-        }
-        a:active, a:visited, a:link {
-            text-decoration:underline;
-        }
-    </style>
 </head
 <body>
     <div>

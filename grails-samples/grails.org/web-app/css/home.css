@@ -219,6 +219,15 @@ Version:  02 Feb 2008
 	border-bottom: 1px solid;
 }
 
+
+#feedLink {
+    float:right;
+    border:none;
+}
+#feedLink a:active,#feedLink a:visited,#feedLink a:link {
+    text-decoration:none;
+    border:none;
+}
 /* bite-sized area styles 													
 ------------------------------------------------------- */
 

@@ -87,7 +87,7 @@ body.subpage {
     position:absolute;
     font: 300 0.95em Arial, sans-serif;
 }
-#statusbox a:link, a:visited {
+#statusbox a:link, statusbox a:visited {
     color: #fff;    
 }
 
