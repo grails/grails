@@ -42,7 +42,7 @@ class MailerJob {
                      text << "Page <a href=\"http://grails.org/${titleUrlEscaped}\">${content.title}<a/> <br><br>"
                      text << "</div>"
                      text << '<div style="color:black;"><br><br>'
-                     text << "Edited by <b>${user.login}</b>. <a href=\"http://grails.org/previous/${titleUrlEscaped}/${version.number}\">View change</a> <br><br>"
+                     text << "Edited by <b>${version.author?.login}</b>. <a href=\"http://grails.org/previous/${titleUrlEscaped}/${version.number}\">View change</a> <br><br>"
                      text << "</div>"
                      text << engine.render(content.body, context)
 
