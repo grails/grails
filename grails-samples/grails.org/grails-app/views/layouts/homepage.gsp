@@ -10,7 +10,7 @@
 	<style type="text/css">@import url("css/home.css");</style>
 
 	<!--[if IE]>
-		<link rel="stylesheet" href="css/ie/master.css" type="text/css" media="screen" title="Primary screen stylesheet" charset="utf-8" />
+		<link rel="stylesheet" href="${createLinkTo(dir:'css/ie', file:'master.css')}" type="text/css" media="screen" title="Primary screen stylesheet" charset="utf-8" />
 	<![endif]-->
     <g:layoutHead />
 
