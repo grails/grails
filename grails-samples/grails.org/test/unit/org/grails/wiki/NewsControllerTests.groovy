@@ -91,6 +91,6 @@ class NewsControllerTests extends GroovyTestCase{
         def controller = new NewsController()
         controller.createNews()
 
-        assertEquals "", redirectParams.uri
+        assertEquals "/", redirectParams.uri
     }    
 }

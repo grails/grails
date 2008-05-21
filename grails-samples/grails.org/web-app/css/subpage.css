@@ -71,7 +71,7 @@ body.subpage {
 .subpage #content {
 	background-color: #fff;
 	position: relative;
-
+	min-height: 780px;
 	top: 88px;
 	left: 31px;
 	width: 890px;
@@ -110,7 +110,7 @@ body.subpage {
 	float: right;
 	clear: both;
 	top: 0px;
-	right: -30px;
+	right: 0px;
 	width: 240px;
 	z-index: 1000;
 }
@@ -203,7 +203,7 @@ body.subpage {
 
 #footerNav {
 	position: relative;
-	top: -89px;
+	top: -92px;
 	background-color: #82866b;
 	width: 490px;
 	margin: 0px auto;
@@ -213,8 +213,8 @@ body.subpage {
 
 #footerContent {
 	width: 870px;
-	height: 66px;
-	margin: 0px auto;
+	height: 48px;
+	margin: 40px auto 0px auto;
 	padding: 25px 0px 0px 45px;
 	text-align: left;
 	line-height: 1.6em;

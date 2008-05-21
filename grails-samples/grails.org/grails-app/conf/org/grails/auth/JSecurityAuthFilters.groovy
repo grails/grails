@@ -50,7 +50,7 @@ class JSecurityAuthFilters {
 	                }
 	            }
 	        }
-            jobPosting(controller:"job", action:"(delete|edit|update|editJobs|save|create)") {
+            jobPosting(controller:"(job|paypal)", action:"(delete|edit|update|editJobs|save|create|buy|success|cancel)") {
 	            before = {
 	                accessControl {
 	                    role("Editor") || role("Administrator")

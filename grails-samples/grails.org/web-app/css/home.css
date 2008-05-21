@@ -85,22 +85,21 @@ Version:  02 Feb 2008
 	width: 615px;
 	height: 300px;
 	font-size: 1.2em;
-	line-height: 1.35em;
+	line-height: 1.25em;
 }
 
-.post h2 a:link,
-.post h2 a:visited {
+.blogpost h2 a:link,
+.blogpost h2 a:visited {
 	display: block;
 	font-size: 1.8em;
-	line-height: 1.8em;
+	line-height: 1.6em;
 	letter-spacing: -0.04em;
-	color: #333;
 	font-weight: 300;
 	border-bottom: none;
 }
 
-.post h2 a:hover,
-.post h2 a:active {
+.blogpost h2 a:hover,
+.blogpost h2 a:active {
 	border-bottom: none;
 	text-decoration: underline;
 }
@@ -142,6 +141,8 @@ Version:  02 Feb 2008
 	border-bottom: 1px solid;
 }
 
+
+
 /* confluence-specific styles */												
 
 .blogHeading a:link,
@@ -166,8 +167,9 @@ Version:  02 Feb 2008
 }
 
 .blogpost {
-	margin-bottom:10px;
+	margin-bottom: 20px;
 }
+
 .endsection {
 	margin: 15px 0px 0px 0px;
 	font-size: 0.8em;
@@ -314,20 +316,11 @@ Version:  02 Feb 2008
 #footer {
 	background: #82866b url('../images/footer-bg.gif') top middle no-repeat;
 	position: relative;
-	top: 150px;
+	top: 70px;
 	margin: 0em auto;
-	padding: 0px 0px 91px 0px;
+	padding: 0px 0px 90px 0px;
 	width: 100%;
 	color: #333;
-}
-
-#footerContent {
-	width: 870px;
-	height: 66px;
-	margin: 0px auto;
-	padding: 65px 0px 40px 45px;
-	text-align: left;
-	line-height: 1.6em;
 }
 
 #footer a:link,
@@ -344,13 +337,25 @@ Version:  02 Feb 2008
 
 #footerNav {
 	position: relative;
-	top: -89px;
+	top: -92px;
 	background-color: #82866b;
 	width: 490px;
 	margin: 0px auto;
 	padding: 3px;
 	text-align: center;
 }
+
+#footerContent {
+	position: relative;
+	top: 80px;
+	width: 870px;
+	height: 48px;
+	margin: 0px auto 0px auto;
+	padding: 25px 0px 0px 45px;
+	text-align: left;
+	line-height: 1.6em;
+}
+
 
 #footerNav li {
 	list-style-type: none;

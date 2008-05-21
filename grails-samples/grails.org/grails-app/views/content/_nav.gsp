@@ -24,10 +24,12 @@
                 </li>
                 <li><g:link controller="content" id="Community">Community</g:link>
                 <ul>
+                    <plugin:isAvailable name="jobs">
+                        <li><g:link controller="job" action="list">Jobs Listings</g:link></li>    
+                    </plugin:isAvailable>
                     <li><g:link controller="content" id="Testimonials">Testimonials</g:link></li>
                     <li><g:link controller="content" id="Community">Contributing</g:link></li>
                     <li><g:link controller="content" id="Plugins">Plugins</g:link></li>
-                    <li><g:link controller="content" id="Developer+Blogs">Developer Blogs</g:link></li>
                     <li><g:link controller="content" id="Mailing lists">Mailing Lists</g:link></li>
                 </ul>
                 </li>

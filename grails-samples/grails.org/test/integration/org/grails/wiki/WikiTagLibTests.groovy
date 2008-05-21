@@ -13,11 +13,11 @@ class WikiTagLibTests extends GroovyPagesTestCase {
     void testHeadTags() {
         def template = '<wiki:text>h1. Hello</wiki:text>'
 
-        assertOutputEquals "<h1>Hello</h1>", template
+        assertOutputEquals "<a name=\"Hello\"></a><h1>Hello</h1>", template
 
          template = '<wiki:text>h2. Hello</wiki:text>'
 
-        assertOutputEquals "<h2>Hello</h2>", template 
+        assertOutputEquals "<a name=\"Hello\"></a><h2>Hello</h2>", template
 
     }
 
@@ -36,13 +36,24 @@ class WikiTagLibTests extends GroovyPagesTestCase {
         
         def template = '<wiki:text>My Link [Test Page]</wiki:text>'
 
-        assertOutputEquals 'My Link <a href="/Test+Page" class="Test+Page">Test Page</a>', template
+        assertOutputEquals 'My Link <a href="/Test+Page" class="pageLink">Test Page</a>', template
+
+    }
+
+    void testLinksForExistantPagesWithAnchors() {
+
+        def page = new WikiPage(title:"Test Page", body:"stuff")
+        assert page.save(flush:true)
+
+        def template = '<wiki:text>My Link [Test Page|Test Page#MyAnchor]</wiki:text>'
+
+        assertOutputEquals 'My Link <a href="/Test+Page#MyAnchor" class="pageLink">Test Page</a>', template
 
     }
 
     void testLinksForNonExistantPages() {
        def template = '<wiki:text>My Link [Random Page]</wiki:text>'
 
-        assertOutputEquals 'My Link <a href="./create/Random+Page" class="Random+Page">Random Page</a>', template        
+        assertOutputEquals 'My Link <a href="./create/Random+Page" class="createPageLink">Random Page (+)</a>', template        
     }
 }

@@ -52,7 +52,7 @@ class GrailsWikiEngine extends BaseRenderEngine implements WikiRenderEngine{
                             TextileLinkFilter,
                             HeaderFilter,
                             ListFilter,
-                            //TableFilter,
+                           // TableFilter,
                             LineFilter,
                             StrikeThroughFilter,
                             NewlineFilter,
@@ -97,6 +97,10 @@ class GrailsWikiEngine extends BaseRenderEngine implements WikiRenderEngine{
 
         def cache = initialContext.get(CACHE)
         if(cache?.getWikiText(name)) return true
+
+        if(name.indexOf("#")>-1) {
+            name = name[0..name.indexOf('#')-1]
+        }
         
         WikiPage page = WikiPage.findByTitle(name)
 
@@ -111,26 +115,35 @@ class GrailsWikiEngine extends BaseRenderEngine implements WikiRenderEngine{
         def contextPath = initialContext.get(CONTEXT_PATH)
         contextPath = contextPath ?: ""
         if(name.startsWith("http:")||name.startsWith("https:"))
-            buffer <<  "<a href=\"$name#$anchor\" class=\"$name\">$view</a>"
+            buffer <<  "<a href=\"$name#$anchor\" class=\"pageLink\">$view</a>"
         else
-            buffer <<  "<a href=\"$contextPath/$name#$anchor\" class=\"$name\">$view</a>"
+            buffer <<  "<a href=\"$contextPath/$name#$anchor\" class=\"pageLink\">$view</a>"
     }
 
     public void appendLink(StringBuffer buffer, String name, String view) {
+
         def contextPath = initialContext.get(CONTEXT_PATH)
         contextPath = contextPath ?: ""
+        def decoded = URLDecoder.decode(name, 'utf-8')
+        int i =decoded.indexOf('#')
+        if(i>-1) {
+            appendLink(buffer,URLEncoder.encode(decoded[0..i-1],'utf-8'),view, decoded[i+1..-1])            
+        }
+        else {
 
-        if(name.startsWith("http:")||name.startsWith("https:"))
-            buffer <<  "<a href=\"$name\" class=\"$name\">$view</a>"
-        else
-            buffer <<  "<a href=\"$contextPath/$name\" class=\"$name\">$view</a>"
+            if(name.startsWith("http:")||name.startsWith("https:"))
+                buffer <<  "<a href=\"$name\" class=\"pageLink\">$view</a>"
+            else
+                buffer <<  "<a href=\"$contextPath/$name\" class=\"pageLink\">$view</a>"
+        }
+
     }
 
     public void appendCreateLink(StringBuffer buffer, String name, String view) {
         def contextPath = initialContext.get(CONTEXT_PATH)
         contextPath = contextPath ?: "."
         
-        buffer <<  "<a href=\"$contextPath/create/$name\" class=\"$name\">$view (+)</a>"
+        buffer <<  "<a href=\"$contextPath/create/$name\" class=\"createPageLink\">$view (+)</a>"
     }
 
 }
@@ -275,7 +288,7 @@ class HeaderFilter extends RegexTokenFilter{
 
           def header = matchResult.group(1)
           def content = matchResult.group(2)
-          out << "<h$header>$content</h$header>"
+          out << "<a name=\"$content\"></a><h$header>$content</h$header>"
     }
 
 

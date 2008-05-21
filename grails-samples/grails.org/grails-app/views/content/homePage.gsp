@@ -7,14 +7,14 @@
     <meta content="homepage" name="layout" />
 </head
 <body>
-    <div>
-      <div id="feedLink" >
-           <g:link controller="news" action="latest" params="[format:'rss']"><img border="0" src="${createLinkTo(dir:'images', file:'feed.gif')}" alt="RSS Feed"  /></g:link>
-      </div>
+
+	  <div id="feedLink" >
+	       <g:link controller="news" action="latest" params="[format:'rss']"><img border="0" src="${createLinkTo(dir:'images', file:'feed.gif')}" alt="RSS Feed"  /></g:link>
+	  </div>
       <g:set var="newsItems" value="${NewsItem.listOrderByDateCreated(sort:'dateCreated', max:2, order:'desc')}" />
-        <g:each var="newsItem" in="${newsItems}">
-            <div class="blogpost" style="margin-bottom: 30px">
-                <div><g:link controller="news" action="showNews" id="${newsItem.id}">${newsItem.title}</g:link></div>
+      <g:each var="newsItem" in="${newsItems}">
+        <div class="blogpost">
+            <div><h2><g:link controller="news" action="showNews" id="${newsItem.id}">${newsItem.title}</g:link></h2></div>
 
                 <div class="pagesubheading">
                                 </div>
@@ -28,17 +28,15 @@
                     </div>
                      <div class="endsection">
                                 <b>Posted at ${newsItem.dateCreated}</b> by
-
                                 <a href="#">${newsItem.author?.login}</a>            |
                     </div>
             </div>
         </g:each>
 
+
         <div>
             <g:link controller="news" action="createNews">Click here</g:link> to add news
         </div>
-    </div>
-
 
 </body>
 </html>

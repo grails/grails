@@ -286,5 +286,8 @@
     <mapping directory="$PROJECT_DIR$" vcs="svn" />
   </component>
   <component name="WebServicesPlugin" addRequiredLibraries="true" />
+  <UsedPathMacros>
+    <macro name="GRAILS_HOME" />
+  </UsedPathMacros>
 </project>
 

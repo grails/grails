@@ -241,8 +241,9 @@ div .message {
     border:2px solid yellow;
 }
 
-.actionIcon {
-    text-decoration:none;
+a:link.actionIcon img,
+a:visited.actionIcon img {
+    text-decoration: none;
 }
 
 .dialog {
@@ -286,5 +287,3 @@ div .message {
 .formButtons {
     margin: 20px;
 }
-
-
