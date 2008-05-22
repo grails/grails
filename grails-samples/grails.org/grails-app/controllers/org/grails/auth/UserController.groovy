@@ -19,6 +19,18 @@ class UserController {
 
     def jsecSecurityManager
 
+    def profile = {
+        def userInfo = UserInfo.findByUser(request.user)
+        if(request.method == 'POST') {
+            if(!userInfo) userInfo = new UserInfo(user:request.user)
+            userInfo.properties = params
+            userInfo.save()
+
+        }
+        return [user:request.user, userInfo:userInfo]
+
+    }
+
     def register = {
         def renderParams = [ model:[originalURI:params.originalURI,
                       formData:params,

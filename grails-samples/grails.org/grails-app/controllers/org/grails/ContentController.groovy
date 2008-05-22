@@ -70,17 +70,25 @@ class ContentController extends BaseWikiController{
     def index = {
         def pageName = params.id
 
-        if(pageName && 'Home'!=pageName) { 
-            def wikiPage = getCachedOrReal(pageName)
-            if(wikiPage) {
-                if(request.xhr) {
-                    render(template:"wikiShow", model:[content:wikiPage])
-                }
-                else
-                    render(view:"contentPage", model:[content:wikiPage])
-            }
-            else
+        if(pageName) {
+            if(pageName == 'Home') {
                 render(view:"homePage")
+            }
+            else {
+
+                def wikiPage = getCachedOrReal(pageName)
+                if(wikiPage) {
+                    if(request.xhr) {
+                        render(template:"wikiShow", model:[content:wikiPage])
+                    }
+                    else
+                        render(view:"contentPage", model:[content:wikiPage])
+                }
+                else {
+                    response.sendError 404
+                }
+            }
+
 		}
 		else {
 			render(view:"homePage")

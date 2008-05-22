@@ -3,7 +3,7 @@
         Effect.Fade("errors", {delay:5})
     }
     if($("message")!=null) {
-        Effect.Fade("message", {delay:5})
+        Effect.Fade("message", {delay:10, toggle:false})
     }
 
 </script>

@@ -21,7 +21,7 @@
 
 	<div id="container">
         <jsec:isLoggedIn>
-            <div id="statusbox">Welcome <strong><jsec:principal /></strong> | <g:link controller="user" action="logout">Logout</g:link></div>    
+            <div id="statusbox">Welcome <strong><jsec:principal /></strong> | <g:link controller="user" action="profile">Profile</g:link> | <g:link controller="user" action="logout">Logout</g:link></div>    
         </jsec:isLoggedIn>
 		<div id="floatBox">
             <g:render template="/content/nav" />

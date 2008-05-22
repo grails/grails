@@ -78,6 +78,7 @@ class GrailsWikiEngine extends BaseRenderEngine implements WikiRenderEngine{
                     loader.add(repository, new WarningMacro())
                     loader.add(repository, new NoteMacro())
                     loader.add(repository, new InfoMacro())
+                    loader.add(repository, new AnchorMacro())
                 }
             }
             localFP.init();
@@ -94,17 +95,25 @@ class GrailsWikiEngine extends BaseRenderEngine implements WikiRenderEngine{
 
     
     public boolean exists(String name) {
-
-        def cache = initialContext.get(CACHE)
-        if(cache?.getWikiText(name)) return true
-
-        if(name.indexOf("#")>-1) {
-            name = name[0..name.indexOf('#')-1]
+        if(name.startsWith('#')) {
+            // its an anchor link
+            return true
         }
-        
-        WikiPage page = WikiPage.findByTitle(name)
+        else if(name.startsWith("http:")||name.startsWith("https:") || name.startsWith("mailto:")) {
+            return true
+        }
+        else {
+            def cache = initialContext.get(CACHE)
+            if(cache?.getWikiText(name)) return true
 
-        return page != null
+            if(name.indexOf("#")>-1) {
+                name = name[0..name.indexOf('#')-1]
+            }
+
+            WikiPage page = WikiPage.findByTitle(name)
+
+            return page != null
+        }
     }
 
     public boolean showCreate() {
@@ -125,14 +134,18 @@ class GrailsWikiEngine extends BaseRenderEngine implements WikiRenderEngine{
         def contextPath = initialContext.get(CONTEXT_PATH)
         contextPath = contextPath ?: ""
         def decoded = URLDecoder.decode(name, 'utf-8')
+
         int i =decoded.indexOf('#')
-        if(i>-1) {
+        if(decoded.startsWith('#')) {
+            buffer <<  "<a href=\"${decoded}\" class=\"pageLink\">${decoded[1..-1]}</a>"
+        }
+        else if(i>-1) {
             appendLink(buffer,URLEncoder.encode(decoded[0..i-1],'utf-8'),view, decoded[i+1..-1])            
         }
         else {
 
-            if(name.startsWith("http:")||name.startsWith("https:"))
-                buffer <<  "<a href=\"$name\" class=\"pageLink\">$view</a>"
+            if(decoded.startsWith("http:")||decoded.startsWith("https:") || decoded.startsWith("mailto:"))
+                buffer <<  "<a href=\"$decoded\" class=\"pageLink\">$view</a>"
             else
                 buffer <<  "<a href=\"$contextPath/$name\" class=\"pageLink\">$view</a>"
         }
@@ -167,6 +180,19 @@ public class InfoMacro extends BaseMacro {
     writer << '<blockquote class="info">' << params.content << "</blockquote>"
   }
 }
+public class AnchorMacro extends BaseMacro {
+
+    String getName() { "anchor" }
+
+    void execute(Writer writer, MacroParameter params) {
+        if(params.length >0) {
+            def name = params.get(0)
+            def body = params.content ?: ''
+            writer << "<a name=\"$name\">${body}</a>"
+        }
+    }
+
+}
 
 class ItalicFilter extends RegexTokenFilter {
     public ItalicFilter() {
@@ -200,7 +226,7 @@ class CodeFilter extends RegexTokenFilter {
 }
 class ImageFilter  extends RegexTokenFilter {
     public ImageFilter() {
-        super(/!([^\n]*?)!/);
+        super(/\s!([^\n]*?)!\s/);
     }
 
 
@@ -288,7 +314,9 @@ class HeaderFilter extends RegexTokenFilter{
 
           def header = matchResult.group(1)
           def content = matchResult.group(2)
-          out << "<a name=\"$content\"></a><h$header>$content</h$header>"
+          def contentNoTags = content?.replaceAll(/(m?)<\/?[^>]+>/,'')
+
+          out << "<a name=\"$contentNoTags\"></a><h$header>$content</h$header>"
     }
 
 

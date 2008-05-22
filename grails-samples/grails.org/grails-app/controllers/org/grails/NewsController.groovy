@@ -4,6 +4,7 @@ import org.grails.news.NewsItem
 import org.radeox.engine.context.BaseInitialRenderContext
 import org.grails.wiki.GrailsWikiEngine
 import org.grails.wiki.BaseWikiController
+import org.grails.cache.CacheService
 
 /**
  * @author Graeme Rocher
@@ -15,7 +16,7 @@ class NewsController extends BaseWikiController{
 
     def scaffold = NewsItem
 
-    def cacheService
+    CacheService cacheService
 
     def latest = {
 
@@ -52,6 +53,27 @@ class NewsController extends BaseWikiController{
 
     def showNews = {
         [content:NewsItem.get(params.id)]
+    }
+
+    def editNews = {
+        def newsItem = NewsItem.get(params.id)
+        if(newsItem) {
+
+            if(request.method == 'POST') {
+                // update news
+                newsItem.properties = params
+                newsItem.save(flush:true)
+                cacheService.removeWikiText newsItem.title
+                redirect(action:'showNews', id:newsItem.id)
+
+            }
+            else {
+                return  [content:newsItem]
+            }
+        }
+        else {
+            response.sendError 404
+        }
     }
 
     def createNews = {

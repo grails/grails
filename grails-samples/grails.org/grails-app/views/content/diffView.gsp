@@ -27,7 +27,7 @@
 </head>
 <body>
     <div id="contentPane">
-        <div id="infoLinks" style="margin-left:550px;">
+        <div id="infoLinks" style="margin-left:520px;">
             <g:link controller="content" id="${content?.title}"><img src="${createLinkTo(dir:'images/','icon-edit.png')}" width="15" height="15" alt="Icon Edit" class="inlineIcon" border="0" /></g:link>
             <g:link update="contentPane" controller="content" id="${content?.title}">View Page</g:link>
         </div>
