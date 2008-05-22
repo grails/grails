@@ -226,7 +226,7 @@ class CodeFilter extends RegexTokenFilter {
 }
 class ImageFilter  extends RegexTokenFilter {
     public ImageFilter() {
-        super(/\s!([^\n]*?)!\s/);
+        super(/!(\S*?)!/);
     }
 
 

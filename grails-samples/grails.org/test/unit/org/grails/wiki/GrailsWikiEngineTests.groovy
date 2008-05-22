@@ -89,6 +89,16 @@ class GrailsWikiEngineTests extends GroovyTestCase{
         assertEquals '<a href="http://grails.org/unsubscribe" class="pageLink">http://grails.org/unsubscribe</a>', engine.render('[http://grails.org/unsubscribe]', context)
         
     }
-    
+
+    void testImages() {
+        def text = '''!image.jpg!
+
+hello world!
+
+an again!
+'''
+         assertEquals '''<img border="0" class="center" src="./images/image.jpg"></img><p class="paragraph"/>hello world!<p class="paragraph"/>an again!
+''', engine.render(text, context)
+    }
 }
 

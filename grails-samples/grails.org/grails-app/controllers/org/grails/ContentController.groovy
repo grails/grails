@@ -329,8 +329,10 @@ class ContentController extends BaseWikiController{
             MultipartFile file = request.getFile('file')
             ServletContext context = getServletContext()
             def path = context.getRealPath("/images${ params.id ? '/'+params.id : ''}")
-
-            if(config.wiki.supported.upload.types?.contains(file.getContentType())) {
+            if(!(file.getOriginalFilename() ==~ /\S+/)) {  
+                render(view:"/common/uploadDialog",model:[category:params.id,message:"Your filename cannot contain white space characters!"])
+            }
+            else if(config.wiki.supported.upload.types?.contains(file.getContentType())) {
                 File targetFile = new File("$path/${file.getOriginalFilename()}")
                 if(!targetFile.parentFile.exists()) targetFile.parentFile.mkdirs()
                 
