@@ -1,6 +1,6 @@
 
 <div id="search">
-    <g:form method="GET" url="[controller:'searchable']" name="searchForm">
+    <g:form method="GET" url="[controller:'content', action:'search']" name="searchForm">
         <input type="text" accessKey="s" name="q" /></g:form>
 </div><!-- / search -->
 

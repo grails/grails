@@ -27,13 +27,7 @@
           font-weight: bold;
       }
 
-      ul {
-        margin: 1em 2em;
-      }
 
-      li, p {
-        margin-bottom: 1em;
-      }
     </style>
     <script type="text/javascript">
         var focusQueryInput = function() {
@@ -71,12 +65,12 @@
             
             <g:set var="className" value="${result.title}" />
 
-            <div class="name"><g:link controller="content" id="${result.title}">${className} #${result.id}</g:link></div>
+            <div class="name"><g:link controller="content" id="${result.title}">${className}</g:link></div>
 
-            <g:set var="desc"><g:if test="${result.body.size() > 120}"><wiki:text>${result.body[0..120]}</wiki:text>...</g:if>
+            <g:set var="desc"><g:if test="${result.body.size() > 220}"><wiki:text>${result.body[0..220]}</wiki:text>...</g:if>
             <g:else><wiki:text id="${result.title}">${result.body}</wiki:text></g:else></g:set>
             <div class="desc">${desc}</div>
-            <div class="displayLink">${createLink(controller: "content",id: result.title)}</div>
+            
           </div>
         </g:each>
       </div>

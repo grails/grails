@@ -6,7 +6,7 @@ class UrlMappings {
       "/news/create"(controller:"news", action:"createNews")
       "/news/edit/$id"(controller:"news", action:"editNews")
       "/news/latest"(controller:"news", action:"latest")
-      "/search"(controller:"searchable")
+      "/search"(controller:"content", action:"search")
       "/upload/$id?"(controller:"content", action:"uploadImage")
       "/register"(controller:"user", action:"register")
       "/login"(controller:"user", action:"login")
