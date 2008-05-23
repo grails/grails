@@ -19,6 +19,8 @@ Attributes
 * @value@ (optional) - The value of the checkbox
 * @checked@ (optional) - Expression if evaluates to @true@ sets to checkbox to checked
 
+The @checkBox@ tag typically only requires the @name@ and @value@ attributes and will infer whether the checkbox should be checked or not from the value. However, if you need to override this behaviour the @checked@ attribute can be used for fine grained control.
+
 h2. Source
 
 {source:tag=FormTagLib.checkBox}
