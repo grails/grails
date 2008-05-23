@@ -11,7 +11,7 @@ h2. Examples
 <g:javascript src="myscript.js" /> 
 
 // imports all the necessary js for the scriptaculous library
-<g:javascript library="scripaculous" /> 
+<g:javascript library="scriptaculous" /> 
 
 <g:javascript>alert('hello')</g:javascript>
 {code}
