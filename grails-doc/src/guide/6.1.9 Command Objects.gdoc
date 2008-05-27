@@ -49,9 +49,10 @@ class LoginCommand {
 
 	String username
 	String password
+
 	static constraints = {
-		username(validator: {
-			loginService.canLogin(username, password)
+		username(validator: { val, obj ->
+			obj.loginService.canLogin(obj.username, obj.password)
 		})
 	}
 }
