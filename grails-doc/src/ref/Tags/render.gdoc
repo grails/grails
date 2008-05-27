@@ -70,6 +70,7 @@ Attributes
 * @model@ (optional) - The model to apply the template against as a java.util.Map
 * @collection@ (optional) - A collection of model objects to apply the template to
 * @var@ (optional) - The variable name of the bean to be referenced in the template
+* @plugin@ (optional) - The plug-in to look for the template in
 
 
 h2. Source
