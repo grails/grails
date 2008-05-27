@@ -74,3 +74,4 @@ Parameters:
 * @contentType@ (optional) - The contentType of the response
 * @encoding@ (optional) - The encoding of the response
 * @converter@ (as single non-named first parameter) - A Converter that should be rendered as Response
+* @plugin@ (optional) - The plug-in to look for the template in
