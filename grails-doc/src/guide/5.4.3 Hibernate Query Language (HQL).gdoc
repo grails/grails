@@ -41,10 +41,10 @@ Groovy multiline strings will NOT work with HQL queries
 
 h4. Pagination and Sorting
 
-You can also perform pagination and sorting whilst using HQL queries. To do so simply specify the pagination and sorting options as a hash at the end of the method call:
+You can also perform pagination and sorting whilst using HQL queries. To do so simply specify the pagination options as a map at the end of the method call and include an "ORDER BY" clause in the HQL:
 
 {code:java}
 def results =
-      Book.findAll("from Book as b where b.title like 'Lord of the%'", 
-                   [max:10, offset:20, sort:"title", order:"asc"])
+      Book.findAll("from Book as b where b.title like 'Lord of the%' order by b.title asc",
+                   [max:10, offset:20])
 {code}
