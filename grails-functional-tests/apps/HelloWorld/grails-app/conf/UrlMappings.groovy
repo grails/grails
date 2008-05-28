@@ -1,10 +1,29 @@
 class UrlMappings {
     static mappings = {
-      "/$controller/$action?/$id?"{
-	      constraints {
-			 // apply constraints here
-		  }
-	  }
-	  "500"(view:'/error')
-	}
+        "/mapping"(controller: "hello", action: "mapping") {
+            something = "test string"
+        }
+
+        "/mapping2" {
+            controller = "hello"
+            action = "mapping"
+            something = "test string"
+        }
+
+        "/$controller/$action?/$id?"{
+            something = "test string"
+            
+            constraints {
+                // apply constraints here
+            }
+        }
+        
+        "500"(controller: "errors", action: "show") {
+            code = 1001
+        }
+
+        "414"(view: "/missing")
+
+        "444"(controller: "hello", view: "kaput")
+    }
 }
