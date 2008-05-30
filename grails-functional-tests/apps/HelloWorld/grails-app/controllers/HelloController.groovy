@@ -18,4 +18,6 @@ class HelloController {
     def error444 = {
         response.sendError(444)
     }
+
+    def reloadTest = {}
 }

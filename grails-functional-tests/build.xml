@@ -46,6 +46,7 @@
 	
     <macrodef name="grails">
         <attribute name="command" description="the command line to execute"/>
+        <attribute name="environment" default="" description="The environment to use for the command."/>
         <attribute name="projectName" default=""/>
         <attribute name="resultID" default="0"/>
     	<attribute name="dir" default="${checkoutDir}/@{projectName}"/>
@@ -54,7 +55,8 @@
 			<echo message="Executing: grails @{command}"/>
 			<exec executable="${grailsCmd.absolute}" dir="@{dir}" resultproperty="testResult_@{resultID}" failonerror="@{failonerror}">
 				<arg value="-Dserver.port=8083" />
-				<arg value="@{command}"/>
+                <arg value="@{environment}" />
+                <arg value="@{command}"/>
 				<env key="GRAILS_HOME" path="${grails.home}"/>
 			</exec>
         </sequential>
@@ -138,7 +140,7 @@
 		               }
 
 		               // Run webtest
-		               ant.grails(command:"run-webtest", projectName:properties.projectName, resultID:grailsInvocationCounter++)
+		               ant.grails(command:"run-webtest", environment:"dev", projectName:properties.projectName, resultID:grailsInvocationCounter++)
 		               outcomes << "Functional tests in application ${properties.projectName}: " +
 		                   ((properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) ? "Failed" : "OK")
 		               if (properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) {
@@ -181,7 +183,7 @@
 		<grails command="clean" dir="${newWebApp.dir}" failonerror="true"/>
 		<grails command="compile" dir="${newWebApp.dir}" failonerror="true"/>
 		<grails command="generate-all blog" dir="${newWebApp.dir}" failonerror="true"/>
-		
+
 		<parallel>
 			<daemons>
 				<grails command="run-app" dir="${newWebApp.dir}" failonerror="true"/>
