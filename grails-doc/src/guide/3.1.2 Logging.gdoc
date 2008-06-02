@@ -46,7 +46,7 @@ When exceptions occur, there can be an awful lot of noise in the stacktrace from
 When this happens, the full trace is always written to the @StackTrace@ logger. This logs to a file called @stacktrace.log@ - but you can change this in your @Config.groovy@ to do anything you like. For example if you prefer full stack traces to go to standard out you can change the line:
 
 {code:java}
-StackTrace="error,errors"
+StackTrace="error,stacktraceLog"
 {code}
 
 To:
