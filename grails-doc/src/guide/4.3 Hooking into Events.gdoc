@@ -4,7 +4,13 @@ The mechanism is deliberately simple and loosely specified. The list of possible
 
 h4. Defining event handlers
 
-Event handlers are defined in a script called @Events.groovy@ either in the @scripts/@ folder of a plugin, or in your @.grails/scripts/@ folder in your @USER_HOME@ directory. All events scripts are called whenever an event occurs, so you can have 10 plugins handling events and also a custom per-user script.
+Event handlers are defined in scripts called @Events.groovy@. Grails searches for these scripts in the following locations:
+
+* @USER_HOME/.grails/scripts@ - user-specific event handlers
+* @PROJECT_HOME/scripts@ - applicaton-specific event handlers
+* @PROJECT_HOME/plugins/*/scripts@ - plugin-specific event handlers
+
+Whenever an event is fired, _all_ the registered handlers for that event are executed. Note that the registration of handlers is performed automatically by Grails, so you just need to declare them in the relevant @Events.groovy@ file.
 
 Event handlers are blocks defined in @Events.groovy@, with a name beginning with "event". The following example can be put in your /scripts directory to demonstrate the feature:
 
