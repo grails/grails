@@ -1,6 +1,7 @@
 package org.grails.wiki
 
 import org.radeox.engine.context.BaseInitialRenderContext
+import org.grails.cache.CacheService
 
 /**
 * @author Graeme Rocher
@@ -8,11 +9,11 @@ import org.radeox.engine.context.BaseInitialRenderContext
 *
 * Created: Feb 19, 2008
 */
-class WikiTagLib {
+class WikiTagLib  {
 
     static namespace = 'wiki'
 
-    def cacheService
+    CacheService cacheService
 
     def text = { attrs, body ->
         def cached

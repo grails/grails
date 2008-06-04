@@ -1,5 +1,7 @@
 class UrlMappings {
     static mappings = {
+      "/Download"(controller:"download", action="latest")
+      "/download/file"(controller:"download", action:"downloadFile")  
       "/wiki/latest"(controller:"content", action:"latest")
       "/auth/$action"(controller:"auth")
       "/news/$id"(controller:"news", action:"showNews")
@@ -27,9 +29,9 @@ class UrlMappings {
           layout = "subpage"
       }
       
-      "/$id?"(controller:"content")
+      "/$id?"(controller:"content", action:"index")
 
-      "/admin/$controller/$action?"()
+      "/admin/$controller/$action?/$id?"()
       "/admin"(view:"/admin/index")
 
 

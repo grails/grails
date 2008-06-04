@@ -109,11 +109,27 @@
 
 		<!-- / reference -->
 
-		<h4>Conference</h4>
-		<div class="banner" style="margin-left:150px;">
-						<a href="http://groovygrails.com"><img src="http://grails.org/images/banner.gif" border="0" width="520" /></a>
-	     </div>
+		<h4>Professional Services</h4>
+		<ul>
+            <li>
+                <a href="http://www.g2one.com/services.html#training"><img src="images/bs-medallions-tutorials.png" width="53" height="53" alt="Bs Medallions Training" /></a>
+                <h5><a href="http://www.g2one.com/services.html#training">Training</a></h5>
+                Need help getting up and running with Grails? <a href="http://www.g2one.com">G2One</a> offers a range of courses from short one day workshops to comprehensive 4 day courses on both Groovy & Grails.
 
+            </li>
+            <li>
+                <div style="margin-left:50px;position:absolute;">
+                        <a href="http://www.g2one.com"><img src="${createLinkTo(dir:'images', file:'g2one-logo-for-grails-org.png')}" width="165" alt="G2One Inc. - The Groovy/Grails Company" /></a>
+                </div>
+            </li>
+
+            <li>
+            <a href="http://www.g2one.com/services.html#consulting"><img src="images/bs-medallion-quickstart.png" width="53" height="53" alt="Bs Medallion Consulting" /></a>
+            <h5><a href="http://www.g2one.com/services.html#consulting">Consulting</a></h5>
+            Need support on your latest cutting-edge Groovy or Grails project? Get it from the <a href="http://www.g2one.com/company.html#company">people the behind the project</a>.
+            </li>
+
+		</ul>
 		<!-- community -->
 
 		<h4>Community</h4>
@@ -122,11 +138,9 @@
 		<li>
 		<a href="Community"><img src="images/bs-medallion-contribute.png" width="53" height="53" alt="Bs Medallion Contribute" /></a>
 		<h5><a href="Community">Contributing</a></h5>
-		Interesting in advancing the cause? Check
-		out the <a href="Developer+Guidelines">Developer guidelines</a>. Ready? Then
+		Interesting in advancing the cause? Then
 		<a href="http://svn.grails.codehaus.org/">browse the source</a> and get <a href="http://xircles.codehaus.org/projects/grails/repo">source control</a>
-		and <a href="http://bamboo.ci.codehaus.org/browse/GRAILS">continuous integration</a> set up. Keep
-		others informed by maintaining the <a href="http://docs.codehaus.org/display/GRAILS/">wiki</a>.
+		and <a href="http://bamboo.ci.codehaus.org/browse/GRAILS">continuous integration</a> set up. 
 		</li>
 
 		<li>

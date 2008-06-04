@@ -17,6 +17,7 @@
                 <li><g:link controller="user" action="list">Users</g:link></li>
                 <li><g:link controller="userInfo" action="list">User Info</g:link></li>
                 <li><g:link controller="wikiPage" action="list">Wiki Pages</g:link></li>
+                <li><g:link controller="download" action="list">Downloads</g:link></li>
             </ul>
 
 

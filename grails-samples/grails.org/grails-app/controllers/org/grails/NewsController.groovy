@@ -63,7 +63,7 @@ class NewsController extends BaseWikiController{
                 // update news
                 newsItem.properties = params
                 newsItem.save(flush:true)
-                cacheService.removeWikiText newsItem.title
+                cacheService?.removeWikiText newsItem.title
                 redirect(action:'showNews', id:newsItem.id)
 
             }
