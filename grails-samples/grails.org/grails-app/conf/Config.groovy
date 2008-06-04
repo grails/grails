@@ -54,19 +54,19 @@ log4j {
     appender.'file.layout'="org.apache.log4j.PatternLayout"
     appender.'file.layout.ConversionPattern'='[%r] %c{2} %m%n'
     appender.'file.File'="stacktrace.log"
-    rootLogger="info,stdout"
+    rootLogger="error,stdout"
     logger {
-        grails="info"
-        StackTrace="info,file"
+        grails="error"
+        StackTrace="error,file"
         org {
-            codehaus.groovy.grails.web.servlet="info"  //  controllers
-            codehaus.groovy.grails.web.pages="info" //  GSP
-            codehaus.groovy.grails.web.sitemesh="info" //  layouts
-            codehaus.groovy.grails."web.mapping.filter"="info" // URL mapping
-            codehaus.groovy.grails."web.mapping"="info" // URL mapping
-            codehaus.groovy.grails.commons="info" // core / classloading
-            codehaus.groovy.grails.plugins="info" // plugins
-            codehaus.groovy.grails.orm.hibernate="info" // hibernate integration
+            codehaus.groovy.grails.web.servlet="error"  //  controllers
+            codehaus.groovy.grails.web.pages="error" //  GSP
+            codehaus.groovy.grails.web.sitemesh="error" //  layouts
+            codehaus.groovy.grails."web.mapping.filter"="error" // URL mapping
+            codehaus.groovy.grails."web.mapping"="error" // URL mapping
+            codehaus.groovy.grails.commons="error" // core / classloading
+            codehaus.groovy.grails.plugins="error" // plugins
+            codehaus.groovy.grails.orm.hibernate="error" // hibernate integration
             springframework="off"
         }
 		org.hibernate.SQL="off"
