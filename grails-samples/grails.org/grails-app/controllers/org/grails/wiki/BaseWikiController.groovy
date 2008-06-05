@@ -1,6 +1,7 @@
 package org.grails.wiki
 
 import org.radeox.engine.context.BaseInitialRenderContext
+import org.radeox.engine.context.BaseRenderContext
 
 /**
  * @author Graeme Rocher
@@ -11,15 +12,10 @@ import org.radeox.engine.context.BaseInitialRenderContext
 class BaseWikiController {
 
     def cacheService
-    def context = new BaseInitialRenderContext();
+    BaseRenderContext wikiContext
+    GrailsWikiEngine wikiEngine
     
-    GrailsWikiEngine createWikiEngine() {
-
-        context.set(GrailsWikiEngine.CONTEXT_PATH, request.contextPath)
-        context.set(GrailsWikiEngine.CACHE, cacheService)
-        def engine = new GrailsWikiEngine(context)
-        context.setRenderEngine engine
-        return engine
-    }
+    GrailsWikiEngine createWikiEngine() { wikiEngine }
+    BaseRenderContext getContext() { wikiContext }    
 
 }

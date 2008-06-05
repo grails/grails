@@ -12,6 +12,13 @@ class DownloadController {
         render(view:'index', model:[download:download])    
     }
 
+    def archive = {
+        def downloads = Download.findAllBySoftwareName(params.id, [order:'desc', sort:'releaseDate'])
+
+        return [downloads:downloads]
+    }
+
+
     def downloadFile = {
 
         def mirror = params.mirror? Mirror.lock(params.mirror) : null

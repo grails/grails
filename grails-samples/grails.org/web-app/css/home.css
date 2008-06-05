@@ -287,20 +287,31 @@ Version:  02 Feb 2008
 
 #biteSized h5 a:hover,
 #biteSized h5 a:active {
-	border-bottom: 1px solid #fff;;
+border-bottom: 1px solid #fff;;
 }
 
-#biteSized img {
-  	float: left;
-  	margin: 10px 10px 60px 0px;
-	border: none;
-}
-
-#biteSized a:link, 
+#biteSized a:link,
 #biteSized a:visited,
 #biteSized a:hover,
 #biteSized a:active {
 	color: #fff;
+}
+
+#g2oneLogo a:link,
+#g2oneLogo a:visited,
+#g2oneLogo a:hover,
+#g2oneLogo a:active {
+	color: white;
+    text-decoration:none;
+    border:none;
+}
+#biteSized img {
+    border: none;
+}
+.biteSizedLI img {
+    float: left;
+    margin: 10px 10px 60px 0px;
+    border: none;
 }
 
 #ads {

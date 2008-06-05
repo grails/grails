@@ -59,7 +59,7 @@
 
         <p>Got a mirror? <a href="mailto:info@g2one.com">Contact G2One Inc.</a> to get it posted. </p>
 
-        <p>Past releases and individual JAR downloads can be found at the <a href="http://dist.codehaus.org/grails/">Codehaus distribution site</a>.</p>
+        <p>Past releases can be found at the <g:link controller="download" action="archive" id="Grails">Archive</g:link>.</p>
         <br />
 
         <h3>Grails Development Builds</h3>
@@ -83,7 +83,7 @@
 
         <h3>Grails Plugin Downloads</h3>
 
-        <p>Grails has a number of plugins available for it that extend its capability. Checkout the Plugins page for more info on available plugins and how they can be installed.</p>
+        <p>Grails has a number of plugins available for it that extend its capability. Checkout the <g:link controller="content" id="Plugins">Plugins page</g:link> for more info on available plugins and how they can be installed.</p>
     </div>
 </body>
 </html>

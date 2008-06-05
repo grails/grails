@@ -1,7 +1,8 @@
 class UrlMappings {
     static mappings = {
       "/Download"(controller:"download", action="latest")
-      "/download/file"(controller:"download", action:"downloadFile")  
+      "/download/file"(controller:"download", action:"downloadFile")
+      "/download/archive/$id"(controller:"download", action:"archive")
       "/wiki/latest"(controller:"content", action:"latest")
       "/auth/$action"(controller:"auth")
       "/news/$id"(controller:"news", action:"showNews")

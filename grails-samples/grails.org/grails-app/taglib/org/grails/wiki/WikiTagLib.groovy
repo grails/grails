@@ -2,6 +2,9 @@ package org.grails.wiki
 
 import org.radeox.engine.context.BaseInitialRenderContext
 import org.grails.cache.CacheService
+import org.radeox.engine.context.BaseRenderContext
+import org.springframework.context.ApplicationContextAware
+import org.springframework.context.ApplicationContext
 
 /**
 * @author Graeme Rocher
@@ -9,11 +12,12 @@ import org.grails.cache.CacheService
 *
 * Created: Feb 19, 2008
 */
-class WikiTagLib  {
+class WikiTagLib implements ApplicationContextAware  {
 
     static namespace = 'wiki'
 
     CacheService cacheService
+    ApplicationContext applicationContext
 
     def text = { attrs, body ->
         def cached
@@ -24,13 +28,8 @@ class WikiTagLib  {
             out << cached            
         }
         else {
-            def context = new BaseInitialRenderContext();
-            context.set(GrailsWikiEngine.CONTEXT_PATH, request.contextPath)
-            context.set(GrailsWikiEngine.CACHE, cacheService)
-            def engine = new GrailsWikiEngine(context)
-
-
-            context.setRenderEngine engine
+            def engine = applicationContext.getBean('wikiEngine')
+            def context = applicationContext.getBean('wikiContext')
 
             def content = body()
             def text = engine.render(content.trim(), context)
