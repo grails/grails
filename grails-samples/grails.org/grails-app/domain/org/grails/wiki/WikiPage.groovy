@@ -23,7 +23,7 @@ class WikiPage extends Content {
     }
 
 	static constraints = {
-		title(blank:false, matches:/[^\.\/\\]+/)
+		title(blank:false, matches:/[^\/\\]+/)
 		body(blank:false)
 	}
 
