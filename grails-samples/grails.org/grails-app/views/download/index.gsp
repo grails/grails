@@ -87,7 +87,7 @@
         </p>
 
         <ul class="star">
-            <li>Click on the latest build link relevent to your JDK</li>
+            <li>Click on the latest build link relevant to your JDK</li>
             <li>Click on the Completed Builds tab</li>
             <li>Click on the latest successful build link (green, not red)</li>
             <li>Click on the Artifacts tab</li>
@@ -99,7 +99,7 @@
 
         <h3>Grails Plugin Downloads</h3>
 
-        <p>Grails has a number of plugins available for it that extend its capability. Checkout the <g:link controller="content" id="Plugins">Plugins page</g:link> for more info on available plugins and how they can be installed.</p>
+        <p>Grails has a number of plugins available for it that extend its capability. Check out the <g:link controller="content" id="Plugins">Plugins page</g:link> for more info on available plugins and how they can be installed.</p>
     </div>
 </body>
 </html>

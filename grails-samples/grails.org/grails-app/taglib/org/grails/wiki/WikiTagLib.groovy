@@ -19,6 +19,23 @@ class WikiTagLib implements ApplicationContextAware  {
     CacheService cacheService
     ApplicationContext applicationContext
 
+    def preview = { attrs, body ->
+        def engine = applicationContext.getBean('wikiEngine')
+        def context = applicationContext.getBean('wikiContext')
+
+        def content = body()
+        def text = engine.render(content.trim(), context)
+
+
+        if(text.size() > 150) {
+            text = text.replaceAll(/<.+?>/, '').replaceAll(/<\/\S+?>/, '')
+            out << text
+        }
+        else {
+            out << text
+        }
+    }
+
     def text = { attrs, body ->
         def cached
         if(attrs.key) {

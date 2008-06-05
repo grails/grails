@@ -19,8 +19,9 @@
                 <div class="pagesubheading">
                                 </div>
                     <div class="wiki-content">
+                        <g:set var="newsBody"><wiki:text>${newsItem.body}</wiki:text></g:set>
                         <g:if test="${newsItem.body.size() > 150}">
-                          <wiki:text>${newsItem.body[0..150]} </wiki:text> ... <g:link controller="news" action="showNews" id="${newsItem.id}">click for more</g:link>
+                          <wiki:preview>${newsItem.body}</wiki:preview>  ...  <g:link controller="news" action="showNews" id="${newsItem.id}">click for more</g:link>
                         </g:if>
                         <g:else>
                             <wiki:text>${newsItem.body}</wiki:text>
