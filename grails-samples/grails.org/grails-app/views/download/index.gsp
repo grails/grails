@@ -73,7 +73,7 @@
 
         
 
-        <p>Got a mirror? <a href="mailto:info@g2one.com">Contact G2One Inc.</a> to get it posted. </p>
+        <p>Got a mirror? <a href="http://www.g2one.com/company.html#contactus">Contact G2One Inc.</a> to get it posted. </p>
 
         <p>Past releases can be found at the <g:link controller="download" action="archive" id="Grails">Archive</g:link>.</p>
         <br />
