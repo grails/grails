@@ -55,7 +55,7 @@ Attributes
 
 The @optionKey@ and @optionValue@ attribute of the @<g:select>@ tag deserve special mention as these allow you to control what is displayed to the user within the resulting @<select>@ tag and also the value which is submitted in a form submission. The default behaviour is to call @toString()@ on each element in the @from@ attribute, but for example if you had a list of @Book@ domain classes this may not be useful behaviour.
 	
-As an example the following @<g:select>@ using the @optionKey@ attribute to use the @id@ property of each @Book@ as the value of the @value@ attribute in each @<option>@ tag. It also uses the @optionValue@ attribute of @<g:select>@ to display the @title@ property of each @Book@ to the user:
+As an example the following @<g:select>@ uses the @optionKey@ attribute to resolve the @id@ property of each @Book@ as the value of the @value@ attribute in each @<option>@ tag. It also uses the @optionValue@ attribute of @<g:select>@ to display the @title@ property of each @Book@ to the user:
 	
 {code}
 <g:select optionKey="id" optionValue="title" name="book.title" from="${bookList}" />
