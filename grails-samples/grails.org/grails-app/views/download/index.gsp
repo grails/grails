@@ -55,7 +55,23 @@
                 </tr>
                 </g:form>
             </g:each>
+
+            <g:set var="docFile" value="${docDownload?.files?.iterator()?.next()}"></g:set>
+            <g:if test="${docFile}">
+               <g:form controller="download" action="downloadFile">
+                    <tr>
+                    <td><strong>Documentation</strong></td>
+                    <td>
+                        <g:select optionKey="id" optionValue="name" name="mirror" from="${docFile.mirrors}" />
+
+                    </td>
+                    <td width="70" class="downloadCell"> <g:submitButton name="Download" value="Download" /></td>
+                </tr>
+                </g:form>
+            </g:if>
         </table>
+
+        
 
         <p>Got a mirror? <a href="mailto:info@g2one.com">Contact G2One Inc.</a> to get it posted. </p>
 

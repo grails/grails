@@ -6,10 +6,12 @@ class DownloadController {
 
     def latest = {
 
-        def downloads = Download.list(max:1, order:'desc', sort:'releaseDate')
+        def downloads = Download.findAllBySoftwareName('Grails',[max:1, order:'desc', sort:'releaseDate'])
         def download = downloads ? downloads[0] : null
 
-        render(view:'index', model:[download:download])    
+        def docs = Download.findAllBySoftwareName('Grails Documentation',[max:1, order:'desc', sort:'releaseDate'])
+
+        render(view:'index', model:[download:download, docDownload:docs? docs[0] : null] )    
     }
 
     def archive = {
