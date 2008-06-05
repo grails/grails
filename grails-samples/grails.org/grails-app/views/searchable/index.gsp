@@ -40,11 +40,12 @@
   <div id="main">
     <g:set var="haveQuery" value="${params.q?.trim()}" />
     <g:set var="haveResults" value="${searchResult?.results}" />
+    <g:set var="query" value="${params.q?.encodeAsHTML()}" />
     <div class="title">
       <span>
         <g:if test="${haveQuery && haveResults}">
           Showing <strong>${searchResult.offset + 1}</strong> - <strong>${searchResult.results.size() + searchResult.offset}</strong> of <strong>${searchResult.total}</strong>
-          results for <strong>${params.q?.encodeAsHTML()}</strong>
+          results for <strong>${query}</strong>
         </g:if>
         <g:else>
         &nbsp;
@@ -53,10 +54,10 @@
     </div>
 
     <g:if test="${parseException}">
-      <p>Your query - <strong>${params.q}</strong> - is not valid.</p>
+      <p>Your query - <strong>${query}</strong> - is not valid.</p>
     </g:if>
     <g:elseif test="${haveQuery && !haveResults}">
-      <p>Nothing matched your query - <strong>${params.q}</strong></p>
+      <p>Nothing matched your query - <strong>${query}</strong></p>
     </g:elseif>
     <g:elseif test="${haveResults}">
       <div id="results" class="results">
