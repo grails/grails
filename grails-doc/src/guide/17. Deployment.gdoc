@@ -4,7 +4,7 @@ h3. "grails run-app"
 
 You should be very familiar with this approach by now, since it is the most common method of running an application during the development phase. An embedded Jetty server is launched that loads the web application from the development sources, thus allowing it to pick up an changes to application files.
 
-This approach is not recommended at all for production deployment because the performance is poor. Checking for and loading changes places a sizable overhead on the server. Having said that, @grails prod run-app@ removes the per-request overhead and allows you to fine tune how frequently the regular check takes place.Any
+This approach is not recommended at all for production deployment because the performance is poor. Checking for and loading changes places a sizable overhead on the server. Having said that, @grails prod run-app@ removes the per-request overhead and allows you to fine tune how frequently the regular check takes place.
 
 Setting the system property "disable.auto.recompile" to @true@ disables this regular check completely, while the property "recompile.frequency" controls the frequency. This latter property should be set to the number of seconds you want between each check. The default is currently 3.
 
@@ -34,7 +34,7 @@ grails.war.destFile = "foobar-prod.war"
 
 Of course, any command line argument that you provide overrides this setting.
 
-It is also possible to control what libraries are included in the WAR file, in case you need to avoid conflicts with libraries in a shared folder for example. You can set the properties @grails.war.dependencies@ and @grails.war.java5.dependencies@ in Config.froovy to either lists of Ant include patterns or closures containing AntBuilder syntax. Closures are invoked from within an Ant "copy" step, so only elements like "fileset" can be included, whereas each item in a pattern list is included. Any closure assigned to the latter property will only be included if you are running JDK 1.5 or above.
+It is also possible to control what libraries are included in the WAR file, in case you need to avoid conflicts with libraries in a shared folder for example. The default behavior is to include in the WAR file all libraries required by Grails, plus any libraries contained in plugin "lib" directories, plus any libraries contained in the application's "lib" directory. As an alternative to the default behavior you can explicitly specify the complete list of libraries to include in the WAR file by setting the properties @grails.war.dependencies@ and @grails.war.java5.dependencies@ in Config.groovy to either lists of Ant include patterns or closures containing AntBuilder syntax. Closures are invoked from within an Ant "copy" step, so only elements like "fileset" can be included, whereas each item in a pattern list is included. Any closure or pattern assigned to the latter property will be included in addition to @grails.war.dependencies@ only if you are running JDK 1.5 or above.
 
 Be careful with these properties: if any of the libraries Grails depends on are missing, the application will almost certainly fail. Here is an example that includes a small subset of the standard Grails dependencies:
 
