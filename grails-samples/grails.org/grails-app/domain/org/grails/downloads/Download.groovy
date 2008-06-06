@@ -2,7 +2,7 @@ package org.grails.downloads
 
 import org.codehaus.groovy.grails.commons.ConfigurationHolder
 
-class Download {
+class Download implements Serializable{
     Date releaseDate = new Date()                    
     String softwareName
     String softwareVersion

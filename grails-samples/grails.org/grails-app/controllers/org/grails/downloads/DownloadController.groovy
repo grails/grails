@@ -1,17 +1,38 @@
 package org.grails.downloads
 
+
+import net.sf.ehcache.Element
+import net.sf.ehcache.Ehcache
+
 class DownloadController {
     
     def index = { redirect(action:list,params:params) }
 
+    Ehcache downloadCache
+
     def latest = {
 
-        def downloads = Download.findAllBySoftwareName('Grails',[max:1, order:'desc', sort:'releaseDate'])
-        def download = downloads ? downloads[0] : null
+        def download = getCachedOr("Grails") {
+            def downloads = Download.findAllBySoftwareName('Grails',[max:1, order:'desc', sort:'releaseDate'])
+            downloads ? downloads[0] : null
+        }
 
-        def docs = Download.findAllBySoftwareName('Grails Documentation',[max:1, order:'desc', sort:'releaseDate'])
 
-        render(view:'index', model:[download:download, docDownload:docs? docs[0] : null] )    
+        def doc = getCachedOr("Grails Documentation") {
+            def docs = Download.findAllBySoftwareName('Grails Documentation',[max:1, order:'desc', sort:'releaseDate'])
+            docs? docs[0] : null
+        }
+
+        render(view:'index', model:[download:download, docDownload:doc])
+    }
+
+    def getCachedOr(String name, callable) {
+        def obj = downloadCache?.get(name)?.value 
+        if(!obj) {
+            obj = callable.call()
+            downloadCache?.put new Element(name, obj)
+        }
+        return obj
     }
 
     def archive = {

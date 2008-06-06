@@ -11,28 +11,30 @@
 	  <div id="feedLink" >
 	       <g:link controller="news" action="latest" params="[format:'rss']"><img border="0" src="${createLinkTo(dir:'images', file:'feed.gif')}" alt="RSS Feed"  /></g:link>
 	  </div>
-      <g:set var="newsItems" value="${NewsItem.listOrderByDateCreated(sort:'dateCreated', max:2, order:'desc')}" />
-      <g:each var="newsItem" in="${newsItems}">
-        <div class="blogpost">
-            <div><h2><g:link controller="news" action="showNews" id="${newsItem.id}">${newsItem.title}</g:link></h2></div>
+        <cache:text id="newsItems">
+            <g:set var="newsItems" value="${NewsItem.listOrderByDateCreated(sort:'dateCreated', max:2, order:'desc')}" />
+            <g:each var="newsItem" in="${newsItems}">
+                <div class="blogpost">
+                    <div><h2><g:link controller="news" action="showNews" id="${newsItem.id}">${newsItem.title}</g:link></h2></div>
 
-                <div class="pagesubheading">
-                                </div>
+                    <div class="pagesubheading">
+                    </div>
                     <div class="wiki-content">
                         <g:set var="newsBody"><wiki:text>${newsItem.body}</wiki:text></g:set>
                         <g:if test="${newsItem.body.size() > 150}">
-                          <wiki:preview>${newsItem.body}</wiki:preview>  ...  <g:link controller="news" action="showNews" id="${newsItem.id}">click for more</g:link>
+                            <wiki:preview>${newsItem.body}</wiki:preview>  ...  <g:link controller="news" action="showNews" id="${newsItem.id}">click for more</g:link>
                         </g:if>
                         <g:else>
                             <wiki:text>${newsItem.body}</wiki:text>
                         </g:else>
                     </div>
-                     <div class="endsection">
-                                <b>Posted at ${newsItem.dateCreated}</b> by
-                                <a href="#">${newsItem.author?.login}</a>            |
+                    <div class="endsection">
+                        <b>Posted at ${newsItem.dateCreated}</b> by
+                        <a href="#">${newsItem.author?.login}</a>            |
                     </div>
-            </div>
-        </g:each>
+                </div>
+            </g:each>
+        </cache:text>
 
 
         <div>

@@ -5,7 +5,13 @@ import org.grails.wiki.GrailsWikiEngineFactoryBean
 import org.radeox.engine.context.BaseInitialRenderContext
 
 // Place your Spring DSL code here
-beans = {    
+beans = {
+    textCache(EhCacheFactoryBean) {
+        timeToLive = 10000        
+    }
+    downloadCache(EhCacheFactoryBean) {
+        timeToLive = 10000
+    }
     contentCache(EhCacheFactoryBean) {
         timeToLive = 5000
     }

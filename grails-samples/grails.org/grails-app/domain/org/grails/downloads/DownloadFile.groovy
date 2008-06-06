@@ -1,6 +1,6 @@
 package org.grails.downloads
 
-class DownloadFile {
+class DownloadFile implements Serializable{
     String title
     List mirrors
     Download download
