@@ -7,16 +7,16 @@ import org.radeox.engine.context.BaseInitialRenderContext
 // Place your Spring DSL code here
 beans = {
     textCache(EhCacheFactoryBean) {
-        timeToLive = 10000        
+        timeToLive = 300
     }
     downloadCache(EhCacheFactoryBean) {
-        timeToLive = 10000
+        timeToLive = 300
     }
     contentCache(EhCacheFactoryBean) {
-        timeToLive = 5000
+        timeToLive = 300
     }
     wikiCache(EhCacheFactoryBean) {
-        timeToLive = 5000
+        timeToLive = 300
     }
     contentToMessage(ContentAlertStack)
     wikiContext(BaseInitialRenderContext)
