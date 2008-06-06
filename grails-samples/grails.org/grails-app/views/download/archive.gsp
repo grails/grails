@@ -40,7 +40,7 @@
 
             <h3>Grails ${download?.softwareVersion}</h3>
             <ul>
-                <li>Change Log</li>
+                <li><a href="http://jira.codehaus.org/browse/GRAILS?report=com.atlassian.jira.plugin.system.project:changelog-panel">Change Log</a></li>
                 <li><a href="${download?.releaseNotes}">Release Notes</a></li>
             </ul>
 
