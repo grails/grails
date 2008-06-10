@@ -115,7 +115,8 @@
 
 		               properties.projectName = it
 
-		               if (new File("${properties.checkoutDir}/${properties.projectName}").exists()) {
+                               def appDir = new File("${properties.checkoutDir}/${properties.projectName}")
+		               if (appDir.exists()) {
 		                   ant.antcall(target:"-update-app") {
 		                       param(name:"projectName", value:properties.projectName)
 		                   }
@@ -124,6 +125,11 @@
 		                       param(name:"projectName", value:properties.projectName)
 		                   }
 		               }
+
+                               // Clear any existing webtest plugin
+                               ant.delete(includeEmptyDirs: true) {
+                                   fileset(dir: appDir.path, includes: "plugins/*webtest*/**")
+                               }
 
 		               // First upgrade
 		               ant.grails(command:"upgrade -force", projectName:properties.projectName, resultID:grailsInvocationCounter++)
