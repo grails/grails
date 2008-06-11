@@ -36,6 +36,12 @@ Example as a method call in GSP only:
 </select>
 {code}
 
+Example changing the asynchronous option to false:
+
+{code:xml}
+<select from="[1,2,3,4,5]}" onchange="${remoteFunction(action:'bookbyname', update:[success:'great', failure:'ohno'], options=[asynchronous:false]}" />
+{code}
+
 
 
 h2. Description
@@ -48,7 +54,7 @@ Attributes
 * @update@ (optional) - Either a map containing the elements to update for 'success' or 'failure' states, or a string with the element to update in which cause failure events would be ignored
 * @before@ (optional) - The javascript function to call before the remote function call
 * @after@ (optional) - The javascript function to call after the remote function call
-* @asynchronous@ (optional) - Whether to do the call asynchronously or not (defaults to true)
+* @asynchronous@ (optional) - Whether to do the call asynchronously or not (defaults to true, specified in 'options' array)
 * @method@ (optional) - The method to use the execute the call (defaults to "post")
 
 Events
