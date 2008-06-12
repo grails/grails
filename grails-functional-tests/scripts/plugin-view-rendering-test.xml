@@ -15,15 +15,15 @@
         <grails command="install-plugin searchable" dir="target/scripts/test-plugin-views" />
 		<parallel>
 			<daemons>
-				<grails command="run-app" dir="target/scripts/test-plugin-views" failonerror="true"/>
+				<grails command="run-app" dir="target/scripts/test-plugin-views" serverPort="8084" failonerror="true"/>
 			</daemons>
 			<sequential>
                 <waitfor maxwait="1" maxwaitunit="minute" checkevery="500">
-				    <http url="http://localhost:8083/test-plugins-views"/>
+				    <http url="http://localhost:8084/test-plugins-views"/>
 				</waitfor>
                 <groovy><![CDATA[
 
-                    def text = new URL("http://localhost:8083/test-plugin-views/searchable").text
+                    def text = new URL("http://localhost:8084/test-plugin-views/searchable").text
                     if(!text.contains("<title>Grails Searchable Plugin</title>")) {
                         ant.fail("Functional test failed! Plug-in views not displaying correctly!")
                     }
