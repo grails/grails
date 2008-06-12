@@ -1,0 +1,35 @@
+<project default="test-plugin-view-rendering">
+
+
+    <path id="classpath">
+        <fileset dir="lib" includes="*.jar"/>
+    </path>
+
+    <taskdef name="groovy" classname="org.codehaus.groovy.ant.Groovy" classpathref="classpath"/>
+
+    <import file="../common/macros.xml" />
+
+    <target name="test-plugin-view-rendering">
+        <mkdir dir="target/scripts" />
+        <grails command="create-app test-plugin-views" dir="target/scripts" />
+        <grails command="install-plugin searchable" dir="target/scripts/test-plugin-views" />
+		<parallel>
+			<daemons>
+				<grails command="run-app" dir="target/scripts/test-plugin-views" failonerror="true"/>
+			</daemons>
+			<sequential>
+                <waitfor maxwait="1" maxwaitunit="minute" checkevery="500">
+				    <http url="http://localhost:8083/test-plugins-views"/>
+				</waitfor>
+                <groovy><![CDATA[
+
+                    def text = new URL("http://localhost:8083/test-plugin-views/searchable").text
+                    if(!text.contains("<title>Grails Searchable Plugin</title>")) {
+                        ant.fail("Functional test failed! Plug-in views not displaying correctly!")
+                    }
+
+                ]]></groovy>
+            </sequential>
+		</parallel>
+    </target>
+</project>

@@ -12,6 +12,8 @@
         <fileset dir="lib" includes="*.jar"/>
     </path>
 
+    <import file="./common/macros.xml" />
+
     <taskdef name="svn" classname="org.tigris.subversion.svnant.SvnTask" classpathref="classpath"/>
     <taskdef name="groovy" classname="org.codehaus.groovy.ant.Groovy" classpathref="classpath"/>
 
@@ -43,24 +45,7 @@
 
     </target>
 
-	
-    <macrodef name="grails">
-        <attribute name="command" description="the command line to execute"/>
-        <attribute name="environment" default="" description="The environment to use for the command."/>
-        <attribute name="projectName" default=""/>
-        <attribute name="resultID" default="0"/>
-    	<attribute name="dir" default="${checkoutDir}/@{projectName}"/>
-    	<attribute name="failonerror" default="false"/>
-        <sequential>
-			<echo message="Executing: grails @{command}"/>
-			<exec executable="${grailsCmd.absolute}" dir="@{dir}" resultproperty="testResult_@{resultID}" failonerror="@{failonerror}">
-				<arg value="-Dserver.port=8083" />
-                <arg value="@{environment}" />
-                <arg value="@{command}"/>
-				<env key="GRAILS_HOME" path="${grails.home}"/>
-			</exec>
-        </sequential>
-    </macrodef>
+
 
     <target name="-get-grails" depends="-checkout-grails,-update-grails"/>
 
@@ -94,6 +79,28 @@
             depends="clean-reports,init,-get-grails,-build-grails, -testsWithNewApp">
 
 		<mkdir dir="reports" />
+        <antcall target="-functional-test-apps" />
+        <antcall target="-functional-test-scripts" />
+    </target>
+
+    <target name="run-test-scripts" depends="clean-reports,init">
+        <antcall target="-functional-test-scripts" />
+    </target>
+
+    <target name="-functional-test-scripts">
+         <delete dir="target/scripts" failonerror="false" />
+         <mkdir dir="target/scripts" />
+         <groovy>
+             println "Running functional test scripts!"
+             def scriptFiles = new File("scripts").listFiles().findAll { it.name.endsWith('.xml') }
+             scriptFiles.each { file ->
+                ant.ant(antfile:file, inheritRefs:true)
+             }
+         </groovy>
+        <delete dir="target/scripts" failonerror="false" />
+    </target>
+
+    <target name="-functional-test-apps">
         <groovy><![CDATA[
 			try {
 		           def outcomes = []
@@ -167,20 +174,21 @@
 		           }
 
 		           if (failure) ant.fail(message:"At least one of the tests failed")
-			
+
 			}
 			catch(Exception e) {
 				println e.message
 				e.printStackTrace()
-				
+
 				ant.fail(message:"functional tests failed due to error")
 			}
             ]]>
         </groovy>
+
     </target>
 
-		
-	<target name="-testsWithNewApp">
+
+    <target name="-testsWithNewApp">
         <echo>Creating new Grails app ${newWebApp} and running some tests on it</echo>
 		<property name="newWebApp.dir" value="${target}/${newWebApp}"/>
         <delete dir="${newWebApp.dir}"/>
