@@ -11,10 +11,11 @@
 			<echo message="Executing: grails @{command}"/>
 			<exec executable="${grailsCmd.absolute}" dir="@{dir}" resultproperty="testResult_@{resultID}" failonerror="@{failonerror}">
 				<arg value="-Dserver.port=@{serverPort}" />
+                <arg value="-Djava.util.logging.manager=java.util.logging.LogManager"/>
                 <arg value="@{environment}" />
                 <arg value="@{command}"/>
 				<env key="GRAILS_HOME" path="${grails.home}"/>
-			</exec>
+            </exec>
         </sequential>
     </macrodef>
 
