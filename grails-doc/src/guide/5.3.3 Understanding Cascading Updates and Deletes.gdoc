@@ -2,7 +2,7 @@ It is critical that you understand how cascading updates and deletes work when u
 
 Whether it is a one-to-one, one-to-many or many-to-many if you define @belongsTo@ updates and deletes will cascade from the owning class to its possessions (the other side of the relationship).
 
-If you _do not_ define @belongsTo@ than no cascades will happen and you will have to manually save each object.
+If you _do not_ define @belongsTo@ then no cascades will happen and you will have to manually save each object.
 
 Here is an example:
 
