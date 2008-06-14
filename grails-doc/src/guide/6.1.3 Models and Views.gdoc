@@ -43,7 +43,7 @@ def index = {
 
 h4. Selecting the View
 
-In both the previous two example there was no code that specified which [view|guide:GSP] to render. So how does Grails know which view to pick? The answer lies in the conventions. For the action:
+In both of the previous two examples there was no code that specified which [view|guide:GSP] to render. So how does Grails know which view to pick? The answer lies in the conventions. For the action:
 
 {code:java}
 class BookController {
