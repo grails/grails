@@ -1,4 +1,4 @@
-If you want to resolve a URL a view, without a controller or action involved, you can do so too. For example if you wanted to map the root URL @/@ to a GSP at the location @grails-app/views/index.gsp@ you could use:
+If you want to resolve a URL to a view, without a controller or action involved, you can do so too. For example if you wanted to map the root URL @/@ to a GSP at the location @grails-app/views/index.gsp@ you could use:
 
 {code:java}
 static mappings = {
