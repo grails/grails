@@ -25,4 +25,4 @@ Book.executeUpdate( String query, Collection positionalParams )
 Parameters:
 
 * @query@ - An HQL query with DML-style operations
-* @positionalParams@ - A List of parameters for a positional parametrized HQL query
+* @positionalParams@ - A List of parameters for a positional parameterized HQL query
