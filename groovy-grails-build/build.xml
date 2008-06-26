@@ -95,10 +95,10 @@
           </copy>
 
 
-         <move tofile="checkout/grails/lib/groovy-all-test.jar">
-             <fileset dir="checkout/grails/lib" includes="groovy-all-*.jar"/>
-         </move>
+         <move file="groovy-all.jar" tofile="checkout/grails/lib/groovy-all-test.jar" />
+
         <taskdef name="groovy" classname="org.codehaus.groovy.ant.Groovy">
+	
             <classpath location="checkout/grails/lib/groovy-all-test.jar" />
         </taskdef>
         <groovy>
