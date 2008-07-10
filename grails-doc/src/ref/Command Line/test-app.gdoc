@@ -39,5 +39,10 @@ grails test-app -integration
 
 The first example will execute a test called @FooTests.groovy@ whilst the second will execute @FooTests.groovy@ and @BarTests.groovy@ if they exist.
 
+If you only wish to re-run failed tests use the -rerun flag
+
+{code:java}
+grails test-app -rerun
+{code}
 
 

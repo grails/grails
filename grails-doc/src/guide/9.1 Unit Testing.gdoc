@@ -34,3 +34,5 @@ void testShow() {
 
 Notice how we provide a custom implementation of the @get@ method that returns a mocked instance and how we can even use assertions within this implementation. Also note how we provide a mocked instance of the @params@ object using a map.
 
+Keep in mind that unit and integration tests are compiled together so test class names must be unique. You can use packages if you do want an integration and unit test with the same name e.g. com.mycompany.unit.BookTests and com.mycompany.integrations.BookTests
+
