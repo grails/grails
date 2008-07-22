@@ -104,6 +104,7 @@ def f = new File("$artefactFile")
 f.withWriter { writer ->
     writer << '''$newCode'''
 }
+Thread.sleep(5000)
 """
     		group(description: "Gets the page again and checks new output") {
 	            invoke      (url: invokeUrl)
@@ -122,5 +123,6 @@ f.withWriter { writer ->
         artefactFile.withWriter { writer ->
             writer << originalCode
         }
+        Thread.sleep(5000)
     }
 }
