@@ -18,6 +18,9 @@
                 <li><g:link controller="userInfo" action="list">User Info</g:link></li>
                 <li><g:link controller="wikiPage" action="list">Wiki Pages</g:link></li>
                 <li><g:link controller="download" action="list">Downloads</g:link></li>
+                <plugin:isAvailable name="jobs">
+                	<li><g:link controller="jobAdmin" action="list">Jobs</g:link></li>
+				</plugin:isAvailable>
             </ul>
 
 
