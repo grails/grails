@@ -22,6 +22,8 @@
    </target>
 
 	<property name="groovy.checkout.url" value="http://svn.codehaus.org/groovy/trunk/groovy/groovy-core/"></property>
+	<property name="grails.checkout.url" value="http://svn.codehaus.org/grails/trunk/grails/"></property>	
+	
 	<property environment="env" />
 	
     <target name="-checkout-groovy" unless="checkout.groovy">		
@@ -59,9 +61,9 @@
     </target>
 
     <target name="-checkout-grails" unless="checkout.grails">
-        <echo>Checking out Grails</echo>
+        <echo>Checking out Grails from :${grails.checkout.url}</echo>
         <svn>
-            <checkout url="http://svn.codehaus.org/grails/trunk/grails/" destPath="checkout/grails" />
+            <checkout url="${grails.checkout.url}" destPath="checkout/grails" />
         </svn>
     </target>
 
