@@ -81,7 +81,7 @@ class HelloControllerTest extends grails.util.WebTest {
             String newText,
             String invokeUrl,
             String pageTitle) {
-    	def originalCode = artefactFile.text
+    	def originalCode = artefactFile.text 
 		try {
     	def newCode = originalCode.replaceAll(originalText, newText)
     	assert originalCode != newCode

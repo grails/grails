@@ -97,7 +97,6 @@
                 ant.ant(antfile:file, inheritRefs:true)
              }
          </groovy>
-        <delete dir="target/scripts" failonerror="false" />
     </target>
 
     <target name="-functional-test-apps">
