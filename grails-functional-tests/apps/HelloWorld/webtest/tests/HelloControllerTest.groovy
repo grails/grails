@@ -82,6 +82,7 @@ class HelloControllerTest extends grails.util.WebTest {
             String invokeUrl,
             String pageTitle) {
     	def originalCode = artefactFile.text
+		try {
     	def newCode = originalCode.replaceAll(originalText, newText)
     	assert originalCode != newCode
 
@@ -104,7 +105,8 @@ def f = new File("$artefactFile")
 f.withWriter { writer ->
     writer << '''$newCode'''
 }
-Thread.sleep(5000)
+
+Thread.sleep(10000)
 """
     		group(description: "Gets the page again and checks new output") {
 	            invoke      (url: invokeUrl)
@@ -115,14 +117,17 @@ Thread.sleep(5000)
 	            }
     		}
         }
-
-        // Reset the tag lib back to the way it was. The "sleep()"
-        // ensures that the file appears modified on systems that only
-        // have a granularity of a second on their file timestamps.
-        Thread.sleep(1000)
-        artefactFile.withWriter { writer ->
-            writer << originalCode
-        }
-        Thread.sleep(5000)
+			
+		}
+		finally {
+	        // Reset the tag lib back to the way it was. The "sleep()"
+	        // ensures that the file appears modified on systems that only
+	        // have a granularity of a second on their file timestamps.
+	        Thread.sleep(1000)
+	        artefactFile.withWriter { writer ->
+	            writer << originalCode
+	        }
+	        Thread.sleep(5000)			
+		}
     }
 }
