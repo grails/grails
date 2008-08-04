@@ -28,8 +28,8 @@ class MailerJob {
 
             context.setRenderEngine engine
             def users = UserInfo.findAllByEmailSubscribed(true).user
-            for(user in users) {
-                 while(content) {
+            while(content) {
+ 	           	for(user in users) {
                      def text = new StringBuffer()
                      def titleUrlEscaped = content.title.encodeAsURL()
 
@@ -53,8 +53,8 @@ class MailerJob {
                          to user.email
                          html text.toString()
                      }
-                     content = contentToMessage?.popOffStack()
-                 }
+	            }
+                content = contentToMessage?.popOffStack()	
             }
         }
         // execute task
