@@ -98,7 +98,7 @@
 
 
 		<move tofile="checkout/grails/lib/groovy-all-test.jar">
-		    <fileset dir="checkout/groovy/target/dist" includes="groovy-all-*.jar"/>
+		    <fileset dir="checkout/groovy/target/dist" includes="groovy-all-*.jar" excludes="groovy-all-*-sources.jar, groovy-all-minimal-*.jar"/>
 		</move>
 
         <taskdef name="groovy" classname="org.codehaus.groovy.ant.Groovy">
