@@ -54,7 +54,7 @@
 
     <target name="-build-groovy">
         <ant dir="checkout/groovy" antfile="build.xml" target="clean" />
-        <ant dir="checkout/groovy" antfile="build.xml" target="createJars">
+        <ant dir="checkout/groovy" antfile="build.xml" target="install">
             <property name="skipTests" value="true"/>
             <property name="skipExamples" value="true"/>
         </ant>
