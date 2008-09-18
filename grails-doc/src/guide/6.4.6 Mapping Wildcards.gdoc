@@ -35,7 +35,7 @@ In this case it will store the path matched by the wildcard inside a @name@ para
 
 {code:java}
 def name = params.name
-println name // prints "logo.jpg" or "other/logo.jpg"
+println name // prints "logo" or "other/logo"
 {code}
 
 
