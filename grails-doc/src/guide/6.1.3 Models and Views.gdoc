@@ -102,4 +102,40 @@ render(template:'book_template', collection:Book.list())
 render(text:"<xml>some xml</xml>",contentType:"text/xml",encoding:"UTF-8")
 {code}
 
+If you plan on using Groovy's MarkupBuilder to generate html for use with the render method becareful of naming clashes between html elements and Grails tags. e.g.
 
+{code:java}
+    def login = {
+        StringWriter w = new StringWriter()
+        def builder = new groovy.xml.MarkupBuilder(w)
+        builder.html{
+            head{
+                title 'Log in'
+            }
+            body{
+                h1 'Hello'
+                form{
+
+                }
+            }
+        }
+
+        def html = w.toString()
+        render html
+    }
+{code}
+
+Will actually [call the form tag|guide:6.2.2.6 Tags as Method Calls] (which will return some text that will be ignored by the MarkupBuilder). To correctly output a <form> elemement, use the following:
+
+ {code:java}
+    def login = {
+        // ...
+        body{
+            h1 'Hello'
+            builder.form{
+
+            }
+        }
+        // ...
+   }
+{code}
