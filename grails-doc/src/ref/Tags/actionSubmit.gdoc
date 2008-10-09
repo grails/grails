@@ -67,6 +67,7 @@ This isn't too much of a problem when the form URL does not include an action na
 
 where the action specified in the mapping is either the default action of the controller, or the action specified in the @<g:form>@ tag.
 
+Also note that this tag relies on the multipart resolver to be able to inspect parameters included with mulitpart requests. If you disable the resolver by setting grails.disableCommonsMultipart to true in Config.groovy, actionSubmit will not work.
 
 h2. Source
 
