@@ -17,6 +17,12 @@ class UrlMappings {
                 // apply constraints here
             }
         }
+
+        // GRAILS-3112
+        "/feeds/contents/$path**"{
+            controller = "feeds"
+            action = "contents"
+        }
         
         "500"(controller: "errors", action: "show") {
             code = 1001
