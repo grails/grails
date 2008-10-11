@@ -1,7 +1,20 @@
 class UrlMappingsTest extends grails.util.WebTest {
     void suite() {
+        testParamsClearedBetweenMappingEvaluations()
         testDoubleWildcardMapping()
         testDoubleWildcardReverseMapping()
+    }
+
+    /**
+     * Regression test for GRAILS-3369. Checks that the request parameters
+     * do not get polluted during mapping evaluation such that earlier
+     * mappings affect whether later ones match or not.
+     */
+    void testParamsClearedBetweenMappingEvaluations() {
+        webtest("Regression test for GRAILS-3369") {
+            invoke     (url: "fr/hello/")
+            verifyText ("Hello world!")
+        }
     }
 
     /**

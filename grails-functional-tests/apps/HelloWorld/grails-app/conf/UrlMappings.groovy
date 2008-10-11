@@ -23,6 +23,22 @@ class UrlMappings {
             controller = "feeds"
             action = "contents"
         }
+
+        // The next two are related to GRAILS-3369. If Grails is not
+        // working correctly, the "example" action remains in the
+        // params map for the web request when the next mapping is
+        // evaluated. Since the "hello" controller does not have such
+        // an action, the next mapping does not match even though it
+        // should.
+        "/$controller/hello/$id?" {
+            action = "example"
+        }
+
+        "/$lang/$controller/$action?" {
+            constraints {
+                lang("matches": /[a-z]{2}/)
+            }
+        }
         
         "500"(controller: "errors", action: "show") {
             code = 1001
