@@ -41,6 +41,14 @@ As a method call in GSP only. In this case we check for a field error on a parti
 </div>
 {code}
 
+Checking for errors inside a nested object:
+
+{code:xml}
+<div class="prop ${hasErrors(bean:parent, field:'child.name', 'errors')}">
+    <label for="child.name"><input type="text" name="child.name" value="${fieldValue(bean:parent,field:'child.name'} />
+</div>
+{code}
+
 h2. Description
 
 Attributes
