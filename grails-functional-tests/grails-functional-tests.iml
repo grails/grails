@@ -7,15 +7,6 @@
     <facet type="Grails" name="Grails" implicit="true">
       <configuration />
     </facet>
-    <facet type="Spring" name="Spring" implicit="true">
-      <configuration>
-        <options>
-          <option name="enableValidation" value="false" />
-          <option name="reportErrorsAsWarnings" value="true" />
-        </options>
-        <customNs />
-      </configuration>
-    </facet>
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
@@ -61,6 +52,9 @@
       </library>
     </orderEntry>
     <orderEntryProperties />
+  </component>
+  <component name="RSpecModuleSettingsStorage">
+    <RSPEC_MODULE_SETTINGS_STORAGE_ID NAME="RSPEC_SUPPORT_TYPE" VALUE="NONE" />
   </component>
 </module>
 
