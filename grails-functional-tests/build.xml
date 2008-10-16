@@ -218,6 +218,7 @@
 		</delete>
         <delete dir="checkout/grails" failonerror="false"/>
         <delete dir="reports" failonerror="false"/>
+        <delete dir="target" failonerror="false"/>
     </target>
 
 	<target name="clean-reports">
