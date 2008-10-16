@@ -133,8 +133,9 @@
 		               }
 
                                // Clear any existing webtest plugin
-                               ant.delete(includeEmptyDirs: true) {
-                                   fileset(dir: appDir.path, includes: "plugins/*webtest*/**")
+                               ant.echo message: "Delete existing webtest plugins"
+                               ant.delete(includeemptydirs: true) {
+                                   fileset(dir: appDir.path, includes: "**/webtest-*/**/*")
                                }
 
 		               // First upgrade
