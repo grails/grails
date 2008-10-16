@@ -10,6 +10,7 @@
     <import file="../common/macros.xml" />
 
     <target name="test-plugin-view-rendering">
+        <delete dir="target/scripts" />
         <mkdir dir="target/scripts" />
         <grails command="create-app test-plugin-views" dir="target/scripts" />
         <grails command="install-plugin searchable" dir="target/scripts/test-plugin-views" />
@@ -18,7 +19,7 @@
 				<grails command="run-app" dir="target/scripts/test-plugin-views" serverPort="8084" failonerror="true"/>
 			</daemons>
 			<sequential>
-                <waitfor maxwait="1" maxwaitunit="minute" checkevery="500">
+                <waitfor maxwait="2" maxwaitunit="minute" checkevery="1" checkeveryunit="second">
 				    <http url="http://localhost:8084/test-plugins-views"/>
 				</waitfor>
                 <groovy><![CDATA[
