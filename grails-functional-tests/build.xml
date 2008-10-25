@@ -210,16 +210,17 @@
 		</parallel>
 	</target>
 
-	<target name="clean" depends="clean-reports">
+    <target name="clean" depends="clean-reports">
         <delete failonerror="false">
-			<fileset dir="${checkoutDir}">
-				<include name="*" />
-				<exclude name=".svn" />
-			</fileset>
-		</delete>
+            <fileset dir="${checkoutDir}">
+                <include name="*" />
+                <exclude name=".svn" />
+            </fileset>
+        </delete>
         <delete dir="checkout/grails" failonerror="false"/>
         <delete dir="reports" failonerror="false"/>
         <delete dir="target" failonerror="false"/>
+        <delete dir="work-global" failonerror="false"/>
     </target>
 
 	<target name="clean-reports">

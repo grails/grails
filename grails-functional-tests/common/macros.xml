@@ -12,7 +12,8 @@
             <exec executable="${grailsCmd.absolute}" dir="@{dir}" resultproperty="testResult_@{resultID}" failonerror="@{failonerror}">
                 <arg value="-Dserver.port=@{serverPort}" />
                 <arg value="-Djava.util.logging.manager=java.util.logging.LogManager"/>
-                <arg value="-Dgrails.work.dir=work"/>
+                <arg value="-Dgrails.work.dir=${basedir}/work-global"/>
+                <arg value="-Dgrails.project.work.dir=work"/>
                 <arg value="@{environment}" />
                 <arg value="@{command}"/>
                 <env key="GRAILS_HOME" path="${grails.home}"/>
