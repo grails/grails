@@ -8,13 +8,14 @@
     	<attribute name="failonerror" default="false"/>
         <attribute name="serverPort" default="8083" />
         <sequential>
-			<echo message="Executing: grails @{command}"/>
-			<exec executable="${grailsCmd.absolute}" dir="@{dir}" resultproperty="testResult_@{resultID}" failonerror="@{failonerror}">
-				<arg value="-Dserver.port=@{serverPort}" />
+            <echo message="Executing: grails @{command}"/>
+            <exec executable="${grailsCmd.absolute}" dir="@{dir}" resultproperty="testResult_@{resultID}" failonerror="@{failonerror}">
+                <arg value="-Dserver.port=@{serverPort}" />
                 <arg value="-Djava.util.logging.manager=java.util.logging.LogManager"/>
+                <arg value="-Dgrails.work.dir=work"/>
                 <arg value="@{environment}" />
                 <arg value="@{command}"/>
-				<env key="GRAILS_HOME" path="${grails.home}"/>
+                <env key="GRAILS_HOME" path="${grails.home}"/>
             </exec>
         </sequential>
     </macrodef>
