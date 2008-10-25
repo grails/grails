@@ -10,6 +10,7 @@
     <import file="../common/macros.xml" />
 
     <target name="test-enable-dynamic-scaffolding">
+        <delete dir="target/scripts/test-enable-scaffolding"/>
         <mkdir dir="target/scripts" />
         <grails command="create-app test-enable-scaffolding" dir="target/scripts" />
         <grails command="create-domain-class Book" dir="target/scripts/test-enable-scaffolding" failonerror="true"/>

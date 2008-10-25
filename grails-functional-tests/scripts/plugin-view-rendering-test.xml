@@ -10,7 +10,7 @@
     <import file="../common/macros.xml" />
 
     <target name="test-plugin-view-rendering">
-        <delete dir="target/scripts" />
+        <delete dir="target/scripts/test-plugin-views" />
         <mkdir dir="target/scripts" />
         <grails command="create-app test-plugin-views" dir="target/scripts" />
         <grails command="clean" dir="target/scripts/test-plugin-views" />
