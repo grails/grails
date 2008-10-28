@@ -20,8 +20,8 @@
 				<grails command="run-app" dir="target/scripts/test-enable-scaffolding" serverPort="8085" failonerror="true"/>
 			</daemons>
 			<sequential>
-                <waitfor maxwait="1" maxwaitunit="minute" checkevery="5">
-				    <http url="http://localhost:8084/test-plugins-views"/>
+                <waitfor maxwait="1" maxwaitunit="minute" checkevery="5" checkeveryunit="second">
+				    <http url="http://localhost:8085/test-enable-scaffolding"/>
 				</waitfor>
 
                 <grails command="create-controller Book" dir="target/scripts/test-enable-scaffolding" failonerror="true"/>

@@ -78,7 +78,7 @@
             description="Runs functional tests for one or more test applications from SVN"
             depends="clean-reports,init,-get-grails,-build-grails, -testsWithNewApp">
 
-		<mkdir dir="reports" />
+        <mkdir dir="reports" />
         <antcall target="-functional-test-apps" />
         <antcall target="-functional-test-scripts" />
     </target>
