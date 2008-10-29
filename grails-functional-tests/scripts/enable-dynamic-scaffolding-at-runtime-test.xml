@@ -16,13 +16,14 @@
         <grails command="create-domain-class Book" dir="target/scripts/test-enable-scaffolding" failonerror="true"/>
 
         <parallel>
-			<daemons>
-				<grails command="run-app" dir="target/scripts/test-enable-scaffolding" serverPort="8085" failonerror="true"/>
-			</daemons>
-			<sequential>
+            <daemons>
+                <grails command="run-app" dir="target/scripts/test-enable-scaffolding" serverPort="8085" failonerror="true"/>
+            </daemons>
+
+            <sequential>
                 <waitfor maxwait="1" maxwaitunit="minute" checkevery="5" checkeveryunit="second">
-				    <http url="http://localhost:8085/test-enable-scaffolding"/>
-				</waitfor>
+                    <http url="http://localhost:8085/test-enable-scaffolding"/>
+                </waitfor>
 
                 <grails command="create-controller Book" dir="target/scripts/test-enable-scaffolding" failonerror="true"/>
 
@@ -30,8 +31,11 @@
                     import org.apache.commons.httpclient.*
                     import org.apache.commons.httpclient.methods.*
                     
+                    Thread.sleep(8000)
+
                     def text = new URL("http://localhost:8085/test-enable-scaffolding").text
                     if(!text.contains("BookController")) {
+                        new File("/var/tmp/scaffold-text.html") << text
                         ant.fail("Functional test failed! Controller didn't appear in list of controllers!")
                     }
                     // enable scaffolding
