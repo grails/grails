@@ -106,14 +106,14 @@ f.withWriter { writer ->
     writer << '''$newCode'''
 }
 
-Thread.sleep(2000)
+Thread.sleep(6000)
 """
     		group(description: "Gets the page again and checks new output") {
 	            invoke      (url: invokeUrl)
 	            verifyTitle (text: pageTitle)
-                verifyText  (text: "$newText")
+            	    verifyText  (text: "$newText")
 	            not {
-                    verifyText (text: "$originalText")
+    	                verifyText (text: "$originalText")
 	            }
     		}
         }
@@ -127,7 +127,7 @@ Thread.sleep(2000)
 	        artefactFile.withWriter { writer ->
 	            writer << originalCode
 	        }
-	        Thread.sleep(2000)			
+	        Thread.sleep(5000)			
 		}
     }
 }
