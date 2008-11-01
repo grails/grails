@@ -12,7 +12,7 @@ grails create-filters logging
 
 h2. Description         
 
-Creates a filters for the give base name. For example for a base name @logging@ a filters class called @LoggingFilters@ will be created in the @grails-app/conf@ directory.   
+Creates a filters class for the give base name. For example for a base name @logging@ a filters class called @LoggingFilters@ will be created in the @grails-app/conf@ directory.   
 
 {note}
 Note that this command is merely for convenience and you can also create filters in your favorite text editor or IDE if you choose.
