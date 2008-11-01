@@ -17,7 +17,7 @@ Creates a service for the give base name. For example for a base name @book@ a s
 A service class encapsulates business logic and is delegated to by controllers to perform the core logic of a Grails application. For more information on tags refer to the section on [Services|guide:services] in the user guide.
 
 {note}
-Note that this command is merely for convenience and you can also create controllers in your favourite text editor or IDE if you choose.
+Note that this command is merely for convenience and you can also create services in your favorite text editor or IDE if you choose.
 {note}
 
 Usage: 
