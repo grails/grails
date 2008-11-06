@@ -36,7 +36,7 @@ class WikiTagLibTests extends GroovyPagesTestCase {
         
         def template = '<wiki:text>My Link [Test Page]</wiki:text>'
 
-        assertOutputEquals 'My Link <a href="/Test+Page" class="pageLink">Test Page</a>', template
+        assertOutputEquals 'My Link <a href="http://www.grails.org/Test+Page" class="pageLink">Test Page</a>', template
 
     }
 
@@ -47,13 +47,13 @@ class WikiTagLibTests extends GroovyPagesTestCase {
 
         def template = '<wiki:text>My Link [Test Page|Test Page#MyAnchor]</wiki:text>'
 
-        assertOutputEquals 'My Link <a href="/Test+Page#MyAnchor" class="pageLink">Test Page</a>', template
+        assertOutputEquals 'My Link <a href="http://www.grails.org/Test+Page#MyAnchor" class="pageLink">Test Page</a>', template
 
     }
 
     void testLinksForNonExistantPages() {
        def template = '<wiki:text>My Link [Random Page]</wiki:text>'
 
-        assertOutputEquals 'My Link <a href="./create/Random+Page" class="createPageLink">Random Page (+)</a>', template        
+        assertOutputEquals 'My Link <a href="http://www.grails.org/create/Random+Page" class="createPageLink">Random Page (+)</a>', template        
     }
 }

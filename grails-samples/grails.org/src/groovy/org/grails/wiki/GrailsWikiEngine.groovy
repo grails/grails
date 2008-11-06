@@ -259,6 +259,7 @@ class LinkTestFilter extends RegexTokenFilter {
 
             try {
                 String name = matchResult.group(1)
+                name = name.replaceAll("&#38;", "&") // restore pre-escaped &s
 
                 int pipeIndex = name.indexOf('|');
                 String alias = name;

@@ -41,8 +41,11 @@ environments {
     production {
         grails.serverURL = "http://www.grails.org"
     }
+    test {
+        grails.serverURL = "http://www.grails.org"
+    }
     development {
-        grails.serverURL = "http://81.102.254.249"        
+        grails.serverURL = "http://localhost:8080"
     }
 }
 

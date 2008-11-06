@@ -90,6 +90,10 @@ class GrailsWikiEngineTests extends GroovyTestCase{
         
     }
 
+    void testExternalLinks() {
+        assertEquals '<a href="http://pipes.yahoo.com/pipes/pipe.run?_id=4n_tZgby2xGooF4z60jTQA&_render=rss" class="pageLink">RSS</a>', engine.render('[RSS|http://pipes.yahoo.com/pipes/pipe.run?_id=4n_tZgby2xGooF4z60jTQA&_render=rss]', context)
+    }
+
     void testImages() {
         def text = '''!image.jpg!
 
