@@ -1,0 +1,6 @@
+<archetype>
+  <id>maven-project</id>
+  <resources>
+    <resource>grails-app/conf/PreInit.groovy</resource>
+  </resources>
+</archetype>
