@@ -28,7 +28,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
   <repositories>
     <repository>
       <id>Codehaus Snapshots</id>
-      <url>http://snapshots.repository.codehaus.org/</url>
+      <url>http://snapshots.repository.codehaus.org</url>
       <snapshots>
         <enabled>true</enabled>
       </snapshots>
@@ -37,6 +37,19 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
       </releases>
     </repository>
   </repositories>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>Codehaus Snapshots</id>
+      <url>http://snapshots.repository.codehaus.org</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+    </pluginRepository>
+  </pluginRepositories>
 
   <build>
     <pluginManagement />
