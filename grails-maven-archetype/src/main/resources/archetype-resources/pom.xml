@@ -42,7 +42,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
     <pluginManagement />
     <plugins>
       <plugin>
-        <groupId>com.octo.mtg</groupId>
+        <groupId>org.grails</groupId>
         <artifactId>grails-maven-plugin</artifactId>
         <version>0.4-SNAPSHOT</version>
         <extensions>true</extensions>
