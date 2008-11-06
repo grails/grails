@@ -15,8 +15,8 @@ This application was developed against Grails 1.0.2 and requires the following p
 
 These can be installed with:
 
-grails install-plugin searchable 0.4.2-SNAPSHOT
 grails install-plugin jsecurity 0.2
+grails install-plugin searchable 0.4.2-SNAPSHOT
 grails install-plugin quartz 0.2
 grails install-plugin mail 0.1-ALPHA
 grails install-plugin feeds 1.2
