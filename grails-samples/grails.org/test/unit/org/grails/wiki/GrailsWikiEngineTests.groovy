@@ -57,6 +57,7 @@ class GrailsWikiEngineTests extends GroovyTestCase{
 
     void testAnchorLinks() {
          assertEquals '<a href="#MyAnchor" class="pageLink">MyAnchor</a>',engine.render('[#MyAnchor]', context)
+         assertEquals '<a href="#MyAnchor" class="pageLink">see My Anchor</a>',engine.render('[see My Anchor|#MyAnchor]', context)
     }
 
     void testAnchorLinksInBullets() {

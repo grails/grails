@@ -137,7 +137,7 @@ class GrailsWikiEngine extends BaseRenderEngine implements WikiRenderEngine{
 
         int i =decoded.indexOf('#')
         if(decoded.startsWith('#')) {
-            buffer <<  "<a href=\"${decoded}\" class=\"pageLink\">${decoded[1..-1]}</a>"
+            buffer <<  "<a href=\"${decoded}\" class=\"pageLink\">${view != decoded ? view : decoded[1..-1]}</a>"
         }
         else if(i>-1) {
             appendLink(buffer,URLEncoder.encode(decoded[0..i-1],'utf-8'),view, decoded[i+1..-1])            
@@ -196,7 +196,7 @@ public class AnchorMacro extends BaseMacro {
 
 class ItalicFilter extends RegexTokenFilter {
     public ItalicFilter() {
-        super(/\s_([^\n]*?)_\s/);
+        super(/_([^\n]*?)_/);
     }
     public void handleMatch(StringBuffer buffer, MatchResult result, FilterContext context) {
         buffer << " <em class=\"italic\">${result.group(1)}</em> "
@@ -213,7 +213,7 @@ class BoldFilter extends RegexTokenFilter {
 class CodeFilter extends RegexTokenFilter {
 
     public CodeFilter() {
-        super(/\s@([^\n]*?)@\s/);
+        super(/@([^\n]*?)@/);
     }
 
 
