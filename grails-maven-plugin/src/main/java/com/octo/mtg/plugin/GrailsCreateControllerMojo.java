@@ -43,6 +43,6 @@ public class GrailsCreateControllerMojo extends AbstractGrailsMojo {
     private String controllerName;
 
     public void execute() throws MojoExecutionException, MojoFailureException {
-        runGrails("create-controller", new String[]{this.controllerName}, "runtime");
+        runGrails("create-controller", this.controllerName, "runtime");
     }
 }
