@@ -47,6 +47,7 @@ class GrailsWikiEngine extends BaseRenderEngine implements WikiRenderEngine{
           
 
             def filters = [
+                            LinkTestFilter,
                             ParamFilter,
                             MacroFilter,
                             TextileLinkFilter,
@@ -60,7 +61,6 @@ class GrailsWikiEngine extends BaseRenderEngine implements WikiRenderEngine{
                             BoldFilter,
                             CodeFilter,
                             ItalicFilter,
-                            LinkTestFilter,
                             ImageFilter,
                             MarkFilter,
                             KeyFilter,
