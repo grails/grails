@@ -23,15 +23,10 @@ class ContentController extends BaseWikiController{
 
    def search = {
 		if(params.q) {
-			def hit = WikiPage.search(offset:params.offset ? params.offset.toInteger() : 0) {
-                term("title", params.q)
-                term("body", params.q)
-                mustNot(term("title", "korean"))
-                mustNot(term("title", "japanese")) 
-            }
-			flash.message = "Found $hit.total results!"
+			def searchResult = WikiPage.search(params.q, offset: params.offset)
+			flash.message = "Found $searchResult.total results!"
 			flash.next()
-			render(view:"/searchable/index", model:[searchResult:hit])
+			render(view:"/searchable/index", model:[searchResult:searchResult])
 		}
 		else {
 			redirect(action:list)
