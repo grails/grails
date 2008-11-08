@@ -37,64 +37,19 @@ import java.io.File;
 public class MvnWarMojo extends AbstractGrailsMojo {
 
     /**
-     * The maven artifact.
-     *
-     * @parameter expression="${project.artifact}"
-     * @required
-     * @readonly
-     */
-    private Artifact artifact;
-
-    /**
-     * The build directory. The WAR file will end up here.
-     *
-     * @parameter expression="${project.build.directory}"
-     * @required
-     * @readonly
-     */
-    private File buildDirectory;
-
-    /**
-     * The final name of the artifact without the extension.
-     *
-     * @parameter expression="${project.build.finalName}"
-     * @required
-     * @readonly
-     */
-    private String finalName;
-
-    /**
-     * The artifact handler.
-     *
-     * @parameter expression="${component.org.apache.maven.artifact.handler.ArtifactHandler#grails-app}"
-     * @required
-     * @readonly
-     */
-    protected ArtifactHandler artifactHandler;
-
-    /**
      * Executes the MvnWarMojo on the current project.
      *
      * @throws MojoExecutionException if an error occured while building the webapp
      */
     public void execute() throws MojoExecutionException, MojoFailureException {
         runGrails("War");
-//        GrailsProject grailsProject = getGrailsServices().readProjectDescriptor();
-//
-//        getGrailsServices().launchGrails(grailsHome, env, "war");
-//        String warFileName = grailsProject.getAppName() + "-" + grailsProject.getAppVersion() + ".war";
-//        File warGeneratedByGrails = new File(getBasedir(), warFileName);
-//
-//        if (!buildDirectory.isDirectory() && !buildDirectory.mkdirs()) {
-//            throw new MojoExecutionException("Unable to create directory: " + buildDirectory.getAbsolutePath());
-//        }
-//
-//        File mavenWarFile = new File(buildDirectory, finalName + ".war");
-//        mavenWarFile.delete();
-//        if (!warGeneratedByGrails.renameTo(mavenWarFile)) {
-//            throw new MojoExecutionException("Unable to copy the war in the target directory");
-//        }
-//        artifact.setFile(mavenWarFile);
-//        artifact.setArtifactHandler(artifactHandler);
+        String warFileName = project.getArtifactId() + "-" + project.getVersion() + ".war";
+        File warGeneratedByGrails = new File(getBasedir(), warFileName);
+
+        File mavenWarFile = new File(project.getBuild().getDirectory(), warFileName);
+        mavenWarFile.delete();
+        if (!warGeneratedByGrails.renameTo(mavenWarFile)) {
+            throw new MojoExecutionException("Unable to copy the war in the target directory");
+        }
     }
 }
