@@ -152,9 +152,17 @@ body.subpage {
     font-weight: normal;
 }
 
-.code .code-comment, .code .code-comment * {
-    color: green;
-    font-weight: normal;
+.java-quote .java-keyword {
+    color: inherit;
+    font-weight: inherit;
+}
+
+.code .xml-tag {
+    color: #222;
+}
+
+.code .xml-quote {
+    color: darkred;
 }
 
 /* footer styles 													
@@ -253,7 +261,6 @@ body.subpage {
 	margin: 0px 0px 10px 0px;
 	font: 300 2.75em/2.2em Arial, sans-serif;
 	letter-spacing: -0.02em;
-	text-transform: uppercase;
 	color: #265c8f;
 }
 
@@ -265,7 +272,6 @@ body.subpage {
 	margin: 10px 0px 10px 0px;
 	font: 700 2.2em/2.2em Arial, sans-serif;
 	letter-spacing: -0.01em;
-	text-transform: capitalize;
 	color: #002445;
 }
 

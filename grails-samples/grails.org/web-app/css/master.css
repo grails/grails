@@ -42,39 +42,48 @@ body {
 }
 
 .wiki-table  {
-    
+    border-collapse: collapse;
     margin:10px;
     padding:5px;
-    width:70%;
+    width:95%;
 }
 .wiki-table td  {
     border:1px dotted gray;
     border-top:0px;
     margin:10px;
     padding:5px;
-    width:70%;
 }
 .wiki-table th  {
-    background-color: lightgray;
-    border:none;
-    border-top:0px;
+    background-color: #ddd;
+    border:1px dotted gray;
     margin:10px;
     padding:5px;
-    width:70%;
-    color:#014684;
+    color: #002445;
+}
+
+.info {
+    background: #e2e0ff url("/images/icon-info.png") 13px 12px no-repeat;
+    padding: 10px 10px 1px 39px;
+    margin:10px 10px;
 }
 
 .warning {
-    background-color:#FFCCCC;
-    padding:10px;
-    border:1px solid red;
-    margin-top:10px;
+    background: #ffdede url("/images/icon-info.png") 13px 12px no-repeat;
+    padding: 10px 10px 1px 39px;
+    margin:10px 10px;
 }
 
 .note {
-    background-color:#FFFFE0;    
-    border:1px solid yellow;
-    padding:10px;
+    background: #fefecc url("/images/icon-info.png") 13px 12px no-repeat;
+    padding: 10px 10px 1px 39px;
+    margin:10px 10px;
+}
+
+.code {
+    background-color: #efefef;
+    border: 1px dashed #c5c5c5;
+    padding: 10px 10px 0 10px;
+    margin: 10px 20px;
 }
 
 a:link,
@@ -96,6 +105,10 @@ a:active {
 form {
 	margin: 0px;
 	padding: 0px;
+}
+
+strong {
+    font-weight: bold;
 }
 
 /* layout styles 													
