@@ -43,7 +43,6 @@ class GrailsWikiEngine extends BaseRenderEngine implements WikiRenderEngine {
         if (null == fp) {
             FilterPipe localFP = new FilterPipe(initialContext);
             def filters = [
-                    LinkTestFilter,
                     ParamFilter,
                     MacroFilter,
                     TextileLinkFilter,
@@ -57,6 +56,7 @@ class GrailsWikiEngine extends BaseRenderEngine implements WikiRenderEngine {
                     BoldFilter,
                     CodeFilter,
                     ItalicFilter,
+                    LinkTestFilter,
                     ImageFilter,
                     MarkFilter,
                     KeyFilter,

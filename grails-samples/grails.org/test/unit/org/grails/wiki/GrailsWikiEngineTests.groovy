@@ -42,6 +42,22 @@ class GrailsWikiEngineTests extends GroovyTestCase {
         assertEquals 'the <code>Book</code> class', engine.render('the @Book@ class', context)
     }
 
+    void testCodeBlock() {
+        assertEquals '''
+<div class="code"><pre>class Book &#123;
+    <span class="java&#45;keyword">static</span> hasMany = &#91;authors: Authors&#93;
+    <span class="java&#45;object">String</span> title
+&#125;</pre></div>
+''', engine.render('''
+{code}
+class Book {
+    static hasMany = [authors: Authors]
+    String title
+}
+{code}
+''', context)
+    }
+
     void testHeadTags() {
         assertEquals "<a name=\"Hello\"></a><h1>Hello</h1>", engine.render('h1. Hello', context)
     }
