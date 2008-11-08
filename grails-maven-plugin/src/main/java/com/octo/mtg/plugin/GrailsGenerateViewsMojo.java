@@ -39,7 +39,6 @@ public class GrailsGenerateViewsMojo extends AbstractGrailsMojo {
     private String domainClassName;
 
     public void execute() throws MojoExecutionException, MojoFailureException {
-        getGrailsServices().launchGrails(grailsHome, env, "generate-views",
-            new String[]{this.domainClassName});
+        runGrails("generate-views", domainClassName, "runtime");
     }
 }

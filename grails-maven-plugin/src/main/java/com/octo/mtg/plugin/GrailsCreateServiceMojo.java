@@ -39,7 +39,6 @@ public class GrailsCreateServiceMojo extends AbstractGrailsMojo {
     private String serviceName;
 
     public void execute() throws MojoExecutionException, MojoFailureException {
-        getGrailsServices().launchGrails(grailsHome, env, "create-service",
-            new String[]{this.serviceName});
+        runGrails("create-service", serviceName, "runtime");
     }
 }

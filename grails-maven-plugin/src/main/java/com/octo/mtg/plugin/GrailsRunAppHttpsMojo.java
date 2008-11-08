@@ -31,6 +31,6 @@ import org.apache.maven.plugin.MojoFailureException;
 public class GrailsRunAppHttpsMojo extends AbstractGrailsMojo {
 
     public void execute() throws MojoExecutionException, MojoFailureException {
-        getGrailsServices().launchGrails(grailsHome, env, "run-app-https");
+        runGrails("run-app-https");
     }
 }

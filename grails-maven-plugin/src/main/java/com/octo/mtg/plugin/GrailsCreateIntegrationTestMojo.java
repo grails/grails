@@ -42,7 +42,6 @@ public class GrailsCreateIntegrationTestMojo extends AbstractGrailsMojo {
     private String integrationTestName;
 
     public void execute() throws MojoExecutionException, MojoFailureException {
-        getGrailsServices().launchGrails(grailsHome, env, "create-integration-test",
-            new String[]{this.integrationTestName});
+        runGrails("create-integration-test", integrationTestName, "runtime");
     }
 }

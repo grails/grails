@@ -32,6 +32,6 @@ import org.apache.maven.plugin.MojoFailureException;
 public class GrailsPackageMojo extends AbstractGrailsMojo {
 
     public void execute() throws MojoExecutionException, MojoFailureException {
-        getGrailsServices().launchGrails(grailsHome, env, "package");
+        runGrails("package");
     }
 }

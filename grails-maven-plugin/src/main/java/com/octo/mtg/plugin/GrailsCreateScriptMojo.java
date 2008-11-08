@@ -39,7 +39,6 @@ public class GrailsCreateScriptMojo extends AbstractGrailsMojo {
     private String scriptName;
 
     public void execute() throws MojoExecutionException, MojoFailureException {
-        getGrailsServices().launchGrails(grailsHome, env, "create-script",
-            new String[]{this.scriptName});
+        runGrails("create-script", scriptName, "runtime");
     }
 }

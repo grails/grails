@@ -31,6 +31,6 @@ import org.apache.maven.plugin.MojoFailureException;
 public class GrailsRunWebTestMojo extends AbstractGrailsMojo {
 
     public void execute() throws MojoExecutionException, MojoFailureException {
-        getGrailsServices().launchGrails(grailsHome, env, "run-webtest");
+        runGrails("run-webtest");
     }
 }

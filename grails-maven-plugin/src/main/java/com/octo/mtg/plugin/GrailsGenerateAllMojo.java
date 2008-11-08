@@ -40,7 +40,6 @@ public class GrailsGenerateAllMojo extends AbstractGrailsMojo {
     private String domainClassName;
 
     public void execute() throws MojoExecutionException, MojoFailureException {
-        getGrailsServices().launchGrails(grailsHome, env, "generate-all",
-            new String[]{this.domainClassName});
+        runGrails("generate-all", domainClassName, "runtime");
     }
 }

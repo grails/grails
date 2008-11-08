@@ -39,7 +39,6 @@ public class GrailsCreateWebTestMojo extends AbstractGrailsMojo {
     private String webTestName;
 
     public void execute() throws MojoExecutionException, MojoFailureException {
-        getGrailsServices().launchGrails(grailsHome, env, "create-webtest",
-            new String[]{this.webTestName});
+        runGrails("create-webtest", webTestName, "runtime");
     }
 }
