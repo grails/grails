@@ -86,6 +86,14 @@ body {
     margin: 10px 20px;
 }
 
+.code pre {
+    font-family: Monaco, "Lucida Console", "Bitstream Vera Sans Mono", monospace;
+}
+
+code {
+    font-family: Monaco, "Lucida Console", "Bitstream Vera Sans Mono", monospace;
+}
+
 a:link,
 a:visited {
 	text-decoration: none;
