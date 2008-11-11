@@ -23,6 +23,18 @@
   <name>Maven plugin for GRAILS applications</name>
   <description>This plugin allows you to integrate GRAILS applications into maven 2 builds.</description>
   <url>http://forge.octo.com/maven/sites/mtg/grails-maven-plugin</url>
+  <repositories>
+    <repository>
+      <id>Codehaus Snapshots</id>
+      <url>http://snapshots.repository.codehaus.org</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+    </repository>
+  </repositories>
   <distributionManagement>
     <repository>
       <id>codehaus.org</id>
