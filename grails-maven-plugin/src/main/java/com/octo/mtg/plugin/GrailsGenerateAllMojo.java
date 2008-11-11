@@ -28,6 +28,7 @@ import org.apache.maven.plugin.MojoFailureException;
  * class.
  * @goal generate-all
  * @requiresProject false
+ * @requiresDependencyResolution runtime
  * @since 0.1
  */
 public class GrailsGenerateAllMojo extends AbstractGrailsMojo {
@@ -40,6 +41,6 @@ public class GrailsGenerateAllMojo extends AbstractGrailsMojo {
     private String domainClassName;
 
     public void execute() throws MojoExecutionException, MojoFailureException {
-        runGrails("generate-all", domainClassName, "runtime");
+        runGrails("GenerateAll", domainClassName, "runtime");
     }
 }

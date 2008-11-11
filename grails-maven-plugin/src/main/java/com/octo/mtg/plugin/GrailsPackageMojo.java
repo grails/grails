@@ -27,11 +27,12 @@ import org.apache.maven.plugin.MojoFailureException;
  * running.
  * @goal package
  * @requiresProject false
+ * @requiresDependencyResolution runtime
  * @since 0.2
  */
 public class GrailsPackageMojo extends AbstractGrailsMojo {
 
     public void execute() throws MojoExecutionException, MojoFailureException {
-        runGrails("package");
+        runGrails("Package");
     }
 }

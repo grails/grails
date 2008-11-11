@@ -26,11 +26,12 @@ import org.apache.maven.plugin.MojoFailureException;
  * @description Installs the artifact and scaffolding templates.
  * @goal install-templates
  * @requiresProject false
+ * @requiresDependencyResolution runtime
  * @since 0.1
  */
 public class GrailsInstallTemplatesMojo extends AbstractGrailsMojo {
 
     public void execute() throws MojoExecutionException, MojoFailureException {
-        runGrails("install-templates");
+        runGrails("InstallTemplates");
     }
 }

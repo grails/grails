@@ -41,6 +41,6 @@ public class GrailsCreateAppMojo extends AbstractGrailsMojo {
     private String appName;
 
     public void execute() throws MojoExecutionException, MojoFailureException {
-        runGrails("create-app", appName, "runtime");
+        runGrails("CreateApp", appName, "runtime");
     }
 }

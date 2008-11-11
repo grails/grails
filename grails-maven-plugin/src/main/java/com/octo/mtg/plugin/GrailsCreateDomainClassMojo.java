@@ -27,6 +27,7 @@ import org.apache.maven.plugin.MojoFailureException;
  * @description Creates a new domain class.
  * @goal create-domain-class
  * @requiresProject false
+ * @requiresDependencyResolution runtime
  * @since 0.1
  */
 public class GrailsCreateDomainClassMojo extends AbstractGrailsMojo {
@@ -39,6 +40,6 @@ public class GrailsCreateDomainClassMojo extends AbstractGrailsMojo {
     private String domainClassName;
 
     public void execute() throws MojoExecutionException, MojoFailureException {
-        runGrails("create-domain-class", domainClassName, "runtime");
+        runGrails("CreateDomainClass", domainClassName, "runtime");
     }
 }

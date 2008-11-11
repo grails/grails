@@ -27,6 +27,7 @@ import org.apache.maven.plugin.MojoFailureException;
  * @description Creates a new service class.
  * @goal create-service
  * @requiresProject false
+ * @requiresDependencyResolution runtime
  * @since 0.1
  */
 public class GrailsCreateServiceMojo extends AbstractGrailsMojo {
@@ -39,6 +40,6 @@ public class GrailsCreateServiceMojo extends AbstractGrailsMojo {
     private String serviceName;
 
     public void execute() throws MojoExecutionException, MojoFailureException {
-        runGrails("create-service", serviceName, "runtime");
+        runGrails("CreateService", serviceName, "runtime");
     }
 }

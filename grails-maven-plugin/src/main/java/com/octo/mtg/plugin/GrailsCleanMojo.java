@@ -35,6 +35,6 @@ import java.util.List;
 public class GrailsCleanMojo extends AbstractGrailsMojo {
 
     public void execute() throws MojoExecutionException, MojoFailureException {
-        runGrails("clean");
+        runGrails("Clean");
     }
 }

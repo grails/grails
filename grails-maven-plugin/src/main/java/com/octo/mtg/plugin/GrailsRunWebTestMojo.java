@@ -26,11 +26,12 @@ import org.apache.maven.plugin.MojoFailureException;
  * @description Runs all of the Web tests against a Grails application.
  * @goal run-webtest
  * @requiresProject false
+ * @requiresDependencyResolution runtime
  * @since 0.1
  */
 public class GrailsRunWebTestMojo extends AbstractGrailsMojo {
 
     public void execute() throws MojoExecutionException, MojoFailureException {
-        runGrails("run-webtest");
+        runGrails("RunWebtest");
     }
 }

@@ -27,6 +27,7 @@ import org.apache.maven.plugin.MojoFailureException;
  * given name.
  * @goal create-web-test
  * @requiresProject false
+ * @requiresDependencyResolution runtime
  * @since 0.1
  */
 public class GrailsCreateWebTestMojo extends AbstractGrailsMojo {
@@ -39,6 +40,6 @@ public class GrailsCreateWebTestMojo extends AbstractGrailsMojo {
     private String webTestName;
 
     public void execute() throws MojoExecutionException, MojoFailureException {
-        runGrails("create-webtest", webTestName, "runtime");
+        runGrails("CreateWebtest", webTestName, "runtime");
     }
 }

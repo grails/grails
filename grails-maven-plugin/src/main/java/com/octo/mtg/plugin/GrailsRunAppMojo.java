@@ -26,11 +26,12 @@ import org.apache.maven.plugin.MojoFailureException;
  * @description Runs a Grails application in Jetty.
  * @goal run-app
  * @requiresProject false
+ * @requiresDependencyResolution runtime
  * @since 0.3
  */
 public class GrailsRunAppMojo extends AbstractGrailsMojo {
 
     public void execute() throws MojoExecutionException, MojoFailureException {
-        runGrails("run-app");
+        runGrails("RunApp");
     }
 }

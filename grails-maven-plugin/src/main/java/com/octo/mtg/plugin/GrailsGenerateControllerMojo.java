@@ -26,6 +26,7 @@ import org.apache.maven.plugin.MojoFailureException;
  * @description Generates a CRUD controller for a specified domain class.
  * @goal generate-controller
  * @requiresProject false
+ * @requiresDependencyResolution runtime
  * @since 0.1
  */
 public class GrailsGenerateControllerMojo extends AbstractGrailsMojo {
@@ -38,6 +39,6 @@ public class GrailsGenerateControllerMojo extends AbstractGrailsMojo {
     private String domainClassName;
 
     public void execute() throws MojoExecutionException, MojoFailureException {
-        runGrails("generate-controller", domainClassName, "runtime");
+        runGrails("GenerateController", domainClassName, "runtime");
     }
 }

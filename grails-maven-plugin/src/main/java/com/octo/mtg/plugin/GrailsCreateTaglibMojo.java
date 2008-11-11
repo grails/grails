@@ -26,6 +26,7 @@ import org.apache.maven.plugin.MojoFailureException;
  * @description Creates a new taglib.
  * @goal create-taglib
  * @requiresProject false
+ * @requiresDependencyResolution runtime
  * @since 0.1
  */
 public class GrailsCreateTaglibMojo extends AbstractGrailsMojo {
@@ -38,6 +39,6 @@ public class GrailsCreateTaglibMojo extends AbstractGrailsMojo {
     private String taglibName;
 
     public void execute() throws MojoExecutionException, MojoFailureException {
-        runGrails("create-taglib", taglibName, "runtime");
+        runGrails("CreateTaglib", taglibName, "runtime");
     }
 }

@@ -29,6 +29,7 @@ import org.apache.maven.plugin.MojoFailureException;
  * mock out access to dynamic methods, but executes a lot quicker.
  * @goal create-unit-test
  * @requiresProject false
+ * @requiresDependencyResolution runtime
  * @since 0.1
  */
 public class GrailsCreateUnitTestMojo extends AbstractGrailsMojo {
@@ -41,6 +42,6 @@ public class GrailsCreateUnitTestMojo extends AbstractGrailsMojo {
     private String unitTestName;
 
     public void execute() throws MojoExecutionException, MojoFailureException {
-        runGrails("create-unit-test", unitTestName, "runtime");
+        runGrails("CreateUnitTest", unitTestName, "runtime");
     }
 }

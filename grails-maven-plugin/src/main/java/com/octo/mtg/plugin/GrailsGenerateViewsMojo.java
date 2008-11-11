@@ -27,6 +27,7 @@ import org.apache.maven.plugin.MojoFailureException;
  * @description Generates the CRUD views for a specified domain class.
  * @goal generate-views
  * @requiresProject false
+ * @requiresDependencyResolution runtime
  * @since 0.1
  */
 public class GrailsGenerateViewsMojo extends AbstractGrailsMojo {
@@ -39,6 +40,6 @@ public class GrailsGenerateViewsMojo extends AbstractGrailsMojo {
     private String domainClassName;
 
     public void execute() throws MojoExecutionException, MojoFailureException {
-        runGrails("generate-views", domainClassName, "runtime");
+        runGrails("GenerateViews", domainClassName, "runtime");
     }
 }
