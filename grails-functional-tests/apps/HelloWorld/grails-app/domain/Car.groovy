@@ -1,6 +1,13 @@
 class Car {
-
     Date dateOfManufacture
-    String Make
+    String make
     int engineCapacity
+    BigDecimal listPrice
+
+    static constraints = {
+        make()
+        engineCapacity()
+        dateOfManufacture()
+        listPrice()
+    }
 }
