@@ -118,8 +118,8 @@
 
             </li>
             <li style="text-align:center" id="g2oneLogo">
-                <div style="position:relative;top:-5px;left:5px;">
-                    <a href="http://www.g2one.com" ><img border="0" src="${createLinkTo(dir:'images', file:'g2one-logo-for-grails-org.png')}" width="165" alt="G2One Inc. - The Groovy/Grails Company" /></a>
+                <div style="position:relative;top:10px;left:5px;">
+                    <a href="http://www.springsource.com/g2one" ><img border="0" src="${createLinkTo(dir:'images', file:'g2one-acquiredby.png')}" width="165" alt="G2One is acquired by SpringSource" /></a>
                 </div>
 
             </li>

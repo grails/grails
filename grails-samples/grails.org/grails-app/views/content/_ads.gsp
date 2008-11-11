@@ -1,11 +1,10 @@
-<div id="sidebarAds">
+<div id="sidebarAds" style="text-align:center;width:300px;">
     <p>
-    <h4>Led &amp; Sustained by</h4>
-    <a href="http://www.g2one.com/"><img src="${createLinkTo(dir:'images/','g2one-logo.png')}" width="110" height="62" border="0" alt="G2one Logo" /></a>
+    <a href="http://www.springsource.com/g2one"><img src="${createLinkTo(dir:'images/','g2one-acquiredby.png')}" width="150" border="0" alt="G2one Logo" /></a>
     </p>
 
     <p>
-<a href="http://www.jetbrains.com/idea/" style="display:block; width:120px; height:60px;border:0; margin:0;padding:0;text-decoration:none;text-indent:0;"><img src="http://www.jetbrains.com/idea/opensource/img/banners/idea120x60_white.gif" alt="The best Java IDE" border="0"/></a>
+<a href="http://www.jetbrains.com/idea/"><img src="http://www.jetbrains.com/idea/opensource/img/banners/idea120x60_white.gif" alt="The best Java IDE" border="0"/></a>
     </p>
 
     <p>
