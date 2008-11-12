@@ -97,3 +97,42 @@ order("holderLastName", "desc")
 sizeEq("transactions", 10)
 {code}       
 {table}
+
+Criteria also support the notion of projections. A projection is used to change the nature of the results. For example the following query using a projection to count the number of distinct @branch@ names there are for each @Account@:
+
+{code:java}
+def c = Account.createCriteria()
+def branchCount = c.get {
+	projections {
+		countDistinct "branch"
+	}
+}
+{code}
+
+The following table summarizes the different projections and what they do:
+
+{table}
+Name | Description | Example
+*property* | Returns the given property in the returned results | {code:java}
+property("firstName"){code}
+*distinct* | Returns results using a single or collection of distinct property names | {code:java}
+distinct("lastName") or distinct(['firstName', 'lastName']){code}
+*avg* | Returns the average value of the given property | {code:java}
+avg("age"){code}
+*count* | Returns the count of the given property name | {code:java}
+count("branch"){code}
+*countDistinct* | Returns the distinct count of the given property name | {code:java}
+countDistinct("branch"){code}
+*groupProperty* | Groups the results by the given property | {code:java}
+groupProperty("lastName"){code}
+*max* | Returns the maximum value of the given property | {code:java}
+max("age"){code}
+*min* | Returns the minimum value of the given property | {code:java}
+min("age"){code}
+*sum* | Returns the sum of the given property | {code:java}
+sum("balance"){code}
+*rowCount* | Returns count of the number of rows returned | {code:java}
+rowCount(){code}
+
+
+{table}
