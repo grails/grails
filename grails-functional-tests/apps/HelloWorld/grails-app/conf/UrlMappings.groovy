@@ -24,6 +24,10 @@ class UrlMappings {
             action = "contents"
         }
 
+        // GRAILS-3087
+        "/files/download/$filename.$ext" (controller: "file", action: "get")
+        "/3087/prefix-$stem/$action-$id?"(controller: "stem")
+
         // The next two are related to GRAILS-3369. If Grails is not
         // working correctly, the "example" action remains in the
         // params map for the web request when the next mapping is

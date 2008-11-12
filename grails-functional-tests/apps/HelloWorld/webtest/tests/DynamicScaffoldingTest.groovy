@@ -17,7 +17,7 @@ class DynamicScaffoldingTest extends grails.util.WebTest {
             setSelectField name: "dateOfManufacture_minute", text: "00"
             setInputField name: "engineCapacity", value: "12345"
             setInputField name: "make", value: "Ferrari"
-            setInputField name: "listPrice", value: "135456.88"
+            setInputField name: "listPrice", value: "135,456.88"
             clickButton "Create"
 
             verifyText "2020-01-01 12:00:00.0"
