@@ -29,7 +29,7 @@ At this point you may already have errors in the @errors@ property due to type c
 
 {code:java}
 if(user.hasErrors()) {
-	if(user.hasFieldError("login")) {
+	if(user.hasFieldErrors("login")) {
 		println user.getFieldError("login").rejectedValue
 	}
 }
