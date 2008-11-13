@@ -96,3 +96,25 @@ book.save()
 {code}
 
 The static @hasMany@ property defines the type of the elements within the Map. The keys for the map *must* be strings.
+
+h4. A Note on Collection Types and Performance
+
+The Java @Set@ type is a collection that doesn't allow duplicates. In order to ensure uniqueness when adding an entry to a @Set@ association Hibernate has to load the entire associations from the database. If you have a large numbers of entries in the association this can be costly in terms of performance.
+
+The same behavior is required for @List@ types, since Hibernate needs to load the entire association in-order to maintain order. Therefore it is recommended that if you anticipate a large numbers of records in the association that you make the association bidirectional so that the link can be created on the inverse side. For example consider the following code:
+
+{code:java}
+def book = new Book(title:"New Grails Book")
+def author = Author.get(1)
+book.author = author
+book.save()
+{code}
+
+In this example the association link is being created by the child (Book) and hence it is not necessary to manipulate the collection directly resulting in fewer queries and more efficient code. Given an @Author@ with a large number of associated @Book@ instances if you were to write code like the following you would see an impact on performance:
+
+{code:java}
+def book = new Book(title:"New Grails Book")
+def author = Author.get(1)
+author.addToBooks(book)
+author.save()
+{code}
