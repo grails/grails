@@ -1,6 +1,6 @@
 Unit testing are tests at the "unit" level. In other words you are testing individual methods or blocks of code without considering for surrounding infrastructure. In Grails you need to be particularity aware of the difference between unit and integration tests because in unit tests Grails *does not* inject any of the dynamic methods present during integration tests and at runtime. 
 
-The reason for this is that it is left up to you to mock these methods using something like "Groovy Mock":http://docs.codehaus.org/display/GROOVY/Groovy+Mocks or [ExpandoMetaClass|http://groovy.codehaus.org/ExpandoMetaClass].
+The reason for this is that it is left up to you to mock these methods using something like "Groovy Mock":http://docs.codehaus.org/display/GROOVY/Groovy+Mocks or [ExpandoMetaClass|http://groovy.codehaus.org/ExpandoMetaClass]. Alternatively, you could using the new [Testing plugin|http://www.grails.org/Testing+Plugin] that will be integrated into the upcoming Grails 1.1 release. The Testing plugin provides utility methods that enable you to mock the behavior of Grails classes within a unit test.
 
 For example say you have an action like the following in @BookController@:
 
