@@ -36,7 +36,7 @@ Attributes
 
 * @var@ - The name of the variable
 * @value@ - The initial value to be assgined
-* @scope@ - Scope to set variable in (either "request", "page", "flash" or "session")
+* @scope@ - Scope to set variable in (either @request@, @page@, @flash@ or @session@. Defaults to @page@).
 
 
 h2. Source
