@@ -2,17 +2,17 @@ h1. nullable
 
 h2. Purpose
 
-Ensures the property value cannot be @null@ when set to @false@
+Allows a property to be set to @null@. By default Grails does not allow @null@ values for properties.
 
 h2. Examples
 
 {code:java}
-age(nullable:false)
+age(nullable:true)
 {code}
 
 h2. Description
 
-Set to @false@ if the property value cannot be null. This constraint influences [schema generation|guide:5.7 GORM and Constraints].
+Set to @true@ if the property allows @null@ values. This constraint influences [schema generation|guide:5.7 GORM and Constraints].
 
 {note}
 An empty form field will appear in the request parameters as an empty string, not as null. Keep this in mind when setting domain fields directly form request parameters 
