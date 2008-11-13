@@ -130,4 +130,6 @@ If you have a domain class in a package or are generating from a [Hibernate mapp
 grails generate-all com.bookstore.Book
 {code}
 
+h4. Customizing the Scaffolding templates
 
+The templates used by Grails to generate the controller and views can be customized by installing the templates with the [install-templates|commandLine] command.
