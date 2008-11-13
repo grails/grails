@@ -111,7 +111,7 @@ grails plugin-info [plugin-name]
 Which outputs more information based on the meta info entered into the plug-in descriptor. 
 
 {note}
-If you have created a Grails plug-in and want it to be hosted in the central repository contact a member of the "G2One team"http://www.g2one.com and they can grant you access.
+If you have created a Grails plug-in and want it to be hosted in the central repository take a look at the wiki page [http://grails.org/Creating+Plugins], which details how to go about releasing your plugin in the repository.
 {note}
 
 When you have access to the Grails Plug-in repository to release your plugin you simply have to execute the [release-plugin|commandLine] command:
