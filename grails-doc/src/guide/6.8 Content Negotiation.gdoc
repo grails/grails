@@ -66,7 +66,7 @@ class BookController {
 
 What happens here is that if the preferred format is @html@ then Grails will execute the @html()@ call only. What this is does is make Grails look for a view called either @grails-app/views/books/list.html.gsp@ or @grails-app/views/books/list.gsp@. If the format is @xml@ then the closure will be invoked and an XML response rendered.
 
-If the accept header is 'all' such as in an older browser then the format to select is based on the order of the calls within the @withFormat@ method. In the previous example the @html@ method will be invoked first in this case.
+How do we handle the "all" format? Simply order the content-types within your @withFormat@ block so that whichever one you want executed comes first. So in the above example, "all" will trigger the @html@ handler.
 
 {note}
 When using [withFormat|controllers] make sure it is the last call in your controller action as the return value of the @withFormat@ method is used by the action to dictate what happens next.
