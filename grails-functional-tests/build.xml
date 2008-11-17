@@ -206,6 +206,7 @@
 				<waitfor maxwait="1" maxwaitunit="minute" checkevery="500">
 				    <http url="http://localhost:8083/${newWebApp}"/>
 				</waitfor>
+                                <touch file="${basedir}/.kill-run-app"/>
 			</sequential>
 		</parallel>
 	</target>
