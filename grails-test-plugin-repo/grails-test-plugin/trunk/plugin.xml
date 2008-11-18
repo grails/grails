@@ -1,0 +1,10 @@
+<plugin name='test-plugin' version='0.1'>
+  <author>Your name</author>
+  <title>Plugin summary/headline</title>
+  <documentation>http://grails.org/TestPlugin+Plugin</documentation>
+  <resources>
+    <resource>DataSource</resource>
+    <resource>UrlMappings</resource>
+  </resources>
+  <dependencies />
+</plugin>
