@@ -1,0 +1,10 @@
+<plugin name='simpleplugin' version='0.1'>
+  <author>Your name</author>
+  <title>Plugin summary/headline</title>
+  <documentation>http://grails.org/Simpleplugin+Plugin</documentation>
+  <resources>
+    <resource>DataSource</resource>
+    <resource>UrlMappings</resource>
+  </resources>
+  <dependencies />
+</plugin>
