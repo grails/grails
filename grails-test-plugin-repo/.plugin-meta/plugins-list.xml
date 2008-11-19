@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="7718">
+<plugins revision="7721">
     <plugin name="simpleplugin"/>
     <plugin latest-release="0.1" name="test-plugin">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
