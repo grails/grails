@@ -1,8 +1,9 @@
-<plugin name='test-plugin' version='0.3'>
+<plugin name='test-plugin' version='0.4'>
   <author>Your name</author>
   <title>Plugin summary/headline</title>
   <documentation>http://grails.org/TestPlugin+Plugin</documentation>
   <resources>
+    <resource>TestPluginController</resource>
     <resource>FeedsTagLib</resource>
   </resources>
   <dependencies>

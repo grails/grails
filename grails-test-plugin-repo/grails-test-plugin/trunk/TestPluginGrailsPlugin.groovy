@@ -1,5 +1,5 @@
 class TestPluginGrailsPlugin {
-    def version = 0.3
+    def version = 0.4
     def dependsOn = [feeds:"1.4", simpleplugin:"0.1"]
 
     // TODO Fill in these fields
