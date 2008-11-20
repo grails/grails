@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="7729">
-    <plugin name="simpleplugin"/>
+<plugins revision="7733">
+    <plugin latest-release="0.1" name="simpleplugin">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>Plugin summary/headline</title>
+            <author>Your name</author>
+            <authorEmail/>
+            <description/>
+            <documentation>http://grails.org/Simpleplugin+Plugin</documentation>
+            <file>http://svn.codehaus.org/grails/trunk/grails-test-plugin-repo/grails-simpleplugin/tags/RELEASE_0_1/grails-simpleplugin-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin latest-release="0.2" name="test-plugin">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Plugin summary/headline</title>
