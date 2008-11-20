@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="7721">
+<plugins revision="7729">
     <plugin name="simpleplugin"/>
-    <plugin latest-release="0.1" name="test-plugin">
+    <plugin latest-release="0.2" name="test-plugin">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Plugin summary/headline</title>
             <author>Your name</author>
@@ -10,13 +10,13 @@
             <documentation>http://grails.org/TestPlugin+Plugin</documentation>
             <file>http://svn.codehaus.org/grails/trunk/grails-test-plugin-repo/grails-test-plugin/tags/RELEASE_0_1/grails-test-plugin-0.1.zip</file>
         </release>
-        <release tag="RELEASE_0_2" type="svn" version="0.1">
+        <release tag="RELEASE_0_2" type="svn" version="0.2">
             <title>Plugin summary/headline</title>
             <author>Your name</author>
             <authorEmail/>
             <description/>
             <documentation>http://grails.org/TestPlugin+Plugin</documentation>
-            <file>http://svn.codehaus.org/grails/trunk/grails-test-plugin-repo/grails-test-plugin/tags/RELEASE_0_2/grails-test-plugin-0.1.zip</file>
+            <file>http://svn.codehaus.org/grails/trunk/grails-test-plugin-repo/grails-test-plugin/tags/RELEASE_0_2/grails-test-plugin-0.2.zip</file>
         </release>
     </plugin>
 </plugins>
