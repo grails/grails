@@ -1,4 +1,4 @@
-<plugin name='test-plugin' version='0.2'>
+<plugin name='test-plugin' version='0.3'>
   <author>Your name</author>
   <title>Plugin summary/headline</title>
   <documentation>http://grails.org/TestPlugin+Plugin</documentation>
@@ -7,5 +7,6 @@
   </resources>
   <dependencies>
     <plugin name='feeds' version='1.4' />
+    <plugin name='simpleplugin' version='0.1' />
   </dependencies>
 </plugin>

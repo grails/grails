@@ -1,6 +1,6 @@
 class TestPluginGrailsPlugin {
-    def version = 0.2
-    def dependsOn = [feeds:"1.4"]
+    def version = 0.3
+    def dependsOn = [feeds:"1.4", simpleplugin:"0.1"]
 
     // TODO Fill in these fields
     def author = "Your name"
