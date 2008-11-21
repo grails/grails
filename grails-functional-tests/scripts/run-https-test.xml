@@ -20,6 +20,7 @@
         <grails command="create-app test-run-https" dir="target/scripts" />
         <grails command="create-domain-class Book" dir="${project.dir}" failonerror="true"/>
 
+        <!--
         <parallel>
             <daemons>
                 <grails command="run-app-https" dir="${project.dir}" serverPort="8086" failonerror="true"/>
@@ -72,6 +73,7 @@ class BookController {
                 <touch file="${project.dir}/.kill-run-app"/>
 
             </sequential>
-		</parallel>
+        </parallel>
+        -->
     </target>
 </project>

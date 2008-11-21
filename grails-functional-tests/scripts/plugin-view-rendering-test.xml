@@ -10,19 +10,20 @@
     <import file="../common/macros.xml" />
 
     <target name="test-plugin-view-rendering">
-        <delete dir="target/scripts/test-plugin-views" />
+        <property name="project.dir" value="target/scripts/test-plugin-views"/>
+        <delete dir="${project.dir}" />
         <mkdir dir="target/scripts" />
         <grails command="create-app test-plugin-views" dir="target/scripts" />
-        <grails command="clean" dir="target/scripts/test-plugin-views" />
-        <grails command="install-plugin searchable 0.4.2" dir="target/scripts/test-plugin-views" />
-		<parallel>
-			<daemons>
-				<grails command="run-app" dir="target/scripts/test-plugin-views" serverPort="8084" failonerror="true"/>
-			</daemons>
-			<sequential>
+        <grails command="clean" dir="${project.dir}" />
+        <grails command="install-plugin searchable 0.4.2" dir="${project.dir}" />
+        <parallel>
+            <daemons>
+                <grails command="run-app" dir="${project.dir}" serverPort="8084" failonerror="true"/>
+            </daemons>
+            <sequential>
                 <waitfor maxwait="2" maxwaitunit="minute" checkevery="1" checkeveryunit="second">
-				    <http url="http://localhost:8084/test-plugins-views"/>
-				</waitfor>
+                    <http url="http://localhost:8084/test-plugins-views"/>
+                </waitfor>
                 <groovy><![CDATA[
 
                     def text = new URL("http://localhost:8084/test-plugin-views/searchable").text
@@ -31,7 +32,8 @@
                     }
 
                 ]]></groovy>
+                <touch file="${project.dir}/.kill-run-app"/>
             </sequential>
-		</parallel>
+        </parallel>
     </target>
 </project>
