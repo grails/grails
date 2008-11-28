@@ -194,7 +194,7 @@ public class AnchorMacro extends BaseMacro {
 
 class ItalicFilter extends RegexReplaceFilter {
     public ItalicFilter() {
-        super(/_([^\n]*?)_/, '<em class="italic">$1</em>');
+        super(/\s_([^\n]*?)_\s/, '<em class="italic">$1</em>');
     }
 }
 class BoldFilter extends RegexReplaceFilter {
