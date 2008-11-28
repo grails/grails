@@ -42,6 +42,13 @@
                             <td valign="top" class="value">${download.softwareVersion}</td>
                             
                         </tr>
+
+			             <tr class="prop">
+	                            <td valign="top" class="name">Beta?:</td>
+
+	                            <td valign="top" class="value">${download.betaRelease}</td>
+
+	                    </tr>
                     
                         <tr class="prop">
                             <td valign="top" class="name">Count:</td>

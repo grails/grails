@@ -12,18 +12,37 @@ class DownloadController {
 
     def latest = {
 
-        def download = getCachedOr("Grails") {
-            def downloads = Download.findAllBySoftwareName('Grails',[max:1, order:'desc', sort:'releaseDate'])
+        def stableDownload = getCachedOr("Grails") {
+            def downloads = Download.withCriteria {
+				eq('softwareName', 'Grails')  
+				or {
+					eq('betaRelease', false)
+					isNull 'betaRelease'
+				}
+				order 'releaseDate', 'desc'
+				maxResults 1
+			}
             downloads ? downloads[0] : null
         }
 
+		def betaDownload = getCachedOr("GrailsBeta") {
+            def downloads = Download.findAllBySoftwareNameAndBetaRelease('Grails', true,[max:1, order:'desc', sort:'releaseDate'])
+            downloads ? downloads[0] : null
+        }
+		
+
 
         def doc = getCachedOr("Grails Documentation") {
-            def docs = Download.findAllBySoftwareName('Grails Documentation',[max:1, order:'desc', sort:'releaseDate'])
+            def docs = Download.findAllBySoftwareNameAndBetaRelease('Grails Documentation',false,[max:1, order:'desc', sort:'releaseDate'])
             docs? docs[0] : null
         }
 
-        render(view:'index', model:[download:download, docDownload:doc])
+        def betaDoc = getCachedOr("GrailsBeta Documentation") {
+            def docs = Download.findAllBySoftwareNameAndBetaRelease('Grails Documentation',true,[max:1, order:'desc', sort:'releaseDate'])
+            docs? docs[0] : null
+        } 
+
+        render(view:'index', model:[stableDownload:stableDownload, betaDownload:betaDownload, betaDoc:betaDoc, docDownload:doc])
     }
 
     def getCachedOr(String name, callable) {

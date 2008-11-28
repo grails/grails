@@ -55,6 +55,16 @@
                                     <g:datePicker name="releaseDate" value="${download?.releaseDate}" ></g:datePicker>
                                 </td>
                             </tr> 
+
+		                    <tr class="prop">
+	                                <td valign="top" class="name">
+	                                    <label for="releaseDate">Beta Release?:</label>
+	                                </td>
+	                                <td valign="top" class="value ${hasErrors(bean:download,field:'betaRelease','errors')}">
+	                                    <g:checkBox name="betaRelease" value="${download?.betaRelease}" ></g:checkBox>
+	                                </td>
+	                            </tr> 
+
        
                         </tbody>
                     </table>
