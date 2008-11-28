@@ -7,7 +7,7 @@ class Download implements Serializable{
     String softwareName
     String softwareVersion
     int count
-	Boolean betaRelease
+	Boolean betaRelease = false
 
     List files
     static hasMany = [files:DownloadFile]   
