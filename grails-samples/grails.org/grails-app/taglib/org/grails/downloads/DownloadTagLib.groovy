@@ -36,7 +36,15 @@ class DownloadTagLib {
 
             def download = latestCache[software]
             if(!download) {
-                def downloads = Download.findAllBySoftwareName(software,[max:1, order:'desc', sort:'releaseDate'])
+	         	def downloads = Download.withCriteria {
+					eq('softwareName', 'Grails')  
+					or {
+						eq('betaRelease', false)
+						isNull 'betaRelease'
+					}
+					order 'releaseDate', 'desc'
+					maxResults 1
+				}	
 
 
                 if(downloads) {

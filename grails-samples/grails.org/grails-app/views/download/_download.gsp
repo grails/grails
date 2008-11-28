@@ -4,7 +4,7 @@
     <li><a href="${downloadObj?.releaseNotes}">Release Notes</a></li>
 </ul>
 
-<cache:text id="downloadPage">
+<cache:text id="downloadPage_${${downloadObj?.softwareVersion}}">
     <table class="download-table">
         <tr><th>Distribution</th><th>Mirror</th></tr>
         <g:each var="file" in="${downloadObj?.files}">
