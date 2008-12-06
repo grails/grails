@@ -28,6 +28,14 @@ Provided Codecs:
 * @URLCodec@ - encodes/decodes URLs
 * @JavascriptCodec@ - encodes (escapes) Javascript
 * @Base64Codec@ - encodes/decodes Base64 data
+* @HexCodec@ - encodes a byte array or list of integers into a hex string, and decodes hex strings into byte array
+* @MD5Codec@ - encodes a byte array or list of integers, or the characters of a string (using default system encoding) into an MD5 digest as a hex string
+* @MD5BytesCodec@ - encodes a byte array or list of integers, or the characters of a string (using default system encoding) into an MD5 digest as a byte array
+* @SHA1Codec@ - encodes a byte array or list of integers, or the characters of a string (using default system encoding) into an SHA1 digest as a hex string
+* @SHA1BytesCodec@ - encodes a byte array or list of integers, or the characters of a string (using default system encoding) into an SHA1 digest as a byte array
+* @SHA256Codec@ - encodes a byte array or list of integers, or the characters of a string (using default system encoding) into an SHA256 digest as a hex string
+* @SHA256BytesCodec@ - encodes byte array or list of integers, or the characters of a string (using default system encoding) into an SHA256 digest as a byte array
+
 
 
 
