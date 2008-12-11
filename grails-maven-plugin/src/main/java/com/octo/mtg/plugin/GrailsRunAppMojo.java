@@ -25,7 +25,7 @@ import org.apache.maven.plugin.MojoFailureException;
  * @version $Id$
  * @description Runs a Grails application in Jetty.
  * @goal run-app
- * @requiresProject false
+ * @requiresProject true
  * @requiresDependencyResolution runtime
  * @since 0.3
  */

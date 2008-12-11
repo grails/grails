@@ -29,12 +29,14 @@ import org.apache.maven.project.MavenProject;
 import org.apache.maven.project.MavenProjectBuilder;
 import org.apache.maven.project.artifact.MavenMetadataSource;
 import org.codehaus.groovy.grails.cli.support.GrailsRootLoader;
+import org.codehaus.groovy.grails.cli.support.GrailsBuildHelper;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.Method;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.*;
 
@@ -179,7 +181,11 @@ public abstract class AbstractGrailsMojo extends AbstractMojo {
     }
 
     protected Artifact getBootStrapPOM() {
-        return this.artifactFactory.createBuildArtifact("org.grails", "grails-bootstrap", "1.1-SNAPSHOT", "pom");
+        return this.artifactFactory.createBuildArtifact("org.grails", "grails-bootstrap", "1.1-beta1", "pom");
+    }
+
+    protected Artifact getScriptsPOM() {
+        return this.artifactFactory.createBuildArtifact("org.grails", "grails-scripts", "1.1-beta1", "pom");
     }
 
     protected List getPluginDependencies(Artifact pom) throws MojoExecutionException {
@@ -218,100 +224,43 @@ public abstract class AbstractGrailsMojo extends AbstractMojo {
     }
 
     protected void runGrails(String targetName, String args, String scope) throws MojoExecutionException {
-//        List pluginDependencies = getPluginDependencies(getBootStrapPOM());
-//        List runtimeDependencies = this.project.getRuntimeArtifacts();
-//        List systemDependencies = this.project.getSystemArtifacts();
-        Set allArtifacts = new HashSet(getPluginDependencies(getBootStrapPOM()));
-        allArtifacts.addAll(this.project.getDependencyArtifacts());
-
-        if (scope.equals("compile")) {
-            allArtifacts.addAll(this.project.getCompileArtifacts());
-        } else if (scope.equals("runtime")) {
-            allArtifacts.addAll(this.project.getRuntimeArtifacts());
-        } else if (scope.equals("test")) {
-            allArtifacts.addAll(this.project.getTestArtifacts());
-        } else if (scope.equals("system")) {
-            allArtifacts.addAll(this.project.getSystemArtifacts());
-        }
+        List pluginDependencies = getPluginDependencies(getBootStrapPOM());
+        pluginDependencies.addAll(getPluginDependencies(getScriptsPOM()));
+        Set allArtifacts = new HashSet(pluginDependencies);
 
         URL[] classpath;
         try {
-            classpath = new URL[allArtifacts.size()];
+            classpath = new URL[allArtifacts.size() + 1];
             int index = 0;
             for (Iterator iter = allArtifacts.iterator(); iter.hasNext();) {
                 classpath[index++] = ((Artifact) iter.next()).getFile().toURI().toURL();
             }
 
-//            for (Iterator iter = runtimeDependencies.iterator(); iter.hasNext();) {
-//                classpath[index++] = ((Artifact) iter.next()).getFile().toURI().toURL();
-//            }
-//
-//            for (Iterator iter = systemDependencies.iterator(); iter.hasNext();) {
-//                classpath[index++] = ((Artifact) iter.next()).getFile().toURI().toURL();
-//            }
-
-//            Commandline cmd = new Commandline();
-//            cmd.setWorkingDirectory(getBasedir());
-//            cmd.setExecutable("java");
-//            cmd.createArg().setValue("-cp");
-//            cmd.createArg().setValue(toClasspath(classpath));
-//            cmd.createArg().setValue("org.codehaus.groovy.grails.cli.GrailsScriptRunner");
-//            cmd.createArg().setValue(targetName);
-//
-//            int returnCode = mojoServices.executeCommandLine(cmd, System.in, infoOutputStream, warnOutputStream);
-//            getLog().debug("Grails ended with the return code: " + returnCode);
-//            if (returnCode != 0) {
-//                throw new MojoExecutionException("Grails ended with a non null return code: " + returnCode);
-//            }
-
-            // Setup grails env
-//            if (env != null) {
-//                // For default environments, we use the command line arg
-//                // as a workaround for [GRAILS-1658]
-//                if ("dev".equals(env)) {
-//                    cmd.createArg().setValue("dev");
-//                } else if ("prod".equals(env)) {
-//                    cmd.createArg().setValue("prod");
-//                } else if ("test".equals(env)) {
-//                    cmd.createArg().setValue("test");
-//                } else {
-//                    cmd.createArg().setValue("-Dgrails.env=" + env);
-//                }
-//            }
-            List mainArgs = new ArrayList();
-            mainArgs.add(targetName);
-
-//            if (env != null) {
-//                mainArgs.add(env);
-//            }
-
-//            if (args != null && args.length > 0) {
-//                mainArgs.addAll(Arrays.asList(args));
-//            }
-
-            System.setProperty("grails.project.work.dir", this.project.getBuild().getDirectory());
+            // Add the "tools.jar" to the classpath so that the Grails
+            // scripts can run native2ascii. First assume that "java.home"
+            // points to a JRE within a JDK.
+            String javaHome = System.getProperty("java.home");
+            File toolsJar = new File(javaHome, "../lib/tools.jar");
+            if (!toolsJar.exists()) {
+                // The "tools.jar" cannot be found with that path, so
+                // now try with the assumption that "java.home" points
+                // to a JDK.
+                toolsJar = new File(javaHome, "tools.jar");
+            }
+            classpath[classpath.length - 1] = toolsJar.toURI().toURL();
 
             GrailsRootLoader rootLoader = new GrailsRootLoader(classpath, getClass().getClassLoader());
-            Class mainClass = rootLoader.loadClass("org.codehaus.groovy.grails.cli.GrailsScriptRunner");
-            Object scriptRunner = mainClass.newInstance();
+            GrailsBuildHelper helper = new GrailsBuildHelper(rootLoader);
+            configureBuildSettings(helper);
 
-            mainClass.getDeclaredMethod("setOut", new Class[]{ PrintStream.class }).invoke(
-                    scriptRunner,
-                    new Object[] { new PrintStream(infoOutputStream) });
+//            mainClass.getDeclaredMethod("setOut", new Class[]{ PrintStream.class }).invoke(
+//                    scriptRunner,
+//                    new Object[] { new PrintStream(infoOutputStream) });
 
-            Method mainMethod = mainClass.getDeclaredMethod(
-                    "executeCommand",
-                    new Class[]{ String.class, String.class, String.class });
-            Object retval = mainMethod.invoke(
-                    scriptRunner,
-                    new Object[] { targetName, args, env });
-            if (((Integer) retval).intValue() != 0) {
+            int retval = helper.execute(targetName, args, env);
+            if (retval != 0) {
                 throw new MojoExecutionException("Grails returned non-zero value.");
             }
-//        } catch (MalformedURLException ex) {
-//            throw new MojoExecutionException("Something went wrong", ex);
-//        } catch (CommandLineException ex) {
-//            throw new MojoExecutionException("Something went wrong", ex);
         } catch (MojoExecutionException ex) {
             // Simply rethrow it.
             throw ex;
@@ -320,16 +269,26 @@ public abstract class AbstractGrailsMojo extends AbstractMojo {
         }
     }
 
-    private String toClasspath(URL[] urls) {
-        if (urls.length == 0) return "";
+    private void configureBuildSettings(GrailsBuildHelper helper)
+            throws ClassNotFoundException, IllegalAccessException,
+            InstantiationException, MojoExecutionException, NoSuchMethodException, InvocationTargetException {
+        String targetDir = this.project.getBuild().getDirectory();
+        helper.setCompileDependencies(artifactsToFiles(this.project.getCompileArtifacts()));
+        helper.setTestDependencies(artifactsToFiles(this.project.getTestArtifacts()));
+        helper.setRuntimeDependencies(artifactsToFiles(this.project.getRuntimeArtifacts()));
+        helper.setProjectWorkDir(new File(targetDir));
+        helper.setClassesDir(new File(targetDir, "classes"));
+        helper.setTestClassesDir(new File(targetDir, "test-classes"));
+        helper.setResourcesDir(new File(targetDir, "resources"));
+        helper.setProjectPluginsDir(new File(this.project.getBasedir(), "plugins"));
+    }
 
-        String pathSeparator = System.getProperty("path.separator");
-        StringBuffer buf = new StringBuffer(urls[0].getPath());
-        for (int i = 1; i < urls.length; i++) {
-            buf.append(pathSeparator);
-            buf.append(urls[i].getPath());
+    private List artifactsToFiles(Collection artifacts) {
+        List files = new ArrayList(artifacts.size());
+        for (Iterator iter = artifacts.iterator(); iter.hasNext();) {
+            files.add(((Artifact) iter.next()).getFile());
         }
 
-        return buf.toString();
+        return files;
     }
 }
