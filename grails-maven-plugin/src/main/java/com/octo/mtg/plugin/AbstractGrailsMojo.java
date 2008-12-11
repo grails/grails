@@ -28,7 +28,7 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.project.MavenProjectBuilder;
 import org.apache.maven.project.artifact.MavenMetadataSource;
-import org.codehaus.groovy.tools.RootLoader;
+import org.codehaus.groovy.grails.cli.support.GrailsRootLoader;
 
 import java.io.File;
 import java.io.IOException;
@@ -291,7 +291,7 @@ public abstract class AbstractGrailsMojo extends AbstractMojo {
 
             System.setProperty("grails.project.work.dir", this.project.getBuild().getDirectory());
 
-            RootLoader rootLoader = new RootLoader(classpath, getClass().getClassLoader());
+            GrailsRootLoader rootLoader = new GrailsRootLoader(classpath, getClass().getClassLoader());
             Class mainClass = rootLoader.loadClass("org.codehaus.groovy.grails.cli.GrailsScriptRunner");
             Object scriptRunner = mainClass.newInstance();
 
