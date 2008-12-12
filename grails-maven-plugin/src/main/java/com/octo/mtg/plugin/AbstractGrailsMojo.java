@@ -20,14 +20,19 @@ import com.octo.mtg.plugin.tools.GrailsServices;
 import com.octo.mtg.plugin.tools.MojoServices;
 import com.octo.mtg.plugin.tools.PomServices;
 import org.apache.maven.artifact.Artifact;
+import org.apache.maven.artifact.metadata.ArtifactMetadataSource;
 import org.apache.maven.artifact.factory.ArtifactFactory;
 import org.apache.maven.artifact.repository.ArtifactRepository;
 import org.apache.maven.artifact.resolver.ArtifactResolver;
+import org.apache.maven.artifact.resolver.ArtifactCollector;
+import org.apache.maven.artifact.resolver.ArtifactResolutionResult;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.project.MavenProjectBuilder;
+import org.apache.maven.project.ProjectBuildingException;
 import org.apache.maven.project.artifact.MavenMetadataSource;
+import org.apache.maven.model.Dependency;
 import org.codehaus.groovy.grails.cli.support.GrailsRootLoader;
 import org.codehaus.groovy.grails.cli.support.GrailsBuildHelper;
 
@@ -88,6 +93,16 @@ public abstract class AbstractGrailsMojo extends AbstractMojo {
      * @component
      */
     private ArtifactFactory artifactFactory;
+
+    /**
+     * @component
+     */
+    private ArtifactCollector artifactCollector;
+
+    /**
+     * @component
+     */
+    private ArtifactMetadataSource artifactMetadataSource;
 
     /**
      * @parameter expression="${localRepository}"
@@ -169,7 +184,7 @@ public abstract class AbstractGrailsMojo extends AbstractMojo {
 
     protected GrailsServices getGrailsServices() throws MojoExecutionException {
         grailsServices.setBasedir(basedir);
-        grailsServices.setDependencies(getPluginDependencies(getBootStrapPOM()));
+        grailsServices.setDependencies(new ArrayList(getGrailsPluginDependencies()));
 
         return grailsServices;
     }
@@ -180,59 +195,17 @@ public abstract class AbstractGrailsMojo extends AbstractMojo {
         return pomServices;
     }
 
-    protected Artifact getBootStrapPOM() {
-        return this.artifactFactory.createBuildArtifact("org.grails", "grails-bootstrap", "1.1-beta1", "pom");
-    }
-
-    protected Artifact getScriptsPOM() {
-        return this.artifactFactory.createBuildArtifact("org.grails", "grails-scripts", "1.1-beta1", "pom");
-    }
-
-    protected List getPluginDependencies(Artifact pom) throws MojoExecutionException {
-        try {
-            MavenProject project = this.projectBuilder.buildFromRepository(pom,
-                                                                           this.remoteRepositories,
-                                                                           this.localRepository);
-
-            //get all of the dependencies for the executable project
-            List dependencies = project.getDependencies();
-
-            //make Artifacts of all the dependencies
-            Set dependencyArtifacts =
-                MavenMetadataSource.createArtifacts(this.artifactFactory, dependencies, null, null, null);
-
-            //not forgetting the Artifact of the project itself
-            dependencyArtifacts.add(project.getArtifact());
-
-            //resolve all dependencies transitively to obtain a comprehensive list of assemblies
-            List artifacts = new ArrayList(dependencyArtifacts.size());
-            for (Iterator iter = dependencyArtifacts.iterator(); iter.hasNext();) {
-                Artifact artifact = (Artifact) iter.next();
-                this.artifactResolver.resolve(artifact, this.remoteRepositories, this.localRepository);
-                artifacts.add(artifact);
-            }
-
-            return artifacts;
-        } catch ( Exception ex ) {
-            throw new MojoExecutionException("Encountered problems resolving dependencies of the executable " +
-                                             "in preparation for its execution.", ex);
-        }
-    }
-
     protected void runGrails(String targetName) throws MojoExecutionException {
         runGrails(targetName, null, "runtime");
     }
 
     protected void runGrails(String targetName, String args, String scope) throws MojoExecutionException {
-        List pluginDependencies = getPluginDependencies(getBootStrapPOM());
-        pluginDependencies.addAll(getPluginDependencies(getScriptsPOM()));
-        Set allArtifacts = new HashSet(pluginDependencies);
-
+        Set pluginDependencies = getGrailsPluginDependencies();
         URL[] classpath;
         try {
-            classpath = new URL[allArtifacts.size() + 1];
+            classpath = new URL[pluginDependencies.size() + 1];
             int index = 0;
-            for (Iterator iter = allArtifacts.iterator(); iter.hasNext();) {
+            for (Iterator iter = pluginDependencies.iterator(); iter.hasNext();) {
                 classpath[index++] = ((Artifact) iter.next()).getFile().toURI().toURL();
             }
 
@@ -269,6 +242,26 @@ public abstract class AbstractGrailsMojo extends AbstractMojo {
         }
     }
 
+    private Set getGrailsPluginDependencies() throws MojoExecutionException {
+        Artifact pluginArtifact = findArtifact(this.project.getPluginArtifacts(), "org.grails", "grails-maven-plugin");
+        MavenProject project = null;
+        try {
+            project = this.projectBuilder.buildFromRepository(pluginArtifact,
+                                                              this.remoteRepositories,
+                                                              this.localRepository);
+        } catch (ProjectBuildingException ex) {
+            throw new MojoExecutionException("Failed to get information about Grails Maven Plugin", ex);
+        }
+
+        List deps = artifactsByGroupId(dependenciesToArtifacts(project.getDependencies()), "org.grails");
+        Set pluginDependencies = new HashSet();
+        for (Iterator iter = deps.iterator(); iter.hasNext();) {
+            pluginDependencies.addAll(getPluginDependencies((Artifact) iter.next()));
+        }
+
+        return pluginDependencies;
+    }
+
     private void configureBuildSettings(GrailsBuildHelper helper)
             throws ClassNotFoundException, IllegalAccessException,
             InstantiationException, MojoExecutionException, NoSuchMethodException, InvocationTargetException {
@@ -283,6 +276,45 @@ public abstract class AbstractGrailsMojo extends AbstractMojo {
         helper.setProjectPluginsDir(new File(this.project.getBasedir(), "plugins"));
     }
 
+    private Set getPluginDependencies(Artifact pom) throws MojoExecutionException {
+        try {
+            MavenProject project = this.projectBuilder.buildFromRepository(pom,
+                                                                           this.remoteRepositories,
+                                                                           this.localRepository);
+
+            //get all of the dependencies for the executable project
+            List dependencies = project.getDependencies();
+
+            //make Artifacts of all the dependencies
+            Set dependencyArtifacts =
+                MavenMetadataSource.createArtifacts(this.artifactFactory, dependencies, null, null, null);
+
+            ArtifactResolutionResult result = artifactCollector.collect(
+                    dependencyArtifacts,
+                    project.getArtifact(),
+                    this.localRepository,
+                    this.remoteRepositories,
+                    this.artifactMetadataSource,
+                    null,
+                    Collections.EMPTY_LIST);
+            dependencyArtifacts.addAll(result.getArtifacts());
+
+            //not forgetting the Artifact of the project itself
+            dependencyArtifacts.add(project.getArtifact());
+
+            //resolve all dependencies transitively to obtain a comprehensive list of assemblies
+            for (Iterator iter = dependencyArtifacts.iterator(); iter.hasNext();) {
+                Artifact artifact = (Artifact) iter.next();
+                this.artifactResolver.resolve(artifact, this.remoteRepositories, this.localRepository);
+            }
+
+            return dependencyArtifacts;
+        } catch ( Exception ex ) {
+            throw new MojoExecutionException("Encountered problems resolving dependencies of the executable " +
+                                             "in preparation for its execution.", ex);
+        }
+    }
+
     private List artifactsToFiles(Collection artifacts) {
         List files = new ArrayList(artifacts.size());
         for (Iterator iter = artifacts.iterator(); iter.hasNext();) {
@@ -290,5 +322,45 @@ public abstract class AbstractGrailsMojo extends AbstractMojo {
         }
 
         return files;
+    }
+
+    private Artifact findArtifact(Collection artifacts, String groupId, String artifactId) {
+        for (Iterator iter = artifacts.iterator(); iter.hasNext();) {
+            Artifact artifact = (Artifact) iter.next();
+            if (artifact.getGroupId().equals(groupId) && artifact.getArtifactId().equals(artifactId)) {
+                return artifact;
+            }
+        }
+
+        return null;
+    }
+
+    private List artifactsByGroupId(Collection artifacts, String groupId) {
+        List inGroup = new ArrayList(artifacts.size());
+        for (Iterator iter = artifacts.iterator(); iter.hasNext();) {
+            Artifact artifact = (Artifact) iter.next();
+            if (artifact.getGroupId().equals(groupId)) {
+                inGroup.add(artifact);
+            }
+        }
+
+        return inGroup;
+    }
+
+    private List dependenciesToArtifacts(Collection deps) {
+        List artifacts = new ArrayList(deps.size());
+        for (Iterator iter = deps.iterator(); iter.hasNext();) {
+            artifacts.add(dependencyToArtifact((Dependency) iter.next()));
+        }
+
+        return artifacts;
+    }
+
+    private Artifact dependencyToArtifact(Dependency dep) {
+        return this.artifactFactory.createBuildArtifact(
+                dep.getGroupId(),
+                dep.getArtifactId(),
+                dep.getVersion(),
+                "pom");
     }
 }
