@@ -40,6 +40,6 @@ public class GrailsCreateScriptMojo extends AbstractGrailsMojo {
     private String scriptName;
 
     public void execute() throws MojoExecutionException, MojoFailureException {
-        runGrails("CreateScript", scriptName, "runtime");
+        runGrails("CreateScript", scriptName, false);
     }
 }

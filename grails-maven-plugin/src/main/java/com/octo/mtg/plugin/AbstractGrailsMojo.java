@@ -196,16 +196,23 @@ public abstract class AbstractGrailsMojo extends AbstractMojo {
     }
 
     protected void runGrails(String targetName) throws MojoExecutionException {
-        runGrails(targetName, null, "runtime");
+        runGrails(targetName, null, false);
     }
 
-    protected void runGrails(String targetName, String args, String scope) throws MojoExecutionException {
-        Set pluginDependencies = getGrailsPluginDependencies();
+    protected void runGrails(String targetName, String args, boolean includeProjectDeps) throws MojoExecutionException {
+        // First get the dependencies specified by the plugin.
+        Set deps = getGrailsPluginDependencies();
+
+        // Now add the project dependencies if necessary.
+        if (includeProjectDeps) {
+            deps.addAll(this.project.getRuntimeArtifacts());
+        }
+        
         URL[] classpath;
         try {
-            classpath = new URL[pluginDependencies.size() + 1];
+            classpath = new URL[deps.size() + 1];
             int index = 0;
-            for (Iterator iter = pluginDependencies.iterator(); iter.hasNext();) {
+            for (Iterator iter = deps.iterator(); iter.hasNext();) {
                 classpath[index++] = ((Artifact) iter.next()).getFile().toURI().toURL();
             }
 

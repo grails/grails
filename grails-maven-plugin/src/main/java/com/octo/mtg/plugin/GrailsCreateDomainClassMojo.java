@@ -40,6 +40,6 @@ public class GrailsCreateDomainClassMojo extends AbstractGrailsMojo {
     private String domainClassName;
 
     public void execute() throws MojoExecutionException, MojoFailureException {
-        runGrails("CreateDomainClass", domainClassName, "runtime");
+        runGrails("CreateDomainClass", domainClassName, false);
     }
 }

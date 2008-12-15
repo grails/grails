@@ -40,6 +40,6 @@ public class GrailsCreateWebTestMojo extends AbstractGrailsMojo {
     private String webTestName;
 
     public void execute() throws MojoExecutionException, MojoFailureException {
-        runGrails("CreateWebtest", webTestName, "runtime");
+        runGrails("CreateWebtest", webTestName, false);
     }
 }

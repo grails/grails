@@ -82,7 +82,7 @@ public class MvnValidateMojo extends AbstractGrailsMojo {
             File outputDir = new File(project.getBuild().getDirectory(), "grails-lib");
             getLog().info("Creating '" + outputDir + "' directory for Grails JARs");
             outputDir.mkdirs();
-            runGrails("CreateApp", "--inplace --appVersion=" + version + " " + artifactId, "runtime");
+            runGrails("CreateApp", "--inplace --appVersion=" + version + " " + artifactId, false);
             grailsProject = getGrailsServices().readProjectDescriptor();
         }
 
