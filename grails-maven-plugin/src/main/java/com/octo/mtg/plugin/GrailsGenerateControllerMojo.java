@@ -39,6 +39,6 @@ public class GrailsGenerateControllerMojo extends AbstractGrailsMojo {
     private String domainClassName;
 
     public void execute() throws MojoExecutionException, MojoFailureException {
-        runGrails("GenerateController", domainClassName, false);
+        runGrails("GenerateController", domainClassName, true);
     }
 }
