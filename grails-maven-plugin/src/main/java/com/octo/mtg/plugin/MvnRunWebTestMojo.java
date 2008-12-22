@@ -44,7 +44,8 @@ public class MvnRunWebTestMojo extends AbstractGrailsMojo {
     private boolean enable;
 
     public void execute() throws MojoExecutionException, MojoFailureException {
-        if (enable)
-            getGrailsServices().launchGrails(grailsHome, env, "run-webtest");
+        if (enable) {
+            runGrails("RunWebtest", null, true);
+        }
     }
 }

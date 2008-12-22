@@ -68,14 +68,6 @@ public abstract class AbstractGrailsMojo extends AbstractMojo {
     protected String env;
 
     /**
-     * The path to GRAILS' HOME.
-     *
-     * @parameter expression="${grailsHome}"
-//     * @required
-     */
-    protected String grailsHome;
-
-    /**
      * POM
      *
      * @parameter expression="${project}"
@@ -129,18 +121,6 @@ public abstract class AbstractGrailsMojo extends AbstractMojo {
      */
     private GrailsServices grailsServices;
 
-    /**
-     * @component
-     * @readonly
-     */
-    private MojoServices mojoServices;
-
-    /**
-     * @component
-     * @readonly
-     */
-    private PomServices pomServices;
-
     protected File getBasedir() {
         if(basedir == null) {
             throw new RuntimeException("Your subclass have a field called 'basedir'. Remove it and use getBasedir() " +
@@ -184,15 +164,7 @@ public abstract class AbstractGrailsMojo extends AbstractMojo {
 
     protected GrailsServices getGrailsServices() throws MojoExecutionException {
         grailsServices.setBasedir(basedir);
-        grailsServices.setDependencies(new ArrayList(getGrailsPluginDependencies()));
-
         return grailsServices;
-    }
-
-    protected PomServices getPomServices() {
-        pomServices.setBasedir(basedir);
-
-        return pomServices;
     }
 
     protected void runGrails(String targetName) throws MojoExecutionException {

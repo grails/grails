@@ -43,16 +43,6 @@ public class DefaultGrailsServices extends AbstractLogEnabled implements GrailsS
 
     private static final String FILE_SUFFIX = "GrailsPlugin.groovy";
 
-    /**
-     * @plexus.requirement
-     */
-    private PomServices pomServices;
-
-    /**
-     * @plexus.requirement
-     */
-    private MojoServices mojoServices;
-
     private File _basedir;
     private List _dependencyPaths;
 
@@ -102,10 +92,6 @@ public class DefaultGrailsServices extends AbstractLogEnabled implements GrailsS
 
     public void setBasedir(File basedir) {
         this._basedir = basedir;
-    }
-
-    public void setDependencies(List deps) {
-        this._dependencyPaths = deps;
     }
 
     public MavenProject createPOM(String groupId, GrailsProject grailsProjectDescriptor, String mtgGroupId,
@@ -289,74 +275,5 @@ public class DefaultGrailsServices extends AbstractLogEnabled implements GrailsS
             throw new MojoExecutionException("Unable to call getVersion() on the plugin configuration.", e);
         }
         return pluginProject;
-    }
-
-    /**
-     * Launch a GRAILS commandLine with a target and no parameter.
-     *
-     * @param targetName the grails target to call
-     * @throws CommandLineException If a problem occurs to call Grails.
-     */
-    public void launchGrails(String grailsHome, String env, String targetName) throws MojoExecutionException {
-        launchGrails(grailsHome, env, targetName, null);
-    }
-
-    /**
-     * Launch a GRAILS commandLine with a target and its parameters.
-     *
-     * @param targetName   the grails target to call
-     * @param targetParams the target parameters
-     * @throws CommandLineException If a problem occurs to call Grails.
-     */
-    public void launchGrails(String grailsHome, String env, String targetName, String[] targetParams)
-        throws MojoExecutionException {
-        Commandline cmd = new Commandline();
-        try {
-            cmd.addSystemEnvironment();
-        } catch (Exception e1) {
-            getLogger().warn("Unable to use system environment variables to launch Grails", e1);
-        }
-
-        getLogger().debug("Setting environment variable GRAILS_HOME to '" + grailsHome + "'.");
-//        cmd.addEnvironment("GRAILS_HOME", grailsHome);
-
-        getLogger().debug("Working directory " + getBasedir() + "'.");
-        cmd.setWorkingDirectory(getBasedir());
-
-        cmd.setExecutable("java");
-
-        // Setup grails env
-        if (env != null) {
-            // For default environments, we use the command line arg
-            // as a workaround for [GRAILS-1658]
-            if ("dev".equals(env)) {
-                cmd.createArg().setValue("dev");
-            } else if ("prod".equals(env)) {
-                cmd.createArg().setValue("prod");
-            } else if ("test".equals(env)) {
-                cmd.createArg().setValue("test");
-            } else {
-                cmd.createArg().setValue("-Dgrails.env=" + env);
-            }
-        }
-
-        cmd.createArg().setValue(targetName);
-        if (targetParams != null) {
-            for (int i = 0; i < targetParams.length; i++) {
-                if (targetParams[i] != null)
-                    cmd.createArg().setValue(targetParams[i]);
-            }
-        }
-
-        try {
-            getLogger().debug("Command line: " + cmd.toString());
-            int returnCode = mojoServices.executeCommandLine(cmd, System.in, infoOutputStream, warnOutputStream);
-            getLogger().debug("Grails ended with the return code: " + returnCode);
-            if (returnCode != 0) {
-                throw new MojoExecutionException("Grails ended with a non null return code: " + returnCode);
-            }
-        } catch (CommandLineException e) {
-            throw new MojoExecutionException("Unable to execute grails", e);
-        }
     }
 }

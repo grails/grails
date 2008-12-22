@@ -33,8 +33,6 @@ public interface GrailsServices {
      */
     void setBasedir(File basedir);
 
-    void setDependencies(List deps);
-
     /**
      * Create a pom from a grails project.
      *
@@ -101,28 +99,4 @@ public interface GrailsServices {
         throws MojoExecutionException;
 
     GrailsPluginProject readGrailsPluginProject() throws MojoExecutionException;
-
-    /**
-     * Launch a GRAILS commandLine with a target and no parameter.
-     *
-     * @param targetName
-     *                the grails target to call
-     * @throws CommandLineException
-     *                 If a problem occurs to call Grails.
-     */
-    void launchGrails(String grailsHome, String env, String targetName)
-	    throws MojoExecutionException;
-
-    /**
-     * Launch a GRAILS commandLine with a target and its parameters.
-     *
-     * @param targetName
-     *                the grails target to call
-     * @param targetParams
-     *                the target parameters
-     * @throws CommandLineException
-     *                 If a problem occurs to call Grails.
-     */
-    void launchGrails(String grailsHome, String env, String targetName, String[] targetParams)
-        throws MojoExecutionException;
 }

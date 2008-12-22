@@ -35,33 +35,7 @@ import java.io.File;
  */
 public class GrailsPackagePluginMojo extends AbstractGrailsMojo {
 
-    /**
-     * The artifact that this project procuces.
-     *
-     * @parameter expression="${project.artifact}"
-     * @required
-     * @readonly
-     */
-    private Artifact artifact;
-
-    /**
-     * The artifact handler.
-     *
-     * @parameter expression="${component.org.apache.maven.artifact.handler.ArtifactHandler#grails-plugin}"
-     * @required
-     * @readonly
-     */
-    protected ArtifactHandler artifactHandler;
-
     public void execute() throws MojoExecutionException, MojoFailureException {
-        GrailsPluginProject pluginProject = getGrailsServices().readGrailsPluginProject();
-
-        getGrailsServices().launchGrails(grailsHome, env, "package-plugin");
-
-        String zipFileName = "grails-" + pluginProject.getPluginName() + "-" + pluginProject.getVersion() + ".zip";
-
-        File pluginFile = new File(basedir, zipFileName);
-        artifact.setFile(pluginFile);
-        artifact.setArtifactHandler(artifactHandler);
+        runGrails("PackagePlugin");
     }
 }
