@@ -70,10 +70,6 @@ public class LoadMojosTest extends AbstractMojoTestCase {
         mojoTest("grails-create-unit-test/plugin-config.xml", "create-unit-test", GrailsCreateUnitTestMojo.class);
     }
 
-    public void testLoadGrailsCreateWebTestMojoLookup() throws Exception {
-        mojoTest("grails-create-web-test/plugin-config.xml", "create-web-test", GrailsCreateWebTestMojo.class);
-    }
-
     public void testLoadGrailsGenerateAllMojoLookup() throws Exception {
         mojoTest("grails-generate-all/plugin-config.xml", "generate-all", GrailsGenerateAllMojo.class);
     }
@@ -102,10 +98,6 @@ public class LoadMojosTest extends AbstractMojoTestCase {
         mojoTest("grails-run-app-https/plugin-config.xml", "run-app-https", GrailsRunAppHttpsMojo.class);
     }
 
-    public void testLoadGrailsRunWebTestMojoLookup() throws Exception {
-        mojoTest("grails-run-webtest/plugin-config.xml", "run-webtest", GrailsRunWebTestMojo.class);
-    }
-
     public void testLoadGrailsTestAppMojoLookup() throws Exception {
         mojoTest("grails-test-app/plugin-config.xml", "test-app", GrailsTestAppMojo.class);
     }
@@ -116,10 +108,6 @@ public class LoadMojosTest extends AbstractMojoTestCase {
 
     public void testLoadMavenCleanMojoLookup() throws Exception {
         mojoTest("maven-clean/plugin-config.xml", "maven-clean", MvnCleanMojo.class);
-    }
-
-    public void testLoadMavenRunWebTestMojoLookup() throws Exception {
-        mojoTest("maven-run-webtest/plugin-config.xml", "maven-run-webtest", MvnRunWebTestMojo.class);
     }
 
     public void testLoadMavenTestAppMojoLookup() throws Exception {
