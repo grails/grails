@@ -79,11 +79,12 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
       <plugin>
         <groupId>org.grails</groupId>
         <artifactId>grails-maven-plugin</artifactId>
-        <version>0.4-SNAPSHOT</version>
+        <version>0.4</version>
         <extensions>true</extensions>
         <executions>
           <execution>
             <goals>
+              <goal>init</goal>
               <goal>maven-clean</goal>
               <goal>validate</goal>
               <goal>config-directories</goal>
