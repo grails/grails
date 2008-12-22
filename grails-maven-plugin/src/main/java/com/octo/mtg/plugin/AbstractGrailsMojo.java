@@ -17,8 +17,6 @@
 package com.octo.mtg.plugin;
 
 import com.octo.mtg.plugin.tools.GrailsServices;
-import com.octo.mtg.plugin.tools.MojoServices;
-import com.octo.mtg.plugin.tools.PomServices;
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.artifact.metadata.ArtifactMetadataSource;
 import org.apache.maven.artifact.factory.ArtifactFactory;
@@ -39,8 +37,6 @@ import org.codehaus.groovy.grails.cli.support.GrailsBuildHelper;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.PrintStream;
-import java.lang.reflect.Method;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.*;
@@ -49,6 +45,7 @@ import java.util.*;
  * Common services for all Mojos using Grails
  *
  * @author <a href="mailto:aheritier@gmail.com">Arnaud HERITIER</a>
+ * @author Peter Ledbrook
  * @version $Id$
  */
 public abstract class AbstractGrailsMojo extends AbstractMojo {

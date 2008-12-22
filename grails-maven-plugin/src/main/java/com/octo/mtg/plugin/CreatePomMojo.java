@@ -18,7 +18,6 @@ package com.octo.mtg.plugin;
 
 import com.octo.mtg.plugin.tools.GrailsProject;
 import com.octo.mtg.plugin.tools.GrailsServices;
-import com.octo.mtg.plugin.tools.PomServices;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
