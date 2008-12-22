@@ -70,6 +70,10 @@ public class LoadMojosTest extends AbstractMojoTestCase {
         mojoTest("grails-create-unit-test/plugin-config.xml", "create-unit-test", GrailsCreateUnitTestMojo.class);
     }
 
+    public void testLoadGrailsExecMojoLookup() throws Exception {
+        mojoTest("grails-exec/plugin-config.xml", "exec", GrailsExecMojo.class);
+    }
+
     public void testLoadGrailsGenerateAllMojoLookup() throws Exception {
         mojoTest("grails-generate-all/plugin-config.xml", "generate-all", GrailsGenerateAllMojo.class);
     }
