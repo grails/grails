@@ -87,7 +87,6 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
               <goal>maven-clean</goal>
               <goal>validate</goal>
               <goal>config-directories</goal>
-              <goal>copy-dependencies</goal>
               <goal>maven-compile</goal>
               <goal>maven-test</goal>
               <goal>maven-war</goal>
