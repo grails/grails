@@ -25,9 +25,7 @@
         <groupId>com.octo.maven.plugins</groupId>
         <artifactId>grails-maven-plugin</artifactId>
         <extensions>true</extensions>
-        <configuration>
-          <grailsHome>${env.GRAILS_HOME}</grailsHome>
-        </configuration>
+        <configuration/>
       </plugin>
     </plugins>
   </build>

@@ -118,16 +118,12 @@ public class LoadMojosTest extends AbstractMojoTestCase {
         mojoTest("maven-clean/plugin-config.xml", "maven-clean", MvnCleanMojo.class);
     }
 
-//    public void testLoadMavenCopyDependenciesMojoLookup() throws Exception {
-//        mojoTest("maven-copy-dependencies/plugin-config.xml", "copy-dependencies", MvnCopyDependenciesMojo.class);
-//    }
-
     public void testLoadMavenRunWebTestMojoLookup() throws Exception {
         mojoTest("maven-run-webtest/plugin-config.xml", "maven-run-webtest", MvnRunWebTestMojo.class);
     }
 
     public void testLoadMavenTestAppMojoLookup() throws Exception {
-        mojoTest("maven-test-app/plugin-config.xml", "maven-test-app", MvnTestAppMojo.class);
+        mojoTest("maven-test-app/plugin-config.xml", "maven-test", MvnTestMojo.class);
     }
 
     public void testLoadMavenValidateMojoLookup() throws Exception {

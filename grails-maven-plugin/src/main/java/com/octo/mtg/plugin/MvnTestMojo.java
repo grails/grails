@@ -29,7 +29,7 @@ import org.apache.maven.plugin.MojoFailureException;
  * @requiresProject true
  * @since 0.3
  */
-public class MvnTestAppMojo extends AbstractGrailsMojo {
+public class MvnTestMojo extends AbstractGrailsMojo {
 
     /**
      * Set this to 'true' to bypass unit/integration tests entirely. Its use is

@@ -27,7 +27,6 @@
         <extensions>true</extensions>
         <configuration>
           <scriptName>MyScript</scriptName>
-          <grailsHome>${env.GRAILS_HOME}</grailsHome>
         </configuration>
       </plugin>
     </plugins>

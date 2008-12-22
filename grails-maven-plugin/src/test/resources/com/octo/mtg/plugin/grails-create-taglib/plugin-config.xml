@@ -27,7 +27,6 @@
         <extensions>true</extensions>
         <configuration>
           <taglibName>MyController</taglibName>
-          <grailsHome>${env.GRAILS_HOME}</grailsHome>
         </configuration>
       </plugin>
     </plugins>

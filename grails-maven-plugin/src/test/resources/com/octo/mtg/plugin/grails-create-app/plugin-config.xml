@@ -27,7 +27,6 @@
         <extensions>true</extensions>
         <configuration>
           <appName>my-grails-app</appName>
-          <grailsHome>${env.GRAILS_HOME}</grailsHome>
         </configuration>
       </plugin>
     </plugins>

@@ -27,7 +27,6 @@
         <extensions>true</extensions>
         <configuration>
           <unitTestName>MyUnitTest</unitTestName>
-          <grailsHome>${env.GRAILS_HOME}</grailsHome>
         </configuration>
       </plugin>
     </plugins>

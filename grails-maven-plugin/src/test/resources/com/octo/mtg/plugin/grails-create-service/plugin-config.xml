@@ -27,7 +27,6 @@
         <extensions>true</extensions>
         <configuration>
           <serviceName>MyService</serviceName>
-          <grailsHome>${env.GRAILS_HOME}</grailsHome>
         </configuration>
       </plugin>
     </plugins>

@@ -27,7 +27,6 @@
         <extensions>true</extensions>
         <configuration>
           <domainClassName>MyObject</domainClassName>
-          <grailsHome>${env.GRAILS_HOME}</grailsHome>
         </configuration>
       </plugin>
     </plugins>

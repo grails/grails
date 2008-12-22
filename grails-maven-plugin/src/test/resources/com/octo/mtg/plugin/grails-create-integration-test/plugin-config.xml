@@ -27,7 +27,6 @@
         <extensions>true</extensions>
         <configuration>
           <integrationTestName>MyIntegrationTest</integrationTestName>
-          <grailsHome>${env.GRAILS_HOME}</grailsHome>
         </configuration>
       </plugin>
     </plugins>

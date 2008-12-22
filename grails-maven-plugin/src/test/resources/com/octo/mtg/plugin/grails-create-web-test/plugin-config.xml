@@ -27,7 +27,6 @@
         <extensions>true</extensions>
         <configuration>
           <webTestName>MyWebTest</webTestName>
-          <grailsHome>${env.GRAILS_HOME}</grailsHome>
         </configuration>
       </plugin>
     </plugins>
