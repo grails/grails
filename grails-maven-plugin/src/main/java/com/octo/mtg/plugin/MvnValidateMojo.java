@@ -76,16 +76,11 @@ public class MvnValidateMojo extends AbstractGrailsMojo {
         GrailsProject grailsProject;
         try {
             grailsProject = getGrailsServices().readProjectDescriptor();
-        } catch (MojoExecutionException ex) {
-            // Initialise the app.
-            getLog().info("Cannot read application info, so initialising new application.");
-            File outputDir = new File(project.getBuild().getDirectory(), "grails-lib");
-            getLog().info("Creating '" + outputDir + "' directory for Grails JARs");
-            outputDir.mkdirs();
-            runGrails("CreateApp", "--inplace --appVersion=" + version + " " + artifactId, false);
-            grailsProject = getGrailsServices().readProjectDescriptor();
+        } catch (MojoExecutionException e) {
+            getLog().info("No Grails application found - skipping validation.");
+            return;
         }
-
+        
         if (!artifactId.equals(grailsProject.getAppName())) {
             throw new MojoFailureException("app.name [" + grailsProject.getAppName() + "] in " +
                 "application.properties is different of the artifactId [" + artifactId + "] in the pom.xml");

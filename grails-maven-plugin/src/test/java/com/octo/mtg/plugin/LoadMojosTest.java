@@ -126,6 +126,10 @@ public class LoadMojosTest extends AbstractMojoTestCase {
         mojoTest("maven-test-app/plugin-config.xml", "maven-test", MvnTestMojo.class);
     }
 
+    public void testLoadMavenInitializeMojoLookup() throws Exception {
+        mojoTest("maven-initialize/plugin-config.xml", "init", MvnInitializeMojo.class);
+    }
+
     public void testLoadMavenValidateMojoLookup() throws Exception {
         mojoTest("maven-validate/plugin-config.xml", "validate", MvnValidateMojo.class);
     }
