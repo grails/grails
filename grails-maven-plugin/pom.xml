@@ -18,11 +18,10 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.grails</groupId>
   <artifactId>grails-maven-plugin</artifactId>
-  <version>0.4</version>
+  <version>1.0-SNAPSHOT</version>
   <packaging>maven-plugin</packaging>
   <name>Maven plugin for GRAILS applications</name>
   <description>This plugin allows you to integrate GRAILS applications into maven 2 builds.</description>
-  <url>http://forge.octo.com/maven/sites/mtg/grails-maven-plugin</url>
   <repositories>
     <repository>
       <id>Codehaus Snapshots</id>
