@@ -47,6 +47,8 @@ public class MvnWarMojo extends AbstractGrailsMojo {
         mavenWarFile.delete();
         if (!warGeneratedByGrails.renameTo(mavenWarFile)) {
             throw new MojoExecutionException("Unable to copy the war in the target directory");
+        } else {
+            getLog().info("Moved WAR file to '" + mavenWarFile + "'.");
         }
     }
 }
