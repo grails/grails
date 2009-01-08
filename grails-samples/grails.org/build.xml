@@ -1,39 +1,90 @@
-<project name="site" default="test">
+<project xmlns:ivy="antlib:org.apache.ivy.ant" name="site" default="test">
+    <property environment="env"/>
+    <property name="grails.home" value="${env.GRAILS_HOME}"/>
+    <property name="lib.dir" value="${basedir}/lib"/>
 
-    <condition property="grails" value="grails.bat">
-        <os family="windows"/>
-    </condition>
-    <property name="grails" value="grails" />
-
-	<!-- ================================= 
-          target: clean              
+    <macrodef name="grails">
+        <attribute name="script"/>
+        <sequential>
+            <grailsTask script="@{script}" classpathref="grails.classpath">
+                <compileClasspath refid="compile.classpath"/>
+                <testClasspath refid="test.classpath"/>
+                <runtimeClasspath refid="app.classpath"/>
+            </grailsTask>
+        </sequential>
+    </macrodef>
+    
+    <!-- ================================= 
+          target: resolve
          ================================= -->
-    <target name="clean" description="--> Cleans a Grails application">
-		<exec executable="${grails}" failonerror="true">
-			<arg value="clean"/>
-		</exec>                               
+    <target name="-resolve" description="--> Retrieve dependencies with ivy">
+        <ivy:retrieve pattern="${lib.dir}/[conf]/[artifact]-[revision].[ext]"/>
     </target>
 
-	<!-- ================================= 
-          target: war              
+    <target name="-init-grails" depends="-resolve">
+        <path id="grails.classpath">
+            <fileset dir="${lib.dir}/build"/>
+        </path>
+
+        <path id="compile.classpath">
+            <fileset dir="${lib.dir}/compile"/>
+        </path>
+
+        <path id="test.classpath">
+            <fileset dir="${lib.dir}/test"/>
+        </path>
+
+        <path id="app.classpath">
+            <fileset dir="${lib.dir}/runtime"/>
+        </path>
+
+        <taskdef name="grailsTask"
+                 classname="grails.ant.GrailsTask"
+                 classpathref="grails.classpath"/>
+    </target>
+
+    <target name="deps-report" depends="-resolve" description="--> Generate report of module dependencies.">
+        <ivy:report conf="*"/>
+    </target>
+
+    <!-- ================================= 
+          target: clean
          ================================= -->
-    <target name="war" description="--> Creates a WAR of a Grails application">
-		<exec executable="${grails}" failonerror="true">
-			<arg value="war"/>
-		</exec>                               
+    <target name="clean" depends="-init-grails" description="--> Cleans a Grails application">
+        <grails script="Clean"/>
+        <delete dir="${lib.dir}" includes="**/*"/>
+    </target>
+
+    <!-- ================================= 
+          target: compile
+         ================================= -->
+    <target name="compile" depends="-init-grails" description="--> Compiles a Grails application">
+        <grails script="Compile"/>
+    </target>
+
+    <!-- ================================= 
+          target: war
+         ================================= -->
+    <target name="war" depends="-init-grails" description="--> Creates a WAR of a Grails application">
+        <grails script="War"/>
     </target>
 	
-	<!-- ================================= 
-          target: test              
+    <!-- ================================= 
+          target: test
          ================================= -->
-    <target name="test" description="--> Run a Grails applications unit tests">
-		<exec executable="${grails}" failonerror="true">
-			<arg value="test-app"/>
-		</exec>                               
+    <target name="test" depends="-init-grails" description="--> Run a Grails applications unit tests">
+        <grails script="TestApp"/>
+    </target>
+
+    <!-- ================================= 
+          target: run
+         ================================= -->
+    <target name="run" depends="-init-grails" description="--> Runs a Grails application using embedded Jetty">
+        <grails script="RunApp"/>
     </target>
 	
-	<!-- ================================= 
-          target: deploy              
+    <!-- ================================= 
+          target: deploy
          ================================= -->
     <target name="deploy" depends="war" description="--> The deploy target (initially empty)">
         <!-- TODO -->
