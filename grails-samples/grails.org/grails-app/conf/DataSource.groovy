@@ -1,9 +1,9 @@
 dataSource {
 	pooled = false
-	driverClassName = "com.mysql.jdbc.Driver"			
-	url = "jdbc:mysql://localhost/grails"
-	username = "root"
-	password = ""
+	driverClassName = "org.postgresql.Driver"			
+	url = "jdbc:postgresql://localhost:5432/grails"
+	username = "test"
+	password = "test"
 }
 hibernate {
     cache.use_second_level_cache=true
