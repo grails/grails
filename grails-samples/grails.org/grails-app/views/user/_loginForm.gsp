@@ -13,7 +13,7 @@
 
         </div>
         <g:hiddenField name="originalURI" value="${originalURI ?: params.originalURI}" />
-        <g:each in="${formData?}" var="d">
+        <g:each in="${formData}" var="d">
             <g:if test="${d.key != 'login' && d.key != 'password'}">
                 <g:hiddenField name="${d.key}" value="${d.value}" />
             </g:if>
