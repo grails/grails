@@ -14,7 +14,6 @@ class User {
 	}
 
     static mapping = {
-        table "`user`"
         cache true
     }
 
