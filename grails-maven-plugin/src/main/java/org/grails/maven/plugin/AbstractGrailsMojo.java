@@ -208,7 +208,7 @@ public abstract class AbstractGrailsMojo extends AbstractMojo {
 
             int retval = helper.execute(targetName, args, env);
             if (retval != 0) {
-                throw new MojoExecutionException("Grails returned non-zero value.");
+                throw new MojoExecutionException("Grails returned non-zero value: " + retval);
             }
         } catch (MojoExecutionException ex) {
             // Simply rethrow it.
