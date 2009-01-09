@@ -124,5 +124,19 @@ public class CreatePomMojo extends AbstractMojo {
             if (reader != null) try { reader.close(); } catch (IOException e) {}
             if (writer != null) try { writer.close(); } catch (IOException e) {}
         }
+
+        // Add the web.xml file that's required to get the packaging
+        // working.
+        File webXml = new File(basedir, "src/main/webapp/WEB-INF/web.xml");
+        if (!webXml.exists()) {
+            webXml.getParentFile().mkdirs();
+            try {
+                webXml.createNewFile();
+            } catch (IOException e) {
+                getLog().warn("Unable to create the dummy web descriptor '" + webXml.getPath() +
+                        "' - " + "the package phase won't work without it, so you should create " +
+                        "it (an empty file) manually. Reason: " + e.getMessage());
+            }
+        }
     }
 }
