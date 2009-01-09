@@ -6,9 +6,14 @@
     </condition>
     <property name="ivy.home" value="${user.home}/.ant" />
     <property name="ivy.jar.dir" value="${ivy.home}/lib" />
-    <property name="ivy.jar.file" value="${ivy.jar.dir}/ivy.jar" />
+    <property name="ivy.jar.file" value="${ivy.jar.dir}/ivy-${ivy.install.version}.jar" />
 
     <target name="download-ivy" unless="offline">
+		<available file="${ivy.jar.file}" property="ivy.available"/>
+		<antcall target="-download-ivy" />
+    </target>
+
+	<target name="-download-ivy" unless="ivy.available">
         <mkdir dir="${ivy.jar.dir}"/>
         <!-- download Ivy from web site so that it can be used even without any special installation -->
         <get src="http://www.apache.org/dist/ant/ivy/${ivy.install.version}/apache-ivy-${ivy.install.version}-bin.zip"
@@ -18,11 +23,10 @@
 		        <include name="**/*.jar"/>
 		    </patternset>
 			<mapper type="flatten"/>				
-		</unzip>
-		
-    </target>
+		</unzip>		
+	</target>
 
-    <target name="init-ivy" depends="download-ivy">
+    <target name="init-ivy" depends="download-ivy" unless="ivy.lib.path">
       <!-- try to load ivy here from ivy home, in case the user has not already dropped
               it into ant's lib dir (note that the latter copy will always take precedence).
               We will not fail as long as local lib dir exists (it may be empty) and
