@@ -1,23 +1,8 @@
 <project xmlns:ivy="antlib:org.apache.ivy.ant" name="site" default="test">
-    <property environment="env"/>
-    <property name="grails.home" value="${env.GRAILS_HOME}"/>
-    <property name="lib.dir" value="${basedir}/lib"/>
-
-    <macrodef name="grails">
-        <attribute name="script"/>
-        <sequential>
-            <grailsTask script="@{script}" classpathref="grails.classpath">
-                <compileClasspath refid="compile.classpath"/>
-                <testClasspath refid="test.classpath"/>
-                <runtimeClasspath refid="app.classpath"/>
-            </grailsTask>
-        </sequential>
-    </macrodef>
-    
     <!-- ================================= 
           target: resolve
          ================================= -->
-    <target name="-resolve" description="--> Retrieve dependencies with ivy">
+    <target name="-resolve" description="--> Retrieve dependencies with ivy" depends="init-ivy">
         <ivy:retrieve pattern="${lib.dir}/[conf]/[artifact]-[revision].[ext]"/>
     </target>
 
