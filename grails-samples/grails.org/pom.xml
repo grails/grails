@@ -96,14 +96,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
       <version>5.1.6</version>
       <scope>runtime</scope>
     </dependency>
-
-    <dependency>
-      <groupId>postgresql</groupId>
-      <artifactId>postgresql</artifactId>
-      <version>8.3-603.jdbc3</version>
-      <scope>runtime</scope>
-    </dependency>
-  </dependencies>
+ </dependencies>
 
   <repositories>
     <!-- Required to get hold of JTA -->
