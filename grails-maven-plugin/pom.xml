@@ -111,7 +111,7 @@
     <dependency>
       <groupId>org.grails</groupId>
       <artifactId>grails-maven-archetype</artifactId>
-      <version>1.0-beta2</version>
+      <version>1.0-SNAPSHOT</version>
       <scope>runtime</scope>
     </dependency>
   </dependencies>
