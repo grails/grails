@@ -42,6 +42,10 @@ public class LoadMojosTest extends AbstractMojoTestCase {
         mojoTest("grails-clean/plugin-config.xml", "clean", GrailsCleanMojo.class);
     }
 
+    public void testLoadGrailsConsoleMojoLookup() throws Exception {
+        mojoTest("grails-console/plugin-config.xml", "console", GrailsConsoleMojo.class);
+    }
+
     public void testLoadGrailsCreateControllerMojoLookup() throws Exception {
         mojoTest("grails-create-controller/plugin-config.xml", "create-controller", GrailsCreateControllerMojo.class);
     }
