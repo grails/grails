@@ -1,7 +1,6 @@
 <archetype>
   <id>maven-project</id>
   <resources>
-    <resource>grails-app/conf/BuildConfig.groovy</resource>
     <resource>src/main/webapp/WEB-INF/web.xml</resource>
   </resources>
 </archetype>
