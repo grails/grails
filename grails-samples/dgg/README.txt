@@ -26,6 +26,13 @@ $ grails import-itunes-library ~/Music/iTunes/iTunes\ Music\ Library.xml
 
 If you're on a Windows system the path will likely differ.
 
+Importing Sample Data
+---------------------
 
+From Chapter 12 onwards there is also a Gant script that you can use to import some sample data:
+
+$ grails import-library-from-xml ../gtunes-data.xml
+
+Note: The paths to the physical files will probably not be correct for your machine, so playback of tracks that is implemented in Chapter 14 will not work unless you modify the paths. 
 
 
