@@ -46,7 +46,9 @@ class BookController {
 }
                     '''
 
-                    sleep(3000)
+                    // The update thread runs every 5s, so we need to
+                    // sleep at least that long.
+                    sleep(5000)
 
 
                     def client = new HttpClient()
