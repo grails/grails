@@ -35,7 +35,7 @@ public class GrailsExecMojo extends AbstractGrailsMojo {
     /**
      * Set this to name of the command you want to execute.
      *
-     * @parameter expression="${grails.cmd}"
+     * @parameter expression="${command}"
      * @required
      */
     private String command;
@@ -43,7 +43,7 @@ public class GrailsExecMojo extends AbstractGrailsMojo {
     /**
      * Set this to the arguments you want to pass to the command.
      *
-     * @parameter expression="${grails.args}"
+     * @parameter expression="${args}"
      */
     private String args;
 
