@@ -31,7 +31,7 @@ class GrailsWikiEngineTests extends GroovyTestCase {
     }
 
     void testItalic() {
-        assertEquals 'this word has <em class="italic">emphasis</em>!', engine.render('this word has _emphasis_!', context)
+        assertEquals 'this word has <em class="italic">emphasis</em> !', engine.render('this word has _emphasis_ !', context)
     }
 
     void testBold() {
@@ -82,14 +82,14 @@ class Book {
     }
 
     void testAnchorLinks() {
-        assertEquals '<a href="#MyAnchor" class="pageLink">MyAnchor</a>', engine.render('[#MyAnchor]', context)
         assertEquals '<a href="#MyAnchor" class="pageLink">see My Anchor</a>', engine.render('[see My Anchor|#MyAnchor]', context)
+        assertEquals '<a href="http://www.springsource.com/training#grv001" class="pageLink">training</a>', engine.render('[training|http://www.springsource.com/training#grv001]', context)
     }
 
     void testAnchorLinksInBullets() {
         assertEquals '''<ul class="star">
 <li><a href="#Abstract" class="pageLink">Abstract</a></li>
-</ul>''', engine.render('* [#Abstract]', context)
+</ul>''', engine.render('* [Abstract|#Abstract]', context)
     }
 
     void testAnchorMacro() {
@@ -109,16 +109,13 @@ class Book {
     }
 
     void testAbsoluteLinks() {
+        assertEquals '<a href="http://grails.org/unsubscribe#subsection" class="pageLink">unsubscribe</a>', engine.render('[unsubscribe|http://grails.org/unsubscribe#subsection]', context)	
         assertEquals '<a href="http://grails.org/unsubscribe" class="pageLink">unsubscribe</a>', engine.render('[unsubscribe|http://grails.org/unsubscribe]', context)
         assertEquals '<a href="http://grails.org/unsubscribe" class="pageLink">http://grails.org/unsubscribe</a>', engine.render('[http://grails.org/unsubscribe]', context)
         enableNotFound()
         assertEquals '<a href="http://grails.org/unsubscribe" class="pageLink">unsubscribe</a>', engine.render('[unsubscribe|http://grails.org/unsubscribe]', context)
         assertEquals '<a href="http://grails.org/unsubscribe" class="pageLink">http://grails.org/unsubscribe</a>', engine.render('[http://grails.org/unsubscribe]', context)
 
-    }
-
-    void testExternalLinks() {
-        assertEquals '<a href="http://pipes.yahoo.com/pipes/pipe.run?_id=4n_tZgby2xGooF4z60jTQA&_render=rss" class="pageLink">RSS</a>', engine.render('[RSS|http://pipes.yahoo.com/pipes/pipe.run?_id=4n_tZgby2xGooF4z60jTQA&_render=rss]', context)
     }
 
     void testImages() {

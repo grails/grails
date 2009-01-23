@@ -8,6 +8,15 @@
 
 	<link rel="stylesheet" href="css/master.css" type="text/css" media="screen" title="Master screen stylesheet" charset="utf-8" />
 	<style type="text/css">@import url("css/home.css");</style>
+	<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+	try {
+	var pageTracker = _gat._getTracker("UA-2728886-12");
+	pageTracker._trackPageview();
+	} catch(err) {}</script>	
 
 	<!--[if IE]>
 		<link rel="stylesheet" href="${createLinkTo(dir:'css/ie', file:'master.css')}" type="text/css" media="screen" title="Primary screen stylesheet" charset="utf-8" />
@@ -112,9 +121,9 @@
 		<h4>Professional Services</h4>
 		<ul>
             <li class="biteSizedLI">
-                <a href="http://www.g2one.com/services.html#training"><img src="images/bs-medallions-tutorials.png" width="53" height="53" alt="Bs Medallions Training" /></a>
-                <h5><a href="http://www.g2one.com/services.html#training">Training</a></h5>
-                Need help getting up and running with Grails? <a href="http://www.g2one.com">G2One</a> offers a range of courses from short one day workshops to comprehensive 4 day courses on both Groovy & Grails.
+                <a href="http://www.springsource.com/training/grv001"><img src="images/bs-medallions-tutorials.png" width="53" height="53" alt="Bs Medallions Training" /></a>
+                <h5><a href="http://www.springsource.com/training/grv001">Training</a></h5>
+                Need help getting up and running with Grails? <a href="http://www.springsource.com">SpringSource</a> offers a range of courses from short one day workshops to comprehensive 4 day courses on both Groovy & Grails.
 
             </li>
             <li style="text-align:center" id="g2oneLogo">
@@ -125,9 +134,9 @@
             </li>
 
             <li class="biteSizedLI">
-            <a href="http://www.g2one.com/services.html#consulting"><img src="images/bs-medallion-quickstart.png" width="53" height="53" alt="Bs Medallion Consulting" /></a>
-            <h5><a href="http://www.g2one.com/services.html#consulting">Consulting</a></h5>
-            Need support on your latest cutting-edge Groovy or Grails project? Get it from the <a href="http://www.g2one.com/company.html#company">people the behind the project</a>.
+            <a href="http://www.springsource.com/services"><img src="images/bs-medallion-quickstart.png" width="53" height="53" alt="Bs Medallion Consulting" /></a>
+            <h5><a href="http://www.springsource.com/services">Consulting</a></h5>
+            Need support on your latest cutting-edge Groovy or Grails project? Get it from the <a href="http://www.springsource.com">people the behind the project</a>.
             </li>
 
 		</ul>

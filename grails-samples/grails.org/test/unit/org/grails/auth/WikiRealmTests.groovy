@@ -28,7 +28,8 @@ class WikiRealmTests extends GroovyTestCase {
 
         realm.credentialMatcher = [doCredentialsMatch:{ org.jsecurity.authc.AuthenticationToken authenticationToken, org.jsecurity.authc.Account account-> false }] as CredentialsMatcher
 
-        User.metaClass.static.findByLogin = { String s -> new User(login:"Fred") }
+        User.metaClass.static.findByLogin = { String s -> 
+			new User(login:"Fred") }
 
         shouldFail(IncorrectCredentialsException) {
             realm.authenticate( new UsernamePasswordToken("Fred", "Frog" ) )

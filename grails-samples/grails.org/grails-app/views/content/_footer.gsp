@@ -1,7 +1,7 @@
 <div id="footer">
 
     <div id="footerContent">
-    Copyright 2003-2008. All rights reserved unless otherwise noted. Hosting sponsored by <a href="http://www.contegix.com/">Contegix</a>.<br />
+    Powered by <strong>Grails <g:meta name="app.grails.version" /></strong>. <br> Copyright 2003-2008. All rights reserved unless otherwise noted. Hosting sponsored by <a href="http://www.contegix.com/">Contegix</a>.<br />
 
         <ul id="footerNav">
             <li><g:link controller="content" id="Home">Home</g:link></li>

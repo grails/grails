@@ -136,18 +136,17 @@ class GrailsWikiEngine extends BaseRenderEngine implements WikiRenderEngine{
         def decoded = URLDecoder.decode(name, 'utf-8')
 
         int i =decoded.indexOf('#')
-        if(decoded.startsWith('#')) {
-            buffer <<  "<a href=\"${decoded}\" class=\"pageLink\">${decoded[1..-1]}</a>"
+        if(decoded.startsWith("http:")||decoded.startsWith("https:") || decoded.startsWith("mailto:")) {
+            buffer <<  "<a href=\"$decoded\" class=\"pageLink\">$view</a>"
+		}
+        else if(decoded.startsWith('#')) {
+            buffer <<  "<a href=\"${decoded}\" class=\"pageLink\">${view}</a>"
         }
         else if(i>-1) {
             appendLink(buffer,URLEncoder.encode(decoded[0..i-1],'utf-8'),view, decoded[i+1..-1])            
         }
         else {
-
-            if(decoded.startsWith("http:")||decoded.startsWith("https:") || decoded.startsWith("mailto:"))
-                buffer <<  "<a href=\"$decoded\" class=\"pageLink\">$view</a>"
-            else
-                buffer <<  "<a href=\"$contextPath/$name\" class=\"pageLink\">$view</a>"
+            buffer <<  "<a href=\"$contextPath/$name\" class=\"pageLink\">$view</a>"
         }
 
     }
@@ -221,7 +220,7 @@ class CodeFilter extends RegexTokenFilter {
 		def text = result.group(1)
 		// are we inside a code block?
 		if(text.indexOf('class="code"') > -1) buffer << "@$text@"
-		else buffer << "<code>${text}</code>"
+		else buffer << " <code>${text}</code> "
     }
 }
 class ImageFilter  extends RegexTokenFilter {
