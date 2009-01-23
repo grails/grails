@@ -4,6 +4,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	<meta name="robots" content="NOODP">	
+	<meta name="Description" content="Grails is a high-productivity web framework based on the Groovy language that embraces the coding by convention paradigm, but is designed specifically for the Java platform.">	
+	
 	<title>Grails - The search is over.</title>
 
 	<link rel="stylesheet" href="css/master.css" type="text/css" media="screen" title="Master screen stylesheet" charset="utf-8" />
