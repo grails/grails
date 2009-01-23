@@ -7,7 +7,8 @@
     <title>Search Results</title>
     <style type="text/css">
       .result {
-        margin-bottom: 1em;
+		margin-top: 3em;
+        margin-bottom: 3em;
       }
 
       .result .displayLink {
@@ -15,12 +16,17 @@
       }
 
       .result .name {
-        font-size: larger;
+        font-size: 1.4em;
+      }
+	  .result .desc {
+		margin-top:5px;
+		padding:10px;
       }
       
 
       .paging a.step {
-        padding: 0 .3em;
+		  margin-left:5px;
+		  margin-right:5px;		
       }
 
       .paging span.currentStep {
