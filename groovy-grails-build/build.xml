@@ -114,7 +114,13 @@
     </target>
     <target name="test-grails">
         <ant dir="checkout/grails" antfile="build.xml" target="clean" />
-        <exec dir="checkout/grails" command="ant test" failonerror="true" />
+        <exec dir="checkout/grails" command="ant test" failonerror="true" osfamily="unix"/>
+        <exec dir="checkout/grails" command="cmd" failonerror="true" osfamily="windows">
+          <arg value="/c"/>
+          <arg value="ant.bat"/>
+          <arg value="test"/>
+        </exec>
+        
     </target>
     <target name="build" depends="build-groovy, update-grails, replace-jar, test-grails" />
    
