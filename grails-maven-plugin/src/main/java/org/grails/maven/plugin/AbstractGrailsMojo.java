@@ -65,6 +65,14 @@ public abstract class AbstractGrailsMojo extends AbstractMojo {
     protected String env;
 
     /**
+     * The directory where is launched the mvn command.
+     *
+     * @parameter expression="${nonInteractive}" default-value="false"
+     * @required
+     */
+    protected boolean nonInteractive;
+
+    /**
      * POM
      *
      * @parameter expression="${project}"
@@ -206,6 +214,12 @@ public abstract class AbstractGrailsMojo extends AbstractMojo {
 //            mainClass.getDeclaredMethod("setOut", new Class[]{ PrintStream.class }).invoke(
 //                    scriptRunner,
 //                    new Object[] { new PrintStream(infoOutputStream) });
+
+            // If the command is running in non-interactive mode, we
+            // need to pass on the relevant argument.
+            if (this.nonInteractive) {
+                args = args == null ? "--non-interactive" : "--non-interactive " + args;
+            }
 
             int retval = helper.execute(targetName, args, env);
             if (retval != 0) {
