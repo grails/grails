@@ -26,7 +26,7 @@
         <artifactId>grails-maven-plugin</artifactId>
         <extensions>true</extensions>
         <configuration>
-          <taglibName>MyController</taglibName>
+          <tagLibName>MyController</tagLibName>
         </configuration>
       </plugin>
     </plugins>

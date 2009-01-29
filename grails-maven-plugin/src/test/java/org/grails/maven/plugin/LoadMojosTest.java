@@ -66,8 +66,8 @@ public class LoadMojosTest extends AbstractMojoTestCase {
         mojoTest("grails-create-service/plugin-config.xml", "create-service", GrailsCreateServiceMojo.class);
     }
 
-    public void testLoadGrailsCreateTaglibMojoLookup() throws Exception {
-        mojoTest("grails-create-taglib/plugin-config.xml", "create-taglib", GrailsCreateTaglibMojo.class);
+    public void testLoadGrailsCreateTagLibMojoLookup() throws Exception {
+        mojoTest("grails-create-tag-lib/plugin-config.xml", "create-tag-lib", GrailsCreateTagLibMojo.class);
     }
 
     public void testLoadGrailsCreateUnitTestMojoLookup() throws Exception {
