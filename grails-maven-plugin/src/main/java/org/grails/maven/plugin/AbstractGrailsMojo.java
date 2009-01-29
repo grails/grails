@@ -206,9 +206,8 @@ public abstract class AbstractGrailsMojo extends AbstractMojo {
             }
             classpath[classpath.length - 1] = toolsJar.toURI().toURL();
 
-            System.setProperty("base.dir", basedir.getAbsolutePath());
             GrailsRootLoader rootLoader = new GrailsRootLoader(classpath, getClass().getClassLoader());
-            GrailsBuildHelper helper = new GrailsBuildHelper(rootLoader);
+            GrailsBuildHelper helper = new GrailsBuildHelper(rootLoader, null, basedir.getAbsolutePath());
             configureBuildSettings(helper);
 
 //            mainClass.getDeclaredMethod("setOut", new Class[]{ PrintStream.class }).invoke(
