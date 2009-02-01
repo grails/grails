@@ -14,9 +14,9 @@
  */
 package org.grails.auth;
 
-import groovy.util.GroovyTestCase
-import org.jsecurity.authc.AuthenticationException
+import grails.test.ControllerUnitTestCase
 import org.grails.meta.UserInfo
+import org.jsecurity.authc.AuthenticationException
 
 
 /**
@@ -25,7 +25,7 @@ import org.grails.meta.UserInfo
  *        <p/>
  *        Created: Feb 28, 2008
  */
-public class UserControllerTests extends GroovyTestCase {
+public class UserControllerTests extends ControllerUnitTestCase {
 
     void testRegisterGET() {
         def renderParams = [:]
@@ -85,85 +85,68 @@ public class UserControllerTests extends GroovyTestCase {
     }
 
     void testRegisterWithFormErrors() {
-      def renderParams = [:]
         def params = [originalURI:"/foo/bar", login:"Fred", password:"one", password2:"one"]
 
+        mockDomain(Role, [
+                new Role(name: Role.ADMINSITRATOR),
+                new Role(name: Role.EDITOR),
+                new Role(name: Role.OBSERVER) ])
+        mockDomain(User)
+        mockDomain(UserInfo)
 
-        UserController.metaClass.getRequest = {-> [method:"POST"] }
-        UserController.metaClass.render = { Map args -> renderParams = args }
-        UserController.metaClass.getParams = {->  params}
-        Role.metaClass.static.findByName = { String n -> new Role(name:n) }
-
-        User.metaClass.static.findByLogin = {String login-> null }
-        User.metaClass.addToRoles = { Role r -> delegate }
-        User.metaClass.hasErrors = {-> true }
-
-        def controller = new UserController()
+        controller.request.method = "POST"
+        controller.jsecSecurityManager = [login: { authenticateCalled = true }]
+        controller.params.putAll(params)
         controller.register()
 
-        assertEquals "register", renderParams.view
-        assert  renderParams?.model?.user
+        assertEquals "register", renderArgs.view
+        assert  renderArgs?.model?.user
         
-        assertEquals  "/foo/bar", renderParams.model?.originalURI
-        assertEquals  params, renderParams.model?.formData
+        assertEquals  "/foo/bar", renderArgs.model?.originalURI
+        assertEquals  params, renderArgs.model?.formData
     }
 
     void testRegisterAndRedirectToOriginalPage() {
-          def redirectParams = [:]
-          def params = [originalURI:"/foo/bar", login:"Fred", password:"one", password2:"one"]
+        def params = [originalURI:"/foo/bar", login:"dilbert", password:"one", password2:"one", email: "dilbert@nowhere.org"]
 
+        mockDomain(Role, [
+                new Role(name: Role.ADMINSITRATOR),
+                new Role(name: Role.EDITOR),
+                new Role(name: Role.OBSERVER) ])
+        mockDomain(User)
+        mockDomain(UserInfo)
 
-          UserController.metaClass.redirect = {Map m-> redirectParams = m }
-          UserController.metaClass.getRequest = {-> [method:"POST"] }
-          UserController.metaClass.getParams = {->  params}
+        def authenticateCalled = false
+        controller.request.method = "POST"
+        controller.jsecSecurityManager = [login: { authenticateCalled = true }]
+        controller.params.putAll(params)
+        controller.register()
 
-          Role.metaClass.static.findByName = { String n -> new Role(name:n) }
-          User.metaClass.static.findByLogin = {String login-> null }
-          User.metaClass.addToRoles = { Role r -> delegate }
-          User.metaClass.hasErrors = {-> false }
-          User.metaClass.save = { delegate }
-          UserInfo.metaClass.setProperties = {Map m->}
-          UserInfo.metaClass.save = {}
-          UserInfo.metaClass.constructor << { Map m -> UserInfo.newInstance() }
+        assert authenticateCalled
 
-            def controller = new UserController()
-            def authenticateCalled = false
-            controller.jsecSecurityManager = [login: { authenticateCalled = true }]
-            controller.register()
-
-        
-          assert authenticateCalled
-
-          assertEquals params.originalURI, redirectParams.url
-          assertEquals params, redirectParams.params
+        assertEquals params.originalURI, redirectArgs.url
+        assertEquals params, redirectArgs.params
     }
 
     void testRedirectWithoutOriginalPage() {
-         def redirectParams = [:]
-          def params = [ login:"Fred", password:"one", password2:"one"]
+        def params = [ login:"dilbert", password:"one", password2:"one", email: "dilbert@nowhere.org"]
 
+        mockDomain(Role, [
+                new Role(name: Role.ADMINSITRATOR),
+                new Role(name: Role.EDITOR),
+                new Role(name: Role.OBSERVER) ])
+        mockDomain(User)
+        mockDomain(UserInfo)
 
-          UserController.metaClass.redirect = {Map m-> redirectParams = m }
-          UserController.metaClass.getRequest = {-> [method:"POST"] }
-          UserController.metaClass.getParams = {->  params}
+        def authenticateCalled = false
+        controller.request.method = "POST"
+        controller.jsecSecurityManager = [login: { authenticateCalled = true }]
+        controller.params.putAll(params)
+        controller.register()
 
-          User.metaClass.static.findByLogin = {String login-> null }
-        Role.metaClass.static.findByName = { String n -> new Role(name:n) }
-          User.metaClass.addToRoles = { Role r -> delegate }
-          User.metaClass.hasErrors = {-> false }
-          User.metaClass.save = {delegate }
-        UserInfo.metaClass.constructor << { Map m -> UserInfo.newInstance() }
-        UserInfo.metaClass.save = {}
+        assert authenticateCalled
 
-            def controller = new UserController()
-            def authenticateCalled = false
-            controller.jsecSecurityManager = [login: { authenticateCalled = true }]
-            controller.register()
-
-
-          assert authenticateCalled
-
-          assertEquals "", redirectParams.uri
+        assertEquals "", redirectArgs.uri
     }
 
     /*void testLogout() {
