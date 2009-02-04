@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?><plugins revision="8418"><plugin latest-release="0.1" name="foobar"><release tag="RELEASE_0_1" type="svn" version="0.1"><title>Plugin summary/headline</title><author>Your name</author><authorEmail></authorEmail><description>\
+Brief description of the plugin.
+</description><documentation>http://grails.org/Foobar+Plugin</documentation><file>http://svn.codehaus.org/grails/trunk/grails-test-plugin-repo2/grails-foobar/tags/RELEASE_0_1/grails-foobar-0.1.zip</file></release></plugin></plugins>
