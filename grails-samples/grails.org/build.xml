@@ -1,6 +1,6 @@
 <project xmlns:ivy="antlib:org.apache.ivy.ant" name="site" default="test">
-    <property environment="env"/>	
-  	<property name="ivy.install.version" value="2.0.0-rc2" />
+    <property environment="env"/>
+  	<property name="ivy.install.version" value="2.0.0" />
     <condition property="ivy.home" value="${env.IVY_HOME}">
       <isset property="env.IVY_HOME" />
     </condition>
@@ -22,8 +22,8 @@
 		   <patternset>
 		        <include name="**/*.jar"/>
 		    </patternset>
-			<mapper type="flatten"/>				
-		</unzip>		
+			<mapper type="flatten"/>
+		</unzip>
 	</target>
 
     <target name="init-ivy" depends="download-ivy" unless="ivy.lib.path">
@@ -37,22 +37,23 @@
         <taskdef resource="org/apache/ivy/ant/antlib.xml"
                  uri="antlib:org.apache.ivy.ant" classpathref="ivy.lib.path"/>
     </target>
-	
+
 
     <property name="lib.dir" value="${basedir}/lib"/>
 
     <macrodef name="grails">
         <attribute name="script"/>
+		<attribute name="args" default="" />
         <sequential>
-            <grailsTask script="@{script}" classpathref="grails.classpath">
+            <grailsTask script="@{script}" args="--non-interactive @{args}" classpathref="grails.classpath">
                 <compileClasspath refid="compile.classpath"/>
                 <testClasspath refid="test.classpath"/>
                 <runtimeClasspath refid="app.classpath"/>
             </grailsTask>
         </sequential>
     </macrodef>
-    
-    <!-- ================================= 
+
+    <!-- =================================
           target: resolve
          ================================= -->
     <target name="-resolve" description="--> Retrieve dependencies with ivy" depends="init-ivy">
@@ -85,7 +86,7 @@
         <ivy:report conf="*"/>
     </target>
 
-    <!-- ================================= 
+    <!-- =================================
           target: clean
          ================================= -->
     <target name="clean" depends="-init-grails" description="--> Cleans a Grails application">
@@ -93,35 +94,35 @@
         <delete dir="${lib.dir}" includes="**/*"/>
     </target>
 
-    <!-- ================================= 
+    <!-- =================================
           target: compile
          ================================= -->
     <target name="compile" depends="-init-grails" description="--> Compiles a Grails application">
         <grails script="Compile"/>
     </target>
 
-    <!-- ================================= 
+    <!-- =================================
           target: war
          ================================= -->
     <target name="war" depends="-init-grails" description="--> Creates a WAR of a Grails application">
         <grails script="War"/>
     </target>
-	
-    <!-- ================================= 
+
+    <!-- =================================
           target: test
          ================================= -->
     <target name="test" depends="-init-grails" description="--> Run a Grails applications unit tests">
         <grails script="TestApp"/>
     </target>
 
-    <!-- ================================= 
+    <!-- =================================
           target: run
          ================================= -->
     <target name="run" depends="-init-grails" description="--> Runs a Grails application using embedded Jetty">
         <grails script="RunApp"/>
     </target>
-	
-    <!-- ================================= 
+
+    <!-- =================================
           target: deploy
          ================================= -->
     <target name="deploy" depends="war" description="--> The deploy target (initially empty)">
