@@ -1,6 +1,7 @@
 package org.grails.wiki
 
 import grails.test.GroovyPagesTestCase
+import org.codehaus.groovy.grails.commons.ConfigurationHolder
 
 /**
 * @author Graeme Rocher
@@ -9,6 +10,12 @@ import grails.test.GroovyPagesTestCase
 * Created: Feb 27, 2008
 */
 class WikiTagLibTests extends GroovyPagesTestCase {
+
+    def config
+
+    void setUp() {
+        config = ConfigurationHolder.getConfig()
+    }
 
     void testHeadTags() {
         def template = '<wiki:text>h1. Hello</wiki:text>'
@@ -36,7 +43,7 @@ class WikiTagLibTests extends GroovyPagesTestCase {
         
         def template = '<wiki:text>My Link [Test Page]</wiki:text>'
 
-        assertOutputEquals 'My Link <a href="http://www.grails.org/Test+Page" class="pageLink">Test Page</a>', template
+        assertOutputEquals "My Link <a href=\"${config.grails.serverURL}/Test+Page\" class=\"pageLink\">Test Page</a>", template
 
     }
 
@@ -47,13 +54,13 @@ class WikiTagLibTests extends GroovyPagesTestCase {
 
         def template = '<wiki:text>My Link [Test Page|Test Page#MyAnchor]</wiki:text>'
 
-        assertOutputEquals 'My Link <a href="http://www.grails.org/Test+Page#MyAnchor" class="pageLink">Test Page</a>', template
+        assertOutputEquals "My Link <a href=\"${config.grails.serverURL}/Test+Page#MyAnchor\" class=\"pageLink\">Test Page</a>", template
 
     }
 
     void testLinksForNonExistantPages() {
        def template = '<wiki:text>My Link [Random Page]</wiki:text>'
 
-        assertOutputEquals 'My Link <a href="http://www.grails.org/create/Random+Page" class="createPageLink">Random Page (+)</a>', template        
+        assertOutputEquals "My Link <a href=\"${config.grails.serverURL}/create/Random+Page\" class=\"createPageLink\">Random Page (+)</a>", template        
     }
 }

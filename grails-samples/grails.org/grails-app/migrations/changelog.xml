@@ -1,0 +1,15 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+
+    <!-- the database schema construction from scratch -->
+    <include file="init.xml"/>
+
+    <!-- 2.6 migrations -->
+    <include file="r2.6/2009-02-05.xml"/>
+    <include file="r2.6/2009-02-06.xml"/>
+
+
+</databaseChangeLog>

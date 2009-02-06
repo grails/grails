@@ -32,6 +32,8 @@ class UrlMappings {
       
       "/$id?"(controller:"content", action:"index")
 
+      "/Plugins"(controller:"plugin", action: "index")
+
       "/admin/$controller/$action?/$id?"()
       "/admin"(view:"/admin/index")
 

@@ -34,12 +34,17 @@ target(importConfluenceXML: "The implementation task") {
 			handler.pages.eachWithIndex { page , i ->
 					def wikiPageClass = grailsApp.getDomainClass("org.grails.wiki.WikiPage").clazz
 					def wikiPage = wikiPageClass.newInstance(title:page.title, body:handler.bodies[i])
-					wikiPage.save(flush:true)
+					try {
+                        wikiPage.save(flush:true)
+                    } catch (Exception e) {
+                        println "WARNING: Can't save page ${page.title}"
+                        println e.message
+                        return
+                    }
 					if(wikiPage.hasErrors()) {
 						println "WARNING: Can't save page ${page.title}"
 						wikiPage.errors.allErrors.each { println it }
-					}
-                    else {
+					} else {
                         def v = wikiPage.createVersion()
                         v.author = adminUser
                         v.save(flush:true)

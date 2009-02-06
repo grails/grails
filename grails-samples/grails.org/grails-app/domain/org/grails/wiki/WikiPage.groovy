@@ -4,8 +4,6 @@ import org.grails.content.Content
 import org.grails.content.Version
 
 class WikiPage extends Content {
-	
-
 
 	Version createVersion() {       
         def verObject = new Version(number:version, current:this)

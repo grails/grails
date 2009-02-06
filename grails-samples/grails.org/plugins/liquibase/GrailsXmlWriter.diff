@@ -1,0 +1,15 @@
+Index: src/java/org/liquibase/grails/GrailsXmlWriter.java
+===================================================================
+--- src/java/org/liquibase/grails/GrailsXmlWriter.java	(revision 47353)
++++ src/java/org/liquibase/grails/GrailsXmlWriter.java	(working copy)
+@@ -2,8 +2,8 @@
+ 
+ import liquibase.xml.XmlWriter;
+ import org.w3c.dom.Document;
+-import org.apache.xml.serialize.XMLSerializer;
+-import org.apache.xml.serialize.OutputFormat;
++import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
++import com.sun.org.apache.xml.internal.serialize.OutputFormat;
+ 
+ import java.io.OutputStream;
+ import java.io.IOException;
