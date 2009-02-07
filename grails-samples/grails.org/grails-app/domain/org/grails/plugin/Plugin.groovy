@@ -42,6 +42,7 @@ class Plugin extends WikiPage {
     }
 
     def getAvgRating() {
+        if (!ratings || !ratings.size()) return null // for no ratings, return null
         ratings*.stars.sum() / ratings.size()
     }
 

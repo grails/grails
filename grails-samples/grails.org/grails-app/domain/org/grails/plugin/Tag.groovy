@@ -4,4 +4,8 @@ package org.grails.plugin
  */
 class Tag {
     String name
+
+    String toString() {
+        name
+    }
 }

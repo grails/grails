@@ -14,11 +14,11 @@ class PluginControllerTests extends ControllerUnitTestCase {
         mockParams.id = 1
 
         def controller = new PluginController()
-        def model = controller.showPlugin()
+        def model = controller.show()
 
         assert p
 
-        assertEquals p, model.content
+        assertEquals p, model.plugin
     }
 
     void testCreatePluginGET() {
@@ -27,7 +27,7 @@ class PluginControllerTests extends ControllerUnitTestCase {
         mockParams.description='stuff here'
 
         def controller = new PluginController()
-        def model = controller.createPlugin()
+        def model = controller.create()
 
         assert model.plugin
         assertEquals 'my plugin', model.plugin.title
@@ -43,7 +43,7 @@ class PluginControllerTests extends ControllerUnitTestCase {
         Plugin.metaClass.save = { -> null }
 
         def controller = new PluginController()
-        def model = controller.createPlugin()
+        def model = controller.create()
 
         assert model.plugin
         assertEquals 'my plugin', model.plugin.title
@@ -60,7 +60,7 @@ class PluginControllerTests extends ControllerUnitTestCase {
         Plugin.metaClass.save = { -> delegate }
 
         def controller = new PluginController()
-        controller.createPlugin()
+        controller.create()
 
         assertEquals "/", redirectParams.uri
     }
