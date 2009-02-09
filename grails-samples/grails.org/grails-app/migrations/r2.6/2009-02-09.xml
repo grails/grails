@@ -4,12 +4,13 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
     http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
 
-    <!-- the database schema construction from scratch -->
-    <include file="init.xml"/>
-
-    <!-- 2.6 migrations -->
-    <include file="r2.6/2009-02-05.xml"/>
-    <include file="r2.6/2009-02-06.xml"/>
-    <include file="r2.6/2009-02-09.xml"/>
+    <!--
+        Adding grails version plugin was developed under
+    -->
+    <changeSet author="rhyolight" id="2009-02-09:1">
+        <addColumn tableName="content">
+            <column name="grails_version" type="VARCHAR(16)"/>
+        </addColumn>
+    </changeSet>
 
 </databaseChangeLog>
