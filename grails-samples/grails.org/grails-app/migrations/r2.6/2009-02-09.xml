@@ -13,4 +13,18 @@
         </addColumn>
     </changeSet>
 
+    <!--
+        Adding removing poster/email strings in place of a reference to the User domain
+    -->
+    <changeSet author="rhyolight" id="2009-02-09:2">
+        <dropColumn tableName="comment" columnName="poster"/>
+        <dropColumn tableName="comment" columnName="email"/>
+        <addColumn tableName="comment">
+            <column name="user_id" type="BIGINT(20)"/>
+        </addColumn>
+        <addForeignKeyConstraint constraintName="fk_comment_user"
+            baseTableName="comment" baseColumnNames="user_id"
+            referencedTableName="user" referencedColumnNames="id"
+        />
+    </changeSet>
 </databaseChangeLog>

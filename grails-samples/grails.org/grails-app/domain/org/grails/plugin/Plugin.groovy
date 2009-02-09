@@ -13,8 +13,8 @@ class Plugin extends WikiPage {
     String author
     String authorEmail
     String screenshots
-    String grailsVersion    // version it was developed against
-    Boolean official        // specifies SpringSource support
+    String grailsVersion        // version it was developed against
+    Boolean official = false    // specifies SpringSource support
     Number avgRating
 
     static hasMany = [tags:Tag, ratings:Rating]
@@ -29,7 +29,7 @@ class Plugin extends WikiPage {
         screenshots(nullable: true)
         author(nullable: true)
         authorEmail(email:true, blank:false)
-        grailsVersion(nullable:false, blank:false, maxLength:16)
+        grailsVersion(nullable:true, blank:false, maxLength:16)
     }
 
     Version createVersion() {
@@ -52,5 +52,13 @@ class Plugin extends WikiPage {
     void setDescription(String desc) {
         this.@description = desc
         this.body = desc
+    }
+
+    String toString() {
+        """$title
+-------------------------
+$description
+-------------------------
+AUTHOR: $author ($authorEmail)"""
     }
 }

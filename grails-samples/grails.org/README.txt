@@ -40,6 +40,10 @@ Once this is done CTRL-C or quit the application and import the data from Conflu
 
 grails import-confluence-xml ./data/confluence/entities.xml
 
+If you want to translate the Plugin Wiki pages into the new Plugin model, run this script
+
+grails translate-content-to-plugins
+
 With this done you can now run-app
 
 grails run-app

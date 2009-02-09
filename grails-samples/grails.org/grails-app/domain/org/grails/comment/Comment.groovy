@@ -1,16 +1,22 @@
 package org.grails.comment
 
 import org.grails.content.Content
+import org.grails.auth.User
 
 class Comment {
-	String poster
+	User user
 	String body
-	String email
     Content parent
 	
 	static constraints = {
-		poster(blank:false)
-		email(email:true, nullable:true)
 		body(blank:false)
 	}
+
+    String toString() {
+        """+--- COMMENT: ---------------------
+$body
++--- ${user.login} ---------------------
+<>
+"""
+    }
 }
