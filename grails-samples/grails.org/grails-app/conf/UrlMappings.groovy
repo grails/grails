@@ -11,7 +11,8 @@ class UrlMappings {
         "/news/edit/$id"(controller: "news", action: "editNews")
         "/news/latest"(controller: "news", action: "latest")
         
-        "/Plugins"(controller: "plugin")
+        "/Plugins"(controller: "plugin", action: "index")
+        "/plugin/$title"(controller: "plugin", action: "show")
         "/plugin/list"(controller: "plugin", action:"list")
         "/plugin/show/$id"(controller: "plugin", action:"show")
         "/plugin/create"(controller: "plugin", action:"create")
@@ -39,7 +40,6 @@ class UrlMappings {
         }
 
         "/$id?"(controller: "content", action: "index")
-
 
         "/admin/$controller/$action?/$id?"()
         "/admin"(view: "/admin/index")

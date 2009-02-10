@@ -15,11 +15,11 @@ class PluginController extends BaseWikiController {
     }
 
     def show = {
-        render view:'showPlugin', model:[plugin:Plugin.get(params.id)]
+        def plugin = params.id ? Plugin.get(params.id) : Plugin.findByTitle(params.title)
+        render view:'showPlugin', model:[plugin:plugin]
     }
 
     def edit = {
-        println "EDIT: $params"
         def plugin = Plugin.get(params.id)
         if(plugin) {
             if(request.method == 'POST') {

@@ -12,11 +12,4 @@ class Comment {
 		body(blank:false)
 	}
 
-    String toString() {
-        """+--- COMMENT: ---------------------
-$body
-+--- ${user.login} ---------------------
-<>
-"""
-    }
 }

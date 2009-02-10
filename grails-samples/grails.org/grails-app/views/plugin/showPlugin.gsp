@@ -1,5 +1,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
+    <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'plugins.css')}" />    
     <title>${plugin.title} Plugin</title>
     <meta content="subpage" name="layout"/>
 </head>
@@ -11,15 +12,18 @@
     </div>
 
     <h1>Plugin: ${plugin?.title}</h1>
-    <div style="width:450px;">
+    <div class="plugin">
         <wiki:text key="${plugin?.title}">
             ${plugin?.body}
         </wiki:text>
-    </div>
-    <div class="endsection" style="margin-top:10px;">
-        <b>Posted at ${plugin.dateCreated}</b> by
-
-        <a href="#">${plugin.author}</a>
+        <g:each var="comment" in="${plugin?.comments}">
+            <div class="comment">
+                <wiki:text>
+                    ${comment?.body}
+                </wiki:text>
+                <div class="author">${comment?.user.login}</div>
+            </div>
+        </g:each>
     </div>
 </div>
 </body>
