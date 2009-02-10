@@ -15,12 +15,11 @@ class PluginController extends BaseWikiController {
     }
 
     def show = {
-        def plugin = params.id ? Plugin.get(params.id) : Plugin.findByTitle(params.title)
-        render view:'showPlugin', model:[plugin:plugin]
+        render view:'showPlugin', model:[plugin:byTitle(params)]
     }
 
     def edit = {
-        def plugin = Plugin.get(params.id)
+        def plugin = byTitle(params)
         if(plugin) {
             if(request.method == 'POST') {
                 // update plugin
@@ -55,5 +54,9 @@ class PluginController extends BaseWikiController {
                 return render(view:'createPlugin', model:[plugin:plugin])
             }
         }
+    }
+
+    private def byTitle(params) {
+        Plugin.findByTitle(params.title.replaceAll('\\+', ' '))
     }
 }

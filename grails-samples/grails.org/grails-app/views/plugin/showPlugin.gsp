@@ -8,7 +8,7 @@
 <div id="contentPane">
     <div id="infoLinks" style="margin-left:520px;">
         <g:link controller="plugin" action="list">All Plugins</g:link><br/>
-        <g:link controller="plugin" action="edit" id="${plugin?.id}"><img src="${createLinkTo(dir: 'images/', 'icon-edit.png')}" width="15" height="15" alt="Icon Edit" class="inlineIcon" border="0"/>Edit Plugin</g:link>
+        <g:link controller="plugin" action="edit" params="${[title:plugin.title]}"><img src="${createLinkTo(dir: 'images/', 'icon-edit.png')}" width="15" height="15" alt="Icon Edit" class="inlineIcon" border="0"/>Edit Plugin</g:link>
     </div>
 
     <h1>Plugin: ${plugin?.title}</h1>

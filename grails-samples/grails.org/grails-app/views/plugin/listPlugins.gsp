@@ -15,7 +15,7 @@
     </g:if>
     <ul>
         <g:each var="plugin" in="${plugins}">
-            <li><g:link action="show" id="${plugin.id}">${plugin.title}</g:link></li>
+            <li><g:link action="show" params="${[title:plugin.title]}">${plugin.title}</g:link></li>
         </g:each>
     </ul>
 </div>
