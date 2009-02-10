@@ -14,7 +14,7 @@ hibernate {
 environments {
 	development {
 		dataSource {
-			dbCreate = "update" // one of 'create', 'create-drop','update'
+//			dbCreate = "update" // one of 'create', 'create-drop','update'
 		}
 	}
 	test {
@@ -28,7 +28,7 @@ environments {
 	}
 	production {
 		dataSource {
-			dbCreate = "update"
+//			dbCreate = "update"
 		}
 	}
 }
