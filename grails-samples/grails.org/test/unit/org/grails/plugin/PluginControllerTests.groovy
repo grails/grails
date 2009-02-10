@@ -8,10 +8,10 @@ import grails.test.ControllerUnitTestCase
 class PluginControllerTests extends ControllerUnitTestCase {
 
     void testShowPlugin() {
-        Plugin p = new Plugin(id:1, title:'plugin',body:'stuff')
+        Plugin p = new Plugin(title:'plugin',body:'stuff')
 
         mockDomain(Plugin, [p])
-        mockParams.id = 1
+        mockParams.title = 'plugin'
 
         def controller = new PluginController()
         def model = controller.show()

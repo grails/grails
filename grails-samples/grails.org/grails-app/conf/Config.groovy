@@ -36,6 +36,9 @@ grails.app.context = "/"
 // enabled native2ascii conversion of i18n properties files
 grails.enable.native2ascii = true
 
+// location of plugins-list.xml
+pluginslist = "http://plugins.grails.org/.plugin-meta/plugins-list.xml"
+
 // set per-environment serverURL stem for creating absolute links
 environments {
     production {
