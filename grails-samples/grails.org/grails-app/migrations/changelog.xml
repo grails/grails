@@ -11,5 +11,6 @@
     <include file="r2.6/2009-02-05.xml"/>
     <include file="r2.6/2009-02-06.xml"/>
     <include file="r2.6/2009-02-09.xml"/>
+    <include file="r2.6/2009-02-10.xml"/>
 
 </databaseChangeLog>

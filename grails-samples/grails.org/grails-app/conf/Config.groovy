@@ -11,7 +11,8 @@
 // }
 
 wiki.supported.upload.types = ['image/png','image/jpg','image/gif']
-
+// location of plugins-list.xml
+plugins.pluginslist = "http://plugins.grails.org/.plugin-meta/plugins-list.xml"
 
 grails.mime.file.extensions = false // enables the parsing of file extensions from URLs into the request format
 grails.mime.types = [ html: ['text/html','application/xhtml+xml'],
@@ -35,9 +36,6 @@ grails.app.context = "/"
 
 // enabled native2ascii conversion of i18n properties files
 grails.enable.native2ascii = true
-
-// location of plugins-list.xml
-pluginslist = "http://plugins.grails.org/.plugin-meta/plugins-list.xml"
 
 // set per-environment serverURL stem for creating absolute links
 environments {

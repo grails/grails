@@ -6,13 +6,16 @@ import org.grails.content.Version
  * author: Matthew Taylor
  */
 class Plugin extends WikiPage {
-
+    String name
     String description
     String installation
     String faq
     String author
     String authorEmail
     String screenshots
+    String currentRelease
+    String documentationUrl
+    String downloadUrl
     String grailsVersion        // version it was developed against
     Boolean official = false    // specifies SpringSource support
     Number avgRating
@@ -22,7 +25,8 @@ class Plugin extends WikiPage {
     static transients = ['avgRating']
 
     static constraints = {
-        title(unique:true)
+        name(unique:false, maxLength:16)
+        title(nullable:false, blank:false)
         description(nullable: true)
         installation(nullable: true)
         faq(nullable: true)
@@ -41,6 +45,7 @@ class Plugin extends WikiPage {
         verObject.stats = stats
         verObject.tags = tags
         verObject.ratings = ratings
+        verObject.currentRelease = currentRelease
     }
 
     def getAvgRating() {
