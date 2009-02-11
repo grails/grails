@@ -6,10 +6,10 @@ class PluginService {
 
     boolean transactional = true
     
-    def grailsApplication
-
-    void afterPropertiesSet() {}
-
+    def runMasterUpdate() {
+        translateMasterPlugins(generateMasterPlugins())
+    }
+    
     def generateMasterPlugins() {
         def pluginLoc = ConfigurationHolder.config?.plugins?.pluginslist
         def listFile = new URL(pluginLoc)
@@ -19,6 +19,8 @@ class PluginService {
         def plugins = new XmlSlurper().parseText(listText)
         
         def pluginsList = []
+        
+        log.info "Found ${plugins.plugin.size()} master plugins."
         
         plugins.plugin.each { pxml ->
             if (!pxml.release.size()) return
@@ -47,17 +49,15 @@ class PluginService {
                 // save new master plugin
                 it.body = it.description
                 if (!it.save()) {
-                    log.error "Could not save master plugin: ${masterInfo(it)}"
+                    log.error "Could not save master plugin: $it.name ($it.title), version $it.currentRelease"
+                } else {
+                    log.info "New plugin was saved from master: $it.name"
                 }
             } else {
                 // update existing plugin
                 updatePlugin(plugin, it)
             }
         }
-    }
-    
-    def masterInfo(m) {
-        "$m.name ($m.title), version $m.currentRelease"
     }
 
     def updatePlugin(plugin, master) {
@@ -73,6 +73,8 @@ class PluginService {
         plugin.documentationUrl = master.documentationUrl
         plugin.downloadUrl = master.downloadUrl
         plugin.currentRelease = master.currentRelease
+        
+        log.info "Local plugin '$plugin.name' was updated with master version."
     }
     
     def updatePluginAttribute(propName, plugin, master) {

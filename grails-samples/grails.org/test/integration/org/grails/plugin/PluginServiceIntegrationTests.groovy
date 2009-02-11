@@ -7,6 +7,8 @@ class PluginServiceIntegrationTests extends GroovyTestCase {
         def plugins = service.generateMasterPlugins()
         
         assertNotNull plugins
+        println plugins.size()
+        println plugins
         assertTrue plugins.size() > 100
     }
     

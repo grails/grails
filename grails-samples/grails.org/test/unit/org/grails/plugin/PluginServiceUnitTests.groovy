@@ -6,6 +6,12 @@ class PluginServiceUnitTests extends grails.test.GrailsUnitTestCase {
     void setUp() {
         super.setUp()
         service = new PluginService()
+        service.metaClass.getLog = { ->
+            [
+                info: { String s -> println s},
+                error: { String s -> println s}
+            ]
+        }
     }
 
     void testGenerateMasterPlugins() {
@@ -103,14 +109,29 @@ class PluginServiceUnitTests extends grails.test.GrailsUnitTestCase {
             name: 'plugin-a', 
             title: 'Plugin A', 
             body: 'Keep me!',
-            author: 'Kevin Mekler',
-            authorEmail: 'someguy@someguy.net'
+            author: 'Richard D. James',
+            authorEmail: 'richard@aphextwin.com'
         )
         service.updatePlugin(plugin, master[0])
         assertEquals "Plugin A", plugin.title
         assertEquals "Keep me!", plugin.body
-        assertEquals 'Kevin Mekler', plugin.author
-        assertEquals 'someguy@someguy.net', plugin.authorEmail
+        assertEquals 'Richard D. James', plugin.author
+        assertEquals 'richard@aphextwin.com', plugin.authorEmail
+    }
+    
+    void testRunMasterUpdate() {
+        def translated = false
+        service.metaClass.generateMasterPlugins = { ->
+            println "mock generate"
+            'master plugins'
+        }
+        service.metaClass.translateMasterPlugins = { masters ->
+            println "mock translate"
+            translated = true
+            assertEquals 'master plugins', masters
+        }
+        service.runMasterUpdate()
+        assertTrue 'Master plugins were not translated', translated
     }
 
     private def generateMockMasterPluginList() {
