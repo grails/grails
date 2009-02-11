@@ -39,6 +39,9 @@ class PluginController extends BaseWikiController {
 
     def create = {
         def plugin = new Plugin(params)
+        if (!params.body && params.description) {
+            plugin.body = plugin.description
+        }
         if(request.method == 'POST') {
             plugin.author = request.user
             def saved = plugin.save()

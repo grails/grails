@@ -53,17 +53,7 @@ class Plugin extends WikiPage {
         ratings*.stars.sum() / ratings.size()
     }
 
-    // set the content body same as description
-    void setDescription(String desc) {
-        this.@description = desc
-        this.body = desc
-    }
-
     String toString() {
-        """$title
--------------------------
-$description
--------------------------
-AUTHOR: $author ($authorEmail)"""
+        "$name : $title"
     }
 }
