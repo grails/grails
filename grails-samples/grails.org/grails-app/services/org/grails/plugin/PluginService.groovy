@@ -7,7 +7,9 @@ class PluginService {
     boolean transactional = true
     
     def runMasterUpdate() {
-        translateMasterPlugins(generateMasterPlugins())
+        def masters = generateMasterPlugins()
+        
+        translateMasterPlugins(masters)
     }
     
     def generateMasterPlugins() {
@@ -18,13 +20,13 @@ class PluginService {
         listText = listText.replaceAll(/\<\?xml ([^\<\>]*)\>/, '')
         def plugins = new XmlSlurper().parseText(listText)
         
-        def pluginsList = []
-        
+        println "Found ${plugins.plugin.size()} master plugins."
         log.info "Found ${plugins.plugin.size()} master plugins."
         
-        plugins.plugin.each { pxml ->
-            if (!pxml.release.size()) return
+        plugins.plugin.inject([]) { pluginsList, pxml ->
+            if (!pxml.release.size()) return pluginsList
             def latestRelease = pxml.release[pxml.release.size()-1]
+            println "... processing ${pxml.@name}"
             pluginsList << new Plugin(
                 name: pxml.@name,
                 title: latestRelease.title,
@@ -36,11 +38,11 @@ class PluginService {
                 currentRelease: latestRelease.@version
             )
         }
-        pluginsList
     }
 
     def translateMasterPlugins(masters) {
         masters.each {
+            println "* translating ${it} (${it.class})"
             def plugin = Plugin.findByName(it.name)
             if (!plugin) {
                 plugin = Plugin.findByTitleLike(it.title)

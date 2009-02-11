@@ -60,7 +60,7 @@ log4j {
     appender.'file.layout'="org.apache.log4j.PatternLayout"
     appender.'file.layout.ConversionPattern'='[%r] %c{2} %m%n'
     appender.'file.File'="stacktrace.log"
-    rootLogger="error,stdout"
+    rootLogger="debug,stdout"
     logger {
         grails="error"
         StackTrace="error,file"

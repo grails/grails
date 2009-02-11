@@ -16,6 +16,7 @@ class MailerJob {
     def cacheService
     
     def execute() {
+        println "MAILING!!"
         Content content = contentToMessage?.popOffStack()
         if(content) {
 
