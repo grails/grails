@@ -61,8 +61,12 @@ private contentToPlugin(c) {
 
     p.title = c.title
     p.description = c.body
+    p.body = c.body
     p.author = author.login
     p.authorEmail = author.email
+    p.documentationUrl = 'not provided'
+    p.downloadUrl = 'not provided'
+    p.currentRelease = 'not provided'
 
     if (!p.validate()) {
         p.errors.allErrors.each { println it }

@@ -7,9 +7,7 @@ class PluginService {
     boolean transactional = true
     
     def runMasterUpdate() {
-        def masters = generateMasterPlugins()
-        
-        translateMasterPlugins(masters)
+        translateMasterPlugins(generateMasterPlugins())
     }
     
     def generateMasterPlugins() {
@@ -20,38 +18,45 @@ class PluginService {
         listText = listText.replaceAll(/\<\?xml ([^\<\>]*)\>/, '')
         def plugins = new XmlSlurper().parseText(listText)
         
-        println "Found ${plugins.plugin.size()} master plugins."
         log.info "Found ${plugins.plugin.size()} master plugins."
         
         plugins.plugin.inject([]) { pluginsList, pxml ->
             if (!pxml.release.size()) return pluginsList
             def latestRelease = pxml.release[pxml.release.size()-1]
-            println "... processing ${pxml.@name}"
-            pluginsList << new Plugin(
-                name: pxml.@name,
-                title: latestRelease.title,
-                description: latestRelease.description,
-                author: latestRelease.author,
-                authorEmail: latestRelease.authorEmail,
-                documentationUrl: latestRelease.documentation,
-                downloadUrl: latestRelease.file,
-                currentRelease: latestRelease.@version
-            )
+            def p = new Plugin()
+            p.with {
+                name = pxml.@name
+                title = latestRelease.title.toString() ?: pxml.@name
+                description = latestRelease.description
+                body = p.description ?: 'None provided'
+                author = latestRelease.author
+                authorEmail = latestRelease.authorEmail
+                documentationUrl = latestRelease.documentation
+                downloadUrl = latestRelease.file
+                currentRelease = latestRelease.@version
+            }
+
+            pluginsList << p
         }
     }
 
     def translateMasterPlugins(masters) {
         masters.each {
-            println "* translating ${it} (${it.class})"
             def plugin = Plugin.findByName(it.name)
+            // try by title
             if (!plugin) {
                 plugin = Plugin.findByTitleLike(it.title)
             }
+            // try by title matching name
+            if (!plugin) {
+                plugin = Plugin.findByNameIsNullAndTitleLike("%${it.name}%")
+            }
+
             if (!plugin) {
                 // save new master plugin
-                it.body = it.description
                 if (!it.save()) {
                     log.error "Could not save master plugin: $it.name ($it.title), version $it.currentRelease"
+                    it.errors.allErrors.each { log.error "\t$it" }
                 } else {
                     log.info "New plugin was saved from master: $it.name"
                 }
@@ -71,6 +76,7 @@ class PluginService {
         updatePluginAttribute('body', plugin, master)
         
         // these are always overridden by the master list
+        plugin.name = master.name
         plugin.description = master.description
         plugin.documentationUrl = master.documentationUrl
         plugin.downloadUrl = master.downloadUrl

@@ -25,14 +25,14 @@ class Plugin extends WikiPage {
     static transients = ['avgRating']
 
     static constraints = {
-        name(unique:false, maxLength:16)
-        title(nullable:false, blank:false)
+        name(nullable: true, unique:false)
+        // overriding the WikiPage matches constraint for title beause we won't use it for a URL
+        title(nullable:false, blank:false, matches:/.*/) 
         description(nullable: true)
         installation(nullable: true)
         faq(nullable: true)
         screenshots(nullable: true)
         author(nullable: true)
-        authorEmail(email:true, blank:false)
         grailsVersion(nullable:true, blank:false, maxLength:16)
     }
 

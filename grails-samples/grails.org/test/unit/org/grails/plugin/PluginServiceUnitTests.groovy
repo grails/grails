@@ -134,6 +134,8 @@ class PluginServiceUnitTests extends grails.test.GrailsUnitTestCase {
         assertTrue 'Master plugins were not translated', translated
     }
 
+    
+
     private def generateMockMasterPluginList() {
         ('a'..'z').inject([]) {masterList, x ->
             def up = x.toUpperCase()
@@ -141,6 +143,7 @@ class PluginServiceUnitTests extends grails.test.GrailsUnitTestCase {
                     name: "plugin-${x}",
                     title: "Plugin ${up} Plugin",
                     description: "hosted at www.${x}-plugin.org",
+                    body: "hosted at www.${x}-plugin.org",
                     author: "Peter ${up}. Jackson",
                     authorEmail: "peter_${x}@jackson.com",
                     documentationUrl: "http://www.grails.org/Plugin+${up}+Plugin",

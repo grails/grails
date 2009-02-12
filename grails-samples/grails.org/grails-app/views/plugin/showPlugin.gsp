@@ -11,7 +11,7 @@
         <g:link controller="plugin" action="edit" params="${[title:plugin.title]}"><img src="${createLinkTo(dir: 'images/', 'icon-edit.png')}" width="15" height="15" alt="Icon Edit" class="inlineIcon" border="0"/>Edit Plugin</g:link>
     </div>
 
-    <h1>Plugin: ${plugin?.title}</h1>
+    <h1>${plugin?.title}</h1>
     <div class="plugin">
         <wiki:text key="${plugin?.title}">
             ${plugin?.body}

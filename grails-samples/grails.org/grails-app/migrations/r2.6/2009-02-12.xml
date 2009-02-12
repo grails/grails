@@ -1,0 +1,15 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+
+
+    <!-- Updating the name constraint on context to allow more chars -->
+
+    <changeSet author="rhyolight" id="2009-02-12:1">
+        <renameColumn tableName="content"
+                      oldColumnName="name" newColumnName="name" columnDataType="VARCHAR(255)"/>
+    </changeSet>
+
+</databaseChangeLog>
