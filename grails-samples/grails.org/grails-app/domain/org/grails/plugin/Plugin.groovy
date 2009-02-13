@@ -36,17 +36,17 @@ class Plugin extends WikiPage {
         grailsVersion(nullable:true, blank:false, maxLength:16)
     }
 
-    Version createVersion() {
-        def verObject = super.createVersion()
-        verObject.description = description
-        verObject.installation = installation
-        verObject.faq = faq
-        verObject.screenshots = screenshots
-        verObject.stats = stats
-        verObject.tags = tags
-        verObject.ratings = ratings
-        verObject.currentRelease = currentRelease
-    }
+//    Version createVersion() {
+//        def verObject = super.createVersion()
+//        verObject.description = description
+//        verObject.installation = installation
+//        verObject.faq = faq
+//        verObject.screenshots = screenshots
+//        verObject.stats = stats
+//        verObject.tags = tags
+//        verObject.ratings = ratings
+//        verObject.currentRelease = currentRelease
+//    }
 
     def getAvgRating() {
         if (!ratings || !ratings.size()) return null // for no ratings, return null
