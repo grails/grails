@@ -37,15 +37,6 @@
 
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                    <label for="body">Body:</label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean:pluginInstance,field:'body','errors')}">
-                                    <input type="text" id="body" name="body" value="${fieldValue(bean:pluginInstance,field:'body')}"/>
-                                </td>
-                            </tr>
-
-                            <tr class="prop">
-                                <td valign="top" class="name">
                                     <label for="name">Name:</label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean:pluginInstance,field:'name','errors')}">
@@ -59,15 +50,6 @@
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean:pluginInstance,field:'description','errors')}">
                                     <input type="text" id="description" name="description" value="${fieldValue(bean:pluginInstance,field:'description')}"/>
-                                </td>
-                            </tr>
-
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="installation">Installation:</label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean:pluginInstance,field:'installation','errors')}">
-                                    <input type="text" id="installation" name="installation" value="${fieldValue(bean:pluginInstance,field:'installation')}"/>
                                 </td>
                             </tr>
 
@@ -118,35 +100,10 @@
 
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                    <label for="comments">Comments:</label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean:pluginInstance,field:'comments','errors')}">
-
-<ul>
-<g:each var="c" in="${pluginInstance?.comments?}">
-    <li><g:link controller="comment" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></li>
-</g:each>
-</ul>
-<g:link controller="comment" params="['plugin.id':pluginInstance?.id]" action="create">Add Comment</g:link>
-
-                                </td>
-                            </tr>
-
-                            <tr class="prop">
-                                <td valign="top" class="name">
                                     <label for="currentRelease">Current Release:</label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean:pluginInstance,field:'currentRelease','errors')}">
                                     <input type="text" id="currentRelease" name="currentRelease" value="${fieldValue(bean:pluginInstance,field:'currentRelease')}"/>
-                                </td>
-                            </tr>
-
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="dateCreated">Date Created:</label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean:pluginInstance,field:'dateCreated','errors')}">
-                                    <g:datePicker name="dateCreated" value="${pluginInstance?.dateCreated}" ></g:datePicker>
                                 </td>
                             </tr>
 
@@ -170,32 +127,10 @@
 
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                    <label for="lastUpdated">Last Updated:</label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean:pluginInstance,field:'lastUpdated','errors')}">
-                                    <g:datePicker name="lastUpdated" value="${pluginInstance?.lastUpdated}" ></g:datePicker>
-                                </td>
-                            </tr>
-
-                            <tr class="prop">
-                                <td valign="top" class="name">
                                     <label for="official">Official:</label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean:pluginInstance,field:'official','errors')}">
                                     <g:checkBox name="official" value="${pluginInstance?.official}" ></g:checkBox>
-                                </td>
-                            </tr>
-
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="ratings">Ratings:</label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean:pluginInstance,field:'ratings','errors')}">
-                                    <g:select name="ratings"
-from="${org.grails.plugin.Rating.list()}"
-size="5" multiple="yes" optionKey="id"
-value="${pluginInstance?.ratings}" />
-
                                 </td>
                             </tr>
 
@@ -208,31 +143,6 @@ value="${pluginInstance?.ratings}" />
 from="${org.grails.plugin.Tag.list()}"
 size="5" multiple="yes" optionKey="id"
 value="${pluginInstance?.tags}" />
-
-                                </td>
-                            </tr>
-
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="versions">Versions:</label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean:pluginInstance,field:'versions','errors')}">
-
-<ul>
-<g:each var="v" in="${pluginInstance?.versions?}">
-    <li><g:link controller="version" action="show" id="${v.id}">${v?.encodeAsHTML()}</g:link></li>
-</g:each>
-</ul>
-<g:link controller="version" params="['plugin.id':pluginInstance?.id]" action="create">Add Version</g:link>
-
-                                </td>
-                            </tr>
-
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="avgRating">Avg Rating:</label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean:pluginInstance,field:'avgRating','errors')}">
 
                                 </td>
                             </tr>

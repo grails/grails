@@ -23,9 +23,7 @@ target('default': "Translates all Context objects that represent Plugins into Pl
 target(translateContextToPlugin: "The implementation task") {
 
     def wikiClass = grailsApp.getDomainClass("org.grails.wiki.WikiPage").clazz
-
     def id = wikiClass.executeQuery("select max(w.id) from WikiPage w where w.title = 'Plugins'")[0]
-
     def pluginList = wikiClass.get(id)
 
     matcher = pluginList.body =~ /\* \[([^\[\]]*)\]/ // matches "* [Plugin name]"
@@ -42,7 +40,6 @@ target(translateContextToPlugin: "The implementation task") {
 
         if (!pluginContent) {
             println "X: ${title} has no docs on grails.org, see: ${match[1].split(/\|/)[1]}"
-
         } else {
             contentToPlugin pluginContent
         }
@@ -51,12 +48,31 @@ target(translateContextToPlugin: "The implementation task") {
 
 private contentToPlugin(c) {
     println "--> Translating $c.title to plugin..."
-    def p = grailsApp.getDomainClass("org.grails.plugin.Plugin").clazz.newInstance()
+    def pluginClass = grailsApp.getDomainClass("org.grails.plugin.Plugin").clazz
+    def p = pluginClass.newInstance()
     def authors = c.versions*.author
     def author = (authors as Set).inject(null) {mostEdited, it ->
         if (!mostEdited) return it
         if (mostEdited < authors.count(it)) return it
         mostEdited
+    }
+
+    // there will not be a name, so we'll try to guess one
+    matcher = c.body =~ /(?<=\binstall-plugin\s)(\w+)(-)?(\w+)[ |\n|\}|\']/
+    def name = matcher ? matcher[0][0].toString() : null
+    if (name) {
+        // strip off the last char, as the regex will leave it
+        p.name = name[0..-2]
+        println "Found name '$p.name'..."
+    } else {
+        println "!! Cannot procure a plugin name for \"${c.title}\""
+    }
+
+    // check to see if there is already something in the database to remove first
+    def existing = pluginClass.executeQuery("from Plugin p where p.title = '${c.title}'")
+    existing.each { it
+        println "Removing existing plugins before saving '$p.name'"
+        it.delete()
     }
 
     p.title = c.title

@@ -6,7 +6,7 @@
 <body>
 <div id="contentPane">
     <div id="infoLinks" style="margin-left:520px;">
-        <g:link class="create" controller="plugin" action="create">Create Plugin</g:link>
+        <g:link controller="plugin" action="createPlugin">Create Plugin Page</g:link>
     </div>
 
     <h1>Plugin List</h1>
@@ -15,7 +15,14 @@
     </g:if>
     <ul>
         <g:each var="plugin" in="${plugins}">
-            <li><g:link action="show" params="${[title:plugin.title]}">${plugin.title}</g:link></li>
+            <li>
+                <g:if test="${!plugin.name}">
+                    ${plugin.title} (there is no name associated with this plugin)
+                </g:if>
+                <g:else>
+                    <g:link action="show" params="${[name:plugin.name]}">${plugin.title}</g:link>
+                </g:else>
+            </li>
         </g:each>
     </ul>
 </div>

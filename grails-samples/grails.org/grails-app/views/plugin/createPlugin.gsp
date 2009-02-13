@@ -17,7 +17,7 @@
                 <g:renderErrors bean="${pluginInstance}" as="list" />
             </div>
             </g:hasErrors>
-            <g:form action="save" method="post" >
+            <g:form name="createPlugin" url="[controller:'plugin', action:'createPlugin']">
                 <div class="dialog">
                     <table>
                         <tbody>
@@ -143,9 +143,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="buttons">
-                    <span class="button"><input class="save" type="submit" value="Create" /></span>
-                </div>
+                <g:submitButton name="save" value="Save" />
             </g:form>
         </div>
     </body>

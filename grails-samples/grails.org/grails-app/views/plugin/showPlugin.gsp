@@ -8,22 +8,26 @@
 <div id="contentPane">
     <div id="infoLinks" style="margin-left:520px;">
         <g:link controller="plugin" action="list">All Plugins</g:link><br/>
-        <g:link controller="plugin" action="edit" params="${[title:plugin.title]}"><img src="${createLinkTo(dir: 'images/', 'icon-edit.png')}" width="15" height="15" alt="Icon Edit" class="inlineIcon" border="0"/>Edit Plugin</g:link>
+        <g:link controller="plugin" action="editPlugin" params="${[name:plugin.name]}"><img src="${createLinkTo(dir: 'images/', 'icon-edit.png')}" width="15" height="15" alt="Icon Edit" class="inlineIcon" border="0"/>Edit Plugin</g:link>
     </div>
 
     <h1>${plugin?.title}</h1>
     <div class="plugin">
 
-        <wiki:text key="${plugin?.name}">
+        <h2>Description</h2>
+        <wiki:text>
             ${plugin?.description}
         </wiki:text>
-        <wiki:text key="${plugin?.name}">
+        <h2>FAQ</h2>
+        <wiki:text>
             ${plugin?.faq}
         </wiki:text>
-        <wiki:text key="${plugin?.name}">
+        <h2>Screenshots</h2>
+        <wiki:text>
             ${plugin?.screenshots}
         </wiki:text>
-        <wiki:text key="${plugin?.name}">
+        <h2>Installation</h2>
+        <wiki:text>
             ${plugin?.installation}
         </wiki:text>
 

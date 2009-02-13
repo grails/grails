@@ -13,10 +13,10 @@ class UrlMappings {
         
         "/Plugins"(controller: "plugin", action: "index")
         "/plugins"(controller: "plugin", action: "index")
-        "/plugin/$title"(controller: "plugin", action:"show")
+        "/plugin/$name"(controller: "plugin", action:"show")
         "/plugin/list"(controller: "plugin", action:"list")
-        "/plugin/create"(controller: "plugin", action:"create")
-        "/plugin/edit/$title"(controller: "plugin", action:"edit")
+        "/plugin/create"(controller: "plugin", action:"createPlugin")
+        "/plugin/edit/$name"(controller: "plugin", action:"editPlugin")
 
         "/search"(controller: "content", action: "search")
         "/upload/$id?"(controller: "content", action: "uploadImage")

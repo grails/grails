@@ -70,13 +70,13 @@ class PluginService {
     def updatePlugin(plugin, master) {
         // these attributes are overriden by local plugin domain changes
         updatePluginAttribute('title', plugin, master)
+        updatePluginAttribute('description', plugin, master)
         updatePluginAttribute('author', plugin, master)
         updatePluginAttribute('authorEmail', plugin, master)
         updatePluginAttribute('body', plugin, master)
         
         // these are always overridden by the master list
         plugin.name = master.name
-        plugin.description = master.description
         plugin.documentationUrl = master.documentationUrl
         plugin.downloadUrl = master.downloadUrl
         plugin.currentRelease = master.currentRelease

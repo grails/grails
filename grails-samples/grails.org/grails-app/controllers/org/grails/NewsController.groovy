@@ -77,7 +77,6 @@ class NewsController extends BaseWikiController{
     }
 
     def createNews = {
-        println params
         def newsItem = new NewsItem(params)
         if(request.method == 'POST') {
             newsItem.author = request.user

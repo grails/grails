@@ -85,34 +85,34 @@ class PluginServiceUnitTests extends grails.test.GrailsUnitTestCase {
         assertEquals "5.0.2", plugin.currentRelease
     }
     
-    void testUpdatePluginOverridesExisting_Desc_DocUrl_DlUrl_Release() {
+    void testUpdatePluginOverridesExisting_DocUrl_DlUrl_Release() {
         mockDomain(Plugin)
         def master = generateMockMasterPluginList()
         def plugin = new Plugin(
             name: 'plugin-a', 
-            description: 'old description', 
             documentationUrl: 'old doc url',
             downloadUrl: 'old dl url',
             currentRelease: 'old release'
         )
         service.updatePlugin(plugin, master[0])
-        assertEquals "hosted at www.a-plugin.org", plugin.description
         assertEquals "http://www.grails.org/Plugin+A+Plugin", plugin.documentationUrl
         assertEquals "http://plugins.grails.org/plugin-a-5.0.2.zip", plugin.downloadUrl
         assertEquals "5.0.2", plugin.currentRelease
     }
     
-    void testUpdatePluginDoesNotOverrideExisting_Title_Body_Author_AuthorEmail() {
+    void testUpdatePluginDoesNotOverrideExisting_Title_Desc_Body_Author_AuthorEmail() {
         mockDomain(Plugin)
         def master = generateMockMasterPluginList()
         def plugin = new Plugin(
             name: 'plugin-a', 
-            title: 'Plugin A', 
+            title: 'Plugin A',
+            description: 'old description',
             author: 'Richard D. James',
             authorEmail: 'richard@aphextwin.com'
         )
         service.updatePlugin(plugin, master[0])
         assertEquals "Plugin A", plugin.title
+        assertEquals "old description", plugin.description
         assertEquals "see desc", plugin.body
         assertEquals 'Richard D. James', plugin.author
         assertEquals 'richard@aphextwin.com', plugin.authorEmail
