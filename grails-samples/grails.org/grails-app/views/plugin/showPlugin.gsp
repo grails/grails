@@ -13,9 +13,20 @@
 
     <h1>${plugin?.title}</h1>
     <div class="plugin">
-        <wiki:text key="${plugin?.title}">
-            ${plugin?.body}
+
+        <wiki:text key="${plugin?.name}">
+            ${plugin?.description}
         </wiki:text>
+        <wiki:text key="${plugin?.name}">
+            ${plugin?.faq}
+        </wiki:text>
+        <wiki:text key="${plugin?.name}">
+            ${plugin?.screenshots}
+        </wiki:text>
+        <wiki:text key="${plugin?.name}">
+            ${plugin?.installation}
+        </wiki:text>
+
         <g:each var="comment" in="${plugin?.comments}">
             <div class="comment">
                 <wiki:text>

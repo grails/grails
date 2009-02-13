@@ -77,11 +77,11 @@ class PluginServiceUnitTests extends grails.test.GrailsUnitTestCase {
         assertEquals 'plugin-a', plugin.name
         assertEquals 'Plugin A Plugin', plugin.title
         assertEquals "hosted at www.a-plugin.org", plugin.description
-        assertEquals "hosted at www.a-plugin.org", plugin.body
+        assertEquals "see desc", plugin.body
         assertEquals "Peter A. Jackson", plugin.author
         assertEquals "peter_a@jackson.com", plugin.authorEmail
         assertEquals "http://www.grails.org/Plugin+A+Plugin", plugin.documentationUrl
-        assertEquals "http://www.a-plugin.org/plugin-a-5.0.2.zip", plugin.downloadUrl
+        assertEquals "http://plugins.grails.org/plugin-a-5.0.2.zip", plugin.downloadUrl
         assertEquals "5.0.2", plugin.currentRelease
     }
     
@@ -98,7 +98,7 @@ class PluginServiceUnitTests extends grails.test.GrailsUnitTestCase {
         service.updatePlugin(plugin, master[0])
         assertEquals "hosted at www.a-plugin.org", plugin.description
         assertEquals "http://www.grails.org/Plugin+A+Plugin", plugin.documentationUrl
-        assertEquals "http://www.a-plugin.org/plugin-a-5.0.2.zip", plugin.downloadUrl
+        assertEquals "http://plugins.grails.org/plugin-a-5.0.2.zip", plugin.downloadUrl
         assertEquals "5.0.2", plugin.currentRelease
     }
     
@@ -108,13 +108,12 @@ class PluginServiceUnitTests extends grails.test.GrailsUnitTestCase {
         def plugin = new Plugin(
             name: 'plugin-a', 
             title: 'Plugin A', 
-            body: 'Keep me!',
             author: 'Richard D. James',
             authorEmail: 'richard@aphextwin.com'
         )
         service.updatePlugin(plugin, master[0])
         assertEquals "Plugin A", plugin.title
-        assertEquals "Keep me!", plugin.body
+        assertEquals "see desc", plugin.body
         assertEquals 'Richard D. James', plugin.author
         assertEquals 'richard@aphextwin.com', plugin.authorEmail
     }
@@ -143,11 +142,11 @@ class PluginServiceUnitTests extends grails.test.GrailsUnitTestCase {
                     name: "plugin-${x}",
                     title: "Plugin ${up} Plugin",
                     description: "hosted at www.${x}-plugin.org",
-                    body: "hosted at www.${x}-plugin.org",
+                    body: "see desc",
                     author: "Peter ${up}. Jackson",
                     authorEmail: "peter_${x}@jackson.com",
                     documentationUrl: "http://www.grails.org/Plugin+${up}+Plugin",
-                    downloadUrl: "http://www.${x}-plugin.org/plugin-${x}-5.0.2.zip",
+                    downloadUrl: "http://plugins.grails.org/plugin-${x}-5.0.2.zip",
                     currentRelease: "5.0.2"
             )
         }

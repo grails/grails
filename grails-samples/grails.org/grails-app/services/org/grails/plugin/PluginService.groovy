@@ -28,7 +28,7 @@ class PluginService {
                 name = pxml.@name
                 title = latestRelease.title.toString() ?: pxml.@name
                 description = latestRelease.description
-                body = p.description ?: 'None provided'
+                body = 'see desc'
                 author = latestRelease.author
                 authorEmail = latestRelease.authorEmail
                 documentationUrl = latestRelease.documentation
@@ -72,7 +72,6 @@ class PluginService {
         updatePluginAttribute('title', plugin, master)
         updatePluginAttribute('author', plugin, master)
         updatePluginAttribute('authorEmail', plugin, master)
-        master.body = master.description // body is a duplicate of description if there is no body in the plugin yet
         updatePluginAttribute('body', plugin, master)
         
         // these are always overridden by the master list

@@ -48,7 +48,8 @@ With this done you can now run-app
 
 grails run-app
 
-And you have a successfully configured Grails wiki
+And you have a successfully configured Grails wiki.  After one minute, a job will run that will attempt to update local
+plugin data with master data located on the grails.org server.
 
 
 Continuing after an update

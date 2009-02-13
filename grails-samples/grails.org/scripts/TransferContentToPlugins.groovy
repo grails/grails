@@ -61,7 +61,7 @@ private contentToPlugin(c) {
 
     p.title = c.title
     p.description = c.body
-    p.body = c.body
+    p.body = 'see desc'
     p.author = author.login
     p.authorEmail = author.email
     p.documentationUrl = 'not provided'
