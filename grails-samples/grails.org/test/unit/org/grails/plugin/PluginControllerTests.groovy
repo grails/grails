@@ -1,6 +1,7 @@
 package org.grails.plugin
 
 import grails.test.ControllerUnitTestCase
+import org.grails.wiki.WikiPage
 
 /*
  * author: Matthew Taylor
@@ -8,10 +9,10 @@ import grails.test.ControllerUnitTestCase
 class PluginControllerTests extends ControllerUnitTestCase {
 
     void testShowPlugin() {
-        Plugin p = new Plugin(title:'plugin',body:'stuff')
+        Plugin p = new Plugin(name:'plugin', title:'My Plugin')
 
         mockDomain(Plugin, [p])
-        mockParams.title = 'plugin'
+        mockParams.name = 'plugin'
 
         def controller = new PluginController()
         def model = controller.show()
@@ -23,16 +24,15 @@ class PluginControllerTests extends ControllerUnitTestCase {
 
     void testCreatePluginGET() {
         mockRequest.method = 'GET'
-        mockParams.title='my plugin'
-        mockParams.description='stuff here'
+        mockParams.title='My Plugin'
+        mockParams.description = 'stuff here'
 
         def controller = new PluginController()
-        def model = controller.create()
+        def model = controller.createPlugin()
 
         assert model.plugin
-        assertEquals 'my plugin', model.plugin.title
-        assertEquals 'stuff here', model.plugin.description
-        assertEquals 'stuff here', model.plugin.body
+        assertEquals 'My Plugin', model.plugin.title
+        assertEquals 'stuff here', model.plugin.description.body
     }
 
     void testCreatePluginValidationError() {
@@ -43,7 +43,7 @@ class PluginControllerTests extends ControllerUnitTestCase {
         Plugin.metaClass.save = { -> null }
 
         def controller = new PluginController()
-        def model = controller.create()
+        def model = controller.createPlugin()
 
         assert model.plugin
         assertEquals 'my plugin', model.plugin.title
@@ -60,7 +60,7 @@ class PluginControllerTests extends ControllerUnitTestCase {
         Plugin.metaClass.save = { -> delegate }
 
         def controller = new PluginController()
-        controller.create()
+        controller.createPlugin()
 
         assertEquals "/", redirectParams.uri
     }

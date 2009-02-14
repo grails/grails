@@ -16,8 +16,8 @@
     <ul>
         <g:each var="plugin" in="${plugins}">
             <li>
-                <g:if test="${!plugin.name}">
-                    ${plugin.title} (there is no name associated with this plugin)
+                <g:if test="${plugin.name.startsWith('fix-this-')}">
+                    <g:link action="show" params="${[name:plugin.name]}">${plugin.title}</g:link> (RENAME ME!)
                 </g:if>
                 <g:else>
                     <g:link action="show" params="${[name:plugin.name]}">${plugin.title}</g:link>

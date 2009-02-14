@@ -3,6 +3,7 @@
 package org.grails.plugin
 
 import org.grails.wiki.BaseWikiController
+import org.grails.wiki.WikiPage
 
 class PluginController extends BaseWikiController {
 
@@ -15,7 +16,8 @@ class PluginController extends BaseWikiController {
     }
 
     def show = {
-        render view:'showPlugin', model:[plugin:byName(params)]
+        def plugin = byName(params)
+        render view:'showPlugin', model:[plugin:plugin, comments: plugin.comments]
     }
 
     def editPlugin = {
@@ -38,10 +40,19 @@ class PluginController extends BaseWikiController {
     }
 
     def createPlugin = {
-        def plugin = new Plugin(params)
-        if (!params.body && params.description) {
-            plugin.body = plugin.description
+        def wikiList = Plugin.WIKIS.inject([:]) { wikiMap, wiki ->
+            if (params."$wiki") {
+                wikiMap."$wiki" = params.remove(wiki)
+            }
+            wikiMap
         }
+        // create a new plugin with everything except the wiki data
+        def plugin = new Plugin(params)
+        // go through and create wikis seperately
+        Plugin.WIKIS.each { wiki ->
+            pluginWiki wiki, plugin, wikiList
+        }
+
         if(request.method == 'POST') {
             plugin.author = request.user
             def saved = plugin.save()
@@ -57,6 +68,10 @@ class PluginController extends BaseWikiController {
                 return render(view:'createPlugin', model:[plugin:plugin])
             }
         }
+    }
+
+    private def pluginWiki(name, plugin, params) {
+        plugin."$name" = new WikiPage(title:name, body:params."$name")
     }
 
     private def byTitle(params) {

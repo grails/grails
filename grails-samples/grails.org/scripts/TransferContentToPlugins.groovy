@@ -49,6 +49,7 @@ target(translateContextToPlugin: "The implementation task") {
 private contentToPlugin(c) {
     println "--> Translating $c.title to plugin..."
     def pluginClass = grailsApp.getDomainClass("org.grails.plugin.Plugin").clazz
+    def wikiClass = grailsApp.getDomainClass("org.grails.wiki.WikiPage").clazz
     def p = pluginClass.newInstance()
     def authors = c.versions*.author
     def author = (authors as Set).inject(null) {mostEdited, it ->
@@ -60,40 +61,56 @@ private contentToPlugin(c) {
     // there will not be a name, so we'll try to guess one
     matcher = c.body =~ /(?<=\binstall-plugin\s)(\w+)(-)?(\w+)[ |\n|\}|\']/
     def name = matcher ? matcher[0][0].toString() : null
-    if (name) {
+    if (name && !pluginClass.executeQuery("from Plugin p where p.name = '${name[0..-2]}'")) {
         // strip off the last char, as the regex will leave it
         p.name = name[0..-2]
         println "Found name '$p.name'..."
     } else {
-        println "!! Cannot procure a plugin name for \"${c.title}\""
+        def newName = 'fix-this-' + c.title.toLowerCase().replaceAll(/\s+/, '-')
+        println "!! Cannot procure a plugin name for \"${c.title}\" !!"
+        println "\t\"${c.title}\" will be called ${newName} for now."
+        p.name = newName
     }
 
     // check to see if there is already something in the database to remove first
     def existing = pluginClass.executeQuery("from Plugin p where p.title = '${c.title}'")
     existing.each { it
         println "Removing existing plugins before saving '$p.name'"
-        it.delete()
+        it.comments.each { cmt -> cmt.delete() }
+        it.description?.delete()
+        it.delete(flush:true)
     }
 
     p.title = c.title
-    p.description = c.body
-    p.body = 'see desc'
+    def descWiki = wikiClass.newInstance()
+    descWiki.title = 'description'
+    descWiki.body = c.body
+    p.description = descWiki
     p.author = author.login
     p.authorEmail = author.email
     p.documentationUrl = 'not provided'
     p.downloadUrl = 'not provided'
     p.currentRelease = 'not provided'
 
-    if (!p.validate()) {
-        p.errors.allErrors.each { println it }
-    }
-    assert p.save()
-
     def comment = grailsApp.getDomainClass("org.grails.comment.Comment").clazz.newInstance()
     comment.user = grailsApp.getDomainClass("org.grails.auth.User").clazz.findByLogin('admin')
-    comment.body = "This Plugin page was automatically generated.  To see the old Wiki version, go to [${p.title}].  This will only be available for a limited time in order for plugin authors to make adjustments during this transition."
-    comment.parent = p
+    comment.body = """This Plugin page was automatically generated.  To see the old Wiki version, go to [${p.title}]. /
+This will only be available for a limited time in order for plugin authors to make adjustments during this /
+transition."""
+    if (!comment.validate()) {
+        println "!! ERROR adding Comment to ${p}!!"
+        comment.errors.allErrors.each { println it }
+    }
     assert comment.save()
     p.comments = [comment]
-    assert p.save()
+    if (!p.validate()) {
+        println "!! ERROR saving plugins ${p}!!"
+        p.errors.allErrors.each { println it }
+    }
+    if (!p.description.validate()) {
+        println "!! ERROR saving pluging description wiki for ${p}!!"
+        p.description.errors.allErrors.each { println it }
+    }
+    assert p.description.save()
+    assert p.save(flush:true)
 }

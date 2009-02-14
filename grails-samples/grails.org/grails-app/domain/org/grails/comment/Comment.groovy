@@ -6,7 +6,6 @@ import org.grails.auth.User
 class Comment {
 	User user
 	String body
-    Content parent
 	
 	static constraints = {
 		body(blank:false)

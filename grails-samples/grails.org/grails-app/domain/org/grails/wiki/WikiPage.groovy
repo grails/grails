@@ -5,11 +5,10 @@ import org.grails.content.Version
 
 class WikiPage extends Content {
 
-	Version createVersion() {       
-        def verObject = new Version(number:version, current:this)
-        verObject.title = title
-        verObject.body = body
-        return verObject
+    def wikiPageService
+
+	Version createVersion() {
+        getWikiPageService().createVersion(this)
     }
 	
 	static hasMany = [versions:Version]
@@ -24,5 +23,9 @@ class WikiPage extends Content {
 		title(blank:false, matches:/[^\/\\]+/)
 		body(blank:false)
 	}
+
+    String toString() {
+        body
+    }
 
 }

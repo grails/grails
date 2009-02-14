@@ -256,6 +256,8 @@ class ContentControllerTests extends GroovyTestCase {
       WikiPage.metaClass.save = {-> delegate }
       WikiPage.metaClass.hasErrors = {-> false }
       WikiPage.metaClass.getVersion = {-> 2 }
+      WikiPage.metaClass.getWikiPageService = {-> new WikiPageService() }
+      assertNotNull new WikiPage().wikiPageService
       Version.metaClass.save = {-> delegate }
 
       def redirectParams = [:]

@@ -47,7 +47,7 @@ target(importConfluenceXML: "The implementation task") {
 					} else {
                         def v = wikiPage.createVersion()
                         v.author = adminUser
-                        v.save(flush:true)
+                        assert v.save(flush:true)
                     }
 
             }

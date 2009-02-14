@@ -28,11 +28,7 @@ password = ""
 Getting Started
 ---------------
 
-First you need to run the Liquibase migrations to construct the database schema:
-
-grails migrate
-
-Then you should run the application and configure an initial admin account:
+First you should run the application and configure an initial admin account:
 
 grails -Dinitial.admin.password=changeit run-app
 
@@ -42,7 +38,7 @@ grails import-confluence-xml ./data/confluence/entities.xml
 
 If you want to translate the Plugin Wiki pages into the new Plugin model, run this script
 
-grails translate-content-to-plugins
+grails transfer-content-to-plugins
 
 With this done you can now run-app
 
