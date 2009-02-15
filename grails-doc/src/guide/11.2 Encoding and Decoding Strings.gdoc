@@ -6,7 +6,7 @@ A Grails codec class is a class that may contain an encode closure, a decode clo
 
 The framework will look under @grails-app/utils/@ for class names that end with the convention @Codec@.  For example one of the standard codecs that ship with Grails is @HTMLCodec@.
 
-If a codec contains an @encode@ property assigned a block of code Grails will create a dynamic @encode@ method and add that method to the String class with a name representing the codec that defined the encode closure.  For example, the @HTMLCodec@ class defines an @encode@ block so Grails will attach that closure to the @String@ class with the name @encodeAsHTML@.
+If a codec contains an @encode@ property assigned a block of code Grails will create a dynamic @encode@ method and add that method to the Object class with a name representing the codec that defined the encode closure.  For example, the @HTMLCodec@ class defines an @encode@ block so Grails will attach that closure to the @Object@ class with the name @encodeAsHTML@.
 
 The @HTMLCodec@ and @URLCodec@ classes also define a @decode@ block so Grails will attach those with the names @decodeHTML@ and @decodeURL@. Dynamic codec methods may be invoked from anywhere in a Grails application. For example, consider a case where a report contains a property called 'description' and that description may contain special characters that need to be escaped to be presented in an HTML document.  One way to deal with that in a GSP is to encode the description property using the dynamic encode method as shown below:
 
