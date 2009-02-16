@@ -14,6 +14,7 @@
       <sourceFolder url="file://$MODULE_DIR$/../grails-app/services" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../grails-app/taglib" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../grails-app/utils" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../plugins/grails-ui-1.0.2/grails-app/taglib" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../plugins/jsecurity-0.1.1/src/groovy" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../plugins/jsecurity-0.1.1/src/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../plugins/searchable-0.4-SNAPSHOT/src/groovy" isTestSource="false" />

@@ -1,13 +1,11 @@
 package org.grails.plugin
 
 import org.grails.wiki.WikiPage
-import org.grails.wiki.WikiPageService
 import org.grails.content.Version
 import org.grails.auth.User
 
 class PluginServiceUnitTests extends grails.test.GrailsUnitTestCase {
     def service
-    def wikiPageService = new WikiPageService()
 
     void setUp() {
         super.setUp()
@@ -160,7 +158,7 @@ class PluginServiceUnitTests extends grails.test.GrailsUnitTestCase {
         ('a'..'z').inject([]) {masterList, x ->
             def up = x.toUpperCase()
             WikiPage descPage = new WikiPage(title: 'Description', body: "hosted at www.${x}-plugin.org")
-            descPage.wikiPageService = wikiPageService
+            descPage.version = 2
             masterList << new Plugin(
                     name: "plugin-${x}",
                     title: "Plugin ${up} Plugin",
