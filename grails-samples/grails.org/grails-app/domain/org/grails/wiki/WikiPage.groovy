@@ -8,7 +8,7 @@ class WikiPage extends Content {
     def wikiPageService
 
 	Version createVersion() {
-        getWikiPageService().createVersion(this)
+        wikiPageService.createVersion(this)
     }
 	
 	static hasMany = [versions:Version]

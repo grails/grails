@@ -29,7 +29,6 @@ class Plugin {
     static transients = ['avgRating']
 
     static constraints = {
-        name(nullable: false, unique:true)
         description(nullable: true)
         installation(nullable: true)
         faq(nullable: true)

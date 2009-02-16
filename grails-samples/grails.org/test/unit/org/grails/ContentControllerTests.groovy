@@ -1,4 +1,4 @@
-package org.grails.wiki
+package org.grails
 
 import org.grails.news.NewsItem
 import org.grails.ContentController
@@ -9,6 +9,7 @@ import net.sf.ehcache.CacheManager
 import org.grails.content.Version
 import org.grails.content.Content
 import org.codehaus.groovy.grails.plugins.codecs.URLCodec
+import org.grails.wiki.*
 
 /**
 * @author Graeme Rocher
@@ -16,7 +17,7 @@ import org.codehaus.groovy.grails.plugins.codecs.URLCodec
 *
 * Created: Feb 28, 2008
 */
-class ContentControllerTests extends GroovyTestCase {
+class ContentControllerTests extends grails.test.ControllerUnitTestCase {
 
     protected void setUp() {
         super.setUp();
@@ -224,8 +225,6 @@ class ContentControllerTests extends GroovyTestCase {
     }
 
   void testSaveWikiPageWhenPageNotFoundFailure() {
-
-
       ContentController.metaClass.getRequest ={-> [method:"POST"] }
       ContentController.metaClass.getParams ={-> [id:"Introduction",title:"Introduction", body:"hello"] }
       WikiPage.metaClass.static.findByTitle = { String title -> null }
@@ -247,18 +246,20 @@ class ContentControllerTests extends GroovyTestCase {
     }
 
   void testSaveWikiPageWhenPageNotFoundSuccess() {
+      def wikiControl = mockFor(WikiPage)
+      wikiControl.demand.static.findByTitle { String t -> null }
+      wikiControl.demand.save { -> delegate }
+      wikiControl.demand.hasErrors { -> false }
+      wikiControl.demand.createVersion { ->
+          new Version()
+      }
+      def versControl = mockFor(Version)
+      versControl.demand.save { -> delegate }
 
-
-      ContentController.metaClass.getRequest ={-> [method:"POST"] }
-      ContentController.metaClass.getParams ={-> [id:"Introduction",title:"Introduction", body:"hello"] }
-      WikiPage.metaClass.static.findByTitle = { String title -> null }
-      WikiPage.metaClass.setId = { }
-      WikiPage.metaClass.save = {-> delegate }
-      WikiPage.metaClass.hasErrors = {-> false }
-      WikiPage.metaClass.getVersion = {-> 2 }
-      WikiPage.metaClass.getWikiPageService = {-> new WikiPageService() }
-      assertNotNull new WikiPage().wikiPageService
-      Version.metaClass.save = {-> delegate }
+      mockParams.id = 'Introduction'
+      mockParams.title = 'Introduction'
+      mockParams.body = 'hello'
+      mockRequest.method = 'POST'
 
       def redirectParams = [:]
       ContentController.metaClass.redirect = { Map args -> redirectParams = args }

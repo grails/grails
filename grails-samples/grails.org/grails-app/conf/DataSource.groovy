@@ -3,7 +3,7 @@ dataSource {
 	driverClassName = "com.mysql.jdbc.Driver"			
 	url = "jdbc:mysql://localhost/grails"
 	username = "root"
-	password = ""
+	password = "monlung13"
 }
 hibernate {
     cache.use_second_level_cache=true

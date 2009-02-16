@@ -160,7 +160,7 @@ class PluginServiceUnitTests extends grails.test.GrailsUnitTestCase {
         ('a'..'z').inject([]) {masterList, x ->
             def up = x.toUpperCase()
             WikiPage descPage = new WikiPage(title: 'Description', body: "hosted at www.${x}-plugin.org")
-            descPage.metaClass.getWikiPageService = {-> wikiPageService }
+            descPage.wikiPageService = wikiPageService
             masterList << new Plugin(
                     name: "plugin-${x}",
                     title: "Plugin ${up} Plugin",

@@ -60,7 +60,7 @@ class PluginService {
 
             if (!plugin) {
                 // before saving the master, we need to save the description wiki page
-                if (!master.description.save()) {
+                if (!master.description.save() && master.description.hasErrors()) {
                     master.description.errors.allErrors.each { println it }
                 }
                 // save new master plugin
