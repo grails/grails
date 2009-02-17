@@ -4,6 +4,7 @@
 <wiki:text key="${content?.title}">
     ${content?.body}
 </wiki:text>
+
 <g:javascript>
    if($('message')!=null) {
         Effect.Fade('message', {delay:3})

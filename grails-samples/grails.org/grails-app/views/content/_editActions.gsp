@@ -21,5 +21,5 @@
     <g:remoteLink class="actionIcon" action="infoWikiPage" id="${content?.title}" update="contentPane">
         <img border="0" src="${createLinkTo(dir:'images/','icon-info.png')}" width="15" height="15" alt="Icon Edit" class="inlineIcon" border="0" />
     </g:remoteLink>
-    <g:remoteLink action="infoWikiPage" id="${content?.title}" update="contentPane">View Info</g:remoteLink>
+    <g:remoteLink action="infoWikiPage" id="${content?.title}" update="contentPane">    View Info</g:remoteLink>
 </div>

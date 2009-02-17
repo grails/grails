@@ -5,6 +5,7 @@ import org.grails.comment.Comment
 class Content implements Serializable {
 	String title
 	String body
+    Boolean locked = false
 	Date dateCreated
 	Date lastUpdated
 

@@ -1,6 +1,7 @@
 import org.springframework.orm.hibernate3.SessionHolder
 import org.springframework.orm.hibernate3.SessionFactoryUtils
 import org.springframework.transaction.support.TransactionSynchronizationManager
+import org.codehaus.groovy.grails.commons.ConfigurationHolder
 
 grailsHome = Ant.project.properties."environment.GRAILS_HOME"
 
@@ -22,10 +23,12 @@ target('default': "Translates all Context objects that represent Plugins into Pl
 
 target(translateContextToPlugin: "The implementation task") {
 
+    // getting the plugin listing wiki page to parse
     def wikiClass = grailsApp.getDomainClass("org.grails.wiki.WikiPage").clazz
     def id = wikiClass.executeQuery("select max(w.id) from WikiPage w where w.title = 'Plugins'")[0]
     def pluginList = wikiClass.get(id)
 
+    // for each * [Plugin Name] in the markup, we'll try to grab and parse
     matcher = pluginList.body =~ /\* \[([^\[\]]*)\]/ // matches "* [Plugin name]"
 
     println "Found ${matcher.size()} plugins within wiki pages... processing..."
@@ -34,7 +37,9 @@ target(translateContextToPlugin: "The implementation task") {
         def pluginContent = wikiClass.findByTitle(title)
 
         if (!pluginContent) {
+            println " ! There was no Wiki Page with title '${title}'"
             def url = match[1].split(/\|/)[1]
+            println " ->Trying by url: ${url}"
             pluginContent = wikiClass.findByTitle(url)
         }
 
@@ -64,7 +69,7 @@ private contentToPlugin(c) {
     if (name && !pluginClass.executeQuery("from Plugin p where p.name = '${name[0..-2]}'")) {
         // strip off the last char, as the regex will leave it
         p.name = name[0..-2]
-        println "Found name '$p.name'..."
+        println "--> I think ${c.title} is '$p.name'..."
     } else {
         def newName = 'fix-this-' + c.title.toLowerCase().replaceAll(/\s+/, '-')
         println "!! Cannot procure a plugin name for \"${c.title}\" !!"
@@ -94,11 +99,11 @@ private contentToPlugin(c) {
 
     def comment = grailsApp.getDomainClass("org.grails.comment.Comment").clazz.newInstance()
     comment.user = grailsApp.getDomainClass("org.grails.auth.User").clazz.findByLogin('admin')
-    comment.body = """This Plugin page was automatically generated.  To see the old Wiki version, go to [${p.title}]. /
-This will only be available for a limited time in order for plugin authors to make adjustments during this /
+    comment.body = """This Plugin page was automatically generated.  To see the old Wiki version, go to [${p.title}]. \
+This will only be available for a limited time in order for plugin authors to make adjustments during this \
 transition."""
     if (!comment.validate()) {
-        println "!! ERROR adding Comment to ${p}!!"
+        println "!! ERROR adding Comment to plugin: ${p}!!"
         comment.errors.allErrors.each { println it }
     }
     assert comment.save()
@@ -113,4 +118,23 @@ transition."""
     }
     assert p.description.save()
     assert p.save(flush:true)
+
+    // add a comment to the original content object before locking it
+    comment = grailsApp.getDomainClass("org.grails.comment.Comment").clazz.newInstance()
+    comment.user = grailsApp.getDomainClass("org.grails.auth.User").clazz.findByLogin('admin')
+    comment.body = """This wiki page has been locked because another page outdates it.  Please see the new plugin page \
+for "${c.title}" [here|${ConfigurationHolder.config.grails.serverURL}/plugin/${p.name}]."""
+    if (!comment.validate()) {
+        println "!! ERROR adding Comment to content: ${c}!!"
+        comment.errors.allErrors.each { println it }
+    }
+    assert comment.save()
+    if (c.comments) c.comments << comment
+    else c.comments = [comment]
+    if (!c.validate()) {
+        println "!! ERROR saving content after comment: ${c}!!"
+        c.errors.allErrors.each { println it }
+    }
+    c.locked = true
+    assert c.save(flush:true)
 }

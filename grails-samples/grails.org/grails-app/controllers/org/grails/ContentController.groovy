@@ -96,7 +96,7 @@ class ContentController extends BaseWikiController{
                         render(template:"wikiShow", model:[content:wikiPage])
                     }
                     else
-                        render(view:"contentPage", model:[content:wikiPage])
+                        render(view:"contentPage", model:[content:wikiPage, comments: wikiPage.comments])
                 }
                 else {
                     response.sendError 404

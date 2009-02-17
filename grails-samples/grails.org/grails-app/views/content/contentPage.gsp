@@ -2,6 +2,7 @@
 <head>
     <title>${content?.title}</title>
     <meta content="subpage" name="layout" />
+    <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'comments.css')}" />
     <g:javascript library="scriptaculous" />
     <g:javascript library="diff_match_patch" />
 
@@ -74,5 +75,15 @@
 
         </div>
     </div>
+
+    <g:each var="comment" in="${comments}">
+        <div class="comment">
+            <wiki:text>
+                ${comment?.body}
+            </wiki:text>
+            <div class="author">${comment?.user.login}</div>
+        </div>
+    </g:each>
+
 </body>
 </html>

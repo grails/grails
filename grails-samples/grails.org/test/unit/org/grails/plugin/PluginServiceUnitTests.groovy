@@ -152,7 +152,7 @@ class PluginServiceUnitTests extends grails.test.GrailsUnitTestCase {
         assertTrue 'Master plugins were not translated', translated
     }
 
-    
+
 
     private def generateMockMasterPluginList() {
         ('a'..'z').inject([]) {masterList, x ->

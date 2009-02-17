@@ -21,12 +21,14 @@ class PluginService {
         listText = listText.replaceAll(/\<\?xml ([^\<\>]*)\>/, '')
         def plugins = new XmlSlurper().parseText(listText)
         
-        println "Found ${plugins.plugin.size()} master plugins."
+//        println "Found ${plugins.plugin.size()} master plugins."
         log.info "Found ${plugins.plugin.size()} master plugins."
 
         plugins.plugin.inject([]) { pluginsList, pxml ->
             if (!pxml.release.size()) return pluginsList
+//            println "processing xml node for ${pxml.@name}"
             def latestRelease = pxml.release[pxml.release.size()-1]
+//            println "\tlatest release is ${latestRelease.title}:${latestRelease.@version}"
             def p = new Plugin()
             p.with {
                 name = pxml.@name
@@ -44,14 +46,15 @@ class PluginService {
     }
 
     def translateMasterPlugins(masters) {
-        println "translating master plugins:"
+//        println "translating master plugins:"
         masters.each { master ->
-            println "for ==> $master.name"
+//            println "==> $master.name <== MASTER"
             def plugin = Plugin.findByName(master.name)
-            println ".... found plugin: $plugin"
             // try by title
             if (!plugin) {
                 plugin = Plugin.findByTitleLike(master.title)
+                //except 'Functional Testing', which is unfortunately named
+                if (master.title == 'Functional Testing') plugin = null
             }
             // try by title matching name
             if (!plugin) {
@@ -59,17 +62,18 @@ class PluginService {
             }
 
             if (!plugin) {
+//                println "No existing plugin, creating new ==> ${master.name}"
                 // before saving the master, we need to save the description wiki page
                 if (!master.description.save() && master.description.hasErrors()) {
                     master.description.errors.allErrors.each { println it }
                 }
                 // save new master plugin
                 if (!master.save()) {
-                    println   "Could not save master plugin: $master.name ($master.title), version $master.currentRelease"
+//                    println   "Could not save master plugin: $master.name ($master.title), version $master.currentRelease"
                     log.error "Could not save master plugin: $master.name ($master.title), version $master.currentRelease"
                     master.errors.allErrors.each { log.error "\t$it"; println "\t$it" }
                 } else {
-                    println  "New plugin was saved from master: $master.name"
+//                    println  "New plugin was saved from master: $master.name"
                     log.info "New plugin was saved from master: $master.name"
                 }
             } else {
@@ -80,15 +84,15 @@ class PluginService {
     }
 
     def updatePlugin(plugin, master) {
-        println "Updating plugin \"$plugin.name\"..."
+//        println "Updating plugin \"$plugin.name\"..."
         // handle the wiki page with some care
         if (master.description?.body && !plugin.description?.body) {
             plugin.description = master.description
-            if (!plugin.description.validate()) { plugin.description.errors.allErrors.each { println it } }
+//            if (!plugin.description.validate()) { plugin.description.errors.allErrors.each { println it } }
             assert plugin.description.save()
             Version v = plugin.description.createVersion()
             v.author = User.findByLogin('admin')
-            if (!v.validate()) { v.errors.allErrors.each { println it } }
+//            if (!v.validate()) { v.errors.allErrors.each { println it } }
             assert v.save()
         }
 
@@ -104,12 +108,12 @@ class PluginService {
         plugin.currentRelease = master.currentRelease
 
         if (!plugin.save()) {
-            println  "Local plugin '$plugin.name' was not updated properly... errors follow:"
+//            println  "Local plugin '$plugin.name' was not updated properly... errors follow:"
             log.warn "Local plugin '$plugin.name' was not updated properly... errors follow:"
-            plugin.errors.allErrors.each { log.warn it; println it }
+//            plugin.errors.allErrors.each { log.warn it; println it }
         }
         
-        println  "Local plugin '$plugin.name' was updated with master version."
+//        println  "Local plugin '$plugin.name' was updated with master version."
         log.info "Local plugin '$plugin.name' was updated with master version."
     }
     
