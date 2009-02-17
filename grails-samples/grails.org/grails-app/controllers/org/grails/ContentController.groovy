@@ -8,6 +8,8 @@ import org.grails.wiki.WikiPage
 import org.grails.content.Version
 import org.grails.content.notifications.ContentAlertStack
 import org.grails.wiki.BaseWikiController
+import org.grails.comment.Comment
+import org.grails.content.Content
 
 class ContentController extends BaseWikiController{
     
@@ -82,32 +84,44 @@ class ContentController extends BaseWikiController{
     }
 
     def index = {
+//        println params
         def pageName = params.id
 
         if(pageName) {
             if(pageName == 'Home') {
                 render(view:"homePage")
-            }
-            else {
-
+            }  else {
                 def wikiPage = getCachedOrReal(pageName)
                 if(wikiPage) {
                     if(request.xhr) {
+//                        println "render wikiShow..."
                         render(template:"wikiShow", model:[content:wikiPage])
+                    } else {
+//                        println "render contentPage..."
+//                        println wikiPage.comments
+                        render(view:"contentPage", model:[content:wikiPage, comments: wikiPage.comments.sort { it.dateCreated }])
                     }
-                    else
-                        render(view:"contentPage", model:[content:wikiPage, comments: wikiPage.comments])
                 }
                 else {
                     response.sendError 404
                 }
             }
-
-		}
-		else {
+		} else {
 			render(view:"homePage")
 		}
 	}
+
+    def postComment = {
+//        println params
+        def content = Content.get(params.id)
+        if (params.comment) {
+            def c = new Comment(body:params.comment, user: request.user)
+            content.addToComments(c)
+            assert content.save(flush:true)
+        }
+//        println "Saved comment to content ${content.title}"
+        redirect(action:'index', params: [id:content.title])
+    }
 
 	private getCachedOrReal(id) {
          id = id.decodeURL()

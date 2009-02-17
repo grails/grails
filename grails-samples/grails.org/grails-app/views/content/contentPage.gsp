@@ -76,14 +76,7 @@
         </div>
     </div>
 
-    <g:each var="comment" in="${comments}">
-        <div class="comment">
-            <wiki:text>
-                ${comment?.body}
-            </wiki:text>
-            <div class="author">${comment?.user.login}</div>
-        </div>
-    </g:each>
+    <g:render template="/comment/comments" model="${[parentId:content.id, comments:comments, locked:content.locked]}"/>
 
 </body>
 </html>

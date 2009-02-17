@@ -65,13 +65,13 @@ class PluginService {
 //                println "No existing plugin, creating new ==> ${master.name}"
                 // before saving the master, we need to save the description wiki page
                 if (!master.description.save() && master.description.hasErrors()) {
-                    master.description.errors.allErrors.each { println it }
+                    master.description.errors.allErrors.each { log.error it }
                 }
                 // save new master plugin
                 if (!master.save()) {
 //                    println   "Could not save master plugin: $master.name ($master.title), version $master.currentRelease"
                     log.error "Could not save master plugin: $master.name ($master.title), version $master.currentRelease"
-                    master.errors.allErrors.each { log.error "\t$it"; println "\t$it" }
+                    master.errors.allErrors.each { log.error "\t$it" }
                 } else {
 //                    println  "New plugin was saved from master: $master.name"
                     log.info "New plugin was saved from master: $master.name"

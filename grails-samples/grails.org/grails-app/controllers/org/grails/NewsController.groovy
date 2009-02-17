@@ -80,7 +80,6 @@ class NewsController extends BaseWikiController{
         def newsItem = new NewsItem(params)
         if(request.method == 'POST') {
             newsItem.author = request.user
-            println 'saving'
             if(newsItem.save()) {
                 redirect(uri:"/")
             }

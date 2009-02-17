@@ -12,11 +12,11 @@ import org.codehaus.groovy.grails.plugins.codecs.URLCodec
 import org.grails.wiki.*
 
 /**
-* @author Graeme Rocher
-* @since 1.0
-*
-* Created: Feb 28, 2008
-*/
+ * @author Graeme Rocher
+ * @since 1.0
+ *
+ * Created: Feb 28, 2008
+ */
 class ContentControllerTests extends grails.test.ControllerUnitTestCase {
 
     protected void setUp() {
@@ -41,91 +41,91 @@ class ContentControllerTests extends grails.test.ControllerUnitTestCase {
 
 
     void testIndexNoId() {
-        ContentController.metaClass.getRequest ={-> [method:"POST"] }
-        ContentController.metaClass.getParams ={-> [id:null] }
+        ContentController.metaClass.getRequest = {-> [method: "POST"] }
+        ContentController.metaClass.getParams = {-> [id: null] }
 
         def renderParams = [:]
-        ContentController.metaClass.render = { Map args -> renderParams = args }
+        ContentController.metaClass.render = {Map args -> renderParams = args }
 
         def controller = new ContentController()
 
         controller.index()
 
-        assertEquals "homePage" , renderParams.view
+        assertEquals "homePage", renderParams.view
 
     }
 
     void testIndexHomeId() {
-       ContentController.metaClass.getRequest ={-> [method:"POST"] }
-        ContentController.metaClass.getParams ={-> [id:"Home"] }
+        ContentController.metaClass.getRequest = {-> [method: "POST"] }
+        ContentController.metaClass.getParams = {-> [id: "Home"] }
 
         def renderParams = [:]
-        ContentController.metaClass.render = { Map args -> renderParams = args }
+        ContentController.metaClass.render = {Map args -> renderParams = args }
 
         def controller = new ContentController()
 
         controller.index()
 
-        assertEquals "homePage" , renderParams.view
+        assertEquals "homePage", renderParams.view
     }
 
 
     void testIndexWikiPageNormalRequest() {
-        ContentController.metaClass.getRequest ={-> [method:"POST"] }
-         ContentController.metaClass.getParams ={-> [id:"Introduction"] }
-
-         def renderParams = [:]
-         ContentController.metaClass.render = { Map args -> renderParams = args }
-         WikiPage.metaClass.static.findByTitle = { String title -> new WikiPage(title:title) }
-
-         def controller = new ContentController()
-
-         def manager = CacheManager.create()
-         manager.addCache "test1"
-         Cache cache = manager.getCache("test1")
-         controller.cacheService = new CacheService(contentCache:cache)
-
-         controller.index()
-
-         assertEquals "contentPage" , renderParams.view
-         assertTrue renderParams?.model?.content instanceof WikiPage
-         assertEquals "Introduction",renderParams?.model?.content?.title
-
-         assertEquals renderParams?.model?.content,cache.get("Introduction")?.getValue()
-     }
-
-     void testIndexWikiPageAjaxRequest() {
-        ContentController.metaClass.getRequest ={-> [method:"POST", xhr:true] }
-         ContentController.metaClass.getParams ={-> [id:"Introduction"] }
-
-         def renderParams = [:]
-         ContentController.metaClass.render = { Map args -> renderParams = args }
-         WikiPage.metaClass.static.findByTitle = { String title -> new WikiPage(title:title) }
-
-         def controller = new ContentController()
-
-         def manager = CacheManager.create()
-         manager.addCache "test2"
-         Cache cache = manager.getCache("test2")
-         controller.cacheService = new CacheService(contentCache:cache)
-
-         controller.index()
-
-         assertEquals "wikiShow" , renderParams.template
-         assertTrue renderParams?.model?.content instanceof WikiPage
-         assertEquals "Introduction",renderParams?.model?.content?.title
-
-         assertEquals renderParams?.model?.content,cache.get("Introduction")?.getValue()
-     }
-
-    void testShowWikiVersion() {
-        ContentController.metaClass.getParams ={-> [id:"Introduction", number:7] }
-        WikiPage.metaClass.static.findByTitle = { String title -> new WikiPage(title:title) }
-        def v
-        Version.metaClass.static.findByCurrentAndNumber = { WikiPage page, Long n-> v = new Version(number:n, current:page)}
+        ContentController.metaClass.getRequest = {-> [method: "POST"] }
+        ContentController.metaClass.getParams = {-> [id: "Introduction"] }
 
         def renderParams = [:]
-        ContentController.metaClass.render = { Map args -> renderParams = args }
+        ContentController.metaClass.render = {Map args -> renderParams = args }
+        WikiPage.metaClass.static.findByTitle = {String title -> new WikiPage(title: title, comments: []) }
+
+        def controller = new ContentController()
+
+        def manager = CacheManager.create()
+        manager.addCache "test1"
+        Cache cache = manager.getCache("test1")
+        controller.cacheService = new CacheService(contentCache: cache)
+
+        controller.index()
+
+        assertEquals "contentPage", renderParams.view
+        assertTrue renderParams?.model?.content instanceof WikiPage
+        assertEquals "Introduction", renderParams?.model?.content?.title
+
+        assertEquals renderParams?.model?.content, cache.get("Introduction")?.getValue()
+    }
+
+    void testIndexWikiPageAjaxRequest() {
+        ContentController.metaClass.getRequest = {-> [method: "POST", xhr: true] }
+        ContentController.metaClass.getParams = {-> [id: "Introduction"] }
+
+        def renderParams = [:]
+        ContentController.metaClass.render = {Map args -> renderParams = args }
+        WikiPage.metaClass.static.findByTitle = {String title -> new WikiPage(title: title) }
+
+        def controller = new ContentController()
+
+        def manager = CacheManager.create()
+        manager.addCache "test2"
+        Cache cache = manager.getCache("test2")
+        controller.cacheService = new CacheService(contentCache: cache)
+
+        controller.index()
+
+        assertEquals "wikiShow", renderParams.template
+        assertTrue renderParams?.model?.content instanceof WikiPage
+        assertEquals "Introduction", renderParams?.model?.content?.title
+
+        assertEquals renderParams?.model?.content, cache.get("Introduction")?.getValue()
+    }
+
+    void testShowWikiVersion() {
+        ContentController.metaClass.getParams = {-> [id: "Introduction", number: 7] }
+        WikiPage.metaClass.static.findByTitle = {String title -> new WikiPage(title: title) }
+        def v
+        Version.metaClass.static.findByCurrentAndNumber = {WikiPage page, Long n -> v = new Version(number: n, current: page)}
+
+        def renderParams = [:]
+        ContentController.metaClass.render = {Map args -> renderParams = args }
 
         def controller = new ContentController()
         controller.showWikiVersion()
@@ -136,13 +136,13 @@ class ContentControllerTests extends grails.test.ControllerUnitTestCase {
     }
 
     void testShowWikiVersionNotFound() {
-        ContentController.metaClass.getParams ={-> [id:"Introduction", number:7] }
+        ContentController.metaClass.getParams = {-> [id: "Introduction", number: 7] }
         def page
-        WikiPage.metaClass.static.findByTitle = { String title -> page = new WikiPage(title:title) }
-        Version.metaClass.static.findByCurrentAndNumber = { WikiPage p, Long n-> null}
+        WikiPage.metaClass.static.findByTitle = {String title -> page = new WikiPage(title: title) }
+        Version.metaClass.static.findByCurrentAndNumber = {WikiPage p, Long n -> null}
 
         def renderParams = [:]
-        ContentController.metaClass.render = { Map args -> renderParams = args }
+        ContentController.metaClass.render = {Map args -> renderParams = args }
 
         def controller = new ContentController()
         controller.showWikiVersion()
@@ -152,45 +152,45 @@ class ContentControllerTests extends grails.test.ControllerUnitTestCase {
     }
 
     void testMarkupWikiPage() {
-       ContentController.metaClass.getParams ={-> [id:"Introduction", number:7] }
+        ContentController.metaClass.getParams = {-> [id: "Introduction", number: 7] }
         def page
-        WikiPage.metaClass.static.findByTitle = { String title -> page = new WikiPage(title:title) }
+        WikiPage.metaClass.static.findByTitle = {String title -> page = new WikiPage(title: title) }
 
         def renderParams = [:]
-        ContentController.metaClass.render = { Map args -> renderParams = args }
+        ContentController.metaClass.render = {Map args -> renderParams = args }
 
         def controller = new ContentController()
         controller.markupWikiPage()
         assertEquals "wikiFields", renderParams.template
 
         assertEquals page, renderParams.model?.wikiPage
-                
+
     }
 
     void testInfoWikiPage() {
-       ContentController.metaClass.getParams ={-> [id:"Introduction", number:7] }
+        ContentController.metaClass.getParams = {-> [id: "Introduction", number: 7] }
         def page
-        WikiPage.metaClass.static.findByTitle = { String title -> page = new WikiPage(title:title) }
-        Version.metaClass.static.findAllByCurrent = { Content c -> []}
+        WikiPage.metaClass.static.findByTitle = {String title -> page = new WikiPage(title: title) }
+        Version.metaClass.static.findAllByCurrent = {Content c -> []}
         def renderParams = [:]
-        ContentController.metaClass.render = { Map args -> renderParams = args }
+        ContentController.metaClass.render = {Map args -> renderParams = args }
 
         def controller = new ContentController()
         controller.infoWikiPage()
         assertEquals "wikiInfo", renderParams.template
 
         assertEquals page, renderParams.model?.wikiPage
-        assertEquals( [], renderParams.model.versions )
+        assertEquals([], renderParams.model.versions)
 
     }
 
     void testEditWikiPage() {
-       ContentController.metaClass.getParams ={-> [id:"Introduction", number:7] }
+        ContentController.metaClass.getParams = {-> [id: "Introduction", number: 7] }
         def page
-        WikiPage.metaClass.static.findByTitle = { String title -> page = new WikiPage(title:title) }
-        Version.metaClass.static.findAllByCurrent = { Content c -> []}
+        WikiPage.metaClass.static.findByTitle = {String title -> page = new WikiPage(title: title) }
+        Version.metaClass.static.findAllByCurrent = {Content c -> []}
         def renderParams = [:]
-        ContentController.metaClass.render = { Map args -> renderParams = args }
+        ContentController.metaClass.render = {Map args -> renderParams = args }
 
         def controller = new ContentController()
         controller.editWikiPage()
@@ -201,7 +201,7 @@ class ContentControllerTests extends grails.test.ControllerUnitTestCase {
     }
 
     void testCreateWikiPage() {
-            ContentController.metaClass.getParams ={-> [id:"Introduction"] }
+        ContentController.metaClass.getParams = {-> [id: "Introduction"] }
 
         def controller = new ContentController()
         def model = controller.createWikiPage()
@@ -213,82 +213,82 @@ class ContentControllerTests extends grails.test.ControllerUnitTestCase {
     void testSaveWikiPageGET() {
 
         def errorArg = 404
-        ContentController.metaClass.getResponse = {-> [sendError:{ errorArg = it}]  }
-        ContentController.metaClass.getRequest ={-> [method:"GET"] }
+        ContentController.metaClass.getResponse = {-> [sendError: { errorArg = it}]  }
+        ContentController.metaClass.getRequest = {-> [method: "GET"] }
 
 
         def controller = new ContentController()
         def model = controller.saveWikiPage()
 
 
-        assertEquals 403, errorArg            
+        assertEquals 403, errorArg
     }
 
-  void testSaveWikiPageWhenPageNotFoundFailure() {
-      ContentController.metaClass.getRequest ={-> [method:"POST"] }
-      ContentController.metaClass.getParams ={-> [id:"Introduction",title:"Introduction", body:"hello"] }
-      WikiPage.metaClass.static.findByTitle = { String title -> null }
-      WikiPage.metaClass.setId = { }
-      WikiPage.metaClass.save = {-> delegate }
-      WikiPage.metaClass.hasErrors = {-> true }
-      String.metaClass.encodeAsURL ={-> URLCodec.encode(delegate)}
-      
-      def renderParams = [:]
-      ContentController.metaClass.render = { Map args -> renderParams = args }
+    void testSaveWikiPageWhenPageNotFoundFailure() {
+        ContentController.metaClass.getRequest = {-> [method: "POST"] }
+        ContentController.metaClass.getParams = {-> [id: "Introduction", title: "Introduction", body: "hello"] }
+        WikiPage.metaClass.static.findByTitle = {String title -> null }
+        WikiPage.metaClass.setId = { }
+        WikiPage.metaClass.save = {-> delegate }
+        WikiPage.metaClass.hasErrors = {-> true }
+        String.metaClass.encodeAsURL = {-> URLCodec.encode(delegate)}
 
-      def controller = new ContentController()
-      controller.saveWikiPage()
+        def renderParams = [:]
+        ContentController.metaClass.render = {Map args -> renderParams = args }
 
-      assertEquals "createWikiPage" , renderParams.view
-      assertEquals "Introduction",renderParams?.model?.pageName
-      assertEquals "Introduction",renderParams?.model?.wikiPage?.title
+        def controller = new ContentController()
+        controller.saveWikiPage()
+
+        assertEquals "createWikiPage", renderParams.view
+        assertEquals "Introduction", renderParams?.model?.pageName
+        assertEquals "Introduction", renderParams?.model?.wikiPage?.title
 
     }
 
-  void testSaveWikiPageWhenPageNotFoundSuccess() {
-      def wikiControl = mockFor(WikiPage)
-      wikiControl.demand.static.findByTitle { String t -> null }
-      wikiControl.demand.save { -> delegate }
-      wikiControl.demand.hasErrors { -> false }
-      wikiControl.demand.createVersion { ->
-          new Version()
-      }
-      def versControl = mockFor(Version)
-      versControl.demand.save { -> delegate }
+    void testSaveWikiPageWhenPageNotFoundSuccess() {
+        def wikiControl = mockFor(WikiPage)
+        wikiControl.demand.static.findByTitle {String t -> null }
+        wikiControl.demand.save {-> delegate }
+        wikiControl.demand.hasErrors {-> false }
+        wikiControl.demand.createVersion {->
+            new Version()
+        }
+        def versControl = mockFor(Version)
+        versControl.demand.save {-> delegate }
 
-      mockParams.id = 'Introduction'
-      mockParams.title = 'Introduction'
-      mockParams.body = 'hello'
-      mockRequest.method = 'POST'
+        mockParams.id = 'Introduction'
+        mockParams.title = 'Introduction'
+        mockParams.body = 'hello'
+        mockRequest.method = 'POST'
 
-      def redirectParams = [:]
-      ContentController.metaClass.redirect = { Map args -> redirectParams = args }
+        def redirectParams = [:]
+        ContentController.metaClass.redirect = {Map args -> redirectParams = args }
 
-      def controller = new ContentController()
-      controller.saveWikiPage()
+        def controller = new ContentController()
+        controller.saveWikiPage()
 
-      assertEquals "/Introduction", redirectParams.uri 
+        assertEquals "/Introduction", redirectParams.uri
     }
 
 
-  void testSaveWikiPageWhenPageExistsOptimisticLockingFailure() {
-      ContentController.metaClass.getRequest ={-> [method:"POST"] }
-      ContentController.metaClass.getParams ={-> [id:"Introduction",title:"Introduction", body:"hello", version:"3"] }
-      WikiPage.metaClass.static.findByTitle = { String title -> new WikiPage(title:title) }
-      WikiPage.metaClass.setId = { }
-      WikiPage.metaClass.save = {-> delegate }
-      WikiPage.metaClass.hasErrors = {-> false }
-      WikiPage.metaClass.getVersion = {-> 2 }
-      Version.metaClass.save = {-> delegate }
+    void testSaveWikiPageWhenPageExistsOptimisticLockingFailure() {
+        ContentController.metaClass.getRequest = {-> [method: "POST"] }
+        ContentController.metaClass.getParams = {-> [id: "Introduction", title: "Introduction", body: "hello", version: "3"] }
+        WikiPage.metaClass.static.findByTitle = {String title -> new WikiPage(title: title) }
+        WikiPage.metaClass.setId = { }
+        WikiPage.metaClass.save = {-> delegate }
+        WikiPage.metaClass.hasErrors = {-> false }
+        WikiPage.metaClass.getVersion = {-> 2 }
+        Version.metaClass.save = {-> delegate }
 
-      def renderParams = [:]
-      ContentController.metaClass.render = { Map args -> renderParams = args }
+        def renderParams = [:]
+        ContentController.metaClass.render = {Map args -> renderParams = args }
 
-      def controller = new ContentController()
-      controller.saveWikiPage()
+        def controller = new ContentController()
+        controller.saveWikiPage()
 
-      assertEquals "wikiEdit", renderParams.template
-      assertEquals "page.optimistic.locking.failure", renderParams.model.error
+        assertEquals "wikiEdit", renderParams.template
+        assertEquals "page.optimistic.locking.failure", renderParams.model.error
 
-  }
+    }
 }

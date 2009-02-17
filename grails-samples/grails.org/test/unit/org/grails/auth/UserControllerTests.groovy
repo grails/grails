@@ -191,7 +191,6 @@ public class UserControllerTests extends ControllerUnitTestCase {
 
         controller.login()
 
-        println renderParams
         assertEquals "loginForm", renderParams.template
         assertEquals "auth.invalid.login", renderParams?.model?.message
         assertEquals true, renderParams?.model?.async

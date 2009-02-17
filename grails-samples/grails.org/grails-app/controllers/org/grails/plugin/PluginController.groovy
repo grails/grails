@@ -4,6 +4,7 @@ package org.grails.plugin
 
 import org.grails.wiki.BaseWikiController
 import org.grails.wiki.WikiPage
+import org.grails.comment.Comment
 
 class PluginController extends BaseWikiController {
 
@@ -17,7 +18,7 @@ class PluginController extends BaseWikiController {
 
     def show = {
         def plugin = byName(params)
-        render view:'showPlugin', model:[plugin:plugin, comments: plugin.comments]
+        render view:'showPlugin', model:[plugin:plugin, comments: plugin.comments.sort { it.dateCreated }]
     }
 
     def editPlugin = {
@@ -68,6 +69,16 @@ class PluginController extends BaseWikiController {
                 return render(view:'createPlugin', model:[plugin:plugin])
             }
         }
+    }
+
+    def postComment = {
+        def plugin = Plugin.get(params.id)
+        if (params.comment) {
+            def c = new Comment(body:params.comment, user: request.user)
+            plugin.addToComments(c)
+            plugin.save()
+        }
+        redirect(action:'show', params: [name:plugin.name])
     }
 
     private def pluginWiki(name, plugin, params) {

@@ -1,6 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
     <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'plugins.css')}" />    
+    <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'comments.css')}" />    
     <title>${plugin.title} Plugin</title>
     <meta content="subpage" name="layout"/>
 </head>
@@ -31,14 +32,8 @@
             ${plugin?.installation}
         </wiki:text>
 
-        <g:each var="comment" in="${plugin?.comments}">
-            <div class="comment">
-                <wiki:text>
-                    ${comment?.body}
-                </wiki:text>
-                <div class="author">${comment?.user.login}</div>
-            </div>
-        </g:each>
+        <g:render template="/comment/comments" model="${[parentId:plugin.id, comments:comments]}"/>
+
     </div>
 </div>
 </body>

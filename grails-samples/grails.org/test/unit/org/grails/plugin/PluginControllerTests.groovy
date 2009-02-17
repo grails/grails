@@ -9,7 +9,7 @@ import org.grails.wiki.WikiPage
 class PluginControllerTests extends ControllerUnitTestCase {
 
     void testShowPlugin() {
-        Plugin p = new Plugin(name:'plugin', title:'My Plugin')
+        Plugin p = new Plugin(name:'plugin', title:'My Plugin', comments:[])
 
         mockDomain(Plugin, [p])
         mockParams.name = 'plugin'
