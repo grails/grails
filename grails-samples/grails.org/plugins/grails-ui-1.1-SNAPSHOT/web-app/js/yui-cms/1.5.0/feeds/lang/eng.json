@@ -1,0 +1,11 @@
+<?php
+ $result = array("CMO_RSS" => 'RSS',
+				 "CMO_RSS_BLOGLINES" => 'Add to Bloglines',
+				 "CMO_RSS_YAHOO" => 'Add to My Yahoo!',
+				 "CMO_RSS_GOOGLE" => 'Add to Google Reader',
+				 "CMO_RSS_NETVIBES" => 'Add to Netvibes',
+				 "CMO_RSS_MSN" => 'Add to My MSN',
+				 "CMO_RSS_NEWSGATOR" => 'Add to Newsgator',
+				 "CMO_RSS_LIVE" => 'Another Application...',
+				 "MCMS_CLOSE" => 'Close');
+?>

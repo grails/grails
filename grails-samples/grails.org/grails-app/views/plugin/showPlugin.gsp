@@ -1,7 +1,9 @@
+<%@ page import="org.grails.plugin.Plugin" %>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
+    <gui:resources components="['tabView']"/>
     <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'plugins.css')}" />    
-    <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'comments.css')}" />    
+    <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'comments.css')}" />
     <title>${plugin.title} Plugin</title>
     <meta content="subpage" name="layout"/>
 </head>
@@ -13,24 +15,42 @@
     </div>
 
     <h1>${plugin?.title}</h1>
-    <div class="plugin">
+    <%
+        def officialStyle = plugin.official ? 'official' : ''
+    %>
+    <div class="plugin yui-skin-sam ${officialStyle}">
 
-        <h2>Description</h2>
-        <wiki:text>
-            ${plugin?.description}
-        </wiki:text>
-        <h2>FAQ</h2>
-        <wiki:text>
-            ${plugin?.faq}
-        </wiki:text>
-        <h2>Screenshots</h2>
-        <wiki:text>
-            ${plugin?.screenshots}
-        </wiki:text>
-        <h2>Installation</h2>
-        <wiki:text>
-            ${plugin?.installation}
-        </wiki:text>
+        <table class='details'>
+            <tr>
+                <th>Author(s)</th>
+                <td>${plugin.author}</td>
+                <td colspan='2'>${plugin.authorEmail}</td>
+            </tr>
+            <tr>
+                <th>Docs</th>
+                <td colspan='3'><a href="${plugin.documentationUrl}">${plugin.documentationUrl}</a></td>
+            </tr>
+            <tr>
+                <th>Download</th>
+                <td colspan='3'><a href="${plugin.downloadUrl}">${plugin.downloadUrl}</a></td>
+            </tr>
+            <tr>
+                <th>Current Release</th>
+                <td>${plugin.currentRelease}</td>
+                <th>Built on Grails</th>
+                <td>${plugin.grailsVersion}</td>
+            </tr>
+        </table>
+
+    <br/><br/>
+
+        <gui:tabView>
+            <g:each var="wiki" in="${Plugin.WIKIS}">
+                <gui:tab label="${wiki[0].toUpperCase() + wiki[1..-1]}" active="${wiki == 'description'}">
+                    <div class='${wiki}, wikiPage'><wiki:text>${plugin."$wiki"}</wiki:text></div>
+                </gui:tab>
+            </g:each>
+        </gui:tabView>
 
         <g:render template="/comment/comments" model="${[parentId:plugin.id, comments:comments]}"/>
 

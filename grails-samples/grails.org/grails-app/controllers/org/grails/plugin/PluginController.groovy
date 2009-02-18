@@ -5,6 +5,7 @@ package org.grails.plugin
 import org.grails.wiki.BaseWikiController
 import org.grails.wiki.WikiPage
 import org.grails.comment.Comment
+import org.codehaus.groovy.grails.commons.ConfigurationHolder
 
 class PluginController extends BaseWikiController {
 
@@ -41,24 +42,32 @@ class PluginController extends BaseWikiController {
     }
 
     def createPlugin = {
-        def wikiList = Plugin.WIKIS.inject([:]) { wikiMap, wiki ->
-            if (params."$wiki") {
-                wikiMap."$wiki" = params.remove(wiki)
-            }
-            wikiMap
-        }
-        // create a new plugin with everything except the wiki data
+        println "createPlugin:"
+        println params
+        println request
         def plugin = new Plugin(params)
-        // go through and create wikis seperately
-        Plugin.WIKIS.each { wiki ->
-            pluginWiki wiki, plugin, wikiList
-        }
 
         if(request.method == 'POST') {
+            Plugin.WIKIS.each { wiki ->
+                def body = ''
+                if (wiki == 'installation') {
+                    body = "{code}grails install-plugin ${plugin.name}{code}"
+                }
+                def wikiPage = new WikiPage(title:wiki, body:body)
+                if (!wikiPage.validate()) { println wikiPage.errors }
+                wikiPage.save()
+                plugin."$wiki" = wikiPage
+            }
+
+            // if there is no provided doc url, we'll assume that this page is the doc
+            if (!plugin.documentationUrl) {
+                plugin.documentationUrl = "${ConfigurationHolder.config.grails.serverURL}/plugin/${plugin.name}"
+            }
+
             plugin.author = request.user
             def saved = plugin.save()
             if(saved) {
-                redirect(uri:"/")
+                redirect(action:'show', params: [name:plugin.name])
             } else {
                 return render(view:'createPlugin', model:[plugin:plugin])
             }

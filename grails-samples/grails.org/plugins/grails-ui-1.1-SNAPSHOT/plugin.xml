@@ -1,0 +1,33 @@
+<plugin name='grails-ui' version='1.1-SNAPSHOT'>
+  <author>Matthew Taylor</author>
+  <authorEmail>rhyolight@gmail.com</authorEmail>
+  <title>Grails UI</title>
+  <description>
+Provides a standard UI tag library for ajaxy widgets using YUI.
+</description>
+  <documentation>http://grails.org/GrailsUI+Plugin</documentation>
+  <resources>
+    <resource>BootStrap</resource>
+    <resource>DataSource</resource>
+    <resource>GrailsUIConfig</resource>
+    <resource>UrlMappings</resource>
+    <resource>ChartTagLibService</resource>
+    <resource>DatePickerService</resource>
+    <resource>GrailsUITagLibService</resource>
+    <resource>MenuTagLibService</resource>
+    <resource>ResourcesTagLibService</resource>
+    <resource>ChartTagLib</resource>
+    <resource>DataTableTagLib</resource>
+    <resource>DialogTagLib</resource>
+    <resource>DisplayTagLib</resource>
+    <resource>DragAndDropTagLib</resource>
+    <resource>InputTagLib</resource>
+    <resource>MenuTagLib</resource>
+    <resource>ResourcesTagLib</resource>
+    <resource>TabTagLib</resource>
+  </resources>
+  <dependencies>
+    <plugin name='bubbling' version='1.5.0 &gt; *' />
+    <plugin name='yui' version='2.6.0 &gt; *' />
+  </dependencies>
+</plugin>

@@ -22,7 +22,7 @@ class WikiPage extends Content {
 
 	static constraints = {
 		title(blank:false, matches:/[^\/\\]+/)
-		body(blank:false)
+		body(blank:true)
 	}
 
     String toString() {

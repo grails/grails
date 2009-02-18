@@ -1,5 +1,13 @@
 .plugin {
-    width: 450px;
+    width: 600px;
 }
 
+.official {
+    background: transparent url(../images/springsource.png) top right no-repeat;
+}
+
+.plugin table {
+    border: solid black 1px;
+    padding: 10px;
+}
 

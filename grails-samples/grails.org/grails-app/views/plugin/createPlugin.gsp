@@ -35,29 +35,29 @@
                     <input type="text" id="title" name="title" value="${fieldValue(bean: pluginInstance, field: 'title')}"/>
                 </plugin:input>
 
-                <plugin:input
-                        name="Description"
-                        description="The long description of your plugin.">
-                    <textarea cols="60" rows="14" id="description" name="description" value="${fieldValue(bean: pluginInstance, field: 'description')}"></textarea>
-                </plugin:input>
+                %{--<plugin:input--}%
+                        %{--name="Description"--}%
+                        %{--description="The long description of your plugin.">--}%
+                    %{--<textarea cols="60" rows="14" id="description" name="description" value="${fieldValue(bean: pluginInstance, field: 'description')}"></textarea>--}%
+                %{--</plugin:input>--}%
 
-                <plugin:input
-                        name="FAQ"
-                        description="Frequently asked questions (if you leave this blank, it will not be included in your page).">
-                    <textarea cols="60" rows="14" id="faq" name="faq" value="${fieldValue(bean: pluginInstance, field: 'faq')}"></textarea>
-                </plugin:input>
+                %{--<plugin:input--}%
+                        %{--name="FAQ"--}%
+                        %{--description="Frequently asked questions (if you leave this blank, it will not be included in your page).">--}%
+                    %{--<textarea cols="60" rows="14" id="faq" name="faq" value="${fieldValue(bean: pluginInstance, field: 'faq')}"></textarea>--}%
+                %{--</plugin:input>--}%
 
-                <plugin:input
-                        name="Screenshots"
-                        description="Attach any screenshots here (if you leave this blank, it will not be included in your page).">
-                    <textarea cols="60" rows="14" type="text" id="screenshots" name="screenshots" value="${fieldValue(bean: pluginInstance, field: 'screenshots')}"></textarea>
-                </plugin:input>
+                %{--<plugin:input--}%
+                        %{--name="Screenshots"--}%
+                        %{--description="Attach any screenshots here (if you leave this blank, it will not be included in your page).">--}%
+                    %{--<textarea cols="60" rows="14" type="text" id="screenshots" name="screenshots" value="${fieldValue(bean: pluginInstance, field: 'screenshots')}"></textarea>--}%
+                %{--</plugin:input>--}%
 
-                <plugin:input
-                        name="Author"
-                        description="Plugin author's name(s)">
-                    <input type="text" id="author" name="author" value="${fieldValue(bean: pluginInstance, field: 'author')}"/>
-                </plugin:input>
+                %{--<plugin:input--}%
+                        %{--name="Author"--}%
+                        %{--description="Plugin author's name(s)">--}%
+                    %{--<input type="text" id="author" name="author" value="${fieldValue(bean: pluginInstance, field: 'author')}"/>--}%
+                %{--</plugin:input>--}%
 
                 <plugin:input
                         name="Author Email"
@@ -90,7 +90,7 @@
                 </plugin:input>
 
                 <plugin:input
-                        name="Officila"
+                        name="Official"
                         description="Check this if you work for SpringSource">
                     <g:checkBox name="official" value="${pluginInstance?.official}"></g:checkBox>
                 </plugin:input>

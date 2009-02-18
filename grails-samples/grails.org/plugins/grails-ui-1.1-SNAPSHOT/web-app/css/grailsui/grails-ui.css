@@ -1,0 +1,52 @@
+/* prevent bubbling accordion.css from going to yahoo for images */
+.yui-skin-sam .yui-cms-accordion .yui-cms-item.selected .actions .accordionToggleItem {
+    background: transparent url(../../images/sprite.png) no-repeat scroll 0 -400px;
+}
+.yui-skin-sam .yui-cms-accordion .yui-cms-item .actions .accordionToggleItem {
+    background: transparent url(../../images/sprite.png) no-repeat scroll 0 -350px;
+}
+
+.yui-skin-sam .yui-ac-input {
+    position: relative;
+}
+
+.yui-skin-sam .yui-ac-container {
+    left: 0;
+}
+
+/* the ajax loading dialog */
+#grailsuiLoading {
+    text-align: center;
+    background: transparent url(../../images/ajax-loader.gif) no-repeat;
+    height: 32px;
+    width: 32px;
+}
+
+/* Clear calendar's float */
+div.datePicker .bd:after {content:".";display:block;clear:left;height:0;visibility:hidden;}
+
+/* Have calendar squeeze upto bd bounding box */
+div.datePicker .bd {padding:0;}
+
+/* Remove calendar's border and set padding in ems instead of px, so we can specify an width in ems for the container */
+#cal {border:none;padding:1em}
+
+/* Datefield look/feel */
+.datefield {
+    position:relative;
+    top:10px;
+    left:10px;
+    white-space:nowrap;
+    width:25em;
+    padding:5px;
+}
+
+.datefield input,
+.datefield button,
+.datefield label  {vertical-align:middle}
+
+.datefield label  {font-weight:bold}
+.datefield input  {width:15em}
+.datefield button  {padding:0 5px 0 5px; margin-left:2px;}
+.datefield button img {padding:0;margin:0;vertical-align:middle}
+

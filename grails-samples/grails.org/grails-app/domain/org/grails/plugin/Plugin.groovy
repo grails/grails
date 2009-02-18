@@ -7,7 +7,7 @@ import org.grails.comment.Comment
  */
 class Plugin {
 
-    static final def WIKIS = ['description','installation','faq','screenshots']
+    static final def WIKIS = ['installation','description','faq','screenshots']
 
     String name
     String title
