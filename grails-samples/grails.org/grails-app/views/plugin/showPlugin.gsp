@@ -55,6 +55,14 @@
                     <g:render template="ratings" model="[parentId:plugin.id, average:plugin.avgRating]"/>
                 </td>
             </tr>
+            <tr>
+                <th>Tags</th>
+                <td colspan='3'>
+                    <g:each var='tag' in="${plugin.tags}">
+                        <span class="tag">${tag.name}</span>
+                    </g:each>
+                </td>
+            </tr>
         </table>
 
         <br/><br/>

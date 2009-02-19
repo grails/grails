@@ -13,18 +13,23 @@
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
     </g:if>
-    <ul>
-        <g:each var="plugin" in="${plugins}">
-            <li>
-                <g:if test="${plugin.name.startsWith('fix-this-')}">
-                    <g:link action="show" params="${[name:plugin.name]}">${plugin.title}</g:link> (RENAME ME!)
-                </g:if>
-                <g:else>
-                    <g:link action="show" params="${[name:plugin.name]}">${plugin.title}</g:link>
-                </g:else>
-            </li>
-        </g:each>
-    </ul>
+    
+    <g:each var='tagMap' in="${pluginMap}">
+        <h2>${tagMap.key}</h2>
+        <ul>
+            <g:each var='plugin' in="${tagMap.value}">
+                <li>
+                    <g:if test="${plugin.name.startsWith('fix-this-')}">
+                        <g:link action="show" params="${[name:plugin.name]}">${plugin.title}</g:link> (RENAME ME!)
+                    </g:if>
+                    <g:else>
+                        <g:link action="show" params="${[name:plugin.name]}">${plugin.title}</g:link>
+                    </g:else>
+                </li>
+            </g:each>
+        </ul>
+    </g:each>
+
 </div>
 </body>
 </html>

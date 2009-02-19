@@ -15,7 +15,16 @@ class PluginController extends BaseWikiController {
     }
 
     def list = {
-        render view:'listPlugins', model:[plugins:Plugin.list(), totalPlugins: Plugin.count()]
+        def pluginMap = [:]
+        Tag.list().each { tag ->
+            pluginMap[tag] = Plugin.withCriteria {
+                tags {
+                    eq('name', tag.name)
+                }
+            }.sort { it.title }
+        }
+        pluginMap = pluginMap.sort { it.key.name }
+        render view:'listPlugins', model:[pluginMap: pluginMap]
     }
 
     def show = {
