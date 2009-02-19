@@ -26,7 +26,7 @@ class Plugin {
 
     static hasMany = [comments:Comment, tags:Tag, ratings:Rating]
 
-    static transients = ['avgRating']
+    static transients = ['avgRating','official']
 
     static constraints = {
         description(nullable: true)
@@ -35,6 +35,10 @@ class Plugin {
         screenshots(nullable: true)
         author(nullable: true)
         grailsVersion(nullable:true, blank:false, maxLength:16)
+    }
+
+    def getOfficial() {
+        authorEmail.trim().endsWith('@springsource.com') || authorEmail.trim().endsWith('@g2one.com')
     }
 
     def getAvgRating() {

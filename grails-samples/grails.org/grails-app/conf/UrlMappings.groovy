@@ -16,7 +16,7 @@ class UrlMappings {
         "/plugin/$name"(controller: "plugin", action:"show")
         "/plugin/list"(controller: "plugin", action:"list")
         "/plugin/create"(controller: "plugin", action:"createPlugin")
-        "/plugin/edit/$name"(controller: "plugin", action:"editPlugin")
+        "/plugin/edit/$id"(controller: "plugin", action:"editPlugin")
 
         "/search"(controller: "content", action: "search")
         "/upload/$id?"(controller: "content", action: "uploadImage")

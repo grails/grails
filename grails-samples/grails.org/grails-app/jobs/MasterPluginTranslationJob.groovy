@@ -2,7 +2,7 @@
 class MasterPluginTranslationJob {
     def pluginService
 
-    def startDelay = 30000  // 30 second start-up
+    def startDelay = 120000 // 120 second start-up
     def timeout = 3600000   // execute job every hour
     
     def execute() {

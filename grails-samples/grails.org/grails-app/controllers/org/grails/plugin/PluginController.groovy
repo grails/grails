@@ -17,13 +17,14 @@ class PluginController extends BaseWikiController {
     def list = {
         def pluginMap = [:]
         Tag.list().each { tag ->
-            pluginMap[tag] = Plugin.withCriteria {
+            pluginMap[tag.name] = Plugin.withCriteria {
                 tags {
                     eq('name', tag.name)
                 }
             }.sort { it.title }
         }
-        pluginMap = pluginMap.sort { it.key.name }
+        pluginMap = pluginMap.sort { it.key }
+        pluginMap.untagged = Plugin.withCriteria { isEmpty('tags') }
         render view:'listPlugins', model:[pluginMap: pluginMap]
     }
 
@@ -34,17 +35,16 @@ class PluginController extends BaseWikiController {
     }
 
     def editPlugin = {
-        def plugin = byName(params)
+        println "editPlugin: $params"
+        def plugin = Plugin.get(params.id)
         if(plugin) {
             if(request.method == 'POST') {
                 // update plugin
                 plugin.properties = params
                 plugin.save(flush:true)
 //                cacheService?.removeWikiText plugin.title
-                redirect(action:'show', id:plugin.id)
-
-            }
-            else {
+                redirect(action:'show', params:[name:plugin.name])
+            } else {
                 return render(view:'editPlugin', model: [plugin:plugin])
             }
         } else {
@@ -114,6 +114,22 @@ class PluginController extends BaseWikiController {
             plugin.save()
         }
         render "${plugin.avgRating},${plugin.ratings.size()}"
+    }
+
+    def addTag = {
+        println "addTag: $params"
+
+        def plugin = Plugin.get(params.id)
+
+        def tag = Tag.findByName(params.newTag)
+        if (!tag) {
+            tag = new Tag(name: params.newTag)
+            tag.save()
+        }
+
+        plugin.addToTags(tag)
+        assert plugin.save()
+        render(template:'tags', var:'plugin', bean:plugin)
     }
 
     private def pluginWiki(name, plugin, params) {

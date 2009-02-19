@@ -1,7 +1,7 @@
 <%@ page import="org.grails.plugin.Plugin" %>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <gui:resources components="['tabView','dialog']"/>
+    <gui:resources components="['tabView','dialog','autoComplete']"/>
     <g:javascript library="prototype" />
     <yui:javascript dir='animation' file='animation-min.js'/>
     <script src="${createLinkTo(dir:'js', file:'rating.js')}"></script>
@@ -12,10 +12,13 @@
     <meta content="subpage" name="layout"/>
 </head>
 <body>
-<div id="contentPane">
+<%
+    def officialStyle = plugin.official ? 'official' : ''
+%>
+<div id="contentPane" class='${officialStyle}'>
     <div id="infoLinks" style="margin-left:520px;">
         <g:link controller="plugin" action="list">All Plugins</g:link><br/>
-        <g:link controller="plugin" action="editPlugin" params="${[name:plugin.name]}"><img src="${createLinkTo(dir: 'images/', 'icon-edit.png')}" width="15" height="15" alt="Icon Edit" class="inlineIcon" border="0"/>Edit Plugin</g:link>
+        <g:link controller="plugin" action="editPlugin" id="${plugin.id}"><img src="${createLinkTo(dir: 'images/', 'icon-edit.png')}" width="15" height="15" alt="Icon Edit" class="inlineIcon" border="0"/>Edit Plugin</g:link>
     </div>
 
     <gui:dialog id='loginDialog' title="Login required" modal="true">
@@ -24,12 +27,10 @@
 
     <h1>${plugin?.title}</h1>
 
-    <%
-        def officialStyle = plugin.official ? 'official' : ''
-    %>
-    <div class="plugin ${officialStyle}">
 
-        <table class='details'>
+    <div class="plugin">
+
+        <table class='details ${officialStyle}'>
             <tr>
                 <th>Author(s)</th>
                 <td>${plugin.author}</td>
@@ -58,12 +59,28 @@
             <tr>
                 <th>Tags</th>
                 <td colspan='3'>
-                    <g:each var='tag' in="${plugin.tags}">
-                        <span class="tag">${tag.name}</span>
-                    </g:each>
+                    <div id='pluginTags'>
+                        <g:render template='tags' var='plugin' bean="${plugin}"/>
+                    </div>
+                    <img id='addTagTrigger' src="${createLinkTo(dir: 'images/famfamfam', file: 'add.png')}"/>
                 </td>
             </tr>
         </table>
+
+        <gui:dialog id='addTagDialog'
+            title='Add Tags'
+            form='true' controller='plugin' action='addTag' params="${[id:plugin.id]}"
+            triggers="[show:[id:'addTagTrigger',on:'click']]"
+            update='pluginTags'
+        >
+            <gui:autoComplete id='newTag'
+                controller='tag' action='autoCompleteNames'
+                resultName='tagResults'
+                labelField='name'
+                minQueryLength='1'
+                queryDelay='1'
+            />
+        </gui:dialog>
 
         <br/><br/>
 

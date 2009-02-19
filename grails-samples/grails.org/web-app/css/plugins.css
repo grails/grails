@@ -2,13 +2,28 @@
     width: 600px;
 }
 
-.official {
-    background: transparent url(../images/springsource.png) top right no-repeat;
-}
-
 .plugin table {
     border: solid black 1px;
     padding: 10px;
+}
+
+.plugin table.official {
+    background: #a5d7a5 url(../images/springsource.png) bottom right no-repeat;
+}
+
+.plugin .tag {
+    margin:2px;
+    background-color: #6788a9;
+    color: #021b31;
+    padding: 2px 4px;
+}
+
+.plugin .tag a {
+    text-decoration: none;
+    border: none;
+}
+
+#addTagTrigger {
 }
 
 .plugin .unit-rating li {
@@ -19,3 +34,4 @@
 .plugin .unit-rating li a {
     border: none;
 }
+
