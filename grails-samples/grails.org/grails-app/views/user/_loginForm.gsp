@@ -14,9 +14,9 @@
         </div>
         <g:hiddenField name="originalURI" value="${originalURI ?: params.originalURI}" />
         <g:each in="${formData}" var="d">
-            <g:if test="${d.key != 'login' && d.key != 'password'}">
+            %{--<g:if test="${d.key != 'login' && d.key != 'password'}">--}%
                 <g:hiddenField name="${d.key}" value="${d.value}" />
-            </g:if>
+            %{--</g:if>--}%
         </g:each>
 
 
@@ -47,4 +47,4 @@
      </div>
 </div>
 
-<g:render template="/common/messages_effects" model="${pageScope.getVariables()}" />
+%{--<g:render template="/common/messages_effects" model="${pageScope.getVariables()}" />--}%

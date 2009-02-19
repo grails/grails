@@ -2,11 +2,24 @@ package org.grails.plugin
 
 import grails.test.ControllerUnitTestCase
 import org.grails.wiki.WikiPage
+import org.codehaus.groovy.grails.commons.ConfigurationHolder
 
 /*
  * author: Matthew Taylor
  */
 class PluginControllerTests extends ControllerUnitTestCase {
+    def cache = [:]
+
+    void setUp() {
+        super.setUp()
+//        cache.config = ConfigurationHolder.config
+        ConfigurationHolder.config = [grails:[serverURL:'serverurl']]
+    }
+
+    void tearDown() {
+        super.tearDown()
+//        ConfigurationHolder.metaClass.static.getConfig = cache.configHolderGetConfig
+    }
 
     void testShowPlugin() {
         Plugin p = new Plugin(name:'plugin', title:'My Plugin', comments:[])
@@ -25,20 +38,19 @@ class PluginControllerTests extends ControllerUnitTestCase {
     void testCreatePluginGET() {
         mockRequest.method = 'GET'
         mockParams.title='My Plugin'
-        mockParams.description = 'stuff here'
+        mockDomain(WikiPage)
 
         def controller = new PluginController()
         def model = controller.createPlugin()
 
         assert model.plugin
         assertEquals 'My Plugin', model.plugin.title
-        assertEquals 'stuff here', model.plugin.description.body
     }
 
     void testCreatePluginValidationError() {
         mockRequest.method = 'POST'
         mockParams.title='my plugin'
-        mockParams.description='stuff here'
+        mockDomain(WikiPage)
 
         Plugin.metaClass.save = { -> null }
 
@@ -51,17 +63,18 @@ class PluginControllerTests extends ControllerUnitTestCase {
 
     void testCreatePluginValidationSuccess() {
         mockDomain(Plugin)
+        mockDomain(WikiPage)
         mockRequest.method = 'POST'
         mockParams.title='my plugin'
-        mockParams.description='stuff here'
+        mockParams.name='my-plugin'
+        mockParams.authorEmail='blargh'
+        mockParams.currentRelease='1.2'
+        mockParams.downloadUrl='durl'
         def redirectParams = [:]
-
-        PluginController.metaClass.redirect = { Map args -> redirectParams = args }
-        Plugin.metaClass.save = { -> delegate }
 
         def controller = new PluginController()
         controller.createPlugin()
 
-        assertEquals "/", redirectParams.uri
+        assertEquals "show", redirectArgs.action
     }
 }

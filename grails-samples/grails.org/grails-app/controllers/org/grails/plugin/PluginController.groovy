@@ -6,6 +6,7 @@ import org.grails.wiki.BaseWikiController
 import org.grails.wiki.WikiPage
 import org.grails.comment.Comment
 import org.codehaus.groovy.grails.commons.ConfigurationHolder
+import org.grails.auth.User
 
 class PluginController extends BaseWikiController {
 
@@ -18,6 +19,7 @@ class PluginController extends BaseWikiController {
     }
 
     def show = {
+        println "show: $params"
         def plugin = byName(params)
         render view:'showPlugin', model:[plugin:plugin, comments: plugin.comments.sort { it.dateCreated }]
     }
@@ -42,9 +44,9 @@ class PluginController extends BaseWikiController {
     }
 
     def createPlugin = {
-        println "createPlugin:"
-        println params
-        println request
+//        println "createPlugin:"
+//        println params
+//        println request
         def plugin = new Plugin(params)
 
         if(request.method == 'POST') {
@@ -67,6 +69,7 @@ class PluginController extends BaseWikiController {
             plugin.author = request.user
             def saved = plugin.save()
             if(saved) {
+                println "REDIRECTING"
                 redirect(action:'show', params: [name:plugin.name])
             } else {
                 return render(view:'createPlugin', model:[plugin:plugin])
@@ -88,6 +91,20 @@ class PluginController extends BaseWikiController {
             plugin.save()
         }
         redirect(action:'show', params: [name:plugin.name])
+    }
+
+    def rate = {
+        println "rate:params: $params"
+        def plugin = Plugin.get(params.id)
+        def user = request.user
+        // only save if the ip has not already rated
+        def users = plugin.ratings*.user
+        if (!users || !(user in users) ) {
+            def rating = params.rating.toInteger()
+            plugin.addToRatings(stars:rating, user: User.get(user.id))
+            plugin.save()
+        }
+        render "${plugin.avgRating},${plugin.ratings.size()}"
     }
 
     private def pluginWiki(name, plugin, params) {

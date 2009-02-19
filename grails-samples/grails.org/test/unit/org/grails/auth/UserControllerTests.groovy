@@ -218,14 +218,13 @@ public class UserControllerTests extends ControllerUnitTestCase {
     }
 
     void testLoginSuccessWithOriginalPage() {
-        def redirectParams = [:]
-        UserController.metaClass.redirect = {Map m-> redirectParams = m }
+        mockParams.originalURI = "/foo/bar"
+        mockParams.username ="fred"
+        mockParams.password = "letmein"
+        LinkedHashMap.metaClass.toQueryString = { -> '?queryString' }
+        mockRequest.method = "POST"
 
-        def params = [originalURI:"/foo/bar", username:"fred", password:"letmein"]
-        UserController.metaClass.getParams = {-> params }
-        UserController.metaClass.getRequest = {-> [method:"POST", xhr:false] }
         UserController.metaClass.getFlash = {-> [:]}
-
 
         def controller = new UserController()
 
@@ -233,9 +232,7 @@ public class UserControllerTests extends ControllerUnitTestCase {
 
         controller.login()
 
-
-        assertEquals "/foo/bar", redirectParams.url
-        assertEquals params, redirectParams.params
+        assertEquals "/foo/bar?queryString", redirectArgs.url
     }
 
     void testLoginSuccessWithoutOriginalPage() {
@@ -255,6 +252,6 @@ public class UserControllerTests extends ControllerUnitTestCase {
         controller.login()
 
 
-        assertEquals "", redirectParams.uri
+        assertEquals "/", redirectParams.uri
     }
 }

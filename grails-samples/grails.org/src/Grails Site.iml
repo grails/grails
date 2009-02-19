@@ -14,11 +14,13 @@
       <sourceFolder url="file://$MODULE_DIR$/../grails-app/services" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../grails-app/taglib" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../grails-app/utils" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../plugins/grails-ui-1.0.2/grails-app/taglib" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../plugins/jsecurity-0.1.1/src/groovy" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../plugins/jsecurity-0.1.1/src/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../plugins/searchable-0.4-SNAPSHOT/src/groovy" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../plugins/searchable-0.4-SNAPSHOT/src/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../plugins/grails-ui-1.1-SNAPSHOT/grails-app/taglib" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../plugins/jsecurity-0.3/grails-app/taglib" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../plugins/jsecurity-0.3/src/groovy" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../plugins/jsecurity-0.3/src/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../plugins/searchable-0.5.1/src/groovy" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../plugins/searchable-0.5.1/src/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../plugins/yui-2.6.0/grails-app/taglib" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/groovy" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../test/integration" isTestSource="true" />
@@ -26,6 +28,7 @@
     </content>
     <orderEntry type="library" name="GRAILS" level="application" />
     <orderEntry type="library" name="grails-1.1-SNAPSHOT" level="application" />
+    <orderEntry type="library" name="grails-1.1-RC1" level="application" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">

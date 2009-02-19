@@ -7,3 +7,17 @@
 .comment .author {
     margin: 10px;
 }
+
+.postComment form {
+    width: 510px;
+}
+
+.postComment textarea {
+    width: 500px;
+    height: 200px;
+    margin-bottom: 10px;
+}
+
+#commentForm {
+    text-align:right;
+}

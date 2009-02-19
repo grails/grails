@@ -23,8 +23,7 @@ class JSecurityAuthFilters {
                                                         formData:d.params,
                                                         async:true,
                                                         message:"auth.not.logged.in"])
-        }
-        else {
+        } else {
             // Redirect to login page.
             def targetUri = d.request.forwardURI 
             if (d.request.queryString) {

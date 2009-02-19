@@ -11,3 +11,11 @@
     padding: 10px;
 }
 
+.plugin .unit-rating li {
+    float: none;
+    line-height: 0px;
+}
+
+.plugin .unit-rating li a {
+    border: none;
+}

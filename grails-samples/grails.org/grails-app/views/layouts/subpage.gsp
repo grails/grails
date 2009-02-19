@@ -29,7 +29,7 @@
     <g:layoutHead />
 
 </head>
-<body class="subpage">
+<body class="subpage yui-skin-sam">
 
 	<div id="container">
         <jsec:isLoggedIn>

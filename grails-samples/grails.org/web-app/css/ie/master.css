@@ -53,3 +53,7 @@ html, body {
 	color: #666;
 	line-height: 1.35em;
 }
+
+.plugin .unit-rating li a {
+    margin-top: 8px;
+}
