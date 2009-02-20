@@ -318,3 +318,15 @@ body.subpage {
 #results h2 { font: 700 1.0em Arial, sans-serif; }
 #results h3 { font: 700 1.0em Arial, sans-serif; }
 #results h4 { font: 700 1.0em Arial, sans-serif; }
+
+.previewPane {
+    z-index:999;
+    position:absolute;
+    background:white;
+    border:2px solid black;
+    top:100px;
+    width:600px;
+    height:500px;
+    overflow-y:auto;
+    overflow-x:hidden;
+}

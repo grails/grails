@@ -50,3 +50,10 @@
     border: none;
 }
 
+.plugin #loginForm {
+    width: 500px;
+}
+
+.actionIcon {
+    white-space: nowrap;
+}

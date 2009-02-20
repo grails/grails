@@ -29,7 +29,6 @@
 
     <g:if test="${true == async}">
         <g:formRemote name="login" url="[controller:'user',action:'login']" update="${updateElement}">
-
             ${formBody}
         </g:formRemote>
     </g:if>

@@ -2,7 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
     <gui:resources components="['tabView','dialog','autoComplete']"/>
-    <g:javascript library="prototype" />
+    %{--<g:javascript library="prototype" />--}%
+    <g:javascript library="diff_match_patch" />
+    <g:javascript library="scriptaculous" />
     <yui:javascript dir='animation' file='animation-min.js'/>
     <script src="${createLinkTo(dir:'js', file:'rating.js')}"></script>
     <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'plugins.css')}" />
@@ -10,6 +12,7 @@
     <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'ratings.css')}" />
     <title>${plugin.title} Plugin</title>
     <meta content="subpage" name="layout"/>
+    <g:render template="../content/wikiJavaScript"/>    
 </head>
 <body>
 <%
@@ -95,7 +98,9 @@
                 </gui:tab>
             </g:each>
         </gui:tabView>
-    
+
+        <g:render template="../content/previewPane"/>
+        
         <g:render template="/comment/comments" model="${[parentId:plugin.id, comments:comments]}"/>
 
     </div>

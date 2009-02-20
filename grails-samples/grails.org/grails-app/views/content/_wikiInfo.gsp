@@ -2,11 +2,12 @@
 <div id="infoLinks" style="margin-left:500px;">
     <g:remoteLink class="actionIcon" controller="content" action="editWikiPage" id="${wikiPage?.title}" update="${updateElement}">
         <img border="0" src="${createLinkTo(dir:'images/','icon-edit.png')}" width="15" height="15" alt="Icon Edit" class="inlineIcon" border="0" />
+        <span>Edit</span>
     </g:remoteLink>
-    <g:remoteLink controller="content" action="editWikiPage" id="${wikiPage?.title}" update="${updateElement}">Edit</g:remoteLink>
-    <br/>
-    <g:remoteLink update="${updateElement}" controller="content" id="${wikiPage?.title}" params="[xhr:true, update:updateElement]"><img src="${createLinkTo(dir:'images/','icon-edit.png')}" width="15" height="15" alt="Icon Edit" class="inlineIcon" border="0" /></g:remoteLink>
-    <g:remoteLink update="${updateElement}" controller="content" id="${wikiPage?.title}" params="[xhr:true, update:updateElement]">View Page</g:remoteLink>
+    <g:remoteLink class="actionIcon" update="${updateElement}" controller="content" id="${wikiPage?.title}" params="[xhr:true, update:updateElement]">
+        <img src="${createLinkTo(dir:'images/','icon-info.png')}" width="15" height="15" alt="Icon Edit" class="inlineIcon" border="0" />
+        <span>View Page</span>
+    </g:remoteLink>
 </div>
 <g:if test="${!update}">
     <h1>Page: ${wikiPage?.title}</h1>

@@ -1,4 +1,6 @@
-<g:render template="editActions" model="[content:wikiPage]"/>
+<g:set var="updateElement" value="${update ?: 'contentPane'}"/>
+
+<g:render template="editActions" model="[content:wikiPage, update:updateElement]"/>
 
 <div id="uploadDialog" class="dialog" style="display:none;margin-top:10px;width:500px;">
     <iframe id="uploadIframe" width="550" height="40" frameborder="0" scrolling="no" src="${createLink(controller: 'content', action: 'uploadImage', id: wikiPage.title)}"></iframe>

@@ -195,7 +195,7 @@ class ContentController extends BaseWikiController {
         else {
             def page = WikiPage.findByTitle(params.id.decodeURL())
 
-            render(template:"wikiEdit",model:[wikiPage:page])
+            render(template:"wikiEdit",model:[wikiPage:page, update: params.update])
         }
     }
 
@@ -251,7 +251,7 @@ class ContentController extends BaseWikiController {
 							assert v.save()
 
                             evictFromCache(params.id)
-                            render(template:"wikiShow", model:[content:page, message:"wiki.page.updated"])
+                            render(template:"wikiShow", model:[content:page, message:"wiki.page.updated", update: params.update])
                         }
                     }
                 }

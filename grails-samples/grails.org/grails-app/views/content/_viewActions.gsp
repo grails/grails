@@ -6,15 +6,14 @@
         LOCKED<br/>
     </g:if>
     <g:else>
-        <g:remoteLink class="actionIcon" controller="content" action="editWikiPage" id="${content?.title}" update="${updateElement}">
+        <g:remoteLink class="actionIcon" controller="content" action="editWikiPage" id="${content?.title}" params="[update:updateElement]" update="${updateElement}">
             <img border="0" src="${createLinkTo(dir:'images/','icon-edit.png')}" width="15" height="15" alt="Icon Edit" class="inlineIcon" border="0" />
+            <span>Edit</span>
         </g:remoteLink>
-        <g:remoteLink class="actionIcon" controller="content" action="editWikiPage" id="${content?.title}" update="${updateElement}">Edit</g:remoteLink>
     </g:else>
-    <br/>
     <g:remoteLink class="actionIcon" controller="content" action="infoWikiPage" id="${content?.title}" params="[update:updateElement]" update="${updateElement}">
         <img border="0" src="${createLinkTo(dir:'images/','icon-info.png')}" width="15" height="15" alt="Icon Edit" class="inlineIcon" border="0" />
+        <span>View Info</span>
     </g:remoteLink>
-    <g:remoteLink controller="content" action="infoWikiPage" id="${content?.title}" params="[update:updateElement]" update="${updateElement}">View Info</g:remoteLink>
 
 </div>
