@@ -1,3 +1,5 @@
+<g:set var="updateElement" value="${update ?: 'contentPane'}"/>
+
 <g:render template="/common/messages" model="${pageScope.getVariables() + [bean:wikiPage]}" />
 
 <h1>Site Login</h1>
@@ -26,7 +28,7 @@
     </g:set>
 
     <g:if test="${true == async}">
-        <g:formRemote name="login" url="[controller:'user',action:'login']" update="contentPane">
+        <g:formRemote name="login" url="[controller:'user',action:'login']" update="${updateElement}">
 
             ${formBody}
         </g:formRemote>
@@ -40,7 +42,7 @@
      <div>
 
          <g:set var="registerLink">
-            <g:if test="${true == async}"><a href="#" onclick="new Ajax.Updater('contentPane','${createLink(controller:'user', action:'register')}',{method:'GET',asynchronous:true,evalScripts:true,parameters:Form.serialize('login')});return false;">click here</a></g:if>
+            <g:if test="${true == async}"><a href="#" onclick="new Ajax.Updater('${updateElement}','${createLink(controller:'user', action:'register')}',{method:'GET',asynchronous:true,evalScripts:true,parameters:Form.serialize('login')});return false;">click here</a></g:if>
             <g:else><g:link controller="user" action="register">click here</g:link></g:else>
          </g:set>
          If you do not have an account ${registerLink} to register.

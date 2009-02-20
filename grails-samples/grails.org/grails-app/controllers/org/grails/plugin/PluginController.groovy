@@ -2,11 +2,11 @@
 
 package org.grails.plugin
 
-import org.grails.wiki.BaseWikiController
 import org.grails.wiki.WikiPage
 import org.grails.comment.Comment
 import org.codehaus.groovy.grails.commons.ConfigurationHolder
 import org.grails.auth.User
+import org.grails.wiki.BaseWikiController
 
 class PluginController extends BaseWikiController {
 
@@ -24,7 +24,7 @@ class PluginController extends BaseWikiController {
             }.sort { it.title }
         }
         pluginMap = pluginMap.sort { it.key }
-        pluginMap.untagged = Plugin.withCriteria { isEmpty('tags') }
+        pluginMap.untagged = Plugin.withCriteria { isEmpty('tags') }.sort { it.title }
         render view:'listPlugins', model:[pluginMap: pluginMap]
     }
 
@@ -118,14 +118,14 @@ class PluginController extends BaseWikiController {
 
     def addTag = {
         def plugin = Plugin.get(params.id)
-
-        def tag = Tag.findByName(params.newTag)
-        if (!tag) {
-            tag = new Tag(name: params.newTag)
-            tag.save()
+        params.newTag.trim().split(',').each { newTag ->
+            def tag = Tag.findByName(newTag)
+            if (!tag) {
+                tag = new Tag(name: newTag)
+                tag.save()
+            }
+            plugin.addToTags(tag)
         }
-
-        plugin.addToTags(tag)
         assert plugin.save()
         render(template:'tags', var:'plugin', bean:plugin)
     }

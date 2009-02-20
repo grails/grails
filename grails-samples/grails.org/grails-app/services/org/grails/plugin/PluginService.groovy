@@ -33,7 +33,7 @@ class PluginService {
             p.with {
                 name = pxml.@name
                 title = latestRelease.title.toString() ?: pxml.@name
-                description = new WikiPage(title:'Description', body:latestRelease.description.toString() ?: 'Not provided')
+                description = new WikiPage(body:latestRelease.description.toString() ?: 'Not provided')
                 author = latestRelease.author
                 authorEmail = latestRelease.authorEmail
                 documentationUrl = latestRelease.documentation
@@ -62,10 +62,30 @@ class PluginService {
             }
 
             if (!plugin) {
+                // injecting a unique wiki page name for description
+                // pull off the desc so we don't try to save it
+                def descWiki = master.description
+                master.description = null
+                // so we need to save the master first to get its id
+                if (!master.save()) {
+                    log.error "Could not save master plugin: $master.name ($master.title), version $master.currentRelease"
+                    master.errors.allErrors.each { log.error "\t$it" }
+                }
+                // put the wiki page back with a unique title
+                descWiki.title = "description-${master.id}"
+                master.description = descWiki
 //                println "No existing plugin, creating new ==> ${master.name}"
                 // before saving the master, we need to save the description wiki page
                 if (!master.description.save() && master.description.hasErrors()) {
                     master.description.errors.allErrors.each { log.error it }
+                } else {
+                    def v = master.description.createVersion()
+                    v.author = User.findByLogin('admin')
+                    try {
+                        v.save(flush:true)
+                    } catch (Exception e) {
+                        println "WARNING: Can't save version ${v.title} (${v.number})"
+                    }
                 }
                 // save new master plugin
                 if (!master.save()) {
@@ -111,6 +131,14 @@ class PluginService {
 //            println  "Local plugin '$plugin.name' was not updated properly... errors follow:"
             log.warn "Local plugin '$plugin.name' was not updated properly... errors follow:"
 //            plugin.errors.allErrors.each { log.warn it; println it }
+        } else {
+            def v = plugin.description.createVersion()
+            v.author = User.findByLogin('admin')
+            try {
+                assert v.save(flush:true)
+            } catch (Exception e) {
+                println "WARNING: Can't save version ${v.title} (${v.number})"
+            }
         }
         
 //        println  "Local plugin '$plugin.name' was updated with master version."

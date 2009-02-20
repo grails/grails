@@ -1,4 +1,6 @@
-<g:render template="viewActions" model="[content:content]" />
+<g:set var="updateElement" value="${update ?: 'contentPane'}"/>
+
+<g:render template="viewActions" model="[content:content, update:updateElement]" />
 <g:render template="/common/messages" model="${pageScope.getVariables() + [bean:content]}" />
 
 <wiki:text key="${content?.title}">

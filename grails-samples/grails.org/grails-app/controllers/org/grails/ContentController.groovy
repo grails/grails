@@ -10,8 +10,9 @@ import org.grails.content.notifications.ContentAlertStack
 import org.grails.wiki.BaseWikiController
 import org.grails.comment.Comment
 import org.grails.content.Content
+import org.grails.plugin.Plugin
 
-class ContentController extends BaseWikiController{
+class ContentController extends BaseWikiController {
     
     static accessControl = {
         // Alternatively, several actions can be specified.
@@ -90,7 +91,23 @@ class ContentController extends BaseWikiController{
         if(pageName) {
             if(pageName == 'Home') {
                 render(view:"homePage")
-            }  else {
+            }
+            // treat plugin pages differently
+            else if (pageName.matches(/(${Plugin.WIKIS.join('|')})-[0-9]*/)) {
+                println "trying to show a plugin wiki: ${pageName}"
+                // name will look like this: description-34
+                // last half is plugin id
+                def plugin = Plugin.get(pageName.split('-')[1])
+                println "plugin: $plugin.name"
+                if (request.xhr) {
+                    println 'ajax request'
+                    // update the wikiTab, not the whole contentPane
+                    def wikiPage = getCachedOrReal(pageName)
+                    return render(template:"wikiShow", model:[content:wikiPage, update:"${pageName.split('-')[0]}Tab"])
+                }
+                redirect(controller:'plugin', action:'show', params:[name:plugin.name])
+            }
+            else {
                 def wikiPage = getCachedOrReal(pageName)
                 if(wikiPage) {
                     if(request.xhr) {
@@ -142,7 +159,7 @@ class ContentController extends BaseWikiController{
         }
 
         if(version) {
-            render(view:"showVersion", model:[content:version])                    
+            render(view:"showVersion", model:[content:version, update:params.update])                    
         }
         else {
             render(view:"contentPage", model:[content:page])
@@ -166,7 +183,7 @@ class ContentController extends BaseWikiController{
             def pageVersions = Version.findAllByCurrent(page)
             pageVersions = pageVersions.sort { it.number }                        
 
-            render(template:'wikiInfo',model:[wikiPage:page, versions:pageVersions])
+            render(template:'wikiInfo',model:[wikiPage:page, versions:pageVersions, update:params.update])
         }
 
     }

@@ -1,3 +1,4 @@
+<g:set var="updateElement" value="${update ?: 'contentPane'}" />
 <g:if test="${message}">
     <div id="message" class="message">${message}</div>
 </g:if>
@@ -5,10 +6,10 @@
 
 <g:each in="${versions}" var="v">
     <li>
-        <g:remoteLink update="contentPane"
+        <g:remoteLink update="${updateElement}"
                 controller="content"
                 action="showWikiVersion" id="${wikiPage?.title}"
-                params="[number:v.number]">
+                params="[number:v.number, update:updateElement]">
             Version ${v.number}</g:remoteLink> (Updated by <strong>${v.author.login}</strong>)
 
         <jsec:authenticated>

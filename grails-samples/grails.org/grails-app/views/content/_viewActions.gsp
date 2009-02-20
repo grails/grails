@@ -1,18 +1,20 @@
 <div id="viewLinks" style="margin-left:500px;">
 
+    <g:set var="updateElement" value="${update ?: 'contentPane'}"/>
+
     <g:if test="${content?.locked}">
         LOCKED<br/>
     </g:if>
     <g:else>
-        <g:remoteLink class="actionIcon" action="editWikiPage" id="${content?.title}" update="contentPane">
+        <g:remoteLink class="actionIcon" controller="content" action="editWikiPage" id="${content?.title}" update="${updateElement}">
             <img border="0" src="${createLinkTo(dir:'images/','icon-edit.png')}" width="15" height="15" alt="Icon Edit" class="inlineIcon" border="0" />
         </g:remoteLink>
-        <g:remoteLink action="editWikiPage" id="${content?.title}" update="contentPane">Edit</g:remoteLink>
+        <g:remoteLink class="actionIcon" controller="content" action="editWikiPage" id="${content?.title}" update="${updateElement}">Edit</g:remoteLink>
     </g:else>
-
-    <g:remoteLink class="actionIcon" action="infoWikiPage" id="${content?.title}" update="contentPane">
+    <br/>
+    <g:remoteLink class="actionIcon" controller="content" action="infoWikiPage" id="${content?.title}" params="[update:updateElement]" update="${updateElement}">
         <img border="0" src="${createLinkTo(dir:'images/','icon-info.png')}" width="15" height="15" alt="Icon Edit" class="inlineIcon" border="0" />
     </g:remoteLink>
-    <g:remoteLink action="infoWikiPage" id="${content?.title}" update="contentPane">View Info</g:remoteLink>
+    <g:remoteLink controller="content" action="infoWikiPage" id="${content?.title}" params="[update:updateElement]" update="${updateElement}">View Info</g:remoteLink>
 
 </div>

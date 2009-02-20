@@ -36,6 +36,7 @@ target(importConfluenceXML: "The implementation task") {
 					def wikiPage = wikiPageClass.newInstance(title:page.title, body:handler.bodies[i])
 					try {
                         wikiPage.save(flush:true)
+                        println "Saved ${wikiPage.title}"
                     } catch (Exception e) {
                         println "WARNING: Can't save page ${page.title}"
                         println e.message
@@ -47,7 +48,11 @@ target(importConfluenceXML: "The implementation task") {
 					} else {
                         def v = wikiPage.createVersion()
                         v.author = adminUser
-                        assert v.save(flush:true)
+                        try {
+                            v.save(flush:true)
+                        } catch (Exception e) {
+                            println "WARNING: Can't save version ${v.title} (${v.number})"
+                        }
                     }
 
             }

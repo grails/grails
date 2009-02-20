@@ -22,6 +22,7 @@ class JSecurityAuthFilters {
             d.render(template:"/user/loginForm", model:[originalURI:d.request.forwardURI,
                                                         formData:d.params,
                                                         async:true,
+                                                        update:d.params.update
                                                         message:"auth.not.logged.in"])
         } else {
             // Redirect to login page.

@@ -30,7 +30,6 @@ target(translateContextToPlugin: "The implementation task") {
 
     def pluginCategories
     pluginList.body.eachLine { line ->
-        println line
         if (line.contains('h2.')) {
             pluginCategories = (line - 'h2.').trim().trim().split('/')
             pluginCategories = pluginCategories.collect { cat ->
@@ -64,33 +63,11 @@ target(translateContextToPlugin: "The implementation task") {
         }
     }
 
-/*
-    // for each * [Plugin Name] in the markup, we'll try to grab and parse
-    matcher = pluginList.body =~ /\* \[([^\[\]]*)\]/ // matches "* [Plugin name]"
-
-    println "Found ${matcher.size()} plugins within wiki pages... processing..."
-    matcher.each {match ->
-        def title = match[1].split(/\|/)[0]
-        def pluginContent = wikiClass.findByTitle(title)
-
-        if (!pluginContent) {
-            println " ! There was no Wiki Page with title '${title}'"
-            def url = match[1].split(/\|/)[1]
-            println " ->Trying by url: ${url}"
-            pluginContent = wikiClass.findByTitle(url)
-        }
-
-        if (!pluginContent) {
-            println "X: ${title} has no docs on grails.org, see: ${match[1].split(/\|/)[1]}"
-        } else {
-            contentToPlugin pluginContent
-        }
-    }
-*/
 }
 
 private contentToPlugin(c, tagNames) {
     println "--> Translating $c.title to plugin..."
+    def adminUser = grailsApp.getDomainClass("org.grails.auth.User").clazz.findByLogin('admin')
     def pluginClass = grailsApp.getDomainClass("org.grails.plugin.Plugin").clazz
     def wikiClass = grailsApp.getDomainClass("org.grails.wiki.WikiPage").clazz
     def tagClass = grailsApp.getDomainClass("org.grails.plugin.Tag").clazz
@@ -126,10 +103,7 @@ private contentToPlugin(c, tagNames) {
     }
 
     p.title = c.title
-    def descWiki = wikiClass.newInstance()
-    descWiki.title = 'description'
-    descWiki.body = c.body
-    p.description = descWiki
+
     p.author = author.login
     p.authorEmail = author.email
     p.documentationUrl = 'not provided'
@@ -140,13 +114,31 @@ private contentToPlugin(c, tagNames) {
         println "!! ERROR saving plugins ${p}!!"
         p.errors.allErrors.each { println it }
     }
+
+    assert p.save(flush:true)
+
+    // needed to save the plugin before adding the description wiki page, because we need to identify the plugin by id
+    // within the wiki description to ensure it is unique
+    def descWiki = wikiClass.newInstance()
+    descWiki.title = "description-${p.id}"
+    descWiki.body = c.body
+    p.description = descWiki
     if (!p.description.validate()) {
         println "!! ERROR saving pluging description wiki for ${p}!!"
         p.description.errors.allErrors.each { println it }
     }
     assert p.description.save()
+
+    def v = p.description.createVersion()
+    v.author = adminUser
+    try {
+        v.save(flush:true)
+    } catch (Exception e) {
+        println "WARNING: Can't save version ${v.title} (${v.number})"
+    }   
+
     p.tags = []
-    assert p.save(flush:true)
+    p.save(flush:true)
 
     // working with the tag names provided to add tags to new plugins appropriately
     tagNames.each { tagName ->
@@ -164,7 +156,7 @@ private contentToPlugin(c, tagNames) {
 
     // adding a comment to the plugin about this move
     def comment = grailsApp.getDomainClass("org.grails.comment.Comment").clazz.newInstance()
-    comment.user = grailsApp.getDomainClass("org.grails.auth.User").clazz.findByLogin('admin')
+    comment.user = adminUser
     comment.body = """This Plugin page was automatically generated.  To see the old Wiki version, go to [${p.title}]. \
 This will only be available for a limited time in order for plugin authors to make adjustments during this \
 transition."""
@@ -178,7 +170,7 @@ transition."""
 
     // add a comment to the original content object before locking it
     comment = grailsApp.getDomainClass("org.grails.comment.Comment").clazz.newInstance()
-    comment.user = grailsApp.getDomainClass("org.grails.auth.User").clazz.findByLogin('admin')
+    comment.user = adminUser
     comment.body = """This wiki page has been locked because another page outdates it.  Please see the new plugin page \
 for "${c.title}" [here|${ConfigurationHolder.config.grails.serverURL}/plugin/${p.name}]."""
     if (!comment.validate()) {

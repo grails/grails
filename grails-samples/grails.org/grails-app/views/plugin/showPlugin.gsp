@@ -89,8 +89,8 @@
 
         <gui:tabView>
             <g:each var="wiki" in="${Plugin.WIKIS}">
-                <gui:tab label="${wiki[0].toUpperCase() + wiki[1..-1]}" active="${wiki == 'description'}">
-                    <g:render template="../content/viewActions" model="[content:plugin[wiki]]" />
+                <gui:tab id="${wiki}Tab" label="${wiki[0].toUpperCase() + wiki[1..-1]}" active="${wiki == 'description'}">
+                    <g:render template="../content/viewActions" model="${[content: plugin[wiki], update: wiki + 'Tab']}"/>
                     <div class='${wiki}, wikiPage'><wiki:text>${plugin."$wiki"}</wiki:text></div>
                 </gui:tab>
             </g:each>
