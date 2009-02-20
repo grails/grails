@@ -59,28 +59,30 @@
             <tr>
                 <th>Tags</th>
                 <td colspan='3'>
-                    <div id='pluginTags'>
+                    <span id='pluginTags'>
                         <g:render template='tags' var='plugin' bean="${plugin}"/>
-                    </div>
-                    <img id='addTagTrigger' src="${createLinkTo(dir: 'images/famfamfam', file: 'add.png')}"/>
+                    </span>
+                    <jsec:isLoggedIn><span id='addTagTrigger' ><img src="${createLinkTo(dir: 'images/famfamfam', file: 'add.png')}"/></span></jsec:isLoggedIn>
                 </td>
             </tr>
         </table>
 
-        <gui:dialog id='addTagDialog'
-            title='Add Tags'
-            form='true' controller='plugin' action='addTag' params="${[id:plugin.id]}"
-            triggers="[show:[id:'addTagTrigger',on:'click']]"
-            update='pluginTags'
-        >
-            <gui:autoComplete id='newTag'
-                controller='tag' action='autoCompleteNames'
-                resultName='tagResults'
-                labelField='name'
-                minQueryLength='1'
-                queryDelay='1'
-            />
-        </gui:dialog>
+        <jsec:isLoggedIn>
+            <gui:dialog id='addTagDialog'
+                title='Add Tags'
+                form='true' controller='plugin' action='addTag' params="${[id:plugin.id]}"
+                triggers="[show:[id:'addTagTrigger',on:'click']]"
+                update='pluginTags'
+            >
+                <gui:autoComplete id='newTag'
+                    controller='tag' action='autoCompleteNames'
+                    resultName='tagResults'
+                    labelField='name'
+                    minQueryLength='1'
+                    queryDelay='1'
+                />
+            </gui:dialog>
+        </jsec:isLoggedIn>
 
         <br/><br/>
 
@@ -88,6 +90,7 @@
         <gui:tabView>
             <g:each var="wiki" in="${Plugin.WIKIS}">
                 <gui:tab label="${wiki[0].toUpperCase() + wiki[1..-1]}" active="${wiki == 'description'}">
+                    <g:render template="../content/viewActions" model="[content:plugin[wiki]]" />
                     <div class='${wiki}, wikiPage'><wiki:text>${plugin."$wiki"}</wiki:text></div>
                 </gui:tab>
             </g:each>

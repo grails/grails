@@ -17,6 +17,8 @@ class UrlMappings {
         "/plugin/list"(controller: "plugin", action:"list")
         "/plugin/create"(controller: "plugin", action:"createPlugin")
         "/plugin/edit/$id"(controller: "plugin", action:"editPlugin")
+        // always allow autocomplete for tags
+        "/tag/autoCompleteNames"(controller:'plugin', action:'autoCompleteNames')
 
         "/search"(controller: "content", action: "search")
         "/upload/$id?"(controller: "content", action: "uploadImage")

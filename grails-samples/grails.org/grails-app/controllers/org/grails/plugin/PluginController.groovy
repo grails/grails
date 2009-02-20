@@ -117,8 +117,6 @@ class PluginController extends BaseWikiController {
     }
 
     def addTag = {
-        println "addTag: $params"
-
         def plugin = Plugin.get(params.id)
 
         def tag = Tag.findByName(params.newTag)
@@ -129,6 +127,13 @@ class PluginController extends BaseWikiController {
 
         plugin.addToTags(tag)
         assert plugin.save()
+        render(template:'tags', var:'plugin', bean:plugin)
+    }
+
+    def removeTag = {
+        def plugin = Plugin.get(params.id)
+        plugin.tags.remove(Tag.findByName(params.tagName))
+        plugin.save()
         render(template:'tags', var:'plugin', bean:plugin)
     }
 

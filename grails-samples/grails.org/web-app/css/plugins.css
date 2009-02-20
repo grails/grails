@@ -3,8 +3,9 @@
 }
 
 .plugin table {
-    border: solid black 1px;
+    border: solid #456145 1px;
     padding: 10px;
+    width: 600px;
 }
 
 .plugin table.official {
@@ -16,6 +17,8 @@
     background-color: #6788a9;
     color: #021b31;
     padding: 2px 4px;
+    border: 1px solid #536a82;
+    white-space: nowrap;
 }
 
 .plugin .tag a {
@@ -23,7 +26,19 @@
     border: none;
 }
 
-#addTagTrigger {
+.plugin .tag img {
+    margin-bottom: -3px;
+    opacity: 0.75;
+}
+
+#pluginTags {
+    line-height: 25px;
+    overflow: auto;
+}
+
+#addTagTrigger img {
+    margin-bottom: -3px;
+    margin-left: 3px;
 }
 
 .plugin .unit-rating li {
