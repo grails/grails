@@ -89,7 +89,6 @@
 
         <br/><br/>
 
-
         <gui:tabView>
             <g:each var="wiki" in="${Plugin.WIKIS}">
                 <gui:tab id="${wiki}Tab" label="${wiki[0].toUpperCase() + wiki[1..-1]}" active="${wiki == 'description'}">

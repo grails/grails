@@ -119,15 +119,19 @@ private contentToPlugin(c, tagNames) {
 
     // needed to save the plugin before adding the description wiki page, because we need to identify the plugin by id
     // within the wiki description to ensure it is unique
-    def descWiki = wikiClass.newInstance()
-    descWiki.title = "description-${p.id}"
-    descWiki.body = c.body
+    def descWiki = wikiClass.newInstance(title:"description-${p.id}", body: c.body)
     p.description = descWiki
     if (!p.description.validate()) {
         println "!! ERROR saving pluging description wiki for ${p}!!"
         p.description.errors.allErrors.each { println it }
     }
     assert p.description.save()
+    p.installation = wikiClass.newInstance(title:"installation-${p.id}", body: '')
+    assert p.installation.save()
+    p.faq = wikiClass.newInstance(title:"faq-${p.id}", body: '')
+    assert p.faq.save()
+    p.screenshots = wikiClass.newInstance(title:"screenshots-${p.id}", body: '')
+    assert p.screenshots.save()
 
     def v = p.description.createVersion()
     v.author = adminUser

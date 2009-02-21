@@ -33,7 +33,7 @@ class PluginService {
             p.with {
                 name = pxml.@name
                 title = latestRelease.title.toString() ?: pxml.@name
-                description = new WikiPage(body:latestRelease.description.toString() ?: 'Not provided')
+                description = new WikiPage(body:latestRelease.description.toString() ?: '')
                 author = latestRelease.author
                 authorEmail = latestRelease.authorEmail
                 documentationUrl = latestRelease.documentation
@@ -86,6 +86,11 @@ class PluginService {
                     } catch (Exception e) {
                         println "WARNING: Can't save version ${v.title} (${v.number})"
                     }
+                }
+                //inject dummy wikis for users to fill in
+                (Plugin.WIKIS - 'description').each { wiki ->
+                    master."$wiki" = new WikiPage(title:"$wiki-${master.id}", body:'')
+                    assert master."$wiki".save()
                 }
                 // save new master plugin
                 if (!master.save()) {

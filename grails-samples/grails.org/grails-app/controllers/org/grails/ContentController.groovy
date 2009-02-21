@@ -200,7 +200,10 @@ class ContentController extends BaseWikiController {
     }
 
     def createWikiPage = {
-           [pageName:params.id?.decodeURL()]
+        if (params.xhr) {
+            return render(template:'wikiCreate', var:'pageName', bean:params.id?.decodeURL())
+        }
+        [pageName:params.id?.decodeURL()]
     }
 
 

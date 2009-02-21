@@ -53,9 +53,6 @@ class PluginController extends BaseWikiController {
     }
 
     def createPlugin = {
-//        println "createPlugin:"
-//        println params
-//        println request
         def plugin = new Plugin(params)
 
         if(request.method == 'POST') {

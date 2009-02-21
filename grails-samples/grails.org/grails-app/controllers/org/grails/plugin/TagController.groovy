@@ -8,12 +8,19 @@ import grails.converters.JSON
 class TagController {
 
     def autoCompleteNames = {
-        println "autoCompleteNames: $params"
-        def tags = Tag.findAllByNameLike("${params.query}%")
+        def delimits
+        def csvPre = ''
+        def query = params.query
+        if (query.contains(',') && !query.trim().endsWith(',')) {
+            delimits = query.trim().split(',')
+            csvPre = delimits[0..-2].join(', ') + ', '
+            query = delimits[-1]
+        }
+        def tags = Tag.findAllByNameLike("${query.trim()}%")
         response.setHeader("Cache-Control", "no-store")
 
         def results = tags.collect {
-            [ id: it.id, name: it.name ]
+            [ id: it.id, name: csvPre + it.name ]
         }
 
         def data = [ tagResults: results ]
