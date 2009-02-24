@@ -1,0 +1,36 @@
+/* RSS contextual menu links */
+#cms_rssfeed_contextmenu li.yuimenuitem .yuimenuitemlabel {
+	background-position: left;
+	background-repeat: no-repeat;
+}
+li.yuimenuitem.cms_rss_bloglines .yuimenuitemlabel {
+	background-image: url(bloglines.gif);
+}
+li.yuimenuitem.cms_rss_yahoo .yuimenuitemlabel {
+	background-image: url(yahoo.gif);
+}
+li.yuimenuitem.cms_rss_google .yuimenuitemlabel {
+	background-image: url(google.gif);
+}
+li.yuimenuitem.cms_rss_netvibes .yuimenuitemlabel {
+	background-image: url(netvibes.gif);
+}
+li.yuimenuitem.cms_rss_msn .yuimenuitemlabel {
+	background-image: url(msn.gif);
+}
+li.yuimenuitem.cms_rss_newsgator .yuimenuitemlabel {
+	background-image: url(newsgator.gif);
+}
+li.yuimenuitem.cms_rss_link .yuimenuitemlabel {
+	background-image: url(feed.gif);
+}
+/* Close element in Context Menus */
+div.yuimenu li.closemenu {
+	text-align: right;
+}
+	div.yuimenu li.closemenu a {
+		text-align: right;
+		font-size: 9px;
+		margin-left: auto;
+		margin-right: auto;
+	}

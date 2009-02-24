@@ -1,0 +1,30 @@
+/* Bookmark contextual menu links */
+#cms_bookmark_contextmenu li.yuimenuitem .yuimenuitemlabel {
+	background-position: left;
+	background-repeat: no-repeat;
+}
+li.yuimenuitem.cms_bm_meneame .yuimenuitemlabel {
+	background-image: url(meneame.gif);
+}
+li.yuimenuitem.cms_bm_digg .yuimenuitemlabel {
+	background-image: url(digg.gif);
+}
+li.yuimenuitem.cms_bm_delicious .yuimenuitemlabel {
+	background-image: url(delicious.gif);
+}
+li.yuimenuitem.cms_bm_technorati .yuimenuitemlabel {
+	background-image: url(technorati.gif);
+}
+li.yuimenuitem.cms_bm_yahoo .yuimenuitemlabel {
+	background-image: url(yahoo.gif);
+}
+/* Close element in Context Menus */
+div.yuimenu li.closemenu {
+	text-align: right;
+}
+	div.yuimenu li.closemenu a {
+		text-align: right;
+		font-size: 9px;
+		margin-left: auto;
+		margin-right: auto;
+	}

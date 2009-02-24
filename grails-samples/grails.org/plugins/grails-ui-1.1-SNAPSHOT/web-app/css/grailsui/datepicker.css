@@ -1,0 +1,15 @@
+.yui-skin-sam .yui-calendar {
+    width: 100%;
+}
+
+.yui-skin-sam .yui-calcontainer {
+    float: none;
+}
+
+.yui-skin-sam .yui-panel-container .timeInput select {
+    font-size: 6pt;
+}
+
+.yui-skin-sam .yui-panel-container .timeInput {
+    text-align: center;
+}

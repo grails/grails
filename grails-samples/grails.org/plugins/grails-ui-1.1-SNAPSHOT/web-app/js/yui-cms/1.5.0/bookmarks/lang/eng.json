@@ -1,0 +1,9 @@
+<?php
+$result = array("CMO_BOOKMARK" => 'Bookmark',
+				"CMO_BOOKMARK_MENEAME" => 'Add to Meneame',
+				"CMO_BOOKMARK_DIGG" => 'Add to Digg',
+				"CMO_BOOKMARK_DELICIOUS" => 'Add to Del.icio.us',
+				"CMO_BOOKMARK_TECHNORATI" => 'Add to Technorati',
+				"CMO_BOOKMARK_YAHOO" => 'Add to Yahoo!',
+				"MCMS_CLOSE" => 'Close');
+?>
