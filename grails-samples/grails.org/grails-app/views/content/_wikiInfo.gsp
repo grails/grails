@@ -12,6 +12,7 @@
 <g:if test="${!update}">
     <h1>Page: ${wikiPage?.title}</h1>
 </g:if>
+<g:if test="${versions}">
 <p>
     <strong>First Created:</strong> ${wikiPage?.dateCreated} by <strong>${versions[0].author.login}</strong>
 </p>
@@ -23,3 +24,5 @@
 <div id="versions">
     <g:render template="versionList" model="[versions:versions, wikiPage:wikiPage, update:updateElement]" />
 </div>
+</g:if>
+<g:else>No Versions</g:else>
