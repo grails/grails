@@ -85,7 +85,6 @@ class ContentController extends BaseWikiController {
     }
 
     def index = {
-//        println params
         def pageName = params.id
 
         if(pageName) {
@@ -94,13 +93,10 @@ class ContentController extends BaseWikiController {
             }
             // treat plugin pages differently
             else if (pageName.matches(/(${Plugin.WIKIS.join('|')})-[0-9]*/)) {
-                println "trying to show a plugin wiki: ${pageName}"
                 // name will look like this: description-34
                 // last half is plugin id
                 def plugin = Plugin.get(pageName.split('-')[1])
-                println "plugin: $plugin.name"
                 if (request.xhr) {
-                    println 'ajax request'
                     // update the wikiTab, not the whole contentPane
                     def wikiPage = getCachedOrReal(pageName)
                     return render(template:"wikiShow", model:[content:wikiPage, update:"${pageName.split('-')[0]}Tab"])
@@ -111,11 +107,8 @@ class ContentController extends BaseWikiController {
                 def wikiPage = getCachedOrReal(pageName)
                 if(wikiPage) {
                     if(request.xhr) {
-//                        println "render wikiShow..."
                         render(template:"wikiShow", model:[content:wikiPage])
                     } else {
-//                        println "render contentPage..."
-//                        println wikiPage.comments
                         render(view:"contentPage", model:[content:wikiPage, comments: wikiPage.comments.sort { it.dateCreated }])
                     }
                 }
@@ -129,14 +122,12 @@ class ContentController extends BaseWikiController {
 	}
 
     def postComment = {
-//        println params
         def content = Content.get(params.id)
         if (params.comment) {
             def c = new Comment(body:params.comment, user: request.user)
             content.addToComments(c)
             assert content.save(flush:true)
         }
-//        println "Saved comment to content ${content.title}"
         redirect(action:'index', params: [id:content.title])
     }
 
@@ -360,8 +351,8 @@ class ContentController extends BaseWikiController {
         if(request.method == 'POST') {
             MultipartFile file = request.getFile('file')
             ServletContext context = getServletContext()
-            def path = context.getRealPath("/images${ params.id ? '/'+params.id : ''}")
-            log.info "Uploading image, file: ${file.absolutePath} (${file.contentType}) to be saved at $path"
+            def path = context.getRealPath("/images${ params.id ? '/' + params.id.encodeAsURL() : '' }" )
+            log.info "Uploading image, file: ${file.originalFilename} (${file.contentType}) to be saved at $path"
             if(config.wiki.supported.upload.types?.contains(file.contentType)) {
                 def newFilename = file.originalFilename.replaceAll(/\s+/, '_')
                 File targetFile = new File("$path/${newFilename}")
@@ -373,7 +364,7 @@ class ContentController extends BaseWikiController {
                     log.info "Success! Rendering message back to view"
                     render(view:"/common/iframeMessage", model:[pageId:"upload",
                             frameSrc: g.createLink(controller:'content', action:'uploadImage', id:params.id),
-                            message: "Upload complete. Use the syntax !${params.id? params.id + '/' : ''}${newFilename}! to refer to your file"])
+                            message: "Upload complete. Use the syntax !${params.id ? params.id.encodeAsURL() + '/' : ''}${newFilename}! to refer to your file"])
                 } catch (Exception e) {
                     log.error(e.message, e)
                     render(view:"/common/uploadDialog",model:[category:params.id,message:"Error uploading file!"])
