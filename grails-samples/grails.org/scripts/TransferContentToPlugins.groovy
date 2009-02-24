@@ -2,6 +2,7 @@ import org.springframework.orm.hibernate3.SessionHolder
 import org.springframework.orm.hibernate3.SessionFactoryUtils
 import org.springframework.transaction.support.TransactionSynchronizationManager
 import org.codehaus.groovy.grails.commons.ConfigurationHolder
+import org.codehaus.groovy.grails.web.context.ServletContextHolder
 
 grailsHome = Ant.project.properties."environment.GRAILS_HOME"
 
@@ -190,4 +191,48 @@ for "${c.title}" [here|${ConfigurationHolder.config.grails.serverURL}/plugin/${p
     }
     c.locked = true
     assert c.save(flush:true)
+
+    // handle any image references
+    def context = org.codehaus.groovy.grails.commons.ApplicationHolder.application.parentContext.servletContext
+    def imageMatcher = p.description.body =~ /\![a-zA-Z0-9_+\/\.\-\%]+\!/
+    imageMatcher.each { match ->
+        println "\tFound image reference: $match"
+        def relPath = match.toString().replaceAll('!','')
+        def existingFile = new File(context.getRealPath("/images/${relPath}"))
+        println "\t\tI think I found that image here: ${existingFile.absolutePath}"
+        if (!existingFile.exists()) {
+            println "\t\tWARNING: ${existingFile.absolutePath} does not exist... trying another place..."
+            // try looking in the wiki page name directory
+            relPath = "${c.title.encodeAsURL()}/${relPath}"
+            existingFile = new File(context.getRealPath("/images/${relPath}"))
+            if (!existingFile.exists()) {
+                println "\t\tWARNING: ${existingFile.absolutePath} does not exist... I GIVE UP!!"
+                return
+            }
+        }
+        def newFileName = relPath.split('/')[-1]
+        def newPath = context.getRealPath("/images/${p.description.title.encodeAsURL()}/${newFileName}")
+        def newFile = new File("$newPath")
+        println "\t\tI'm going to put the new one here: ${newFile.absolutePath}"
+        if(!newFile.parentFile.exists()) newFile.parentFile.mkdirs()
+        try {
+            copyFile(existingFile, newFile)
+        } catch (IOException e) {
+            println "\t\tERROR: $e"
+            return
+        }
+        // if the image file copy was make properly, we'll need to update the wiki page with the new reference
+        def newRelPath = relPath.replace(c.title.encodeAsURL(), p.description.title.encodeAsURL())
+        println "\t\tREPLACING ${match.toString()} with !${newRelPath}!"
+        p.description.body = p.description.body.replace(match.toString(), "!${newRelPath}!")
+    }
+    assert p.description.save()
+}
+
+private void copyFile(File source, File destination) {
+   def reader = source.newReader()
+   destination.withWriter { writer ->
+       writer << reader
+   }
+   reader.close()
 }
