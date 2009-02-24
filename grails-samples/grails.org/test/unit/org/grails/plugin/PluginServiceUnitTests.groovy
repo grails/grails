@@ -43,9 +43,12 @@ class PluginServiceUnitTests extends grails.test.GrailsUnitTestCase {
         assertTrue autobase.description.body.startsWith('This plugin marries the ')
         assertEquals 'http://github.com/RobertFischer/autobase/wikis', autobase.documentationUrl
         assertEquals 'http://plugins.grails.org/grails-autobase/tags/RELEASE_0_8_1/grails-autobase-0.8.1.zip', autobase.downloadUrl
+
         def avatar = plugins[1]
         // ensure the grailsVersion got in
         assertEquals '1.1 > *', avatar.grailsVersion
+        // ensure the docs got translated to the new site framework
+        assertEquals 'http://grails.org/plugin/avatar', avatar.documentationUrl
     }
     
     void testTranslateMasterPlugins_AddsPluginsThatDontExist() {

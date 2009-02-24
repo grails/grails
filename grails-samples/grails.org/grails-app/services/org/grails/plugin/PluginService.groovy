@@ -37,13 +37,20 @@ class PluginService {
                 description = new WikiPage(body:latestRelease.description.toString() ?: '')
                 author = latestRelease.author
                 authorEmail = latestRelease.authorEmail
-                documentationUrl = latestRelease.documentation
+                documentationUrl = replaceOldDocsWithNewIfNecessary(latestRelease.documentation, name)
                 downloadUrl = latestRelease.file
                 currentRelease = latestRelease.@version
             }
 
             pluginsList << p
         }
+    }
+
+    private def replaceOldDocsWithNewIfNecessary(oldDocs, name) {
+        println oldDocs
+        boolean match = oldDocs =~ /http:\/\/(www\.)?grails.org\//
+        println match
+        return match ? "http://grails.org/plugin/${name}" : oldDocs
     }
 
     def translateMasterPlugins(masters) {
