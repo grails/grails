@@ -34,7 +34,7 @@ class Plugin {
         faq(nullable: true)
         screenshots(nullable: true)
         author(nullable: true)
-        grailsVersion(nullable:true, blank:false, maxLength:16)
+        grailsVersion(nullable:true, blank:true, maxLength:16)
     }
 
     def getOfficial() {

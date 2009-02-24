@@ -32,6 +32,7 @@ class PluginService {
             def p = new Plugin()
             p.with {
                 name = pxml.@name
+                grailsVersion = pxml.@grailsVersion
                 title = latestRelease.title.toString() ?: pxml.@name
                 description = new WikiPage(body:latestRelease.description.toString() ?: '')
                 author = latestRelease.author
@@ -131,6 +132,7 @@ class PluginService {
         plugin.documentationUrl = master.documentationUrl
         plugin.downloadUrl = master.downloadUrl
         plugin.currentRelease = master.currentRelease
+        plugin.grailsVersion = master.grailsVersion
 
         if (!plugin.save()) {
 //            println  "Local plugin '$plugin.name' was not updated properly... errors follow:"

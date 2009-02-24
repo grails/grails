@@ -5,7 +5,7 @@ import org.grails.content.Version
 import org.grails.auth.User
 
 class PluginServiceUnitTests extends grails.test.GrailsUnitTestCase {
-    def service
+    PluginService service
 
     void setUp() {
         super.setUp()
@@ -43,6 +43,9 @@ class PluginServiceUnitTests extends grails.test.GrailsUnitTestCase {
         assertTrue autobase.description.body.startsWith('This plugin marries the ')
         assertEquals 'http://github.com/RobertFischer/autobase/wikis', autobase.documentationUrl
         assertEquals 'http://plugins.grails.org/grails-autobase/tags/RELEASE_0_8_1/grails-autobase-0.8.1.zip', autobase.downloadUrl
+        def avatar = plugins[1]
+        // ensure the grailsVersion got in
+        assertEquals '1.1 > *', avatar.grailsVersion
     }
     
     void testTranslateMasterPlugins_AddsPluginsThatDontExist() {
@@ -97,7 +100,7 @@ class PluginServiceUnitTests extends grails.test.GrailsUnitTestCase {
         assertEquals "5.0.2", plugin.currentRelease
     }
     
-    void testUpdatePluginOverridesExisting_DocUrl_DlUrl_Release() {
+    void testUpdatePluginOverridesExisting_DocUrl_DlUrl_GrailsVersion_Release() {
         mockDomain(Plugin)
         mockDomain(WikiPage)
         mockDomain(Version)
@@ -107,12 +110,14 @@ class PluginServiceUnitTests extends grails.test.GrailsUnitTestCase {
             name: 'plugin-a', 
             documentationUrl: 'old doc url',
             downloadUrl: 'old dl url',
-            currentRelease: 'old release'
+            currentRelease: 'old release',
+            grailsVersion:' old grailsVersion'
         )
         service.updatePlugin(plugin, master[0])
         assertEquals "http://www.grails.org/Plugin+A+Plugin", plugin.documentationUrl
         assertEquals "http://plugins.grails.org/plugin-a-5.0.2.zip", plugin.downloadUrl
         assertEquals "5.0.2", plugin.currentRelease
+        assertEquals '1.1 > *', plugin.grailsVersion
     }
     
     void testUpdatePluginDoesNotOverrideExisting_Title_Desc_Body_Author_AuthorEmail() {
@@ -164,7 +169,8 @@ class PluginServiceUnitTests extends grails.test.GrailsUnitTestCase {
                     authorEmail: "peter_${x}@jackson.com",
                     documentationUrl: "http://www.grails.org/Plugin+${up}+Plugin",
                     downloadUrl: "http://plugins.grails.org/plugin-${x}-5.0.2.zip",
-                    currentRelease: "5.0.2"
+                    currentRelease: "5.0.2",
+                    grailsVersion: '1.1 > *'
             )
         }
     }
