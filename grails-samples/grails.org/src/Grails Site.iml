@@ -8,27 +8,28 @@
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$/..">
+      <sourceFolder url="file://$MODULE_DIR$/../grails-app/conf" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../grails-app/controllers" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../grails-app/domain" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../grails-app/jobs" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../grails-app/realms" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../grails-app/services" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../grails-app/taglib" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../grails-app/utils" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../grails-app/views" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../plugins/grails-ui-1.1-SNAPSHOT/grails-app/taglib" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../plugins/jsecurity-0.3/grails-app/taglib" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../plugins/jsecurity-0.3/src/groovy" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../plugins/jsecurity-0.3/src/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../plugins/searchable-0.5.1/src/groovy" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../plugins/searchable-0.5.1/src/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../plugins/yui-2.6.0/grails-app/taglib" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/groovy" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../test/integration" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/../test/unit" isTestSource="true" />
     </content>
-    <orderEntry type="library" name="GRAILS" level="application" />
     <orderEntry type="library" name="grails-1.1-SNAPSHOT" level="application" />
-    <orderEntry type="library" name="grails-1.1-RC1" level="application" />
+    <orderEntry type="library" name="grails-1.1-SNAPSHOT" level="application" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">
@@ -37,21 +38,6 @@
           <root url="jar://$MODULE_DIR$/../lib/radeox-1.0b2.jar!/" />
           <root url="jar://$MODULE_DIR$/../lib/radeox-1.0b2-oro.jar!/" />
           <root url="jar://$MODULE_DIR$/../lib/radeox-1.0b2-api.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="JSecurity">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../plugins/jsecurity-0.2/lib/jug.jar!/" />
-          <root url="jar://$MODULE_DIR$/../plugins/jsecurity-0.2/lib/quartz.jar!/" />
-          <root url="jar://$MODULE_DIR$/../plugins/jsecurity-0.2/lib/jsecurity-jdk14.jar!/" />
-          <root url="jar://$MODULE_DIR$/../plugins/jsecurity-0.2/lib/commons-codec.jar!/" />
-          <root url="jar://$MODULE_DIR$/../plugins/jsecurity-0.2/lib/grails-jsecurity-annotations.jar!/" />
-          <root url="jar://$MODULE_DIR$/../plugins/jsecurity-0.2/lib/retroweaver-rt.jar!/" />
-          <root url="jar://$MODULE_DIR$/../plugins/jsecurity-0.2/lib/jug-native.zip!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -80,6 +66,7 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="JSecurity" level="project" />
   </component>
 </module>
 

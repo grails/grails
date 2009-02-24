@@ -10,7 +10,7 @@
 //    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
 // }
 
-wiki.supported.upload.types = ['image/png','image/jpg','image/gif']
+wiki.supported.upload.types = ['image/png','image/jpg','image/jpeg','image/gif']
 // location of plugins-list.xml
 plugins.pluginslist = "http://plugins.grails.org/.plugin-meta/plugins-list.xml"
 

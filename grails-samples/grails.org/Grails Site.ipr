@@ -317,5 +317,15 @@
     <mapping directory="$PROJECT_DIR$" vcs="svn" />
   </component>
   <component name="WebServicesPlugin" addRequiredLibraries="true" />
+  <component name="libraryTable">
+    <library name="JSecurity">
+      <CLASSES>
+        <root url="file://$PROJECT_DIR$/plugins/jsecurity-0.3/lib" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+      <jarDirectory url="file://$PROJECT_DIR$/plugins/jsecurity-0.3/lib" recursive="false" />
+    </library>
+  </component>
 </project>
 

@@ -361,28 +361,28 @@ class ContentController extends BaseWikiController {
             MultipartFile file = request.getFile('file')
             ServletContext context = getServletContext()
             def path = context.getRealPath("/images${ params.id ? '/'+params.id : ''}")
-            if(!(file.getOriginalFilename() ==~ /\S+/)) {  
-                render(view:"/common/uploadDialog",model:[category:params.id,message:"Your filename cannot contain white space characters!"])
-            }
-            else if(config.wiki.supported.upload.types?.contains(file.getContentType())) {
-                File targetFile = new File("$path/${file.getOriginalFilename()}")
+            log.info "Uploading image, file: ${file.absolutePath} (${file.contentType}) to be saved at $path"
+            if(config.wiki.supported.upload.types?.contains(file.contentType)) {
+                def newFilename = file.originalFilename.replaceAll(/\s+/, '_')
+                File targetFile = new File("$path/${newFilename}")
                 if(!targetFile.parentFile.exists()) targetFile.parentFile.mkdirs()
-                
+                log.info "Target file: ${targetFile.absolutePath}"
                 try {
+                    log.info "Attempting file transfer..."
                     file.transferTo(targetFile)
+                    log.info "Success! Rendering message back to view"
                     render(view:"/common/iframeMessage", model:[pageId:"upload",
                             frameSrc: g.createLink(controller:'content', action:'uploadImage', id:params.id),
-                            message: "Upload complete. Use the syntax !${params.id? params.id + '/' : ''}${file.getOriginalFilename()}! to refer to your file"])
+                            message: "Upload complete. Use the syntax !${params.id? params.id + '/' : ''}${newFilename}! to refer to your file"])
                 } catch (Exception e) {
                     log.error(e.message, e)
                     render(view:"/common/uploadDialog",model:[category:params.id,message:"Error uploading file!"])
                 }
             }
             else {
+                log.info "Bad file type, rendering error message to view"
                 render(view:"/common/uploadDialog",model:[category:params.id,message:"File type not in list of supported types: ${config.wiki.supported.upload.types?.join(',')}"])
             }
-
-
         }
         else {
             render(view:"/common/uploadDialog", model:[category:params.id])

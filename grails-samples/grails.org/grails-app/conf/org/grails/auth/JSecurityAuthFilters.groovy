@@ -1,8 +1,5 @@
 package org.grails.auth
 
-import org.codehaus.groovy.grails.commons.ApplicationHolder
-import org.codehaus.groovy.grails.commons.ArtefactHandler
-import org.codehaus.groovy.grails.commons.ControllerArtefactHandler
 import org.jsecurity.SecurityUtils
 
 /**
@@ -72,6 +69,22 @@ class JSecurityAuthFilters {
 	                }
 	            }                
             }
+
+            pluginRating(controller:"plugin", action:"rate") {
+                before = {
+                    accessControl {
+                        role("Editor") || role("Administrator")
+                    }
+                }
+            }
+            pluginTagging(controller:"(tag|plugin)", action:"(autoCompleteNames|addTag|removeTag)") {
+                before = {
+                    accessControl {
+                        role("Editor") || role("Administrator")
+                    }
+                }
+            }
+
             adminArea(uri:"/admin/**") {
                 before = {
                     accessControl {
