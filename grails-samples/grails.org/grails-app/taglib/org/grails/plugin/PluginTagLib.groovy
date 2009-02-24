@@ -9,13 +9,13 @@ class PluginTagLib {
         out << """
             <tr class="prop">
                 <td valign="top" class="name">
-                    <label for="name">${attrs.name}</label>
+                    <label for="name">${attrs?.name}</label>
                 </td>
-                <td class='description'>${attrs.description}</td>
+                <td class='description'>${attrs?.description}</td>
             </tr>
             <tr class="prop">
                 <td></td>
-                <td valign="top" class="value ${hasErrors(bean:attrs.plugin,field:'name','errors')}">
+                <td valign="top" class="value ${hasErrors(bean:attrs?.plugin, field:'name','errors')}">
                     ${body()}
                 </td>
             </tr>

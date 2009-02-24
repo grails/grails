@@ -31,6 +31,9 @@ class PluginController extends BaseWikiController {
     def show = {
         println "show: $params"
         def plugin = byName(params)
+        if (!plugin) {
+            return redirect(action:'createPlugin', params:params)
+        }
         render view:'showPlugin', model:[plugin:plugin, comments: plugin.comments.sort { it.dateCreated }]
     }
 
@@ -53,7 +56,11 @@ class PluginController extends BaseWikiController {
     }
 
     def createPlugin = {
+        println "createPlugin: $params"
+        // just in case this was an ad hoc creation where the user logged in during the creation...
+        if (params.name) params.name = params.name - '?action=login'
         def plugin = new Plugin(params)
+        println plugin.name
 
         if(request.method == 'POST') {
             Plugin.WIKIS.each { wiki ->
@@ -75,17 +82,12 @@ class PluginController extends BaseWikiController {
             plugin.author = request.user
             def saved = plugin.save()
             if(saved) {
-                println "REDIRECTING"
                 redirect(action:'show', params: [name:plugin.name])
             } else {
                 return render(view:'createPlugin', model:[plugin:plugin])
             }
         } else {
-            if(params.async) {
-//                render(template:"newsForm", model:[plugin:plugin])
-            } else {
-                return render(view:'createPlugin', model:[plugin:plugin])
-            }
+            return render(view:'createPlugin', model:[plugin:plugin])
         }
     }
 

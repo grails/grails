@@ -9,6 +9,7 @@ class PluginServiceUnitTests extends grails.test.GrailsUnitTestCase {
 
     void setUp() {
         super.setUp()
+        mockDomain(User, [new User(login:'admin')])
         service = new PluginService()
         service.metaClass.getLog = { ->
             [
@@ -59,7 +60,6 @@ class PluginServiceUnitTests extends grails.test.GrailsUnitTestCase {
         mockDomain(Plugin, mockPluginList)
         mockDomain(WikiPage)
         mockDomain(Version)
-        mockDomain(User, [new User(login:'admin')])
 
         service.translateMasterPlugins(generateMockMasterPluginList())
         // there are 26 masters, and one existing that should have been updated, so 26 total
@@ -71,7 +71,6 @@ class PluginServiceUnitTests extends grails.test.GrailsUnitTestCase {
         mockDomain(Plugin, mockPluginList)
         mockDomain(WikiPage)
         mockDomain(Version)
-        mockDomain(User, [new User(login:'admin')])
 
         service.translateMasterPlugins(generateMockMasterPluginList())
         // there are 26 masters, and one existing that should have been updated, so 26 total
@@ -82,7 +81,6 @@ class PluginServiceUnitTests extends grails.test.GrailsUnitTestCase {
         mockDomain(Plugin)
         mockDomain(WikiPage)
         mockDomain(Version)
-        mockDomain(User, [new User(login:'admin')])
         def master = generateMockMasterPluginList()
         def plugin = new Plugin(
             name: 'plugin-a', 
@@ -103,7 +101,6 @@ class PluginServiceUnitTests extends grails.test.GrailsUnitTestCase {
         mockDomain(Plugin)
         mockDomain(WikiPage)
         mockDomain(Version)
-        mockDomain(User, [new User(login:'admin')])
 
         def master = generateMockMasterPluginList()
         def plugin = new Plugin(
