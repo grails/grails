@@ -21,14 +21,11 @@ class PluginService {
         listText = listText.replaceAll(/\<\?xml ([^\<\>]*)\>/, '')
         def plugins = new XmlSlurper().parseText(listText)
         
-//        println "Found ${plugins.plugin.size()} master plugins."
         log.info "Found ${plugins.plugin.size()} master plugins."
 
         plugins.plugin.inject([]) { pluginsList, pxml ->
             if (!pxml.release.size()) return pluginsList
-//            println "processing xml node for ${pxml.@name}"
             def latestRelease = pxml.release[pxml.release.size()-1]
-//            println "\tlatest release is ${latestRelease.title}:${latestRelease.@version}"
             def p = new Plugin()
             p.with {
                 name = pxml.@name
@@ -52,9 +49,7 @@ class PluginService {
     }
 
     def translateMasterPlugins(masters) {
-//        println "translating master plugins:"
         masters.each { master ->
-//            println "==> $master.name <== MASTER"
             def plugin = Plugin.findByName(master.name)
             // try by title
             if (!plugin) {
@@ -80,7 +75,7 @@ class PluginService {
                 // put the wiki page back with a unique title
                 descWiki.title = "description-${master.id}"
                 master.description = descWiki
-//                println "No existing plugin, creating new ==> ${master.name}"
+                log.info "No existing plugin, creating new ==> ${master.name}"
                 // before saving the master, we need to save the description wiki page
                 if (!master.description.save() && master.description.hasErrors()) {
                     master.description.errors.allErrors.each { log.error it }
@@ -90,7 +85,7 @@ class PluginService {
                     try {
                         v.save(flush:true)
                     } catch (Exception e) {
-                        println "WARNING: Can't save version ${v.title} (${v.number})"
+                        log.warn "Can't save version ${v.title} (${v.number})"
                     }
                 }
                 //inject dummy wikis for users to fill in
@@ -100,11 +95,9 @@ class PluginService {
                 }
                 // save new master plugin
                 if (!master.save()) {
-//                    println   "Could not save master plugin: $master.name ($master.title), version $master.currentRelease"
                     log.error "Could not save master plugin: $master.name ($master.title), version $master.currentRelease"
                     master.errors.allErrors.each { log.error "\t$it" }
                 } else {
-//                    println  "New plugin was saved from master: $master.name"
                     log.info "New plugin was saved from master: $master.name"
                 }
             } else {
@@ -115,15 +108,13 @@ class PluginService {
     }
 
     def updatePlugin(plugin, master) {
-//        println "Updating plugin \"$plugin.name\"..."
+        log.info "Updating plugin \"$plugin.name\"..."
         // handle the wiki page with some care
         if (master.description?.body && !plugin.description?.body) {
             plugin.description = master.description
-//            if (!plugin.description.validate()) { plugin.description.errors.allErrors.each { println it } }
             assert plugin.description.save()
             Version v = plugin.description.createVersion()
             v.author = User.findByLogin('admin')
-//            if (!v.validate()) { v.errors.allErrors.each { println it } }
             assert v.save()
         }
 
@@ -140,22 +131,18 @@ class PluginService {
         plugin.grailsVersion = master.grailsVersion
 
         if (!plugin.save()) {
-//            println  "Local plugin '$plugin.name' was not updated properly... errors follow:"
             log.warn "Local plugin '$plugin.name' was not updated properly... errors follow:"
-//            plugin.errors.allErrors.each { log.warn it; println it }
+            plugin.errors.allErrors.each { log.warn it }
         } else {
             def v = plugin.description.createVersion()
             v.author = User.findByLogin('admin')
             try {
-                if (!v.save(flush:true)) {
-                    v.errors.allErrors.each { println it }
-                }
+                assert v.save(flush:true)
             } catch (Exception e) {
-                println "WARNING: Can't save version ${v.title} (${v.number})"
+                log.warn "Can't save version ${v.title} (${v.number})"
             }
         }
         
-//        println  "Local plugin '$plugin.name' was updated with master version."
         log.info "Local plugin '$plugin.name' was updated with master version."
     }
     
