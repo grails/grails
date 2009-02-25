@@ -6,10 +6,15 @@
         LOCKED<br/>
     </g:if>
     <g:else>
-        <g:remoteLink class="actionIcon" controller="content" action="editWikiPage" id="${content?.title}" params="[update:updateElement]" update="${updateElement}">
+        <script>
+            var hideCommentPost = function() {
+                YAHOO.util.Dom.addClass('postComment', 'hidden');
+            };
+        </script>
+        <g:remoteLink class="actionIcon" controller="content" action="editWikiPage" id="${content?.title}" params="[update:updateElement]" update="${updateElement}" onLoaded="hideCommentPost()">
             <img border="0" src="${createLinkTo(dir:'images/','icon-edit.png')}" width="15" height="15" alt="Icon Edit" class="inlineIcon" border="0" />
             <span>Edit</span>
-        </g:remoteLink><br/>
+        </g:remoteLink>
     </g:else>
     <g:remoteLink class="actionIcon" controller="content" action="infoWikiPage" id="${content?.title}" params="[update:updateElement]" update="${updateElement}">
         <img border="0" src="${createLinkTo(dir:'images/','icon-info.png')}" width="15" height="15" alt="Icon Edit" class="inlineIcon" border="0" />

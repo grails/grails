@@ -180,6 +180,7 @@ class ContentController extends BaseWikiController {
     }
 
 	def editWikiPage = {
+        println "editWikiPage: $params"
         if(!params.id) {
             render(template:"/shared/remoteError", [code:"page.id.missing"])
         }

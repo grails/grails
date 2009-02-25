@@ -9,6 +9,6 @@
 
 <g:javascript>
    if($('message')!=null) {
-        Effect.Fade('message', {delay:3})
+        Effect.Fade('message', {delay:3});
    }
 </g:javascript>

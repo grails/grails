@@ -2,6 +2,12 @@
 
 <div id="editLinks" style="margin-left:230px;">
 
+    <script>
+        var showCommentPost = function() {
+            YAHOO.util.Dom.removeClass('postComment', 'hidden');
+        }
+    </script>
+
     <g:set var="href" value="${update ? 'javascript:void(0)' : '#'}"/>
     <a href="${href}" class="actionIcon" onclick="Effect.Appear('uploadDialog')">
         <img src="${createLinkTo(dir: 'images/', 'icon-upload.png')}" width="15" height="15" alt="Icon Image Upload" class="inlineIcon" border="0"/>
@@ -15,17 +21,17 @@
     </a>
 
     <a href="${href}" class="actionIcon"
-            onclick="new Ajax.Updater('${updateElement}', '${createLink(controller:'content',action:'saveWikiPage',id:content?.title, params:[update:updateElement])}', getAjaxOptions()); return false">
+            onclick="new Ajax.Updater('${updateElement}', '${createLink(controller:'content',action:'saveWikiPage',id:content?.title, params:[update:updateElement])}', getAjaxOptions()); showCommentPost(); return false">
         <img src="${createLinkTo(dir: 'images/', 'icon-save.png')}" width="15" height="15" alt="Icon Save" class="inlineIcon" border="0"/>
         <span>Save</span>
     </a>
 
-    <g:remoteLink class="actionIcon" update="${updateElement}" controller="content" id="${content?.title}" params="[xhr:true,update:updateElement]">
+    <g:remoteLink class="actionIcon" update="${updateElement}" controller="content" id="${content?.title}" params="[xhr:true,update:updateElement]" before="showCommentPost()">
         <img src="${createLinkTo(dir: 'images/', 'icon-cancel.png')}" width="15" height="15" alt="Icon Cancel" class="inlineIcon" border="0"/>
         <span>Cancel</span>
     </g:remoteLink>
 
-    <g:remoteLink class="actionIcon" action="infoWikiPage" id="${content?.title}" params="[update:updateElement]" update="${updateElement}">
+    <g:remoteLink class="actionIcon" action="infoWikiPage" id="${content?.title}" params="[update:updateElement]" update="${updateElement}" before="showCommentPost()">
         <img border="0" src="${createLinkTo(dir: 'images/', 'icon-info.png')}" width="15" height="15" alt="Icon Edit" class="inlineIcon" border="0"/>
         <span>View Info</span>
     </g:remoteLink>

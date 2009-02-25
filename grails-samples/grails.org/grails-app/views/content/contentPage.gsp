@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'comments.css')}" />
     <g:javascript library="scriptaculous" />
     <g:javascript library="diff_match_patch" />
-
+    <yui:javascript dir='yahoo-dom-event' file='yahoo-dom-event.js'/>
     <g:render template="wikiJavaScript"/>
 
 </head>

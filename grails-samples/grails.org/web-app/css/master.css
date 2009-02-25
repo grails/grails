@@ -308,3 +308,7 @@ a:visited.actionIcon img {
 .formButtons {
     margin: 20px;
 }
+
+.hidden {
+    display: none;
+}

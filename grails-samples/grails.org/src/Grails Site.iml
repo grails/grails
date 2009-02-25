@@ -27,6 +27,7 @@
       <sourceFolder url="file://$MODULE_DIR$/../plugins/jsecurity-0.3/src/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../plugins/searchable-0.5.1/src/groovy" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../plugins/searchable-0.5.1/src/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../plugins/yui-2.6.1/grails-app/taglib" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/groovy" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../test/integration" isTestSource="true" />

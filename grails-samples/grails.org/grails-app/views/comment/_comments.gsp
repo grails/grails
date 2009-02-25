@@ -17,7 +17,7 @@
         </div>
     </g:each>
 
-    <div class="postComment">
+    <div id="postComment">
         <h2>Post a Comment</h2>
         <g:if test="${!locked}">
             <g:if test="${jsec.principal()}">
