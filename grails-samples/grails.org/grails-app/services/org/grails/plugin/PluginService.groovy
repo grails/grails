@@ -47,9 +47,7 @@ class PluginService {
     }
 
     private def replaceOldDocsWithNewIfNecessary(oldDocs, name) {
-        println oldDocs
         boolean match = oldDocs =~ /http:\/\/(www\.)?grails.org\//
-        println match
         return match ? "http://grails.org/plugin/${name}" : oldDocs
     }
 
@@ -149,7 +147,9 @@ class PluginService {
             def v = plugin.description.createVersion()
             v.author = User.findByLogin('admin')
             try {
-                assert v.save(flush:true)
+                if (!v.save(flush:true)) {
+                    v.errors.allErrors.each { println it }
+                }
             } catch (Exception e) {
                 println "WARNING: Can't save version ${v.title} (${v.number})"
             }

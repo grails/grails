@@ -16,6 +16,6 @@ class Content implements Serializable {
 	}
 	static constraints = {
 		title(blank:false)
-		body(blank:false)
+		body(blank:true)
 	}
 }
