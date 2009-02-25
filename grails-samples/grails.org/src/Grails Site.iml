@@ -4,6 +4,9 @@
     <facet type="Grails" name="Grails">
       <configuration />
     </facet>
+    <facet type="Groovy" name="Groovy">
+      <configuration />
+    </facet>
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
@@ -31,6 +34,7 @@
     </content>
     <orderEntry type="library" name="grails-1.1-SNAPSHOT" level="application" />
     <orderEntry type="library" name="grails-1.1-SNAPSHOT" level="application" />
+    <orderEntry type="library" name="groovy-1.6-beta-2" level="application" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">

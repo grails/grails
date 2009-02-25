@@ -129,9 +129,9 @@ class PluginController extends BaseWikiController {
     def addTag = {
         def plugin = Plugin.get(params.id)
         params.newTag.trim().split(',').each { newTag ->
-            def tag = Tag.findByName(newTag)
+            def tag = Tag.findByName(newTag.trim())
             if (!tag) {
-                tag = new Tag(name: newTag)
+                tag = new Tag(name: newTag.trim())
                 tag.save()
             }
             plugin.addToTags(tag)
