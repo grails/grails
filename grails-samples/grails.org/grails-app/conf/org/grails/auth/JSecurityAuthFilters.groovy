@@ -70,6 +70,14 @@ class JSecurityAuthFilters {
 	            }                
             }
 
+            pluginDeletion(controller:"plugin", action:"deletePlugin") {
+                before = {
+                    accessControl {
+                        role("Administrator")
+                    }
+                }
+            }
+
             pluginRating(controller:"plugin", action:"rate") {
                 before = {
                     accessControl {

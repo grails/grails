@@ -14,7 +14,8 @@ class PluginServiceUnitTests extends grails.test.GrailsUnitTestCase {
         service.metaClass.getLog = { ->
             [
                 info: { String s -> println s},
-                error: { String s -> println s}
+                error: { String s -> println s},
+                warn: { String s -> println s}
             ]
         }
     }

@@ -60,7 +60,6 @@ class PluginController extends BaseWikiController {
         // just in case this was an ad hoc creation where the user logged in during the creation...
         if (params.name) params.name = params.name - '?action=login'
         def plugin = new Plugin(params)
-        println plugin.name
 
         if(request.method == 'POST') {
             Plugin.WIKIS.each { wiki ->
@@ -80,8 +79,7 @@ class PluginController extends BaseWikiController {
             }
 
             plugin.author = request.user
-            def saved = plugin.save()
-            if(saved) {
+            if(plugin.save()) {
                 redirect(action:'show', params: [name:plugin.name])
             } else {
                 return render(view:'createPlugin', model:[plugin:plugin])
@@ -89,6 +87,13 @@ class PluginController extends BaseWikiController {
         } else {
             return render(view:'createPlugin', model:[plugin:plugin])
         }
+    }
+
+    def deletePlugin = {
+        def plugin = byName(params)
+        log.warn "Deleting Plugin: $plugin"
+        plugin.delete()
+        redirect(view:'list')
     }
 
     def postComment = {
