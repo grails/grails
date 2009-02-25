@@ -78,14 +78,7 @@ class JSecurityAuthFilters {
                 }
             }
 
-            pluginRating(controller:"plugin", action:"rate") {
-                before = {
-                    accessControl {
-                        role("Editor") || role("Administrator")
-                    }
-                }
-            }
-            pluginTagging(controller:"(tag|plugin)", action:"(autoCompleteNames|addTag|removeTag)") {
+            pluginActivities(controller:"(tag|plugin)", action:"(rate|postComment|autoCompleteNames|addTag|removeTag)") {
                 before = {
                     accessControl {
                         role("Editor") || role("Administrator")

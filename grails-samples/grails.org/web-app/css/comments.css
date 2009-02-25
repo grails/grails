@@ -21,3 +21,8 @@
 #commentForm {
     text-align:right;
 }
+
+.comments a.anchor:hover {
+    border: none;
+    color: inherit;
+}

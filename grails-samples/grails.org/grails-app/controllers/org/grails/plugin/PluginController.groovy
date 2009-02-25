@@ -29,16 +29,23 @@ class PluginController extends BaseWikiController {
     }
 
     def show = {
-        println "show: $params"
         def plugin = byName(params)
         if (!plugin) {
             return redirect(action:'createPlugin', params:params)
         }
-        render view:'showPlugin', model:[plugin:plugin, comments: plugin.comments.sort { it.dateCreated }]
+        def userRating
+        if (request.user) {
+            userRating = Plugin.withCriteria {
+                eq('id', plugin.id)
+                ratings {
+                    eq('user', request.user)
+                }
+            }
+        }
+        render view:'showPlugin', model:[plugin:plugin, comments: plugin.comments.sort { it.dateCreated }, userRating: userRating]
     }
 
     def editPlugin = {
-        println "editPlugin: $params"
         def plugin = Plugin.get(params.id)
         if(plugin) {
             if(request.method == 'POST') {
@@ -56,7 +63,6 @@ class PluginController extends BaseWikiController {
     }
 
     def createPlugin = {
-        println "createPlugin: $params"
         // just in case this was an ad hoc creation where the user logged in during the creation...
         if (params.name) params.name = params.name - '?action=login'
         def plugin = new Plugin(params)
@@ -68,7 +74,6 @@ class PluginController extends BaseWikiController {
                     body = "{code}grails install-plugin ${plugin.name}{code}"
                 }
                 def wikiPage = new WikiPage(title:wiki, body:body)
-                if (!wikiPage.validate()) { println wikiPage.errors }
                 wikiPage.save()
                 plugin."$wiki" = wikiPage
             }
@@ -98,16 +103,17 @@ class PluginController extends BaseWikiController {
 
     def postComment = {
         def plugin = Plugin.get(params.id)
+        def frag = 'comments'
         if (params.comment) {
             def c = new Comment(body:params.comment, user: request.user)
             plugin.addToComments(c)
-            plugin.save()
+            plugin.save(flush:true)
+            frag = "comment_${c.id}"
         }
-        redirect(action:'show', params: [name:plugin.name])
+        redirect(action:'show', params: [name:plugin.name], fragment:frag)
     }
 
     def rate = {
-        println "rate:params: $params"
         def plugin = Plugin.get(params.id)
         def user = request.user
         // only save if the ip has not already rated

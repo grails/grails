@@ -1,11 +1,18 @@
 <div class="comments">
-
+    <h2><a class='anchor' name='comments'>Comments</a></h2>
     <g:each var="comment" in="${comments}">
+
         <div class="comment">
             <wiki:text>
                 ${comment?.body}
             </wiki:text>
-            <div class="author">${comment?.user.login}</div>
+            <div class="author"><a class='anchor' name="comment_${comment.id}">${comment?.user.login}</a></div>
+
+            <avatar:gravatar cssClass="gravatar" size="50"
+                    email="${comment?.user.email}" gravatarRating="R"
+                    defaultGravatarUrl="${createLinkTo(absolute: true, dir:'/images',file:'grails-icon.png')}"
+            />
+
             <div class="date">posted on ${comment.dateCreated}</div>
         </div>
     </g:each>

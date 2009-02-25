@@ -47,12 +47,12 @@ div.rating div.hover a,
     background-position: 0 -32px;
 }
 
-div.notifytext {
+div#notifytext {
     margin-top: 5px;
     font-size: .8em;
     clear: both;
 }
 
 #ratingdiv {
-    height: 35px;
+    height: 12px;
 }

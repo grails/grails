@@ -5,7 +5,6 @@
     %{--<g:javascript library="prototype" />--}%
     <g:javascript library="diff_match_patch" />
     <g:javascript library="scriptaculous" />
-    <yui:javascript dir='animation' file='animation-min.js'/>
     <script src="${createLinkTo(dir:'js', file:'rating.js')}"></script>
     <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'plugins.css')}" />
     <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'comments.css')}" />
@@ -56,7 +55,7 @@
             <tr>
                 <th>Rating</th>
                 <td colspan='3'>
-                    <g:render template="ratings" model="[parentId:plugin.id, average:plugin.avgRating]"/>
+                    <g:render template="ratings" model="[parentId:plugin.id, average:plugin.avgRating, total:plugin.ratings.size(), active: jsec.principal() && !(userRating as Boolean)]"/>
                 </td>
             </tr>
             <tr>

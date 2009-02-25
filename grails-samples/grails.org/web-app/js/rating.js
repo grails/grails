@@ -21,7 +21,8 @@ var rating = {
         rating.ratingform = YAHOO.util.Dom.get('rating')
         rating.ratingdiv = YAHOO.util.Dom.get('ratingdiv')
         rating.stardiv = document.createElement('div')
-        rating.notifytext = document.createElement('div')
+        rating.notifytext = YAHOO.util.Dom.get('notifytext')
+        rating.active = YAHOO.util.Dom.get('ratingIsActive').value
         rating.average = rating.ratingform.title.split(".")
         rating.submitted = false
         rating.make_stardiv()
@@ -46,17 +47,15 @@ var rating = {
             rating.stardiv.appendChild(star);
 
             // add needed listeners to every star
-            YAHOO.util.Event.addListener(star, 'mouseover', rating.hover_star, i);
-            YAHOO.util.Event.addListener(star, 'mouseout', rating.reset_stars);
-            YAHOO.util.Event.addListener(star, 'click', rating.submit_rating, i);
+            if (rating.active == 'true') {
+                YAHOO.util.Event.addListener(star, 'mouseover', rating.hover_star, i);
+                YAHOO.util.Event.addListener(star, 'mouseout', rating.reset_stars);
+                YAHOO.util.Event.addListener(star, 'click', rating.submit_rating, i);
+            }
         }
         rating.ratingdiv.appendChild(rating.stardiv);
         // show the average
         rating.reset_stars();
-        // add the statustext div and hide it
-        YAHOO.util.Dom.addClass(rating.notifytext, 'notifytext');
-        YAHOO.util.Dom.setStyle(rating.notifytext, 'opacity', 0);
-        rating.ratingdiv.appendChild(rating.notifytext);
     },
 
     hover_star: function(e, which_star) {
@@ -119,8 +118,8 @@ var rating = {
 
             // change the statustext div and show it
             rating.notifytext.innerHTML = 'Rating is being saved.';
-            var notify_display = new YAHOO.util.Anim(rating.notifytext, { opacity: { to: 1 } }, 0.25, YAHOO.util.Easing.easeIn);
-            notify_display.animate();
+//            var notify_display = new YAHOO.util.Anim(rating.notifytext, { opacity: { to: 1 } }, 0.25, YAHOO.util.Easing.easeIn);
+//            notify_display.animate();
 
             // change the rating-value for the form and submit the form
             var post_to = rating.ratingform.action;
@@ -142,7 +141,7 @@ var rating = {
                 rating.submitted = false;
                 var avg = o.responseText.split(',')[0];
                 var total = o.responseText.split(',')[1];
-                rating.notifytext.innerHTML = 'Rating saved. (' + total + ' rankings)';
+                rating.notifytext.innerHTML = 'Rating saved. (' + total + ' ratings)';
                 rating.average = avg.split(".");
                 rating.ratingform.elements[0].value = parseInt(o.responseText);
                 rating.reset_stars();

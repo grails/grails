@@ -8,6 +8,8 @@
             <option value="4">4 - Very Good</option>
             <option value="5">5 - Excellent</option>
         </select>
+        <input id='ratingIsActive' type="hidden" value="${active}"/>
         <input type="submit" value=" Submit rating"/>
     </form>
 </div>
+<div id='notifytext'>(${total} Ratings)</div>

@@ -21,6 +21,7 @@ class UrlMappings {
         "/plugin/rate/$id"(controller: "plugin", action:"rate")
         "/plugin/addTag/$id"(controller: "plugin", action:"addTag")
         "/plugin/removeTag/$id"(controller: "plugin", action:"removeTag")
+        "/plugin/postComment/$id"(controller: "plugin", action:"postComment")
 
         "/tag/autoCompleteNames"(controller:'tag', action:'autoCompleteNames')
 
