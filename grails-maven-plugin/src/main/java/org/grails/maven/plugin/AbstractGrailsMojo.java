@@ -16,23 +16,29 @@
 
 package org.grails.maven.plugin;
 
-import org.grails.maven.plugin.tools.GrailsServices;
+import grails.util.Metadata;
+
 import org.apache.maven.artifact.Artifact;
-import org.apache.maven.artifact.metadata.ArtifactMetadataSource;
 import org.apache.maven.artifact.factory.ArtifactFactory;
+import org.apache.maven.artifact.metadata.ArtifactMetadataSource;
 import org.apache.maven.artifact.repository.ArtifactRepository;
-import org.apache.maven.artifact.resolver.ArtifactResolver;
 import org.apache.maven.artifact.resolver.ArtifactCollector;
 import org.apache.maven.artifact.resolver.ArtifactResolutionResult;
+import org.apache.maven.artifact.resolver.ArtifactResolver;
+import org.apache.maven.model.Dependency;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.project.MavenProjectBuilder;
 import org.apache.maven.project.ProjectBuildingException;
 import org.apache.maven.project.artifact.MavenMetadataSource;
-import org.apache.maven.model.Dependency;
-import org.codehaus.groovy.grails.cli.support.GrailsRootLoader;
 import org.codehaus.groovy.grails.cli.support.GrailsBuildHelper;
+import org.codehaus.groovy.grails.cli.support.GrailsRootLoader;
+import org.codehaus.plexus.archiver.ArchiverException;
+import org.codehaus.plexus.archiver.zip.ZipUnArchiver;
+import org.codehaus.plexus.logging.Logger;
+import org.codehaus.plexus.logging.console.ConsoleLogger;
+import org.grails.maven.plugin.tools.GrailsServices;
 
 import java.io.File;
 import java.io.IOException;
@@ -49,6 +55,9 @@ import java.util.*;
  * @version $Id$
  */
 public abstract class AbstractGrailsMojo extends AbstractMojo {
+
+    public static final String PLUGIN_PREFIX = "grails-";
+
     /**
      * The directory where is launched the mvn command.
      *
@@ -184,7 +193,7 @@ public abstract class AbstractGrailsMojo extends AbstractMojo {
         if (includeProjectDeps) {
             deps.addAll(this.project.getRuntimeArtifacts());
         }
-        
+
         URL[] classpath;
         try {
             classpath = new URL[deps.size() + 1];

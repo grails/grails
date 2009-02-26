@@ -15,7 +15,9 @@
  */
 package org.grails.maven.plugin.tools;
 
+import grails.util.GrailsNameUtils;
 import groovy.lang.GroovyClassLoader;
+
 import org.apache.maven.model.Plugin;
 import org.apache.maven.model.PluginManagement;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -26,7 +28,9 @@ import org.codehaus.plexus.util.xml.Xpp3Dom;
 
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
-import java.util.*;
+import java.util.Date;
+import java.util.List;
+import java.util.Properties;
 
 /**
  * @author <a href="mailto:aheritier@gmail.com">Arnaud HERITIER</a>
@@ -240,10 +244,10 @@ public class DefaultGrailsServices extends AbstractLogEnabled implements GrailsS
         }
 
         File descriptor = files[0];
+        pluginProject.setFileName(descriptor);
 
-        String pluginName = descriptor.getName().substring(0, descriptor.getName().length() - FILE_SUFFIX.length());
-        pluginName = pluginName.substring(0, 1).toLowerCase() + pluginName.substring(1);
-
+        String className = descriptor.getName().substring(0, descriptor.getName().length() - ".groovy".length());
+        String pluginName = GrailsNameUtils.getScriptName(GrailsNameUtils.getLogicalName(className, "GrailsPlugin"));
         pluginProject.setPluginName(pluginName);
 
         try {

@@ -43,15 +43,6 @@ public class MvnValidateMojo extends AbstractGrailsMojo {
     private String artifactId;
 
     /**
-     * The packaging of the project.
-     *
-     * @parameter expression="${project.packaging}"
-     * @required
-     * @readonly
-     */
-    private String packaging;
-
-    /**
      * The version id of the project.
      *
      * @parameter expression="${project.version}"
@@ -60,17 +51,7 @@ public class MvnValidateMojo extends AbstractGrailsMojo {
      */
     private String version;
 
-    private static final String PLUGIN_PREFIX = "grails-";
-
     public void execute() throws MojoExecutionException, MojoFailureException {
-        if ("grails-plugin".equals(packaging)) {
-            validateGrailsPlugin();
-        } else {
-            validateGrailsApp();
-        }
-    }
-
-    private void validateGrailsApp() throws MojoExecutionException, MojoFailureException {
         GrailsProject grailsProject;
         try {
             grailsProject = getGrailsServices().readProjectDescriptor();
@@ -99,33 +80,6 @@ public class MvnValidateMojo extends AbstractGrailsMojo {
             getLog().warn("Setting to default value '" + grailsProject.getAppVersion() + "'.");
 
             getGrailsServices().writeProjectDescriptor(getBasedir(), grailsProject);
-        }
-    }
-
-    private void validateGrailsPlugin() throws MojoExecutionException, MojoFailureException {
-
-        GrailsPluginProject project = getGrailsServices().readGrailsPluginProject();
-
-        String pluginName = project.getPluginName();
-
-        if (artifactId.equals(pluginName)) {
-            throw new MojoFailureException("The artifact id in pom.xml has to be the same as in " +
-                project.getFileName() + " prefixed with '" + PLUGIN_PREFIX + "'. This is to avoid confustion when " +
-                "the artifact is installed in the Maven repository.");
-        }
-
-        if (!artifactId.equals(PLUGIN_PREFIX + pluginName)) {
-            throw new MojoFailureException("The plugin name in [" + pluginName + "] in " + project.getFileName() +
-                " is not the expected " + PLUGIN_PREFIX + pluginName + ". Please correct the pom or the plugin " +
-                "descriptor.");
-        }
-
-        String pomVersion = version.trim();
-        String grailsVersion = project.getVersion();
-
-        if (!grailsVersion.equals(pomVersion)) {
-            throw new MojoFailureException("The version specified in the plugin configuration " +
-                "[" + grailsVersion + "] in is different of the version [" + pomVersion + "] in the pom.xml");
         }
     }
 }

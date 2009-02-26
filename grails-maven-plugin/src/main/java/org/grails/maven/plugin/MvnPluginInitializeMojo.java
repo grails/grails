@@ -26,12 +26,12 @@ import java.io.File;
  * @author <a href="mailto:aheritier@gmail.com">Arnaud HERITIER</a>
  * @version $Id$
  * @description Determines whether the current directory contains a Grails application or not, and creates one in the latter case.
- * @goal init
+ * @goal init-plugin
  * @phase initialize
  * @requiresDependencyResolution runtime
- * @since 0.1
+ * @since 1.0
  */
-public class MvnInitializeMojo extends AbstractGrailsMojo {
+public class MvnPluginInitializeMojo extends AbstractGrailsMojo {
 
     /**
      * The artifact id of the project.
@@ -55,9 +55,11 @@ public class MvnInitializeMojo extends AbstractGrailsMojo {
         try {
             getGrailsServices().readProjectDescriptor();
         } catch (MojoExecutionException ex) {
-            // Initialise the app.
-            getLog().info("Cannot read application info, so initialising new application.");
-            runGrails("CreateApp", "--inplace --appVersion=" + version + " " + artifactId, false);
+            String pluginName = artifactId.substring(PLUGIN_PREFIX.length());
+
+            // Initialise the plugin.
+            getLog().info("Cannot read application info, so initialising new plugin.");
+            runGrails("CreatePlugin", "--inplace --appVersion=" + version + " " + pluginName, false);
         }
     }
 }
