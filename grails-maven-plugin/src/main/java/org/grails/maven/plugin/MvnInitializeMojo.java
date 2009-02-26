@@ -43,15 +43,6 @@ public class MvnInitializeMojo extends AbstractGrailsMojo {
     private String artifactId;
 
     /**
-     * The packaging of the project.
-     *
-     * @parameter expression="${project.packaging}"
-     * @required
-     * @readonly
-     */
-    private String packaging;
-
-    /**
      * The version id of the project.
      *
      * @parameter expression="${project.version}"
@@ -68,9 +59,6 @@ public class MvnInitializeMojo extends AbstractGrailsMojo {
         } catch (MojoExecutionException ex) {
             // Initialise the app.
             getLog().info("Cannot read application info, so initialising new application.");
-            File outputDir = new File(project.getBuild().getDirectory(), "grails-lib");
-            getLog().info("Creating '" + outputDir + "' directory for Grails JARs");
-            outputDir.mkdirs();
             runGrails("CreateApp", "--inplace --appVersion=" + version + " " + artifactId, false);
         }
     }
