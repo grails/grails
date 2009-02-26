@@ -72,7 +72,6 @@ public class MvnTestMojo extends AbstractGrailsMojo {
             }
         }
 
-//        getGrailsServices().launchGrails(grailsHome, env, "test-app");
-        runGrails("TestApp", null, true);
+        runGrails("TestApp", "--unit --integration", true);
     }
 }
