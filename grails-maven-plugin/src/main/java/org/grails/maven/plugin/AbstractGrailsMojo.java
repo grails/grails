@@ -219,6 +219,19 @@ public abstract class AbstractGrailsMojo extends AbstractMojo {
             GrailsBuildHelper helper = new GrailsBuildHelper(rootLoader, null, basedir.getAbsolutePath());
             configureBuildSettings(helper);
 
+            // Search for all Grails plugin dependencies and install
+            // any that haven't already been installed.
+            Metadata metadata = Metadata.getInstance(new File(getBasedir(), "application.properties"));
+            boolean metadataModified = false;
+            for (Iterator iter = deps.iterator(); iter.hasNext();) {
+                Artifact dep = (Artifact) iter.next();
+                if (dep.getType() != null && dep.getType().equals("grails-plugin")) {
+                    metadataModified |= installGrailsPlugin(dep, metadata,  helper);
+                }
+            }
+
+            if (metadataModified) metadata.persist();
+
 //            mainClass.getDeclaredMethod("setOut", new Class[]{ PrintStream.class }).invoke(
 //                    scriptRunner,
 //                    new Object[] { new PrintStream(infoOutputStream) });
@@ -311,6 +324,52 @@ public abstract class AbstractGrailsMojo extends AbstractMojo {
         } catch ( Exception ex ) {
             throw new MojoExecutionException("Encountered problems resolving dependencies of the executable " +
                                              "in preparation for its execution.", ex);
+        }
+    }
+
+    /**
+     * Installs a Grails plugin into the current project if it isn't
+     * already installed. It works by simply unpacking the plugin
+     * artifact (a ZIP file) into the appropriate location and adding
+     * the plugin to the application's metadata.
+     * @param plugin The plugin artifact to install.
+     * @param metadata The application metadata. An entry for the plugin
+     * is added to this if the installation is successful.
+     * @param helper The helper instance that contains information about
+     * the various project directories. In particular, this is where the
+     * method gets the location of the project's "plugins" directory
+     * from.
+     * @return <code>true</code> if the plugin is installed and the
+     * metadata updated, otherwise <code>false</code>.
+     * @throws IOException
+     * @throws ArchiverException
+     */
+    private boolean installGrailsPlugin(
+            Artifact plugin,
+            Metadata metadata,
+            GrailsBuildHelper helper) throws IOException, ArchiverException {
+        String pluginName = plugin.getArtifactId().substring(PLUGIN_PREFIX.length());
+        String pluginVersion = plugin.getVersion();
+
+        // The directory the plugin will be unzipped to.
+        File targetDir = new File(helper.getProjectPluginsDir(), pluginName + "-" + pluginVersion);
+
+        // Unpack the plugin if it hasn't already been.
+        if (!targetDir.exists()) {
+            targetDir.mkdirs();
+
+            ZipUnArchiver unzipper = new ZipUnArchiver();
+            unzipper.enableLogging(new ConsoleLogger(Logger.LEVEL_ERROR, "zip-unarchiver"));
+            unzipper.setSourceFile(plugin.getFile());
+            unzipper.setDestDirectory(targetDir);
+            unzipper.setOverwrite(true);
+            unzipper.extract();
+
+            // Now add it to the application metadata.
+            metadata.setProperty("plugins." + pluginName, pluginVersion);
+            return true;
+        } else {
+            return false;
         }
     }
 
