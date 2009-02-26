@@ -1,7 +1,8 @@
 .comment {
+    background-color: #b7bfc6;
     margin: 20px;
     padding: 20px;
-    border: 1px solid green;
+    border: 1px solid #666;
 }
 
 .comment .author {
@@ -20,6 +21,10 @@
 
 #commentForm {
     text-align:right;
+}
+
+#commentList {
+    list-style-type: none;
 }
 
 .comments a.anchor:hover {

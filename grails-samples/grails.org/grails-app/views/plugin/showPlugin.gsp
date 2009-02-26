@@ -1,7 +1,7 @@
 <%@ page import="org.grails.plugin.Plugin" %>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <gui:resources components="['tabView','dialog','autoComplete']"/>
+    <gui:resources components="['tabView','dialog','autoComplete']" javascript='animation'/>
     <g:javascript library="diff_match_patch" />
     <g:javascript library="scriptaculous" />
     <script src="${createLinkTo(dir:'js', file:'rating.js')}"></script>
@@ -98,7 +98,7 @@
 
         <g:render template="../content/previewPane"/>
         
-        <g:render template="/comment/comments" model="${[parentId:plugin.id, comments:comments]}"/>
+        <g:render template="../comment/comments" model="${[commentType:'plugin', parentId:plugin.id, comments:comments]}"/>
 
     </div>
 </div>

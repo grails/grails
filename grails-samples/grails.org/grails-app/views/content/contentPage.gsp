@@ -1,5 +1,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
+    <gui:resources javascript='yahoo-dom-event,animation'/>
     <title>${content?.title}</title>
     <meta content="subpage" name="layout" />
     <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'content.css')}" />
@@ -22,7 +23,7 @@
 
     <g:render template="previewPane"/>
 
-    <g:render template="/comment/comments" model="${[parentId:content.id, comments:comments, locked:content.locked]}"/>
+    <g:render template="../comment/comments" model="${[commentType:'content', parentId:content.id, comments:comments, locked:content.locked]}"/>
 
 </body>
 </html>

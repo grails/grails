@@ -16,7 +16,7 @@ class ContentController extends BaseWikiController {
     
     static accessControl = {
         // Alternatively, several actions can be specified.
-        role(name: 'Editor', only:['createNews','editWikiPage','markupWikiPage', 'saveWikiPage', 'createWikiPage'] )
+        role(name: 'Editor', only:['createNews','editWikiPage','markupWikiPage', 'saveWikiPage', 'createWikiPage', 'postComment'] )
         role(name: 'Administrator', action: 'rollbackWikiVersion' )
     }
 
@@ -123,12 +123,10 @@ class ContentController extends BaseWikiController {
 
     def postComment = {
         def content = Content.get(params.id)
-        if (params.comment) {
-            def c = new Comment(body:params.comment, user: request.user)
-            content.addToComments(c)
-            assert content.save(flush:true)
-        }
-        redirect(action:'index', params: [id:content.title])
+        def c = new Comment(body:params.comment, user: request.user)
+        content.addToComments(c)
+        content.save(flush:true)
+        render(template:'/comment/comment', var:'comment', bean:c)
     }
 
 	private getCachedOrReal(id) {

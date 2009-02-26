@@ -104,14 +104,10 @@ class PluginController extends BaseWikiController {
 
     def postComment = {
         def plugin = Plugin.get(params.id)
-        def frag = 'comments'
-        if (params.comment) {
-            def c = new Comment(body:params.comment, user: request.user)
-            plugin.addToComments(c)
-            plugin.save(flush:true)
-            frag = "comment_${c.id}"
-        }
-        redirect(action:'show', params: [name:plugin.name], fragment:frag)
+        def c = new Comment(body:params.comment, user: request.user)
+        plugin.addToComments(c)
+        plugin.save(flush:true)
+        return render(template:'/comment/comment', var:'comment', bean:c)
     }
 
     def rate = {
