@@ -2,6 +2,7 @@
 <head>
     <title>${content?.title}</title>
     <meta content="subpage" name="layout" />
+    <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'content.css')}" />
     <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'comments.css')}" />
     <g:javascript library="scriptaculous" />
     <g:javascript library="diff_match_patch" />

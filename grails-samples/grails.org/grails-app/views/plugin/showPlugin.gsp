@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
     <gui:resources components="['tabView','dialog','autoComplete']"/>
-    %{--<g:javascript library="prototype" />--}%
     <g:javascript library="diff_match_patch" />
     <g:javascript library="scriptaculous" />
     <script src="${createLinkTo(dir:'js', file:'rating.js')}"></script>
+    <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'content.css')}" />
     <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'plugins.css')}" />
     <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'comments.css')}" />
     <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'ratings.css')}" />
@@ -28,7 +28,6 @@
     </gui:dialog>
 
     <h1>${plugin?.title}</h1>
-
 
     <div class="plugin">
 
