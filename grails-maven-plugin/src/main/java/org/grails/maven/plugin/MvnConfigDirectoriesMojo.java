@@ -28,17 +28,10 @@ import java.io.File;
  * @description Set sources/tests directories to be compatible with the directories layout used by grails.
  * @goal config-directories
  * @phase generate-sources
+ * @requiresProject true
  * @since 0.3
  */
 public class MvnConfigDirectoriesMojo extends AbstractGrailsMojo {
-
-    /*
-     * @parameter expression="${project}"
-     * @required
-     * @readonly
-     */
-//    private MavenProject project;
-
     /*
      * (non-Javadoc)
      * 
@@ -62,11 +55,20 @@ public class MvnConfigDirectoriesMojo extends AbstractGrailsMojo {
 //        }
 
         // Add sources directories
+        this.project.addCompileSourceRoot((new File(projectDir, "/grails-app/conf")).getAbsolutePath());
+        this.project.addCompileSourceRoot((new File(projectDir, "/grails-app/controllers")).getAbsolutePath());
+        this.project.addCompileSourceRoot((new File(projectDir, "/grails-app/domain")).getAbsolutePath());
+        this.project.addCompileSourceRoot((new File(projectDir, "/grails-app/services")).getAbsolutePath());
+        this.project.addCompileSourceRoot((new File(projectDir, "/grails-app/taglib")).getAbsolutePath());
+        this.project.addCompileSourceRoot((new File(projectDir, "/grails-app/utils")).getAbsolutePath());
+        this.project.addCompileSourceRoot((new File(projectDir, "/src/groovy")).getAbsolutePath());        
         this.project.addCompileSourceRoot((new File(projectDir, "src/java")).getAbsolutePath());
+
         // Add tests directories
-//        this.project.addTestCompileSourceRoot((new File(projectDir, "test/unit")).getAbsolutePath());
-//        this.project.addTestCompileSourceRoot((new File(projectDir, "test/integration")).getAbsolutePath());
+        this.project.addTestCompileSourceRoot((new File(projectDir, "test/unit")).getAbsolutePath());
+        this.project.addTestCompileSourceRoot((new File(projectDir, "test/integration")).getAbsolutePath());
+
         // Change output dir
-//        this.project.getModel().getBuild().setOutputDirectory("web-app/WEB-INF/classes");
+        this.project.getModel().getBuild().setOutputDirectory("web-app/WEB-INF/classes");
     }
 }
