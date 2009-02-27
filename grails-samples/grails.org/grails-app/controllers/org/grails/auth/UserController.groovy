@@ -97,14 +97,11 @@ class UserController {
     }
 
     def login = {
-        println "login: ${params}"
         if(request.method == 'POST') {
-            println "POST"
             def authToken = new UsernamePasswordToken(params.login, params.password)
             try {
                 this.jsecSecurityManager.login(authToken)
                 if(params.originalURI) {
-                    println "Found original URI at ${params.originalURI}, redirecting with params ($params)..."
                     // get rid of the login stuff before passing along params
                     params.remove('login')
                     params.remove('password')
@@ -112,19 +109,15 @@ class UserController {
                     def uri = params.remove('originalURI')
                     redirect(url:"${uri}${params.toQueryString()}")
                 } else {
-                    println "Taking you back home (no original uri)..."
                     redirect(uri:"/")
                 }
             } catch (AuthenticationException ex){
-                println "authentication exception on login..."
                 if(request.xhr) {
-                    println "This was an xhr request, rerendering login form..."
                     render(template:"loginForm", model:[originalURI:params.originalURI,
                                                         formData:params,
                                                         async:true,
                                                         message:"auth.invalid.login"])
                 } else {
-                    println "This was not an ajax call, so redirecting to static login form..."
                     flash.message = "Invalid username and/or password"
                     redirect(action: 'login', params: [ username: params.username ])
                 }

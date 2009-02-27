@@ -6,7 +6,7 @@
 <body>
 <div id="contentPane">
     <div id="infoLinks" style="margin-left:520px;">
-        <g:link controller="plugin" action="list">All Plugins</g:link><br/>
+        <g:link class="home" controller="plugin" action="index">Plugins Home</g:link><br/>
     </div>
     <h1>Create Plugin</h1>
     <g:if test="${flash.message}">

@@ -6,6 +6,7 @@
 <body>
 <div id="contentPane">
     <div id="infoLinks" style="margin-left:520px;">
+        <g:link class="home" controller="plugin" action="index">Plugins Home</g:link><br/>
         <g:link controller="plugin" action="createPlugin">Create Plugin Page</g:link>
     </div>
 

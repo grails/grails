@@ -33,7 +33,7 @@
         </g:formRemote>
     </g:if>
     <g:else>
-        <g:form name="login" action="login">
+        <g:form name="login" controller='user' action="login">
             ${formBody}
         </g:form>
     </g:else>

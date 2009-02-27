@@ -41,7 +41,8 @@
                 </g:formRemote>
             </g:if>
             <g:else>
-                <g:link action='postComment' id='${parentId}'>Login</g:link> to leave a comment
+                Login to leave a comment:
+                <g:render template='../user/loginForm' var='originalURI' bean="${request.forwardURI}"/>
             </g:else>
         </g:if>
         <g:else>

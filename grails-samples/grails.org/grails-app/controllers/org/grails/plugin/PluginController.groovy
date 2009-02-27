@@ -7,11 +7,34 @@ import org.grails.comment.Comment
 import org.codehaus.groovy.grails.commons.ConfigurationHolder
 import org.grails.auth.User
 import org.grails.wiki.BaseWikiController
+import org.hibernate.criterion.Projections
+import org.hibernate.criterion.Projection
+import org.hibernate.criterion.Order
 
 class PluginController extends BaseWikiController {
 
     def index = {
-        redirect(controller:'plugin', action:list, params:params)
+        redirect(controller:'plugin', action:home, params:params)
+    }
+
+    def home = {
+        def popularTags, popularPlugins, newestPlugins, recentlyUpdatedPlugins = []
+        popularPlugins = []
+        Plugin.withSession { session ->
+            def crit = session.createCriteria(Plugin.class)
+                .createAlias("ratings", "r")
+                .setProjection(Projections.projectionList()
+                    .add(Projections.groupProperty("name") )
+                    .add(Projections.groupProperty("title") )
+                    .add(Projections.avg("r.stars").as("avgStars") )
+                    .add(Projections.count("r.stars").as("numRatings") )
+                ).addOrder(Order.desc("avgStars"))
+            crit.list().each {
+                popularPlugins << [[name:it[0], title:it[1]], it[2], it[3]]
+            }
+            session.clear()
+        }
+        [popularTags: popularTags, popularPlugins: popularPlugins, newestPlugins: newestPlugins, recentlyUpdatedPlugins: recentlyUpdatedPlugins]
     }
 
     def list = {
@@ -25,6 +48,7 @@ class PluginController extends BaseWikiController {
         }
         pluginMap = pluginMap.sort { it.key }
         pluginMap.untagged = Plugin.withCriteria { isEmpty('tags') }.sort { it.title }
+
         render view:'listPlugins', model:[pluginMap: pluginMap]
     }
 
@@ -99,7 +123,7 @@ class PluginController extends BaseWikiController {
         def plugin = byName(params)
         log.warn "Deleting Plugin: $plugin"
         plugin.delete()
-        redirect(view:'list')
+        redirect(view:'index')
     }
 
     def postComment = {

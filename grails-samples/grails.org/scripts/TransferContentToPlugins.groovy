@@ -149,8 +149,7 @@ private contentToPlugin(c, tagNames) {
     tagNames.each { tagName ->
         def tag = tagClass.executeQuery("from Tag t where t.name = '${tagName.toLowerCase()}'")[0]
         if (!tag) {
-            tag = tagClass.newInstance()
-            tag.name = tagName
+            tag = tagClass.newInstance(name:tagName)
             assert tag.save(flush:true)
             println " * created new tag $tag ($tag.id) * "
         }

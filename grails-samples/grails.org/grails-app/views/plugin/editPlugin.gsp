@@ -6,7 +6,7 @@
 <body>
 <div id="contentPane">
     <div id="infoLinks" style="margin-left:520px;">
-        <g:link class="home" controller="plugin" action="list">Plugin List</g:link><br/>
+        <g:link class="home" controller="plugin" action="index">Plugins Home</g:link><br/>
         <g:link controller="plugin" action="show" params="${[name:plugin.name]}">Back</g:link>
     </div>
 
@@ -19,11 +19,6 @@
             <g:renderErrors bean="${plugin}" as="list"/>
         </div>
     </g:hasErrors>
-
-        %{--<g:form action="editPlugin" id="${plugin?.id}">--}%
-            %{--<g:textArea id="body" name="body" rows="20" cols="75" value="${content?.body}"/> <br/>--}%
-            %{--<g:submitButton name="save" value="Save"/>--}%
-        %{--</g:form>--}%
 
     <g:form action='editPlugin' id="${plugin?.id}">
         <input type="hidden" name="id" value="${plugin?.id}"/>
