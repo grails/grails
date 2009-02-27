@@ -27,7 +27,7 @@ div.star {
     cursor: pointer;
 }
 
-div.star, div.star a {
+div.star, span.star, div.star a, span.star a {
     background: url(../images/star.gif) no-repeat 0 0px;
 }
 
@@ -56,3 +56,19 @@ div#notifytext {
 #ratingdiv {
     height: 12px;
 }
+
+.ratingDisplay td {
+    padding: 0px;
+    margin: 0px;
+    border: none;
+}
+
+.ratingDisplay div.star {
+    cursor: default;
+    float:none;
+}
+.ratingDisplay div.on a {
+    background-position: 0 -32px;
+}
+
+

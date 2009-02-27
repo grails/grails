@@ -8,7 +8,6 @@ import org.codehaus.groovy.grails.commons.ConfigurationHolder
 import org.grails.auth.User
 import org.grails.wiki.BaseWikiController
 import org.hibernate.criterion.Projections
-import org.hibernate.criterion.Projection
 import org.hibernate.criterion.Order
 
 class PluginController extends BaseWikiController {
@@ -18,22 +17,40 @@ class PluginController extends BaseWikiController {
     }
 
     def home = {
-        def popularTags, popularPlugins, newestPlugins, recentlyUpdatedPlugins = []
-        popularPlugins = []
-        Plugin.withSession { session ->
-            def crit = session.createCriteria(Plugin.class)
-                .createAlias("ratings", "r")
-                .setProjection(Projections.projectionList()
-                    .add(Projections.groupProperty("name") )
-                    .add(Projections.groupProperty("title") )
-                    .add(Projections.avg("r.stars").as("avgStars") )
-                    .add(Projections.count("r.stars").as("numRatings") )
-                ).addOrder(Order.desc("avgStars"))
-            crit.list().each {
-                popularPlugins << [[name:it[0], title:it[1]], it[2], it[3]]
-            }
-            session.clear()
+
+
+        def popularTags = Tag.withCriteria {
+            createAlias('plugins', 'p')
+            .setProjection(Projections.projectionList()
+                .add(Projections.groupProperty('name'))
+                .add(Projections.count('p.id').as('numPlugins'))
+            ).addOrder(Order.desc('numPlugins'))
+            maxResults(10)
         }
+
+        def popularPlugins = Plugin.withCriteria {
+            createAlias("ratings", "r")
+            .setProjection(Projections.projectionList()
+                .add(Projections.groupProperty("name"))
+                .add(Projections.groupProperty("title"))
+                .add(Projections.avg("r.stars").as("avgStars"))
+                .add(Projections.count("r.stars").as("numRatings"))
+            ).addOrder(Order.desc("avgStars"))
+            maxResults(10)
+        }.inject([]) { list, result ->
+            list << [[name:result[0], title:result[1]], result[2], result[3]]
+        }
+
+        def newestPlugins = Plugin.withCriteria {
+            order('dateCreated', 'desc')
+            maxResults(5)
+        }
+
+        def recentlyUpdatedPlugins = Plugin.withCriteria {
+            order('lastReleased', 'desc')
+            maxResults(5)
+        }
+
         [popularTags: popularTags, popularPlugins: popularPlugins, newestPlugins: newestPlugins, recentlyUpdatedPlugins: recentlyUpdatedPlugins]
     }
 
@@ -74,6 +91,9 @@ class PluginController extends BaseWikiController {
         def plugin = Plugin.get(params.id)
         if(plugin) {
             if(request.method == 'POST') {
+                if (params.currentRelease && plugin.currentRelease != params.currentRelease) {
+                    plugin.lastReleased = new Date();
+                }
                 // update plugin
                 plugin.properties = params
                 plugin.save(flush:true)
@@ -109,6 +129,7 @@ class PluginController extends BaseWikiController {
             }
 
             plugin.author = request.user
+            plugin.lastReleased = new Date()
             if(plugin.save()) {
                 redirect(action:'show', params: [name:plugin.name])
             } else {

@@ -142,6 +142,41 @@ class PluginServiceUnitTests extends grails.test.GrailsUnitTestCase {
         assertEquals 'Richard D. James', plugin.author
         assertEquals 'richard@aphextwin.com', plugin.authorEmail
     }
+
+    void testUpdateCurrentRelease_AlsoUpdatesLastReleasedDate() {
+//        mockDomain(Plugin)
+//        mockDomain(WikiPage)
+//        mockDomain(Version)
+//
+//        def master = generateMockMasterPluginList()
+//        def plugin = new Plugin(
+//            name: 'plugin-a',
+//            description: new WikiPage(title:'Description', body:'old description'),
+//            currentRelease: '5.0.1',
+//            lastReleased: null
+//        )
+//        service.updatePlugin(plugin, master[0])
+
+
+        mockDomain(Plugin)
+        mockDomain(WikiPage)
+
+        def master = generateMockMasterPluginList()
+        def plugin = new Plugin(
+            name: 'plugin-a',
+            title: 'Plugin A',
+            description: new WikiPage(title:'Description', body:'old description'),
+                currentRelease: '5.0.1',
+            author: 'Richard D. James',
+            authorEmail: 'richard@aphextwin.com'
+        )
+        service.updatePlugin(plugin, master[0])
+        assertEquals "Plugin A", plugin.title
+        assertEquals 'old description', plugin.description.body
+        assertEquals 'Richard D. James', plugin.author
+        assertEquals 'richard@aphextwin.com', plugin.authorEmail
+        assertNotNull plugin.lastReleased
+    }
     
     void testRunMasterUpdate() {
         def translated = false

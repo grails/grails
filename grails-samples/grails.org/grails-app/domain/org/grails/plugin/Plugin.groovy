@@ -23,6 +23,9 @@ class Plugin {
     String grailsVersion        // version it was developed against
     Boolean official = false    // specifies SpringSource support
     Number avgRating
+    Date dateCreated
+    Date lastUpdated
+    Date lastReleased
 
     static hasMany = [comments:Comment, tags:Tag, ratings:Rating]
 
@@ -35,6 +38,7 @@ class Plugin {
         screenshots(nullable: true)
         author(nullable: true)
         grailsVersion(nullable:true, blank:true, maxLength:16)
+        lastReleased(nullable:true)
     }
 
     def getOfficial() {

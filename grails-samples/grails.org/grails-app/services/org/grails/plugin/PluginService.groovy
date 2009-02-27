@@ -127,6 +127,10 @@ class PluginService {
         plugin.name = master.name
         plugin.documentationUrl = master.documentationUrl
         plugin.downloadUrl = master.downloadUrl
+        // if this was a release update, also update the date of release
+        if (plugin.currentRelease != master.currentRelease) {
+            plugin.lastReleased = new Date();
+        }
         plugin.currentRelease = master.currentRelease
         plugin.grailsVersion = master.grailsVersion
 

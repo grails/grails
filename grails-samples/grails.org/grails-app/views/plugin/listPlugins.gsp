@@ -16,7 +16,7 @@
     </g:if>
     
     <g:each var='tagMap' in="${pluginMap}">
-        <a id="${tagMap.key} tags"><h2>${tagMap.key}</h2></a>
+        <a id="${(tagMap.key + ' tags').encodeAsURL()}"><h2>${tagMap.key}</h2></a>
         <ul>
             <g:each var='plugin' in="${tagMap.value}">
                 <li>

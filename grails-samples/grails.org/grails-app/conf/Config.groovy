@@ -50,6 +50,7 @@ environments {
     }
 }
 
+format.date = 'MMM d, yyyy'
 
 // log4j configuration
 log4j {
