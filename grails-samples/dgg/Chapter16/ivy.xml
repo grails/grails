@@ -19,10 +19,8 @@
             <exclude org="javax.servlet" module="servlet-api" name="*" type="*" ext="*" conf="" matcher="exact"/>
         </dependency>
         <dependency org="hsqldb" name="hsqldb" rev="1.8.0.5" conf="runtime"/>
-        <dependency org="org.apache.activemq" name="activemq-core" rev="5.0.0" conf="runtime"/>
+        <dependency org="org.apache.activemq" name="activemq-core" rev="5.2.0" conf="runtime"/>
         <dependency org="mysql" name="mysql-connector-java" rev="5.1.6" conf="runtime"/>
-        <dependency org="javax.management" name="jmxremote" rev="1.0.1_04" conf="runtime"/>
-        <dependency org="jms" name="jms" rev="1.1" conf="runtime"/>
         <!--
         <dependency org="mysql" name="mysql-connector-java" rev="5.1.6" conf="runtime"/>
         <dependency org="postgresql" name="postgresql" rev="8.3-603.jdbc3" conf="runtime"/>
