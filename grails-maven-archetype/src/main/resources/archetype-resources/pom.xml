@@ -112,6 +112,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
               <goal>maven-compile</goal>
               <goal>maven-test</goal>
               <goal>maven-war</goal>
+              <goal>maven-functional-test</goal>
             </goals>
           </execution>
         </executions>
