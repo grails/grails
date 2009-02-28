@@ -29,6 +29,8 @@ class Plugin {
 
     static hasMany = [comments:Comment, tags:Tag, ratings:Rating]
 
+    static searchable = [only: ['name', 'title', 'author', 'authorEmail', 'description']]
+
     static transients = ['avgRating','official']
 
     static constraints = {

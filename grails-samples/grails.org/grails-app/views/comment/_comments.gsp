@@ -1,5 +1,10 @@
 <div class="comments">
-    <h2><a class='anchor' name='comments'>${comments.size()} Comments</a></h2>
+    <%
+        def commentHeader = "No Comments Yet"
+        if (comments.size == 1) commentHeader = "1 Comment"
+        if (comments.size > 1) commentHeader = "${comments.size()} Comments"
+    %>
+    <h2><a class='anchor' name='comments'>${commentHeader}</a></h2>
     <ul id="commentList">
         <g:each var="comment" in="${comments}">
             <li class="comment">

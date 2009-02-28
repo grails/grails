@@ -17,8 +17,6 @@ class PluginController extends BaseWikiController {
     }
 
     def home = {
-
-
         def popularTags = Tag.withCriteria {
             createAlias('plugins', 'p')
             .setProjection(Projections.projectionList()
@@ -146,6 +144,29 @@ class PluginController extends BaseWikiController {
         plugin.delete()
         redirect(view:'index')
     }
+
+    def search = {
+        println "search: $params"
+        def plugins = Plugin.search(params.query).results
+        render(view:'listPlugins', model:[pluginMap:["Search Result":plugins]])
+    }
+
+    /*
+    def search = {
+		if(params.q) {
+			def searchResult = WikiPage.search(params.q, offset: params.offset, escape:true)
+			def filtered = searchResult.results.unique { it.title }
+			searchResult.results = filtered
+			searchResult.total = filtered.size()
+			flash.message = "Found $searchResult.total results!"
+			flash.next()
+			render(view:"/searchable/index", model:[searchResult:searchResult])
+		}
+		else {
+			render(view:"homePage")
+		}
+     }
+     */
 
     def postComment = {
         def plugin = Plugin.get(params.id)

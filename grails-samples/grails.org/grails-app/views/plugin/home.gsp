@@ -10,6 +10,12 @@
         <g:link controller="plugin" action="createPlugin">Create Plugin Page</g:link>
     </div>
 
+    <div class="searchBox">
+        <g:form name="search" action="search">
+            Search: <input type="text" name="query" value="${query}"/>
+            <input type="submit" value="Search"/>
+        </g:form>
+    </div>
     <g:render template='popularTags' var='tags' bean="${popularTags}"/>
     <g:render template='popularPlugins' var='plugins' bean="${popularPlugins}"/>
     <g:render template='newest' var='plugins' bean="${newestPlugins}"/>
