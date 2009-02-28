@@ -28,10 +28,12 @@
       <sourceFolder url="file://$MODULE_DIR$/../plugins/searchable-0.5.1/src/groovy" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../plugins/searchable-0.5.1/src/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../plugins/yui-2.6.1/grails-app/taglib" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../plugins/yui-2.6.1/src/groovy" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/groovy" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../test/integration" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/../test/unit" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/../web-app/js" />
     </content>
     <orderEntry type="library" name="grails-1.1-SNAPSHOT" level="application" />
     <orderEntry type="library" name="grails-1.1-SNAPSHOT" level="application" />

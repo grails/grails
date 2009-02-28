@@ -104,7 +104,6 @@ private contentToPlugin(c, tagNames) {
     }
 
     p.title = c.title
-
     p.author = author.login
     p.authorEmail = author.email
     p.documentationUrl = 'not provided'
@@ -184,11 +183,11 @@ for "${c.title}" [here|${ConfigurationHolder.config.grails.serverURL}/plugin/${p
     assert comment.save()
     if (c.comments) c.comments << comment
     else c.comments = [comment]
+    c.locked = true
     if (!c.validate()) {
         println "!! ERROR saving content after comment: ${c}!!"
         c.errors.allErrors.each { println it }
     }
-    c.locked = true
     assert c.save(flush:true)
 
     // handle any image references
