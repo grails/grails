@@ -11,9 +11,9 @@
     </div>
 
     <div class="searchBox">
-        <g:form name="search" action="search">
-            Search: <input type="text" name="query" value="${query}"/>
-            <input type="submit" value="Search"/>
+        <g:form name="pluginSearch" action="search">
+            <input type="text" name="q" value="${q}"/>
+            <input type="submit" value="Search Plugins"/>
         </g:form>
     </div>
     <g:render template='popularTags' var='tags' bean="${popularTags}"/>

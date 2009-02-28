@@ -85,7 +85,6 @@ class PluginController extends BaseWikiController {
     }
 
     def editPlugin = {
-        println "editPlugin: $params"
         def plugin = Plugin.get(params.id)
         if(plugin) {
             if(request.method == 'POST') {
@@ -146,18 +145,30 @@ class PluginController extends BaseWikiController {
     }
 
     def search = {
-        println "search: $params"
-        def plugins = Plugin.search(params.query).results
-        render(view:'listPlugins', model:[pluginMap:["Search Result":plugins]])
-    }
-
-    /*
-    def search = {
 		if(params.q) {
+            // get all the plugin wiki pages that contain the search query
 			def searchResult = WikiPage.search(params.q, offset: params.offset, escape:true)
 			def filtered = searchResult.results.unique { it.title }
-			searchResult.results = filtered
-			searchResult.total = filtered.size()
+            def pluginWikis = filtered.collect {
+                if (it.title.matches(/(${Plugin.WIKIS.join('|')})-[0-9]*/)) {
+                    def plugin = Plugin.read(it.title.split('-')[1])
+                    plugin.metaClass.getBody = { -> it.body }
+                    return plugin
+                }
+            }.findAll { it } // gets rid of the nulls
+
+            // get all the plugins with meta data that matches search
+            def plugins = Plugin.search(params.q).results.collect { it.metaClass.getBody = { -> '' }; it }
+
+            // remove the duplicates from the meta data plugin matches, because the wiki search results have more detail
+            pluginWikis.each { wiki ->
+                plugins.removeAll plugins.findAll { it.title == wiki.title }
+            }
+
+            def compositeResult = plugins + pluginWikis
+
+            searchResult.results = compositeResult
+			searchResult.total = compositeResult.size()
 			flash.message = "Found $searchResult.total results!"
 			flash.next()
 			render(view:"/searchable/index", model:[searchResult:searchResult])
@@ -165,8 +176,7 @@ class PluginController extends BaseWikiController {
 		else {
 			render(view:"homePage")
 		}
-     }
-     */
+   }
 
     def postComment = {
         def plugin = Plugin.get(params.id)

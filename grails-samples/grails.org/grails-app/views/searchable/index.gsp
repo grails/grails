@@ -53,8 +53,8 @@
                             </g:else>
                         </div>
 
-                        <g:set var="desc"><g:if test="${result.body.size() > 220}"><wiki:text>${result.body[0..220]}</wiki:text>...</g:if>
-                            <g:else><wiki:text id="${result.title}">${result.body}</wiki:text></g:else></g:set>
+                        <g:set var="desc"><g:if test="${result.body?.size() > 220}"><wiki:text>${result.body[0..220]}</wiki:text>...</g:if>
+                            <g:else><wiki:text id="${result.title}">${result.body ?: ''}</wiki:text></g:else></g:set>
                         <div class="desc">${desc}</div>
 
                     </div>

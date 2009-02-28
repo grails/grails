@@ -28,11 +28,9 @@ class ContentController extends BaseWikiController {
 		if(params.q) {
 			def searchResult = WikiPage.search(params.q, offset: params.offset, escape:true)
 			def filtered = searchResult.results.unique { it.title }
-            filtered = filtered.collect {
+            filtered = searchResult.results.collect {
                 if (it.title.matches(/(${Plugin.WIKIS.join('|')})-[0-9]*/)) {
-                    println 'replacing'
                     def plugin = Plugin.read(it.title.split('-')[1])
-                    plugin.title = "${plugin.title}: ${it.title.split('-')[0]}"
                     plugin.metaClass.getBody = { -> it.body }
                     return plugin
                 }
