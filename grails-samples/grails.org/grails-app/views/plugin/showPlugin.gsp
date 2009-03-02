@@ -57,7 +57,7 @@
             <tr>
                 <th>Rating</th>
                 <td colspan='3'>
-                    <g:render template="ratings" model="[parentId:plugin.id, average:plugin.avgRating, total:plugin.ratings.size(), active: jsec.principal() && !(userRating as Boolean)]"/>
+                    <g:render template="ratings" model="[parentId:plugin.id, average:plugin.avgRating, total:plugin.ratings.size(), active: true]"/>
                 </td>
             </tr>
             <tr>

@@ -18,6 +18,7 @@
 
     <div id="postComment">
         <h2>Post a Comment</h2>
+        <p class='tip'>You may use wiki text.</p>
         <g:if test="${!locked}">
             <g:if test="${jsec.principal()}">
                 <script>

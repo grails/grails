@@ -168,12 +168,18 @@ class PluginController extends BaseWikiController {
     def rate = {
         def plugin = Plugin.get(params.id)
         def user = request.user
-        // only save if the ip has not already rated
         def users = plugin.ratings*.user
+        def rating = params.rating.toInteger()
+        // for new ratings, create a new one
         if (!users || !(user in users) ) {
-            def rating = params.rating.toInteger()
             plugin.addToRatings(stars:rating, user: User.get(user.id))
             plugin.save()
+        }
+        // update the current rating if the user has already rated it
+        else {
+            def oldRating = plugin.ratings.find { it.user == user }
+            oldRating.stars = rating
+            assert oldRating.save()
         }
         render "${plugin.avgRating},${plugin.ratings.size()}"
     }
