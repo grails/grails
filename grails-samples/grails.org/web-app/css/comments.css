@@ -31,3 +31,7 @@
     border: none;
     color: inherit;
 }
+
+#postBoxTrigger:hover {
+    text-decoration: underline;
+}
