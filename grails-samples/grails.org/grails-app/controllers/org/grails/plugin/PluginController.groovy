@@ -194,8 +194,8 @@ class PluginController extends BaseWikiController {
             }
             plugin.addToTags(tag)
             tag.addToPlugins(plugin)
+            assert tag.save()
         }
-        assert tag.save()
         assert plugin.save()
         render(template:'tags', var:'plugin', bean:plugin)
     }

@@ -86,6 +86,17 @@
                     queryDelay='1'
                 />
             </gui:dialog>
+
+            <script>
+                YAHOO.util.Event.onDOMReady(function() {
+                    // on show, put the dialog in the right place
+                    GRAILSUI.addTagDialog.subscribe('show', function() {
+                        var pos = YAHOO.util.Dom.getXY('addTagTrigger');
+                        this.cfg.setProperty('x',pos[0]+20);
+                        this.cfg.setProperty('y',pos[1]+20);
+                    });
+                });
+            </script>
         </jsec:isLoggedIn>
 
         <br/><br/>
