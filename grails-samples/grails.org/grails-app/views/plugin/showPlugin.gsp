@@ -35,21 +35,24 @@
             <tr>
                 <th>Author(s)</th>
                 <td>${plugin.author}</td>
-                <td colspan='2'>${plugin.authorEmail}</td>
-            </tr>
-            <tr>
-                <th>Docs</th>
-                <td colspan='3'><a href="${plugin.documentationUrl}">${plugin.documentationUrl}</a></td>
-            </tr>
-            <tr>
-                <th>Download</th>
-                <td colspan='3'><a href="${plugin.downloadUrl}">${plugin.downloadUrl}</a></td>
+                <td colspan='2'>
+                    <jsec:isLoggedIn>
+                        ${plugin.authorEmail}
+                    </jsec:isLoggedIn>
+                    <jsec:isNotLoggedIn>
+                        (Log in for author email address)
+                    </jsec:isNotLoggedIn>
+                </td>
             </tr>
             <tr>
                 <th>Current Release</th>
                 <td>${plugin.currentRelease}</td>
+                <td colspan='2'><a href="${plugin.documentationUrl}">Official Docs</a></td>
+            </tr>
+            <tr>
                 <th>Built on Grails</th>
-                <td>${plugin.grailsVersion}</td>
+                <td>${plugin.grailsVersion ?: '?'}</td>
+                <td colspan='2'><a href="${plugin.downloadUrl}">Download</a></td>
             </tr>
             <tr>
                 <th>Rating</th>

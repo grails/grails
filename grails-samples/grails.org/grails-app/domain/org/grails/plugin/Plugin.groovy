@@ -29,7 +29,17 @@ class Plugin {
 
     static hasMany = [comments:Comment, tags:Tag, ratings:Rating]
 
-    static searchable = [only: ['name', 'title', 'author', 'authorEmail', 'description']]
+    static searchable = {
+        only = [
+            'name', 'title', 'author', 'authorEmail', 'tags',
+            'description', 'installation', 'faq', 'screenshots'
+        ]
+        tags component: true
+        description component: true
+        installation component: true
+        faq component: true
+        screenshots component: true
+    }
 
     static transients = ['avgRating','official']
 
@@ -41,6 +51,10 @@ class Plugin {
         author(nullable: true)
         grailsVersion(nullable:true, blank:true, maxLength:16)
         lastReleased(nullable:true)
+    }
+
+    static mapping = {
+        tags cascade: 'save-update'
     }
 
     def getOfficial() {

@@ -7,6 +7,10 @@ class Tag {
     static hasMany = [plugins:Plugin]
     static belongsTo = Plugin
 
+    static searchable = {
+        only = ['name']
+    }
+
     void setName(String name) {
         this.@name = name.toLowerCase()
     }

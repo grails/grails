@@ -108,14 +108,14 @@ class PluginController extends BaseWikiController {
         // just in case this was an ad hoc creation where the user logged in during the creation...
         if (params.name) params.name = params.name - '?action=login'
         def plugin = new Plugin(params)
-
         if(request.method == 'POST') {
+            assert plugin.save(flush:true)
             Plugin.WIKIS.each { wiki ->
                 def body = ''
                 if (wiki == 'installation') {
                     body = "{code}grails install-plugin ${plugin.name}{code}"
                 }
-                def wikiPage = new WikiPage(title:wiki, body:body)
+                def wikiPage = new WikiPage(title:"${wiki}-${plugin.id}", body:body)
                 wikiPage.save()
                 plugin."$wiki" = wikiPage
             }
@@ -146,29 +146,8 @@ class PluginController extends BaseWikiController {
 
     def search = {
 		if(params.q) {
-            // get all the plugin wiki pages that contain the search query
-			def searchResult = WikiPage.search(params.q, offset: params.offset, escape:true)
-			def filtered = searchResult.results.unique { it.title }
-            def pluginWikis = filtered.collect {
-                if (it.title.matches(/(${Plugin.WIKIS.join('|')})-[0-9]*/)) {
-                    def plugin = Plugin.read(it.title.split('-')[1])
-                    plugin.metaClass.getBody = { -> it.body }
-                    return plugin
-                }
-            }.findAll { it } // gets rid of the nulls
-
-            // get all the plugins with meta data that matches search
-            def plugins = Plugin.search(params.q).results.collect { it.metaClass.getBody = { -> '' }; it }
-
-            // remove the duplicates from the meta data plugin matches, because the wiki search results have more detail
-            pluginWikis.each { wiki ->
-                plugins.removeAll plugins.findAll { it.title == wiki.title }
-            }
-
-            def compositeResult = plugins + pluginWikis
-
-            searchResult.results = compositeResult
-			searchResult.total = compositeResult.size()
+            def searchResult = Plugin.search(params.q, offset: params.offset, escape:true)
+            searchResult.results = searchResult.results.collect { it.metaClass.getBody = { -> delegate.description.body }; it }
 			flash.message = "Found $searchResult.total results!"
 			flash.next()
 			render(view:"/searchable/index", model:[searchResult:searchResult])
@@ -208,15 +187,20 @@ class PluginController extends BaseWikiController {
                 tag.save()
             }
             plugin.addToTags(tag)
+            tag.addToPlugins(plugin)
         }
+        assert tag.save()
         assert plugin.save()
         render(template:'tags', var:'plugin', bean:plugin)
     }
 
     def removeTag = {
         def plugin = Plugin.get(params.id)
-        plugin.tags.remove(Tag.findByName(params.tagName))
+        def tag = Tag.findByName(params.tagName)
+        plugin.removeFromTags(tag)
+        tag.removeFromPlugins(plugin)
         plugin.save()
+        tag.save()
         render(template:'tags', var:'plugin', bean:plugin)
     }
 

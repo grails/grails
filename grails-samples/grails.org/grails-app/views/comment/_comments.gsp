@@ -6,6 +6,7 @@
     %>
     <h2><a class='anchor' name='comments'>${commentHeader}</a></h2>
     <ul id="commentList">
+        <li></li>
         <g:each var="comment" in="${comments}">
             <li class="comment">
                 <g:render template="/comment/comment" var='comment' bean="${comment}"/>

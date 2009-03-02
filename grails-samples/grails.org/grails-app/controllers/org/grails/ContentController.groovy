@@ -27,8 +27,7 @@ class ContentController extends BaseWikiController {
    def search = {
 		if(params.q) {
 			def searchResult = WikiPage.search(params.q, offset: params.offset, escape:true)
-			def filtered = searchResult.results.unique { it.title }
-            filtered = searchResult.results.collect {
+            def filtered = searchResult.results.unique { it.title }.collect {
                 if (it.title.matches(/(${Plugin.WIKIS.join('|')})-[0-9]*/)) {
                     def plugin = Plugin.read(it.title.split('-')[1])
                     plugin.metaClass.getBody = { -> it.body }
@@ -36,7 +35,6 @@ class ContentController extends BaseWikiController {
                 }
                 it
             }
-            filtered.each { println it.title + ' ' + it.getClass() }
 			searchResult.results = filtered
 			searchResult.total = filtered.size()
 			flash.message = "Found $searchResult.total results!"
@@ -187,7 +185,6 @@ class ContentController extends BaseWikiController {
     }
 
 	def editWikiPage = {
-        println "editWikiPage: $params"
         if(!params.id) {
             render(template:"/shared/remoteError", [code:"page.id.missing"])
         }
@@ -204,7 +201,6 @@ class ContentController extends BaseWikiController {
         }
         [pageName:params.id?.decodeURL()]
     }
-
 
     def saveWikiPage = {
       if(request.method == 'POST') {
@@ -352,7 +348,6 @@ class ContentController extends BaseWikiController {
         }
 
     }
-
 
     def uploadImage = {
         def config = ConfigurationHolder.getConfig()

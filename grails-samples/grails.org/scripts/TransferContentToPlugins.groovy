@@ -153,6 +153,9 @@ private contentToPlugin(c, tagNames) {
             println " * created new tag $tag ($tag.id) * "
         }
         p.tags << tag
+        if (!tag.plugins) tag.plugins = []
+        tag.plugins << p
+        assert tag.save(flush:true)
         println "Added tag $tag to $p"
     }
     assert p.save(flush:true)
