@@ -32,7 +32,7 @@ class Plugin {
     static searchable = {
         only = [
             'name', 'title', 'author', 'authorEmail', 'tags',
-            'description', 'installation', 'faq', 'screenshots'
+            'installation','description','faq','screenshots'
         ]
         tags component: true
         description component: true
