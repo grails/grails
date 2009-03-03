@@ -57,3 +57,37 @@
 .actionIcon {
     white-space: nowrap;
 }
+
+ul#infoLinks li {
+    list-style-type: none;
+}
+
+ul#infoLinks {
+    margin-left: 420px;
+    text-align: left;
+    line-height: 20px;
+}
+
+ul#infoLinks a {
+    text-decoration: none;
+}
+ul#infoLinks .home {
+    background: url(../images/skin/house.png) center left no-repeat;
+    padding-left: 25px;
+}
+ul#infoLinks .list {
+    background: url(../images/famfamfam/application_view_list.png) center left no-repeat;
+    padding-left: 25px;
+}
+ul#infoLinks .create {
+    background: url(../images/famfamfam/plugin_add.png) center left no-repeat;
+    padding-left: 25px;
+}
+ul#infoLinks .edit {
+    background: url(../images/famfamfam/plugin_edit.png) center left no-repeat;
+    padding-left: 25px;
+}
+ul#infoLinks .show {
+    background: url(../images/famfamfam/plugin.png) center left no-repeat;
+    padding-left: 25px;
+}

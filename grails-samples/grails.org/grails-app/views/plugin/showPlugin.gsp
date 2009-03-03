@@ -18,10 +18,14 @@
     def officialStyle = plugin.official ? 'official' : ''
 %>
 <div id="contentPane" class='${officialStyle}'>
-    <div id="infoLinks" style="margin-left:520px;">
-        <g:link class="home" controller="plugin" action="index">Plugins Home</g:link><br/>
-        <g:link controller="plugin" action="editPlugin" id="${plugin.id}"><img src="${createLinkTo(dir: 'images/', 'icon-edit.png')}" width="15" height="15" alt="Icon Edit" class="inlineIcon" border="0"/>Edit Plugin</g:link>
-    </div>
+    <ul id="infoLinks">
+        <li class="home">
+            <g:link controller="plugin" action="index">Plugins Home</g:link><br/>
+        </li>
+        <li class="edit">
+            <g:link controller="plugin" action="editPlugin" id="${plugin.id}">Edit Plugin</g:link>
+        </li>
+    </ul>
 
     <gui:dialog id='loginDialog' title="Login required" modal="true">
         <div id='loginFormDiv'></div>

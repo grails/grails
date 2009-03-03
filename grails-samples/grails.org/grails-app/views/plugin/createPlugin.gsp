@@ -2,12 +2,15 @@
 <head>
     <title>New Plugin</title>
     <meta content="subpage" name="layout"/>
+    <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'plugins.css')}" />
 </head>
 <body>
 <div id="contentPane">
-    <div id="infoLinks" style="margin-left:520px;">
-        <g:link class="home" controller="plugin" action="index">Plugins Home</g:link><br/>
-    </div>
+    <ul id="infoLinks">
+        <li class='home'>
+            <g:link controller="plugin" action="index">Plugins Home</g:link><br/>
+        </li>
+    </ul>
     <h1>Create Plugin</h1>
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>

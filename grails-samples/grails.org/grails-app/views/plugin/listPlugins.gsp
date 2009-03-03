@@ -2,13 +2,18 @@
 <head>
     <title>Grails Plugins</title>
     <meta content="subpage" name="layout"/>
+    <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'plugins.css')}" />
 </head>
 <body>
 <div id="contentPane">
-    <div id="infoLinks" style="margin-left:520px;">
-        <g:link class="home" controller="plugin" action="index">Plugins Home</g:link><br/>
-        <g:link controller="plugin" action="createPlugin">Create Plugin Page</g:link>
-    </div>
+    <ul id="infoLinks">
+        <li class="home">
+            <g:link controller="plugin" action="index">Plugins Home</g:link>
+        </li>
+        <li class="create">
+            <g:link controller="plugin" action="createPlugin">Create Plugin Page</g:link>
+        </li>
+    </ul>
 
     <h1>Plugin List</h1>
     <g:if test="${flash.message}">
