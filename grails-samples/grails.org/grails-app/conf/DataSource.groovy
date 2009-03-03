@@ -19,7 +19,7 @@ environments {
 	}
 	test {
 		dataSource {
-			dbCreate = "update"
+			dbCreate = "create-drop"
 			url = "jdbc:hsqldb:mem:testDb"
             driverClassName = "org.hsqldb.jdbcDriver"
             username = "sa"
