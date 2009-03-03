@@ -22,7 +22,6 @@
 
         <div id='postBox' class="hidden">
 
-            <p class='tip'>You may use wiki text.</p>
             <g:if test="${!locked}">
                 <g:if test="${jsec.principal()}">
                     <script>
@@ -45,6 +44,7 @@
                             YAHOO.util.Dom.get('comment').value = '';
                         };
                     </script>
+                    <p class='tip'>You may use wiki text.</p>
                     <g:formRemote name='commentForm' url="[controller: commentType, action:'postComment', id:parentId]" update="nextComment" onComplete="handleComment()">
                         <textarea id='comment' name='comment' value=''></textarea>
                         <br/>

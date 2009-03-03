@@ -75,7 +75,7 @@
                                 <th>Tags</th>
                                 <td>
                                     <span id='pluginTags'>
-                                        <g:render template='tags' var='plugin' bean="${result}"/>
+                                        <g:render template='tags' model="[plugin:result, disabled:true]"/>
                                     </span>
                                 </td>
                             </tr>

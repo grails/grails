@@ -70,11 +70,14 @@
                     <span id='pluginTags'>
                         <g:render template='tags' var='plugin' bean="${plugin}"/>
                     </span>
-                    <jsec:isLoggedIn><span id='addTagTrigger' ><img src="${createLinkTo(dir: 'images/famfamfam', file: 'add.png')}"/></span></jsec:isLoggedIn>
+                    <span id='addTagTrigger'><img src="${createLinkTo(dir: 'images/famfamfam', file: 'add.png')}"/></span>
                 </td>
             </tr>
         </table>
 
+        %{--
+            Logged in users will be able to add tags
+        --}%
         <jsec:isLoggedIn>
             <gui:dialog id='addTagDialog'
                 title='Add Tags'
@@ -102,6 +105,17 @@
                 });
             </script>
         </jsec:isLoggedIn>
+        %{-- Unauthenticated users get defered to the login screen --}%
+        <jsec:isNotLoggedIn>
+            <script>
+                YAHOO.util.Event.onDOMReady(function() {
+                    // on show, put the dialog in the right place
+                    YAHOO.util.Event.on('addTagTrigger', 'click', function() {
+                        window.location = "${createLink(controller:'user', action:'login', params:[originalURI:request.forwardURI])}";
+                    });
+                });
+            </script>
+        </jsec:isNotLoggedIn>
 
         <br/><br/>
 
