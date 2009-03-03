@@ -7,8 +7,12 @@
     <h2><a class='anchor' name='comments'>${commentHeader}</a></h2>
     <ul id="commentList">
         <li></li>
-        <g:each var="comment" in="${comments}">
-            <li class="comment">
+        <g:each var="comment" status='i' in="${comments}">
+            <g:set var='oddEven'>
+                <g:if test="${i % 2 == 0}">even</g:if>
+                <g:else>odd</g:else>
+            </g:set>
+            <li class="comment ${oddEven}">
                 <g:render template="/comment/comment" var='comment' bean="${comment}"/>
             </li>
         </g:each>
@@ -27,10 +31,11 @@
                     <script>
                         var handleComment = function() {
                             var lastComment = YAHOO.util.Dom.getLastChild('commentList');
+                            var oddEven = YAHOO.util.Dom.hasClass(lastComment, 'odd') ? 'even' : 'odd';
                             var nextComment = YAHOO.util.Dom.get('nextComment');
                             var newComment = document.createElement('li');
                             newComment.id = 'newestComment';
-                            newComment.className = 'comment';
+                            newComment.className = 'comment ' + oddEven;
                             YAHOO.util.Dom.setStyle(newComment, 'opacity', 0.0);
                             newComment.innerHTML = nextComment.innerHTML;
                             YAHOO.util.Dom.insertAfter(newComment, lastComment);

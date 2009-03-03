@@ -3,3 +3,9 @@ changeSet(id:'PluginPortalComments', author:'Rhyolight') {
     dropColumn(tableName:'comment', columnName:'email')
     dropColumn(tableName:'comment', columnName:'poster')
 }
+
+changeSet(id:'IncreaseCommentBodySize', author:'Rhyolight') {
+    modifyColumn(tableName:'comment') {
+        column(name:'body', type:'TEXT')
+    }
+}

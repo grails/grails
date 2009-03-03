@@ -1,12 +1,39 @@
-.comment {
+li.comment {
     background-color: #b7bfc6;
-    margin: 20px;
-    padding: 20px;
-    border: 1px solid #666;
+    margin: 0px;
+    padding: 0px;
+    /*border: 1px solid #666;*/
+}
+
+li.odd {
+    background-color: #9bb2c7;    
+}
+
+.comment table {
+    width: 100%;
+    border: none;
+    padding: 0px;
+    margin: 0px;
+}
+.comment table td.body {
+    padding: 10px;
+}
+
+.comment .permalink {
+    float:right;
 }
 
 .comment .author {
-    margin: 10px;
+    text-align: right;
+    padding-right: 10px;
+}
+.comment .date {
+    padding-left: 10px;
+}
+
+.comment .commentAvatar {
+    float: left;
+    margin: 0px 10px 10px 0px;
 }
 
 #postComment form {
@@ -25,6 +52,8 @@
 
 #commentList {
     list-style-type: none;
+    margin: 0px;
+    padding: 0px;
 }
 
 .comments a.anchor:hover {
