@@ -146,7 +146,7 @@ class PluginController extends BaseWikiController {
 
     def search = {
 		if(params.q) {
-            def searchResult = Plugin.search(params.q, offset: params.offset, escape:true)
+            def searchResult = Plugin.search(params.q, reload: true, offset: params.offset, escape:true)
             searchResult.results = searchResult.results.unique { it.title }
 			flash.message = "Found $searchResult.total results!"
 			flash.next()

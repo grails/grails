@@ -24,3 +24,17 @@
 .paging span.currentStep {
     font-weight: bold;
 }
+
+.result table {
+    width: inherit;
+    border: none;
+}
+
+.result table td, .result table th {
+    padding: 0px;
+    margin: 0px;
+}
+
+table.ratingDisplay {
+    padding: 0px;
+}

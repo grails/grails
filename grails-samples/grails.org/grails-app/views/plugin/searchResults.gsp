@@ -11,9 +11,10 @@
             document.getElementById("q").focus();
         }
     </script>
-    <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'plugins.css')}" />
-    <link rel="stylesheet" href="${createLinkTo(dir: 'css', file: 'search.css')}"/>
+    <link rel="stylesheet" href="${createLinkTo(dir: 'css', file: 'content.css')}"/>
+    <link rel="stylesheet" href="${createLinkTo(dir: 'css', file: 'plugins.css')}"/>
     <link rel="stylesheet" href="${createLinkTo(dir: 'css', file: 'ratings.css')}"/>
+    <link rel="stylesheet" href="${createLinkTo(dir: 'css', file: 'search.css')}"/>
 </head>
 <body onload="focusQueryInput();">
 <div id="contentPane">
@@ -49,7 +50,7 @@
         <g:elseif test="${haveResults}">
             <div id="results" class="results">
                 <g:each var="result" in="${searchResult.results}" status="index">
-                    <div class="result">
+                    <div class="plugin result">
 
                         <g:set var="className" value="${result.title}"/>
 
@@ -58,39 +59,26 @@
 
                         </div>
 
-                        <table class='details search'>
+                        <table class='search'>
                             <tr>
                                 <th>Author(s)</th>
                                 <td>${result.author}</td>
-                                <td colspan='2'>
-                                    <jsec:isLoggedIn>
-                                        ${result.authorEmail}
-                                    </jsec:isLoggedIn>
-                                    <jsec:isNotLoggedIn>
-                                        (Log in for author email address)
-                                    </jsec:isNotLoggedIn>
-                                </td>
-                            </tr>
-                            <tr>
                                 <th>Current Release</th>
                                 <td>${result.currentRelease}</td>
-                                <td colspan='2'><a href="${result.documentationUrl}">Official Docs</a></td>
                             </tr>
 
                             <tr>
                                 <th>Rating</th>
-                                <td colspan='3'>
+                                <td>
                                     <g:render template="ratingDisplay" var="average" bean="${result.avgRating}"/>
                                 </td>
+                                <th>Tags</th>
+                                <td>
+                                    <span id='pluginTags'>
+                                        <g:render template='tags' var='plugin' bean="${result}"/>
+                                    </span>
+                                </td>
                             </tr>
-                            %{--<tr>--}%
-                            %{--<th>Tags</th>--}%
-                            %{--<td colspan='3'>--}%
-                            %{--<span id='pluginTags'>--}%
-                            %{--<g:render template='tags' var='plugin' bean="${result}"/>--}%
-                            %{--</span>--}%
-                            %{--</td>--}%
-                            %{--</tr>--}%
                         </table>
 
                         <g:set var="desc"><g:if test="${result.description.body?.size() > 220}"><wiki:text>${result.description.body[0..220]}</wiki:text>...</g:if>
@@ -107,7 +95,7 @@
                         Page:
                         <g:set var="totalPages" value="${Math.ceil(searchResult.total / searchResult.max)}"/>
                         <g:if test="${totalPages == 1}"><span class="currentStep">1</span></g:if>
-                        <g:else><g:paginate controller="searchable" action="index" params="[q: params.q]" total="${searchResult.total}" prev="&lt; previous" next="next &gt;"/></g:else>
+                        <g:else><g:paginate controller="plugin" action="search" params="[q: params.q]" total="${searchResult.total}" prev="&lt; previous" next="next &gt;"/></g:else>
                     </g:if>
                 </div>
             </div>
