@@ -47,20 +47,6 @@ class PluginControllerTests extends ControllerUnitTestCase {
         assertEquals 'My Plugin', model.plugin.title
     }
 
-    void testCreatePluginValidationError() {
-        mockRequest.method = 'POST'
-        mockParams.title='my plugin'
-        mockDomain(WikiPage)
-
-        Plugin.metaClass.save = { -> null }
-
-        def controller = new PluginController()
-        def model = controller.createPlugin()
-
-        assert model.plugin
-        assertEquals 'my plugin', model.plugin.title
-    }
-
     void testCreatePluginValidationSuccess() {
         mockDomain(Plugin)
         mockDomain(WikiPage)
@@ -71,6 +57,7 @@ class PluginControllerTests extends ControllerUnitTestCase {
         mockParams.currentRelease='1.2'
         mockParams.downloadUrl='durl'
         def redirectParams = [:]
+        Plugin.metaClass.save = { Map m -> true }
 
         def controller = new PluginController()
         controller.createPlugin()

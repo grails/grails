@@ -109,7 +109,7 @@ class PluginController extends BaseWikiController {
         if (params.name) params.name = params.name - '?action=login'
         def plugin = new Plugin(params)
         if(request.method == 'POST') {
-            assert plugin.save(flush:true)
+            plugin.save(flush:true)
             Plugin.WIKIS.each { wiki ->
                 def body = ''
                 if (wiki == 'installation') {
@@ -150,7 +150,7 @@ class PluginController extends BaseWikiController {
             searchResult.results = searchResult.results.collect { it.metaClass.getBody = { -> delegate.description.body }; it }
 			flash.message = "Found $searchResult.total results!"
 			flash.next()
-			render(view:"/searchable/index", model:[searchResult:searchResult])
+			render(view:"searchResults", model:[searchResult:searchResult])
 		}
 		else {
 			render(view:"homePage")

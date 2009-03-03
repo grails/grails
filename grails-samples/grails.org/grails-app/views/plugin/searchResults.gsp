@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta content="subpage" name="layout"/>
-    <title>Search Results</title>
+    <title>Plugin Search Results</title>
     <script type="text/javascript">
         var focusQueryInput = function() {
             document.getElementById("q").focus();
@@ -45,22 +45,12 @@
                         <g:set var="className" value="${result.title}"/>
 
                         <div class="name">
-
-                            %{--
-                                The result may be either a WikiPage or Plugin object.  If it is a Plugin, we'll want to
-                                link it properly to the Plugin domain.  Otherwise it gets treated like a normal WikiPage
-                            --}%
-                            <g:if test="${result instanceof Plugin}">
-                                <g:link controller="plugin" action="show" params="${[name:result.name]}">${className}</g:link>
-                            </g:if>
-                            <g:else>
-                                <g:link controller="content" id="${result.title}">${className}</g:link>
-                            </g:else>
+                            <g:link controller="plugin" action="show" params="${[name:result.name]}">${className}</g:link>
                         </div>
 
-                        <g:set var="desc"><g:if test="${result.body?.size() > 220}"><wiki:text>${result.body[0..220]}</wiki:text>...</g:if>
-                            <g:else><wiki:text id="${result.title}">${result.body ?: ''}</wiki:text></g:else></g:set>
-                        <div class="desc">${desc}</div>
+                        %{--<g:set var="desc"><g:if test="${result.body?.size() > 220}"><wiki:text>${result.body[0..220]}</wiki:text>...</g:if>--}%
+                            %{--<g:else><wiki:text id="${result.title}">${result.body ?: ''}</wiki:text></g:else></g:set>--}%
+                        %{--<div class="desc">${desc}</div>--}%
 
                     </div>
                 </g:each>
