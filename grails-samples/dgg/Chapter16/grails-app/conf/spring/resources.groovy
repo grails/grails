@@ -5,11 +5,9 @@ beans = {
 	}
 	
 	
-	jmsFactory(org.apache.activemq.pool.PooledConnectionFactory) { bean ->
+	jmsFactory(org.apache.activemq.ActiveMQConnectionFactory) { bean ->
 		bean.destroyMethod = "stop"
-		connectionFactory = { org.apache.activemq.ActiveMQConnectionFactory cf ->
-			brokerURL = "tcp://localhost:61616"			
-		}
+		brokerURL = "tcp://localhost:61616"			
 	}
 	
 	jmsTemplate(org.springframework.jms.core.JmsTemplate) {
