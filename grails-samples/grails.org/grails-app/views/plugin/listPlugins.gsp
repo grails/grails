@@ -1,6 +1,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <title>Grails Plugins</title>
+    <title>Grails Plugins by Tag</title>
     <meta content="subpage" name="layout"/>
     <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'plugins.css')}" />
 </head>
@@ -13,9 +13,12 @@
         <li class="create">
             <g:link controller="plugin" action="createPlugin">Create Plugin Page</g:link>
         </li>
+        <li class="cloud">
+            <g:link controller="tag" action="cloud">Tag Cloud</g:link>
+        </li>
     </ul>
 
-    <h1>Plugin List</h1>
+    <h1>Plugin By Tag</h1>
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
     </g:if>

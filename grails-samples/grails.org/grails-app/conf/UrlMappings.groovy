@@ -24,10 +24,12 @@ class UrlMappings {
         "/plugin/addTag/$id"(controller: "plugin", action:"addTag")
         "/plugin/removeTag/$id"(controller: "plugin", action:"removeTag")
         "/plugin/postComment/$id"(controller: "plugin", action:"postComment")
-        
+        "/plugin/tag/cloud" (controller: 'tag', action:'cloud')
+
         "/content/postComment/$id"(controller: "content", action:"postComment")
 
         "/tag/autoCompleteNames"(controller:'tag', action:'autoCompleteNames')
+        "/tag/show"(controller: 'tag', action:'show')
 
         "/search"(controller: "content", action: "search")
         "/upload/$id?"(controller: "content", action: "uploadImage")

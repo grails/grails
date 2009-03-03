@@ -1,4 +1,5 @@
 <h2>Popular Tags</h2>
+<h4><g:link controller='tag' action='cloud'>Tag Cloud</g:link></h4>
 <ul id="popularTags">
     <g:each var='tag' in="${tags}">
         <li>

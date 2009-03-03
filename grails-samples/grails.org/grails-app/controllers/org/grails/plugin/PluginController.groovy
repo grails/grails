@@ -53,6 +53,7 @@ class PluginController extends BaseWikiController {
     }
 
     def list = {
+        println params
         def pluginMap = [:]
         Tag.list().each { tag ->
             pluginMap[tag.name] = Plugin.withCriteria {
