@@ -35,7 +35,7 @@ class PluginController extends BaseWikiController {
                 .add(Projections.avg("r.stars").as("avgStars"))
                 .add(Projections.count("r.stars").as("numRatings"))
             ).addOrder(Order.desc("avgStars"))
-            maxResults(10)
+            maxResults(5)
         }.inject([]) { list, result ->
             list << [[name:result[0], title:result[1]], result[2], result[3]]
         }
@@ -167,7 +167,7 @@ class PluginController extends BaseWikiController {
 			render(view:"searchResults", model:[searchResult:searchResult])
 		}
 		else {
-			render(view:"homePage")
+			redirect(action:'home')
 		}
    }
 
