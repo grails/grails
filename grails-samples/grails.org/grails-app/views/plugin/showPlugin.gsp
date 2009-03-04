@@ -14,10 +14,7 @@
     <g:render template="../content/wikiJavaScript"/>    
 </head>
 <body>
-<%
-    def officialStyle = plugin.official ? 'official' : ''
-%>
-<div id="contentPane" class='${officialStyle}'>
+<div id="contentPane" class='${plugin.official ? 'official' : ''}'>
     <ul id="infoLinks">
         <li class="home">
             <g:link controller="plugin" action="index">Plugins Home</g:link><br/>
@@ -114,6 +111,12 @@
                 YAHOO.util.Event.onDOMReady(function() {
                     // on show, put the dialog in the right place
                     YAHOO.util.Event.on('addTagTrigger', 'click', function() {
+                        window.location = "${createLink(controller:'user', action:'login', params:[originalURI:request.forwardURI])}";
+                    });
+                    // also hang up rating click if not logged in, redirect to login page with originalURI of this page
+                    // for redirect
+                    YAHOO.util.Event.on('ratingdiv', 'click', function(e) {
+                        YAHOO.util.Event.stopEvent(e);
                         window.location = "${createLink(controller:'user', action:'login', params:[originalURI:request.forwardURI])}";
                     });
                 });

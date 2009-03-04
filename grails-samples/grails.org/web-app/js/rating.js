@@ -3,6 +3,7 @@
  *
  * By <Ville@Unessa.net>
  * http://www.unessa.net/en/hoyci/projects/yui-star-rating/
+ * (altered by Matthew Taylor for Grails.org/Plugins
  *
  * Based loosely on Wil Stuckeys jQuery Star Rating Plugin:
  * http://sandbox.wilstuckey.com/jquery-ratings/
@@ -131,24 +132,17 @@ var rating = {
 
     ajax_callback: {
         success: function(o) {
-            if (o.responseText.search('You are not currently logged in') >= 0) {
-                rating.notifytext.innerHTML = 'Rating was not saved.';
-                var text = 'You must Login before rating a plugin.<br/><a href="/login">Click here</a> to login.';
-                YAHOO.util.Dom.get('loginFormDiv').innerHTML = text;
-                GRAILSUI.loginDialog.show();
-            } else {
-                // release the form to normal status and change the statustext
-                rating.submitted = false;
-                var avg = o.responseText.split(',')[0];
-                var total = o.responseText.split(',')[1];
-                rating.notifytext.innerHTML = 'Rating saved. (' + total + ' ratings)';
-                rating.average = avg.split(".");
-                rating.ratingform.elements[0].value = parseInt(o.responseText);
-                rating.reset_stars();
-            }
+            // release the form to normal status and change the statustext
+            rating.submitted = false;
+            var avg = o.responseText.split(',')[0];
+            var total = o.responseText.split(',')[1];
+            rating.notifytext.innerHTML = 'Rating saved. (' + total + ' ratings)';
+            rating.average = avg.split(".");
+            rating.ratingform.elements[0].value = parseInt(o.responseText);
+            rating.reset_stars();
         },
         failure: function(o) { // we shouldn't ever go down this path.
-            alert('Error: ' + o.status + " " + o.statusText );
+            //
         }
     }
 }

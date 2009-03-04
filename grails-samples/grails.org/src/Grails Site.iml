@@ -35,7 +35,9 @@
       <sourceFolder url="file://$MODULE_DIR$/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../test/integration" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/../test/unit" isTestSource="true" />
-      <excludeFolder url="file://$MODULE_DIR$/../web-app/js" />
+      <excludeFolder url="file://$MODULE_DIR$/../web-app/js/prototype" />
+      <excludeFolder url="file://$MODULE_DIR$/../web-app/js/yui" />
+      <excludeFolder url="file://$MODULE_DIR$/../web-app/js/yui-cms" />
       <excludeFolder url="file://$MODULE_DIR$/../web-app/plugins" />
     </content>
     <orderEntry type="library" name="grails-1.1-SNAPSHOT" level="application" />
