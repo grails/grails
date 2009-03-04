@@ -10,5 +10,6 @@
                 <td><div class="star on"><a style="width:${starWidth}%"></a></div></td>
             </g:else>
         </g:each>
+        <td>(${votes ?: 0})</td>
     </tr>
 </table>

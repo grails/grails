@@ -1,0 +1,19 @@
+#pluginHomeWiki {
+    border-top: 1px solid grey;
+    padding-top: 10px;
+}
+.searchBox {
+    margin: 10px;
+}
+
+.pluginTagCloud {
+    margin: 20px 30px 10px 30px;
+}
+#statsTable td.section {
+    vertical-align: top;
+    width: 33.33%;
+}
+
+.wikiActionMenu {
+    float:right;
+}

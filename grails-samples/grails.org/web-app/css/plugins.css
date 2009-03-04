@@ -2,6 +2,10 @@
     width: 600px;
 }
 
+.plugin div.supported {
+    text-align: right;
+}
+
 .plugin table {
     border: solid #456145 1px;
     padding: 10px;
@@ -9,7 +13,7 @@
 }
 
 .plugin table.official {
-    background: #a5d7a5 url(../images/springsource.png) bottom right no-repeat;
+    background: url(../images/springsource.png) bottom right no-repeat;
 }
 
 .plugin .tag {
@@ -63,9 +67,13 @@ ul#infoLinks li {
 }
 
 ul#infoLinks {
-    margin-left: 420px;
+    position: absolute;
+    top: 0px;
+    right: 300px;
+    float:right;
     text-align: left;
     line-height: 20px;
+    z-index: 100;
 }
 
 ul#infoLinks a {

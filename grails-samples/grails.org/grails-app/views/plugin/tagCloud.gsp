@@ -17,6 +17,8 @@
         </li>
     </ul>
 
+    <h1>Grails Plugin Tag Cloud</h1>
+    
     <richui:tagCloud
         values="${tagCounts}"
         minSize='8'

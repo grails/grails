@@ -36,7 +36,6 @@ class TagController {
     }
 
     def show = {
-        println params
         redirect(controller:'plugin', action:'list', fragment:"${params.selectedTag} tags")
     }
 

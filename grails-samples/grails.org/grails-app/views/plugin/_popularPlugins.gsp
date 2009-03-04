@@ -1,16 +1,9 @@
 <h2>Popular Plugins</h2>
-<table id="popularPluginList">
+<ul id="popularPluginList">
     <g:each var='plugin' in="${plugins}">
-        <tr>
-            <td>
-                <g:link controller="plugin" action="show" params="[name:plugin[0].name]">${plugin[0].title}</g:link>
-            </td>
-            <td>
-                <g:render template="ratingDisplay" var="average" bean="${plugin[1]}"/>
-            </td>
-            <td>
-                (${plugin[2]} votes)
-            </td>
-        </tr>
+        <li>
+            <g:link controller="plugin" action="show" params="[name:plugin[0].name]">${plugin[0].title}</g:link>
+            <g:render template="ratingDisplay" model="[average:plugin[1], votes:plugin[2]]"/>
+        </li>
     </g:each>
-</table>
+</ul>

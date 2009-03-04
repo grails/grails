@@ -21,6 +21,7 @@ class ContentController extends BaseWikiController {
     }
 
     def cacheService
+    def wikiPageService
 
     ContentAlertStack contentToMessage
 
@@ -109,16 +110,16 @@ class ContentController extends BaseWikiController {
                 def plugin = Plugin.get(pageName.split('-')[1])
                 if (request.xhr) {
                     // update the wikiTab, not the whole contentPane
-                    def wikiPage = getCachedOrReal(pageName)
+                    def wikiPage = wikiPageService.getCachedOrReal(pageName)
                     return render(template:"wikiShow", model:[content:wikiPage, update:"${pageName.split('-')[0]}Tab"])
                 }
                 redirect(controller:'plugin', action:'show', params:[name:plugin.name])
             }
             else {
-                def wikiPage = getCachedOrReal(pageName)
+                def wikiPage = wikiPageService.getCachedOrReal(pageName)
                 if(wikiPage) {
                     if(request.xhr) {
-                        render(template:"wikiShow", model:[content:wikiPage])
+                        render(template:"wikiShow", model:[content:wikiPage, update:params.update])
                     } else {
                         render(view:"contentPage", model:[content:wikiPage, comments: wikiPage.comments.sort { it.dateCreated }])
                     }
@@ -140,16 +141,7 @@ class ContentController extends BaseWikiController {
         render(template:'/comment/comment', var:'comment', bean:c)
     }
 
-	private getCachedOrReal(id) {
-         id = id.decodeURL()
 
-         def wikiPage = cacheService.getContent(id)
-            if(!wikiPage) {
-                wikiPage = WikiPage.findByTitle(id)
-                if(wikiPage) cacheService.putContent(id, wikiPage)
-            }
-         return wikiPage
-    }
 
     def showWikiVersion = {
         def page = WikiPage.findByTitle(params.id.decodeURL())

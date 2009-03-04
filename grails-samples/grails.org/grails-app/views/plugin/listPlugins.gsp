@@ -13,12 +13,9 @@
         <li class="create">
             <g:link controller="plugin" action="createPlugin">Create Plugin Page</g:link>
         </li>
-        <li class="cloud">
-            <g:link controller="tag" action="cloud">Tag Cloud</g:link>
-        </li>
     </ul>
 
-    <h1>Plugin By Tag</h1>
+    <h1><a id='top'>Plugin By Tag</a></h1>
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
     </g:if>
@@ -37,6 +34,7 @@
                 </li>
             </g:each>
         </ul>
+        <a href='#top'>Top</a>
     </g:each>
 
 </div>

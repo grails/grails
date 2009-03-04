@@ -12,18 +12,19 @@ import org.hibernate.criterion.Order
 
 class PluginController extends BaseWikiController {
 
+    static String HOME_WIKI = 'PluginHome'
+
+    def wikiPageService
+
     def index = {
         redirect(controller:'plugin', action:home, params:params)
     }
 
     def home = {
-        def popularTags = Tag.withCriteria {
-            createAlias('plugins', 'p')
-            .setProjection(Projections.projectionList()
-                .add(Projections.groupProperty('name'))
-                .add(Projections.count('p.id').as('numPlugins'))
-            ).addOrder(Order.desc('numPlugins'))
-            maxResults(10)
+
+        def tagCounts = Tag.list().inject([:]) { tagCount, tag ->
+            tagCount[tag.name] = tag.plugins.size()
+            tagCount
         }
 
         def popularPlugins = Plugin.withCriteria {
@@ -49,11 +50,20 @@ class PluginController extends BaseWikiController {
             maxResults(5)
         }
 
-        [popularTags: popularTags, popularPlugins: popularPlugins, newestPlugins: newestPlugins, recentlyUpdatedPlugins: recentlyUpdatedPlugins]
+        def homeWiki = wikiPageService.getCachedOrReal(HOME_WIKI)
+        if (!homeWiki) {
+            homeWiki = new WikiPage(title:HOME_WIKI, body: 'Please edit me.').save()
+        }
+        [
+                homeWiki: homeWiki,
+                tagCounts: tagCounts,
+                popularPlugins: popularPlugins,
+                newestPlugins: newestPlugins,
+                recentlyUpdatedPlugins: recentlyUpdatedPlugins
+        ]
     }
 
     def list = {
-        println params
         def pluginMap = [:]
         Tag.list().each { tag ->
             pluginMap[tag.name] = Plugin.withCriteria {

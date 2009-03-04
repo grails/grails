@@ -74,6 +74,9 @@
                 </td>
             </tr>
         </table>
+        <g:if test="${plugin.official}">
+            <div class="supported">Supported by <a href="http://www.springsource.com">SpringSource</a></div>
+        </g:if>
 
         %{--
             Logged in users will be able to add tags
