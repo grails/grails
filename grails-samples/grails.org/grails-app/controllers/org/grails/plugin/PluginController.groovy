@@ -50,6 +50,8 @@ class PluginController extends BaseWikiController {
             maxResults(5)
         }
 
+        def latestComments = Comment.list(sort:'dateCreated', order:'desc', max:5);
+
         def homeWiki = wikiPageService.getCachedOrReal(HOME_WIKI)
         if (!homeWiki) {
             homeWiki = new WikiPage(title:HOME_WIKI, body: 'Please edit me.').save()
@@ -59,7 +61,8 @@ class PluginController extends BaseWikiController {
                 tagCounts: tagCounts,
                 popularPlugins: popularPlugins,
                 newestPlugins: newestPlugins,
-                recentlyUpdatedPlugins: recentlyUpdatedPlugins
+                recentlyUpdatedPlugins: recentlyUpdatedPlugins,
+                latestComments: latestComments
         ]
     }
 
@@ -219,6 +222,15 @@ class PluginController extends BaseWikiController {
         plugin.save()
         tag.save()
         render(template:'tags', var:'plugin', bean:plugin)
+    }
+
+    def showComment = {
+        def plugin = Plugin.withCriteria {
+            comments {
+                eq('id', params.id.toLong())
+            }
+        }[0]
+        redirect(action:'show', params:[name:plugin.name], fragment:"comment_${params.id}")
     }
 
     private def pluginWiki(name, plugin, params) {

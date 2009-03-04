@@ -1,5 +1,6 @@
 #pluginHomeWiki {
-    border-top: 1px solid grey;
+    border: solid gray;
+    border-width: 1px 0px;
     padding-top: 10px;
 }
 .searchBox {
@@ -16,4 +17,12 @@
 
 .wikiActionMenu {
     float:right;
+}
+
+.shortComment {
+    padding: 3px 10px;
+}
+.shortComment .user {
+    width: 100%;
+    text-align: right;
 }

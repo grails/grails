@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="${createLinkTo(dir: 'css', file: 'ratings.css')}"/>
     <link rel="stylesheet" href="${createLinkTo(dir: 'css', file: 'pluginHome.css')}"/>
     <link rel="stylesheet" href="${createLinkTo(dir: 'css', file: 'tagCloud.css')}"/>
+    <link rel="stylesheet" href="${createLinkTo(dir: 'css', file: 'comments.css')}"/>
     <title>Grails Plugins</title>
     <meta content="subpage" name="layout"/>
     <g:render template="../content/wikiJavaScript"/>
@@ -57,6 +58,18 @@
         <div class='wikiPage'><wiki:text>${homeWiki}</wiki:text></div>
     </div>
     <g:render template="../content/previewPane"/>
+
+    <div id="latestComments">
+        <h2>Latest Comments</h2>
+        <ul id='commentList'>
+            <g:each var='comment' status='i' in="${latestComments}">
+                <g:set var='oddEven' value="${(i%2==0) ? 'even' : 'odd'}"/>
+                <li class='comment ${oddEven}'>
+                    <g:render template="shortComment" var="comment" bean="${comment}"/>
+                </li>
+            </g:each>
+        </ul>
+    </div>
 
 </div>
 </body>

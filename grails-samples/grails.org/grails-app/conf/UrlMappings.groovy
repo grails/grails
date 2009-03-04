@@ -26,6 +26,8 @@ class UrlMappings {
         "/plugin/postComment/$id"(controller: "plugin", action:"postComment")
         "/plugin/tag/cloud" (controller: 'tag', action:'cloud')
 
+        "/plugin/showComment/$id"(controller: 'plugin', action:'showComment')
+
         "/content/postComment/$id"(controller: "content", action:"postComment")
 
         "/tag/autoCompleteNames"(controller:'tag', action:'autoCompleteNames')
