@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'plugins.css')}" />
     <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'comments.css')}" />
     <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'ratings.css')}" />
+    <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'tabview.css')}" />
     <title>${plugin.title} Plugin</title>
     <meta content="subpage" name="layout"/>
     <g:render template="../content/wikiJavaScript"/>    
@@ -32,45 +33,56 @@
 
     <div class="plugin">
 
-        <table class='details ${officialStyle}'>
-            <tr>
-                <th>Author(s)</th>
-                <td>${plugin.author}</td>
-                <td colspan='2'>
-                    <jsec:isLoggedIn>
-                        ${plugin.authorEmail}
-                    </jsec:isLoggedIn>
-                    <jsec:isNotLoggedIn>
-                        (Log in for author email address)
-                    </jsec:isNotLoggedIn>
-                </td>
-            </tr>
-            <tr>
-                <th>Current Release</th>
-                <td>${plugin.currentRelease}</td>
-                <td colspan='2'><a href="${plugin.documentationUrl}">Official Docs</a></td>
-            </tr>
-            <tr>
-                <th>Built on Grails</th>
-                <td>${plugin.grailsVersion ?: '?'}</td>
-                <td colspan='2'><a href="${plugin.downloadUrl}">Download</a></td>
-            </tr>
-            <tr>
-                <th>Rating</th>
-                <td colspan='3'>
-                    <g:render template="ratings" model="[parentId:plugin.id, average:plugin.avgRating, total:plugin.ratings.size(), active: true]"/>
-                </td>
-            </tr>
-            <tr>
-                <th>Tags</th>
-                <td colspan='3'>
-                    <span id='pluginTags'>
-                        <g:render template='tags' var='plugin' bean="${plugin}"/>
-                    </span>
-                    <span id='addTagTrigger'><img src="${createLinkTo(dir: 'images/famfamfam', file: 'add.png')}"/></span>
-                </td>
-            </tr>
-        </table>
+        <div class="roundedcornr_box">
+            <div class="roundedcornr_top"><div></div></div>
+            <div class="roundedcornr_content">
+
+                <table class='details ${officialStyle}'>
+                    <tr>
+                        <th>Author(s)</th>
+                        <td>${plugin.author}</td>
+                        <td colspan='2'>
+                            <jsec:isLoggedIn>
+                                ${plugin.authorEmail}
+                            </jsec:isLoggedIn>
+                            <jsec:isNotLoggedIn>
+                                (Log in for author email address)
+                            </jsec:isNotLoggedIn>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Current Release</th>
+                        <td>${plugin.currentRelease}</td>
+                        <td colspan='2'><a href="${plugin.documentationUrl}">Official Docs</a></td>
+                    </tr>
+                    <tr>
+                        <th>Built on Grails</th>
+                        <td>${plugin.grailsVersion ?: '?'}</td>
+                        <td colspan='2'><a href="${plugin.downloadUrl}">Download</a></td>
+                    </tr>
+                    <tr>
+                        <th>Rating</th>
+                        <td colspan='3'>
+                            <g:render template="ratings" model="[parentId:plugin.id, average:plugin.avgRating, total:plugin.ratings.size(), active: true]"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Tags</th>
+                        <td colspan='3'>
+                            <span id='pluginTags'>
+                                <g:render template='tags' var='plugin' bean="${plugin}"/>
+                            </span>
+                            <span id='addTagTrigger'><img src="${createLinkTo(dir: 'images/famfamfam', file: 'add.png')}"/></span>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+            <div class="roundedcornr_bottom"><div></div></div>
+        </div>
+
+
+
         <g:if test="${plugin.official}">
             <div class="supported">Supported by <a href="http://www.springsource.com">SpringSource</a></div>
         </g:if>

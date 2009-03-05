@@ -30,6 +30,9 @@ li.odd {
 .comment .date {
     padding-left: 10px;
 }
+.comment .permalink, .comment .date {
+    font-size: 8pt;
+}
 
 .comment .commentAvatar {
     float: left;

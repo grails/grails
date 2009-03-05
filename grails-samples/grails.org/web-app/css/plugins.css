@@ -7,8 +7,7 @@
 }
 
 .plugin table {
-    border: solid #456145 1px;
-    padding: 10px;
+    padding: 0px 10px;
     width: 600px;
 }
 
@@ -106,4 +105,42 @@ ul#infoLinks .feed {
 ul#infoLinks .cloud {
     background: url(../images/famfamfam/weather_clouds.png) center left no-repeat;
     padding-left: 25px;
+}
+
+/* alterations to the wiki style within tab view */
+.yui-content .code {
+    background-color: #e3e3e3;
+}
+
+/* rounded corner table */
+.roundedcornr_box {
+	background: url(../images/corners/tl.png) no-repeat top left;
+}
+.roundedcornr_top {
+	background: url(../images/corners/tr.png) no-repeat top right;
+}
+.roundedcornr_bottom {
+	background: url(../images/corners/bl.png) no-repeat bottom left;
+}
+.roundedcornr_bottom div {
+	background: url(../images/corners/br.png) no-repeat bottom right;
+}
+.roundedcornr_content {
+	background: url(../images/corners/r.png) top right repeat-y;
+}
+
+.roundedcornr_top div,.roundedcornr_top,
+.roundedcornr_bottom div, .roundedcornr_bottom {
+	width: 100%;
+	height: 10px;
+	font-size: 1px;
+}
+.roundedcornr_content, .roundedcornr_bottom {
+	margin-top: 0px;
+}
+.roundedcornr_content { padding: 0px; }
+
+/* tab styling */
+.yui-skin-sam .yui-navset .yui-nav .selected a {
+    background-color: #013161;
 }
