@@ -30,6 +30,8 @@
       <sourceFolder url="file://$MODULE_DIR$/../plugins/searchable-0.5.3/grails-app/services" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../plugins/searchable-0.5.3/src/groovy" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../plugins/searchable-0.5.3/src/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../plugins/taggable-0.1/grails-app/domain" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../plugins/taggable-0.1/src/groovy" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../plugins/yui-2.6.1/grails-app/taglib" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../plugins/yui-2.6.1/src/groovy" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/groovy" isTestSource="false" />

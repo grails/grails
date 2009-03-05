@@ -5,7 +5,7 @@ import org.grails.comment.Comment
 /*
  * author: Matthew Taylor
  */
-class Plugin {
+class Plugin implements org.grails.taggable.Taggable {
 
     static final def WIKIS = ['installation','description','faq','screenshots']
 
@@ -27,14 +27,14 @@ class Plugin {
     Date lastUpdated
     Date lastReleased
 
-    static hasMany = [comments:Comment, tags:Tag, ratings:Rating]
+    static hasMany = [comments:Comment, ratings:Rating]
 
     static searchable = {
         only = [
-            'name', 'title', 'author', 'authorEmail', 'tags',
+            'name', 'title', 'author', 'authorEmail', /*'tags',*/
             'installation','description','faq','screenshots'
         ]
-        tags component: true
+//        tags component: true
         description component: true
         installation component: true
         faq component: true
@@ -51,10 +51,6 @@ class Plugin {
         author(nullable: true)
         grailsVersion(nullable:true, blank:true, maxLength:16)
         lastReleased(nullable:true)
-    }
-
-    static mapping = {
-        tags cascade: 'save-update'
     }
 
     def getOfficial() {

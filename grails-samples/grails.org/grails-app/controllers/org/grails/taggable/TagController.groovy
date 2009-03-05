@@ -1,4 +1,4 @@
-package org.grails.plugin
+package org.grails.taggable
 
 import grails.converters.JSON
 
@@ -25,18 +25,6 @@ class TagController {
 
         def data = [ tagResults: results ]
         render data as JSON
-    }
-
-    def cloud = {
-        def tagCounts = Tag.list().inject([:]) { tagCount, tag ->
-            tagCount[tag.name] = tag.plugins.size()
-            tagCount
-        }
-        render(view: '/plugin/tagCloud', model:[tagCounts:tagCounts])
-    }
-
-    def show = {
-        redirect(controller:'plugin', action:'list', fragment:"${params.selectedTag} tags")
     }
 
 }

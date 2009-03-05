@@ -9,6 +9,8 @@ import org.grails.auth.User
 import org.grails.wiki.BaseWikiController
 import org.hibernate.criterion.Projections
 import org.hibernate.criterion.Order
+import org.grails.taggable.Tag
+import org.grails.taggable.TagLink
 
 class PluginController extends BaseWikiController {
 
@@ -22,9 +24,16 @@ class PluginController extends BaseWikiController {
 
     def home = {
 
-        def tagCounts = Tag.list().inject([:]) { tagCount, tag ->
-            tagCount[tag.name] = tag.plugins.size()
-            tagCount
+        def tagCounts = [:]
+        TagLink.withCriteria {
+            eq('tagClass', Plugin.class.name)
+            projections {
+                groupProperty('tag')
+                count('tagRef')
+            }
+        }.each {
+            def (tagName, count) = it
+            tagCounts[tagName] = tagCounts[tagName] ? (tagCounts[tagName] + count) : count
         }
 
         def popularPlugins = Plugin.withCriteria {
@@ -68,16 +77,27 @@ class PluginController extends BaseWikiController {
 
     def list = {
         def pluginMap = [:]
-        Tag.list().each { tag ->
-            pluginMap[tag.name] = Plugin.withCriteria {
-                tags {
-                    eq('name', tag.name)
-                }
-            }.sort { it.title }
+        Tag.list(sort:'name').each { tag ->
+            pluginMap[tag.name] = []
+            def links = TagLink.withCriteria {
+                eq('tag', tag)
+                eq('tagClass', Plugin.class.name)
+            }
+            links.each { link ->
+                def p = Plugin.get(link.tagRef)
+                if (p) pluginMap[tag.name] << p 
+            }
+            pluginMap[tag.name].sort { it.title }
         }
-        pluginMap = pluginMap.sort { it.key }
-        pluginMap.untagged = Plugin.withCriteria { isEmpty('tags') }.sort { it.title }
-
+        // remove empty tags
+        pluginMap = pluginMap.findAll { it.value.size() }
+        def taggedIds = TagLink.withCriteria {
+            eq('tagClass', Plugin.class.name)
+            projections {
+                distinct('tagRef')
+            }
+        }
+        pluginMap.untagged = Plugin.findAllByIdNotInList(taggedIds)
         render view:'listPlugins', model:[pluginMap: pluginMap]
     }
 
@@ -237,14 +257,7 @@ class PluginController extends BaseWikiController {
     def addTag = {
         def plugin = Plugin.get(params.id)
         params.newTag.trim().split(',').each { newTag ->
-            def tag = Tag.findByName(newTag.trim())
-            if (!tag) {
-                tag = new Tag(name: newTag.trim())
-                tag.save()
-            }
-            plugin.addToTags(tag)
-            tag.addToPlugins(plugin)
-            assert tag.save()
+            plugin.addTag(newTag.trim())
         }
         assert plugin.save()
         render(template:'tags', var:'plugin', bean:plugin)
@@ -252,12 +265,13 @@ class PluginController extends BaseWikiController {
 
     def removeTag = {
         def plugin = Plugin.get(params.id)
-        def tag = Tag.findByName(params.tagName)
-        plugin.removeFromTags(tag)
-        tag.removeFromPlugins(plugin)
+        plugin.removeTag(params.tagName)
         plugin.save()
-        tag.save()
         render(template:'tags', var:'plugin', bean:plugin)
+    }
+
+    def showTag = {
+        redirect(action:'list', fragment:"${params.selectedTag} tags")
     }
 
     def showComment = {

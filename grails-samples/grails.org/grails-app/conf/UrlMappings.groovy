@@ -23,8 +23,8 @@ class UrlMappings {
         "/plugin/rate/$id"(controller: "plugin", action:"rate")
         "/plugin/addTag/$id"(controller: "plugin", action:"addTag")
         "/plugin/removeTag/$id"(controller: "plugin", action:"removeTag")
+        "/plugin/showTag"(controller: 'plugin', action:'showTag')
         "/plugin/postComment/$id"(controller: "plugin", action:"postComment")
-        "/plugin/tag/cloud"(controller: 'tag', action:'cloud')
         "/plugin/latest"(controller: "plugin", action: "latest")
 
         "/plugin/showComment/$id"(controller: 'plugin', action:'showComment')
@@ -32,7 +32,6 @@ class UrlMappings {
         "/content/postComment/$id"(controller: "content", action:"postComment")
 
         "/tag/autoCompleteNames"(controller:'tag', action:'autoCompleteNames')
-        "/tag/show"(controller: 'tag', action:'show')
 
         "/search"(controller: "content", action: "search")
         "/upload/$id?"(controller: "content", action: "uploadImage")

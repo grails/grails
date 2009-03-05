@@ -9,3 +9,8 @@ changeSet(id:'IncreaseCommentBodySize', author:'Rhyolight') {
         column(name:'body', type:'TEXT')
     }
 }
+
+changeSet(id:'IntegrateTaggablePlugin', author:'Rhyolight') {
+    dropTable(tableName:'plugin_tags')
+    dropTable(tableName:'tag')
+}

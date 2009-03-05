@@ -71,7 +71,8 @@ private contentToPlugin(c, tagNames) {
     def adminUser = grailsApp.getDomainClass("org.grails.auth.User").clazz.findByLogin('admin')
     def pluginClass = grailsApp.getDomainClass("org.grails.plugin.Plugin").clazz
     def wikiClass = grailsApp.getDomainClass("org.grails.wiki.WikiPage").clazz
-    def tagClass = grailsApp.getDomainClass("org.grails.plugin.Tag").clazz
+    def tagClass = grailsApp.getDomainClass("org.grails.taggable.Tag").clazz
+    def tagLinkClass = grailsApp.getDomainClass("org.grails.taggable.TagLink").clazz
     def p = pluginClass.newInstance()
     def authors = c.versions*.author
     def author = (authors as Set).inject(null) {mostEdited, it ->
@@ -140,23 +141,26 @@ private contentToPlugin(c, tagNames) {
     } catch (Exception e) {
         println "WARNING: Can't save version ${v.title} (${v.number})"
     }   
-
-    p.tags = []
     p.save(flush:true)
 
     // working with the tag names provided to add tags to new plugins appropriately
     tagNames.each { tagName ->
+
         def tag = tagClass.executeQuery("from Tag t where t.name = '${tagName.toLowerCase()}'")[0]
         if (!tag) {
             tag = tagClass.newInstance(name:tagName)
             assert tag.save(flush:true)
             println " * created new tag $tag ($tag.id) * "
         }
+        def tagLink = tagLinkClass.newInstance(tag:tag, tagRef:p.id, tagClass:pluginClass.name)
+        assert tagLink.save(flush:true)
+        println "Added tag $tag to $p"
+        /*
         p.tags << tag
         if (!tag.plugins) tag.plugins = []
         tag.plugins << p
         assert tag.save(flush:true)
-        println "Added tag $tag to $p"
+        */
     }
     assert p.save(flush:true)
 
