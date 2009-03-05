@@ -56,11 +56,10 @@ class ContentController extends BaseWikiController {
          def engine = createWikiEngine()
 
          def feedOutput = {
-            def now = new Date()
 
             def top5 = WikiPage.listOrderByLastUpdated(order:'desc', max:5)
             title = "Grails.org Wiki Updates"
-            link = "http://grails.org/wiki/latest.${request.format}"
+            link = "http://grails.org/wiki/latest?format=${request.format}"
             description = "Latest wiki updates Grails framework community"
 
             for(item in top5) {

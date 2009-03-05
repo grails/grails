@@ -21,6 +21,7 @@
       <sourceFolder url="file://$MODULE_DIR$/../grails-app/utils" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../grails-app/views" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../plugins/avatar-0.3/grails-app/taglib" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../plugins/feeds-1.4/grails-app/taglib" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../plugins/grails-ui-1.1-SNAPSHOT/grails-app/taglib" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../plugins/jsecurity-0.3/grails-app/taglib" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../plugins/jsecurity-0.3/src/groovy" isTestSource="false" />

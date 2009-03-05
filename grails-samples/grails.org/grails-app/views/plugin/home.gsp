@@ -1,5 +1,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
+    <feed:meta kind="atom" version="1.0" controller="plugin" action="feed"/>
     <g:javascript library="diff_match_patch"/>
     <g:javascript library="scriptaculous"/>
     <link rel="stylesheet" href="${createLinkTo(dir: 'css', file: 'content.css')}"/>
@@ -21,6 +22,9 @@
         </li>
         <li class="create">
             <g:link controller="plugin" action="createPlugin">Create Plugin Page</g:link>
+        </li>
+        <li class="feed">
+            <g:link controller="plugin" action="feed" params="[format:'rss']">Feed</g:link>
         </li>
     </ul>
 

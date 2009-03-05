@@ -24,7 +24,8 @@ class UrlMappings {
         "/plugin/addTag/$id"(controller: "plugin", action:"addTag")
         "/plugin/removeTag/$id"(controller: "plugin", action:"removeTag")
         "/plugin/postComment/$id"(controller: "plugin", action:"postComment")
-        "/plugin/tag/cloud" (controller: 'tag', action:'cloud')
+        "/plugin/tag/cloud"(controller: 'tag', action:'cloud')
+        "/plugin/latest"(controller: "plugin", action: "latest")
 
         "/plugin/showComment/$id"(controller: 'plugin', action:'showComment')
 

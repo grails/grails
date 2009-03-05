@@ -99,6 +99,10 @@ ul#infoLinks .show {
     background: url(../images/famfamfam/plugin.png) center left no-repeat;
     padding-left: 25px;
 }
+ul#infoLinks .feed {
+    background: url(../images/famfamfam/feed.png) center left no-repeat;
+    padding-left: 25px;
+}
 ul#infoLinks .cloud {
     background: url(../images/famfamfam/weather_clouds.png) center left no-repeat;
     padding-left: 25px;

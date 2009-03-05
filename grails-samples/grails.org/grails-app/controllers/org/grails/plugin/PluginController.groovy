@@ -171,6 +171,42 @@ class PluginController extends BaseWikiController {
 		}
    }
 
+    def latest = {
+
+        def engine = createWikiEngine()
+
+         def feedOutput = {
+
+            def top5 = Plugin.listOrderByLastUpdated(order:'desc', max:5)
+            title = "Grails New Plugins Feed"
+            link = "http://grails.org/plugin/latest?format=${request.format}"
+            description = "New and recently updated Grails Plugins"
+
+            for(item in top5) {
+                entry(item.title) {
+                    link = "http://grails.org/plugin/${item.name.encodeAsURL()}"
+                    categories = item.tags*.name
+                    author = item.author
+                    publishedDate = item.lastUpdated
+                    engine.render(item.description.body, context)
+                }
+            }
+         }
+
+        withFormat {
+            html {
+                redirect(uri:"")
+            }
+            rss {
+                render(feedType:"rss",feedOutput)
+            }
+            atom {
+                render(feedType:"atom", feedOutput)
+            }
+        }
+
+    }
+
     def postComment = {
         def plugin = Plugin.get(params.id)
         def c = new Comment(body:params.comment, user: request.user)
