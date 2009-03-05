@@ -15,7 +15,7 @@
     <g:render template="../content/wikiJavaScript"/>    
 </head>
 <body>
-<div id="contentPane" class='${plugin.official ? 'official' : ''}'>
+<div id="contentPane">
     <ul id="infoLinks">
         <li class="home">
             <g:link controller="plugin" action="index">Plugins Home</g:link><br/>
@@ -37,7 +37,7 @@
             <div class="roundedcornr_top"><div></div></div>
             <div class="roundedcornr_content">
 
-                <table class='details ${officialStyle}'>
+                <table class='details ${plugin.official ? 'official' : ''}'>
                     <tr>
                         <th>Author(s)</th>
                         <td>${plugin.author}</td>
@@ -80,8 +80,6 @@
             </div>
             <div class="roundedcornr_bottom"><div></div></div>
         </div>
-
-
 
         <g:if test="${plugin.official}">
             <div class="supported">Supported by <a href="http://www.springsource.com">SpringSource</a></div>

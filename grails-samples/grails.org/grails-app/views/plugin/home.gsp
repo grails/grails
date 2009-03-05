@@ -35,7 +35,6 @@
     <richui:tagCloud
             values="${tagCounts}"
             minSize='8'
-            maxSize='48'
             class='pluginTagCloud'
             linkClass='tagLink'
             controller='tag'
