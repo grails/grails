@@ -8,29 +8,25 @@ import org.codehaus.groovy.grails.commons.ConfigurationHolder
  * author: Matthew Taylor
  */
 class PluginControllerTests extends ControllerUnitTestCase {
-    def cache = [:]
 
     void setUp() {
         super.setUp()
-//        cache.config = ConfigurationHolder.config
         ConfigurationHolder.config = [grails:[serverURL:'serverurl']]
     }
 
     void tearDown() {
         super.tearDown()
-//        ConfigurationHolder.metaClass.static.getConfig = cache.configHolderGetConfig
     }
 
     void testShowPlugin() {
-        Plugin p = new Plugin(name:'plugin', title:'My Plugin', comments:[])
+        Plugin p = new Plugin(name:'plugin', title:'My Plugin')
 
         mockDomain(Plugin, [p])
         mockParams.name = 'plugin'
+        p.metaClass.getComments = {-> [] }
 
         def controller = new PluginController()
         def model = controller.show()
-
-        assert p
 
         assertEquals p, model.plugin
     }

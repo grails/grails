@@ -37,9 +37,6 @@ class ContentControllerTests extends grails.test.ControllerUnitTestCase {
         remove ContentController
     }
 
-
-
-
     void testIndexNoId() {
         ContentController.metaClass.getRequest = {-> [method: "POST"] }
         ContentController.metaClass.getParams = {-> [id: null] }
@@ -71,51 +68,54 @@ class ContentControllerTests extends grails.test.ControllerUnitTestCase {
 
 
     void testIndexWikiPageNormalRequest() {
-        ContentController.metaClass.getRequest = {-> [method: "POST"] }
-        ContentController.metaClass.getParams = {-> [id: "Introduction"] }
+        mockRequest.method = 'POST'
+        mockParams.id = 'Introduction'
 
-        def renderParams = [:]
-        ContentController.metaClass.render = {Map args -> renderParams = args }
-        WikiPage.metaClass.static.findByTitle = {String title -> new WikiPage(title: title, comments: []) }
+        def wikiPage = new WikiPage(title: 'Introduction')
+        mockDomain(WikiPage, [wikiPage])
+        wikiPage.metaClass.getComments = { -> [] }
 
         def controller = new ContentController()
 
         def manager = CacheManager.create()
         manager.addCache "test1"
         Cache cache = manager.getCache("test1")
-        controller.cacheService = new CacheService(contentCache: cache)
+        def wikiPageService = new WikiPageService()
+        wikiPageService.cacheService = new CacheService(contentCache: cache)
+        controller.wikiPageService = wikiPageService
 
         controller.index()
 
-        assertEquals "contentPage", renderParams.view
-        assertTrue renderParams?.model?.content instanceof WikiPage
-        assertEquals "Introduction", renderParams?.model?.content?.title
+        assertEquals "contentPage", renderArgs.view
+        assertTrue renderArgs.model.content instanceof WikiPage
+        assertEquals "Introduction", renderArgs.model.content.title
 
-        assertEquals renderParams?.model?.content, cache.get("Introduction")?.getValue()
+        assertEquals renderArgs.model.content, cache.get("Introduction")?.getValue()
     }
 
     void testIndexWikiPageAjaxRequest() {
         ContentController.metaClass.getRequest = {-> [method: "POST", xhr: true] }
         ContentController.metaClass.getParams = {-> [id: "Introduction"] }
+        mockParams.id = 'Introduction'
 
-        def renderParams = [:]
-        ContentController.metaClass.render = {Map args -> renderParams = args }
-        WikiPage.metaClass.static.findByTitle = {String title -> new WikiPage(title: title) }
-
-        def controller = new ContentController()
+        def wikiPage = new WikiPage(title: 'Introduction')
+        mockDomain(WikiPage, [wikiPage])
+        wikiPage.metaClass.getComments = { -> [] }
 
         def manager = CacheManager.create()
         manager.addCache "test2"
         Cache cache = manager.getCache("test2")
-        controller.cacheService = new CacheService(contentCache: cache)
+        def wikiPageService = new WikiPageService()
+        wikiPageService.cacheService = new CacheService(contentCache: cache)
+        controller.wikiPageService = wikiPageService
 
         controller.index()
 
-        assertEquals "wikiShow", renderParams.template
-        assertTrue renderParams?.model?.content instanceof WikiPage
-        assertEquals "Introduction", renderParams?.model?.content?.title
+        assertEquals "wikiShow", renderArgs.template
+        assertTrue renderArgs?.model?.content instanceof WikiPage
+        assertEquals "Introduction", renderArgs?.model?.content?.title
 
-        assertEquals renderParams?.model?.content, cache.get("Introduction")?.getValue()
+        assertEquals renderArgs?.model?.content, cache.get("Introduction")?.getValue()
     }
 
     void testShowWikiVersion() {

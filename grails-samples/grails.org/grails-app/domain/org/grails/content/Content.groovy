@@ -1,16 +1,14 @@
 package org.grails.content
 
-import org.grails.comment.Comment
+import org.grails.comments.*
 
-class Content implements Serializable {
+class Content implements Serializable, Commentable {
 	String title
 	String body
     Boolean locked = false
 	Date dateCreated
 	Date lastUpdated
 
-    static hasMany = [comments:Comment]
-    
 	static mapping = {
 		body type:"text"
 	}

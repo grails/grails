@@ -21,7 +21,7 @@ class PluginTests extends GrailsUnitTestCase {
 
     void testAvgRating() {
         def plugin = new Plugin()
-        assertNull plugin.avgRating
+        assertEquals 0,  plugin.avgRating
         plugin.addToRatings(new Rating(stars:2))
         assertEquals 2, plugin.avgRating
         plugin.addToRatings(new Rating(stars:3))

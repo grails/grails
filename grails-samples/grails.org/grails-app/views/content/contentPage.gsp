@@ -23,7 +23,7 @@
 
     <g:render template="previewPane"/>
 
-    <g:render template="../comment/comments" model="${[commentType:'content', parentId:content.id, comments:comments, locked:content.locked]}"/>
+    <g:render template="../comments/comments" model="${[commentType:'content', parentId:content.id, comments:comments, locked:content.locked]}"/>
 
 </body>
 </html>

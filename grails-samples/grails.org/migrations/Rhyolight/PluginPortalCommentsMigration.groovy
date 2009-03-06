@@ -14,3 +14,10 @@ changeSet(id:'IntegrateTaggablePlugin', author:'Rhyolight') {
     dropTable(tableName:'plugin_tags')
     dropTable(tableName:'tag')
 }
+
+/*
+changeSet(id:'IntegrateCommentablePlugin', author:'Rhyolight') {
+    dropTable(tableName:'plugin_tags')
+    dropTable(tableName:'tag')
+}
+*/

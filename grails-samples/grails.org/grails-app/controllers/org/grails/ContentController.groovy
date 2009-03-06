@@ -8,9 +8,8 @@ import org.grails.wiki.WikiPage
 import org.grails.content.Version
 import org.grails.content.notifications.ContentAlertStack
 import org.grails.wiki.BaseWikiController
-import org.grails.comment.Comment
-import org.grails.content.Content
 import org.grails.plugin.Plugin
+import org.grails.content.Content
 
 class ContentController extends BaseWikiController {
     
@@ -134,10 +133,11 @@ class ContentController extends BaseWikiController {
 
     def postComment = {
         def content = Content.get(params.id)
-        def c = new Comment(body:params.comment, user: request.user)
-        content.addToComments(c)
+//        def c = new Comment(body:params.comment, user: request.user)
+//        content.addToComments(c)
+        content.addComment(request.user, params.comment)
         content.save(flush:true)
-        render(template:'/comment/comment', var:'comment', bean:c)
+        render(template:'/comments/comment', var:'comment', bean:content.comments[-1])
     }
 
 

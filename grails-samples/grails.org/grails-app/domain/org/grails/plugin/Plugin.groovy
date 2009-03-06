@@ -1,11 +1,12 @@
 package org.grails.plugin
 
 import org.grails.wiki.WikiPage
-import org.grails.comment.Comment
+import org.grails.taggable.Taggable
+import org.grails.comments.Commentable
 /*
  * author: Matthew Taylor
  */
-class Plugin implements org.grails.taggable.Taggable {
+class Plugin implements Taggable, Commentable {
 
     static final def WIKIS = ['installation','description','faq','screenshots']
 
@@ -27,14 +28,13 @@ class Plugin implements org.grails.taggable.Taggable {
     Date lastUpdated
     Date lastReleased
 
-    static hasMany = [comments:Comment, ratings:Rating]
+    static hasMany = [ratings:Rating]
 
     static searchable = {
         only = [
-            'name', 'title', 'author', 'authorEmail', /*'tags',*/
+            'name', 'title', 'author', 'authorEmail',
             'installation','description','faq','screenshots'
         ]
-//        tags component: true
         description component: true
         installation component: true
         faq component: true

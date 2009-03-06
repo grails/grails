@@ -13,7 +13,7 @@
                 <g:else>odd</g:else>
             </g:set>
             <li class="comment ${oddEven}">
-                <g:render template="/comment/comment" var='comment' bean="${comment}"/>
+                <g:render template="/comments/comment" var='comment' bean="${comment}"/>
             </li>
         </g:each>
     </ul>

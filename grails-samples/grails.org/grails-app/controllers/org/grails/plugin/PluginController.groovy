@@ -3,7 +3,6 @@
 package org.grails.plugin
 
 import org.grails.wiki.WikiPage
-import org.grails.comment.Comment
 import org.codehaus.groovy.grails.commons.ConfigurationHolder
 import org.grails.auth.User
 import org.grails.wiki.BaseWikiController
@@ -11,6 +10,8 @@ import org.hibernate.criterion.Projections
 import org.hibernate.criterion.Order
 import org.grails.taggable.Tag
 import org.grails.taggable.TagLink
+import org.grails.comments.Comment
+import org.grails.comments.CommentLink
 
 class PluginController extends BaseWikiController {
 
@@ -59,8 +60,14 @@ class PluginController extends BaseWikiController {
             maxResults(5)
         }
 
-        def latestComments = Comment.list(sort:'dateCreated', order:'desc', max:5);
-
+        def latestComments = CommentLink.withCriteria {
+            eq 'commentClass', Plugin.class.name
+            comment {
+                order('dateCreated', 'desc')
+            }
+            maxResults 5
+        }*.comment
+    
         def homeWiki = wikiPageService.getCachedOrReal(HOME_WIKI)
         if (!homeWiki) {
             homeWiki = new WikiPage(title:HOME_WIKI, body: 'Please edit me.').save()
@@ -181,7 +188,7 @@ class PluginController extends BaseWikiController {
     def search = {
 		if(params.q) {
             def searchResult = Plugin.search(params.q, reload: true, offset: params.offset, escape:true)
-            searchResult.results = searchResult.results.unique { it.title }
+            searchResult.results = searchResult.results.findAll{it}.unique { it.title }
 			flash.message = "Found $searchResult.total results!"
 			flash.next()
 			render(view:"searchResults", model:[searchResult:searchResult])
@@ -229,10 +236,11 @@ class PluginController extends BaseWikiController {
 
     def postComment = {
         def plugin = Plugin.get(params.id)
-        def c = new Comment(body:params.comment, user: request.user)
-        plugin.addToComments(c)
+//        def c = new Comment(body:params.comment, user: request.user)
+//        plugin.addToComments(c)
+        plugin.addComment(request.user, params.comment)
         plugin.save(flush:true)
-        return render(template:'/comment/comment', var:'comment', bean:c)
+        return render(template:'/comments/comment', var:'comment', bean:plugin.comments[-1])
     }
 
     def rate = {
@@ -275,11 +283,13 @@ class PluginController extends BaseWikiController {
     }
 
     def showComment = {
-        def plugin = Plugin.withCriteria {
-            comments {
-                eq('id', params.id.toLong())
-            }
-        }[0]
+//        def plugin = Plugin.withCriteria {
+//            comments {
+//                eq('id', params.id.toLong())
+//            }
+//        }[0]
+        def link = CommentLink.findByCommentAndCommentClass(Comment.get(params.id), Plugin.class.name)
+        def plugin = Plugin.get(link.commentRef)
         redirect(action:'show', params:[name:plugin.name], fragment:"comment_${params.id}")
     }
 

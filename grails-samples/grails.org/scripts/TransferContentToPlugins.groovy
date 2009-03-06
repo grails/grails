@@ -99,7 +99,7 @@ private contentToPlugin(c, tagNames) {
     def existing = pluginClass.executeQuery("from Plugin p where p.title = '${c.title}'")
     existing.each { it
         println "Removing existing plugins before saving '$p.name'"
-        it.comments.each { cmt -> cmt.delete() }
+        it.comments.each { existing.removeComment(it) }
         it.description?.delete()
         it.delete(flush:true)
     }
@@ -165,37 +165,15 @@ private contentToPlugin(c, tagNames) {
     assert p.save(flush:true)
 
     // adding a comment to the plugin about this move
-    def comment = grailsApp.getDomainClass("org.grails.comment.Comment").clazz.newInstance()
-    comment.user = adminUser
-    comment.body = """This Plugin page was automatically generated.  To see the old Wiki version, go to [${p.title}]. \
+    def text = """This Plugin page was automatically generated.  To see the old Wiki version, go to [${p.title}]. \
 This will only be available for a limited time in order for plugin authors to make adjustments during this \
 transition."""
-    if (!comment.validate()) {
-        println "!! ERROR adding Comment to plugin: ${p}!!"
-        comment.errors.allErrors.each { println it }
-    }
-    assert comment.save(flush:true)
-    p.comments = [comment]
-    p.save(flush:true)
+    addComment(text, p, adminUser)
 
     // add a comment to the original content object before locking it
-    comment = grailsApp.getDomainClass("org.grails.comment.Comment").clazz.newInstance()
-    comment.user = adminUser
-    comment.body = """This wiki page has been locked because another page outdates it.  Please see the new plugin page \
+    text = """This wiki page has been locked because another page outdates it.  Please see the new plugin page \
 for "${c.title}" [here|${ConfigurationHolder.config.grails.serverURL}/plugin/${p.name}]."""
-    if (!comment.validate()) {
-        println "!! ERROR adding Comment to content: ${c}!!"
-        comment.errors.allErrors.each { println it }
-    }
-    assert comment.save()
-    if (c.comments) c.comments << comment
-    else c.comments = [comment]
-    c.locked = true
-    if (!c.validate()) {
-        println "!! ERROR saving content after comment: ${c}!!"
-        c.errors.allErrors.each { println it }
-    }
-    assert c.save(flush:true)
+    addComment(text, c, adminUser)
 
     // handle any image references
     def context = org.codehaus.groovy.grails.commons.ApplicationHolder.application.parentContext.servletContext
@@ -232,6 +210,13 @@ for "${c.title}" [here|${ConfigurationHolder.config.grails.serverURL}/plugin/${p
         p.description.body = p.description.body.replace(match.toString(), "!${newRelPath}!")
     }
     assert p.description.save()
+}
+
+private void addComment(text, instance, poster) {
+    def comment = grailsApp.getDomainClass("org.grails.comments.Comment").clazz.newInstance(body:text, posterId: poster.id, posterClass: poster.class.name)
+    def link = grailsApp.getDomainClass("org.grails.comments.CommentLink").clazz.newInstance(comment:comment, commentRef:instance.id, commentClass:instance.class.name)
+    assert comment.save()
+    assert link.save()
 }
 
 private void copyFile(File source, File destination) {

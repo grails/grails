@@ -37,8 +37,8 @@
             minSize='8'
             class='pluginTagCloud'
             linkClass='tagLink'
-            controller='tag'
-            action='show'/>
+            controller='plugin'
+            action='showTag'/>
 
     <table id="statsTable">
         <tbody>
