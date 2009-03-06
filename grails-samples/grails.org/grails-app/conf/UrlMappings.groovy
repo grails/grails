@@ -49,10 +49,16 @@ class UrlMappings {
         "/rollback/$id/$number"(controller: "content", action: "rollbackWikiVersion")
         "/diff/$id/$number/$diff"(controller: "content", action: "diffWikiVersion")
         "/previous/$id/$number"(controller: "content", action: "previousWikiVersion")
-
-        "/jobs/$action?/$id?"(controller: "job") {
-            layout = "subpage"
-        }
+		
+		"/screencasts"(controller:"screencast", action:"list") 
+		"/screencast/save"(controller:"screencast", action:"save") 
+		"/screencast/search"(controller:"screencast", action:"search") 		
+		"/screencast/update"(controller:"screencast", action:"update") 				
+		"/screencast/edit/$id"(controller:"screencast", action:"edit") 				
+		"/screencast/feed"(controller:"screencast", action:"feed") 						
+		"/screencast/add"(controller:"screencast", action:"create")
+		"/screencast/show/$id"(controller:"screencast", action:"show")		
+		"/comment/add"(controller:"commentable", action:"add")
 
         "/$id?"(controller: "content", action: "index")
 

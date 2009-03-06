@@ -68,7 +68,17 @@ class JSecurityAuthFilters {
 	                }
 	            }                
             }
-
+			comments(controller:"commentable", action:"add") {
+				before = {
+					accessControl()
+				}
+			}
+			comments(controller:"screencast", action:"(edit|create|save|update)") {
+				before = {
+					accessControl()
+				}
+			}
+			
             pluginDeletion(controller:"plugin", action:"deletePlugin") {
                 before = {
                     accessControl {

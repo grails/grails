@@ -24,7 +24,7 @@
 	<!--[if IE]>
 		<link rel="stylesheet" href="${createLinkTo(dir:'css/ie', file:'master.css')}" type="text/css" media="screen" title="Primary screen stylesheet" charset="utf-8" />
 	<![endif]-->
-    <g:javascript library="prototype" />
+    <g:javascript base="/js/" library="prototype" />
 
     <g:layoutHead />
 

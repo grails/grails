@@ -12,7 +12,9 @@
                     <li><g:link controller="content" id="Quick Start">Quick Start</g:link></li>
                     <li><g:link controller="content" id="IDE Integration">IDE Setup</g:link></li>
                     <li><g:link controller="content" id="Tutorials">Tutorials</g:link></li>
-                    <li><g:link controller="content" id="Grails Screencasts">Screencasts</g:link></li>
+                    <plugin:isAvailable name="screencasts">
+                    	<li><g:link controller="screencast" action="list">Screencasts</g:link></li>
+					</plugin:isAvailable>
                 </ul>
                 </li>
                 <li><g:link controller="content" id="Reference">Reference</g:link>

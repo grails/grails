@@ -16,12 +16,12 @@
         </div>
         <g:hiddenField name="originalURI" value="${originalURI ?: params.originalURI}" />
         <g:each in="${formData}" var="d">
-            %{--<g:if test="${d.key != 'login' && d.key != 'password'}">--}%
+           	<g:if test="${!(d.value instanceof Map)}">
                 <g:hiddenField name="${d.key}" value="${d.value}" />
-            %{--</g:if>--}%
+            </g:if>
         </g:each>
 
-
+		<g:hiddenField name="async" value="${async ?: false}"></g:hiddenField>
         <div class="formButtons">
             <g:submitButton name="Submit" value="Login" />
         </div>

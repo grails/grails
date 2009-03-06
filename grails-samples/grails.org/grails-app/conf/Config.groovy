@@ -51,33 +51,20 @@ environments {
 }
 
 format.date = 'MMM d, yyyy'
+screencasts.page.layout="subpage"
 
 // log4j configuration
-log4j {
-    appender.stdout = "org.apache.log4j.ConsoleAppender"
-    appender.'stdout.layout'="org.apache.log4j.PatternLayout"
-    appender.'stdout.layout.ConversionPattern'='[%r] %c{2} %m%n'
-    appender.file = "org.apache.log4j.FileAppender"
-    appender.'file.layout'="org.apache.log4j.PatternLayout"
-    appender.'file.layout.ConversionPattern'='[%r] %c{2} %m%n'
-    appender.'file.File'="stacktrace.log"
-    rootLogger="debug,stdout"
-    logger {
-        grails="error"
-        StackTrace="error,file"
-        org {
-            codehaus.groovy.grails.web.servlet="error"  //  controllers
-            codehaus.groovy.grails.web.pages="error" //  GSP
-            codehaus.groovy.grails.web.sitemesh="error" //  layouts
-            codehaus.groovy.grails."web.mapping.filter"="error" // URL mapping
-            codehaus.groovy.grails."web.mapping"="error" // URL mapping
-            codehaus.groovy.grails.commons="error" // core / classloading
-            codehaus.groovy.grails.plugins="error" // plugins
-            codehaus.groovy.grails.orm.hibernate="error" // hibernate integration
-            springframework="off"
-        }
-		org.hibernate.SQL="off"
-		org.hibernate.type="off"		
-    }
-    additivity.StackTrace=false
+log4j = {
+    error  'org.codehaus.groovy.grails.web.servlet',  //  controllers
+	       'org.codehaus.groovy.grails.web.pages', //  GSP
+	       'org.codehaus.groovy.grails.web.sitemesh', //  layouts
+	       'org.codehaus.groovy.grails."web.mapping.filter', // URL mapping
+	       'org.codehaus.groovy.grails."web.mapping', // URL mapping
+	       'org.codehaus.groovy.grails.commons', // core / classloading
+	       'org.codehaus.groovy.grails.plugins', // plugins
+	       'org.codehaus.groovy.grails.orm.hibernate', // hibernate integration
+	       'org.springframework',
+	       'org.hibernate'
+
+    warn   'org.mortbay.log'
 }
