@@ -15,13 +15,17 @@
     background: url(../images/springsource.png) bottom right no-repeat;
 }
 
+.plugin table td.tags {
+    line-height: 2.5em; /* this is for IE */
+}
+
 .plugin .tag {
     margin:2px;
     background-color: #6788a9;
     color: #021b31;
     padding: 2px 4px;
     border: 1px solid #536a82;
-    white-space: nowrap;
+    /*white-space: nowrap;*/
 }
 
 .plugin .tag a {

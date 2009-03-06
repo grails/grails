@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'comments.css')}" />
     <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'ratings.css')}" />
     <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'tabview.css')}" />
-    <title>${plugin.title} Plugin</title>
+    <title>Plugin: ${plugin.title}</title>
     <meta content="subpage" name="layout"/>
     <g:render template="../content/wikiJavaScript"/>    
 </head>
@@ -68,7 +68,7 @@
                     </tr>
                     <tr>
                         <th>Tags</th>
-                        <td colspan='3'>
+                        <td colspan='3' class='tags'>
                             <span id='pluginTags'>
                                 <g:render template='tags' var='plugin' bean="${plugin}"/>
                             </span>
