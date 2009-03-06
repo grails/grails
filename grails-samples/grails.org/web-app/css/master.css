@@ -306,6 +306,104 @@ a:visited.actionIcon img {
 .hidden {
     display: none;
 }
+.screencastControls {
+	text-align:right;;
+}
+.screencastControls .list {
+	text-align:right;
+	padding-left:20px;
+	background: url(../images/famfamfam/application_view_list.png)  left no-repeat;
+}
+.screencastControls .edit, .screencastControls .create{
+	text-align:right;
+	padding-left:20px;
+	background: url(../images/icon-edit.png)  left no-repeat;
+}
+.screencastControls .feed {
+	text-align:right;
+	padding-left:20px;
+	background: url(../images/famfamfam/feed.png)  left no-repeat;
+}
+
+.screencastForm {
+	border:2px solid #265c8f;
+	padding:15px;
+}
+.screencastForm label {
+	display:block;
+	font-size:1.2em;
+}
+.screencastForm input {
+	display:block;
+	margin-bottom:10px;
+}
+.screencastForm textarea {
+	display:block;
+	width:400px;
+	height:100px;
+}
+.screencast .screencastDescription{
+	margin-top:5px;
+	margin-bottom:5px;	
+	font-size:1.1em;
+	padding:15px;	
+}
+.screencast .screencastTags{
+	font-size:1.2em;
+	margin-bottom:10px;
+	color:grey;
+}
+.screencast .screencastDownloads {
+	border:1px dashed #265c8f;
+	background-color:#eee;
+	padding:10px;	
+	font-weight:bold;
+	font-size:1.2em;
+}
+.screencast .screencastInfo {
+	color:grey;
+	text-align:center;
+}
+.screencast .screencastTitle {
+	font-size:1.4em;
+	text-align:center;
+	
+}
+.screencasts .screencast .screencastTitle {
+	text-align:left;	
+}
+.screencasts .screencast .screencastInfo {
+	text-align:left;	
+}
+
+.screencast .screencastThumbnail {
+	text-align:center;
+}
+.screencastComments .comment {
+	margin-top:15px;
+	border-bottom:1px dashed #265c8f;
+} 
+.screencastComments .comment .permalink {
+	text-align:right;
+	font-size:1.2em;
+}
+.screencastComments .comment .avatar {
+	display:block;
+	position:relative;
+	top:-15px;
+}
+.screencastComments .comment .commentBody {
+	font-size:1.2em;
+}
+.screencastComments .comment .commentDetails {
+	margin-top:10px;
+	color:grey;
+}
+.screencastComments textarea {
+	width:400px;
+	height:200px;
+	margin-bottom:10px;
+}
 
 .yui-dialog a.container-close {
     border: none;
