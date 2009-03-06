@@ -33,10 +33,17 @@ class PluginController extends BaseWikiController {
                 count('tagRef')
             }
         }.each {
-            def (tagName, count) = it
+            // TODO: put multiple assignment back in place as soon as IntelliJ catches up, because right now it thinks
+            // this entire source file is invalid when I do this:
+            //      def (tagName, count) = it
+            def tagName = it[0]
+            def count = it[1]
             tagCounts[tagName] = tagCounts[tagName] ? (tagCounts[tagName] + count) : count
         }
 
+        // TODO: put a criteria restriction in place that will only return plugins that have at least 3 votes.
+        // I can't figure out how restrict a projection within a criteria, so I'm just doing a 'manual' filter
+        // after I've gotten the results back.
         def popularPlugins = Plugin.withCriteria {
             createAlias("ratings", "r")
             .setProjection(Projections.projectionList()
@@ -47,7 +54,11 @@ class PluginController extends BaseWikiController {
             ).addOrder(Order.desc("avgStars"))
             maxResults(5)
         }.inject([]) { list, result ->
-            list << [[name:result[0], title:result[1]], result[2], result[3]]
+            // this is my 'manual' filter to only get plugins with at least 5 votes
+            if (result[3] >= 3) {
+                list << [[name:result[0], title:result[1]], result[2], result[3]]
+            }
+            list
         }
 
         def newestPlugins = Plugin.withCriteria {
@@ -61,7 +72,7 @@ class PluginController extends BaseWikiController {
         }
 
         def latestComments = CommentLink.withCriteria {
-            eq 'commentClass', Plugin.class.name
+            eq 'type', 'plugin'
             comment {
                 order('dateCreated', 'desc')
             }
@@ -122,7 +133,8 @@ class PluginController extends BaseWikiController {
                 }
             }
         }
-        render view:'showPlugin', model:[plugin:plugin, comments: plugin.comments.sort { it.dateCreated }, userRating: userRating]
+        // TODO: figure out why plugin.ratings.size() is always 1
+        render view:'showPlugin', model:[plugin:plugin, userRating: userRating]
     }
 
     def editPlugin = {
@@ -236,8 +248,6 @@ class PluginController extends BaseWikiController {
 
     def postComment = {
         def plugin = Plugin.get(params.id)
-//        def c = new Comment(body:params.comment, user: request.user)
-//        plugin.addToComments(c)
         plugin.addComment(request.user, params.comment)
         plugin.save(flush:true)
         return render(template:'/comments/comment', var:'comment', bean:plugin.comments[-1])
@@ -283,12 +293,7 @@ class PluginController extends BaseWikiController {
     }
 
     def showComment = {
-//        def plugin = Plugin.withCriteria {
-//            comments {
-//                eq('id', params.id.toLong())
-//            }
-//        }[0]
-        def link = CommentLink.findByCommentAndCommentClass(Comment.get(params.id), Plugin.class.name)
+        def link = CommentLink.findByCommentAndType(Comment.get(params.id), 'plugin')
         def plugin = Plugin.get(link.commentRef)
         redirect(action:'show', params:[name:plugin.name], fragment:"comment_${params.id}")
     }

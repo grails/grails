@@ -155,12 +155,6 @@ private contentToPlugin(c, tagNames) {
         def tagLink = tagLinkClass.newInstance(tag:tag, tagRef:p.id, tagClass:pluginClass.name)
         assert tagLink.save(flush:true)
         println "Added tag $tag to $p"
-        /*
-        p.tags << tag
-        if (!tag.plugins) tag.plugins = []
-        tag.plugins << p
-        assert tag.save(flush:true)
-        */
     }
     assert p.save(flush:true)
 

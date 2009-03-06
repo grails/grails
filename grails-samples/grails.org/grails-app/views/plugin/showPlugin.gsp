@@ -146,7 +146,7 @@
 
         <g:render template="../content/previewPane"/>
         
-        <g:render template="../comments/comments" model="${[commentType:'plugin', parentId:plugin.id, comments:comments]}"/>
+        <g:render template="../comments/comments" model="${[commentType:'plugin', parentId:plugin.id, comments:plugin.comments]}"/>
 
     </div>
 </div>

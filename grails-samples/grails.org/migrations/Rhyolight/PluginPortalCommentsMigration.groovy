@@ -15,9 +15,8 @@ changeSet(id:'IntegrateTaggablePlugin', author:'Rhyolight') {
     dropTable(tableName:'tag')
 }
 
-/*
 changeSet(id:'IntegrateCommentablePlugin', author:'Rhyolight') {
-    dropTable(tableName:'plugin_tags')
-    dropTable(tableName:'tag')
+    dropTable(tableName:'content_comment')
+    dropTable(tableName:'plugin_comment')
+    dropColumn(tableName:'comment', columnName:'user_id')
 }
-*/

@@ -21,8 +21,11 @@
       <sourceFolder url="file://$MODULE_DIR$/../grails-app/utils" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../grails-app/views" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../plugins/avatar-0.3/grails-app/taglib" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../plugins/commentable-0.1/grails-app/domain" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../plugins/commentable-0.1/src/groovy" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../plugins/commentable-0.2/grails-app/controllers" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../plugins/commentable-0.2/grails-app/domain" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../plugins/commentable-0.2/grails-app/taglib" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../plugins/commentable-0.2/grails-app/views" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../plugins/commentable-0.2/src/groovy" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../plugins/feeds-1.4/grails-app/taglib" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../plugins/grails-ui-1.1-SNAPSHOT/grails-app/taglib" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../plugins/jsecurity-0.3/grails-app/taglib" isTestSource="false" />
@@ -40,6 +43,7 @@
       <sourceFolder url="file://$MODULE_DIR$/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../test/integration" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/../test/unit" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/../plugins/commentable-0.2/grails-app/views/test" />
       <excludeFolder url="file://$MODULE_DIR$/../web-app/js/prototype" />
       <excludeFolder url="file://$MODULE_DIR$/../web-app/js/yui" />
       <excludeFolder url="file://$MODULE_DIR$/../web-app/js/yui-cms" />
