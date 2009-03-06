@@ -24,7 +24,7 @@
             <g:link controller="plugin" action="createPlugin">Create Plugin Page</g:link>
         </li>
         <li class="feed">
-            <g:link controller="plugin" action="feed" params="[format:'rss']">Feed</g:link>
+            <g:link controller="plugin" action="latest" params="[format:'rss']">Feed</g:link>
         </li>
     </ul>
 

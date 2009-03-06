@@ -1,8 +1,6 @@
 package org.grails
 
 import org.grails.news.NewsItem
-import org.radeox.engine.context.BaseInitialRenderContext
-import org.grails.wiki.GrailsWikiEngine
 import org.grails.wiki.BaseWikiController
 import org.grails.cache.CacheService
 

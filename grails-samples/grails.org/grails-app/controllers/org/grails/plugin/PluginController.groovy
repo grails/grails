@@ -218,13 +218,12 @@ class PluginController extends BaseWikiController {
 
             def top5 = Plugin.listOrderByLastUpdated(order:'desc', max:5)
             title = "Grails New Plugins Feed"
-            link = "http://grails.org/plugin/latest?format=${request.format}"
+            link = "http://grails.org/Plugins"
             description = "New and recently updated Grails Plugins"
 
             for(item in top5) {
                 entry(item.title) {
                     link = "http://grails.org/plugin/${item.name.encodeAsURL()}"
-                    categories = item.tags*.name
                     author = item.author
                     publishedDate = item.lastUpdated
                     engine.render(item.description.body, context)
