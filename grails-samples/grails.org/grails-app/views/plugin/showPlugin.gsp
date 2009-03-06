@@ -112,6 +112,10 @@
                         this.cfg.setProperty('x',pos[0]+20);
                         this.cfg.setProperty('y',pos[1]+20);
                     });
+                    // on hide, clear out the text within it
+                    GRAILSUI.addTagDialog.subscribe('hide', function() {
+                        document.getElementById('newTag').value = '';
+                    });
                 });
             </script>
         </jsec:isLoggedIn>

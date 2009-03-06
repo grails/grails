@@ -96,7 +96,7 @@ body.subpage {
 	float: right;
 	background-color: #ddd;
 	width: 265px;
-	z-index: 100;
+	z-index: 1;
 	margin: 30px 15px 20px 20px;
 	-moz-border-radius: 18px;
 	border: 2px solid #fff;
@@ -112,7 +112,7 @@ body.subpage {
 	top: 0px;
 	right: 0px;
 	width: 240px;
-	z-index: 1000;
+	z-index: 1;
 }
 
 #sidebarAds p {
@@ -320,7 +320,7 @@ body.subpage {
 #results h4 { font: 700 1.0em Arial, sans-serif; }
 
 .previewPane {
-    z-index:999;
+    z-index:1;
     position:absolute;
     background:white;
     border:2px solid black;

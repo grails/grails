@@ -306,3 +306,7 @@ a:visited.actionIcon img {
 .hidden {
     display: none;
 }
+
+.yui-dialog a.container-close {
+    border: none;
+}
