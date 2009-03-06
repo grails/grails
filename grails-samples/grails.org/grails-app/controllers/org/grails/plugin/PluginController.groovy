@@ -27,7 +27,7 @@ class PluginController extends BaseWikiController {
 
         def tagCounts = [:]
         TagLink.withCriteria {
-            eq('tagClass', Plugin.class.name)
+            eq('type', 'plugin')
             projections {
                 groupProperty('tag')
                 count('tagRef')
@@ -99,7 +99,7 @@ class PluginController extends BaseWikiController {
             pluginMap[tag.name] = []
             def links = TagLink.withCriteria {
                 eq('tag', tag)
-                eq('tagClass', Plugin.class.name)
+                eq('type', 'plugin')
             }
             links.each { link ->
                 def p = Plugin.get(link.tagRef)
@@ -110,7 +110,7 @@ class PluginController extends BaseWikiController {
         // remove empty tags
         pluginMap = pluginMap.findAll { it.value.size() }
         def taggedIds = TagLink.withCriteria {
-            eq('tagClass', Plugin.class.name)
+            eq('type', 'plugin')
             projections {
                 distinct('tagRef')
             }

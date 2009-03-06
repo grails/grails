@@ -111,7 +111,8 @@ class PluginService {
         log.info "Updating plugin \"$plugin.name\"..."
         // handle the wiki page with some care
         if (master.description?.body && !plugin.description?.body) {
-            plugin.description.body = master.description.body
+            plugin.description = master.description
+            plugin.description.title = "description-${plugin.id}"
             assert plugin.description.save()
             Version v = plugin.description.createVersion()
             v.author = User.findByLogin('admin')

@@ -32,8 +32,16 @@
 
     <g:render template="searchBar"/>
 
-    <richui:tagCloud
-            values="${tagCounts}"
+    %{--<richui:tagCloud--}%
+            %{--values="${tagCounts}"--}%
+            %{--minSize='8'--}%
+            %{--class='pluginTagCloud'--}%
+            %{--linkClass='tagLink'--}%
+            %{--controller='plugin'--}%
+            %{--action='showTag'/>--}%
+
+    <tags:cloud
+            type='plugin'
             minSize='8'
             class='pluginTagCloud'
             linkClass='tagLink'

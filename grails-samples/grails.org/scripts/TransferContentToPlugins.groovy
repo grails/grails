@@ -3,6 +3,7 @@ import org.springframework.orm.hibernate3.SessionFactoryUtils
 import org.springframework.transaction.support.TransactionSynchronizationManager
 import org.codehaus.groovy.grails.commons.ConfigurationHolder
 import org.codehaus.groovy.grails.web.context.ServletContextHolder
+import grails.util.*
 
 grailsHome = Ant.project.properties."environment.GRAILS_HOME"
 
@@ -152,7 +153,7 @@ private contentToPlugin(c, tagNames) {
             assert tag.save(flush:true)
             println " * created new tag $tag ($tag.id) * "
         }
-        def tagLink = tagLinkClass.newInstance(tag:tag, tagRef:p.id, tagClass:pluginClass.name)
+        def tagLink = tagLinkClass.newInstance(tag:tag, tagRef:p.id, type:'plugin')
         assert tagLink.save(flush:true)
         println "Added tag $tag to $p"
     }
@@ -208,7 +209,7 @@ for "${c.title}" [here|${ConfigurationHolder.config.grails.serverURL}/plugin/${p
 
 private void addComment(text, instance, poster) {
     def comment = grailsApp.getDomainClass("org.grails.comments.Comment").clazz.newInstance(body:text, posterId: poster.id, posterClass: poster.class.name)
-    def link = grailsApp.getDomainClass("org.grails.comments.CommentLink").clazz.newInstance(comment:comment, commentRef:instance.id, commentClass:instance.class.name)
+    def link = grailsApp.getDomainClass("org.grails.comments.CommentLink").clazz.newInstance(comment:comment, commentRef:instance.id, type:GrailsNameUtils.getPropertyName(instance.class))
     assert comment.save()
     assert link.save()
 }

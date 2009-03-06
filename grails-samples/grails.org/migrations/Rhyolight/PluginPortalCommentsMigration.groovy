@@ -20,3 +20,7 @@ changeSet(id:'IntegrateCommentablePlugin', author:'Rhyolight') {
     dropTable(tableName:'plugin_comment')
     dropColumn(tableName:'comment', columnName:'user_id')
 }
+
+changeSet(id:'UpdateTaggableTagLink', author:'Rhyolight') {
+    dropColumn(tableName:'tag_links', columnName:'tag_class')
+}
