@@ -1,6 +1,13 @@
 <script type="text/javascript">
     var dmp = new diff_match_patch();
 
+    function hideCommentPost() {
+        YAHOO.util.Dom.addClass('postComment', 'hidden');
+    }
+    function showCommentPost() {
+        YAHOO.util.Dom.removeClass('postComment', 'hidden');
+    }
+
     function showDiff() {
 
 
@@ -16,14 +23,17 @@
         Effect.Appear('diffOutputDiv')
     }
 
-    function getAjaxOptions(after) {
+    function getAjaxOptions(after, editFormName) {
         if (after == null) {
             after = function() {
             }
         }
+        if (editFormName == null) {
+            editFormName = 'wikiEditForm'
+        }
         return {asynchronous:true,
             evalScripts:true,
-            parameters:Form.serialize($('wikiEditForm')),
+            parameters:Form.serialize($(editFormName)),
             method:"POST",
             onComplete:after
         }

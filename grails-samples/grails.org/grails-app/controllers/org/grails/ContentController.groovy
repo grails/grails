@@ -186,7 +186,7 @@ class ContentController extends BaseWikiController {
         else {
             def page = WikiPage.findByTitle(params.id.decodeURL())
 
-            render(template:"wikiEdit",model:[wikiPage:page, update: params.update])
+            render(template:"wikiEdit",model:[wikiPage:page, update: params.update, editFormName: params.editFormName])
         }
     }
 
