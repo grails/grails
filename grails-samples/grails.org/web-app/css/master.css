@@ -408,3 +408,21 @@ a:visited.actionIcon img {
 .yui-dialog a.container-close {
     border: none;
 }
+
+/* PAGINATION */
+.paginateButtons {
+	margin-top:20px;
+}
+.paginateButtons a {
+    background: #fff url(../images/skin/shadow.jpg) bottom repeat-x;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-color: #ccc #aaa #aaa #ccc;
+    color: #666;
+    margin: 0 3px;
+    padding: 2px 6px;
+}
+.paginateButtons span {
+    padding: 2px 3px;
+}
+
