@@ -306,20 +306,22 @@ a:visited.actionIcon img {
 .hidden {
     display: none;
 }
-.screencastControls {
-	text-align:right;;
+
+
+.screencastControls, .blogControls {
+	text-align:right;
 }
-.screencastControls .list {
+.screencastControls .list, .blogControls .list  {
 	text-align:right;
 	padding-left:20px;
 	background: url(../images/famfamfam/application_view_list.png)  left no-repeat;
 }
-.screencastControls .edit, .screencastControls .create{
+.screencastControls .edit, .screencastControls .create, .blogControls .create{
 	text-align:right;
 	padding-left:20px;
 	background: url(../images/icon-edit.png)  left no-repeat;
 }
-.screencastControls .feed {
+.screencastControls .feed, .blogControls .feed {
 	text-align:right;
 	padding-left:20px;
 	background: url(../images/famfamfam/feed.png)  left no-repeat;
@@ -329,6 +331,7 @@ a:visited.actionIcon img {
 	border:2px solid #265c8f;
 	padding:15px;
 }
+
 .screencastForm label {
 	display:block;
 	font-size:1.2em;
@@ -379,23 +382,23 @@ a:visited.actionIcon img {
 .screencast .screencastThumbnail {
 	text-align:center;
 }
-.screencastComments .comment {
+.comment {
 	margin-top:15px;
 	border-bottom:1px dashed #265c8f;
 } 
-.screencastComments .comment .permalink {
+.comment .permalink {
 	text-align:right;
 	font-size:1.2em;
 }
-.screencastComments .comment .avatar {
+.comment .avatar {
 	display:block;
 	position:relative;
 	top:-15px;
 }
-.screencastComments .comment .commentBody {
+.comment .commentBody {
 	font-size:1.2em;
 }
-.screencastComments .comment .commentDetails {
+.comment .commentDetails {
 	margin-top:10px;
 	color:grey;
 }
@@ -424,5 +427,9 @@ a:visited.actionIcon img {
 }
 .paginateButtons span {
     padding: 2px 3px;
+}
+.newsItems .recentEntry{
+	margin-bottom:10px;
+	margin-top:10px;	
 }
 

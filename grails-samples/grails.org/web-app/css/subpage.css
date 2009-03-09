@@ -330,3 +330,39 @@ body.subpage {
     overflow-y:auto;
     overflow-x:hidden;
 }
+
+
+.createEntryForm label {
+	display:block;
+	font-size:1.2em;	
+}
+.entryDetails {
+	color:grey;
+	margin-bottom:10px;
+}
+.entryBody {
+	border-bottom:1px dashed #265c8f;
+	padding-bottom:10px;
+}
+.blogQuickLinks {
+	position:absolute;
+	left:520px;
+
+}
+#addComment .addCommentTitle {
+	font-size:1.2em;
+}
+.blogEntries {
+	width:450px;
+}
+.recentEntry {
+	border-bottom:1px dashed #265c8f;
+	padding-bottom:5px;
+}
+.recentEntry h2 {
+	font-size:1.1em;
+	display:inline;
+}
+.recentEntry .entryDetails {
+	display:inline;
+}

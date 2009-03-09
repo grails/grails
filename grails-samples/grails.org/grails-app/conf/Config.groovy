@@ -52,6 +52,10 @@ environments {
 
 format.date = 'MMM d, yyyy'
 screencasts.page.layout="subpage"
+blog.page.layout="subpage"
+blog.author.evaluator= {
+	request.user
+}
 
 // log4j configuration
 log4j = {

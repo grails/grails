@@ -78,7 +78,11 @@ class JSecurityAuthFilters {
 					accessControl()
 				}
 			}
-			
+			blogPosting(controller:"blog", action:"createEntry") {
+				before = {
+					accessControl()
+				}				
+			} 
             pluginDeletion(controller:"plugin", action:"deletePlugin") {
                 before = {
                     accessControl {
