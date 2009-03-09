@@ -78,7 +78,7 @@ class JSecurityAuthFilters {
 					accessControl()
 				}
 			}
-			blogPosting(controller:"blog", action:"createEntry") {
+			blogPosting(controller:"blog", action:"(createEntry|editEntry)") {
 				before = {
 					accessControl()
 				}				

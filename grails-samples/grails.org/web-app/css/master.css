@@ -311,12 +311,18 @@ a:visited.actionIcon img {
 .screencastControls, .blogControls {
 	text-align:right;
 }
+.blogControls .show  {
+	text-align:right;
+	padding-left:20px;
+	background: url(../images/icon-cancel.png)  left no-repeat;
+	
+}
 .screencastControls .list, .blogControls .list  {
 	text-align:right;
 	padding-left:20px;
 	background: url(../images/famfamfam/application_view_list.png)  left no-repeat;
 }
-.screencastControls .edit, .screencastControls .create, .blogControls .create{
+.screencastControls .edit, .screencastControls .create, .blogControls .create, .blogControls .edit{
 	text-align:right;
 	padding-left:20px;
 	background: url(../images/icon-edit.png)  left no-repeat;
@@ -430,6 +436,12 @@ a:visited.actionIcon img {
 }
 .newsItems .recentEntry{
 	margin-bottom:10px;
-	margin-top:10px;	
+	margin-top:5px;	
+}
+
+.newsItems .recentEntry .entryDetails{
+	color:grey;	
+	font-size:0.9em;
+	margin-top:2px;
 }
 

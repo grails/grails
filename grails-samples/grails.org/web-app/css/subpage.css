@@ -346,14 +346,14 @@ body.subpage {
 }
 .blogQuickLinks {
 	position:absolute;
-	left:520px;
+	left:540px;
 
 }
 #addComment .addCommentTitle {
 	font-size:1.2em;
 }
 .blogEntries {
-	width:450px;
+	width:470px;
 }
 .recentEntry {
 	border-bottom:1px dashed #265c8f;
