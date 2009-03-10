@@ -8,14 +8,15 @@ import org.grails.auth.User
 import org.grails.wiki.BaseWikiController
 import org.hibernate.criterion.Projections
 import org.hibernate.criterion.Order
-import org.grails.taggable.Tag
-import org.grails.taggable.TagLink
-import org.grails.comments.Comment
-import org.grails.comments.CommentLink
+import org.grails.taggable.*
+import org.grails.comments.*
+import org.grails.rateable.*
 
 class PluginController extends BaseWikiController {
 
     static String HOME_WIKI = 'PluginHome'
+    static int PORTAL_MAX_RESULTS = 5
+    static int PORTAL_MIN_RATINGS = 0
 
     def wikiPageService
 
@@ -41,34 +42,20 @@ class PluginController extends BaseWikiController {
             tagCounts[tagName] = tagCounts[tagName] ? (tagCounts[tagName] + count) : count
         }
 
-        // TODO: put a criteria restriction in place that will only return plugins that have at least 3 votes.
-        // I can't figure out how restrict a projection within a criteria, so I'm just doing a 'manual' filter
-        // after I've gotten the results back.
-        def popularPlugins = Plugin.withCriteria {
-            createAlias("ratings", "r")
-            .setProjection(Projections.projectionList()
-                .add(Projections.groupProperty("name"))
-                .add(Projections.groupProperty("title"))
-                .add(Projections.avg("r.stars").as("avgStars"))
-                .add(Projections.count("r.stars").as("numRatings"))
-            ).addOrder(Order.desc("avgStars"))
-            maxResults(5)
-        }.inject([]) { list, result ->
-            // this is my 'manual' filter to only get plugins with at least 5 votes
-            if (result[3] >= 3) {
-                list << [[name:result[0], title:result[1]], result[2], result[3]]
-            }
-            list
-        }
+        def popularPlugins = Plugin.list().findAll {
+            it.ratings.size() > PORTAL_MIN_RATINGS
+        }.sort {
+            it.averageRating
+        }.reverse()[0..4]
 
         def newestPlugins = Plugin.withCriteria {
             order('dateCreated', 'desc')
-            maxResults(5)
+            maxResults(PORTAL_MAX_RESULTS)
         }
 
         def recentlyUpdatedPlugins = Plugin.withCriteria {
             order('lastReleased', 'desc')
-            maxResults(5)
+            maxResults(PORTAL_MAX_RESULTS)
         }
 
         def latestComments = CommentLink.withCriteria {
@@ -76,7 +63,7 @@ class PluginController extends BaseWikiController {
             comment {
                 order('dateCreated', 'desc')
             }
-            maxResults 5
+            maxResults PORTAL_MAX_RESULTS
         }*.comment
     
         def homeWiki = wikiPageService.getCachedOrReal(HOME_WIKI)
@@ -124,15 +111,12 @@ class PluginController extends BaseWikiController {
         if (!plugin) {
             return redirect(action:'createPlugin', params:params)
         }
+
         def userRating
         if (request.user) {
-            userRating = Plugin.withCriteria {
-                eq('id', plugin.id)
-                ratings {
-                    eq('user', request.user)
-                }
-            }
+            userRating = plugin.userRating(request.user)
         }
+
         // TODO: figure out why plugin.ratings.size() is always 1
         render view:'showPlugin', model:[plugin:plugin, userRating: userRating]
     }
@@ -250,25 +234,6 @@ class PluginController extends BaseWikiController {
         plugin.addComment(request.user, params.comment)
         plugin.save(flush:true)
         return render(template:'/comments/comment', var:'comment', bean:plugin.comments[-1])
-    }
-
-    def rate = {
-        def plugin = Plugin.get(params.id)
-        def user = request.user
-        def users = plugin.ratings*.user
-        def rating = params.rating.toInteger()
-        // for new ratings, create a new one
-        if (!users || !(user in users) ) {
-            plugin.addToRatings(stars:rating, user: User.get(user.id))
-            plugin.save()
-        }
-        // update the current rating if the user has already rated it
-        else {
-            def oldRating = plugin.ratings.find { it.user == user }
-            oldRating.stars = rating
-            assert oldRating.save()
-        }
-        render "${plugin.avgRating},${plugin.ratings.size()}"
     }
 
     def addTag = {

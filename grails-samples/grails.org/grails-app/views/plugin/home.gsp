@@ -3,6 +3,7 @@
     <feed:meta kind="atom" version="1.0" controller="plugin" action="feed"/>
     <g:javascript library="diff_match_patch"/>
     <g:javascript library="scriptaculous"/>
+    <rateable:resources />
     <link rel="stylesheet" href="${createLinkTo(dir: 'css', file: 'content.css')}"/>
     <link rel="stylesheet" href="${createLinkTo(dir: 'css', file: 'plugins.css')}"/>
     <link rel="stylesheet" href="${createLinkTo(dir: 'css', file: 'ratings.css')}"/>
@@ -31,14 +32,6 @@
     <h1>Grails Plugins</h1>
 
     <g:render template="searchBar"/>
-
-    %{--<richui:tagCloud--}%
-            %{--values="${tagCounts}"--}%
-            %{--minSize='8'--}%
-            %{--class='pluginTagCloud'--}%
-            %{--linkClass='tagLink'--}%
-            %{--controller='plugin'--}%
-            %{--action='showTag'/>--}%
 
     <tags:cloud
             type='plugin'

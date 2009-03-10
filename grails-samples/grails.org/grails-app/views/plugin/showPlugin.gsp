@@ -1,14 +1,13 @@
 <%@ page import="org.grails.plugin.Plugin" %>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
+    <rateable:resources />
     <gui:resources components="['tabView','dialog','autoComplete']" javascript='animation'/>
     <g:javascript library="diff_match_patch" />
     <g:javascript library="scriptaculous" />
-    <script src="${createLinkTo(dir:'js', file:'rating.js')}"></script>
     <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'content.css')}" />
     <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'plugins.css')}" />
     <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'comments.css')}" />
-    <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'ratings.css')}" />
     <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'tabview.css')}" />
     <title>Plugin: ${plugin.title}</title>
     <meta content="subpage" name="layout"/>
@@ -63,7 +62,7 @@
                     <tr>
                         <th>Rating</th>
                         <td colspan='3'>
-                            <g:render template="ratings" model="[parentId:plugin.id, average:plugin.avgRating, total:plugin.ratings.size(), active: true]"/>
+                            <rateable:ratings bean="${plugin}"/>
                         </td>
                     </tr>
                     <tr>
@@ -114,7 +113,7 @@
                     });
                     // on hide, clear out the text within it
                     GRAILSUI.addTagDialog.subscribe('hide', function() {
-                        document.getElementById('newTag').value = '';
+                        document.getElementById('newTag').value
                     });
                 });
             </script>

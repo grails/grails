@@ -3,10 +3,11 @@ package org.grails.plugin
 import org.grails.wiki.WikiPage
 import org.grails.taggable.Taggable
 import org.grails.comments.Commentable
+import org.grails.rateable.Rateable
 /*
  * author: Matthew Taylor
  */
-class Plugin implements Taggable, Commentable {
+class Plugin implements Taggable, Commentable, Rateable {
 
     static final def WIKIS = ['installation','description','faq','screenshots']
 
@@ -27,8 +28,6 @@ class Plugin implements Taggable, Commentable {
     Date dateCreated
     Date lastUpdated
     Date lastReleased
-
-    static hasMany = [ratings:Rating]
 
     static searchable = {
         only = [
@@ -55,12 +54,6 @@ class Plugin implements Taggable, Commentable {
 
     def getOfficial() {
         authorEmail.trim().endsWith('@springsource.com') || authorEmail.trim().endsWith('@g2one.com')
-    }
-
-    def getAvgRating() {
-        if (!ratings) return 0
-        if (!ratings || !ratings.size()) return null // for no ratings, return null
-        ratings*.stars.sum() / ratings.size()
     }
 
     String toString() {

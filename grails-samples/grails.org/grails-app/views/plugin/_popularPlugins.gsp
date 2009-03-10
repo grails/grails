@@ -2,8 +2,8 @@
 <ul id="popularPluginList">
     <g:each var='plugin' in="${plugins}">
         <li>
-            <g:link controller="plugin" action="show" params="[name:plugin[0].name]">${plugin[0].title}</g:link>
-            <g:render template="ratingDisplay" model="[average:plugin[1], votes:plugin[2]]"/>
+            <g:link controller="plugin" action="show" params="[name:plugin.name]">${plugin.title}</g:link>
+            <rateable:ratings bean="${plugin}" active='false'/>
         </li>
     </g:each>
 </ul>

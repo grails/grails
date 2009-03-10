@@ -24,3 +24,7 @@ changeSet(id:'IntegrateCommentablePlugin', author:'Rhyolight') {
 changeSet(id:'UpdateTaggableTagLink', author:'Rhyolight') {
     dropColumn(tableName:'tag_links', columnName:'tag_class')
 }
+
+changeSet(id:'IntegrateRateablePlugin', author:'Rhyolight') {
+    dropTable(tableName:'rating')
+}
