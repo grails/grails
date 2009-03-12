@@ -119,7 +119,7 @@ class UserController {
                                                         message:"auth.invalid.login"])
                 } else {
                     flash.message = "Invalid username and/or password"
-                    redirect(action: 'login', params: [ username: params.username ])
+                    redirect(action: 'login', params: [ username: params.username, originalURI:params.originalURI ])
                 }
             }
         } else {            
