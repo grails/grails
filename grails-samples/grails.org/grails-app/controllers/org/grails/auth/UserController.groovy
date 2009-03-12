@@ -73,7 +73,7 @@ class UserController {
                             redirect(url:params.originalURI, params:params)
                         }
                         else {
-                            redirect(uri:"")
+                            redirect(uri:"/")
                         }
                     }
                     else {
