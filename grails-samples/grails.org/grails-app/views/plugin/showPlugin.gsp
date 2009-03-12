@@ -113,7 +113,7 @@
                     });
                     // on hide, clear out the text within it
                     GRAILSUI.addTagDialog.subscribe('hide', function() {
-                        document.getElementById('newTag').value
+                        document.getElementById('newTag').value = ''
                     });
                 });
             </script>

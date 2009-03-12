@@ -83,7 +83,8 @@ body {
     background-color: #efefef;
     border: 1px dashed #c5c5c5;
     padding: 10px 10px 0 10px;
-    margin: 10px 20px;
+    margin: 10px 0px;
+    overflow: auto;
 }
 
 .code pre {

@@ -39,6 +39,10 @@ li.odd {
     margin: 0px 10px 10px 0px;
 }
 
+.comment .commentBody {
+    font-size: 10pt;    
+}
+
 #postComment form {
     width: 510px;
 }
