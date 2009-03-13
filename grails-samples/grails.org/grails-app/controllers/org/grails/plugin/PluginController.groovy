@@ -46,7 +46,9 @@ class PluginController extends BaseWikiController {
             it.ratings.size() > PORTAL_MIN_RATINGS
         }.sort {
             it.averageRating
-        }.reverse()[0..4]
+        }.reverse()
+        // only the first few
+        popularPlugins = popularPlugins[0..(popularPlugins.size() < PORTAL_MAX_RESULTS ? popularPlugins.size() : PORTAL_MAX_RESULTS - 1)]
 
         def newestPlugins = Plugin.withCriteria {
             order('dateCreated', 'desc')
