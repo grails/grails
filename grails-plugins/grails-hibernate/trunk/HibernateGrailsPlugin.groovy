@@ -30,7 +30,7 @@ class HibernateGrailsPlugin {
 	def description = "A plugin that provides integration between Grails and Hibernate through GORM"
 
 	
-    def version = "1.1.1-SNAPSHOT"
+    def version = "1.1"
     def documentation = 'http://grails.org/doc/$version'	
 
     def dependsOn = [dataSource: "1.1 > *",
