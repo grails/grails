@@ -4,6 +4,7 @@ package org.grails.plugin
  */
 
 import grails.test.GrailsUnitTestCase
+import org.grails.rateable.Rating
 
 class PluginTests extends GrailsUnitTestCase {
 
