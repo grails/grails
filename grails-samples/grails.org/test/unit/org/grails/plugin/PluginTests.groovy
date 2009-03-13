@@ -20,15 +20,6 @@ class PluginTests extends GrailsUnitTestCase {
         assertFalse 'should not allow duplicate titles', plugin.validate()
     }
 
-    void testAvgRating() {
-        def plugin = new Plugin()
-        assertEquals 0,  plugin.avgRating
-        plugin.addToRatings(new Rating(stars:2))
-        assertEquals 2, plugin.avgRating
-        plugin.addToRatings(new Rating(stars:3))
-        assertEquals 2.5, plugin.avgRating
-    }
-
     void testTitleConstraintIsLessStringent() {
         def title = 'Dynamically filter / search domain objects.'
 

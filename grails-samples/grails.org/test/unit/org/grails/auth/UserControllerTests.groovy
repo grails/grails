@@ -146,7 +146,7 @@ public class UserControllerTests extends ControllerUnitTestCase {
 
         assert authenticateCalled
 
-        assertEquals "", redirectArgs.uri
+        assertEquals "/", redirectArgs.uri
     }
 
     /*void testLogout() {
