@@ -114,10 +114,11 @@
     </target>
     <target name="test-grails">
         <ant dir="checkout/grails" antfile="build.xml" target="clean" />
-        <exec dir="checkout/grails" command="ant test" failonerror="true" osfamily="unix"/>
+        <exec dir="checkout/grails" command="ant -Dgroovy.grails.joint=true test" failonerror="true" osfamily="unix"/>
         <exec dir="checkout/grails" command="cmd" failonerror="true" osfamily="windows">
           <arg value="/c"/>
           <arg value="ant.bat"/>
+          <arg value="-Dgroovy.grails.joint=true"/>
           <arg value="test"/>
         </exec>
         
