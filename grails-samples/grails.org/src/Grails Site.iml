@@ -51,7 +51,6 @@
       <sourceFolder url="file://$MODULE_DIR$/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../test/integration" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/../test/unit" isTestSource="true" />
-      <excludeFolder url="file://$MODULE_DIR$/../plugins/commentable-0.2/grails-app/views/test" />
       <excludeFolder url="file://$MODULE_DIR$/../web-app/js/prototype" />
       <excludeFolder url="file://$MODULE_DIR$/../web-app/js/yui" />
       <excludeFolder url="file://$MODULE_DIR$/../web-app/js/yui-cms" />
@@ -60,6 +59,7 @@
     <orderEntry type="library" name="grails-1.1-SNAPSHOT" level="application" />
     <orderEntry type="library" name="grails-1.1-SNAPSHOT" level="application" />
     <orderEntry type="library" name="groovy-1.6-beta-2" level="application" />
+    <orderEntry type="library" name="grails-1.1" level="application" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">

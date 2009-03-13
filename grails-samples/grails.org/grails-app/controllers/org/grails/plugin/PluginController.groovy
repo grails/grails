@@ -16,7 +16,7 @@ class PluginController extends BaseWikiController {
 
     static String HOME_WIKI = 'PluginHome'
     static int PORTAL_MAX_RESULTS = 5
-    static int PORTAL_MIN_RATINGS = 0
+    static int PORTAL_MIN_RATINGS = 1
 
     def wikiPageService
 
@@ -43,12 +43,14 @@ class PluginController extends BaseWikiController {
         }
 
         def popularPlugins = Plugin.list().findAll {
-            it.ratings.size() > PORTAL_MIN_RATINGS
+            it.ratings.size() >= PORTAL_MIN_RATINGS
         }.sort {
             it.averageRating
         }.reverse()
         // only the first few
-        popularPlugins = popularPlugins[0..(popularPlugins.size() < PORTAL_MAX_RESULTS ? popularPlugins.size() : PORTAL_MAX_RESULTS - 1)]
+        if (popularPlugins.size()) {
+            popularPlugins = popularPlugins[0..(popularPlugins.size() < PORTAL_MAX_RESULTS ? popularPlugins.size() - 1 : PORTAL_MAX_RESULTS - 1)]
+        }
 
         def newestPlugins = Plugin.withCriteria {
             order('dateCreated', 'desc')

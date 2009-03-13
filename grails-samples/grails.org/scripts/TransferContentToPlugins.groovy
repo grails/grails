@@ -209,9 +209,9 @@ for "${c.title}" [here|${ConfigurationHolder.config.grails.serverURL}/plugin/${p
 
 private void addComment(text, instance, poster) {
     def comment = grailsApp.getDomainClass("org.grails.comments.Comment").clazz.newInstance(body:text, posterId: poster.id, posterClass: poster.class.name)
+    assert comment.save(flush:true)
     def link = grailsApp.getDomainClass("org.grails.comments.CommentLink").clazz.newInstance(comment:comment, commentRef:instance.id, type:GrailsNameUtils.getPropertyName(instance.class))
-    assert comment.save()
-    assert link.save()
+    assert link.save(flush:true)
 }
 
 private void copyFile(File source, File destination) {
