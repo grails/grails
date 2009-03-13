@@ -5,6 +5,8 @@ import org.grails.content.Version
 
 class WikiPage extends Content {
 
+    def cacheService
+    
 	Version createVersion() {
         def verObject = new Version(number:version, current:this)
         verObject.title = title
@@ -24,6 +26,10 @@ class WikiPage extends Content {
 		title(blank:false, matches:/[^\/\\]+/)
 		body(blank:true)
 	}
+
+    def onAddComment = { comment ->
+        cacheService.flushWikiCache()
+    }
 
     String toString() {
         body

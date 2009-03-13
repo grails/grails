@@ -30,7 +30,10 @@ class CacheService {
     def removeContent(key) {
         contentCache.remove key
     }
-                    
+
+    def flushWikiCache() {
+        wikiCache.flush()
+    }
     def getWikiText(key) {
         wikiCache.get(key)?.getValue()
     }

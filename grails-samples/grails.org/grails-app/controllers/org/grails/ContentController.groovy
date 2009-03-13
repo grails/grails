@@ -133,14 +133,9 @@ class ContentController extends BaseWikiController {
 
     def postComment = {
         def content = Content.get(params.id)
-//        def c = new Comment(body:params.comment, user: request.user)
-//        content.addToComments(c)
         content.addComment(request.user, params.comment)
-        content.save(flush:true)
         render(template:'/comments/comment', var:'comment', bean:content.comments[-1])
     }
-
-
 
     def showWikiVersion = {
         def page = WikiPage.findByTitle(params.id.decodeURL())
