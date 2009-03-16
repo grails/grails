@@ -18,6 +18,10 @@
                 <li><g:link controller="userInfo" action="list">User Info</g:link></li>
                 <li><g:link controller="wikiPage" action="list">Wiki Pages</g:link></li>
                 <li><g:link controller="download" action="list">Downloads</g:link></li>
+                <li><g:link controller="commentLink" action="list">Comments</g:link></li>
+                <li><g:link controller="tag" action="list">Tags</g:link></li>
+                %{--<li><g:link controller="rating" action="list">Ratings</g:link></li>--}%
+                %{--<li><g:link controller="blogEntry" action="list">Blog Entries</g:link></li>--}%
                 <plugin:isAvailable name="jobs">
                 	<li><g:link controller="jobAdmin" action="list">Jobs</g:link></li>
 				</plugin:isAvailable>
