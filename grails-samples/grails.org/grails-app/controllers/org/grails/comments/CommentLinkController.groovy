@@ -20,17 +20,6 @@ class CommentLinkController {
         [ commentLinkInstanceList: list, commentLinkInstanceTotal: CommentLink.count() ]
     }
 
-    def show = {
-        def commentLinkInstance = CommentLink.get( params.id )
-
-        if(!commentLinkInstance) {
-            flash.message = "CommentLink not found with id ${params.id}"
-            redirect(action:list)
-        }
-
-        else { return [ commentLinkInstance : commentLinkInstance ] }
-    }
-
     def delete = {
         def commentLink = CommentLink.get(params.id)
         def comment = CommentLink.createCriteria().get {
@@ -51,7 +40,7 @@ class CommentLinkController {
             }
             catch(org.springframework.dao.DataIntegrityViolationException e) {
                 flash.message = "CommentLink ${params.id} could not be deleted"
-                redirect(action:show,id:params.id)
+                redirect(action:list)
             }
         }
         else {

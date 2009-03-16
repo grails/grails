@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
   <head>
-      <title>Admin Area</title>
+      <title>Grails.org Admin Area</title>
       <meta content="subpage" name="layout" />
       <g:javascript library="scriptaculous" />
   </head>
@@ -20,13 +20,12 @@
                 <li><g:link controller="download" action="list">Downloads</g:link></li>
                 <li><g:link controller="commentLink" action="list">Comments</g:link></li>
                 <li><g:link controller="tag" action="list">Tags</g:link></li>
-                %{--<li><g:link controller="rating" action="list">Ratings</g:link></li>--}%
+                <li><g:link controller="ratingLink" action="list">Ratings</g:link></li>
                 %{--<li><g:link controller="blogEntry" action="list">Blog Entries</g:link></li>--}%
                 <plugin:isAvailable name="jobs">
                 	<li><g:link controller="jobAdmin" action="list">Jobs</g:link></li>
 				</plugin:isAvailable>
             </ul>
-
 
         </div>
   </body>

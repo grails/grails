@@ -39,7 +39,7 @@
                     <g:each in="${commentLinkInstanceList}" status="i" var="commentLinkInstance">
                         <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                         
-                            <td><g:link controller="commentLink" action="edit" id="${commentLinkInstance.comment.id}">${fieldValue(bean:commentLinkInstance, field:'id')}</g:link></td>
+                            <td><g:link action="edit" id="${commentLinkInstance.comment.id}">${fieldValue(bean:commentLinkInstance, field:'id')}</g:link></td>
 
                             <td>${commentLinkInstance.comment.poster}</td>
                         
