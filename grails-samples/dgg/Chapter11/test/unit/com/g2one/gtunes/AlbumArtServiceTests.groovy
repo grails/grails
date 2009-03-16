@@ -2,11 +2,17 @@ package com.g2one.gtunes
 
 import com.amazonaws.a2s.*
 import com.amazonaws.a2s.model.*
+import grails.test.GrailsUnitTestCase
 
-class AlbumArtServiceTests extends GroovyTestCase {
+class AlbumArtServiceTests extends GrailsUnitTestCase {
 	
 	void tearDown() {
 		GroovySystem.metaClassRegistry.removeMetaClass(AmazonA2SClient)
+	}
+	
+	void setUp() {
+	    super.setUp()
+	    mockLogging(AlbumArtService)
 	}
 	
 	void testNoAccessKey() {
