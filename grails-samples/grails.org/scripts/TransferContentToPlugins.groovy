@@ -28,7 +28,7 @@ target(translateContextToPlugin: "The implementation task") {
     // getting the plugin listing wiki page to parse
     def wikiClass = grailsApp.getDomainClass("org.grails.wiki.WikiPage").clazz
     def id = wikiClass.executeQuery("select w.id from WikiPage w where w.title = 'Plugins' order by w.lastUpdated")[0]
-    def pluginList = wikiClass.get(id)
+    def pluginList = wikiClass.get(525)
 
     def pluginCategories
     pluginList.body.eachLine { line ->
