@@ -161,8 +161,11 @@ private contentToPlugin(c, tagNames) {
         assert tagLink.save(flush:true)
         println "Added tag $tag to $p"
     }
-    assert p.save(flush:true)
+    if (!p.save(flush:true)) {
+        p.errors.allErrors.each { println it }
+    }
 
+    println "handling comments..."
     // adding a comment to the plugin about this move
     def text = """This Plugin page was automatically generated.  To see the old Wiki version, go to [${p.title}]. \
 This will only be available for a limited time in order for plugin authors to make adjustments during this \
@@ -174,6 +177,7 @@ transition."""
 for "${c.title}" [here|${ConfigurationHolder.config.grails.serverURL}/plugin/${p.name}]."""
     addComment(text, c, adminUser)
 
+    println "handling images..."
     // handle any image references
     def context = org.codehaus.groovy.grails.commons.ApplicationHolder.application.parentContext.servletContext
     def imageMatcher = p.description.body =~ /\![a-zA-Z0-9_+\/\.\-\%]+\!/
