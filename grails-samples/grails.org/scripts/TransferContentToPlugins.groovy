@@ -216,6 +216,7 @@ for "${c.title}" [here|${ConfigurationHolder.config.grails.serverURL}/plugin/${p
 }
 
 private void addComment(text, instance, poster) {
+    println "Adding comment..."
     def comment = grailsApp.getDomainClass("org.grails.comments.Comment").clazz.newInstance(body:text, posterId: poster.id, posterClass: poster.class.name)
     if (!comment.save(flush:true)) {
         comment.errors.allErrors.each { println it }
