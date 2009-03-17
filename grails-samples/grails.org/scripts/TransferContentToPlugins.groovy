@@ -76,9 +76,13 @@ private contentToPlugin(c, tagNames) {
     def tagLinkClass = grailsApp.getDomainClass("org.grails.taggable.TagLink").clazz
     def p = pluginClass.newInstance()
     def authors = c.versions*.author
+    def mostEditedCount = 0
     def author = (authors as Set).inject(null) {mostEdited, it ->
-        if (!mostEdited) return it
-        if (mostEdited < authors.count(it)) return it
+        if (!mostEdited) {
+            mostEditedCount++
+            return it
+        }
+        if (mostEditedCount < authors.count(it)) return it
         mostEdited
     }
 
