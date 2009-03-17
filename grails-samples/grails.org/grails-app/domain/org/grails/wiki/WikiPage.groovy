@@ -18,10 +18,6 @@ class WikiPage extends Content {
 
     static searchable = [only: ['body', 'title']]
 
-    static mapping = {
-        cache true
-    }
-
 	static constraints = {
 		title(blank:false, matches:/[^\/\\]+/)
 		body(blank:true)

@@ -135,7 +135,6 @@ class PluginController extends BaseWikiController {
                 // update plugin
                 plugin.properties = params
                 plugin.save(flush:true)
-//                cacheService?.removeWikiText plugin.title
                 redirect(action:'show', params:[name:plugin.name])
             } else {
                 return render(view:'editPlugin', model: [plugin:plugin])

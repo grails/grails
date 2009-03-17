@@ -13,9 +13,9 @@ class CacheService {
 
     static transactional = false
 
-
     Ehcache contentCache
     Ehcache wikiCache
+    Ehcache textCache
 
     def getContent(key) {  
         contentCache.get(key)?.getValue()
@@ -33,6 +33,7 @@ class CacheService {
 
     def flushWikiCache() {
         wikiCache.flush()
+        textCache.flush()
     }
     def getWikiText(key) {
         wikiCache.get(key)?.getValue()

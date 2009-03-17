@@ -11,6 +11,8 @@ class Plugin implements Taggable, Commentable, Rateable {
 
     static final def WIKIS = ['installation','description','faq','screenshots']
 
+    def cacheService
+    
     String name
     String title
     WikiPage description
@@ -52,8 +54,16 @@ class Plugin implements Taggable, Commentable, Rateable {
         lastReleased(nullable:true)
     }
 
+    static mapping = {
+        cache 'nonstrict-read-write'
+    }
+
     def getOfficial() {
         authorEmail.trim().endsWith('@springsource.com') || authorEmail.trim().endsWith('@g2one.com')
+    }
+
+    def onAddComment = { comment ->
+        cacheService.flushWikiCache()
     }
 
     String toString() {

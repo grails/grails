@@ -12,6 +12,8 @@ import org.grails.plugin.Plugin
 import org.grails.content.Content
 
 class ContentController extends BaseWikiController {
+
+    def textCache
     
     static accessControl = {
         // Alternatively, several actions can be specified.
@@ -226,6 +228,9 @@ class ContentController extends BaseWikiController {
                         page.lock()
                         page.version = page.version+1
                         page.save(flush:true)
+                        // refresh the textCache
+                        textCache.flush()
+
                         if(page.hasErrors()) {
                             render(template:"wikiEdit",model:[wikiPage:page])
                         }

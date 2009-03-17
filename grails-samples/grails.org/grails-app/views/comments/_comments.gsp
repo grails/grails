@@ -5,18 +5,20 @@
         if (comments.size > 1) commentHeader = "${comments.size()} Comments"
     %>
     <h2><a class='anchor' name='comments'>${commentHeader}</a></h2>
-    <ul id="commentList">
-        <li></li>
-        <g:each var="comment" status='i' in="${comments}">
-            <g:set var='oddEven'>
-                <g:if test="${i % 2 == 0}">even</g:if>
-                <g:else>odd</g:else>
-            </g:set>
-            <li class="comment ${oddEven}">
-                <g:render template="/comments/comment" var='comment' bean="${comment}"/>
-            </li>
-        </g:each>
-    </ul>
+    <cache:text id="comments_for_${commentType}_${parentId}">
+        <ul id="commentList">
+            <li></li>
+            <g:each var="comment" status='i' in="${comments}">
+                <g:set var='oddEven'>
+                    <g:if test="${i % 2 == 0}">even</g:if>
+                    <g:else>odd</g:else>
+                </g:set>
+                <li class="comment ${oddEven}">
+                    <g:render template="/comments/comment" var='comment' bean="${comment}"/>
+                </li>
+            </g:each>
+        </ul>
+    </cache:text>
 
     <div id="nextComment" class="hidden"></div>
 

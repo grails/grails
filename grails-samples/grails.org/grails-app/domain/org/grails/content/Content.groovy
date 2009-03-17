@@ -11,6 +11,7 @@ class Content implements Serializable, Commentable {
 
 	static mapping = {
 		body type:"text"
+        cache 'nonstrict-read-write'
 	}
 	static constraints = {
 		title(blank:false)
