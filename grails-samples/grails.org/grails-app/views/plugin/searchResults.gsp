@@ -70,7 +70,7 @@
                             <tr>
                                 <th>Rating</th>
                                 <td>
-                                    <g:render template="ratingDisplay" var="average" bean="${result.avgRating}"/>
+                                    <g:render template="ratingDisplay" var="average" bean="${result.averageRating}"/>
                                 </td>
                                 <th>Tags</th>
                                 <td>
