@@ -5,7 +5,7 @@ Implementation of Grails.org in Grails with example Wiki engine
 Requirements
 ------------
 
-This application was developed against Grails 1.1-SNAPSHOT uses the following plug-in:
+This application was developed against Grails 1.1 uses the following plug-in:
 
 - Searchable 0.4.2-SNAPSHOT
 - JSecurity 0.3
@@ -13,10 +13,6 @@ This application was developed against Grails 1.1-SNAPSHOT uses the following pl
 - Quartz 0.2
 - Feeds 1.2
 - Liquibase 1.0.9 (patched)
-
-The Liquibase plugin has been updated to work with Grails 1.1-SNAPSHOT, and is temporarily installed within this application
-in the plugins/liquibase directory.  There is no need to install this plugin at the moment.  Once the Liquibase team
-has applied the patch to update it for Grails 1.1, we'll remove this internal plugin.
 
 In addition, the application requires a persistent database (an in-memory HSQLDB won't do) at the moment its configured to
 look for a MySQL db configured with:
