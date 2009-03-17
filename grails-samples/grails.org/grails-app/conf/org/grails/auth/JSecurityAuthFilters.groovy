@@ -82,7 +82,15 @@ class JSecurityAuthFilters {
 				before = {
 					accessControl()
 				}				
-			} 
+			}
+        	blogDeletion(controller:"blog", action:"delete") {
+				before = {
+					accessControl {
+                        role("Administrator")
+                    }
+				}
+			}
+
             pluginDeletion(controller:"plugin", action:"deletePlugin") {
                 before = {
                     accessControl {

@@ -21,7 +21,7 @@
                 <li><g:link controller="commentLink" action="list">Comments</g:link></li>
                 <li><g:link controller="tag" action="list">Tags</g:link></li>
                 <li><g:link controller="ratingLink" action="list">Ratings</g:link></li>
-                %{--<li><g:link controller="blogEntry" action="list">Blog Entries</g:link></li>--}%
+                <li><g:link controller="blogEntry" action="adminList">Blog Entries</g:link></li>
                 <plugin:isAvailable name="jobs">
                 	<li><g:link controller="jobAdmin" action="list">Jobs</g:link></li>
 				</plugin:isAvailable>

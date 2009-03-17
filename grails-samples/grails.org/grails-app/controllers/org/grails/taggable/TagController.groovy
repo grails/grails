@@ -28,8 +28,11 @@ class TagController {
 
     def delete = {
         def tagInstance = Tag.get( params.id )
+        def tagLinks = TagLink.findAllByTag(tagInstance)
+
         if(tagInstance) {
             try {
+                tagLinks.each { it.delete() }
                 tagInstance.delete()
                 flash.message = "Tag ${params.id} deleted"
                 redirect(action:list)

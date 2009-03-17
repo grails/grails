@@ -30,6 +30,8 @@ class UrlMappings {
 
         "/content/postComment/$id"(controller: "content", action:"postComment")
 
+        "/blog/delete/$id"(controller: 'blogEntry', action:'delete')
+
         "/rateable/rate/$id"(controller: "rateable", action:"rate")
         "/tag/autoCompleteNames"(controller:'tag', action:'autoCompleteNames')
 

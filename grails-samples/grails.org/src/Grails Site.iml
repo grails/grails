@@ -41,6 +41,10 @@
       <sourceFolder url="file://$MODULE_DIR$/../plugins/searchable-0.5.3/grails-app/services" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../plugins/searchable-0.5.3/src/groovy" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../plugins/searchable-0.5.3/src/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../plugins/simple-blog-0.1.2/grails-app/controllers" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../plugins/simple-blog-0.1.2/grails-app/domain" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../plugins/simple-blog-0.1.2/grails-app/taglib" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../plugins/simple-blog-0.1.2/grails-app/views" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../plugins/taggable-0.4.2/grails-app/domain" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../plugins/taggable-0.4.2/grails-app/services" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../plugins/taggable-0.4.2/grails-app/taglib" isTestSource="false" />
