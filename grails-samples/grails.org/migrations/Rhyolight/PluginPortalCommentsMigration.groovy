@@ -48,3 +48,17 @@ changeSet(id:'IntegrateRateablePlugin', author:'Rhyolight') {
     }
     dropTable(tableName:'rating')
 }
+
+changeSet(id:'EnsuringCommentPosterIsGone', author:'Rhyolight') {
+    preConditions(onFail:'MARK_RAN') {
+        columnExists(schemaName:'grails', tableName:'comment', columnName:'poster')
+    }
+    dropColumn(tableName:'comment', columnName:'poster')
+}
+
+changeSet(id:'EnsuringCommentEmailIsGone', author:'Rhyolight') {
+    preConditions(onFail:'MARK_RAN') {
+        columnExists(schemaName:'grails', tableName:'comment', columnName:'email')
+    }
+    dropColumn(tableName:'comment', columnName:'email')
+}
