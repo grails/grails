@@ -10,12 +10,12 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
     <dependency>
       <groupId>org.grails</groupId>
       <artifactId>grails-crud</artifactId>
-      <version>1.1-SNAPSHOT</version>
+      <version>1.1</version>
     </dependency>
     <dependency>
       <groupId>org.grails</groupId>
       <artifactId>grails-gorm</artifactId>
-      <version>1.1-SNAPSHOT</version>
+      <version>1.1</version>
     </dependency>
 
     <!-- Grails defaults to OSCache for the second-level Hibernate cache. -->
