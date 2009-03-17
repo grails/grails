@@ -218,10 +218,12 @@ for "${c.title}" [here|${ConfigurationHolder.config.grails.serverURL}/plugin/${p
 private void addComment(text, instance, poster) {
     println "Adding comment..."
     def comment = grailsApp.getDomainClass("org.grails.comments.Comment").clazz.newInstance(body:text, posterId: poster.id, posterClass: poster.class.name)
+    println comment
     if (!comment.save(flush:true)) {
         comment.errors.allErrors.each { println it }
     }
     def link = grailsApp.getDomainClass("org.grails.comments.CommentLink").clazz.newInstance(comment:comment, commentRef:instance.id, type:GrailsNameUtils.getPropertyName(instance.class))
+    println link
     if (!link.save(flush:true)) {
         link.errors.allErrors.each { println it }   
     }
