@@ -4,19 +4,15 @@ package org.grails.plugin
 
 import org.grails.wiki.WikiPage
 import org.codehaus.groovy.grails.commons.ConfigurationHolder
-import org.grails.auth.User
 import org.grails.wiki.BaseWikiController
-import org.hibernate.criterion.Projections
-import org.hibernate.criterion.Order
 import org.grails.taggable.*
 import org.grails.comments.*
-import org.grails.rateable.*
 
 class PluginController extends BaseWikiController {
 
     static String HOME_WIKI = 'PluginHome'
     static int PORTAL_MAX_RESULTS = 5
-    static int PORTAL_MIN_RATINGS = 1
+    static int PORTAL_MIN_RATINGS = 3
 
     def wikiPageService
 
