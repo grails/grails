@@ -164,7 +164,7 @@ private contentToPlugin(c, tagNames) {
     if (!p.save(flush:true)) {
         p.errors.allErrors.each { println it }
     }
-
+/*
     println "handling comments..."
     // adding a comment to the plugin about this move
     def text = """This Plugin page was automatically generated.  To see the old Wiki version, go to [${p.title}]. \
@@ -176,7 +176,7 @@ transition."""
     text = """This wiki page has been locked because another page outdates it.  Please see the new plugin page \
 for "${c.title}" [here|${ConfigurationHolder.config.grails.serverURL}/plugin/${p.name}]."""
     addComment(text, c, adminUser)
-
+*/
     println "handling images..."
     // handle any image references
     def context = org.codehaus.groovy.grails.commons.ApplicationHolder.application.parentContext.servletContext
