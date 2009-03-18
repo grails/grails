@@ -45,7 +45,7 @@
         <attribute name="script"/>
         <attribute name="args" default="" />
         <sequential>
-            <grailsTask script="@{script}" args="@{args} --non-interactive" classpathref="grails.classpath">
+            <grailsTask script="@{script}" args="@{args}" classpathref="grails.classpath">
                 <compileClasspath refid="compile.classpath"/>
                 <testClasspath refid="test.classpath"/>
                 <runtimeClasspath refid="app.classpath"/>
@@ -61,6 +61,19 @@
     </target>
 
     <target name="-init-grails" depends="-resolve">
+		<copy todir="${lib.dir}/compile">
+			<fileset dir="lib" includes="*.jar" />
+		</copy>
+		<copy todir="${lib.dir}/build">
+			<fileset dir="lib" includes="*.jar" />
+		</copy>
+		<copy todir="${lib.dir}/test">
+			<fileset dir="lib" includes="*.jar" />
+		</copy>
+		<copy todir="${lib.dir}/runtime">
+			<fileset dir="lib" includes="*.jar" />
+		</copy>
+		
         <path id="grails.classpath">
             <fileset dir="${lib.dir}/build"/>
         </path>
