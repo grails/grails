@@ -18,6 +18,9 @@ beans = {
     wikiCache(EhCacheFactoryBean) {
         timeToLive = 300
     }
+	pluginListCache(EhCacheFactoryBean) {
+		timeToLive = 600
+	}
     contentToMessage(ContentAlertStack)
     wikiContext(BaseInitialRenderContext)
     wikiEngine(GrailsWikiEngineFactoryBean) {

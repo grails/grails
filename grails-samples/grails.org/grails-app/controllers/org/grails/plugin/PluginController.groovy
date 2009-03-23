@@ -7,6 +7,7 @@ import org.codehaus.groovy.grails.commons.ConfigurationHolder
 import org.grails.wiki.BaseWikiController
 import org.grails.taggable.*
 import org.grails.comments.*
+import net.sf.ehcache.Element
 
 class PluginController extends BaseWikiController {
 
@@ -23,13 +24,16 @@ class PluginController extends BaseWikiController {
     def home = {
 
         def tagCounts = [:]
-        TagLink.withCriteria {
+        def tagLinkResults = TagLink.withCriteria {
             eq('type', 'plugin')
             projections {
                 groupProperty('tag')
                 count('tagRef')
             }
-        }.each {
+			cache true
+        }
+
+		tagLinkResults.each {
             // TODO: put multiple assignment back in place as soon as IntelliJ catches up, because right now it thinks
             // this entire source file is invalid when I do this:
             //      def (tagName, count) = it
@@ -38,7 +42,7 @@ class PluginController extends BaseWikiController {
             tagCounts[tagName] = tagCounts[tagName] ? (tagCounts[tagName] + count) : count
         }
 
-        def popularPlugins = Plugin.list().findAll {
+        def popularPlugins = Plugin.list(cache:true).findAll {
             it.ratings.size() >= PORTAL_MIN_RATINGS
         }.sort {
             it.averageRating
@@ -51,20 +55,24 @@ class PluginController extends BaseWikiController {
         def newestPlugins = Plugin.withCriteria {
             order('dateCreated', 'desc')
             maxResults(PORTAL_MAX_RESULTS)
+			cache true
         }
 
         def recentlyUpdatedPlugins = Plugin.withCriteria {
             order('lastReleased', 'desc')
             maxResults(PORTAL_MAX_RESULTS)
+			cache true
         }
 
         def latestComments = CommentLink.withCriteria {
+			projections { property "comment" }
             eq 'type', 'plugin'
             comment {
                 order('dateCreated', 'desc')
             }
             maxResults PORTAL_MAX_RESULTS
-        }*.comment
+			cache true
+        }
     
         def homeWiki = wikiPageService.getCachedOrReal(HOME_WIKI)
         if (!homeWiki) {
@@ -80,20 +88,27 @@ class PluginController extends BaseWikiController {
         ]
     }
 
+	def pluginListCache
     def list = {
-        def pluginMap = [:]
-        Tag.list(sort:'name').each { tag ->
-            pluginMap[tag.name] = []
-            def links = TagLink.withCriteria {
-                eq('tag', tag)
-                eq('type', 'plugin')
-            }
-            links.each { link ->
-                def p = Plugin.get(link.tagRef)
-                if (p) pluginMap[tag.name] << p 
-            }
-            pluginMap[tag.name].sort { it.title }
-        }
+        def pluginMap = pluginListCache?.get("fullPluginList")?.value
+		if(!pluginMap) {
+			pluginMap = [:]
+	        Tag.list(sort:'name', cache:true).each { tag ->
+	            pluginMap[tag.name] = []
+	            def links = TagLink.findByTagAndType(tag, 'plugin', [cache:true]) 
+
+				if(links) {
+					pluginMap[tag.name] = Plugin.withCriteria {
+						inList 'id', links*.tagRef
+						cache true
+					}				
+				}
+	            pluginMap[tag.name].sort { it.title }
+	        }
+			
+			pluginListCache.put new Element("fullPluginList", pluginMap)
+		}
+
         // remove empty tags
         pluginMap = pluginMap.findAll { it.value.size() }
         def taggedIds = TagLink.withCriteria {
@@ -101,8 +116,9 @@ class PluginController extends BaseWikiController {
             projections {
                 distinct('tagRef')
             }
+			cache true
         }
-        pluginMap.untagged = Plugin.findAllByIdNotInList(taggedIds)
+        pluginMap.untagged = Plugin.findAllByIdNotInList(taggedIds, [cache:true])
         render view:'listPlugins', model:[pluginMap: pluginMap]
     }
 
@@ -199,7 +215,7 @@ class PluginController extends BaseWikiController {
 
          def feedOutput = {
 
-            def top5 = Plugin.listOrderByLastUpdated(order:'desc', max:5)
+            def top5 = Plugin.listOrderByLastUpdated(order:'desc', max:5, cache:true)
             title = "Grails New Plugins Feed"
             link = "http://grails.org/Plugins"
             description = "New and recently updated Grails Plugins"
@@ -256,7 +272,7 @@ class PluginController extends BaseWikiController {
     }
 
     def showComment = {
-        def link = CommentLink.findByCommentAndType(Comment.get(params.id), 'plugin')
+        def link = CommentLink.findByCommentAndType(Comment.get(params.id), 'plugin', [cache:true])
         def plugin = Plugin.get(link.commentRef)
         redirect(action:'show', params:[name:plugin.name], fragment:"comment_${params.id}")
     }
@@ -266,10 +282,10 @@ class PluginController extends BaseWikiController {
     }
 
     private def byTitle(params) {
-        Plugin.findByTitle(params.title.replaceAll('\\+', ' '))
+        Plugin.findByTitle(params.title.replaceAll('\\+', ' '), [cache:true])
     }
 
     private def byName(params) {
-        Plugin.findByName(params.name)
+        Plugin.findByName(params.name, [cache:true])
     }
 }

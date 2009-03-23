@@ -18,6 +18,7 @@ import org.radeox.filter.*
 import org.radeox.util.Encoder
 import org.springframework.beans.BeanWrapperImpl
 import java.lang.reflect.Field
+import java.util.concurrent.*
 
 /**
 * @author Graeme Rocher
@@ -93,7 +94,7 @@ class GrailsWikiEngine extends BaseRenderEngine implements WikiRenderEngine{
         field.set(this, filterPipe)
     }
 
-    
+
     public boolean exists(String name) {
         if(name.startsWith('#')) {
             // its an anchor link
@@ -110,7 +111,8 @@ class GrailsWikiEngine extends BaseRenderEngine implements WikiRenderEngine{
                 name = name[0..name.indexOf('#')-1]
             }
 
-            WikiPage page = WikiPage.findByTitle(name)
+
+            WikiPage page = WikiPage.findByTitle(name, [cache:true])
 
             return page != null
         }
