@@ -19,6 +19,7 @@ import org.radeox.util.Encoder
 import org.springframework.beans.BeanWrapperImpl
 import java.lang.reflect.Field
 import java.util.concurrent.*
+import grails.util.Environment
 
 /**
 * @author Graeme Rocher
@@ -111,8 +112,10 @@ class GrailsWikiEngine extends BaseRenderEngine implements WikiRenderEngine{
                 name = name[0..name.indexOf('#')-1]
             }
 
-
-            WikiPage page = WikiPage.findByTitle(name, [cache:true])
+		
+            WikiPage page =  Environment.current == Environment.PRODUCTION ?
+ 								  WikiPage.findByTitle(name, [cache:true]) :
+								  WikiPage.findByTitle(name)
 
             return page != null
         }
