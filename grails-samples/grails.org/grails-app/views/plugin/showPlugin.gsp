@@ -52,7 +52,8 @@
                     <tr>
                         <th>Current Release</th>
                         <td>${plugin.currentRelease}</td>
-                        <td colspan='2'><a href="${plugin.documentationUrl}">Official Docs</a></td>
+                        <td><a href="${plugin.documentationUrl}">Official Docs</a></td>
+                        <td><a href="${fisheye}">Fisheye</a></td>
                     </tr>
                     <tr>
                         <th>Built on Grails</th>

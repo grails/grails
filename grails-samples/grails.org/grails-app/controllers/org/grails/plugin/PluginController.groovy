@@ -133,8 +133,10 @@ class PluginController extends BaseWikiController {
             userRating = plugin.userRating(request.user)
         }
 
+        def fisheye = plugin.downloadUrl ? "${ConfigurationHolder.config.plugins.fisheye}/grails-${plugin.name}" : ''
+
         // TODO: figure out why plugin.ratings.size() is always 1
-        render view:'showPlugin', model:[plugin:plugin, userRating: userRating]
+        render view:'showPlugin', model:[plugin:plugin, userRating: userRating, fisheye: fisheye]
     }
 
     def editPlugin = {
