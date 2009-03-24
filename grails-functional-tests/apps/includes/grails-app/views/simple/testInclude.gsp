@@ -1,0 +1,1 @@
+<g:include controller="simple" action="index" params="[foo:'bar']"></g:include>

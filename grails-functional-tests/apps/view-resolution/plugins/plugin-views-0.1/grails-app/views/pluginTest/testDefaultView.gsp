@@ -1,0 +1,1 @@
+plugin default = ${foo}
