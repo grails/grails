@@ -22,8 +22,6 @@ Version:  02 Feb 2008
 
 	address { font-style: normal; } /* de-italicize address */
 
-	body { opacity: 0.99999; /* to solve the firefox mac overweight font issue */ }
-
 /* global style elements 													
 ------------------------------------------------------- */
 

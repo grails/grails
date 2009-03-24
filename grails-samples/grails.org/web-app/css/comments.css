@@ -71,3 +71,7 @@ li.odd {
 #postBoxTrigger:hover {
     text-decoration: underline;
 }
+
+.commentBody .code {
+    width: 500px;
+}
