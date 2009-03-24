@@ -156,4 +156,21 @@ class PluginService {
             plugin."$propName" = master."$propName"
         }
     }
+
+    def resolvePossiblePlugin(wiki) {
+        // WikiPages that are actually components of a Plugin should be treated as a Plugin
+        if (wiki.title.matches(/(${Plugin.WIKIS.join('|')})-[0-9]*/)) {
+            // we're returning the actual parent Plugin object instead of the WikiPage, but we'll make the body
+            // of the WikiPage available on this Plugin object so the view can render it as if it were a real
+            // WikiPage by calling on the 'body' attributed
+            def plugin = Plugin.read(wiki.title.split('-')[1].toLong())
+            if (!plugin) {
+                log.warn "There should be a plugin with id ${wiki.title.split('-')[1]} to match WikiPage ${wiki.title}, but there is not."
+                return null
+            }
+            plugin.metaClass.getBody = { -> wiki.body }
+            return plugin
+        }
+        wiki
+    }
 }

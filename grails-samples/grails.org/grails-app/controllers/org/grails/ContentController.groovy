@@ -13,6 +13,7 @@ import org.grails.content.Content
 
 class ContentController extends BaseWikiController {
 
+    def pluginService
     def textCache
     
     static accessControl = {
@@ -30,20 +31,7 @@ class ContentController extends BaseWikiController {
 		if(params.q) {
 			def searchResult = WikiPage.search(params.q, offset: params.offset, escape:true)
             def filtered = searchResult.results.unique { it.title }.collect {
-                // WikiPages that are actually components of a Plugin should be treated as a Plugin
-                if (it.title.matches(/(${Plugin.WIKIS.join('|')})-[0-9]*/)) {
-                    // we're returning the actual parent Plugin object instead of the WikiPage, but we'll make the body
-                    // of the WikiPage available on this Plugin object so the view can render it as if it were a real
-                    // WikiPage by calling on the 'body' attributed
-                    def plugin = Plugin.read(it.title.split('-')[1].toLong())
-                    if (!plugin) {
-                        log.warn "There should be a plugin with id ${it.title.split('-')[1]} to match WikiPage ${it.title}, but there is not."
-                        return null
-                    }
-                    plugin.metaClass.getBody = { -> it.body }
-                    return plugin
-                }
-                it
+                pluginService.resolvePossiblePlugin(it)
             }.findAll {it} // gets rid of nulls
 			searchResult.results = filtered
 			searchResult.total = filtered.size()
@@ -207,6 +195,8 @@ class ContentController extends BaseWikiController {
                 WikiPage page = WikiPage.findByTitle(params.id.decodeURL())
                 if(!page) {
                     page = new WikiPage(params)
+                    println 'is it locked?'
+                    if (page.locked == null) page.locked = false
                     page.save()
                     if(page.hasErrors()) {
                         render(view:"createWikiPage", model:[pageName:params.id, wikiPage:page])

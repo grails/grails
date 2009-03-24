@@ -16,5 +16,6 @@ class Content implements Serializable, Commentable {
 	static constraints = {
 		title(blank:false)
 		body(blank:true)
+        locked(nullable:true)
 	}
 }

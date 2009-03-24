@@ -20,6 +20,18 @@ class PluginServiceUnitTests extends grails.test.GrailsUnitTestCase {
         }
     }
 
+    void testResolvePossiblePlugin() {
+        def desc = new WikiPage(title:'description-23')
+        def plugin = new Plugin(id:23, description:desc)
+
+        mockDomain(Plugin, [plugin])
+
+        def result = service.resolvePossiblePlugin(new WikiPage(title:'stuff'))
+        assertTrue "WikiPage should have resolved to a WikiPage", result instanceof WikiPage
+        result = service.resolvePossiblePlugin(desc)
+        assertSame "Plugin WikiPage should have resolved to a Plugin", plugin, result
+    }
+
     void testGenerateMasterPlugins() {
         URL.metaClass.constructor = { path ->
             [text:org.grails.plugin.xml.PluginsListXmlMock.PLUGINS_LIST]
