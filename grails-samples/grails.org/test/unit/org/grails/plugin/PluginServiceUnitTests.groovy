@@ -100,17 +100,6 @@ class PluginServiceUnitTests extends grails.test.GrailsUnitTestCase {
         assertEquals "Master plugins were not saved", 26, mockPluginList.size()
     }
     
-    void testTranslateMasterPlugins_DoesntAddPluginThatExists_WhenNameIsNull() {
-        def mockPluginList = [new Plugin(title: 'Plugin A Plugin')]
-        mockDomain(Plugin, mockPluginList)
-        mockDomain(WikiPage)
-        mockDomain(Version)
-
-        service.translateMasterPlugins(generateMockMasterPluginList())
-        // there are 26 masters, and one existing that should have been updated, so 26 total
-        assertEquals "Master plugins were not saved", 26, mockPluginList.size()
-    }
-    
     void testUpdatePlugin() {
         mockDomain(Plugin)
         mockDomain(WikiPage)

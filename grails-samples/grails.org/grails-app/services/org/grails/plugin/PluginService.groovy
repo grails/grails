@@ -54,16 +54,6 @@ class PluginService {
     def translateMasterPlugins(masters) {
         masters.each { master ->
             def plugin = Plugin.findByName(master.name)
-            // try by title
-            if (!plugin) {
-                plugin = Plugin.findByTitleLike(master.title)
-                //except 'Functional Testing', which is unfortunately named
-                if (master.title == 'Functional Testing') plugin = null
-            }
-            // try by title matching name
-            if (!plugin) {
-                plugin = Plugin.findByNameLikeAndTitleLike('fix-this-%', "%${master.name}%")
-            }
 
             if (!plugin) {
                 // injecting a unique wiki page name for description

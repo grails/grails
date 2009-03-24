@@ -46,13 +46,14 @@ class Plugin implements Taggable, Commentable, Rateable {
     static transients = ['avgRating','official']
 
     static constraints = {
-        description(nullable: true)
-        installation(nullable: true)
-        faq(nullable: true)
-        screenshots(nullable: true)
-        author(nullable: true)
-        grailsVersion(nullable:true, blank:true, maxLength:16)
-        lastReleased(nullable:true)
+        name unique: true
+        description nullable: true
+        installation nullable: true
+        faq nullable: true
+        screenshots nullable: true
+        author nullable: true
+        grailsVersion nullable:true, blank:true, maxLength:16
+        lastReleased nullable:true
     }
 
     static mapping = {
