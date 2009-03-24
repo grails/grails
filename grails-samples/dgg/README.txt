@@ -1,4 +1,4 @@
-The Definitive Guide to Grails - 2nd Edition
+The Definitive Guide To Grails - 2nd Edition
 --------------------------------------------
 
 This document describes how to get the sample code for "The Definitive Guide to Grails - 2nd Edition" (Apress). The sample application models an online music store called gTunes and is organized by chapter, with each directory related to a single chapter (eg. Chapter01). You will need to the following software installed before you can use the samples:
