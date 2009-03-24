@@ -1,2 +1,0 @@
-Although Grails [controllers|guide:controllers] support fine grained interceptors, these are only really useful when applied to a few controllers and become difficult to manage with larger applications. Filters on the other hand can be applied across a whole group of controllers, a URI space or a to a specific action. Filters are far easier to plug-in and maintain completely separately to your main controller logic and are useful for all sorts of cross cutting concerns such as security, logging, and so on.
-

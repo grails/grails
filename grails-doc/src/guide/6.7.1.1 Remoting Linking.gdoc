@@ -1,7 +1,0 @@
-Remote content can be loaded in a number of ways, the most commons way is through the [remoteLink|tags] tag. This tag allows the creation of HTML anchor tags that perform an asynchronous request and optionally set the response in an element. The simplest way to create a remote link is as follows:
-
-{code:xml}
-<g:remoteLink action="delete" id="1">Delete Book</g:remoteLink>
-{code}
-
-The above link sends an asynchronous request to the @delete@ action of the current controller with an id of @1@. 

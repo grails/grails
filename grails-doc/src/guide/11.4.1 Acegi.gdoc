@@ -1,3 +1,0 @@
-The Acegi Plug-in is built on the "Spring Acegi":http://www.acegisecurity.org/ project which provides a flexible, extensible framework for building all sorts of authentication and authorization schemes.
-
-The Acegi plug-in requires you to specify a mapping between URIs and roles and provides a default domain model to model people, authorities and request maps. See the "documentation on the wiki":http://grails.org/AcegiSecurity+Plugin for more information.

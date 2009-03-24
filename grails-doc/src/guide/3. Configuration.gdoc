@@ -1,5 +1,0 @@
-It may seem odd that in a framework that embraces "convention-over-configuration" that we tackle this topic now, but since what configuration there is typically a one off, it is best to get it out the way.
-
-With Grails' default settings you can actually develop and application without doing any configuration whatsoever. Grails ships with an embedded container and in-memory HSQLDB meaning there isn't even a database to set-up.
-
-However, typically you want to set-up a real database at some point and the way you do that is described in the following section.
