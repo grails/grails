@@ -40,4 +40,13 @@ class PluginTests extends GrailsUnitTestCase {
             )
         assertTrue plugin.validate()
     }
+
+    void testIsNewerThan() {
+        def p = new Plugin(currentRelease:'1.0.1')
+        p.pluginService = new PluginService()
+        assertTrue p.isNewerThan('1.0')
+        assertTrue p.isNewerThan('1.1-SNAPSHOT')
+        assertFalse p.isNewerThan('1.1')
+        assertFalse p.isNewerThan('1.0.2')
+    }
 }

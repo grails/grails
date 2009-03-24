@@ -32,6 +32,21 @@ class PluginServiceUnitTests extends grails.test.GrailsUnitTestCase {
         assertSame "Plugin WikiPage should have resolved to a Plugin", plugin, result
     }
 
+    void testCompareVersions() {
+        assertEquals "1.0.3 should be > 1.0.2", 1, service.compareVersions('1.0.3', '1.0.2')
+        assertEquals "1.0.3 should be < 1.1", -1, service.compareVersions('1.0.3', '1.1')
+        assertEquals "1.3 should be > 1.0.1", 1, service.compareVersions('1.3', '1.0.1')
+        assertEquals "1.0.3 should be > 1.1-SNAPSHOT", 1, service.compareVersions('1.0.3', '1.1-SNAPSHOT')
+
+        assertEquals "1.1 should be > 1.0.4", 1, service.compareVersions('1.1', '1.0.4')
+        assertEquals "1.1 should be < 1.1.1", -1, service.compareVersions('1.1', '1.1.1')
+        assertEquals "1.1 should be > 1.1.1-SNAPSHOT", 1, service.compareVersions('1.1', '1.1.1-SNAPSHOT')
+
+        assertEquals "1.0.4 should be < 1.1", -1, service.compareVersions('1.0.4', '1.1')
+        assertEquals "1.1.1 should be > 1.1", 1, service.compareVersions('1.1.1', '1.1')
+        assertEquals "1.1.1-SNAPSHOT should be < 1.1", -1, service.compareVersions('1.1.1-SNAPSHOT', '1.1')
+    }
+
     void testGenerateMasterPlugins() {
         URL.metaClass.constructor = { path ->
             [text:org.grails.plugin.xml.PluginsListXmlMock.PLUGINS_LIST]

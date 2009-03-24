@@ -28,7 +28,6 @@ class CommentLinkController {
             }
             idEq(params.id.toLong())
         }
-        println "criteria comment: $comment.id"
         if(comment) {
             try {
                 // TODO: CommentLink belongsTo Comment, so I should only need to call delete() on the comment here, but

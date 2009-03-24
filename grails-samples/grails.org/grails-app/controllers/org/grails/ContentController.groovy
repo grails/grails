@@ -195,7 +195,6 @@ class ContentController extends BaseWikiController {
                 WikiPage page = WikiPage.findByTitle(params.id.decodeURL())
                 if(!page) {
                     page = new WikiPage(params)
-                    println 'is it locked?'
                     if (page.locked == null) page.locked = false
                     page.save()
                     if(page.hasErrors()) {

@@ -96,6 +96,8 @@ class PluginService {
                     master."$wiki" = new WikiPage(title:"$wiki-${master.id}", body:'')
                     assert master."$wiki".save()
                 }
+                // give an initial release date of now
+                master.lastReleased = new Date()
                 // save new master plugin
                 if (!master.save()) {
                     log.error "Could not save master plugin: $master.name ($master.title), version $master.currentRelease"
@@ -175,5 +177,61 @@ class PluginService {
             return plugin
         }
         wiki
+    }
+
+    def compareVersions(v1, v2) {
+        def v1Num = new PluginVersion(version:v1)
+        def v2Num = new PluginVersion(version:v2)
+        v1Num.compareTo(v2Num)
+    }
+
+}
+
+class PluginVersion implements Comparable {
+
+    String[] version
+    String tag
+
+    public void setVersion(versionString) {
+        def split = versionString.split(/[-|_]/)
+        version = split[0].split(/\./)
+        tag = split.size() > 1 ? split[1] : ''
+    }
+
+    public int compareTo(Object o) {
+        def result = null
+        version.eachWithIndex { versionElem, i ->
+            // skip if we've already found a result in a previous index
+            if (result != null) return
+
+            // if this version is a snapshot, the other is always greater
+            if (tag) {
+                result = -1
+                return
+            }
+            
+            // if the other is a snapshot, this version is always greater
+            if (o.tag) {
+                result = 1
+                return
+            }
+
+            // make other version 0 if there really is no placeholder for it
+            def otherVersion = (o.version.size() == i) ? 0 : o.version[i]
+            if (versionElem > otherVersion) {
+                result = 1
+                return
+            }
+            if (versionElem < otherVersion) {
+                result = -1
+                return
+            }
+        }
+        // if the comparison is equal at this point, and there are more elements on the other version, then that version
+        // will be greater because it has another digit on it
+        if (result == null && o.version.size() > version.size()) {
+            result = -1
+        }
+        result
     }
 }

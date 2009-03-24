@@ -42,11 +42,11 @@ class PluginController extends BaseWikiController {
             tagCounts[tagName] = tagCounts[tagName] ? (tagCounts[tagName] + count) : count
         }
 
+        def ratingsComparator = new PluginComparator()
         def popularPlugins = Plugin.list(cache:true).findAll {
             it.ratings.size() >= PORTAL_MIN_RATINGS
-        }.sort {
-            it.averageRating
-        }.reverse()
+        }.sort(ratingsComparator).reverse()
+
         // only the first few
         if (popularPlugins.size()) {
             popularPlugins = popularPlugins[0..(popularPlugins.size() < PORTAL_MAX_RESULTS ? popularPlugins.size() - 1 : PORTAL_MAX_RESULTS - 1)]
@@ -141,7 +141,7 @@ class PluginController extends BaseWikiController {
         def plugin = Plugin.get(params.id)
         if(plugin) {
             if(request.method == 'POST') {
-                if (params.currentRelease && plugin.currentRelease != params.currentRelease) {
+                if (!plugin.isNewerThan(params.currentRelease)) {
                     plugin.lastReleased = new Date();
                 }
                 // update plugin
@@ -287,5 +287,17 @@ class PluginController extends BaseWikiController {
 
     private def byName(params) {
         Plugin.findByName(params.name, [cache:true])
+    }
+}
+
+// sorts by averageRating, then number of votes
+class PluginComparator implements Comparator {
+    public int compare(Object o1, Object o2) {
+        if (o1.averageRating > o2.averageRating) return 1
+        if (o1.averageRating < o2.averageRating) return -1
+        // averateRatings are same, so use number of votes
+        if (o1.ratings.size() > o2.ratings.size()) return 1
+        if (o1.ratings.size() < o2.ratings.size()) return -1
+        return 0
     }
 }

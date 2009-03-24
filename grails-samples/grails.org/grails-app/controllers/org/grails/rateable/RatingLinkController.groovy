@@ -17,7 +17,6 @@ class RatingLinkController {
         list.each {
             // only ratings on plugins at the moment...
             def plugin = Plugin.get(it.ratingRef)
-            println plugin
             it.metaClass.getPlugin = { -> plugin }
         }
         [ ratingLinks: list, total: RatingLink.count() ]

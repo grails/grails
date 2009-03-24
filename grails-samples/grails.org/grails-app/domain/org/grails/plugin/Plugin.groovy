@@ -12,6 +12,7 @@ class Plugin implements Taggable, Commentable, Rateable {
     static final def WIKIS = ['installation','description','faq','screenshots']
 
     def cacheService
+    def pluginService
     
     String name
     String title
@@ -64,6 +65,10 @@ class Plugin implements Taggable, Commentable, Rateable {
 
     def onAddComment = { comment ->
         cacheService.flushWikiCache()
+    }
+
+    def isNewerThan(version) {
+        pluginService.compareVersions(currentRelease, version) > 0
     }
 
     String toString() {
