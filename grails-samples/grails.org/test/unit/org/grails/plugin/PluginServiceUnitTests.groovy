@@ -156,20 +156,6 @@ class PluginServiceUnitTests extends grails.test.GrailsUnitTestCase {
     }
 
     void testUpdateCurrentRelease_AlsoUpdatesLastReleasedDate() {
-//        mockDomain(Plugin)
-//        mockDomain(WikiPage)
-//        mockDomain(Version)
-//
-//        def master = generateMockMasterPluginList()
-//        def plugin = new Plugin(
-//            name: 'plugin-a',
-//            description: new WikiPage(title:'Description', body:'old description'),
-//            currentRelease: '5.0.1',
-//            lastReleased: null
-//        )
-//        service.updatePlugin(plugin, master[0])
-
-
         mockDomain(Plugin)
         mockDomain(WikiPage)
 

@@ -25,18 +25,21 @@ class PluginService {
 
         plugins.plugin.inject([]) { pluginsList, pxml ->
             if (!pxml.release.size()) return pluginsList
-            def latestRelease = pxml.release[pxml.release.size()-1]
+            def latestRelease = pxml.@'latest-release'
+            def latestReleaseNode = pxml.release.find { releaseNode ->
+                releaseNode.@version == latestRelease
+            }
             def p = new Plugin()
             p.with {
                 name = pxml.@name
                 grailsVersion = pxml.@grailsVersion
-                title = latestRelease.title.toString() ?: pxml.@name
-                description = new WikiPage(body:latestRelease.description.toString() ?: '')
-                author = latestRelease.author
-                authorEmail = latestRelease.authorEmail
-                documentationUrl = replaceOldDocsWithNewIfNecessary(latestRelease.documentation, name)
-                downloadUrl = latestRelease.file
-                currentRelease = latestRelease.@version
+                title = latestReleaseNode.title.toString() ?: pxml.@name
+                description = new WikiPage(body:latestReleaseNode.description.toString() ?: '')
+                author = latestReleaseNode.author
+                authorEmail = latestReleaseNode.authorEmail
+                documentationUrl = replaceOldDocsWithNewIfNecessary(latestReleaseNode.documentation, name)
+                downloadUrl = latestReleaseNode.file
+                currentRelease = latestRelease
             }
 
             pluginsList << p

@@ -119,6 +119,21 @@ class PluginsListXmlMock {
                 <documentation>http://github.com/RobertFischer/autobase/wikis</documentation>
                 <file>http://plugins.grails.org/grails-autobase/tags/RELEASE_0_8_1/grails-autobase-0.8.1.zip</file>
             </release>
+            <release tag="trunk" type="svn" version="0.8.2-SNAPSHOT">
+                <title>Automate your database work as much as possible</title>
+                <author>Robert Fischer</author>
+                <authorEmail>robert.fischer@smokejumperit.com</authorEmail>
+                <description>This plugin marries the established Liquibase core with Grails development processes in order
+                    to to minimze the amount of database code you have to think about.
+
+                    The approach to this plugin is to leave the database update mode ("hbm2ddl.auto" value) as "update", and
+                    to manage alterations to the database schema through checking in changesets to a folder. The changesets
+                    are made up of Liquibase's many "refactorings":
+                    http://www.liquibase.org/manual/home#available_database_refactorings
+                </description>
+                <documentation>http://github.com/RobertFischer/autobase/wikis</documentation>
+                <file>http://plugins.grails.org/grails-autobase/tags/RELEASE_0_8_2-SNAPSHOT/grails-autobase-0.8.2-SNAPSHOT.zip</file>
+            </release>
         </plugin>
         <plugin name="autorest"/>
         <plugin latest-release="0.3" name="avatar" grailsVersion="1.1 > *">
