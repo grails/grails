@@ -103,9 +103,9 @@ class UserController {
                 this.jsecSecurityManager.login(authToken)
                 if(params.originalURI) {
                     // get rid of the login stuff before passing along params
-                    params.remove('login')
-                    params.remove('password')
-                    params.remove('Submit')
+                    params.remove 'login'
+                    params.remove 'password'
+                    params.remove 'Submit'
                     def uri = params.remove('originalURI')
                     redirect(url:"${uri}${params.toQueryString()}")
                 } else {
@@ -113,17 +113,20 @@ class UserController {
                 }
             } catch (AuthenticationException ex){
                 if(request.xhr) {
-                    render(template:"loginForm", model:[originalURI:params.originalURI,
+                    params.remove 'password'
+                    render(template:"loginForm", model:[originalURI:params.remove('originalURI'),
+                                                        update: params.update,
                                                         formData:params,
                                                         async:true,
                                                         message:"auth.invalid.login"])
                 } else {
                     flash.message = "Invalid username and/or password"
+
                     redirect(action: 'login', params: [ username: params.username, originalURI:params.originalURI ])
                 }
             }
         } else {            
-            render(view:"login")
+            render(view:"login", model: [originalURI:params.originalURI])
         }
     }
 
