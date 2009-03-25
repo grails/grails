@@ -10,6 +10,7 @@ import org.grails.rateable.Rateable
 class Plugin implements Taggable, Commentable, Rateable {
 
     static final def WIKIS = ['installation','description','faq','screenshots']
+    static final def VERSION_PATTERN = /^(\d{1,}(\.\d+)*)(-\w*$)?/
 
     def cacheService
     def pluginService
@@ -54,6 +55,7 @@ class Plugin implements Taggable, Commentable, Rateable {
         author nullable: true
         grailsVersion nullable:true, blank:true, maxLength:16
         lastReleased nullable:true
+        currentRelease matches: VERSION_PATTERN
     }
 
     static mapping = {

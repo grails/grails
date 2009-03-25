@@ -143,6 +143,11 @@ class PluginController extends BaseWikiController {
         def plugin = Plugin.get(params.id)
         if(plugin) {
             if(request.method == 'POST') {
+                // update plugin
+                plugin.properties = params
+                if (!plugin.validate()) {
+                    return render(view:'editPlugin', model: [plugin:plugin])
+                }
                 if (!plugin.isNewerThan(params.currentRelease)) {
                     plugin.lastReleased = new Date();
                 }

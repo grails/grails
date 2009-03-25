@@ -9,8 +9,8 @@ import org.grails.content.Version
 import org.grails.plugin.Plugin
 
 class MailerJob {
-    def startDelay = 6000
-    def timeout = 60000     // execute job every minute
+    def startDelay = 60000
+    def timeout =    60000     // execute job every minute
 
     ContentAlertStack contentToMessage
     def mailService

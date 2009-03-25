@@ -136,7 +136,7 @@ class PluginsListXmlMock {
             </release>
         </plugin>
         <plugin name="autorest"/>
-        <plugin latest-release="0.3" name="avatar" grailsVersion="1.1 > *">
+        <plugin latest-release="0.3" name="avatar">
             <release tag="RELEASE_0_3" type="svn" version="0.3">
                 <title>Grails Avatar Plugin</title>
                 <author>Domingo Suarez Torres</author>
