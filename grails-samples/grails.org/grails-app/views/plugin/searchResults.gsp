@@ -67,18 +67,18 @@
                                 <td>${result.currentRelease}</td>
                             </tr>
 
-                            <tr>
-                                <th>Rating</th>
-                                <td>
-                                    <g:render template="ratingDisplay" var="average" bean="${result.averageRating}"/>
-                                </td>
-                                <th>Tags</th>
-                                <td>
-                                    <span id='pluginTags'>
-                                        <g:render template='tags' model="[plugin:result, disabled:true]"/>
-                                    </span>
-                                </td>
-                            </tr>
+                            %{--<tr>--}%
+                                %{--<th>Rating</th>--}%
+                                %{--<td>--}%
+                                    %{--<g:render template="ratingDisplay" var="average" bean="${result.averageRating}"/>--}%
+                                %{--</td>--}%
+                                %{--<th>Tags</th>--}%
+                                %{--<td>--}%
+                                    %{--<span id='pluginTags'>--}%
+                                        %{--<g:render template='tags' model="[plugin:result, disabled:true]"/>--}%
+                                    %{--</span>--}%
+                                %{--</td>--}%
+                            %{--</tr>--}%
                         </table>
 
                         <g:set var="desc"><g:if test="${result.description.body?.size() > 220}"><wiki:text>${result.description.body[0..220]}</wiki:text>...</g:if>
