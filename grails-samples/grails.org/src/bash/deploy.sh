@@ -24,11 +24,11 @@ sourceLoc="$sourceRoot/apps/$url"
 echo "sourceLoc is $sourceLoc"
 currentDir=`pwd`
 
+cd $sourceRoot/apps/grails
+echo "git pull..."
+git pull
+
 cd $sourceLoc
-
-echo "Updating SVN..."
-
-svn update
 
 echo "Packaging grails war in $sourceLoc ..."
 grails clean
