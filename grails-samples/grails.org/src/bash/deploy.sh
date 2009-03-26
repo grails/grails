@@ -2,6 +2,7 @@
 
 name='site'
 appName='grails'
+prevVersion='3.1'
 version='3.2'
 url='grails.org'
 sourceRoot='/home/grails-j2ee'
@@ -39,9 +40,13 @@ newFolder=$name-$version-$cdtDate
 echo "Creating new deployment to folder: $newFolder..."
 warFolder=$deployLoc/$newFolder/exploded_war
 mkdir -p $warFolder
+chown -R www-j2ee:www-j2ee $deployLoc/$newFolder
 cd $warFolder
 echo "Exploding war..."
 jar xf $sourceLoc/*.war
+
+echo "Copying over images from previous version..."
+cp $deployLoc/$name-$prevVersion/exploded_war/images/* $deployLoc/$newFolder/images
 
 echo "Replacing current directory..."
 cd $deployLoc
