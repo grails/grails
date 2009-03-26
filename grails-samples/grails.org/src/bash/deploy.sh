@@ -6,16 +6,11 @@ prevVersion='3.1'
 version='3.2'
 url='grails.org'
 sourceRoot='/home/grails-j2ee'
-environment='prod'
 deployDir='beta'
 
 if [ "$1" ]
 then
-    environment="$1"
-fi
-if [ $environment == "prod" ];
-then
-    deployDir='www'
+    deployDir="$1"
 fi
 
 deployLoc="/opt/j2ee/domains/$url/$deployDir/webapps/$appName"
@@ -31,22 +26,23 @@ git pull
 cd $sourceLoc
 
 echo "Packaging grails war in $sourceLoc ..."
-grails clean
-rm *.war
-grails prod war
+# ~/grails-1.1/bin/grails clean
+# rm *.war
+# ~/grails-1.1/bin/grails prod war
 
 cdtDate=`TZ=CST date +"%Y%m%d-%H%M"`
 newFolder=$name-$version-$cdtDate
 echo "Creating new deployment to folder: $newFolder..."
 warFolder=$deployLoc/$newFolder/exploded_war
 mkdir -p $warFolder
+
 chown -R www-j2ee:www-j2ee $deployLoc/$newFolder
 cd $warFolder
 echo "Exploding war..."
 jar xf $sourceLoc/*.war
 
 echo "Copying over images from previous version..."
-cp $deployLoc/$name-$prevVersion/exploded_war/images/* $deployLoc/$newFolder/images
+cp $deployLoc/$name-$prevVersion/exploded_war/images/* $deployLoc/$newFolder/exploded_war/images
 
 echo "Replacing current directory..."
 cd $deployLoc
