@@ -25,17 +25,16 @@
         <ul>
             <g:each var='plugin' in="${tagMap.value}">
                 <li>
-                    <g:if test="${plugin.name.startsWith('fix-this-')}">
-                        <g:link action="show" params="${[name:plugin.name]}">${plugin.title}</g:link> (RENAME ME!)
-                    </g:if>
-                    <g:else>
-                        <g:link action="show" params="${[name:plugin.name]}">${plugin.title}</g:link>
-                    </g:else>
+                    <g:link action="show" params="${[name:plugin.name]}">${plugin.title}</g:link>
+                    <g:if test="${plugin.name.startsWith('fix-this-')}"> (RENAME ME!)</g:if>
+                    <g:if test="${plugin.official}"> *</g:if>
                 </li>
             </g:each>
         </ul>
         <a href='#top'>Top</a>
     </g:each>
+
+    <p>* Supported by SpringSource</p>
 
 </div>
 </body>
