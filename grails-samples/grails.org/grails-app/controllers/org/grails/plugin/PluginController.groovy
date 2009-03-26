@@ -95,8 +95,8 @@ class PluginController extends BaseWikiController {
 			pluginMap = [:]
 	        Tag.list(sort:'name', cache:true).each { tag ->
 	            pluginMap[tag.name] = []
-	            def links = TagLink.findByTagAndType(tag, 'plugin', [cache:true]) 
-
+	            def links = TagLink.findAllByTagAndType(tag, 'plugin', [cache:true]) 
+                println "$tag.name has ${links.size()} plugins"
 				if(links) {
 					pluginMap[tag.name] = Plugin.withCriteria {
 						inList 'id', links*.tagRef
