@@ -223,6 +223,11 @@ strong {
 	font-size: 0.95em;
 }
 
+/* no image links should have underlines */
+a.imgLink {
+    border: none;
+}
+
 #partners {
 	position: relative;
 	top: -70px;
@@ -444,3 +449,7 @@ a:visited.actionIcon img {
 	margin-top:2px;
 }
 
+/* hiding blog authors because there are so many */
+.blogAuthors {
+    display: none;
+}
