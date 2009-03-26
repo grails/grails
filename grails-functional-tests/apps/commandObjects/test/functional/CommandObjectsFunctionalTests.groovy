@@ -9,12 +9,22 @@ class CommandObjectsFunctionalTests extends functionaltestplugin.FunctionalTestC
         get('/test/testCommand?name=fred&age=45&x=23&y=343')
         assertStatus 200
         assertContentContains 'name: fred, age:45'		
+
+        get('/test/testCommand?name=fred&age=45&name.x=23&name.y=343')
+        assertStatus 200
+        assertContentContains 'name: fred, age:45'		
+
 	}
 	
 	void testCommandObjectsWithNestedObject() {
-        get('/test/testCommand?name=fred&age=45&x=23&y=343&nested.value=test')
+        get('/test/testCommandWithNestedValues?name=fred&age=45&x=23&y=343&nested.value=test')
         assertStatus 200
         assertContentContains 'name: fred, age: 45, nested.value: test'		
+
+        get('/test/testCommandWithNestedValues?name=fred&age=45&x=23&y=343&nested.value=test&nested.x=345')
+        assertStatus 200
+        assertContentContains 'name: fred, age: 45, nested.value: test'		
+
 	}	
 	
 }

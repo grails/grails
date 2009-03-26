@@ -5,6 +5,11 @@ class TestController {
 	def testCommand = { TestCommand cmd ->
 		render "name: ${cmd.name.value}, age:${cmd.age}"
 	}
+	
+	def testCommandWithNestedValues = { TestCommand cmd ->
+		render "name: ${cmd.name.value}, age:${cmd.age}, nested.value: ${cmd.nested.value}"
+	}
+	
 }
 
 class TestCommand {
