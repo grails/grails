@@ -40,4 +40,12 @@ class ErrorsController {
 		[books:results]
 	}
 	
+	def redirectAction = {
+		redirect(action:"pageNotFound")
+	}
+	
+	def pageNotFound = {
+		render "not there"
+	}
+	
 }
