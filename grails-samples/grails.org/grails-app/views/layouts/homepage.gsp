@@ -111,7 +111,7 @@
 		<a href="Tutorials"><img src="images/bs-medallions-tutorials.png" width="53" height="53" alt="Bs Medallions Tutorials" /></a>
 		<h5><a href="Tutorials">Tutorials &amp; Screencasts</a></h5>
 		View "official" and user-created <a href="Tutorials">tutorials</a> and
-		<a href="Grails+Screencasts">screencasts</a> designed to provide an overview
+		<g:link controller="screencast" action="list">screencasts</g:link> designed to provide an overview
 		of Grails or bring you up to speed on specific
 		features.
 		</li>
