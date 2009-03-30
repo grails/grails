@@ -1,33 +1,5 @@
 <project name="grails-docs" default="dist">
 
-    <taskdef name="svn" classname="org.tigris.subversion.svnant.SvnTask" >
-        <classpath>
-            <fileset dir="lib" includes="*.jar" />
-        </classpath>
-    </taskdef>
-
-    <target name="grails-check">
-        <condition property="has.grails">
-            <available file="checkout/grails" />
-        </condition>
-    </target>
-
-    <target name="grails-update" if="has.grails" depends="grails-check">
-        <echo>Updating Grails</echo>
-        <svn>
-            <update dir="checkout/grails" />
-        </svn>
-    </target>
-
-    <target name="grails-checkout" unless="has.grails" depends="grails-update">
-        <echo>Checking out Grails</echo>
-        <mkdir dir="checkout/grails" />
-        <svn>
-            <checkout url="https://svn.codehaus.org/grails/branches/GRAILS_1_1/" destPath="checkout/grails" />
-        </svn>
-        <property name="has.grails" value="true"/>
-    </target>
-
     <target name="grails-javadoc" 
             description="Generate most current javadoc for Grails">
         <ant dir="../grails" target="jar" />
@@ -40,8 +12,6 @@
     </target>
 
     <property environment="env" />
-
-
 
     <target name="clean" description="Delete output">
         <delete dir="output" />
@@ -95,6 +65,5 @@
         </delete>
         <zip destfile="dist/grails-docs-${grails.version}.zip" basedir="output"/>
     </target>
-
 
 </project>
