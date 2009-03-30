@@ -28,14 +28,14 @@
         <property name="has.grails" value="true"/>
     </target>
 
-    <target name="grails-javadoc" depends="grails-checkout" if="has.grails"
+    <target name="grails-javadoc" 
             description="Generate most current javadoc for Grails">
-        <ant dir="checkout/grails" target="jar" />
-        <ant dir="checkout/grails" target="javadoc" />
+        <ant dir="../grails" target="jar" />
+        <ant dir="../grails" target="javadoc" />
 
         <mkdir dir="output" />
         <copy todir="output" failonerror="false">
-            <fileset dir="checkout/grails/doc" />
+            <fileset dir="../grails/doc" />
         </copy>
     </target>
 
@@ -50,15 +50,14 @@
     <target name="distclean" depends="clean"
             description="Delete everything generated and retrieved">
         <delete dir="bin" />
-        <delete dir="checkout" />
         <delete dir="dist" />
     </target>
 
-    <target name="docs" depends="grails-check" if="has.grails"
+    <target name="docs"
             description="Generate the Grails Guide and Reference docs">
         <taskdef name="groovyc"  classname="org.codehaus.groovy.ant.Groovyc">
             <classpath>
-                <fileset dir="checkout/grails/lib" includes="*.jar"  />
+                <fileset dir="../grails/lib" includes="*.jar"  />
                 <fileset dir="lib" />
                 <pathelement location="bin" />
             </classpath>
@@ -69,7 +68,7 @@
         <copy todir="bin" file="resources/log4j.properties"/>
         <groovyc srcdir="src/groovy" destdir="bin">
             <classpath>
-                <fileset dir="checkout/grails/lib" includes="*.jar"  />
+                <fileset dir="../grails/lib" includes="*.jar"  />
                 <fileset dir="lib" />
                 <pathelement location="bin" />
             </classpath>
@@ -79,7 +78,7 @@
         <java classname="groovy.ui.GroovyMain" failonerror="true">
             <arg value="Generate" />
             <classpath>
-                <fileset dir="checkout/grails/lib" includes="*.jar"  />
+                <fileset dir="../grails/lib" includes="*.jar"  />
                 <fileset dir="lib" />
                 <pathelement location="bin" />
             </classpath>
@@ -88,7 +87,7 @@
 
     <target name="dist" depends="grails-javadoc,docs"
             description="Build documentation and create a zip for distibution">
-        <property file="checkout/grails/build.properties"/>
+        <property file="../grails/build.properties"/>
 
         <mkdir dir="dist" />
         <delete failonerror="false">

@@ -32,7 +32,7 @@ class DocEngine extends BaseRenderEngine implements WikiRenderEngine {
     static {
 	   def ant = new AntBuilder()
 	   ant.property(environment:"env")       
-	   GRAILS_HOME = "./checkout/grails"
+	   GRAILS_HOME = "../grails"
 	   new File("./resources/doc.properties").withInputStream {
 			def props = new Properties()
 			props.load(it)
