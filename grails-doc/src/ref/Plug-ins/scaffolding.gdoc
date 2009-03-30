@@ -16,7 +16,7 @@ class BookController {
 
 h2. Description
 
-Refer to the section on [Scaffolding|guide:i18n] in the Grails user guide which details how Grails' scaffolding support works.
+Refer to the section on [Scaffolding|guide:scaffolding] in the Grails user guide which details how Grails' scaffolding support works.
 
 
 
