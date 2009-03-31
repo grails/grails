@@ -5,7 +5,7 @@ import org.grails.doc.DocEngine;
 
 def ant = new AntBuilder()
 
-GRAILS_HOME = "checkout/grails"
+GRAILS_HOME = "../grails"
 CONTEXT_PATH = DocEngine.CONTEXT_PATH
 SOURCE_FILE = DocEngine.SOURCE_FILE
 

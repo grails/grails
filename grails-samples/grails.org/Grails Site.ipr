@@ -244,7 +244,7 @@
   </component>
   <component name="ProjectFileVersion" converted="true" />
   <component name="ProjectKey">
-    <option name="state" value="https://svn.codehaus.org/grails/trunk/grails-samples/grails.org/Grails%20Site.ipr" />
+    <option name="state" value="project:///Users/rhyolight/dev/grails/grails/grails-samples/grails.org/Grails Site.ipr" />
   </component>
   <component name="ProjectModuleManager">
     <modules>
@@ -313,8 +313,7 @@
     </option>
   </component>
   <component name="VcsDirectoryMappings">
-    <mapping directory="" vcs="" />
-    <mapping directory="$PROJECT_DIR$" vcs="svn" />
+    <mapping directory="" vcs="Git" />
   </component>
   <component name="WebServicesPlugin" addRequiredLibraries="true" />
   <component name="libraryTable">

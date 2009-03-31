@@ -32,7 +32,7 @@ class PluginService {
             def p = new Plugin()
             p.with {
                 name = pxml.@name
-                grailsVersion = pxml.@grailsVersion
+                grailsVersion = (latestReleaseNode.documentation.toString().startsWith('http://grails.org') ? getGrailsVersion(p) : '')
                 title = latestReleaseNode.title.toString() ?: pxml.@name
                 description = new WikiPage(body:latestReleaseNode.description.toString() ?: '')
                 author = latestReleaseNode.author
@@ -175,6 +175,15 @@ class PluginService {
         v1Num.compareTo(v2Num)
     }
 
+    def getGrailsVersion(plugin) {
+        def xmlLoc = "${ConfigurationHolder.config?.plugins?.location}/grails-${plugin.name}/tags/LATEST_RELEASE/plugin.xml"
+        def xmlUrl = new URL(xmlLoc)
+        def xmlText = xmlUrl.text
+
+        def pluginXml = new XmlSlurper().parseText(xmlText)
+        pluginXml.@grailsVersion.toString()
+    }
+
 }
 
 class PluginVersion implements Comparable {
@@ -194,20 +203,21 @@ class PluginVersion implements Comparable {
             // skip if we've already found a result in a previous index
             if (result != null) return
 
-            // if this version is a snapshot, the other is always greater
-            if (tag) {
+            // if this version is a snapshot and the other is not, the other is always greater
+            if (tag && !o.tag) {
                 result = -1
                 return
             }
             
-            // if the other is a snapshot, this version is always greater
-            if (o.tag) {
+            // if the other is a snapshot and this is not, this version is always greater
+            if (o.tag && !tag) {
                 result = 1
                 return
             }
 
             // make other version 0 if there really is no placeholder for it
             def otherVersion = (o.version.size() == i) ? 0 : o.version[i]
+
             if (versionElem > otherVersion) {
                 result = 1
                 return
@@ -218,9 +228,10 @@ class PluginVersion implements Comparable {
             }
         }
         // if the comparison is equal at this point, and there are more elements on the other version, then that version
-        // will be greater because it has another digit on it
-        if (result == null && o.version.size() > version.size()) {
-            result = -1
+        // will be greater because it has another digit on it, otherwise the two really are equal
+        if (result == null) {
+            if (o.version.size() > version.size()) result = -1
+            else result = 0
         }
         result
     }

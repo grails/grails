@@ -36,7 +36,7 @@
     <tags:cloud
             type='plugin'
             minSize='8'
-            maxSize='40'
+            maxSize='44'
             class='pluginTagCloud'
             linkClass='tagLink'
             controller='plugin'

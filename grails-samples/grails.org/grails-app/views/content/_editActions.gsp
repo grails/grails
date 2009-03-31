@@ -40,5 +40,8 @@
                 <span>View Info</span>
             </g:remoteLink>
         </li>
+        <li>
+            <g:render template='/common/wikiSyntaxLink'/>
+        </li>
     </ul>
 </div>

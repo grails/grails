@@ -7,16 +7,16 @@
     <g:set var="formBody">
         <div  class="inputForm">
             <p>
-                 <span class="label"><label for="login">Username:</label></span> <g:textField class="textInput" name="login" />
+                 <span class="label"><label for="login">Username:</label></span> <g:textField class="textInput" name="login" value="${formData?.login}"/>
              </p>
              <p>
                  <span class="label"><label for="password">Password:</label></span> <g:field type="password" name="password" />
              </p>
 
         </div>
-        <g:hiddenField name="originalURI" value="${originalURI ?: params.originalURI}" />
+        <g:hiddenField name="originalURI" value="${originalURI ?: formData?.originalURI}" />
         <g:each in="${formData}" var="d">
-           	<g:if test="${!(d.value instanceof Map)}">
+           	<g:if test="${!(d.value instanceof Map) && d.key != 'login'}">
                 <g:hiddenField name="${d.key}" value="${d.value}" />
             </g:if>
         </g:each>

@@ -91,4 +91,11 @@ class ErrorHandlingFunctionalTests extends functionaltestplugin.FunctionalTestCa
 		assertContentContains '[books:Book.findAllByRubbish(&quot;yes&quot;)]'		
 		
 	}
+	
+	void test404ErrorWithRedirect() {
+		get('/errors/bad')
+		// 200 due to the client side redirect
+        assertStatus 200		
+        assertContentContains 'not there'		
+	}
 }

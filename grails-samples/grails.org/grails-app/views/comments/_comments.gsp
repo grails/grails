@@ -51,7 +51,7 @@
                             YAHOO.util.Dom.get('comment').value = '';
                         };
                     </script>
-                    <p class='tip'>You may use wiki text.</p>
+                    <p class='tip'>You may use wiki text. <g:render template='/common/wikiSyntaxLink'/></p>
                     <g:formRemote name='commentForm' url="[controller: commentType, action:'postComment', id:parentId]" update="nextComment" onComplete="handleComment()">
                         <textarea id='comment' name='comment' value=''></textarea>
                         <br/>

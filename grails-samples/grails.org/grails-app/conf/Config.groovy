@@ -14,6 +14,7 @@ wiki.supported.upload.types = ['image/png','image/jpg','image/jpeg','image/gif']
 // location of plugins-list.xml
 plugins.pluginslist = "http://plugins.grails.org/.plugin-meta/plugins-list.xml"
 plugins.fisheye = "http://fisheye.codehaus.org/browse/grails-plugins"
+plugins.location = "http://plugins.grails.org"
 
 grails.mime.file.extensions = false // enables the parsing of file extensions from URLs into the request format
 grails.mime.types = [ html: ['text/html','application/xhtml+xml'],

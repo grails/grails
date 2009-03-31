@@ -13,11 +13,32 @@ class PluginTests extends GrailsUnitTestCase {
         mockDomain(Plugin)
     }
 
-    void testTitleIsUnique() {
-        def plugin = new Plugin(title:'plugin1', body:'body1')
+    void testCurrentReleaseValidation() {
+        def releaseMap = [
+                '1.1': true,
+                '1.4.6': true,
+                '6.34.667.1': true,
+                '2.5-SNAPSHOT': true,
+                'steve':false,
+                '2.steve.5': false,
+                '.3.4.5': false
+        ]
 
-        plugin = new Plugin(title:'plugin1', body:'body1')
-        assertFalse 'should not allow duplicate titles', plugin.validate()
+        releaseMap.each { version, expected ->
+            println "$version $expected"
+            def plugin = new Plugin(
+                name:'plugin1',
+                title: 'stuff',
+                authorEmail: 'email', documentationUrl: '', downloadUrl: '',
+                currentRelease: version
+            )
+            def result = plugin.validate()
+            if (!result) {
+                plugin.errors.allErrors.each { println it }
+            }
+            println "result $result"
+            assertEquals "$version was ${(expected ? '' : 'not ')}expected to validate.", expected, result
+        }
     }
 
     void testTitleConstraintIsLessStringent() {

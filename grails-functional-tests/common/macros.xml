@@ -10,10 +10,6 @@
     	<attribute name="failonerror" default="false"/>
         <attribute name="serverPort" default="${default.port}"/>
         <sequential>
-            <!-- If the "ci.bamboo" property is set, we need to pass it to Grails. -->
-            <condition property="bambooArgs" value="-Dci.bamboo=1" else="">
-                <isset property="ci.bamboo"/>
-            </condition>
 
             <echo message="Executing: grails @{command} @{args}"/>
             <exec executable="${grailsCmd.absolute}" dir="@{dir}" resultproperty="testResult_@{resultID}" failonerror="@{failonerror}">
@@ -22,7 +18,6 @@
                 <arg value="-Dgrails.work.dir=${basedir}/work-global"/>
                 <arg value="-Dgrails.project.work.dir=work"/>
                 <arg value="-Dgrails.project.plugins.dir=plugins"/>
-                <arg line="${bambooArgs}"/>
                 <arg value="@{environment}"/>
                 <arg value="@{command}"/>
                 <arg value="--non-interactive"/>

@@ -1,5 +1,6 @@
 package org.grails.plugin
 
+import org.codehaus.groovy.grails.commons.ConfigurationHolder
 import org.grails.wiki.WikiPage
 import org.grails.content.Version
 import org.grails.auth.User
@@ -33,24 +34,28 @@ class PluginServiceUnitTests extends grails.test.GrailsUnitTestCase {
     }
 
     void testCompareVersions() {
+        assertEquals "1.0.3 should be == 1.0.3", 0, service.compareVersions('1.0.3', '1.0.3')
         assertEquals "1.0.3 should be > 1.0.2", 1, service.compareVersions('1.0.3', '1.0.2')
         assertEquals "1.0.3 should be < 1.1", -1, service.compareVersions('1.0.3', '1.1')
         assertEquals "1.3 should be > 1.0.1", 1, service.compareVersions('1.3', '1.0.1')
-        assertEquals "1.0.3 should be > 1.1-SNAPSHOT", 1, service.compareVersions('1.0.3', '1.1-SNAPSHOT')
-
+        assertEquals "1.0.3 should be > 1.1-SNAPSHOT",          1, service.compareVersions('1.0.3', '1.1-SNAPSHOT')
+        assertEquals "1.1-SNAPSHOT should be == 1.1-SNAPSHOT",  0, service.compareVersions('1.1-SNAPSHOT', '1.1-SNAPSHOT')
         assertEquals "1.1 should be > 1.0.4", 1, service.compareVersions('1.1', '1.0.4')
         assertEquals "1.1 should be < 1.1.1", -1, service.compareVersions('1.1', '1.1.1')
         assertEquals "1.1 should be > 1.1.1-SNAPSHOT", 1, service.compareVersions('1.1', '1.1.1-SNAPSHOT')
-
         assertEquals "1.0.4 should be < 1.1", -1, service.compareVersions('1.0.4', '1.1')
         assertEquals "1.1.1 should be > 1.1", 1, service.compareVersions('1.1.1', '1.1')
         assertEquals "1.1.1-SNAPSHOT should be < 1.1", -1, service.compareVersions('1.1.1-SNAPSHOT', '1.1')
+        assertEquals "0.1 should be == 0.1", 0, service.compareVersions('0.1', '0.1')
     }
 
     void testGenerateMasterPlugins() {
+        def urlConstructor
         URL.metaClass.constructor = { path ->
             [text:org.grails.plugin.xml.PluginsListXmlMock.PLUGINS_LIST]
         }
+
+        service.metaClass.getGrailsVersion = { p -> 'mockGrailsVersion' }
 
         def plugins = service.generateMasterPlugins()
         
@@ -74,7 +79,7 @@ class PluginServiceUnitTests extends grails.test.GrailsUnitTestCase {
 
         def avatar = plugins[1]
         // ensure the grailsVersion got in
-        assertEquals '1.1 > *', avatar.grailsVersion
+        assertEquals 'mockGrailsVersion', avatar.grailsVersion
         // ensure the docs got translated to the new site framework
         assertEquals 'http://grails.org/plugin/avatar', avatar.documentationUrl
     }
@@ -195,7 +200,12 @@ class PluginServiceUnitTests extends grails.test.GrailsUnitTestCase {
         assertTrue 'Master plugins were not translated', translated
     }
 
-
+    void testReadPluginXml_AndGetGrailsVersion() {
+        URL.metaClass.constructor = { path ->
+            [text:org.grails.plugin.xml.PluginCommentableXmlMock.XML]
+        }
+        assertEquals '1.1 > *', service.getGrailsVersion(new Plugin(name:'commentable'))
+    }
 
     private def generateMockMasterPluginList() {
         ('a'..'z').inject([]) {masterList, x ->

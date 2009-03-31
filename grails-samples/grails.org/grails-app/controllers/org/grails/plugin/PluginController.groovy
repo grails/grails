@@ -95,8 +95,7 @@ class PluginController extends BaseWikiController {
 			pluginMap = [:]
 	        Tag.list(sort:'name', cache:true).each { tag ->
 	            pluginMap[tag.name] = []
-	            def links = TagLink.findByTagAndType(tag, 'plugin', [cache:true]) 
-
+	            def links = TagLink.findAllByTagAndType(tag, 'plugin', [cache:true]) 
 				if(links) {
 					pluginMap[tag.name] = Plugin.withCriteria {
 						inList 'id', links*.tagRef
@@ -143,6 +142,11 @@ class PluginController extends BaseWikiController {
         def plugin = Plugin.get(params.id)
         if(plugin) {
             if(request.method == 'POST') {
+                // update plugin
+                plugin.properties = params
+                if (!plugin.validate()) {
+                    return render(view:'editPlugin', model: [plugin:plugin])
+                }
                 if (!plugin.isNewerThan(params.currentRelease)) {
                     plugin.lastReleased = new Date();
                 }
