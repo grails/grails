@@ -41,7 +41,7 @@ environments {
         grails.serverURL = "http://www.changeme.com"
     }
     test {
-        grails.serverURL = "http://localhost:8080/${appName}"
+        grails.serverURL = "http://www.changeme.com"
     }
 }
 
