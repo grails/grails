@@ -2,8 +2,6 @@
                                                                 
     <property environment="env"/>
     <property name="checkoutDir" location="apps"/>
-    <property name="app.checkout.url" value="http://svn.codehaus.org/grails/branches/GRAILS_FUNCTIONAL_TESTS_1_1/apps/"/>
-    <property name="grails.checkout.url" value="http://svn.codehaus.org/grails/branches/GRAILS_1_1"/>
 	
     <property name="newWebApp" value="myTestWebApp"/>
     <property name="target" value="target"/>
@@ -15,28 +13,11 @@
 
     <import file="./common/macros.xml" />
 
-    <taskdef name="svn" classname="org.tigris.subversion.svnant.SvnTask" classpathref="classpath"/>
     <taskdef name="groovy" classname="org.codehaus.groovy.ant.Groovy" classpathref="classpath"/>
 
     <target name="init">
-        <!--
-            If -Duse.grails.home is specified, GRAILS_HOME will be svn updated and used
-            Else, if checkout/grails exists it will svn update unless -Dforce.checkout is set
-            Else, grails will check out to checkout/grails and be used
-        -->
         <groovy>
-            if (properties['use.grails.home']) {
-                ant.property(name:"grails.home", value:properties['env.GRAILS_HOME'])
-                properties['dont.checkout.grails'] = "true"
-            } else {
-                ant.property(name:"grails.home", location:"checkout/grails")
-                if (properties['force.checkout']) {
-                    ant.delete(dir:properties['grails.home'], failonerror:"false")
-                }
-                if (new File(properties['grails.home']).exists()) {
-                    properties['dont.checkout.grails'] = "true"
-                }
-            }
+            ant.property(name:"grails.home", location:"../grails")
         </groovy>
 
 		<condition property="grailsCmd" value="grails.bat" else="grails">
@@ -46,29 +27,8 @@
 
     </target>
 
-
-
-    <target name="-get-grails" depends="-checkout-grails,-update-grails"/>
-
-    <target name="-checkout-grails" unless="dont.checkout.grails">
-        <echo>Checking out Grails</echo>
-        <property name="checked.out.grails" value="true"/>
-        <delete dir="${grails.home}"/>
-        <svn>
-            <checkout url="${grails.checkout.url}" destPath="${grails.home}"/>
-        </svn>
-    </target>
-
-    <target name="-update-grails" unless="checked.out.grails">
-        <echo>Updating Grails</echo>
-        <svn>
-            <update dir="${grails.home}" />
-        </svn>
-    </target>
-
     <target name="-build-grails">
-		<echo>GRAILS_HOME=${grails.home}</echo>
-
+        <echo>GRAILS_HOME=${grails.home}</echo>
         <ant dir="${grails.home}" antfile="build.xml" target="jar">
             <property name="skipTests" value="true"/>
             <property name="skipExamples" value="true"/>
@@ -77,14 +37,14 @@
 
     <target name="functional-test"
             description="Runs functional tests for one or more test applications from SVN"
-            depends="clean-reports,init,-get-grails,-build-grails,-testsWithNewApp">
+            depends="clean-reports,init,-build-grails,-testsWithNewApp">
 
         <mkdir dir="reports" />
         <antcall target="-functional-test-apps" />
         <antcall target="-functional-test-scripts" />
     </target>
 
-    <target name="run-test-scripts" depends="clean-reports,init,-get-grails,-build-grails">
+    <target name="run-test-scripts" depends="clean-reports,init">
         <antcall target="-functional-test-scripts" />
     </target>
 
@@ -119,33 +79,10 @@
 			try {
 		           def outcomes = []
 		           def failure = false
+                   def grailsInvocationCounter = 0
+                   new File('apps').eachDir { appDir ->
+		               properties.projectName = appDir.name
 
-		           // Collate the app names
-		           def listPage = new URL(properties['app.checkout.url']).text
-		           def appNames = []
-		           listPage.eachMatch(/>(\w.*)\/</) {
-		               if (it[1] != "..") {
-		                   appNames << it[1]
-		                   println "Test will include application ${it[1]}"
-		               }
-		           }
-
-		           def grailsInvocationCounter = 0
-
-		           appNames.each() {
-
-		               properties.projectName = it
-
-                       def appDir = new File("${properties.checkoutDir}/${properties.projectName}")
-		               if (appDir.exists()) {
-		                   ant.antcall(target:"-update-app") {
-		                       param(name:"projectName", value:properties.projectName)
-		                   }
-		               } else {
-		                   ant.antcall(target:"-checkout-app") {
-		                       param(name:"projectName", value:properties.projectName)
-		                   }
-		               }
 
                        // Clear any existing webtest and functional test plugins.
                        ant.echo message: "Delete existing webtest/functional test plugins"
@@ -271,13 +208,6 @@
 	</target>
 
     <target name="clean" depends="clean-reports">
-        <delete failonerror="false">
-            <fileset dir="${checkoutDir}">
-                <include name="*" />
-                <exclude name=".svn" />
-            </fileset>
-        </delete>
-        <delete dir="checkout/grails" failonerror="false"/>
         <delete dir="reports" failonerror="false"/>
         <delete dir="target" failonerror="false"/>
         <delete dir="work-global" failonerror="false"/>
@@ -286,28 +216,4 @@
 	<target name="clean-reports">
 		<delete dir="reports" failonerror="false"/>
 	</target>
-
-    <target name="-checkout-app">
-        <echo>Checking out functional test application from :${app.checkout.url}${projectName}</echo>
-
-        <antcall target="-checkout-app-head"/>
-    </target>
-
-    <target name="-update-app">
-        <echo>Updating local copy of functional test application from :${app.checkout.url}${projectName}</echo>
-
-        <antcall target="-update-app-head"/>
-    </target>
-
-    <target name="-checkout-app-head">
-        <svn>
-            <checkout url="${app.checkout.url}${projectName}" destPath="${checkoutDir}/${projectName}"/>
-        </svn>
-    </target>
-
-    <target name="-update-app-head">
-        <svn>
-            <update dir="${checkoutDir}/${projectName}"/>
-        </svn>
-    </target>
 </project>
