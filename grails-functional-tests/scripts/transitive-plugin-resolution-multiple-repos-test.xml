@@ -10,6 +10,7 @@
     <import file="../common/macros.xml" />
 
     <target name="test-transitive-plugin-resolution-multiple-repos">
+<!-- TODO - uncomment
         <property name="project.dir" value="target/scripts/test-multi-repos"/>
         <delete dir="${project.dir}" />
         <mkdir dir="target/scripts" />
@@ -45,5 +46,6 @@ grails.plugin.repos.distribution.myRepository="https://svn.codehaus.org/grails/t
                 <touch file="${project.dir}/.kill-run-app"/>
             </sequential>
 		</parallel>
+-->
     </target>
 </project>
