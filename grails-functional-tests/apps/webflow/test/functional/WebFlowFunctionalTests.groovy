@@ -12,4 +12,18 @@ class WebFlowFunctionalTests extends functionaltestplugin.FunctionalTestCase {
         assertContentContains 'Flow Ended'
 		
     }
+
+	void testFlowDependencyInjection() {
+        get('/testFlow/second')
+        assertStatus 200
+        assertContentContains '<title>Test Flow</title>'
+
+		form("testForm") {
+			click "_eventId_go"
+		}
+		
+        assertStatus 200
+        assertContentContains 'Flow Ended'
+		
+	}
 }
