@@ -1,6 +1,5 @@
 class PluginViewsFunctionalTests extends functionaltestplugin.FunctionalTestCase {
     void testInPlacePluginView() {
-/* TODO - uncomment
         // Here call get(uri) or post(uri) to start the session
         // and then use the custom assertXXXX calls etc to check the response
         //
@@ -17,6 +16,5 @@ class PluginViewsFunctionalTests extends functionaltestplugin.FunctionalTestCase
         assertNotNull byXPath("//a[text() = 'Execute SQL']")
         assertTitle "Database Dump"
         assertContentContains "<h1>Display Data</h1>" 
-*/
     }
 }
