@@ -70,13 +70,9 @@ class DynamicScaffoldingTest extends grails.util.WebTest {
             // page and limiting the maximum number of cars it shows so
             // that the "next" link is displayed.
             //
-            // This test doesn't work with Bamboo.
-/* TODO - uncomment
-            if (System.getProperty("ci.bamboo") == null) {
-                invoke url: "car/list?max=2"
-                verifyText "Nächste"
-            }
-*/
+            invoke url: "car/list?max=2"
+            verifyText "Nächste"
+
             // Set language back to English.
             invoke url: "car/list?lang=en"
         }
