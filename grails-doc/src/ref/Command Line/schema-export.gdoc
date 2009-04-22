@@ -26,4 +26,4 @@ Arguments:
 * @environment@ - The environment containing the database configuration to use (dev, prod, etc...).
 * @action@ - Either 'generate' or 'export'.  The default is 'generate'.
 * @stdout@ - Passing 'stdout' will cause the script to dump the ddl to stdout.
-* @filename@ - The name of the file to write the ddl to.  The default is sql.ddl in the project root.
+* @filename@ - The name of the file to write the ddl to.  The default is ddl.sql in the project root.
