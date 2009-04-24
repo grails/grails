@@ -17,7 +17,10 @@ class WikiTagLib implements ApplicationContextAware  {
     static namespace = 'wiki'
 
     CacheService cacheService
+	def wikiPageService
     ApplicationContext applicationContext
+
+	
 
     def preview = { attrs, body ->
         def engine = applicationContext.getBean('wikiEngine')
@@ -48,7 +51,13 @@ class WikiTagLib implements ApplicationContextAware  {
             def engine = applicationContext.getBean('wikiEngine')
             def context = applicationContext.getBean('wikiContext')
 
-            def content = body()
+            def content 
+			if(attrs.page) {
+ 				content = wikiPageService?.getCachedOrReal(attrs.page)?.body ?: ""
+			}
+			else {
+				content  = body()
+			}
             def text = engine.render(content.trim(), context)
             if(attrs.key) {
                 cacheService.putWikiText(attrs.key, text)

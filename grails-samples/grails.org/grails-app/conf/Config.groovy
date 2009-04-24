@@ -43,6 +43,7 @@ grails.enable.native2ascii = true
 environments {
     production {
         grails.serverURL = "http://www.grails.org"
+		grails.screencasts.upload.directory = "/var/www/domains/grails.org/www/htdocs/dist/screencasts"
     }
     test {
         grails.serverURL = "http://www.grails.org"
@@ -61,16 +62,15 @@ blog.author.evaluator= {
 
 // log4j configuration
 log4j = {
+
     error  'org.codehaus.groovy.grails.web.servlet',  //  controllers
 	       'org.codehaus.groovy.grails.web.pages', //  GSP
 	       'org.codehaus.groovy.grails.web.sitemesh', //  layouts
-	       'org.codehaus.groovy.grails."web.mapping.filter', // URL mapping
-	       'org.codehaus.groovy.grails."web.mapping', // URL mapping
 	       'org.codehaus.groovy.grails.commons', // core / classloading
 	       'org.codehaus.groovy.grails.plugins', // plugins
 	       'org.codehaus.groovy.grails.orm.hibernate', // hibernate integration
 	       'org.springframework',
 	       'org.hibernate'
-
+	
     warn   'org.mortbay.log'
 }

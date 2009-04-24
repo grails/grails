@@ -33,14 +33,7 @@
 
     <g:render template="searchBar"/>
 
-    <tags:cloud
-            type='plugin'
-            minSize='8'
-            maxSize='44'
-            class='pluginTagCloud'
-            linkClass='tagLink'
-            controller='plugin'
-            action='showTag'/>
+
 
     <table id="statsTable">
         <tbody>
@@ -57,6 +50,15 @@
         </tr>
         </tbody>
     </table>
+
+    <tags:cloud
+            type='plugin'
+            minSize='8'
+            maxSize='44'
+            class='pluginTagCloud'
+            linkClass='tagLink'
+            controller='plugin'
+            action='showTag'/>
 
     <div id="pluginHomeWiki">
         <g:render template="../content/viewActions" model="${[content: homeWiki, update: 'pluginHomeWiki']}"/>

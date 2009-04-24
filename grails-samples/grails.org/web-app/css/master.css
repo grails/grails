@@ -438,8 +438,11 @@ a:visited.actionIcon img {
 .paginateButtons span {
     padding: 2px 3px;
 }
+.newsItem {
+	overflow:none;
+}
 .newsItems .recentEntry{
-	margin-bottom:10px;
+	margin-bottom:5px;
 	margin-top:5px;	
 }
 
