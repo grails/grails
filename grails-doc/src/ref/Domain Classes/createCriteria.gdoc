@@ -93,6 +93,10 @@ neProperty("lastTransaction","firstTransaction")
  *order* | Order the results by a particular property | {code}
 order("holderLastName", "desc")
 {code}       
+ *rlike* | Similar to like, but uses a regex. Only supported on Oracle and MySQL. | {code}
+rlike("holderFirstName",/Steph.+/)
+{code}       
+
  *sizeEq* | Where a collection property's size equals a particular value | {code}
 sizeEq("transactions", 10)
 {code}       
