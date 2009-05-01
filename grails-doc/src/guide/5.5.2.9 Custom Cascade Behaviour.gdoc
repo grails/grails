@@ -25,7 +25,7 @@ class Person {
   String firstName
   static hasMany = [addresses:Address]
   static mapping = {
-      addresses cascade:"all,delete-orphan"
+      addresses cascade:"all-delete-orphan"
   }
 }
 class Address {
