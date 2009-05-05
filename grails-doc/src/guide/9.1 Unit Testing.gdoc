@@ -1,6 +1,6 @@
 Unit testing are tests at the "unit" level. In other words you are testing individual methods or blocks of code without considering for surrounding infrastructure. In Grails you need to be particularity aware of the difference between unit and integration tests because in unit tests Grails *does not* inject any of the dynamic methods present during integration tests and at runtime. 
 
-This makes sense if you consider that the methods injected by Grails typically community with the database (with GORM) or the underlying Servlet engine (with Controllers). 
+This makes sense if you consider that the methods injected by Grails typically communicate with the database (with GORM) or the underlying Servlet engine (with Controllers). 
 For example say you have service like the following in @BookController@:
 
 {code:java}
