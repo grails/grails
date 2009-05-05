@@ -89,7 +89,7 @@
     </target>
     <target name="test-grails">
         <ant dir="../grails" antfile="build.xml" target="clean" />
-        <exec dir="../grails" executable="ant" failonerror="true" osfamily="unix">
+        <exec dir="../grails" executable="/opt/java/tools/ant/current/bin/ant" failonerror="true" osfamily="unix">
             <arg value="-Dgroovy.grails.joint=true"/>
             <arg value="test"/>
         </exec>
