@@ -89,9 +89,16 @@
     </target>
     <target name="test-grails">
         <ant dir="../grails" antfile="build.xml" target="clean" />
-        <ant dir="../grails" antfile="build.xml" target="test">
-            <property name="groovy.grails.joint" value="true"/>
-        </ant>
+        <exec dir="../grails" executable="ant" failonerror="true" osfamily="unix">
+            <arg value="-Dgroovy.grails.joint=true"/>
+            <arg value="test"/>
+        </exec>
+        <exec dir="../grails" command="cmd" failonerror="true" osfamily="windows">
+            <arg value="/c"/>
+            <arg value="ant.bat"/>
+            <arg value="-Dgroovy.grails.joint=true"/>
+            <arg value="test"/>
+        </exec>
     </target>
     <target name="build" depends="build-groovy, replace-jar, test-grails" />
 
