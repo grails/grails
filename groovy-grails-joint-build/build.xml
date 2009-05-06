@@ -1,59 +1,13 @@
 
 <project name="groovy-grails-build" default="build">
 
-    <taskdef name="svn" classname="org.tigris.subversion.svnant.SvnTask" >
-        <classpath>
-            <fileset dir="lib" includes="*.jar" />
-        </classpath>
-    </taskdef>
-
-    <target name="clean">
-        <delete dir="checkout" failonerror="false"/>
-    </target>
-
-    <target name="build-groovy">
-        <condition property="checkout.groovy">
-            <available file="checkout/groovy">
-            </available>
-        </condition>
-        <antcall target="-checkout-groovy" />
-        <antcall target="-update-groovy" />
-        <antcall target="-build-groovy" />
-    </target>
-
-    <property name="groovy.checkout.url" value="http://svn.codehaus.org/groovy/trunk/groovy/groovy-core/"></property>
+    <property name="groovy.checkout.dir" value="../../GROOVY_1_6_X"></property>
 
     <property environment="env" />
 
-    <target name="-checkout-groovy" unless="checkout.groovy">		
-        <echo>Checking out Groovy from :${groovy.checkout.url}</echo>
-
-        <antcall target="-checkout-groovy-head"  />
-        <antcall target="-checkout-specific-groovy" />
-    </target>
-
-    <target name="-checkout-groovy-head" unless="env.GROOVY_CHECKOUT_URL">
-        <svn>
-            <checkout url="${groovy.checkout.url}" destPath="checkout/groovy" />
-        </svn>		
-    </target>
-
-    <target name="-checkout-specific-groovy" if="env.GROOVY_CHECKOUT_URL">
-        <svn>
-            <checkout url="${env.GROOVY_CHECKOUT_URL}" destPath="checkout/groovy" />
-        </svn>		
-    </target>
-
-    <target name="-update-groovy" if="checkout.groovy">
-        <echo>Updating Groovy</echo>
-        <svn>
-            <update dir="checkout/groovy" />
-        </svn>
-    </target>
-
-    <target name="-build-groovy">
-        <ant dir="checkout/groovy" antfile="build.xml" target="clean" />
-        <ant dir="checkout/groovy" antfile="build.xml" target="install">
+    <target name="build-groovy">
+        <ant dir="${groovy.checkout.dir}" antfile="build.xml" target="clean" />
+        <ant dir="${groovy.checkout.dir}" antfile="build.xml" target="install">
             <property name="skipTests" value="true"/>
             <property name="skipExamples" value="true"/>
         </ant>
@@ -64,7 +18,7 @@
             <fileset dir="../grails/lib" includes="groovy-all-*.jar" />
         </delete>
         <copy todir="../grails/lib">
-            <fileset dir="checkout/groovy/target/dist">
+            <fileset dir="${groovy.checkout.dir}/target/dist">
                 <include name="groovy-all-*.jar" />
                 <exclude name="groovy-all-*-sources.jar" />
                 <exclude name="groovy-all-minimal-*.jar" />
@@ -73,7 +27,7 @@
 
 
         <move tofile="../grails/lib/groovy-all-test.jar">
-            <fileset dir="checkout/groovy/target/dist" includes="groovy-all-*.jar" excludes="groovy-all-*-sources.jar, groovy-all-minimal-*.jar"/>
+            <fileset dir="${groovy.checkout.dir}/target/dist" includes="groovy-all-*.jar" excludes="groovy-all-*-sources.jar, groovy-all-minimal-*.jar"/>
         </move>
 
         <taskdef name="groovy" classname="org.codehaus.groovy.ant.Groovy">
@@ -89,9 +43,16 @@
     </target>
     <target name="test-grails">
         <ant dir="../grails" antfile="build.xml" target="clean" />
-        <ant dir="../grails" antfile="build.xml" target="test">
-            <property name="groovy.grails.joint" value="true"/>
-        </ant>
+        <exec dir="../grails" executable="${env.ANT_HOME}/bin/ant" failonerror="true" osfamily="unix">
+            <arg value="-Dgroovy.grails.joint=true"/>
+            <arg value="test"/>
+        </exec>
+        <exec dir="../grails" command="cmd" failonerror="true" osfamily="windows">
+            <arg value="/c"/>
+            <arg value="ant.bat"/>
+            <arg value="-Dgroovy.grails.joint=true"/>
+            <arg value="test"/>
+        </exec>
     </target>
     <target name="build" depends="build-groovy, replace-jar, test-grails" />
 
