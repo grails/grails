@@ -41,23 +41,23 @@ class DynamicScaffoldingTest extends grails.util.WebTest {
             // Check what the list price and MPG look like in a different locale.
             invoke url: "car/list?lang=de"
             clickLink xpath: "//tr[td[2]='Ferrari']/td[1]/a"
-            verifyText "135456,88"
-            verifyText "25,50"
+            verifyText "135.456,88"
+            verifyText "25,5"
 
             // The edit page should also be showing the correctly formatted
             // number.
             clickButton "Edit"
-            verifyText "135456,88"
-            verifyText "25,50"
+            verifyText "135.456,88"
+            verifyText "25,5"
 
             // Make sure we can change the value using the localised form.
-            setInputField name: "listPrice", value: "16000,55"
+            setInputField name: "listPrice", value: "16.000,55"
             setInputField name: "mpg", value: "30,9"
             clickButton "Update"
 
             verifyTitle "Show Car"
-            verifyText "16000,55"
-            verifyText "30,90"
+            verifyText "16.000,55"
+            verifyText "30,9"
 
             clickButton "Delete"
 
