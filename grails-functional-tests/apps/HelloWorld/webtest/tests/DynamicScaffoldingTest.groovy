@@ -22,10 +22,10 @@ class DynamicScaffoldingTest extends grails.util.WebTest {
             clickButton "Create"
 
             verifyText "2020-01-01 12:00:00.0"
-            verifyText "12345"
+            verifyText "12,345"
             verifyText "Ferrari"
-            verifyText "135456.88"
-            verifyText "25.50"
+            verifyText "135,456.88"
+            verifyText "25.5"
             verifyTitle "Show Car"
             clickButton "Edit"
 
@@ -33,7 +33,7 @@ class DynamicScaffoldingTest extends grails.util.WebTest {
             clickButton "Update"
 
             verifyTitle "Show Car"
-            verifyText "54321"
+            verifyText "54,321"
 
             invoke url: "car/list"
             verifyText "Ferrari"
