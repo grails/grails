@@ -9,6 +9,7 @@ h2. Examples
 {code:java}
 grails run-war
 grails run-war -https // with HTTPS
+grails run-war -restart // restarts without rebuilding the war
 grails prod run-war
 grails -Dserver.port=8090 run-war
 {code}
@@ -23,6 +24,7 @@ grails [env]* run-war
 Arguments:
 
 * @https@ - Start an HTTPS server (on port 8443 by default) alongside the main server. Just to be clear, the application will be accessible via HTTPS _and_ HTTP.
+* @restart@ - Does not rebuild an already existing WAR.
 
 Supported system properties:
 
