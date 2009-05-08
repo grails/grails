@@ -31,7 +31,7 @@ class ValidationHandlingFunctionalTests extends functionaltestplugin.FunctionalT
 		assertContentContains "Edit Test"		
 		assertContentContains "Property age must be a valid number"
 		
-        get('/test/show/1')
+        get('/test/show/2')
 		assertStatus 200
 		assertContentContains '<td valign="top" class="value">test</td>'
 		assertContentContains '<td valign="top" class="value">25</td>'		
