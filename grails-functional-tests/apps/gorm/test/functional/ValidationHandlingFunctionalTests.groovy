@@ -10,7 +10,7 @@ class ValidationHandlingFunctionalTests extends functionaltestplugin.FunctionalT
 		}
 		
 		assertStatus 200		
-		assertContentContains "Test 1 created"
+		assertContentContains "Test 2 created"
 		
 		form("navForm") {
 			click "_action_Edit"

@@ -1,0 +1,5 @@
+class Child {
+
+	String name
+
+}
