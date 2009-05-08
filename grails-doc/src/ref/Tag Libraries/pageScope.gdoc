@@ -9,12 +9,13 @@ h2. Examples
 
 {code:java}
 class BookTagLib {
-	def parent = { attrs, body ->
-		pageScope.parent = "John"
-	}
-	def child = { attrs, body ->
-		out << "My parent is ${pageScope.parent}"
-	}
+   def parent = { attrs, body ->
+       pageScope.parent = "John"
+       out << body()
+   }
+   def child = { attrs, body ->
+       out << "My parent is ${pageScope.parent}"
+   }
 }
 {code}
 
