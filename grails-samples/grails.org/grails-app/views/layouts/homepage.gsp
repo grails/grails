@@ -151,7 +151,7 @@
 		<li class="biteSizedLI">
 		<a href="Community"><img src="images/bs-medallion-contribute.png" width="53" height="53" alt="Bs Medallion Contribute" /></a>
 		<h5><a href="Community">Contributing</a></h5>
-		Interesting in advancing the cause? Then
+		Interested in advancing the cause? Then
 		<a href="http://github.com/grails/grails/">get the source</a> and monitor our
 		<a href="http://hudson.grails.org/">continuous integration</a> server. 
 		</li>
