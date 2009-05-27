@@ -254,6 +254,13 @@ public abstract class AbstractGrailsMojo extends AbstractMojo {
         }
     }
 
+    /**
+     * Fetches all the dependencies required by this plugin and returns
+     * them as a set of Artifact instances. This method ensures that the
+     * dependencies are downloaded to the local Maven cache.
+     * @return
+     * @throws MojoExecutionException
+     */
     private Set getGrailsPluginDependencies() throws MojoExecutionException {
         Artifact pluginArtifact = findArtifact(this.project.getPluginArtifacts(), "org.grails", "grails-maven-plugin");
         MavenProject project = null;
@@ -265,7 +272,35 @@ public abstract class AbstractGrailsMojo extends AbstractMojo {
             throw new MojoExecutionException("Failed to get information about Grails Maven Plugin", ex);
         }
 
-        List deps = artifactsByGroupId(dependenciesToArtifacts(project.getDependencies()), "org.grails");
+        // Extract the Grails dependencies from the project. We want
+        // to know what version of Grails to link in.
+        Dependency firstDep = null;
+        for (Iterator iter = this.project.getDependencies().iterator(); iter.hasNext();) {
+            Dependency d = (Dependency) iter.next();
+            if ("org.grails".equals(d.getGroupId())) {
+                firstDep = d;
+                break;
+            }
+        }
+
+        List pluginDeps = project.getDependencies();
+        if (firstDep != null) {
+            String grailsVersion = firstDep.getVersion();
+            getLog().info("Using Grails " + grailsVersion);
+
+            List grailsDeps = new ArrayList();
+            for (Iterator iter = pluginDeps.iterator(); iter.hasNext();) {
+                Dependency d = (Dependency) iter.next();
+                if ("org.grails".equals(d.getGroupId()) && !"grails-maven-archetype".equals(d.getArtifactId())) {
+                    d.setVersion(grailsVersion);
+                    grailsDeps.add(d);
+                }
+            }
+
+            pluginDeps = grailsDeps;
+        }
+
+        List deps = artifactsByGroupId(dependenciesToArtifacts(pluginDeps), "org.grails");
         Set pluginDependencies = new HashSet();
         for (Iterator iter = deps.iterator(); iter.hasNext();) {
             pluginDependencies.addAll(getPluginDependencies((Artifact) iter.next()));
@@ -393,6 +428,13 @@ public abstract class AbstractGrailsMojo extends AbstractMojo {
         return null;
     }
 
+    /**
+     * Examines a collection of artifacts and extracts all those that
+     * have the given group ID.
+     * @param artifacts The collection of artifacts to examine.
+     * @param groupId The group ID of interest.
+     * @return A list of artifacts with the given group ID.
+     */
     private List artifactsByGroupId(Collection artifacts, String groupId) {
         List inGroup = new ArrayList(artifacts.size());
         for (Iterator iter = artifacts.iterator(); iter.hasNext();) {
@@ -405,6 +447,12 @@ public abstract class AbstractGrailsMojo extends AbstractMojo {
         return inGroup;
     }
 
+    /**
+     * Converts a collection of Dependency objects to a list of
+     * corresponding Artifact objects.
+     * @param deps The collection of dependencies to convert.
+     * @return A list of Artifact instances.
+     */
     private List dependenciesToArtifacts(Collection deps) {
         List artifacts = new ArrayList(deps.size());
         for (Iterator iter = deps.iterator(); iter.hasNext();) {
@@ -414,6 +462,12 @@ public abstract class AbstractGrailsMojo extends AbstractMojo {
         return artifacts;
     }
 
+    /**
+     * Uses the injected artifact factory to convert a single Dependency
+     * object into an Artifact instance.
+     * @param dep The dependency to convert.
+     * @return The resulting Artifact.
+     */
     private Artifact dependencyToArtifact(Dependency dep) {
         return this.artifactFactory.createBuildArtifact(
                 dep.getGroupId(),

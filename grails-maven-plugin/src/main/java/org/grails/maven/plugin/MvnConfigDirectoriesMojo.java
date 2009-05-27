@@ -69,6 +69,6 @@ public class MvnConfigDirectoriesMojo extends AbstractGrailsMojo {
         this.project.addTestCompileSourceRoot((new File(projectDir, "test/integration")).getAbsolutePath());
 
         // Change output dir
-        this.project.getModel().getBuild().setOutputDirectory("web-app/WEB-INF/classes");
+//        this.project.getModel().getBuild().setOutputDirectory("web-app/WEB-INF/classes");
     }
 }
