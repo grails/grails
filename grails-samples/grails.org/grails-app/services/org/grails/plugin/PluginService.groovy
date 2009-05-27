@@ -54,7 +54,6 @@ class PluginService {
     def translateMasterPlugins(masters) {
         masters.each { master ->
             def plugin = Plugin.findByName(master.name)
-
             if (!plugin) {
                 // injecting a unique wiki page name for description
                 // pull off the desc so we don't try to save it
@@ -104,15 +103,6 @@ class PluginService {
 
     def updatePlugin(plugin, master) {
         log.info "Updating plugin \"$plugin.name\"..."
-        // handle the wiki page with some care
-        if (master.description?.body && !plugin.description?.body) {
-            plugin.description = master.description
-            plugin.description.title = "description-${plugin.id}"
-            assert plugin.description.save()
-            Version v = plugin.description.createVersion()
-            v.author = User.findByLogin('admin')
-            assert v.save()
-        }
 
         // these attributes are overriden by local plugin domain changes
         updatePluginAttribute('title', plugin, master)
