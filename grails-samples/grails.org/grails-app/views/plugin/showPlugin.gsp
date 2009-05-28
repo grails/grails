@@ -144,11 +144,12 @@
                 <g:each var="wiki" in="${Plugin.WIKIS}">
                     <gui:tab id="${wiki}Tab" label="${wiki[0].toUpperCase() + wiki[1..-1]}" active="${wiki == 'description'}">
                         <g:render template="../content/viewActions" model="${[content: plugin[wiki], update: wiki + 'Tab', editFormName: wiki + 'EditForm']}"/>
-                        <div class='${wiki}, wikiPage'><wiki:text>${plugin."$wiki"}</wiki:text></div>
+                        <div class='${wiki}, wikiPage'><wiki:text page="${plugin[wiki]?.title}" /></div>
                     </gui:tab>
                 </g:each>
             </gui:tabView>
-        </cache:text>
+		</cache:text>
+
 
         <g:render template="../content/previewPane"/>
         
