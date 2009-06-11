@@ -27,23 +27,85 @@
 
 <div id="graphicHeader"></div>
 
+<div id="barDecoration"></div>
 <div id="contentWrapper">
-    <div align="center">
+    <div id="contentCenter" align="center">
         <div id="contentArea">
+            
             <div id="grailsAttributes">
                 <div class="left">
-        	        <h1>Rapid</h1>
+        	        <h2>Rapid</h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ut risus in eros.</p>		
                 </div>
                 <div class="center">
-        			<h1>Dynamic</h1>
+        			<h2>Dynamic</h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ut risus in eros</p>
                 </div>
                 <div class="right">
-        			<h1>Robust</h1>
+        			<h2>Robust</h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ut risus in eros.</p>
                 </div>
             </div>
+            
+            <div id="events">
+                <h3>Events</h3>
+                <ul>
+                    <li>
+                        <h4>June 17-19, 2009</h4>
+                        Groovy and Grails - Belgium, Brussels
+                    </li>
+                    <li>
+                        <h4>June 17-19, 2009</h4>
+                        Groovy and Grails - Belgium, Brussels
+                    </li>
+                    <li>
+                        <h4>June 17-19, 2009</h4>
+                        Groovy and Grails - Belgium, Brussels
+                    </li>
+                    <li>
+                        <h4>June 17-19, 2009</h4>
+                        Groovy and Grails - Belgium, Brussels
+                    </li>
+                </ul>
+            </div>
+            
+            <div id="downloadBox">
+                <div id="download">
+                    <h3>Download Grails v1.1.1</h3>
+                    A short description of what I am downloading and some fluffy text highlighting grails key features.  Should not be longer than this.
+                    <h4>Learn More</h4>
+                </div>
+                <div id="plugins">
+                    <h3>Grails Plugins</h3>
+                    <ul>
+                        <li>Grails Flex Scaffold (GFS)</li>
+                        <li>Grails AppEngine</li>
+                        <li>UIPerformance</li>
+                        <li>FCKEditor</li>
+                    </ul>
+                    <h4>View All</h4>
+                </div>
+            </div>
+            
+            <div id="latestNews"></div>
+            
+            <div id="screencasts"></div>
+            
+            <div id="grailsOptions">
+                <div class="left">
+        	        <h3>Training</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ut risus in eros consectetur feugiat. Fusce elementum convallis porttitor. Nulla facilisi. Morbi at erat felis. Aenean ante nisl, pulvinar nec varius ut, egestas sit amet dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vitae fermentum odio. Quisque quis lacus id dolor rhoncus placerat ut eu odio. Duis nec ipsum est. Proin congue faucibus risus, at blandit libero rutrum at. Vivamus ac laoreet lectus. Nam et nisi est. Aliquam hendrerit tristique lectus sit amet fringilla. Aenean pretium lacus vitae massa bibendum feugiat. Suspendisse a mi mauris. Etiam fermentum lacus nec lectus luctus vitae porta nisl ultrices.</p>		
+                </div>
+                <div class="center">
+        			<h3>Support</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ut risus in eros consectetur feugiat. Fusce elementum convallis porttitor. Nulla facilisi. Morbi at erat felis. Aenean ante nisl, pulvinar nec varius ut, egestas sit amet dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vitae fermentum odio. Quisque quis lacus id dolor rhoncus placerat ut eu odio. Duis nec ipsum est. Proin congue faucibus risus, at blandit libero rutrum at. Vivamus ac laoreet lectus. Nam et nisi est. Aliquam hendrerit tristique lectus sit amet fringilla. Aenean pretium lacus vitae massa bibendum feugiat. Suspendisse a mi mauris. Etiam fermentum lacus nec lectus luctus vitae porta nisl ultrices.</p>
+                </div>
+                <div class="right">
+        			<h3>Services</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ut risus in eros consectetur feugiat. Fusce elementum convallis porttitor. Nulla facilisi. Morbi at erat felis. Aenean ante nisl, pulvinar nec varius ut, egestas sit amet dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vitae fermentum odio. Quisque quis lacus id dolor rhoncus placerat ut eu odio. Duis nec ipsum est. Proin congue faucibus risus, at blandit libero rutrum at. Vivamus ac laoreet lectus. Nam et nisi est. Aliquam hendrerit tristique lectus sit amet fringilla. Aenean pretium lacus vitae massa bibendum feugiat. Suspendisse a mi mauris. Etiam fermentum lacus nec lectus luctus vitae porta nisl ultrices.</p>
+                </div>
+            </div>
+            
         </div>
     </div>
 </div>

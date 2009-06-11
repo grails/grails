@@ -1,7 +1,7 @@
 /*div { background: cyan;}*/
 #springSourceBar {
     height: 60px;
-    margin-left: 200px;
+    margin-left: 180px;
     margin-top: -8px;
     background: url(../../images/new/springsource-logo.png) no-repeat left top;
 }
@@ -17,10 +17,22 @@
     width: 100%;
 }
 
+#barDecoration {
+    position: absolute;
+    width: 129px;
+    height: 86px;
+    top: 557px;
+    left: 140px;
+    background: url(../../images/new/bar_decoration.png) no-repeat top left
+}
+
 #contentArea {
     width: 880px;
     text-align: left;
-    border: solid cyan;
+}
+
+#grailsAttributes {
+    margin-bottom: -260px;
 }
 
 #grailsAttributes div {
@@ -32,17 +44,15 @@
     font-size: 11pt;
 }
 
-#grailsAttributes div h1 {
-    font-size: 18pt;
+#grailsAttributes div h2 {
+    font-size: 16pt;
     text-transform: uppercase;
-    padding-left: 40px;
-    padding-top: 7px;
-    margin-left: 14px;
-    margin-top: 7px;
+    padding: 7px 0px 8px 40px;
+    margin: 7px 0px 10px 14px;
 }
 
 #grailsAttributes div p {
-    font-size: 11pt;
+    font-size: 10pt;
     margin: -10px 0px 0px 25px
 }
 
@@ -50,7 +60,7 @@
     left: 0px;
     top: -20px;
 }
-#grailsAttributes div.left h1 {
+#grailsAttributes div.left h2 {
     background: url(../../images/new/rapid_icon.png) no-repeat top left;
 }
 
@@ -58,7 +68,7 @@
     left: 309px;
     top: -142px;
 }
-#grailsAttributes div.center h1 {
+#grailsAttributes div.center h2 {
     background: url(../../images/new/dynamic_icon.png) no-repeat top left;
 }
 
@@ -66,6 +76,6 @@
     left: 616px;
     top: -264px;
 }
-#grailsAttributes div.right h1 {
+#grailsAttributes div.right h2 {
     background: url(../../images/new/robust_icon.png) no-repeat top left;
 }
