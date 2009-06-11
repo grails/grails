@@ -23,7 +23,15 @@
 
 <div id="springSourceBar"></div>
 
-<div id="mainMenuBar"></div>
+<ul id="mainMenuBar">
+    <li>Products</li>
+    <li>Support and Services</li>
+    <li>SpringSource University</li>
+    <li>News and Events</li>
+    <li>Partners</li>
+    <li>Exchange</li>
+    <li>About Us</li>
+</ul>
 
 <div id="graphicHeader"></div>
 
@@ -87,9 +95,55 @@
                 </div>
             </div>
             
-            <div id="latestNews"></div>
+            <div id="latestNews">
+                <h2>Latest News</h2>
+                <div id="newsBox">
+                    <ul>
+                        <li>
+                            <div class="calendar">
+                                <div class="month">June</div>
+                                <div class="day">01</div>
+                            </div>
+                            <div class="detail">
+                                <h4>AmazonFPS Payments Plugin Released</h4>
+                                <div class="author">by someguy | tag1, tag2, tag3</div>
+                                <div class="comments">2 comments</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="calendar">
+                                <div class="month">June</div>
+                                <div class="day">01</div>
+                            </div>
+                            <div class="detail">
+                                <h4>AmazonFPS Payments Plugin Released</h4>
+                                <div class="author">by someguy | tag1, tag2, tag3</div>
+                                <div class="comments">2 comments</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="calendar">
+                                <div class="month">June</div>
+                                <div class="day">01</div>
+                            </div>
+                            <div class="detail">
+                                <h4>AmazonFPS Payments Plugin Released</h4>
+                                <div class="author">by someguy | tag1, tag2, tag3</div>
+                                <div class="comments">2 comments</div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="actions">Add news | Subscribe</div>
+                </div>
+            </div>
             
-            <div id="screencasts"></div>
+            <div id="screencasts">
+                <h2>Recent Screencasts</h2>
+                <div class="castBox">
+                    <img src="/images/new/play_icon.png"/>
+                </div>
+                <h4>View All</h4>
+            </div>
             
             <div id="grailsOptions">
                 <div class="left">

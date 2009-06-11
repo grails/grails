@@ -6,8 +6,18 @@ body {
 h1, h2, h3, h4, h5, h6 {
     color: #48802C;
 }
+
 #mainMenuBar {
     background: url(../../images/new/topnav_menubar.png) repeat scroll top;
-    height: 31px;
-    width: 100%;
+    height: 24px;
+    margin: 0px;
+    padding: 7px 0px 0px 173px;
+    font-size: 10pt;
+}
+
+#mainMenuBar li {
+    background: url(../../images/new/topnav_menbar_divider.png) no-repeat top left;
+    display: inline;
+    padding: 0px 4px 0px 10px;
+    margin-top: 3px;
 }
