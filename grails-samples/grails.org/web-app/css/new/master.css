@@ -1,0 +1,13 @@
+body {
+    font-family: Lucida Grande;
+    font-size: 12pt;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #48802C;
+}
+#mainMenuBar {
+    background: url(../../images/new/topnav_menubar.png) repeat scroll top;
+    height: 31px;
+    width: 100%;
+}
