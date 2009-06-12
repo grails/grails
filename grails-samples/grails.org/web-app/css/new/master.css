@@ -7,12 +7,24 @@ h1, h2, h3, h4, h5, h6 {
     color: #48802C;
 }
 
-#mainMenuBar {
+#springSourceBar {
+    width: 880px;
+    height: 60px;
+    margin-top: -8px;
+    background: url(../../images/new/springsource-logo.png) no-repeat left top;
+}
+
+.mainMenuBarWrapper {
     background: url(../../images/new/topnav_menubar.png) repeat scroll top;
+    width: 100%;
+}
+#mainMenuBar {
     height: 24px;
     margin: 0px;
-    padding: 7px 0px 0px 173px;
+    width: 880px;
+    padding: 7px 0px 0px 0px;
     font-size: 10pt;
+    text-align: left;
 }
 
 #mainMenuBar li {

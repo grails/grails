@@ -20,18 +20,21 @@
 
 </head>
 <body>
-
-<div id="springSourceBar"></div>
-
-<ul id="mainMenuBar">
-    <li>Products</li>
-    <li>Support and Services</li>
-    <li>SpringSource University</li>
-    <li>News and Events</li>
-    <li>Partners</li>
-    <li>Exchange</li>
-    <li>About Us</li>
-</ul>
+    
+<div align="center">
+    <div id="springSourceBar"></div>
+    <div class="mainMenuBarWrapper">
+        <ul id="mainMenuBar">
+            <li>Products</li>
+            <li>Support and Services</li>
+            <li>SpringSource University</li>
+            <li>News and Events</li>
+            <li>Partners</li>
+            <li>Exchange</li>
+            <li>About Us</li>
+        </ul>
+    </div>
+</div>
 
 <div id="graphicHeader"></div>
 
