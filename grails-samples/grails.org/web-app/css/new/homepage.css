@@ -135,4 +135,50 @@
     position: absolute;
     top: 0px;
     left: 321px;
+    font-size: 8pt;
+}
+
+.downloadPluginWrapper {
+    position: relative;
+    width: 585px;
+    height: 207px;
+}
+
+.downloadPluginWrapper div {
+    height: 114px;
+    padding: 77px 0px 0px 21px;
+}
+
+#download {
+    background: url(../../images/new/download_button.png) no-repeat top left;
+    margin: 15px 0px 0px 11px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 215px;
+}
+
+#plugins {
+    background: url(../../images/new/plugins_button.png) no-repeat top left;
+    margin: 15px 0px 0px 11px;
+    position: absolute;
+    top: 0px;
+    left: 295px;
+    width: 215px;
+}
+
+#plugins ul {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+
+#download h3, #plugins h3 {
+    display: none;
+}
+
+#download h4, #plugins h4 {
+    text-transform: uppercase;
+    position: absolute;
+    bottom: 0px;
 }

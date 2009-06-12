@@ -84,20 +84,22 @@
                 <div id="globeGraphic"></div>
             
                 <div id="downloadBox">
-                    <div id="download">
-                        <h3>Download Grails v1.1.1</h3>
-                        A short description of what I am downloading and some fluffy text highlighting grails key features.  Should not be longer than this.
-                        <h4>Learn More</h4>
-                    </div>
-                    <div id="plugins">
-                        <h3>Grails Plugins</h3>
-                        <ul>
-                            <li>Grails Flex Scaffold (GFS)</li>
-                            <li>Grails AppEngine</li>
-                            <li>UIPerformance</li>
-                            <li>FCKEditor</li>
-                        </ul>
-                        <h4>View All</h4>
+                    <div class="downloadPluginWrapper">
+                        <div id="download">
+                            <h3>Download Grails v1.1.1</h3>
+                            A short description of what I am downloading and some fluffy text highlighting grails key features.  Should not be longer than this.
+                            <h4>Learn More</h4>
+                        </div>
+                        <div id="plugins">
+                            <h3>Grails Plugins</h3>
+                            <ul>
+                                <li>Grails Flex Scaffold (GFS)</li>
+                                <li>Grails AppEngine</li>
+                                <li>UIPerformance</li>
+                                <li>FCKEditor</li>
+                            </ul>
+                            <h4>View All</h4>
+                        </div>
                     </div>
                 </div>
             </div>
