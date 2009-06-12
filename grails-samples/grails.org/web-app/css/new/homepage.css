@@ -79,6 +79,7 @@
     width: 910px;
     height: 210px;
     position: relative;
+    margin-bottom: 30px;
 }
 
 #events {
@@ -181,4 +182,106 @@
     text-transform: uppercase;
     position: absolute;
     bottom: 0px;
+}
+
+.newsScreencastWrapper {
+    width: 910px;
+    position: relative;
+    margin: 0px 0px 330px 0px;
+}
+
+.newsScreencastWrapper #latestNews, .newsScreencastWrapper #screencasts {
+    height: 245px;
+    padding: 0px;
+}
+
+#latestNews {
+    position: absolute;
+    top: 3px;
+    left: 0px;
+}
+
+#newsBox {
+    background: url(../../images/new/news_box.png) no-repeat top left;
+    width: 582px;
+    height: 240px;
+    overflow: hidden;
+    font-size: 8pt;
+    line-height: 0px;
+}
+
+#newsBox ul {
+    margin: 14px 0px 0px 0px;
+    padding: 0px;
+    list-style: none;
+}
+
+#newsBox li {
+    color: #96937D;
+    margin: 6px 10px;
+    width: 560px;
+    height: 60px;
+}
+
+#newsBox .detail {
+    background: url(../../images/new/news_text_back.png);
+    float: right;
+    width: 488px;
+    margin-right: 2px;
+    height: 58px;
+    padding-left: 6px;
+}
+
+#newsBox .detail h4 {
+    color: #3C4D2B;
+    font-size: 12pt;
+    margin-top: 11px;
+}
+
+#newsBox .calendar {
+    background: url(../../images/new/calendar_box.png) no-repeat top left;
+    width: 56px;
+    height: 58px;
+    margin-left: 4px;
+}
+
+#newsBox .calendar .month, #newsBox .calendar .day {
+    text-align: center;
+    font-weight: bold;
+}
+
+#newsBox .calendar .month {
+    color: #FFF;
+    font-size: 10pt;
+    padding-top: 10px;
+}
+
+#newsBox .calendar .day {
+    font-size: 18pt;
+    padding-top: 26px;
+}
+
+#newsBox .actions {
+    clear: both;
+}
+
+#screencasts {
+    position: absolute;
+    top: 0px;
+    left: 634px;    
+}
+
+.castBox {
+    background: url(../../images/new/screencast_box.png) no-repeat top left;
+    width: 269px;
+    height: 245px;
+    overflow: hidden;
+}
+
+#latestNews h2, #screencasts h2 {
+    font-weight: bold;
+    color: #363636;
+    font-size: 10pt;
+    margin: 0px 0px 0px 8px;
+    padding: 0px;
 }
