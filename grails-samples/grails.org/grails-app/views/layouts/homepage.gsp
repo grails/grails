@@ -58,45 +58,52 @@
                 </div>
             </div>
             
-            <div id="events">
-                <h3>Events</h3>
-                <ul>
-                    <li>
-                        <h4>June 17-19, 2009</h4>
-                        Groovy and Grails - Belgium, Brussels
-                    </li>
-                    <li>
-                        <h4>June 17-19, 2009</h4>
-                        Groovy and Grails - Belgium, Brussels
-                    </li>
-                    <li>
-                        <h4>June 17-19, 2009</h4>
-                        Groovy and Grails - Belgium, Brussels
-                    </li>
-                    <li>
-                        <h4>June 17-19, 2009</h4>
-                        Groovy and Grails - Belgium, Brussels
-                    </li>
-                </ul>
+            <div class="eventDownloadWrapper">
+                <div id="events">
+                    <h3>Events</h3>
+                    <ul>
+                        <li>
+                            <h4>June 17-19, 2009</h4>
+                            Groovy and Grails - Belgium, Brussels
+                        </li>
+                        <li>
+                            <h4>June 17-19, 2009</h4>
+                            Groovy and Grails - Belgium, Brussels
+                        </li>
+                        <li>
+                            <h4>June 17-19, 2009</h4>
+                            Groovy and Grails - Belgium, Brussels
+                        </li>
+                        <li>
+                            <h4>June 17-19, 2009</h4>
+                            Groovy and Grails - Belgium, Brussels
+                        </li>
+                    </ul>
+                </div>
+                
+                <div id="globeGraphic"></div>
+            
+                <div id="downloadBox">
+                    <div id="download">
+                        <h3>Download Grails v1.1.1</h3>
+                        A short description of what I am downloading and some fluffy text highlighting grails key features.  Should not be longer than this.
+                        <h4>Learn More</h4>
+                    </div>
+                    <div id="plugins">
+                        <h3>Grails Plugins</h3>
+                        <ul>
+                            <li>Grails Flex Scaffold (GFS)</li>
+                            <li>Grails AppEngine</li>
+                            <li>UIPerformance</li>
+                            <li>FCKEditor</li>
+                        </ul>
+                        <h4>View All</h4>
+                    </div>
+                </div>
             </div>
             
-            <div id="downloadBox">
-                <div id="download">
-                    <h3>Download Grails v1.1.1</h3>
-                    A short description of what I am downloading and some fluffy text highlighting grails key features.  Should not be longer than this.
-                    <h4>Learn More</h4>
-                </div>
-                <div id="plugins">
-                    <h3>Grails Plugins</h3>
-                    <ul>
-                        <li>Grails Flex Scaffold (GFS)</li>
-                        <li>Grails AppEngine</li>
-                        <li>UIPerformance</li>
-                        <li>FCKEditor</li>
-                    </ul>
-                    <h4>View All</h4>
-                </div>
-            </div>
+            
+            
             
             <div id="latestNews">
                 <h2>Latest News</h2>
