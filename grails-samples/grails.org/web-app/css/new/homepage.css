@@ -316,3 +316,49 @@
     margin: 0px 0px 0px 8px;
     padding: 0px;
 }
+
+#grailsOptionsGraphicsWrapper {
+    position: relative;
+    width: 100%;
+    height: 100px;
+}
+
+#grailsOptionsGraphicsWrapper div {
+    position: absolute;
+    bottom: 0px;
+}
+
+#mountainLeft {
+    background: url(../../images/new/mountains_decoration.png) top right no-repeat;
+    height: 99px;
+    width: 234px;
+}
+
+#knight {
+    background: url(../../images/new/knight_decoration.png) top left no-repeat;
+    height: 49px;
+    width: 30px;
+}
+
+#mountainRight {
+    background: url(../../images/new/mountains_decoration.png) top left no-repeat;
+    height: 99px;
+    width: 164px;
+    right: 0px;
+}
+
+#castle {
+    background: url(../../images/new/castle_decoration.png) top left no-repeat;
+    height: 31px;
+    width: 87px;
+    right: 283px;
+}
+
+#grailsOptionsBackgroundStretch {
+    background: url(../../images/new/bottom_section_stretch.png) top left repeat-x;
+}
+
+#grailsOptions h3 {
+    padding: 0px;
+    margin: 0px;
+}
