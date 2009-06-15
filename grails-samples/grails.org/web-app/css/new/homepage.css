@@ -12,6 +12,7 @@
     width: 100%;
 }
 
+/* TODO: This decoration doesn't move properly with the center page element when the window is resized */
 #barDecoration {
     position: absolute;
     width: 129px;
@@ -236,6 +237,14 @@
     color: #3C4D2B;
     font-size: 12pt;
     margin-top: 11px;
+}
+
+#newsBox .detail div {
+    height: 14px;
+}
+
+#newsBox .author {
+    text-transform: uppercase;
 }
 
 #newsBox .calendar {
