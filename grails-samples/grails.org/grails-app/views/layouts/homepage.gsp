@@ -154,9 +154,12 @@
                 <div id="screencasts">
                     <h2>Recent Screencasts</h2>
                     <div class="castBox">
-                        <img src="/images/new/play_icon.png"/>
+                        <div class="castScreen">
+                            <img src="/images/new/play_icon.png"/>
+                        </div>
+                        <h4>View All</h4>
                     </div>
-                    <h4>View All</h4>
+                    
                 </div>
             </div>
             

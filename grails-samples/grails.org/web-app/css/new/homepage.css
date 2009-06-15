@@ -271,7 +271,14 @@
 }
 
 #newsBox .actions {
+    color: #96937D;
     clear: both;
+    background: transparent url(../../images/new/rss_icon.png) no-repeat scroll right top;
+    height: 20px;
+    text-transform: uppercase;
+    padding: 8px 26px 0px 0px;
+    margin: 0px 19px;
+    float:right;
 }
 
 #screencasts {
@@ -285,6 +292,21 @@
     width: 269px;
     height: 245px;
     overflow: hidden;
+}
+
+.castBox h4 {
+    text-transform: uppercase;
+    margin: 13px 20px 0px 0px;
+    text-align: right;
+    font-size: 9pt;
+}
+
+.castScreen {
+    background: url(../../images/new/Screenshot_Eg.jpg) no-repeat top left;
+    width: 140px;
+    height: 114px;
+    margin: 14px 0px 0px 14px;
+    padding: 72px 0px 0px 100px;
 }
 
 #latestNews h2, #screencasts h2 {
