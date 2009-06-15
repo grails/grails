@@ -320,7 +320,7 @@
 #grailsOptionsGraphicsWrapper {
     position: relative;
     width: 100%;
-    height: 100px;
+    height: 30px;
 }
 
 #grailsOptionsGraphicsWrapper div {
@@ -338,6 +338,7 @@
     background: url(../../images/new/knight_decoration.png) top left no-repeat;
     height: 49px;
     width: 30px;
+    left: 2px;
 }
 
 #mountainRight {
@@ -358,7 +359,64 @@
     background: url(../../images/new/bottom_section_stretch.png) top left repeat-x;
 }
 
+#grailsOptionsWrapper {
+    height: 322px;
+}
+
+#grailsOptions {
+    width: 910px;
+    height: 300px;
+    text-align: left;
+}
+
 #grailsOptions h3 {
     padding: 0px;
     margin: 0px;
+}
+
+#grailsOptions div {
+    position: relative;
+    width: 263px;
+    height: 308px;
+    overflow: hidden;
+    font-size: 11pt;
+    color: #363636;
+}
+
+#grailsOptions div h3 {
+    font-size: 12pt;
+    font-weight: bold;
+    color: #48802C;
+    text-transform: uppercase;
+    padding: 7px 0px 8px 40px;
+    margin: 7px 0px 20px 14px;
+}
+
+#grailsOptions div p {
+    font-size: 10pt;
+    margin: -10px 0px 0px 25px
+}
+
+#grailsOptions div.left {
+    left: 0px;
+    top: -42px;
+}
+#grailsOptions div.left h3 {
+    background: url(../../images/new/training_icon.jpg) no-repeat top left;
+}
+
+#grailsOptions div.center {
+    left: 325px;
+    top: -348px;
+}
+#grailsOptions div.center h3 {
+    background: url(../../images/new/support_icon.jpg) no-repeat top left;
+}
+
+#grailsOptions div.right {
+    left: 646px;
+    top: -656px;
+}
+#grailsOptions div.right h3 {
+    background: url(../../images/new/services_icon.jpg) no-repeat top left;
 }
