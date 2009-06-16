@@ -78,6 +78,14 @@
                             <h4>June 17-19, 2009</h4>
                             Groovy and Grails - Belgium, Brussels
                         </li>
+                        <li>
+                            <h4>June 17-19, 2009</h4>
+                            Groovy and Grails - Belgium, Brussels
+                        </li>
+                        <li>
+                            <h4>June 17-19, 2009</h4>
+                            Groovy and Grails - Belgium, Brussels
+                        </li>
                     </ul>
                 </div>
                 

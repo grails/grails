@@ -95,16 +95,19 @@
 
 #events h3 {
     color: #363636;
-    margin: 6px 0px 0px 27px;
+    margin: 9px 0px 0px 27px;
     padding: 0px;
     font-weight: normal;
     font-size: 18pt;
 }
 
 #events ul {
-    margin-left: 28px;
+    margin: 0px 3px 0px 28px;
     padding: 0px;
     line-height: 0px;
+    height: 163px;
+    overflow: auto !important;  
+    overflow-x: hidden !important;
 }
 
 #events li {
@@ -408,7 +411,7 @@
     top: -42px;
 }
 #grailsOptions div.left h3 {
-    background: url(../../images/new/training_icon.jpg) no-repeat top left;
+    background: url(../../images/new/training_icon.png) no-repeat top left;
 }
 
 #grailsOptions div.center {
@@ -416,7 +419,7 @@
     top: -348px;
 }
 #grailsOptions div.center h3 {
-    background: url(../../images/new/support_icon.jpg) no-repeat top left;
+    background: url(../../images/new/support_icon.png) no-repeat top left;
 }
 
 #grailsOptions div.right {
@@ -424,5 +427,5 @@
     top: -656px;
 }
 #grailsOptions div.right h3 {
-    background: url(../../images/new/services_icon.jpg) no-repeat top left;
+    background: url(../../images/new/services_icon.png) no-repeat top left;
 }
