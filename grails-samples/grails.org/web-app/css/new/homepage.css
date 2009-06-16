@@ -41,21 +41,30 @@
 }
 
 #grailsAttributes div h2 {
-    font-size: 16pt;
+    font-size: 14pt;
     text-transform: uppercase;
     padding: 7px 0px 8px 40px;
-    margin: 7px 0px 10px 14px;
+    margin: 7px 0px 10px 18px;
 }
 
 #grailsAttributes div p {
-    font-size: 10pt;
-    margin: -10px 0px 0px 25px
+    font-size: 9pt;
+    margin: -10px 10px 0px 20px
+	
 }
 
 #grailsAttributes div.left {
     left: 0px;
     top: -20px;
 }
+#grailsAttributes div.left  p{
+}
+#grailsAttributes div.center  p{
+}
+
+#grailsAttributes div.right  p{
+}
+
 #grailsAttributes div.left h2 {
     background: url(../../images/new/rapid_icon.png) no-repeat top left;
 }

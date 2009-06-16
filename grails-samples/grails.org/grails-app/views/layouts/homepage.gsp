@@ -25,13 +25,12 @@
     <a href="http://www.springsource.com/"><div id="springSourceBar"></div></a>
     <div class="mainMenuBarWrapper">
         <ul id="mainMenuBar">
-            <li><a href="#">Products</a></li>
-            <li><a href="#">Support and Services</a></li>
-            <li><a href="#">SpringSource University</a></li>
-            <li><a href="#">News and Events</a></li>
-            <li><a href="#">Partners</a></li>
-            <li><a href="#">Exchange</a></li>
-            <li><a href="#">About Us</a></li>
+            <li><a href="http://www.springsource.com/products">Products</a></li>
+            <li><a href="http://www.springsource.com/services">Support and Services</a></li>
+            <li><a href="http://www.springsource.com/training">Training</a></li>
+            <li><g:link controller="content" id="Download">Downloads</g:link></li>
+            <li><g:link controller="content" id="Documentation">Documentation</g:link></li>
+            <li><g:link controller="content" id="Community">Community</g:link></li>
         </ul>
     </div>
 </div>
@@ -46,15 +45,15 @@
             <div id="grailsAttributes">
                 <div class="left">
         	        <h2>Rapid</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ut risus in eros.</p>		
+                    <p>Have your next Web 2.0 project done in weeks instead of months. Grails delivers a new age of Java web application productivity.</p>		
                 </div>
                 <div class="center">
         			<h2>Dynamic</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ut risus in eros</p>
+                    <p>Get instant feedback, see instant results. Grails is the premier dynamic language web framework for the JVM.</p>
                 </div>
                 <div class="right">
         			<h2>Robust</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ut risus in eros.</p>
+                    <p>Powered by <a href="http://springframework.org">Spring</a>, Grails out performs the competition. Dynamic, agile web development without compromises.</p>
                 </div>
             </div>
             
