@@ -161,6 +161,7 @@
     top: 0px;
     left: 0px;
     width: 215px;
+    color: #6B6B6B;
 }
 
 #plugins {
@@ -170,6 +171,7 @@
     top: 0px;
     left: 295px;
     width: 215px;
+    color: #6B6B6B;
 }
 
 #plugins ul {
@@ -179,9 +181,13 @@
 }
 
 #plugins a {
-    text-decoration: none;
-    border: none;
-    color: #6B6B6B;
+    text-decoration: inherit;
+    border: inherit;
+    color: inherit;
+}
+
+#plugins a:hover {
+    color: #48802C;
 }
 
 #download h3, #plugins h3 {
@@ -222,6 +228,10 @@
 
 #newsBox a {
     color: inherit;
+}
+
+#newsBox a:hover {
+    color: #48802C;
 }
 
 #newsBox ul {
