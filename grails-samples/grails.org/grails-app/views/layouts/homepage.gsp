@@ -115,11 +115,6 @@
                 <div id="latestNews">
                     <h2>Latest News</h2>
                     <div id="newsBox">
-                        
-                        
-                        
-                    	
-                    	 
                         <ul>
                             <g:each var="newsItem" in="${newsItems}">
                                 <li>
@@ -146,7 +141,9 @@
                     <h2>Recent Screencasts</h2>
                     <div class="castBox">
                         <div class="castScreen">
-                            <img src="/images/new/play_icon.png"/>
+                            <g:link controller="screencast" action="show" id="${latestScreencastId}">
+                                <img src="/images/new/play_icon.png"/>
+                            </g:link>
                         </div>
                         <h4><g:link controller="screencast" action="list">View All</g:link></h4>
                     </div>

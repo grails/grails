@@ -314,7 +314,7 @@
     font-size: 9pt;
 }
 
-.castBox a {
+.castBox a, .castBox img {
     text-decoration: none;
     border: none;
     color: #48802C;

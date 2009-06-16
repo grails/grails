@@ -11,6 +11,7 @@ import org.grails.wiki.BaseWikiController
 import org.grails.plugin.Plugin
 import org.grails.content.Content
 import org.grails.plugin.PluginController
+import org.grails.screencasts.Screencast
 import org.grails.blog.BlogEntry
 
 class ContentController extends BaseWikiController {
@@ -387,6 +388,19 @@ class ContentController extends BaseWikiController {
                 dateService.getDayOfMonth(it.dateCreated)
             }
         }
-        render(view:"homePage", model:[newestPlugins:newestPlugins, newsItems:newsItems])
+        def latestScreencastId = Screencast.withCriteria {
+            order 'dateCreated', 'desc'
+            maxResults 1
+            projections {
+                property 'id'
+            }
+        }[0]
+        render(view:"homePage", 
+                model:[
+                    newestPlugins:newestPlugins, 
+                    newsItems:newsItems,
+                    latestScreencastId: latestScreencastId
+                ]
+        )
     }
 }
