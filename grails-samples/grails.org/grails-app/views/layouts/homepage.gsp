@@ -115,46 +115,30 @@
                 <div id="latestNews">
                     <h2>Latest News</h2>
                     <div id="newsBox">
+                        
+                        
+                        
+                    	
+                    	 
                         <ul>
-                            <li>
-                                <div class="detail">
-                                    <h4>AmazonFPS Payments Plugin Released</h4>
-                                    <div class="author">by someguy | tag1, tag2, tag3</div>
-                                    <div class="comments">2 comments</div>
-                                </div>
-                                <div class="calendar">
-                                    <div class="month">June</div>
-                                    <div class="day">01</div>
-                                </div>
-                                
-                            </li>
-                            <li>
-                                <div class="detail">
-                                    <h4>AmazonFPS Payments Plugin Released</h4>
-                                    <div class="author">by someguy | tag1, tag2, tag3</div>
-                                    <div class="comments">2 comments</div>
-                                </div>
-                                
-                                <div class="calendar">
-                                    <div class="month">June</div>
-                                    <div class="day">01</div>
-                                </div>
-                                
-                            </li>
-                            <li>
-                                <div class="detail">
-                                    <h4>AmazonFPS Payments Plugin Released</h4>
-                                    <div class="author">by someguy | tag1, tag2, tag3</div>
-                                    <div class="comments">2 comments</div>
-                                </div>
-                                <div class="calendar">
-                                    <div class="month">June</div>
-                                    <div class="day">01</div>
-                                </div>
-                                
-                            </li>
+                            <g:each var="newsItem" in="${newsItems}">
+                                <li>
+                                    <g:link controller="blog"  action="showEntry" params="[author:newsItem.author, title: newsItem.title]">
+                                        <div class="detail">
+                                            <h4>${newsItem.title}</h4>
+                                            <div class="author">by ${newsItem.author} | ${newsItem.tags.join(', ')}</div>
+                                            <div class="comments">${newsItem.comments.size()} comments</div>
+                                        </div>
+                                        <div class="calendar">
+                                            <div class="month">${newsItem.month}</div>
+                                            <div class="day">${newsItem.day}</div>
+                                        </div>
+                                    </g:link>
+                                </li>
+                            </g:each>
                         </ul>
-                        <div class="actions">Add news | Subscribe</div>
+                        <div class="actions"><g:link controller="blog" action="createEntry">Add news</g:link> | <g:link controller="blog" action="feed" params="[format:'rss']">Subscribe</g:link>
+                        </div>
                     </div>
                 </div>
             
@@ -164,7 +148,7 @@
                         <div class="castScreen">
                             <img src="/images/new/play_icon.png"/>
                         </div>
-                        <h4>View All</h4>
+                        <h4><g:link controller="screencast" action="list">View All</g:link></h4>
                     </div>
                     
                 </div>

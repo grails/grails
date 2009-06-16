@@ -220,6 +220,10 @@
     line-height: 0px;
 }
 
+#newsBox a {
+    color: inherit;
+}
+
 #newsBox ul {
     margin: 14px 0px 0px 0px;
     padding: 0px;
@@ -308,6 +312,13 @@
     margin: 13px 20px 0px 0px;
     text-align: right;
     font-size: 9pt;
+}
+
+.castBox a {
+    text-decoration: none;
+    border: none;
+    color: #48802C;
+    font-weight: bold;
 }
 
 .castScreen {

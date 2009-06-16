@@ -11,10 +11,12 @@ import org.grails.wiki.BaseWikiController
 import org.grails.plugin.Plugin
 import org.grails.content.Content
 import org.grails.plugin.PluginController
+import org.grails.blog.BlogEntry
 
 class ContentController extends BaseWikiController {
 
     def pluginService
+    def dateService
     def textCache
     
     static accessControl = {
@@ -375,6 +377,16 @@ class ContentController extends BaseWikiController {
     def renderHomepage = {
         // Homepage needs latest plugins
         def newestPlugins = pluginService.newestPlugins(4)
-        render(view:"homePage", model:[newestPlugins:newestPlugins])
+        def newsItems = BlogEntry.list(max:3, cache:true, order:"desc", sort:"dateCreated")
+        // make it easy to get the month and day
+        newsItems.each {
+            it.metaClass.getMonth = { ->
+                dateService.getMonthString(it.dateCreated)
+            }
+            it.metaClass.getDay = { ->
+                dateService.getDayOfMonth(it.dateCreated)
+            }
+        }
+        render(view:"homePage", model:[newestPlugins:newestPlugins, newsItems:newsItems])
     }
 }
