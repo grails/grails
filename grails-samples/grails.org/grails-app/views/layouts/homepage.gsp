@@ -3,7 +3,6 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <g:javascript src="jquery/jquery-1.3.2.min.js"/>
     <g:javascript src="common/application.js"/>
     <g:javascript src="common/tracking.js"/>
     
@@ -31,13 +30,14 @@
             <li><g:link controller="content" id="Download">Downloads</g:link></li>
             <li><g:link controller="content" id="Documentation">Documentation</g:link></li>
             <li><g:link controller="content" id="Community">Community</g:link></li>
-        </ul>
-    </div>
-</div>
+        </ul><!-- mainMenuBar -->
+    </div><!-- mainMenuBarWrapper -->
+</div><!-- center -->
 
 <div id="graphicHeader"></div>
 
 <div id="barDecoration"></div>
+
 <div id="contentWrapper">
     <div id="contentCenter" align="center">
         <div id="contentArea">
@@ -46,16 +46,16 @@
                 <div class="left">
         	        <h2>Rapid</h2>
                     <p>Have your next Web 2.0 project done in weeks instead of months. Grails delivers a new age of Java web application productivity.</p>		
-                </div>
+                </div><!-- left column -->
                 <div class="center">
         			<h2>Dynamic</h2>
                     <p>Get instant feedback, see instant results. Grails is the premier dynamic language web framework for the JVM.</p>
-                </div>
+                </div><!-- center column -->
                 <div class="right">
         			<h2>Robust</h2>
                     <p>Powered by <a href="http://springframework.org">Spring</a>, Grails out performs the competition. Dynamic, agile web development without compromises.</p>
-                </div>
-            </div>
+                </div><!-- right column -->
+            </div><!-- grailsAttributes -->
             
             <div class="eventDownloadWrapper">
                 <div id="events">
@@ -86,7 +86,7 @@
                             Groovy and Grails - Belgium, Brussels
                         </li>
                     </ul>
-                </div>
+                </div><!-- events -->
                 
                 <div id="globeGraphic"></div>
             
@@ -96,7 +96,7 @@
                             <h3>Download Grails v1.1.1</h3>
                             A short description of what I am downloading and some fluffy text highlighting grails key features.  Should not be longer than this.
                             <h4>Learn More</h4>
-                        </div>
+                        </div><!-- download -->
                         <div id="plugins">
                             <h3>Grails Plugins</h3>
                             <ul>
@@ -105,10 +105,10 @@
                                 </g:each>
                             </ul>
                             <h4>View All</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                        </div><!-- plugins -->
+                    </div><!-- downloadPluginWrapper -->
+                </div><!-- downloadBox -->
+            </div><!-- eventDownloadWrapper -->
             
             <div class="newsScreencastWrapper">
                 <div id="latestNews">
@@ -131,10 +131,11 @@
                                 </li>
                             </g:each>
                         </ul>
-                        <div class="actions"><g:link controller="blog" action="createEntry">Add news</g:link> | <g:link controller="blog" action="feed" params="[format:'rss']">Subscribe</g:link>
-                        </div>
-                    </div>
-                </div>
+                        <div class="actions">
+                            <g:link controller="blog" action="createEntry">Add news</g:link> | <g:link controller="blog" action="feed" params="[format:'rss']">Subscribe</g:link>
+                        </div><!-- actions -->
+                    </div><!-- newsBox -->
+                </div><!-- latestNews -->
             
                 <div id="screencasts">
                     <h2>Recent Screencasts</h2>
@@ -143,12 +144,11 @@
                             <g:link controller="screencast" action="show" id="${latestScreencastId}">
                                 <img src="/images/new/play_icon.png"/>
                             </g:link>
-                        </div>
+                        </div><!-- castScreen -->
                         <h4><g:link controller="screencast" action="list">View All</g:link></h4>
-                    </div>
-                    
-                </div>
-            </div>
+                    </div><!-- castBox -->
+                </div><!-- screencasts -->
+            </div><!-- newsScreencastWrapper -->
             
         </div>
     </div>
@@ -159,27 +159,27 @@
             <div id="knight"></div>
             <div id="mountainRight"></div>
             <div id="castle"></div>
-        </div>
+        </div><!-- grailsOptionsGraphicsWrapper-->
         <div id="grailsOptionsBackgroundStretch">
             <div align="center">
                 <div id="grailsOptions">
                     <div class="left">
             	        <h3>Training</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ut risus in eros consectetur feugiat. Fusce elementum convallis porttitor. Nulla facilisi. Morbi at erat felis. Aenean ante nisl, pulvinar nec varius ut, egestas sit amet dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vitae fermentum odio. Quisque quis lacus id dolor rhoncus placerat ut eu odio. Duis nec ipsum est. Proin congue faucibus risus, at blandit libero rutrum at. Vivamus ac laoreet lectus. Nam et nisi est. Aliquam hendrerit tristique lectus sit amet fringilla. Aenean pretium lacus vitae massa bibendum feugiat. Suspendisse a mi mauris. Etiam fermentum lacus nec lectus luctus vitae porta nisl ultrices.</p>		
-                    </div>
+                    </div><!-- left column -->
                     <div class="center">
             			<h3>Support</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ut risus in eros consectetur feugiat. Fusce elementum convallis porttitor. Nulla facilisi. Morbi at erat felis. Aenean ante nisl, pulvinar nec varius ut, egestas sit amet dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vitae fermentum odio. Quisque quis lacus id dolor rhoncus placerat ut eu odio. Duis nec ipsum est. Proin congue faucibus risus, at blandit libero rutrum at. Vivamus ac laoreet lectus. Nam et nisi est. Aliquam hendrerit tristique lectus sit amet fringilla. Aenean pretium lacus vitae massa bibendum feugiat. Suspendisse a mi mauris. Etiam fermentum lacus nec lectus luctus vitae porta nisl ultrices.</p>
-                    </div>
+                    </div><!-- center column -->
                     <div class="right">
             			<h3>Services</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ut risus in eros consectetur feugiat. Fusce elementum convallis porttitor. Nulla facilisi. Morbi at erat felis. Aenean ante nisl, pulvinar nec varius ut, egestas sit amet dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vitae fermentum odio. Quisque quis lacus id dolor rhoncus placerat ut eu odio. Duis nec ipsum est. Proin congue faucibus risus, at blandit libero rutrum at. Vivamus ac laoreet lectus. Nam et nisi est. Aliquam hendrerit tristique lectus sit amet fringilla. Aenean pretium lacus vitae massa bibendum feugiat. Suspendisse a mi mauris. Etiam fermentum lacus nec lectus luctus vitae porta nisl ultrices.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+                    </div><!-- right column -->
+                </div><!-- grailsOptions -->
+            </div><!-- center -->
+        </div><!-- grailsOptionsBackgroundStretch -->
+    </div><!-- grailsOptionsWrapper -->
+</div><!-- contentWrapper -->
 
 <div id="footer">
     <div align="center">
@@ -187,9 +187,9 @@
             <a href="http://twitter.com/grails"><div class="twitter"></div></a>
             <a href="http://www.springsource.com"><div class="springSource"></div></a>
             <p>&copy; Copyright 2009 SpringSource.<br/>All Rights Reserved.</p>
-        </div>
-    </div>
-</div>
+        </div><!-- innerFooter -->
+    </div><!-- center -->
+</div><!-- footer -->
 
 </body>
 </html>
