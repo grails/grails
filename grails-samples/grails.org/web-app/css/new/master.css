@@ -27,6 +27,12 @@ h1, h2, h3, h4, h5, h6 {
     text-align: left;
 }
 
+#mainMenuBar a {
+    color: inherit;
+    border: inherit;
+    text-decoration: inherit;
+}
+
 #mainMenuBar li {
     background: url(../../images/new/topnav_menbar_divider.png) no-repeat top left;
     display: inline;

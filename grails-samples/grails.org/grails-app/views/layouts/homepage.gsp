@@ -25,13 +25,13 @@
     <a href="http://www.springsource.com/"><div id="springSourceBar"></div></a>
     <div class="mainMenuBarWrapper">
         <ul id="mainMenuBar">
-            <li>Products</li>
-            <li>Support and Services</li>
-            <li>SpringSource University</li>
-            <li>News and Events</li>
-            <li>Partners</li>
-            <li>Exchange</li>
-            <li>About Us</li>
+            <li><a href="#">Products</a></li>
+            <li><a href="#">Support and Services</a></li>
+            <li><a href="#">SpringSource University</a></li>
+            <li><a href="#">News and Events</a></li>
+            <li><a href="#">Partners</a></li>
+            <li><a href="#">Exchange</a></li>
+            <li><a href="#">About Us</a></li>
         </ul>
     </div>
 </div>
