@@ -107,7 +107,7 @@
     margin: 9px 0px 0px 27px;
     padding: 0px;
     font-weight: normal;
-    font-size: 18pt;
+    font-size: 16pt;
 }
 
 #events ul {
@@ -160,12 +160,12 @@
 
 .downloadPluginWrapper div {
     height: 114px;
-    padding: 77px 0px 0px 21px;
+    padding: 0px 0px 0px 10px;
 }
 
 #download {
-    background: url(../../images/new/download_button.png) no-repeat top left;
-    margin: 15px 0px 0px 11px;
+
+    margin: 5px 0px 0px 11px;
     position: absolute;
     top: 0px;
     left: 0px;
@@ -174,8 +174,8 @@
 }
 
 #plugins {
-    background: url(../../images/new/plugins_button.png) no-repeat top left;
-    margin: 15px 0px 0px 11px;
+/*    background: url(../../images/new/plugins_button.png) no-repeat top left;*/
+    margin: 5px 0px 0px 11px;
     position: absolute;
     top: 0px;
     left: 295px;
@@ -184,6 +184,8 @@
 }
 
 #plugins ul {
+	position:relative;
+	top:-10px;
     margin: 0px;
     padding: 0px;
     list-style: none;
@@ -199,14 +201,15 @@
     color: #48802C;
 }
 
-#download h3, #plugins h3 {
-    display: none;
+#download h4 a:visited,#download h4 a:link, #plugins h4 a:link {
+    color: #48802C;
+	text-decoration:none;
 }
-
 #download h4, #plugins h4 {
     text-transform: uppercase;
-    position: absolute;
-    bottom: 0px;
+	position:absolute;
+    top: 160px;
+
 }
 
 .newsScreencastWrapper {

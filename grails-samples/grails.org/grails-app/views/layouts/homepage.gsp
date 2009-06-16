@@ -59,7 +59,7 @@
             
             <div class="eventDownloadWrapper">
                 <div id="events">
-                    <h3>Events</h3>
+                    <h3>Training Events</h3>
                     <ul>
                         <li>
                             <h4>June 17-19, 2009</h4>
@@ -93,18 +93,41 @@
                 <div id="downloadBox">
                     <div class="downloadPluginWrapper">
                         <div id="download">
-                            <h3>Download Grails v1.1.1</h3>
-                            A short description of what I am downloading and some fluffy text highlighting grails key features.  Should not be longer than this.
-                            <h4>Learn More</h4>
+					        <download:latest var="grailsDownload" software="Grails" />
+                            <h3>
+								<g:if test="${grailsDownload}">
+									<download:link software="Grails" version="${grailsDownload?.softwareVersion}" file="Binary Zip">
+										<img src="${resource(dir:'images/new',file:'download_button.png')}" 
+											 border="0"
+											alt="Download Grails" />
+									</download:link>								
+								</g:if>
+								<g:else>
+									<g:link controller="content" id="Download">
+									  <img src="${resource(dir:'images/new',file:'download_button.png')}" 
+									       border="0"
+										   alt="Download Grails" />								
+									</g:link>
+								</g:else>
+							</h3>
+							<p>
+                            	A short description of what I am downloading and some fluffy text highlighting grails key features.  Should not be longer than this.</p>
+                            <h4><g:link controller="content" id="Download">Learn More</g:link></h4>
                         </div><!-- download -->
                         <div id="plugins">
-                            <h3>Grails Plugins</h3>
+                            <h3>
+								<g:link controller="plugin">
+									<img src="${resource(dir:'images/new',file:'plugins_button.png')}" alt="Grails Plugins" border="0" />
+								</g:link>
+								
+								
+							</h3>
                             <ul>
                                 <g:each var="plugin" in="${newestPlugins}">
                                     <li><g:link controller="plugin" action="show" params="[name:plugin.name]">${plugin.title}</g:link></li>
                                 </g:each>
                             </ul>
-                            <h4>View All</h4>
+                            <h4><g:link controller="plugin">View All</g:link></h4>
                         </div><!-- plugins -->
                     </div><!-- downloadPluginWrapper -->
                 </div><!-- downloadBox -->
@@ -184,7 +207,7 @@
 <div id="footer">
     <div align="center">
         <div class="innerFooter">
-            <a href="http://twitter.com/grails"><div class="twitter"></div></a>
+            <a href="http://twitter.com/grailsframework"><div class="twitter"></div></a>
             <a href="http://www.springsource.com"><div class="springSource"></div></a>
             <p>&copy; Copyright 2009 SpringSource.<br/>All Rights Reserved.</p>
         </div><!-- innerFooter -->
