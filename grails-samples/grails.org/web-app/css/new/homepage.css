@@ -169,7 +169,7 @@
     position: absolute;
     top: 0px;
     left: 0px;
-    width: 215px;
+    width: 200px;
     color: #6B6B6B;
 }
 
@@ -200,7 +200,12 @@
 #plugins a:hover {
     color: #48802C;
 }
-
+#plugins ul {
+	margin-left:20px;
+}
+#download p {
+	margin-left:20px;
+}
 #download h4 a:visited,#download h4 a:link, #plugins h4 a:link {
     color: #48802C;
 	text-decoration:none;
@@ -209,7 +214,7 @@
     text-transform: uppercase;
 	position:absolute;
     top: 160px;
-
+	margin-left:20px;	
 }
 
 .newsScreencastWrapper {
@@ -244,6 +249,10 @@
 
 #newsBox a:hover {
     color: #48802C;
+
+}
+#newsBox a:link {
+	text-decoration:none;
 }
 
 #newsBox ul {
