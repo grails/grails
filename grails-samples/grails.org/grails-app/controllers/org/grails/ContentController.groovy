@@ -10,6 +10,7 @@ import org.grails.content.notifications.ContentAlertStack
 import org.grails.wiki.BaseWikiController
 import org.grails.plugin.Plugin
 import org.grails.content.Content
+import org.grails.plugin.PluginController
 
 class ContentController extends BaseWikiController {
 
@@ -93,7 +94,7 @@ class ContentController extends BaseWikiController {
 
         if(pageName) {
             if(pageName == 'Home') {
-                render(view:"homePage")
+                renderHomepage()
             }
             // treat plugin pages differently
             else if (pageName.matches(/(${Plugin.WIKIS.join('|')})-[0-9]*/)) {
@@ -121,7 +122,7 @@ class ContentController extends BaseWikiController {
                 }
             }
 		} else {
-			render(view:"homePage")
+			renderHomepage()
 		}
 	}
 
@@ -369,5 +370,11 @@ class ContentController extends BaseWikiController {
         else {
             render(view:"/common/uploadDialog", model:[category:params.id])
         }
+    }
+    
+    def renderHomepage = {
+        // Homepage needs latest plugins
+        def newestPlugins = pluginService.newestPlugins(4)
+        render(view:"homePage", model:[newestPlugins:newestPlugins])
     }
 }

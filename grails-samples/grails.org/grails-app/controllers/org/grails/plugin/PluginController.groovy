@@ -13,9 +13,10 @@ class PluginController extends BaseWikiController {
 
     static String HOME_WIKI = 'PluginHome'
     static int PORTAL_MAX_RESULTS = 5
-    static int PORTAL_MIN_RATINGS = 3
-
+    static int PORTAL_MIN_RATINGS = 1
+    
     def wikiPageService
+    def pluginService
 
     def index = {
         redirect(controller:'plugin', action:home, params:params)
@@ -42,21 +43,14 @@ class PluginController extends BaseWikiController {
             tagCounts[tagName] = tagCounts[tagName] ? (tagCounts[tagName] + count) : count
         }
 
-        def ratingsComparator = new PluginComparator()
-        def popularPlugins = Plugin.list(cache:true).findAll {
-            it.ratings.size() >= PORTAL_MIN_RATINGS
-        }.sort(ratingsComparator).reverse()
+        def popularPlugins = pluginService.popularPlugins(PORTAL_MIN_RATINGS, PORTAL_MAX_RESULTS)
 
         // only the first few
         if (popularPlugins.size()) {
             popularPlugins = popularPlugins[0..(popularPlugins.size() < PORTAL_MAX_RESULTS ? popularPlugins.size() - 1 : PORTAL_MAX_RESULTS - 1)]
         }
 
-        def newestPlugins = Plugin.withCriteria {
-            order('dateCreated', 'desc')
-            maxResults(PORTAL_MAX_RESULTS)
-			cache true
-        }
+        def newestPlugins = pluginService.newestPlugins(PORTAL_MAX_RESULTS)
 
         def recentlyUpdatedPlugins = Plugin.withCriteria {
             order('lastReleased', 'desc')
@@ -293,17 +287,5 @@ class PluginController extends BaseWikiController {
 
     private def byName(params) {
         Plugin.findByName(params.name, [cache:true])
-    }
-}
-
-// sorts by averageRating, then number of votes
-class PluginComparator implements Comparator {
-    public int compare(Object o1, Object o2) {
-        if (o1.averageRating > o2.averageRating) return 1
-        if (o1.averageRating < o2.averageRating) return -1
-        // averateRatings are same, so use number of votes
-        if (o1.ratings.size() > o2.ratings.size()) return 1
-        if (o1.ratings.size() < o2.ratings.size()) return -1
-        return 0
     }
 }

@@ -175,6 +175,12 @@
     list-style: none;
 }
 
+#plugins a {
+    text-decoration: none;
+    border: none;
+    color: #6B6B6B;
+}
+
 #download h3, #plugins h3 {
     display: none;
 }

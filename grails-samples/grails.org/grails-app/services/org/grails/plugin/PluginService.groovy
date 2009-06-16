@@ -7,7 +7,24 @@ import org.grails.content.Version
 
 class PluginService {
 
+    static int DEFAULT_MAX = 5
+
     boolean transactional = true
+    
+    def popularPlugins(minRatings, max = DEFAULT_MAX) {
+        def ratingsComparator = new PluginComparator()
+        Plugin.list(cache:true, maxResults:max).findAll {
+            it.ratings.size() >= minRatings
+        }.sort(ratingsComparator).reverse()
+    }
+    
+    def newestPlugins(max = DEFAULT_MAX) {
+        Plugin.withCriteria {
+            order('dateCreated', 'desc')
+            maxResults(max)
+			cache true
+        }
+    }
     
     def runMasterUpdate() {
         translateMasterPlugins(generateMasterPlugins())
@@ -224,5 +241,17 @@ class PluginVersion implements Comparable {
             else result = 0
         }
         result
+    }   
+}
+
+// sorts by averageRating, then number of votes
+class PluginComparator implements Comparator {
+    public int compare(Object o1, Object o2) {
+        if (o1.averageRating > o2.averageRating) return 1
+        if (o1.averageRating < o2.averageRating) return -1
+        // averateRatings are same, so use number of votes
+        if (o1.ratings.size() > o2.ratings.size()) return 1
+        if (o1.ratings.size() < o2.ratings.size()) return -1
+        return 0
     }
 }

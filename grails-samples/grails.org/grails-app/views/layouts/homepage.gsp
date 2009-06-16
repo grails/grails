@@ -22,7 +22,7 @@
 <body>
     
 <div align="center">
-    <div id="springSourceBar"></div>
+    <a href="http://www.springsource.com/"><div id="springSourceBar"></div></a>
     <div class="mainMenuBarWrapper">
         <ul id="mainMenuBar">
             <li>Products</li>
@@ -93,10 +93,9 @@
                         <div id="plugins">
                             <h3>Grails Plugins</h3>
                             <ul>
-                                <li>Grails Flex Scaffold (GFS)</li>
-                                <li>Grails AppEngine</li>
-                                <li>UIPerformance</li>
-                                <li>FCKEditor</li>
+                                <g:each var="plugin" in="${newestPlugins}">
+                                    <li><g:link controller="plugin" action="show" params="[name:plugin.name]">${plugin.title}</g:link></li>
+                                </g:each>
                             </ul>
                             <h4>View All</h4>
                         </div>
@@ -197,8 +196,8 @@
 <div id="footer">
     <div align="center">
         <div class="innerFooter">
-            <div class="twitter"></div>
-            <div class="springSource"></div>        
+            <a href="http://twitter.com/grails"><div class="twitter"></div></a>
+            <a href="http://www.springsource.com"><div class="springSource"></div></a>
             <p>&copy; Copyright 2009 SpringSource.<br/>All Rights Reserved.</p>
         </div>
     </div>

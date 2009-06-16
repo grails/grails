@@ -8,6 +8,7 @@
 </head
 <body>
 
+%{--
 	  <div id="feedLink" >
 	       <g:link controller="blog" action="feed" params="[format:'rss']"><img border="0" src="${createLinkTo(dir:'images', file:'feed.gif')}" alt="RSS Feed"  /></g:link>
 	  </div>
@@ -21,7 +22,7 @@
 	 <div id="trainingEvents">
 	 	<wiki:text page="Training Events" />
 	 </div>
-
+--}%
 
 </body>
 </html>
