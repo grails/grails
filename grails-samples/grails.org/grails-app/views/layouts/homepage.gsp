@@ -6,8 +6,8 @@
     <g:javascript src="common/application.js"/>
     <g:javascript src="common/tracking.js"/>
     
-    <link rel="stylesheet" href="css/new/master.css" type="text/css" media="screen" title="Master screen stylesheet" charset="utf-8" />
-    <link rel="stylesheet" href="css/new/homepage.css" type="text/css" media="screen" title="Master screen stylesheet" charset="utf-8" />
+    <link rel="stylesheet" href="/css/new/master.css" type="text/css" media="screen" title="Master screen stylesheet" charset="utf-8" />
+    <link rel="stylesheet" href="/css/new/homepage.css" type="text/css" media="screen" title="Master screen stylesheet" charset="utf-8" />
     
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 	<meta name="robots" content="NOODP">	
@@ -173,8 +173,8 @@
                 </div><!-- screencasts -->
             </div><!-- newsScreencastWrapper -->
             
-        </div>
-    </div>
+        </div><!-- contentArea -->
+    </div><!-- contentCenter -->
     
     <div id="grailsOptionsWrapper">
         <div id="grailsOptionsGraphicsWrapper">

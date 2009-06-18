@@ -1,15 +1,7 @@
-/*div { background: cyan;}*/
-
-
 #graphicHeader {
     width: 100%;
     height: 439px;
     background: url(../../images/new/top_branding.jpg) repeat scroll center top;
-}
-
-#contentWrapper {
-    background: url(../../images/new/top_bar.png) repeat-x scroll center top;
-    width: 100%;
 }
 
 /* TODO: This decoration doesn't move properly with the center page element when the window is resized */
@@ -20,11 +12,6 @@
     top: 557px;
     left: 140px;
     background: url(../../images/new/bar_decoration.png) no-repeat top left
-}
-
-#contentArea {
-    width: 910px;
-    text-align: left;
 }
 
 #grailsAttributes {

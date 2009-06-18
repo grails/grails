@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="${createLinkTo(dir: 'css', file: 'tagCloud.css')}"/>
     <link rel="stylesheet" href="${createLinkTo(dir: 'css', file: 'comments.css')}"/>
     <title>Grails Plugins</title>
-    <meta content="subpage" name="layout"/>
+    <meta content="plugin" name="layout"/>
     <g:render template="../content/wikiJavaScript"/>
 </head>
 <body>

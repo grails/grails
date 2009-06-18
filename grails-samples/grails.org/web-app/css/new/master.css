@@ -1,10 +1,20 @@
 body {
-    font-family: Lucida Grande;
+    font-family: Lucida Grande, Lucida, sans-serif;
     font-size: 12pt;
 }
 
 h1, h2, h3, h4, h5, h6 {
     color: #48802C;
+}
+
+#contentWrapper {
+    background: url(../../images/new/top_bar.png) repeat-x scroll center top;
+    width: 100%;
+}
+
+#contentArea {
+    width: 910px;
+    text-align: left;
 }
 
 #springSourceBar {
