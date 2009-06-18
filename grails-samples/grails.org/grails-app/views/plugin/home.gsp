@@ -52,7 +52,7 @@
 <div id="featuredPlugins">
     <g:each var="plugin" in="${featuredPlugins}">
         <div class="featuredPlugin">
-            <h4>plugin.title</h4>
+            <h4>${plugin.title}</h4>
             <g:if test="${plugin.official}">
                 <div class="supported">supported by SpringSource</div>
             </g:if>
@@ -75,7 +75,17 @@
     </g:each>
 </div>
 
-<div id="recentComments"></div>
+<div id="latestComments">
+    <h2>Latest Comments</h2>
+    <ul id='commentList'>
+        <g:each var='comment' status='i' in="${latestComments}">
+            <g:set var='oddEven' value="${(i%2==0) ? 'even' : 'odd'}"/>
+            <li class='comment ${oddEven}'>
+                <g:render template="shortComment" var="comment" bean="${comment}"/>
+            </li>
+        </g:each>
+    </ul>
+</div>
 
 %{--
 <div id="contentPane">

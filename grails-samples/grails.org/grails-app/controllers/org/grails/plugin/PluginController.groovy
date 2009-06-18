@@ -23,7 +23,17 @@ class PluginController extends BaseWikiController {
     }
 
     def home = {
-        [featuredPlugins:Plugin.findAllByFeatured(true)]
+        def featuredPlugins = Plugin.findAllByFeatured(true, [max:3,offset:0,sort:'name'])
+        def latestComments = CommentLink.withCriteria {
+			projections { property "comment" }
+            eq 'type', 'plugin'
+            comment {
+                order('dateCreated', 'desc')
+            }
+            maxResults PORTAL_MAX_RESULTS
+			cache true
+        }
+        [featuredPlugins:featuredPlugins, latestComments:latestComments]
         /*
         def tagCounts = [:]
         def tagLinkResults = TagLink.withCriteria {
