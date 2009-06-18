@@ -4,6 +4,8 @@ import org.grails.wiki.WikiPage
 import org.grails.taggable.Taggable
 import org.grails.comments.Commentable
 import org.grails.rateable.Rateable
+import org.codehaus.groovy.grails.commons.ConfigurationHolder
+
 /*
  * author: Matthew Taylor
  */
@@ -28,6 +30,7 @@ class Plugin implements Taggable, Commentable, Rateable {
     String downloadUrl
     String grailsVersion        // version it was developed against
     Boolean official = false    // specifies SpringSource support
+    Boolean featured = false
     Number avgRating
     Date dateCreated
     Date lastUpdated
@@ -44,7 +47,7 @@ class Plugin implements Taggable, Commentable, Rateable {
         screenshots component: true
     }
 
-    static transients = ['avgRating','official']
+    static transients = ['avgRating','official', 'fisheye']
 
     static constraints = {
         name unique: true
@@ -64,6 +67,10 @@ class Plugin implements Taggable, Commentable, Rateable {
 
     def getOfficial() {
         authorEmail.trim().endsWith('@springsource.com') || authorEmail.trim().endsWith('@g2one.com')
+    }
+    
+    def getFisheye() {
+        downloadUrl ? "${ConfigurationHolder.config.plugins.fisheye}/grails-${name}" : ''
     }
 
     def onAddComment = { comment ->

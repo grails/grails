@@ -53,7 +53,7 @@
                         <th>Current Release</th>
                         <td>${plugin.currentRelease}</td>
                         <td><a href="${plugin.documentationUrl}">Official Docs</a></td>
-                        <td><a href="${fisheye}">Fisheye</a></td>
+                        <td><a href="${plugin.fisheye}">Fisheye</a></td>
                     </tr>
                     <tr>
                         <th>Built on Grails</th>

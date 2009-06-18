@@ -8,9 +8,11 @@ import org.codehaus.groovy.grails.commons.ConfigurationHolder
  * author: Matthew Taylor
  */
 class PluginControllerTests extends ControllerUnitTestCase {
-
+    def controller
+    
     void setUp() {
         super.setUp()
+        controller = new PluginController()
         ConfigurationHolder.config = [grails:[serverURL:'serverurl']]
     }
 
@@ -25,7 +27,6 @@ class PluginControllerTests extends ControllerUnitTestCase {
         mockParams.name = 'plugin'
         p.metaClass.getComments = {-> [] }
 
-        def controller = new PluginController()
         def model = controller.show()
 
         assertEquals p, model.plugin
@@ -36,7 +37,6 @@ class PluginControllerTests extends ControllerUnitTestCase {
         mockParams.title='My Plugin'
         mockDomain(WikiPage)
 
-        def controller = new PluginController()
         def model = controller.createPlugin()
 
         assert model.plugin
@@ -55,9 +55,23 @@ class PluginControllerTests extends ControllerUnitTestCase {
         def redirectParams = [:]
         Plugin.metaClass.save = { Map m -> true }
 
-        def controller = new PluginController()
         controller.createPlugin()
 
         assertEquals "show", redirectArgs.action
+    }
+    
+    void testHomePopulatesFeaturedPlugins() {
+        def plugins = [
+            new Plugin(name:'not featured 1', featured:false),
+            new Plugin(name:'featured 1', featured: true),
+            new Plugin(name:'not featured 2', featured: false),
+            new Plugin(name:'featured 2', featured: true)
+        ]
+        mockDomain(Plugin, plugins)
+        def model = controller.home()
+        
+        assertNotNull model.featuredPlugins
+        assertEquals 2, model.featuredPlugins.size()
+        assertTrue model.featuredPlugins*.name.contains('featured 1')
     }
 }
