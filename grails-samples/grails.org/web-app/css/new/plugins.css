@@ -1,5 +1,18 @@
 #contentWrapper {
+    background: url(../../images/new/plugins/background_stretch.jpg) repeat-x top;
+}
+
+#contentCenter {
     background: url(../../images/new/plugins/background.jpg) no-repeat left top;
+}
+
+#contentArea {
+    width: 1000px;
+}
+
+#pluginMenu {
+    float:left;
+    width: 308px;
 }
 
 #pluginMenu h1 {
@@ -7,11 +20,10 @@
     background: url(../../images/new/plugins/plugins_topnav.png) no-repeat left top;
     width: 469px;
     height: 269px;
-    margin: 0 0 -159px -97px;
+    margin: 0 0 -159px -110px;
 }
 #pluginMenu .box {
     background: url(../../images/new/plugins/left_nav_mid.png) repeat-y;
-    width: 308px;
 }
 
 #pluginMenu .description {
@@ -28,4 +40,38 @@
     text-indent : -9999px;    
     width: 294px;
     height: 56px; 
+}
+
+#content {
+    margin: 0px 0px 0px 350px;
+    padding: 120px 0 0 0;
+}
+
+#searchBar {
+    background: url(../../images/new/plugins/search_bar.png) no-repeat left top;
+    width: 658px;
+    height: 58px;
+}
+
+.featuredPlugin {
+    background: url(../../images/new/plugins/pluginbox_mid.png) repeat-y left top;
+    width: 658px;
+}
+
+.featuredPlugin h4 {
+    background: url(../../images/new/plugins/pluginbox_top.png) no-repeat left top;
+}
+
+.featuredPlugin .details {
+    background: url(../../images/new/plugins/pluginbox_btm.png) no-repeat left bottom;
+}
+
+#latestComments {
+    clear: all;
+    width: 1000px;
+}
+
+#latestComments h2 {
+    margin: 0px;
+    padding: 0px;
 }

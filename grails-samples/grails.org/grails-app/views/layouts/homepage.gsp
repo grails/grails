@@ -177,13 +177,13 @@
     </div><!-- contentCenter -->
     
     <div id="grailsOptionsWrapper">
-        <div id="grailsOptionsGraphicsWrapper">
+        <div id="btmSectionGraphicsWrapper">
             <div id="mountainLeft"></div>
             <div id="knight"></div>
             <div id="mountainRight"></div>
             <div id="castle"></div>
-        </div><!-- grailsOptionsGraphicsWrapper-->
-        <div id="grailsOptionsBackgroundStretch">
+        </div><!-- btmSectionGraphicsWrapper-->
+        <div id="btmSectionBackgroundStretch">
             <div align="center">
                 <div id="grailsOptions">
                     <div class="left">
@@ -200,7 +200,7 @@
                     </div><!-- right column -->
                 </div><!-- grailsOptions -->
             </div><!-- center -->
-        </div><!-- grailsOptionsBackgroundStretch -->
+        </div><!-- btmSectionBackgroundStretch -->
     </div><!-- grailsOptionsWrapper -->
 </div><!-- contentWrapper -->
 

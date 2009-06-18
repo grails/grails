@@ -36,9 +36,7 @@
 
 <div id="contentWrapper">
     <div id="contentCenter" align="center">
-        <div id="contentArea">
-            <g:layoutBody/>
-        </div><!-- contentArea -->
+        <g:layoutBody/>
     </div><!-- contentCenter -->
 </div><!-- contentWrapper -->
 
