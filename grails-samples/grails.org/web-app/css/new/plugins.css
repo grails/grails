@@ -1,3 +1,31 @@
 #contentWrapper {
     background: url(../../images/new/plugins/background.jpg) no-repeat left top;
 }
+
+#pluginMenu h1 {
+    text-indent : -9999px;     
+    background: url(../../images/new/plugins/plugins_topnav.png) no-repeat left top;
+    width: 469px;
+    height: 269px;
+    margin: 0 0 -159px -97px;
+}
+#pluginMenu .box {
+    background: url(../../images/new/plugins/left_nav_mid.png) repeat-y;
+    width: 308px;
+}
+
+#pluginMenu .description {
+    background: url(../../images/new/plugins/left_nav_top.png) no-repeat left top;
+}
+
+#pluginMenu .createPlugin {
+    background: url(../../images/new/plugins/left_nav_btm.png) no-repeat left bottom;
+
+}
+
+#pluginMenu .createPlugin h3 {
+    background: url(../../images/new/plugins/create_plugin.png) no-repeat left top;
+    text-indent : -9999px;    
+    width: 294px;
+    height: 56px; 
+}
