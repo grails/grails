@@ -6,8 +6,8 @@
     <g:javascript src="common/application.js"/>
     <g:javascript src="common/tracking.js"/>
     
-    <link rel="stylesheet" href="css/new/master.css" type="text/css" media="screen" title="Master screen stylesheet" charset="utf-8" />
-    <link rel="stylesheet" href="css/new/homepage.css" type="text/css" media="screen" title="Master screen stylesheet" charset="utf-8" />
+    <link rel="stylesheet" href="/css/new/master.css" type="text/css" media="screen" title="Master screen stylesheet" charset="utf-8" />
+    <link rel="stylesheet" href="/css/new/homepage.css" type="text/css" media="screen" title="Master screen stylesheet" charset="utf-8" />
     
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 	<meta name="robots" content="NOODP">	
@@ -24,13 +24,12 @@
     <a href="http://www.springsource.com/"><div id="springSourceBar"></div></a>
     <div class="mainMenuBarWrapper">
         <ul id="mainMenuBar">
-            <li><a href="#">Products</a></li>
-            <li><a href="#">Support and Services</a></li>
-            <li><a href="#">SpringSource University</a></li>
-            <li><a href="#">News and Events</a></li>
-            <li><a href="#">Partners</a></li>
-            <li><a href="#">Exchange</a></li>
-            <li><a href="#">About Us</a></li>
+            <li><a href="http://www.springsource.com/products">Products</a></li>
+            <li><a href="http://www.springsource.com/services">Support and Services</a></li>
+            <li><a href="http://www.springsource.com/training">Training</a></li>
+            <li><g:link controller="content" id="Download">Downloads</g:link></li>
+            <li><g:link controller="content" id="Documentation">Documentation</g:link></li>
+            <li><g:link controller="content" id="Community">Community</g:link></li>
         </ul><!-- mainMenuBar -->
     </div><!-- mainMenuBarWrapper -->
 </div><!-- center -->
@@ -46,21 +45,21 @@
             <div id="grailsAttributes">
                 <div class="left">
         	        <h2>Rapid</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ut risus in eros.</p>		
+                    <p>Have your next Web 2.0 project done in weeks instead of months. Grails delivers a new age of Java web application productivity.</p>		
                 </div><!-- left column -->
                 <div class="center">
         			<h2>Dynamic</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ut risus in eros</p>
+                    <p>Get instant feedback, see instant results. Grails is the premier dynamic language web framework for the JVM.</p>
                 </div><!-- center column -->
                 <div class="right">
         			<h2>Robust</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ut risus in eros.</p>
+                    <p>Powered by <a href="http://springframework.org">Spring</a>, Grails out performs the competition. Dynamic, agile web development without compromises.</p>
                 </div><!-- right column -->
             </div><!-- grailsAttributes -->
             
             <div class="eventDownloadWrapper">
                 <div id="events">
-                    <h3>Events</h3>
+                    <h3>Training Events</h3>
                     <ul>
                         <li>
                             <h4>June 17-19, 2009</h4>
@@ -94,18 +93,41 @@
                 <div id="downloadBox">
                     <div class="downloadPluginWrapper">
                         <div id="download">
-                            <h3>Download Grails v1.1.1</h3>
-                            A short description of what I am downloading and some fluffy text highlighting grails key features.  Should not be longer than this.
-                            <h4>Learn More</h4>
+					        <download:latest var="grailsDownload" software="Grails" />
+                            <h3>
+								<g:if test="${grailsDownload}">
+									<download:link software="Grails" version="${grailsDownload?.softwareVersion}" file="Binary Zip">
+										<img src="${resource(dir:'images/new',file:'download_button.png')}" 
+											 border="0"
+											alt="Download Grails" />
+									</download:link>								
+								</g:if>
+								<g:else>
+									<g:link controller="content" id="Download">
+									  <img src="${resource(dir:'images/new',file:'download_button.png')}" 
+									       border="0"
+										   alt="Download Grails" />								
+									</g:link>
+								</g:else>
+							</h3>
+							<p>
+                            	A short description of what I am downloading and some fluffy text highlighting grails key features.  Should not be longer than this.</p>
+                            <h4><g:link controller="content" id="Download">Learn More</g:link></h4>
                         </div><!-- download -->
                         <div id="plugins">
-                            <h3>Grails Plugins</h3>
+                            <h3>
+								<g:link controller="plugin">
+									<img src="${resource(dir:'images/new',file:'plugins_button.png')}" alt="Grails Plugins" border="0" />
+								</g:link>
+								
+								
+							</h3>
                             <ul>
                                 <g:each var="plugin" in="${newestPlugins}">
                                     <li><g:link controller="plugin" action="show" params="[name:plugin.name]">${plugin.title}</g:link></li>
                                 </g:each>
                             </ul>
-                            <h4>View All</h4>
+                            <h4><g:link controller="plugin">View All</g:link></h4>
                         </div><!-- plugins -->
                     </div><!-- downloadPluginWrapper -->
                 </div><!-- downloadBox -->
@@ -151,17 +173,17 @@
                 </div><!-- screencasts -->
             </div><!-- newsScreencastWrapper -->
             
-        </div>
-    </div>
+        </div><!-- contentArea -->
+    </div><!-- contentCenter -->
     
     <div id="grailsOptionsWrapper">
-        <div id="grailsOptionsGraphicsWrapper">
+        <div id="btmSectionGraphicsWrapper">
             <div id="mountainLeft"></div>
             <div id="knight"></div>
             <div id="mountainRight"></div>
             <div id="castle"></div>
-        </div><!-- grailsOptionsGraphicsWrapper-->
-        <div id="grailsOptionsBackgroundStretch">
+        </div><!-- btmSectionGraphicsWrapper-->
+        <div id="btmSectionBackgroundStretch">
             <div align="center">
                 <div id="grailsOptions">
                     <div class="left">
@@ -178,14 +200,14 @@
                     </div><!-- right column -->
                 </div><!-- grailsOptions -->
             </div><!-- center -->
-        </div><!-- grailsOptionsBackgroundStretch -->
+        </div><!-- btmSectionBackgroundStretch -->
     </div><!-- grailsOptionsWrapper -->
 </div><!-- contentWrapper -->
 
 <div id="footer">
     <div align="center">
         <div class="innerFooter">
-            <a href="http://twitter.com/grails"><div class="twitter"></div></a>
+            <a href="http://twitter.com/grailsframework"><div class="twitter"></div></a>
             <a href="http://www.springsource.com"><div class="springSource"></div></a>
             <p>&copy; Copyright 2009 SpringSource.<br/>All Rights Reserved.</p>
         </div><!-- innerFooter -->

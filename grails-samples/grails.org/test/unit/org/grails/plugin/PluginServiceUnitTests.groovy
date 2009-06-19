@@ -88,21 +88,24 @@ class PluginServiceUnitTests extends grails.test.GrailsUnitTestCase {
         def mockPluginList = [new Plugin(name: 'mock plugin', title: 'Mock Plugin')]
         mockDomain(Plugin, mockPluginList)
         mockDomain(WikiPage)
+        mockDomain(Version)
 
+        assertEquals 1, Plugin.count()
         service.translateMasterPlugins(generateMockMasterPluginList())
         // there are 26 masters, and 1 existing, so result should be 27
-        assertEquals "Master plugins were not saved properly", 27, mockPluginList.size()
+        assertEquals "Master plugins were not saved properly", 27, Plugin.count()
     }
     
     void testTranslateMasterPlugins_DoesntAddPluginThatExists() {
-        def mockPluginList = [new Plugin(name: 'plugin-a', title: 'Plugin A Plugin')]
-        mockDomain(Plugin, mockPluginList)
         mockDomain(WikiPage)
+        def mockPluginList = [new Plugin(name: 'plugin-a', title: 'Plugin A Plugin', description: new WikiPage(title: 'Description', body:'', version:2))]
+        mockDomain(Plugin, mockPluginList)
         mockDomain(Version)
 
+        assertEquals 1, Plugin.count()
         service.translateMasterPlugins(generateMockMasterPluginList())
         // there are 26 masters, and one existing that should have been updated, so 26 total
-        assertEquals "Master plugins were not saved", 26, mockPluginList.size()
+        assertEquals "Master plugins were not saved", 26, Plugin.count()
     }
     
     void testUpdatePlugin() {
@@ -112,12 +115,13 @@ class PluginServiceUnitTests extends grails.test.GrailsUnitTestCase {
         def master = generateMockMasterPluginList()
         def plugin = new Plugin(
             name: 'plugin-a', 
+            description: new WikiPage(title: 'Description', body:'my body', version:2)
         )
 
         service.updatePlugin(plugin, master[0])
         assertEquals 'plugin-a', plugin.name
         assertEquals 'Plugin A Plugin', plugin.title
-        assertEquals "hosted at www.a-plugin.org", plugin.description.body
+        assertEquals "my body", plugin.description.body
         assertEquals "Peter A. Jackson", plugin.author
         assertEquals "peter_a@jackson.com", plugin.authorEmail
         assertEquals "http://www.grails.org/Plugin+A+Plugin", plugin.documentationUrl
@@ -135,6 +139,7 @@ class PluginServiceUnitTests extends grails.test.GrailsUnitTestCase {
             name: 'plugin-a', 
             documentationUrl: 'old doc url',
             downloadUrl: 'old dl url',
+            description: new WikiPage(title:'Description', body:'old description', version:2),
             currentRelease: 'old release',
             grailsVersion:' old grailsVersion'
         )
@@ -148,12 +153,13 @@ class PluginServiceUnitTests extends grails.test.GrailsUnitTestCase {
     void testUpdatePluginDoesNotOverrideExisting_Title_Desc_Body_Author_AuthorEmail() {
         mockDomain(Plugin)
         mockDomain(WikiPage)
+        mockDomain(Version)
 
         def master = generateMockMasterPluginList()
         def plugin = new Plugin(
             name: 'plugin-a', 
             title: 'Plugin A',
-            description: new WikiPage(title:'Description', body:'old description'),
+            description: new WikiPage(title:'Description', body:'old description', version:2),
             author: 'Richard D. James',
             authorEmail: 'richard@aphextwin.com'
         )
@@ -167,12 +173,13 @@ class PluginServiceUnitTests extends grails.test.GrailsUnitTestCase {
     void testUpdateCurrentRelease_AlsoUpdatesLastReleasedDate() {
         mockDomain(Plugin)
         mockDomain(WikiPage)
+        mockDomain(Version)
 
         def master = generateMockMasterPluginList()
         def plugin = new Plugin(
             name: 'plugin-a',
             title: 'Plugin A',
-            description: new WikiPage(title:'Description', body:'old description'),
+            description: new WikiPage(title:'Description', body:'old description', version:2),
                 currentRelease: '5.0.1',
             author: 'Richard D. James',
             authorEmail: 'richard@aphextwin.com'
@@ -210,8 +217,7 @@ class PluginServiceUnitTests extends grails.test.GrailsUnitTestCase {
     private def generateMockMasterPluginList() {
         ('a'..'z').inject([]) {masterList, x ->
             def up = x.toUpperCase()
-            WikiPage descPage = new WikiPage(title: 'Description', body: "hosted at www.${x}-plugin.org")
-            descPage.version = 2
+            WikiPage descPage = new WikiPage(title: 'Description', body: "hosted at www.${x}-plugin.org", version:2)
             masterList << new Plugin(
                     name: "plugin-${x}",
                     title: "Plugin ${up} Plugin",

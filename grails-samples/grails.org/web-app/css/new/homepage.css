@@ -1,15 +1,7 @@
-/*div { background: cyan;}*/
-
-
 #graphicHeader {
     width: 100%;
     height: 439px;
     background: url(../../images/new/top_branding.jpg) repeat scroll center top;
-}
-
-#contentWrapper {
-    background: url(../../images/new/top_bar.png) repeat-x scroll center top;
-    width: 100%;
 }
 
 /* TODO: This decoration doesn't move properly with the center page element when the window is resized */
@@ -20,11 +12,6 @@
     top: 557px;
     left: 140px;
     background: url(../../images/new/bar_decoration.png) no-repeat top left
-}
-
-#contentArea {
-    width: 910px;
-    text-align: left;
 }
 
 #grailsAttributes {
@@ -41,21 +28,30 @@
 }
 
 #grailsAttributes div h2 {
-    font-size: 16pt;
+    font-size: 14pt;
     text-transform: uppercase;
     padding: 7px 0px 8px 40px;
-    margin: 7px 0px 10px 14px;
+    margin: 7px 0px 10px 18px;
 }
 
 #grailsAttributes div p {
-    font-size: 10pt;
-    margin: -10px 0px 0px 25px
+    font-size: 9pt;
+    margin: -10px 10px 0px 20px
+	
 }
 
 #grailsAttributes div.left {
     left: 0px;
     top: -20px;
 }
+#grailsAttributes div.left  p{
+}
+#grailsAttributes div.center  p{
+}
+
+#grailsAttributes div.right  p{
+}
+
 #grailsAttributes div.left h2 {
     background: url(../../images/new/rapid_icon.png) no-repeat top left;
 }
@@ -98,7 +94,7 @@
     margin: 9px 0px 0px 27px;
     padding: 0px;
     font-weight: normal;
-    font-size: 18pt;
+    font-size: 16pt;
 }
 
 #events ul {
@@ -151,22 +147,22 @@
 
 .downloadPluginWrapper div {
     height: 114px;
-    padding: 77px 0px 0px 21px;
+    padding: 0px 0px 0px 10px;
 }
 
 #download {
-    background: url(../../images/new/download_button.png) no-repeat top left;
-    margin: 15px 0px 0px 11px;
+
+    margin: 5px 0px 0px 11px;
     position: absolute;
     top: 0px;
     left: 0px;
-    width: 215px;
+    width: 200px;
     color: #6B6B6B;
 }
 
 #plugins {
-    background: url(../../images/new/plugins_button.png) no-repeat top left;
-    margin: 15px 0px 0px 11px;
+/*    background: url(../../images/new/plugins_button.png) no-repeat top left;*/
+    margin: 5px 0px 0px 11px;
     position: absolute;
     top: 0px;
     left: 295px;
@@ -175,6 +171,8 @@
 }
 
 #plugins ul {
+	position:relative;
+	top:-10px;
     margin: 0px;
     padding: 0px;
     list-style: none;
@@ -189,15 +187,21 @@
 #plugins a:hover {
     color: #48802C;
 }
-
-#download h3, #plugins h3 {
-    display: none;
+#plugins ul {
+	margin-left:20px;
 }
-
+#download p {
+	margin-left:20px;
+}
+#download h4 a:visited,#download h4 a:link, #plugins h4 a:link {
+    color: #48802C;
+	text-decoration:none;
+}
 #download h4, #plugins h4 {
     text-transform: uppercase;
-    position: absolute;
-    bottom: 0px;
+	position:absolute;
+    top: 160px;
+	margin-left:20px;	
 }
 
 .newsScreencastWrapper {
@@ -232,6 +236,10 @@
 
 #newsBox a:hover {
     color: #48802C;
+
+}
+#newsBox a:link {
+	text-decoration:none;
 }
 
 #newsBox ul {
@@ -345,48 +353,6 @@
     font-size: 10pt;
     margin: 0px 0px 0px 8px;
     padding: 0px;
-}
-
-#grailsOptionsGraphicsWrapper {
-    position: relative;
-    width: 100%;
-    height: 30px;
-}
-
-#grailsOptionsGraphicsWrapper div {
-    position: absolute;
-    bottom: 0px;
-}
-
-#mountainLeft {
-    background: url(../../images/new/mountains_decoration.png) top right no-repeat;
-    height: 99px;
-    width: 234px;
-}
-
-#knight {
-    background: url(../../images/new/knight_decoration.png) top left no-repeat;
-    height: 49px;
-    width: 30px;
-    left: 2px;
-}
-
-#mountainRight {
-    background: url(../../images/new/mountains_decoration.png) top left no-repeat;
-    height: 99px;
-    width: 164px;
-    right: 0px;
-}
-
-#castle {
-    background: url(../../images/new/castle_decoration.png) top left no-repeat;
-    height: 31px;
-    width: 87px;
-    right: 283px;
-}
-
-#grailsOptionsBackgroundStretch {
-    background: url(../../images/new/bottom_section_stretch.png) top left repeat-x;
 }
 
 #grailsOptionsWrapper {

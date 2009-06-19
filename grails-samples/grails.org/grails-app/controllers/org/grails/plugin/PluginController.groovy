@@ -23,7 +23,18 @@ class PluginController extends BaseWikiController {
     }
 
     def home = {
-
+        def featuredPlugins = Plugin.findAllByFeatured(true, [max:3,offset:0,sort:'name'])
+        def latestComments = CommentLink.withCriteria {
+			projections { property "comment" }
+            eq 'type', 'plugin'
+            comment {
+                order('dateCreated', 'desc')
+            }
+            maxResults PORTAL_MAX_RESULTS
+			cache true
+        }
+        [featuredPlugins:featuredPlugins, latestComments:latestComments]
+        /*
         def tagCounts = [:]
         def tagLinkResults = TagLink.withCriteria {
             eq('type', 'plugin')
@@ -80,6 +91,7 @@ class PluginController extends BaseWikiController {
                 recentlyUpdatedPlugins: recentlyUpdatedPlugins,
                 latestComments: latestComments
         ]
+        */
     }
 
 	def pluginListCache
@@ -126,10 +138,8 @@ class PluginController extends BaseWikiController {
             userRating = plugin.userRating(request.user)
         }
 
-        def fisheye = plugin.downloadUrl ? "${ConfigurationHolder.config.plugins.fisheye}/grails-${plugin.name}" : ''
-
         // TODO: figure out why plugin.ratings.size() is always 1
-        render view:'showPlugin', model:[plugin:plugin, userRating: userRating, fisheye: fisheye]
+        render view:'showPlugin', model:[plugin:plugin, userRating: userRating]
     }
 
     def editPlugin = {
