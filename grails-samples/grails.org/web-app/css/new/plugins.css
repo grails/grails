@@ -73,6 +73,17 @@
     height: 31px;
 }
 
+#pluginMenu .links { margin-left: 20px; }
+#pluginMenu .links a { color: inherit; border: inherit; text-decoration: inherit;}
+
+
+#pluginMenu .links ul { list-style: none; padding: 0px; margin: 0px ;}
+#pluginMenu .links li {
+    background: url(../../images/new/plugins/icons/link_icon.png) no-repeat top left; 
+    padding-left: 20px;
+    padding-bottom: 12px;
+}
+
 #content {
     margin: 0px 0px 0px 350px;
     padding: 120px 0 0 0;
