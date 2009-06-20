@@ -60,7 +60,7 @@ class PluginControllerTests extends ControllerUnitTestCase {
         assertEquals "show", redirectArgs.action
     }
     
-    void testHomePopulatesFeaturedPlugins() {
+    void testHomePopulatesCurrentPluginsWithFeaturedByDefault() {
         def plugins = [
             new Plugin(name:'not featured 1', featured:false),
             new Plugin(name:'featured 1', featured: true),
@@ -68,10 +68,11 @@ class PluginControllerTests extends ControllerUnitTestCase {
             new Plugin(name:'featured 2', featured: true)
         ]
         mockDomain(Plugin, plugins)
+        controller.metaClass.getCommentService = { -> [getLatestComments: { String type-> []}]}
         def model = controller.home()
         
-        assertNotNull model.featuredPlugins
-        assertEquals 2, model.featuredPlugins.size()
-        assertTrue model.featuredPlugins*.name.contains('featured 1')
+        assertNotNull model.currentPlugins
+        assertEquals 2, model.currentPlugins.size()
+        assertTrue model.currentPlugins*.name.contains('featured 1')
     }
 }

@@ -51,9 +51,9 @@
             <g:render template="searchBar"/>
         </div>
 
-        <div id="featuredPlugins">
-            <g:each var="plugin" in="${featuredPlugins}">
-                <div class="featuredPlugin">
+        <div id="currentPlugins">
+            <g:each var="plugin" in="${currentPlugins}">
+                <div class="currentPlugin">
                     <h4>${plugin.title}</h4>
                     <g:if test="${plugin.official}">
                         <div class="supported">supported by SpringSource</div>

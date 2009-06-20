@@ -124,16 +124,16 @@
     background: url(../../images/new/plugins/Buttons/search_over.png) no-repeat left top;
 }
 
-.featuredPlugin {
+.currentPlugin {
     background: url(../../images/new/plugins/pluginbox_mid.png) repeat-y left top;
     width: 658px;
 }
 
-.featuredPlugin h4 {
+.currentPlugin h4 {
     background: url(../../images/new/plugins/pluginbox_top.png) no-repeat left top;
 }
 
-.featuredPlugin .details {
+.currentPlugin .details {
     background: url(../../images/new/plugins/pluginbox_btm.png) no-repeat left bottom;
 }
 
