@@ -15,23 +15,23 @@
 <div id="contentArea">
     <div id="pluginMenu">
         <h1>Plugins</h1>
-            <div class="description">
-                <p/>Welcome to the Grails plugin portal. The place where you can find information about the latest plugins available for the Grails framework.
+        <div class="description">
+            <p/>Welcome to the Grails plugin portal. The place where you can find information about the latest plugins available for the Grails framework.
+        </div>
+        <ul id="pluginSorters">
+            <li class="all">All</li>
+            <li class="featured">Featured</li>
+            <li class="popular">Most Popular</li>
+            <li class="recentlyUpdated">Recently Updated</li>
+            <li class="newest">Newest</li>
+        </ul>
+        <div class="createPlugin">
+            <h3>Want to create a plugin?</h3>
+            <div class="detail">
+                If you are interested in creating and distributing a plugin in the Grails central repository, take a look at this <a href="#">user guide section</a>.
             </div>
-            <ul id="pluginSorters">
-                <li class="all">All</li>
-                <li class="featured">Featured</li>
-                <li class="popular">Most Popular</li>
-                <li class="recentlyUpdated">Recently Updated</li>
-                <li class="newest">Newest</li>
-            </ul>
-            <div class="createPlugin">
-                <h3>Want to create a plugin?</h3>
-                <div class="detail">
-                    If you are interested in creating and distributing a plugin in the Grails central repository, take a look at this <a href="#">user guide section</a>.
-                </div>
-            </div>
-            <div class="bottom"></div>
+        </div>
+        <div class="bottom"></div>
         <div class="links">
             <h3>Links heading</h3>
             <ul>
@@ -53,23 +53,30 @@
             <g:each var="plugin" in="${currentPlugins}">
                 <div class="currentPlugin">
                     <h4>${plugin.title}</h4>
-                    <g:if test="${plugin.official}">
-                        <div class="supported">supported by SpringSource</div>
-                    </g:if>
-                    <div class="ratings">
-                        <rateable:ratings bean="${plugin}" active='false'/>
+                    <div class="content">
+                        <g:if test="${plugin.official}">
+                            <div class="supported">supported by SpringSource</div>
+                        </g:if>
+                        <div class="ratings">
+                            <rateable:ratings bean="${plugin}" active='false'/>
+                        </div>
+                        <div class="screenshot">
+                            screenshot would go here if there is one
+                        </div>
+                        <div class="details">
+                            <dl>
+                                <dt>Tags:</dt><dd>${plugin.tags.join(', ')}</dd>
+                                <dt>Grails Version:</dt><dd>${plugin.grailsVersion}</dd>
+                                <dt>Current Release:</dt><dd>${plugin.currentRelease}</dd>
+                            </dl>
+                            <a href="${plugin.fisheye}"><div class="fisheye">Fisheye</div></a>
+                            <a href="${plugin.documentationUrl}"><div class="docs">Docs</div></a>
+                        </div>
                     </div>
-                    <div class="screenshot">
-                        screenshot would go here if there is one
-                    </div>
-                    <div class="details">
-                        <dl>
-                            <dt>Tags:</dt><dd>${plugin.tags.join(', ')}</dd>
-                            <dt>Grails Version:</dt><dd>${plugin.grailsVersion}</dd>
-                            <dt>Current Release:</dt><dd>${plugin.currentRelease}</dd>
-                        </dl>
-                        <a href="${plugin.fisheye}"><div class="fisheye">Fisheye</div></a>
-                        <a href="${plugin.documentationUrl}"><div class="docs">Docs</div></a>
+                    <div class="bottom">
+                        <g:link action="show" params="${[name:plugin.name]}">More Info</g:link>
+                        <div class="comments">${plugin.comments.size()} Comments</div>
+                        <a href="${plugin.downloadUrl}"><div class="download">Download</div></a>
                     </div>
                 </div>
             </g:each>

@@ -125,12 +125,15 @@
 }
 
 .currentPlugin {
-    background: url(../../images/new/plugins/pluginbox_mid.png) repeat-y left top;
     width: 658px;
 }
 
 .currentPlugin h4 {
     background: url(../../images/new/plugins/pluginbox_top.png) no-repeat left top;
+}
+
+.currentPlugin .content {
+    background: url(../../images/new/plugins/pluginbox_mid.png) repeat-y left top;
 }
 
 .currentPlugin .details {
