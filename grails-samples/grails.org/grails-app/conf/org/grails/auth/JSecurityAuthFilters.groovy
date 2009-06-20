@@ -37,36 +37,6 @@ class JSecurityAuthFilters {
 
     static filters = {
 	   // Ensure that all controllers and actions require an authenticated user,
-
-            // temporary to hide the new site design
-            adminArea(uri:"/Home") {
-                before = {
-                    accessControl {
-                        role("Administrator")
-                    }
-                }
-            }
-            adminArea(uri:"/") {
-                before = {
-                    accessControl {
-                        role("Administrator")
-                    }
-                }
-            }
-            adminArea(uri:"/Plugins") {
-                before = {
-                    accessControl {
-                        role("Administrator")
-                    }
-                }
-            }
-            adminArea(uri:"/plugins") {
-                before = {
-                    accessControl {
-                        role("Administrator")
-                    }
-                }
-            }
             
 	        // Creating, modifying, or deleting a book requires the "Administrator"
 	        // role.
