@@ -93,6 +93,35 @@
     background: url(../../images/new/plugins/search_bar.png) no-repeat left top;
     width: 658px;
     height: 58px;
+    margin-top: -10px;
+}
+
+#searchBar .searchInput {
+    margin: 15px 10px 15px 15px;
+    height: 20px;
+    width: 390px;
+    border: none;
+    background: transparent;
+    color: #48802C;
+    font-size: 13pt;
+    font-weight: bold;
+    padding: 3px;
+}
+
+#searchBar select {
+    margin: 5px;
+}
+
+#searchBar .searchButton {
+    background: url(../../images/new/plugins/Buttons/search_btn.png) no-repeat left top;
+    width: 104px;
+    height: 36px;
+    text-indent: -9999px;
+    border: none;
+}
+
+#searchBar .searchButton:hover {
+    background: url(../../images/new/plugins/Buttons/search_over.png) no-repeat left top;
 }
 
 .featuredPlugin {
