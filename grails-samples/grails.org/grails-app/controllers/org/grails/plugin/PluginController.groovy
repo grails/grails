@@ -25,7 +25,7 @@ class PluginController extends BaseWikiController {
 
     def home = {
         def currentPlugins = Plugin.findAllByFeatured(true, [max:3,offset:0,sort:'name'])
-        def latestComments = commentService.getLatestComments('plugin')
+        def latestComments = commentService.getLatestComments('plugin', PORTAL_MAX_RESULTS)
         [currentPlugins:currentPlugins, latestComments:latestComments]
         /*
         def tagCounts = [:]

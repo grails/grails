@@ -15,7 +15,6 @@
 <div id="contentArea">
     <div id="pluginMenu">
         <h1>Plugins</h1>
-        <div class="box">
             <div class="description">
                 <p/>Welcome to the Grails plugin portal. The place where you can find information about the latest plugins available for the Grails framework.
             </div>
@@ -33,7 +32,6 @@
                 </div>
             </div>
             <div class="bottom"></div>
-        </div><!-- box -->
         <div class="links">
             <h3>Links heading</h3>
             <ul>

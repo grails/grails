@@ -4,14 +4,14 @@ class CommentService {
 
     boolean transactional = true
 
-    def getLatestComments(type) {
+    def getLatestComments(type, max) {
         CommentLink.withCriteria {
 			projections { property "comment" }
             eq 'type', type
             comment {
                 order('dateCreated', 'desc')
             }
-            maxResults PORTAL_MAX_RESULTS
+            maxResults max
 			cache true
         }
     }
