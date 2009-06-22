@@ -16,6 +16,7 @@ import org.grails.blog.BlogEntry
 
 class ContentController extends BaseWikiController {
 
+    def screencastService
     def pluginService
     def dateService
     def textCache
@@ -388,13 +389,7 @@ class ContentController extends BaseWikiController {
                 dateService.getDayOfMonth(it.dateCreated)
             }
         }
-        def latestScreencastId = Screencast.withCriteria {
-            order 'dateCreated', 'desc'
-            maxResults 1
-            projections {
-                property 'id'
-            }
-        }[0]
+        def latestScreencastId = screencastService.latestScreencastId
         render(view:"homePage", 
                 model:[
                     newestPlugins:newestPlugins, 

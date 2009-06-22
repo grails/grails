@@ -6,9 +6,9 @@
     <g:javascript src="common/application.js"/>
     <g:javascript src="common/tracking.js"/>
     
-    <link rel="stylesheet" href="css/new/master.css" type="text/css" media="screen" title="Master screen stylesheet" charset="utf-8" />
-    <link rel="stylesheet" href="css/new/homepage.css" type="text/css" media="screen" title="Master screen stylesheet" charset="utf-8" />
-    
+    <link rel="stylesheet" href="${createLinkTo(dir: 'css/new', file: 'master.css')}" type="text/css" />
+    <link rel="stylesheet" href="${createLinkTo(dir: 'css/new', file: 'homepage.css')}" type="text/css" />
+
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 	<meta name="robots" content="NOODP">	
 	<meta name="Description" content="Grails is a high-productivity web framework based on the Groovy language that embraces the coding by convention paradigm, but is designed specifically for the Java platform.">	
@@ -173,17 +173,17 @@
                 </div><!-- screencasts -->
             </div><!-- newsScreencastWrapper -->
             
-        </div>
-    </div>
+        </div><!-- contentArea -->
+    </div><!-- contentCenter -->
     
     <div id="grailsOptionsWrapper">
-        <div id="grailsOptionsGraphicsWrapper">
+        <div id="btmSectionGraphicsWrapper">
             <div id="mountainLeft"></div>
             <div id="knight"></div>
             <div id="mountainRight"></div>
             <div id="castle"></div>
-        </div><!-- grailsOptionsGraphicsWrapper-->
-        <div id="grailsOptionsBackgroundStretch">
+        </div><!-- btmSectionGraphicsWrapper-->
+        <div id="btmSectionBackgroundStretch">
             <div align="center">
                 <div id="grailsOptions">
                     <div class="left">
@@ -200,7 +200,7 @@
                     </div><!-- right column -->
                 </div><!-- grailsOptions -->
             </div><!-- center -->
-        </div><!-- grailsOptionsBackgroundStretch -->
+        </div><!-- btmSectionBackgroundStretch -->
     </div><!-- grailsOptionsWrapper -->
 </div><!-- contentWrapper -->
 

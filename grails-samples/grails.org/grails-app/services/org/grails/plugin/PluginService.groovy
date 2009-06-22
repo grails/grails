@@ -80,6 +80,7 @@ class PluginService {
                 if (!master.save()) {
                     log.error "Could not save master plugin: $master.name ($master.title), version $master.currentRelease"
                     master.errors.allErrors.each { log.error "\t$it" }
+                    
                 }
                 // put the wiki page back with a unique title
                 descWiki.title = "description-${master.id}"
@@ -91,10 +92,9 @@ class PluginService {
                 } else {
                     def v = master.description.createVersion()
                     v.author = User.findByLogin('admin')
-                    try {
-                        v.save(flush:true)
-                    } catch (Exception e) {
+                    if(!v.save(flush:true)) {
                         log.warn "Can't save version ${v.title} (${v.number})"
+                        v.errors.allErrors.each { log.warn it }
                     }
                 }
                 //inject dummy wikis for users to fill in
@@ -110,6 +110,7 @@ class PluginService {
                     master.errors.allErrors.each { log.error "\t$it" }
                 } else {
                     log.info "New plugin was saved from master: $master.name"
+                    log.info "There are now ${Plugin.count()} plugins."
                 }
             } else {
                 // update existing plugin
@@ -143,10 +144,9 @@ class PluginService {
         } else {
             def v = plugin.description.createVersion()
             v.author = User.findByLogin('admin')
-            try {
-                assert v.save(flush:true)
-            } catch (Exception e) {
+            if(!v.save(flush:true)) {
                 log.warn "Can't save version ${v.title} (${v.number})"
+                v.errors.allErrors.each { log.warn it }
             }
         }
         

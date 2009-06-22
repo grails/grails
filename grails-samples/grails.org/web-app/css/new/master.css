@@ -1,10 +1,20 @@
 body {
-    font-family: Lucida Grande;
+    font-family: Lucida Grande, Lucida, sans-serif;
     font-size: 12pt;
 }
 
 h1, h2, h3, h4, h5, h6 {
     color: #48802C;
+}
+
+#contentWrapper {
+    background: url(../../images/new/top_bar.png) repeat-x scroll center top;
+    width: 100%;
+}
+
+#contentArea {
+    width: 910px;
+    text-align: left;
 }
 
 #springSourceBar {
@@ -38,6 +48,48 @@ h1, h2, h3, h4, h5, h6 {
     display: inline;
     padding: 0px 4px 0px 10px;
     margin-top: 3px;
+}
+
+#btmSectionGraphicsWrapper {
+    position: relative;
+    width: 100%;
+    height: 30px;
+}
+
+#btmSectionGraphicsWrapper div {
+    position: absolute;
+    bottom: 0px;
+}
+
+#mountainLeft {
+    background: url(../../images/new/mountains_decoration.png) top right no-repeat;
+    height: 99px;
+    width: 234px;
+}
+
+#knight {
+    background: url(../../images/new/knight_decoration.png) top left no-repeat;
+    height: 49px;
+    width: 30px;
+    left: 2px;
+}
+
+#mountainRight {
+    background: url(../../images/new/mountains_decoration.png) top left no-repeat;
+    height: 99px;
+    width: 164px;
+    right: 0px;
+}
+
+#castle {
+    background: url(../../images/new/castle_decoration.png) top left no-repeat;
+    height: 31px;
+    width: 87px;
+    right: 203px;
+}
+
+#btmSectionBackgroundStretch {
+    background: url(../../images/new/bottom_section_stretch.png) top left repeat-x;
 }
 
 #footer {

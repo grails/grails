@@ -37,7 +37,7 @@ class JSecurityAuthFilters {
 
     static filters = {
 	   // Ensure that all controllers and actions require an authenticated user,
-
+            
 	        // Creating, modifying, or deleting a book requires the "Administrator"
 	        // role.
 	        wikiEditing(controller: "(content|news|plugin)", action: "(editNews|createNews|markupWikiPage|editWikiPage|createWikiPage|saveWikiPage|editPlugin|createPlugin)") {
