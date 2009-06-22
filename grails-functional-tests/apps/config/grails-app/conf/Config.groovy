@@ -29,6 +29,9 @@ grails.views.default.codec="none" // none, html, base64
 grails.views.gsp.encoding="UTF-8"
 grails.converters.encoding="UTF-8"
 
+test.value1="first"
+test.value2="second"
+
 // enabled native2ascii conversion of i18n properties files
 grails.enable.native2ascii = true
 
