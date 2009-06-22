@@ -7,6 +7,7 @@ class TestController {
     // the delete, save and update actions only accept POST requests
     static allowedMethods = [delete:'POST', save:'POST', update:'POST']
 
+
     def list = {
         params.max = Math.min( params.max ? params.max.toInteger() : 10,  100)
         [ testInstanceList: Test.list( params ), testInstanceTotal: Test.count() ]
