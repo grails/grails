@@ -1,4 +1,5 @@
 import org.springframework.context.*
+import org.codehaus.groovy.grails.web.servlet.*
 
 class TestController implements ApplicationContextAware {
 	
@@ -33,6 +34,18 @@ class TestController implements ApplicationContextAware {
 		def two = request.getAttribute("requestScopedBean")
 		
 		render "Scoped bean = ${one == two}"
+	}
+	
+	def testAppCtxInServletContextA = {
+		def appCtx = org.springframework.web.context.support.WebApplicationContextUtils.getRequiredWebApplicationContext(servletContext)
+		
+		render "Resolver class = ${appCtx.getBean('localeResolver').class.name}"
+	}
+
+	def testAppCtxInServletContextB = {
+		def appCtx = servletContext.getAttribute(GrailsApplicationAttributes.APPLICATION_CONTEXT)
+		
+		render "Resolver class = ${appCtx.getBean('localeResolver').class.name}"
 	}
 
 }
