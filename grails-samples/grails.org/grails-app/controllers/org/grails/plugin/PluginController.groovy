@@ -24,67 +24,39 @@ class PluginController extends BaseWikiController {
     }
 
     def home = {
-        def currentPlugins = Plugin.findAllByFeatured(true, [max:3,offset:0,sort:'name'])
+        params.max = params.max ?: 3
+        params.offset = params.offset ?: 0
+        params.sort = params.sort ?: 'name'
+        params.order = params.order ?: 'asc'
+        def category = params.remove('category') ?: 'featured'
+        
+        log.debug "plugin home: $params"
+        
+        def currentPlugins
+        switch (category) {
+            case 'all':
+                currentPlugins = Plugin.list(params)
+                break;
+            case 'featured':
+                currentPlugins = Plugin.findAllByFeatured(true, params)
+                break;
+            case 'recentlyUpdated':
+                params.sort = 'lastReleased'
+                currentPlugins = Plugin.list(params).sort { it.lastReleased }.reverse()
+                currentPlugins.each { log.debug "$it.name : $it.lastReleased"}
+                break;
+            default:
+                currentPlugins = Plugin.list(params).sort { it.averageRating }
+                log.debug "before reverse:"
+                currentPlugins.each { log.debug "$it.name : $it.averageRating"}
+                if (params.order != 'asc') currentPlugins = currentPlugins.reverse()
+                log.debug "after reverse:"
+                currentPlugins.each { log.debug "$it.name : $it.averageRating"}
+        }
+        
         def latestComments = commentService.getLatestComments('plugin', PORTAL_MAX_RESULTS)
         [currentPlugins:currentPlugins, latestComments:latestComments]
-        /*
-        def tagCounts = [:]
-        def tagLinkResults = TagLink.withCriteria {
-            eq('type', 'plugin')
-            projections {
-                groupProperty('tag')
-                count('tagRef')
-            }
-			cache true
-        }
-
-		tagLinkResults.each {
-            // TODO: put multiple assignment back in place as soon as IntelliJ catches up, because right now it thinks
-            // this entire source file is invalid when I do this:
-            //      def (tagName, count) = it
-            def tagName = it[0]
-            def count = it[1]
-            tagCounts[tagName] = tagCounts[tagName] ? (tagCounts[tagName] + count) : count
-        }
-
-        def popularPlugins = pluginService.popularPlugins(PORTAL_MIN_RATINGS, PORTAL_MAX_RESULTS)
-
-        // only the first few
-        if (popularPlugins.size()) {
-            popularPlugins = popularPlugins[0..(popularPlugins.size() < PORTAL_MAX_RESULTS ? popularPlugins.size() - 1 : PORTAL_MAX_RESULTS - 1)]
-        }
-
-        def newestPlugins = pluginService.newestPlugins(PORTAL_MAX_RESULTS)
-
-        def recentlyUpdatedPlugins = Plugin.withCriteria {
-            order('lastReleased', 'desc')
-            maxResults(PORTAL_MAX_RESULTS)
-			cache true
-        }
-
-        def latestComments = CommentLink.withCriteria {
-			projections { property "comment" }
-            eq 'type', 'plugin'
-            comment {
-                order('dateCreated', 'desc')
-            }
-            maxResults PORTAL_MAX_RESULTS
-			cache true
-        }
-    
-        def homeWiki = wikiPageService.getCachedOrReal(HOME_WIKI)
-        if (!homeWiki) {
-            homeWiki = new WikiPage(title:HOME_WIKI, body: 'Please edit me.').save()
-        }
-        [
-                homeWiki: homeWiki,
-                tagCounts: tagCounts,
-                popularPlugins: popularPlugins,
-                newestPlugins: newestPlugins,
-                recentlyUpdatedPlugins: recentlyUpdatedPlugins,
-                latestComments: latestComments
-        ]
-        */
+        
     }
 
 	def pluginListCache
