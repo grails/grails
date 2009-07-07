@@ -23,7 +23,7 @@
 <div align="center">
     <div id="springSourceBar">
 		<div id="springSourceLogo">
-    		<a href="http://www.springsource.com/"><img src="${resource(dir:'images/new', file:'springsource-logo.png')}" border="0"></a>			
+    		<a href="http://www.springsource.com/"><img src="${resource(dir:'images/new', file:'springsource-logo.jpg')}" border="0"></a>			
 		</div>
     </div>
     <div class="mainMenuBarWrapper">
