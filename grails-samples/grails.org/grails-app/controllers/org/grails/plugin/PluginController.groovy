@@ -24,41 +24,61 @@ class PluginController extends BaseWikiController {
     }
 
     def home = {
-        params.max = params.max ?: 3
+        params.max = 5
         params.offset = params.offset ?: 0
         params.sort = params.sort ?: 'name'
         params.order = params.order ?: 'asc'
+		params.cache = true
         def category = params.remove('category') ?: 'featured'
         
         log.debug "plugin home: $params"
         
         def currentPlugins
+		def totalPlugins = 0
+		def defaults = {
+            currentPlugins = Plugin.list(params)
+			totalPlugins = Plugin.count()			
+		}
         switch (category) {
             case 'all':
-                currentPlugins = Plugin.list(params)
+				defaults()
                 break;
+			case 'popular':
+	            currentPlugins = Plugin.listOrderByAverageRating([cache:true, offset:params.offset, max:5])
+				totalPlugins = Plugin.countRated()	
+	            break;				
+			break
+			case 'newest':
+				params.sort = 'dateCreated'
+				params.order = 'desc'
+				defaults()
+				break			
+			break
             case 'featured':
                 currentPlugins = Plugin.findAllByFeatured(true, params)
+				totalPlugins = Plugin.countByFeatured(true)
                 break;
             case 'recentlyUpdated':
                 params.sort = 'lastReleased'
-                currentPlugins = Plugin.list(params).sort { it.lastReleased }.reverse()
-                currentPlugins.each { log.debug "$it.name : $it.lastReleased"}
+				params.order = 'desc'
+				defaults()
                 break;
             default:
-                currentPlugins = Plugin.list(params).sort { it.averageRating }
-                log.debug "before reverse:"
-                currentPlugins.each { log.debug "$it.name : $it.averageRating"}
-                if (params.order != 'asc') currentPlugins = currentPlugins.reverse()
-                log.debug "after reverse:"
-                currentPlugins.each { log.debug "$it.name : $it.averageRating"}
+				defaults()
+				
+			break
         }
         
         def latestComments = commentService.getLatestComments('plugin', PORTAL_MAX_RESULTS)
-        [currentPlugins:currentPlugins, latestComments:latestComments]
+        [currentPlugins:currentPlugins, category:category,latestComments:latestComments, totalPlugins:totalPlugins]
         
     }
 
+	def all = {
+		render view:"home", model:[originAction:"all",
+								  pluginList:Plugin.list(max:10, offset: params.offset?.toInteger(), cache:true, sort:"name")]
+	}
+	
 	def pluginListCache
     def list = {
         def pluginMap = pluginListCache?.get("fullPluginList")?.value

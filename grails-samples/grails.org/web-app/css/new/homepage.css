@@ -1,7 +1,11 @@
 #graphicHeader {
     width: 100%;
-    height: 439px;
-    background: url(../../images/new/top_branding.jpg) repeat scroll center top;
+    height: 349px;
+    background: url(../../images/new/top_brandingv2.jpg) repeat scroll center top;
+}
+body {
+	margin-left:0px;
+	margin-right:0px;
 }
 
 /* TODO: This decoration doesn't move properly with the center page element when the window is resized */

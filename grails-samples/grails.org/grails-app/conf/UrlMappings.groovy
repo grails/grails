@@ -25,6 +25,7 @@ class UrlMappings {
         "/plugin/showTag"(controller: 'plugin', action:'showTag')
         "/plugin/postComment/$id"(controller: "plugin", action:"postComment")
         "/plugin/latest"(controller: "plugin", action: "latest")
+		"/plugin/category/$category"(controller:"plugin", action:"home")
 
         "/plugin/showComment/$id"(controller: 'plugin', action:'showComment')
 

@@ -1,13 +1,20 @@
 #contentWrapper {
     background: url(../../images/new/plugins/background_stretch.jpg) repeat-x top;
+	margin:0px;
+	width:100%;
 }
 
+body {
+	margin-left:0px;
+	margin-right:0px;
+}
 #contentCenter {
     background: url(../../images/new/plugins/background.jpg) no-repeat left top;
+	min-height:800px;
 }
 
 #contentArea {
-    width: 1000px;
+
 }
 
 #pluginMenu {
@@ -76,6 +83,7 @@
 #pluginMenu .links { margin-left: 20px; }
 #pluginMenu .links a { color: inherit; border: inherit; text-decoration: inherit;}
 
+#pluginSorters a { color: inherit; border: inherit; text-decoration: inherit;}
 
 #pluginMenu .links ul { list-style: none; padding: 0px; margin: 0px ;}
 #pluginMenu .links li {
@@ -99,7 +107,7 @@
 #searchBar .searchInput {
     margin: 15px 10px 15px 15px;
     height: 20px;
-    width: 390px;
+    width: 500px;
     border: none;
     background: transparent;
     color: #48802C;
@@ -128,24 +136,161 @@
     width: 658px;
 }
 
-.currentPlugin h4 {
+.currentPlugin .header {
     background: url(../../images/new/plugins/pluginbox_top.png) no-repeat left top;
+	margin:0px;
 }
 
-.currentPlugin .content {
+.currentPlugin .header .detail {
+	padding-top: 10px;
+	padding-left:30px;
+	padding-bottom:20px;
+	font-size:0.8em;	
+}
+
+.currentPlugin .header .label{
+	color:#767676;
+	text-transform:uppercase;
+
+}
+
+.currentPlugin .header h4 {
+	position:relative;
+	top:20px;
+	padding-left:20px;
+}
+.currentPlugin .header .supported {
+	color:#767676;
+	padding-left:20px;
+	font-size:0.7em;
+}
+.currentPlugin .header .ratings {
+	position:absolute;
+	margin-top:10px;
+	margin-left:530px;
+}
+
+.currentPlugin .links {
+	padding-left:20px;
+	padding-bottom:20px;
+	font-size:0.9em;
     background: url(../../images/new/plugins/pluginbox_mid.png) repeat-y left top;
+	margin:0px;
+}
+.currentPlugin .links div {
+	display:inline;
+}
+.currentPlugin .links  a { color: inherit; border: inherit; text-decoration: inherit;}
+.currentPlugin .bottom .comments  a { color: inherit; border: inherit; text-decoration: inherit;}
+.currentPlugin .bottom .comments {
+	position:relative;
+	margin-left:200px;
+	bottom:40px;
+	font-size:0.8em;
 }
 
-.currentPlugin .details {
-    background: url(../../images/new/plugins/pluginbox_btm.png) no-repeat left bottom;
+#contentArea {
+	min-height:800px;
+}
+
+.currentPlugin .bottom .download a { color: black; border: inherit; text-decoration: none;}
+.currentPlugin .bottom .download {
+	float:right;
+	position:relative;
+	right:5px;
+	bottom:80px;
+
+	padding-right:55px;
+	padding-top:20px;
+	padding-bottom:10px;
+	background: url(../../images/new/plugins/Buttons/download_btn.png) no-repeat right bottom;
+}
+.currentPlugin .bottom .moreInfo {
+	padding-top:10px;
+	padding-left:20px;
+	padding-bottom:10px;
+
+}
+.currentPlugin .bottom {
+    background: url(../../images/new/plugins/pluginbox_btm.png) no-repeat left top;
+	margin:0px;
 }
 
 #latestComments {
     clear: all;
-    width: 1000px;
+    width: 100%;
+	min-height:400px;
+	background:transparent url(../../images/new/bottom_section_stretch.png) repeat-x scroll left top
 }
 
 #latestComments h2 {
+	position:relative;
+	bottom:30px;
+	left:15%;
+	font-weight:normal;
+	font-size:1.2em;
     margin: 0px;
     padding: 0px;
+	width:80%;	
+}
+#latestComments #commentList {
+	position:relative;
+	left:15%;	
+	font-size:0.8em;
+	width:80%;	
+}
+#latestComments #commentList .comment {
+	margin-bottom:30px;
+}
+#latestComments #commentList .comment img {
+	float:left;
+}
+#latestComments #commentList .comment .author {
+	font-weight:bold;
+	margin-left:70px;
+}
+#latestComments #commentList .comment .date {
+	color:#003E00;
+
+	margin-left:70px;
+	margin-bottom:10px;	
+}
+#latestComments #commentList .comment .commentBody {
+	margin-left:70px;
+	color:#767676;
+}
+#paginationPlugins a { color: inherit; border: inherit; text-decoration: inherit;}
+#paginationPlugins .step, #paginationPlugins .nextLink, #paginationPlugins .prevLink {
+	font-size:0.8em;
+	padding:5px;	
+	padding-top:2px;
+	padding-left:4px;
+	padding-right:7px;
+	text-align:center;
+	margin-left:3px;
+	background:url(../../images/new/plugins/pagination_box.png) no-repeat left top;;
+	color:#767676;
+
+}
+
+#paginationPlugins .currentStep {
+	font-size:0.8em;
+	padding:5px;	
+	padding-top:2px;
+	padding-left:4px;
+	padding-right:7px;
+	padding-bottom:2px;
+	text-align:center;
+	margin-left:3px;
+	color:white;
+	background-color:#7B7B7B;
+
+}
+#footer .twitter {
+    background: none;
+    width: 69px;
+    height: 78px;
+    position: absolute;
+    top: -17px;
+    left: 20px;
 }

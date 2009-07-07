@@ -21,15 +21,24 @@
 <body>
     
 <div align="center">
-    <a href="http://www.springsource.com/"><div id="springSourceBar"></div></a>
+    <div id="springSourceBar">
+		<div id="springSourceLogo">
+    		<a href="http://www.springsource.com/"><img src="${resource(dir:'images/new', file:'springsource-logo.png')}" border="0"></a>			
+		</div>
+		<div id="grailsLogo">
+			<a href="http://grails.org"><img src="${resource(dir:'images/new', file:'grailslogo_topNav.png')}" border="0"></a>
+		</div>
+
+    </div>
+
     <div class="mainMenuBarWrapper">
         <ul id="mainMenuBar">
             <li><a href="http://www.springsource.com/products">Products</a></li>
             <li><a href="http://www.springsource.com/services">Support and Services</a></li>
             <li><a href="http://www.springsource.com/training">Training</a></li>
+            <li><a href="http://www.springsource.com/customer/casestudies">Case Studies</a></li>
             <li><g:link controller="content" id="Download">Downloads</g:link></li>
             <li><g:link controller="content" id="Documentation">Documentation</g:link></li>
-            <li><g:link controller="content" id="Community">Community</g:link></li>
         </ul><!-- mainMenuBar -->
     </div><!-- mainMenuBarWrapper -->
 </div><!-- center -->
@@ -39,6 +48,19 @@
         <g:layoutBody/>
     </div><!-- contentCenter -->
 </div><!-- contentWrapper -->
+<g:if test="${latestComments}">
+	<div id="latestComments">
+	    <h2><img src="${resource(dir:'images/new/plugins/icons', file:'comments.png')}" border="0" /> Most Recent Comments</h2>
+	    <div id='commentList'>
+	        <g:each var='comment' status='i' in="${latestComments}">
+	            <g:set var='oddEven' value="${(i%2==0) ? 'even' : 'odd'}"/>
+	            <div class='comment ${oddEven}'>
+	                <g:render template="comment" var="comment" bean="${comment}"/>
+	            </div>
+	        </g:each>
+	    </div>
+	</div>
+</g:if>
 
 <div id="footer">
     <div align="center">

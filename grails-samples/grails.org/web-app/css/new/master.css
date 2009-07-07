@@ -17,11 +17,19 @@ h1, h2, h3, h4, h5, h6 {
     text-align: left;
 }
 
+#springSourceBar #grailsLogo {
+	margin-top:10px;
+	float:right;
+}
+#springSourceBar #springSourceLogo {
+	float:left;
+}
+
 #springSourceBar {
-    width: 880px;
+	position:relative;
+	width:900px;
     height: 60px;
     margin-top: -8px;
-    background: url(../../images/new/springsource-logo.png) no-repeat left top;
 }
 
 .mainMenuBarWrapper {
