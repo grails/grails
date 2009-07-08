@@ -47,9 +47,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #mainMenuBar a {
-    color: inherit;
-    border: inherit;
-    text-decoration: inherit;
+	color: black; border: inherit; text-decoration: none;
 }
 
 #mainMenuBar li {

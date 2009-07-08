@@ -8,6 +8,9 @@
     
     <link rel="stylesheet" href="${createLinkTo(dir: 'css/new', file: 'master.css')}" type="text/css" />
     <link rel="stylesheet" href="${createLinkTo(dir: 'css/new', file: 'plugins.css')}" type="text/css" />
+	<!--[if IE]>
+    <link rel="stylesheet" href="${resource(dir: 'css/new', file: 'ie.css')}"/>
+	<![endif]-->
 
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 	<meta name="robots" content="NOODP">	

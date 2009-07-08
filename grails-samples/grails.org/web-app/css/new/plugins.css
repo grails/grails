@@ -81,9 +81,9 @@ body {
 }
 
 #pluginMenu .links { margin-left: 20px; }
-#pluginMenu .links a { color: inherit; border: inherit; text-decoration: inherit;}
+#pluginMenu .links a { color: black; border: inherit; text-decoration: none;}
 
-#pluginSorters a { color: inherit; border: inherit; text-decoration: inherit;}
+#pluginSorters a { color: black; border: inherit; text-decoration: none;}
 
 #pluginMenu .links ul { list-style: none; padding: 0px; margin: 0px ;}
 #pluginMenu .links li {
@@ -121,9 +121,10 @@ body {
 }
 
 #searchBar .searchButton {
-    background: url(../../images/new/plugins/Buttons/search_btn.png) no-repeat left top;
     width: 104px;
     height: 36px;
+	position:relative;
+	top:10px;
     text-indent: -9999px;
     border: none;
 }
@@ -180,8 +181,8 @@ body {
 .currentPlugin .links div {
 	display:inline;
 }
-.currentPlugin .links  a { color: inherit; border: inherit; text-decoration: inherit;}
-.currentPlugin .bottom .comments  a { color: inherit; border: inherit; text-decoration: inherit;}
+.currentPlugin .links  a { color: black; border: inherit; text-decoration: none;}
+.currentPlugin .bottom .comments  a { color: black; border: inherit; text-decoration: none;detail}
 .currentPlugin .bottom .comments {
 	position:relative;
 	margin-left:200px;
@@ -259,7 +260,7 @@ body {
 	margin-left:70px;
 	color:#767676;
 }
-#paginationPlugins a { color: inherit; border: inherit; text-decoration: inherit;}
+#paginationPlugins a { color: black; border: inherit; text-decoration: none;}
 #paginationPlugins .step, #paginationPlugins .nextLink, #paginationPlugins .prevLink {
 	font-size:0.8em;
 	padding:5px;	
