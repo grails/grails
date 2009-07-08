@@ -69,7 +69,7 @@ To make life easier for you, we do recommend that you add a plugin group for Gra
 </settings>
 {code}
 
-In addition, if you have the Octo Maven Tools for Grails setup then you'll need to remove the  @com.octo.mtg@  plugin group.
+In addition, if you have the Octo Maven Tools for Grails set up then you'll need to remove the  @com.octo.mtg@  plugin group.
 
 h4. Creating a Grails Maven Project
 
@@ -78,7 +78,7 @@ To create a Mavenized Grails project simple run the following command:
 {code}
 mvn archetype:generate -DarchetypeGroupId=org.grails \\\
     -DarchetypeArtifactId=grails-maven-archetype \\\
-    -DarchetypeVersion=1.0-SNAPSHOT \\\
+    -DarchetypeVersion=1.0 \\\
     -DarchetypeRepository=http://snapshots.repository.codehaus.org \\\
     -DgroupId=example -DartifactId=my-app
 {code}
