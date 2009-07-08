@@ -32,4 +32,17 @@ class SpringBeanFunctionalTests extends functionaltestplugin.FunctionalTestCase 
         assertStatus 200
         assertContentContains 'Scoped bean = true'		
 	}
+	
+    void testLookupServletContextA() {
+        get('/test/testAppCtxInServletContextA')
+        assertStatus 200
+        assertContentContains 'Resolver class = org.springframework.web.servlet.i18n.FixedLocaleResolver'
+    }
+
+    void testLookupServletContextB() {
+        get('/test/testAppCtxInServletContextB')
+        assertStatus 200
+        assertContentContains 'Resolver class = org.springframework.web.servlet.i18n.FixedLocaleResolver'
+    }
+	
 }

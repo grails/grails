@@ -1,6 +1,6 @@
 <div class="searchBox">
     <g:form name="pluginSearch" action="search">
-        <input type="text" name="q" value="${q}"/>
-        <input type="submit" value="Search Plugins"/>
+        <input class="searchInput" type="text" name="q" value="${q}"/>
+        <input class="searchButton" type="submit" value="Search"/>
     </g:form>
 </div>

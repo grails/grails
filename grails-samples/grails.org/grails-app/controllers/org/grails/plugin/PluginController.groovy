@@ -13,81 +13,72 @@ class PluginController extends BaseWikiController {
 
     static String HOME_WIKI = 'PluginHome'
     static int PORTAL_MAX_RESULTS = 5
-    static int PORTAL_MIN_RATINGS = 3
-
+    static int PORTAL_MIN_RATINGS = 1
+    
     def wikiPageService
+    def pluginService
+    def commentService
 
     def index = {
         redirect(controller:'plugin', action:home, params:params)
     }
 
     def home = {
-
-        def tagCounts = [:]
-        def tagLinkResults = TagLink.withCriteria {
-            eq('type', 'plugin')
-            projections {
-                groupProperty('tag')
-                count('tagRef')
-            }
-			cache true
+        params.max = 5
+        params.offset = params.offset ?: 0
+        params.sort = params.sort ?: 'name'
+        params.order = params.order ?: 'asc'
+		params.cache = true
+        def category = params.remove('category') ?: 'featured'
+        
+        log.debug "plugin home: $params"
+        
+        def currentPlugins
+		def totalPlugins = 0
+		def defaults = {
+            currentPlugins = Plugin.list(params)
+			totalPlugins = Plugin.count()			
+		}
+        switch (category) {
+            case 'all':
+				defaults()
+                break;
+			case 'popular':
+	            currentPlugins = Plugin.listOrderByAverageRating([cache:true, offset:params.offset, max:5])
+				totalPlugins = Plugin.countRated()	
+	            break;				
+			break
+			case 'newest':
+				params.sort = 'dateCreated'
+				params.order = 'desc'
+				defaults()
+				break			
+			break
+            case 'featured':
+                currentPlugins = Plugin.findAllByFeatured(true, params)
+				totalPlugins = Plugin.countByFeatured(true)
+                break;
+            case 'recentlyUpdated':
+                params.sort = 'lastReleased'
+				params.order = 'desc'
+				defaults()
+                break;
+            default:
+				defaults()
+				
+			break
         }
-
-		tagLinkResults.each {
-            // TODO: put multiple assignment back in place as soon as IntelliJ catches up, because right now it thinks
-            // this entire source file is invalid when I do this:
-            //      def (tagName, count) = it
-            def tagName = it[0]
-            def count = it[1]
-            tagCounts[tagName] = tagCounts[tagName] ? (tagCounts[tagName] + count) : count
-        }
-
-        def ratingsComparator = new PluginComparator()
-        def popularPlugins = Plugin.list(cache:true).findAll {
-            it.ratings.size() >= PORTAL_MIN_RATINGS
-        }.sort(ratingsComparator).reverse()
-
-        // only the first few
-        if (popularPlugins.size()) {
-            popularPlugins = popularPlugins[0..(popularPlugins.size() < PORTAL_MAX_RESULTS ? popularPlugins.size() - 1 : PORTAL_MAX_RESULTS - 1)]
-        }
-
-        def newestPlugins = Plugin.withCriteria {
-            order('dateCreated', 'desc')
-            maxResults(PORTAL_MAX_RESULTS)
-			cache true
-        }
-
-        def recentlyUpdatedPlugins = Plugin.withCriteria {
-            order('lastReleased', 'desc')
-            maxResults(PORTAL_MAX_RESULTS)
-			cache true
-        }
-
-        def latestComments = CommentLink.withCriteria {
-			projections { property "comment" }
-            eq 'type', 'plugin'
-            comment {
-                order('dateCreated', 'desc')
-            }
-            maxResults PORTAL_MAX_RESULTS
-			cache true
-        }
-    
-        def homeWiki = wikiPageService.getCachedOrReal(HOME_WIKI)
-        if (!homeWiki) {
-            homeWiki = new WikiPage(title:HOME_WIKI, body: 'Please edit me.').save()
-        }
-        [
-                homeWiki: homeWiki,
-                tagCounts: tagCounts,
-                popularPlugins: popularPlugins,
-                newestPlugins: newestPlugins,
-                recentlyUpdatedPlugins: recentlyUpdatedPlugins,
-                latestComments: latestComments
-        ]
+        
+        def latestComments = commentService.getLatestComments('plugin', PORTAL_MAX_RESULTS)
+        [currentPlugins:currentPlugins, category:category,latestComments:latestComments, totalPlugins:totalPlugins]
+        
     }
 
+	def all = {
+		render view:"home", model:[originAction:"all",
+								  pluginList:Plugin.list(max:10, offset: params.offset?.toInteger(), cache:true, sort:"name")]
+	}
+	
 	def pluginListCache
     def list = {
         def pluginMap = pluginListCache?.get("fullPluginList")?.value
@@ -132,10 +123,8 @@ class PluginController extends BaseWikiController {
             userRating = plugin.userRating(request.user)
         }
 
-        def fisheye = plugin.downloadUrl ? "${ConfigurationHolder.config.plugins.fisheye}/grails-${plugin.name}" : ''
-
         // TODO: figure out why plugin.ratings.size() is always 1
-        render view:'showPlugin', model:[plugin:plugin, userRating: userRating, fisheye: fisheye]
+        render view:'showPlugin', model:[plugin:plugin, userRating: userRating]
     }
 
     def editPlugin = {
@@ -293,17 +282,5 @@ class PluginController extends BaseWikiController {
 
     private def byName(params) {
         Plugin.findByName(params.name, [cache:true])
-    }
-}
-
-// sorts by averageRating, then number of votes
-class PluginComparator implements Comparator {
-    public int compare(Object o1, Object o2) {
-        if (o1.averageRating > o2.averageRating) return 1
-        if (o1.averageRating < o2.averageRating) return -1
-        // averateRatings are same, so use number of votes
-        if (o1.ratings.size() > o2.ratings.size()) return 1
-        if (o1.ratings.size() < o2.ratings.size()) return -1
-        return 0
     }
 }

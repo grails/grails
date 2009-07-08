@@ -10,6 +10,7 @@ import org.grails.content.Version
 import org.grails.content.Content
 import org.codehaus.groovy.grails.plugins.codecs.URLCodec
 import org.grails.wiki.*
+import org.grails.plugin.PluginService
 
 /**
  * @author Graeme Rocher
@@ -38,13 +39,16 @@ class ContentControllerTests extends grails.test.ControllerUnitTestCase {
     }
 
     void testIndexNoId() {
+        mockDomain(BlogEntry)
         ContentController.metaClass.getRequest = {-> [method: "POST"] }
         ContentController.metaClass.getParams = {-> [id: null] }
 
         def renderParams = [:]
-        ContentController.metaClass.render = {Map args -> renderParams = args }
 
         def controller = new ContentController()
+        controller.metaClass.getPluginService = { -> [newestPlugins: { num -> [] } ] }
+        controller.metaClass.getScreencastService = { -> [getLatestScreencastId: { -> 5 } ] }
+        controller.metaClass.render = {Map args -> renderParams = args }
 
         controller.index()
 
@@ -53,13 +57,16 @@ class ContentControllerTests extends grails.test.ControllerUnitTestCase {
     }
 
     void testIndexHomeId() {
+        mockDomain(BlogEntry)
         ContentController.metaClass.getRequest = {-> [method: "POST"] }
         ContentController.metaClass.getParams = {-> [id: "Home"] }
 
         def renderParams = [:]
-        ContentController.metaClass.render = {Map args -> renderParams = args }
-
+        
         def controller = new ContentController()
+        controller.metaClass.getPluginService = { -> [newestPlugins: { num -> [] } ] }
+        controller.metaClass.getScreencastService = { -> [getLatestScreencastId: { -> 5 } ] }
+        controller.metaClass.render = {Map args -> renderParams = args }
 
         controller.index()
 

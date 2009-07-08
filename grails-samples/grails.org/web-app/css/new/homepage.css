@@ -1,0 +1,422 @@
+#graphicHeader {
+    width: 100%;
+    height: 349px;
+    background: url(../../images/new/top_brandingv2.jpg) repeat scroll center top;
+}
+body {
+	margin-left:0px;
+	margin-right:0px;
+}
+
+/* TODO: This decoration doesn't move properly with the center page element when the window is resized */
+#barDecoration {
+    position: absolute;
+    width: 129px;
+    height: 86px;
+    top: 557px;
+    left: 140px;
+    background: url(../../images/new/bar_decoration.png) no-repeat top left
+}
+
+#grailsAttributes {
+    margin-bottom: -220px;
+}
+
+#grailsAttributes div {
+    background: url(../../images/new/top_box.png) no-repeat top left;
+    position: relative;
+    width: 263px;
+    height: 122px;
+    overflow: hidden;
+    font-size: 11pt;
+}
+
+#grailsAttributes div h2 {
+    font-size: 14pt;
+    text-transform: uppercase;
+    padding: 7px 0px 8px 40px;
+    margin: 7px 0px 10px 18px;
+}
+
+#grailsAttributes div p {
+    font-size: 9pt;
+    margin: -10px 10px 0px 20px
+	
+}
+
+#grailsAttributes div.left {
+    left: 0px;
+    top: -20px;
+}
+#grailsAttributes div.left  p{
+}
+#grailsAttributes div.center  p{
+}
+
+#grailsAttributes div.right  p{
+}
+
+#grailsAttributes div.left h2 {
+    background: url(../../images/new/rapid_icon.png) no-repeat top left;
+}
+
+#grailsAttributes div.center {
+    left: 325px;
+    top: -142px;
+}
+#grailsAttributes div.center h2 {
+    background: url(../../images/new/dynamic_icon.png) no-repeat top left;
+}
+
+#grailsAttributes div.right {
+    left: 646px;
+    top: -264px;
+}
+#grailsAttributes div.right h2 {
+    background: url(../../images/new/robust_icon.png) no-repeat top left;
+}
+
+.eventDownloadWrapper {
+    width: 910px;
+    height: 210px;
+    position: relative;
+    margin-bottom: 30px;
+}
+
+#events {
+    background: url(../../images/new/events_back.jpg) no-repeat top left;
+    width: 325px;
+    height: 200px;
+    overflow: hidden;
+    position: absolute;
+    top: 2px;
+    left: 3px;
+}
+
+#events h3 {
+    color: #363636;
+    margin: 9px 0px 0px 27px;
+    padding: 0px;
+    font-weight: normal;
+    font-size: 16pt;
+}
+
+#events ul {
+    margin: 0px 3px 0px 28px;
+    padding: 0px;
+    line-height: 0px;
+    height: 157px;
+    overflow: auto !important;  
+    overflow-x: hidden !important;
+}
+
+#events li {
+    font-size: 8pt;
+    color: #6B6B6B;
+    list-style: none;
+    margin-bottom: 23px;
+}
+
+#events li h4 {
+    font-size: 9pt;
+    font-weight: bold;
+    color: #48802C;
+}
+
+#globeGraphic {
+    background: url(../../images/new/globe.png) no-repeat top left;
+    width: 83px;
+    height: 79px;
+    position: absolute;
+    top: 181px;
+    left: 233px;
+}
+
+#downloadBox {
+    background: url(../../images/new/DownloadPlugin_box.png) no-repeat top left;
+    width: 585px;
+    height: 207px;
+    overflow: hidden;
+    position: absolute;
+    top: 0px;
+    left: 321px;
+    font-size: 8pt;
+}
+
+.downloadPluginWrapper {
+    position: relative;
+    width: 585px;
+    height: 207px;
+}
+
+.downloadPluginWrapper div {
+    height: 114px;
+    padding: 0px 0px 0px 10px;
+}
+
+#download {
+
+    margin: 5px 0px 0px 11px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 200px;
+    color: #6B6B6B;
+}
+
+#plugins {
+/*    background: url(../../images/new/plugins_button.png) no-repeat top left;*/
+    margin: 5px 0px 0px 11px;
+    position: absolute;
+    top: 0px;
+    left: 295px;
+    width: 215px;
+    color: #6B6B6B;
+}
+
+#plugins ul {
+	position:relative;
+	top:-10px;
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+
+#plugins a {
+    text-decoration: inherit;
+    border: inherit;
+    color: inherit;
+}
+
+#plugins a:hover {
+    color: #48802C;
+}
+#plugins ul {
+	margin-left:20px;
+}
+#download p {
+	margin-left:20px;
+}
+#download h4 a:visited,#download h4 a:link, #plugins h4 a:link {
+    color: #48802C;
+	text-decoration:none;
+}
+#download h4, #plugins h4 {
+    text-transform: uppercase;
+	position:absolute;
+    top: 160px;
+	margin-left:20px;	
+}
+
+.newsScreencastWrapper {
+    width: 910px;
+    position: relative;
+    margin: 0px 0px 330px 0px;
+}
+
+.newsScreencastWrapper #latestNews, .newsScreencastWrapper #screencasts {
+    height: 245px;
+    padding: 0px;
+}
+
+#latestNews {
+    position: absolute;
+    top: 3px;
+    left: 0px;
+}
+
+#newsBox {
+    background: url(../../images/new/news_box.png) no-repeat top left;
+    width: 582px;
+    height: 240px;
+    overflow: hidden;
+    font-size: 8pt;
+    line-height: 0px;
+}
+
+#newsBox a {
+    color: inherit;
+}
+
+#newsBox a:hover {
+    color: #48802C;
+
+}
+#newsBox a:link {
+	text-decoration:none;
+}
+
+#newsBox ul {
+    margin: 14px 0px 0px 0px;
+    padding: 0px;
+    list-style: none;
+}
+
+#newsBox li {
+    color: #96937D;
+    margin: 6px 10px;
+    width: 560px;
+    height: 60px;
+}
+
+#newsBox .detail {
+    background: url(../../images/new/news_text_back.png);
+    float: right;
+    width: 488px;
+    margin-right: 2px;
+    height: 58px;
+    padding-left: 6px;
+}
+
+#newsBox .detail h4 {
+    color: #3C4D2B;
+    font-size: 12pt;
+    margin-top: 11px;
+}
+
+#newsBox .detail div {
+    height: 14px;
+}
+
+#newsBox .author {
+    text-transform: uppercase;
+}
+
+#newsBox .calendar {
+    background: url(../../images/new/calendar_box.png) no-repeat top left;
+    width: 56px;
+    height: 58px;
+    margin-left: 4px;
+}
+
+#newsBox .calendar .month, #newsBox .calendar .day {
+    text-align: center;
+    font-weight: bold;
+}
+
+#newsBox .calendar .month {
+    color: #FFF;
+    font-size: 10pt;
+    padding-top: 10px;
+}
+
+#newsBox .calendar .day {
+    font-size: 18pt;
+    padding-top: 26px;
+}
+
+#newsBox .actions {
+    color: #96937D;
+    clear: both;
+    background: transparent url(../../images/new/rss_icon.png) no-repeat scroll right top;
+    height: 20px;
+    text-transform: uppercase;
+    padding: 8px 26px 0px 0px;
+    margin: 0px 19px;
+    float:right;
+}
+
+#screencasts {
+    position: absolute;
+    top: 0px;
+    left: 634px;    
+}
+
+.castBox {
+    background: url(../../images/new/screencast_box.png) no-repeat top left;
+    width: 269px;
+    height: 245px;
+    overflow: hidden;
+}
+
+.castBox h4 {
+    text-transform: uppercase;
+    margin: 13px 20px 0px 0px;
+    text-align: right;
+    font-size: 9pt;
+}
+
+.castBox a, .castBox img {
+    text-decoration: none;
+    border: none;
+    color: #48802C;
+    font-weight: bold;
+}
+
+.castScreen {
+    background: url(../../images/new/Screenshot_Eg.jpg) no-repeat top left;
+    width: 140px;
+    height: 114px;
+    margin: 14px 0px 0px 14px;
+    padding: 72px 0px 0px 100px;
+}
+
+#latestNews h2, #screencasts h2 {
+    font-weight: bold;
+    color: #363636;
+    font-size: 10pt;
+    margin: 0px 0px 0px 8px;
+    padding: 0px;
+}
+
+#grailsOptionsWrapper {
+    height: 322px;
+}
+
+#grailsOptions {
+    width: 910px;
+    height: 300px;
+    text-align: left;
+}
+
+#grailsOptions h3 {
+    padding: 0px;
+    margin: 0px;
+}
+
+#grailsOptions div {
+    position: relative;
+    width: 263px;
+    height: 308px;
+    overflow: hidden;
+    font-size: 11pt;
+    color: #363636;
+}
+
+#grailsOptions div h3 {
+    font-size: 12pt;
+    font-weight: bold;
+    color: #48802C;
+    text-transform: uppercase;
+    padding: 7px 0px 8px 40px;
+    margin: 7px 0px 20px 14px;
+}
+
+#grailsOptions div p {
+    font-size: 10pt;
+    margin: -10px 0px 0px 25px
+}
+
+#grailsOptions div.left {
+    left: 0px;
+    top: -42px;
+}
+#grailsOptions div.left h3 {
+    background: url(../../images/new/training_icon.png) no-repeat top left;
+}
+
+#grailsOptions div.center {
+    left: 325px;
+    top: -348px;
+}
+#grailsOptions div.center h3 {
+    background: url(../../images/new/support_icon.png) no-repeat top left;
+}
+
+#grailsOptions div.right {
+    left: 646px;
+    top: -656px;
+}
+#grailsOptions div.right h3 {
+    background: url(../../images/new/services_icon.png) no-repeat top left;
+}

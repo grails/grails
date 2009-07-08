@@ -26,9 +26,9 @@ git pull
 cd $sourceLoc
 
 echo "Packaging grails war in $sourceLoc ..."
-~/grails-1.1/bin/grails clean
+~/grails-1.1.1/bin/grails clean
 rm *.war
-~/grails-1.1/bin/grails prod war
+~/grails-1.1.1/bin/grails prod war
 
 cdtDate=`TZ=CST date +"%Y%m%d-%H%M"`
 newFolder=$name-$version-$cdtDate

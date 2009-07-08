@@ -1,0 +1,76 @@
+URL Mappings also support named mappings.  Simply put, named mappings are mappings
+which have a name associated with them.  The name may be used to refer to a 
+specific mapping when links are being generated.
+
+The syntax for defining a named mapping is as follows:
+
+{code:java}
+static mappings = {
+   name <mapping name>: <url pattern> {
+      // ...
+   }
+}
+{code}
+
+An example:
+
+{code:java}
+static mappings = {
+    name personList: "/showPeople" {
+        controller = 'person'
+        action = 'list'
+    }
+    name accountDetails: "/details/$acctNumber" {
+        controller = 'product'
+        action = 'accountDetails'
+    }
+}
+{code}
+
+The mapping may be referenced in a link tag in a GSP.
+
+{code:xml}
+<g:link mapping="personList">List People</g:link>
+{code}
+
+That would result in:
+
+{code:xml}
+<a href="/showPeople">List People</a>
+{code}
+
+Parameters may be specified using the params attribute.
+
+{code:xml}
+<g:link mapping="accountDetails" params="[acctNumber:'8675309']">Show Account</g:link>
+{code}
+
+That would result in:
+
+{code:xml}
+<a href="/details/8675309">Show Account</a>
+{code}
+
+Alternatively you may reference a named mapping using the link namespace.
+
+{code:xml}
+<link:personList>List People</link:personList>
+{code}
+
+That would result in:
+
+{code:xml}
+<a href="/showPeople">List People</a>
+{code}
+
+The link namespace approach allows parameters to be specified as attributes.
+
+{code:xml}
+<link:accountDetails acctNumber="8675309">Show Account</link:accountDetails>
+{code}
+
+That would result in:
+
+{code:xml}
+<a href="/details/8675309">Show Account</a>
+{code}

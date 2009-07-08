@@ -5,12 +5,20 @@ package org.grails.plugin
 
 import grails.test.GrailsUnitTestCase
 import org.grails.rateable.Rating
+import org.codehaus.groovy.grails.commons.ConfigurationHolder
 
 class PluginTests extends GrailsUnitTestCase {
 
+    def cachedConfig 
+    
     protected void setUp() {
         super.setUp();
         mockDomain(Plugin)
+        cachedConfig = ConfigurationHolder.config
+    }
+    
+    protected void tearDown() {
+        ConfigurationHolder.config = cachedConfig
     }
 
     void testCurrentReleaseValidation() {
@@ -69,5 +77,13 @@ class PluginTests extends GrailsUnitTestCase {
         assertTrue p.isNewerThan('1.1-SNAPSHOT')
         assertFalse p.isNewerThan('1.1')
         assertFalse p.isNewerThan('1.0.2')
+    }
+    
+    void testFisheyeTransientProperty() {
+        def config = new ConfigObject()
+        config.plugins.fisheye = 'fisheyeUrl'
+        ConfigurationHolder.config = config
+        def p = new Plugin(name:'kevin', downloadUrl:'something')
+        assertEquals "fisheyeUrl/grails-kevin", p.fisheye
     }
 }

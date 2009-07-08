@@ -25,9 +25,9 @@ This is problematic as it forces you to do some clever parsing in the controller
      controller = "blog"
      action = "show"
      constraints {
-          year(matches:/\d{4}/)
-          month(matches:/\d{2}/)
-          day(matches:/\d{2}/)
+          year(matches:/\\\d{4}/)
+          month(matches:/\\\d{2}/)
+          day(matches:/\\\d{2}/)
      }
 }{code}
 

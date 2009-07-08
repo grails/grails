@@ -1,0 +1,140 @@
+body {
+    font-family: Lucida Grande, Lucida, sans-serif;
+    font-size: 12pt;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #48802C;
+}
+
+#contentWrapper {
+    background: url(../../images/new/top_bar.png) repeat-x scroll center top;
+    width: 100%;
+}
+
+#contentArea {
+    width: 910px;
+    text-align: left;
+}
+
+#springSourceBar #grailsLogo {
+	margin-top:10px;
+	float:right;
+}
+#springSourceBar #springSourceLogo {
+	margin-top:5px;
+	float:left;
+}
+
+#springSourceBar {
+	position:relative;
+	width:900px;
+    height: 60px;
+    margin-top: -8px;
+}
+
+.mainMenuBarWrapper {
+    background: url(../../images/new/topnav_menubar.png) repeat scroll top;
+    width: 100%;
+}
+#mainMenuBar {
+    height: 24px;
+    margin: 0px;
+    width: 880px;
+    padding: 7px 0px 0px 0px;
+    font-size: 10pt;
+    text-align: left;
+}
+
+#mainMenuBar a {
+    color: inherit;
+    border: inherit;
+    text-decoration: inherit;
+}
+
+#mainMenuBar li {
+    background: url(../../images/new/topnav_menbar_divider.png) no-repeat top left;
+    display: inline;
+    padding: 0px 4px 0px 10px;
+    margin-top: 3px;
+}
+
+#btmSectionGraphicsWrapper {
+    position: relative;
+    width: 100%;
+    height: 30px;
+}
+
+#btmSectionGraphicsWrapper div {
+    position: absolute;
+    bottom: 0px;
+}
+
+#mountainLeft {
+    background: url(../../images/new/mountains_decoration.png) top right no-repeat;
+    height: 99px;
+    width: 234px;
+}
+
+#knight {
+    background: url(../../images/new/knight_decoration.png) top left no-repeat;
+    height: 49px;
+    width: 30px;
+    left: 2px;
+}
+
+#mountainRight {
+    background: url(../../images/new/mountains_decoration.png) top left no-repeat;
+    height: 99px;
+    width: 164px;
+    right: 0px;
+}
+
+#castle {
+    background: url(../../images/new/castle_decoration.png) top left no-repeat;
+    height: 31px;
+    width: 87px;
+    right: 203px;
+}
+
+#btmSectionBackgroundStretch {
+    background: url(../../images/new/bottom_section_stretch.png) top left repeat-x;
+}
+
+#footer {
+    width: 100%;
+    height: 80px;
+    background: url(../../images/new/footer_stretch.png) repeat-x top;
+    font-size: 10pt;
+}
+
+.innerFooter {
+    position: relative;
+    width: 880px;
+    height: 60px;
+    margin-top: -8px;
+}
+
+.innerFooter p {
+    color: #96937D;
+    text-align: right;
+    padding: 23px 190px 0px 0px;
+}
+
+#footer .twitter {
+    background: url(../../images/new/twitter_icon.png) no-repeat left top;
+    width: 69px;
+    height: 78px;
+    position: absolute;
+    top: -17px;
+    left: 20px;
+}
+
+#footer .springSource {
+    background: url(../../images/new/springsource-logo.png) no-repeat right top;
+    width: 158px;
+    height: 54px;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}

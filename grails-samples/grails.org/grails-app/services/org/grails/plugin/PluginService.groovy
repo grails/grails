@@ -7,7 +7,24 @@ import org.grails.content.Version
 
 class PluginService {
 
+    static int DEFAULT_MAX = 5
+
     boolean transactional = true
+    
+    def popularPlugins(minRatings, max = DEFAULT_MAX) {
+        def ratingsComparator = new PluginComparator()
+        Plugin.list(cache:true, maxResults:max).findAll {
+            it.ratings.size() >= minRatings
+        }.sort(ratingsComparator).reverse()
+    }
+    
+    def newestPlugins(max = DEFAULT_MAX) {
+        Plugin.withCriteria {
+            order('dateCreated', 'desc')
+            maxResults(max)
+			cache true
+        }
+    }
     
     def runMasterUpdate() {
         translateMasterPlugins(generateMasterPlugins())
@@ -54,7 +71,6 @@ class PluginService {
     def translateMasterPlugins(masters) {
         masters.each { master ->
             def plugin = Plugin.findByName(master.name)
-
             if (!plugin) {
                 // injecting a unique wiki page name for description
                 // pull off the desc so we don't try to save it
@@ -64,6 +80,7 @@ class PluginService {
                 if (!master.save()) {
                     log.error "Could not save master plugin: $master.name ($master.title), version $master.currentRelease"
                     master.errors.allErrors.each { log.error "\t$it" }
+                    
                 }
                 // put the wiki page back with a unique title
                 descWiki.title = "description-${master.id}"
@@ -75,10 +92,9 @@ class PluginService {
                 } else {
                     def v = master.description.createVersion()
                     v.author = User.findByLogin('admin')
-                    try {
-                        v.save(flush:true)
-                    } catch (Exception e) {
+                    if(!v.save(flush:true)) {
                         log.warn "Can't save version ${v.title} (${v.number})"
+                        v.errors.allErrors.each { log.warn it }
                     }
                 }
                 //inject dummy wikis for users to fill in
@@ -94,6 +110,7 @@ class PluginService {
                     master.errors.allErrors.each { log.error "\t$it" }
                 } else {
                     log.info "New plugin was saved from master: $master.name"
+                    log.info "There are now ${Plugin.count()} plugins."
                 }
             } else {
                 // update existing plugin
@@ -104,15 +121,6 @@ class PluginService {
 
     def updatePlugin(plugin, master) {
         log.info "Updating plugin \"$plugin.name\"..."
-        // handle the wiki page with some care
-        if (master.description?.body && !plugin.description?.body) {
-            plugin.description = master.description
-            plugin.description.title = "description-${plugin.id}"
-            assert plugin.description.save()
-            Version v = plugin.description.createVersion()
-            v.author = User.findByLogin('admin')
-            assert v.save()
-        }
 
         // these attributes are overriden by local plugin domain changes
         updatePluginAttribute('title', plugin, master)
@@ -136,10 +144,9 @@ class PluginService {
         } else {
             def v = plugin.description.createVersion()
             v.author = User.findByLogin('admin')
-            try {
-                assert v.save(flush:true)
-            } catch (Exception e) {
+            if(!v.save(flush:true)) {
                 log.warn "Can't save version ${v.title} (${v.number})"
+                v.errors.allErrors.each { log.warn it }
             }
         }
         
@@ -234,5 +241,17 @@ class PluginVersion implements Comparable {
             else result = 0
         }
         result
+    }   
+}
+
+// sorts by averageRating, then number of votes
+class PluginComparator implements Comparator {
+    public int compare(Object o1, Object o2) {
+        if (o1.averageRating > o2.averageRating) return 1
+        if (o1.averageRating < o2.averageRating) return -1
+        // averateRatings are same, so use number of votes
+        if (o1.ratings.size() > o2.ratings.size()) return 1
+        if (o1.ratings.size() < o2.ratings.size()) return -1
+        return 0
     }
 }

@@ -10,10 +10,15 @@ import org.grails.content.notifications.ContentAlertStack
 import org.grails.wiki.BaseWikiController
 import org.grails.plugin.Plugin
 import org.grails.content.Content
+import org.grails.plugin.PluginController
+import org.grails.screencasts.Screencast
+import org.grails.blog.BlogEntry
 
 class ContentController extends BaseWikiController {
 
+    def screencastService
     def pluginService
+    def dateService
     def textCache
     
     static accessControl = {
@@ -93,7 +98,7 @@ class ContentController extends BaseWikiController {
 
         if(pageName) {
             if(pageName == 'Home') {
-                render(view:"homePage")
+                renderHomepage()
             }
             // treat plugin pages differently
             else if (pageName.matches(/(${Plugin.WIKIS.join('|')})-[0-9]*/)) {
@@ -121,7 +126,7 @@ class ContentController extends BaseWikiController {
                 }
             }
 		} else {
-			render(view:"homePage")
+			renderHomepage()
 		}
 	}
 
@@ -369,5 +374,28 @@ class ContentController extends BaseWikiController {
         else {
             render(view:"/common/uploadDialog", model:[category:params.id])
         }
+    }
+    
+    def renderHomepage = {
+        // Homepage needs latest plugins
+        def newestPlugins = pluginService.newestPlugins(4)
+        def newsItems = BlogEntry.list(max:3, cache:true, order:"desc", sort:"dateCreated")
+        // make it easy to get the month and day
+        newsItems.each {
+            it.metaClass.getMonth = { ->
+                dateService.getMonthString(it.dateCreated)
+            }
+            it.metaClass.getDay = { ->
+                dateService.getDayOfMonth(it.dateCreated)
+            }
+        }
+        def latestScreencastId = screencastService.latestScreencastId
+        render(view:"homePage", 
+                model:[
+                    newestPlugins:newestPlugins, 
+                    newsItems:newsItems,
+                    latestScreencastId: latestScreencastId
+                ]
+        )
     }
 }

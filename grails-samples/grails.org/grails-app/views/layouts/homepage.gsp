@@ -3,185 +3,220 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
+    <g:javascript src="common/application.js"/>
+    <g:javascript src="common/tracking.js"/>
+    
+    <link rel="stylesheet" href="${createLinkTo(dir: 'css/new', file: 'master.css')}" type="text/css" />
+    <link rel="stylesheet" href="${createLinkTo(dir: 'css/new', file: 'homepage.css')}" type="text/css" />
+
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 	<meta name="robots" content="NOODP">	
 	<meta name="Description" content="Grails is a high-productivity web framework based on the Groovy language that embraces the coding by convention paradigm, but is designed specifically for the Java platform.">	
 	
 	<title>Grails - The search is over.</title>
 
-	<link rel="stylesheet" href="css/master.css" type="text/css" media="screen" title="Master screen stylesheet" charset="utf-8" />
-	<style type="text/css">@import url("css/home.css");</style>
-	<script type="text/javascript">
-	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-	</script>
-	<script type="text/javascript">
-	try {
-	var pageTracker = _gat._getTracker("UA-2728886-12");
-	pageTracker._trackPageview();
-	} catch(err) {}</script>	
-
-	<!--[if IE]>
-		<link rel="stylesheet" href="${createLinkTo(dir:'css/ie', file:'master.css')}" type="text/css" media="screen" title="Primary screen stylesheet" charset="utf-8" />
-	<![endif]-->
-    <g:layoutHead />
+	<g:layoutHead />
 
 </head>
 <body>
-	<div id="container">
+    
+<div align="center">
+    <div id="springSourceBar">
+		<div id="springSourceLogo">
+    		<a href="http://www.springsource.com/"><img src="${resource(dir:'images/new', file:'springsource-logo.jpg')}" border="0"></a>			
+		</div>
+    </div>
+    <div class="mainMenuBarWrapper">
+        <ul id="mainMenuBar">
+            <li><a href="http://www.springsource.com/products">Products</a></li>
+            <li><a href="http://www.springsource.com/services">Support and Services</a></li>
+            <li><a href="http://www.springsource.com/training">Training</a></li>
+            <li><a href="http://www.springsource.com/customer/casestudies">Case Studies</a></li>
+            <li><g:link controller="content" id="Download">Downloads</g:link></li>
+            <li><g:link controller="content" id="Documentation">Documentation</g:link></li>
+        </ul><!-- mainMenuBar -->
+    </div><!-- mainMenuBarWrapper -->
+</div><!-- center -->
 
-	<!-- logo -->
-	<a href="http://grails.org"><img src="images/grails-logo.png" width="285" height="148" alt="Grails Logo" class="logo" border="0"/></a>
-	<!-- / logo -->
+<div id="graphicHeader"></div>
 
-	<!-- masthead -->
+<div id="barDecoration"></div>
 
-	<blockquote id="headline">
-		<img src="images/quote-petrovic.png" width="685" height="65" alt="Quote Petrovic" />
-	<cite>- Mark Petrovic</cite>
-	</blockquote><!-- / headline -->
+<div id="contentWrapper">
+    <div id="contentCenter" align="center">
+        <div id="contentArea">
+            
+            <div id="grailsAttributes">
+                <div class="left">
+        	        <h2>Rapid</h2>
+                    <p>Have your next Web 2.0 project done in weeks instead of months. Grails delivers a new age of Java web application productivity.</p>		
+                </div><!-- left column -->
+                <div class="center">
+        			<h2>Dynamic</h2>
+                    <p>Get instant feedback, see instant results. Grails is the premier dynamic language web framework for the JVM.</p>
+                </div><!-- center column -->
+                <div class="right">
+        			<h2>Robust</h2>
+                    <p>Powered by <a href="http://springframework.org">Spring</a>, Grails out performs the competition. Dynamic, agile web development without compromises.</p>
+                </div><!-- right column -->
+            </div><!-- grailsAttributes -->
+            
+            <div class="eventDownloadWrapper">
+                <div id="events">
+                    <h3>Training Events</h3>
+                    <ul>
+                        <li>
+                            <h4>June 17-19, 2009</h4>
+                            Groovy and Grails - Belgium, Brussels
+                        </li>
+                        <li>
+                            <h4>June 17-19, 2009</h4>
+                            Groovy and Grails - Belgium, Brussels
+                        </li>
+                        <li>
+                            <h4>June 17-19, 2009</h4>
+                            Groovy and Grails - Belgium, Brussels
+                        </li>
+                        <li>
+                            <h4>June 17-19, 2009</h4>
+                            Groovy and Grails - Belgium, Brussels
+                        </li>
+                        <li>
+                            <h4>June 17-19, 2009</h4>
+                            Groovy and Grails - Belgium, Brussels
+                        </li>
+                        <li>
+                            <h4>June 17-19, 2009</h4>
+                            Groovy and Grails - Belgium, Brussels
+                        </li>
+                    </ul>
+                </div><!-- events -->
+                
+                <div id="globeGraphic"></div>
+            
+                <div id="downloadBox">
+                    <div class="downloadPluginWrapper">
+                        <div id="download">
+					        <download:latest var="grailsDownload" software="Grails" />
+                            <h3>
+								<g:if test="${grailsDownload}">
+									<download:link software="Grails" version="${grailsDownload?.softwareVersion}" file="Binary Zip">
+										<img src="${resource(dir:'images/new',file:'download_button.png')}" 
+											 border="0"
+											alt="Download Grails" />
+									</download:link>								
+								</g:if>
+								<g:else>
+									<g:link controller="content" id="Download">
+									  <img src="${resource(dir:'images/new',file:'download_button.png')}" 
+									       border="0"
+										   alt="Download Grails" />								
+									</g:link>
+								</g:else>
+							</h3>
+							<p>
+                            	A short description of what I am downloading and some fluffy text highlighting grails key features.  Should not be longer than this.</p>
+                            <h4><g:link controller="content" id="Download">Learn More</g:link></h4>
+                        </div><!-- download -->
+                        <div id="plugins">
+                            <h3>
+								<g:link controller="plugin">
+									<img src="${resource(dir:'images/new',file:'plugins_button.png')}" alt="Grails Plugins" border="0" />
+								</g:link>
+								
+								
+							</h3>
+                            <ul>
+                                <g:each var="plugin" in="${newestPlugins}">
+                                    <li><g:link controller="plugin" action="show" params="[name:plugin.name]">${plugin.title}</g:link></li>
+                                </g:each>
+                            </ul>
+                            <h4><g:link controller="plugin">View All</g:link></h4>
+                        </div><!-- plugins -->
+                    </div><!-- downloadPluginWrapper -->
+                </div><!-- downloadBox -->
+            </div><!-- eventDownloadWrapper -->
+            
+            <div class="newsScreencastWrapper">
+                <div id="latestNews">
+                    <h2>Latest News</h2>
+                    <div id="newsBox">
+                        <ul>
+                            <g:each var="newsItem" in="${newsItems}">
+                                <li>
+                                    <g:link controller="blog"  action="showEntry" params="[author:newsItem.author, title: newsItem.title]">
+                                        <div class="detail">
+                                            <h4>${newsItem.title}</h4>
+                                            <div class="author">by ${newsItem.author} | ${newsItem.tags.join(', ')}</div>
+                                            <div class="comments">${newsItem.comments.size()} comments</div>
+                                        </div>
+                                        <div class="calendar">
+                                            <div class="month">${newsItem.month}</div>
+                                            <div class="day">${newsItem.day}</div>
+                                        </div>
+                                    </g:link>
+                                </li>
+                            </g:each>
+                        </ul>
+                        <div class="actions">
+                            <g:link controller="blog" action="createEntry">Add news</g:link> | <g:link controller="blog" action="feed" params="[format:'rss']">Subscribe</g:link>
+                        </div><!-- actions -->
+                    </div><!-- newsBox -->
+                </div><!-- latestNews -->
+            
+                <div id="screencasts">
+                    <h2>Recent Screencasts</h2>
+                    <div class="castBox">
+                        <div class="castScreen">
+                            <g:link controller="screencast" action="show" id="${latestScreencastId}">
+                                <img src="/images/new/play_icon.png"/>
+                            </g:link>
+                        </div><!-- castScreen -->
+                        <h4><g:link controller="screencast" action="list">View All</g:link></h4>
+                    </div><!-- castBox -->
+                </div><!-- screencasts -->
+            </div><!-- newsScreencastWrapper -->
+            
+        </div><!-- contentArea -->
+    </div><!-- contentCenter -->
+    
+    <div id="grailsOptionsWrapper">
+        <div id="btmSectionGraphicsWrapper">
+            <div id="mountainLeft"></div>
+            <div id="knight"></div>
+            <div id="mountainRight"></div>
+            <div id="castle"></div>
+        </div><!-- btmSectionGraphicsWrapper-->
+        <div id="btmSectionBackgroundStretch">
+            <div align="center">
+                <div id="grailsOptions">
+                    <div class="left">
+            	        <h3>Training</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ut risus in eros consectetur feugiat. Fusce elementum convallis porttitor. Nulla facilisi. Morbi at erat felis. Aenean ante nisl, pulvinar nec varius ut, egestas sit amet dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vitae fermentum odio. Quisque quis lacus id dolor rhoncus placerat ut eu odio. Duis nec ipsum est. Proin congue faucibus risus, at blandit libero rutrum at. Vivamus ac laoreet lectus. Nam et nisi est. Aliquam hendrerit tristique lectus sit amet fringilla. Aenean pretium lacus vitae massa bibendum feugiat. Suspendisse a mi mauris. Etiam fermentum lacus nec lectus luctus vitae porta nisl ultrices.</p>		
+                    </div><!-- left column -->
+                    <div class="center">
+            			<h3>Support</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ut risus in eros consectetur feugiat. Fusce elementum convallis porttitor. Nulla facilisi. Morbi at erat felis. Aenean ante nisl, pulvinar nec varius ut, egestas sit amet dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vitae fermentum odio. Quisque quis lacus id dolor rhoncus placerat ut eu odio. Duis nec ipsum est. Proin congue faucibus risus, at blandit libero rutrum at. Vivamus ac laoreet lectus. Nam et nisi est. Aliquam hendrerit tristique lectus sit amet fringilla. Aenean pretium lacus vitae massa bibendum feugiat. Suspendisse a mi mauris. Etiam fermentum lacus nec lectus luctus vitae porta nisl ultrices.</p>
+                    </div><!-- center column -->
+                    <div class="right">
+            			<h3>Services</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ut risus in eros consectetur feugiat. Fusce elementum convallis porttitor. Nulla facilisi. Morbi at erat felis. Aenean ante nisl, pulvinar nec varius ut, egestas sit amet dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vitae fermentum odio. Quisque quis lacus id dolor rhoncus placerat ut eu odio. Duis nec ipsum est. Proin congue faucibus risus, at blandit libero rutrum at. Vivamus ac laoreet lectus. Nam et nisi est. Aliquam hendrerit tristique lectus sit amet fringilla. Aenean pretium lacus vitae massa bibendum feugiat. Suspendisse a mi mauris. Etiam fermentum lacus nec lectus luctus vitae porta nisl ultrices.</p>
+                    </div><!-- right column -->
+                </div><!-- grailsOptions -->
+            </div><!-- center -->
+        </div><!-- btmSectionBackgroundStretch -->
+    </div><!-- grailsOptionsWrapper -->
+</div><!-- contentWrapper -->
 
-	<div id="watch">
-	Informative <a href="Grails+Screencasts">screencasts</a> show just how easy it is to build an application in Grails.
-	</div><!-- / watch -->
-
-	<div id="listen">
-	<a href="Grails+Podcast">Podcasts</a> keeps you up to date about the latest developments, interviews and news.
-	</div><!-- / listen -->
-
-	<div id="read">
-	Find essential <a href="Books">books</a> and <a href="Books">references</a> to get you up to speed on Groovy and Grails.
-	</div><!-- / read -->
-
-	<div id="blog">
- 		<g:layoutBody />
-	</div><!-- / blog -->
-
-	<!-- / blog posts -->
-
-	<!-- / masthead -->
-
-	<div id="floatBox">
-            <g:render template="/content/nav" />
-	</div><!-- / floatBox -->
-
-    <g:render template="/content/downloadPanel" />
-
-	<!--  biteSized -->
-	<div id="biteSized">
-
-	<div id="ads">
-
-
-	</div><!-- / ads -->
-
-	<!-- / adsense ads -->
-
-	<h3>Grails - Broken into bite-sized pieces</h3>
-
-	Grails aims to bring the "coding by convention" paradigm to Groovy. It's an open-source web application framework
-	that leverages the Groovy language and complements Java Web development. You can use Grails as a standalone
-	development environment that hides all configuration details or integrate your Java business logic. Grails aims to
-	make development as simple as possible and hence should appeal to a wide range of developers not just those
-	from the Java community. Below you can find all you need to know (and more) about Grails.
-
-
-		<!-- gettingStarted -->
-
-		<h4>Getting Started</h4>
-
-		<ul>
-		<li class="biteSizedLI">
-		<a href="Installation"><img src="images/bs-medallions-install.png" width="53" height="53" alt="Bs Medallions Install" /></a>
-		<h5><a href="Installation">Installation</a></h5>
-		To start using Grails take a look at the
-		<a href="Installation">Installation guide</a>, check out the <a href="Quick+Start">Quick
-		Start tutorial</a>, and then head over to the <a href="User+Guide">User Guide</a>.
-		</li>
-
-		<li class="biteSizedLI">
-		<a href="Quick+Start"><img src="images/bs-medallion-quickstart.png" width="53" height="53" alt="Bs Medallion Quickstart" /></a>
-		<h5><a href="Quick+Start">Quick Start</a></h5>
-		If you already have Grails installed and
-		would like to jump right in, this <a href="Quick+Start">Quick Start
-		tutorial</a> may be just the thing.
-		</li>
-
-		<li class="biteSizedLI">
-		<a href="Tutorials"><img src="images/bs-medallions-tutorials.png" width="53" height="53" alt="Bs Medallions Tutorials" /></a>
-		<h5><a href="Tutorials">Tutorials &amp; Screencasts</a></h5>
-		View "official" and user-created <a href="Tutorials">tutorials</a> and
-		<g:link controller="screencast" action="list">screencasts</g:link> designed to provide an overview
-		of Grails or bring you up to speed on specific
-		features.
-		</li>
-		</ul>
-
-		<!-- / gettingStarted -->
-
-		<!-- / reference -->
-
-		<h4>Professional Services</h4>
-		<ul>
-            <li class="biteSizedLI">
-                <a href="http://www.springsource.com/training/grv001"><img src="images/bs-medallions-tutorials.png" width="53" height="53" alt="Bs Medallions Training" /></a>
-                <h5><a href="http://www.springsource.com/training/grv001">Training</a></h5>
-                Need help getting up and running with Grails? <a href="http://www.springsource.com">SpringSource</a> offers a range of courses from short one day workshops to comprehensive 4 day courses on both Groovy & Grails.
-
-            </li>
-            <li style="text-align:center" id="g2oneLogo">
-                <div style="position:relative;top:10px;left:5px;">
-                    <a href="http://www.springsource.com/g2one" ><img border="0" src="${createLinkTo(dir:'images', file:'g2one-acquiredby.png')}" width="165" alt="G2One is acquired by SpringSource" /></a>
-                </div>
-
-            </li>
-
-            <li class="biteSizedLI">
-            <a href="http://www.springsource.com/services"><img src="images/bs-medallion-quickstart.png" width="53" height="53" alt="Bs Medallion Consulting" /></a>
-            <h5><a href="http://www.springsource.com/services">Consulting</a></h5>
-            Need support on your latest cutting-edge Groovy or Grails project? Get it from the <a href="http://www.springsource.com">people the behind the project</a>.
-            </li>
-
-		</ul>
-		<!-- community -->
-
-		<h4>Community</h4>
-
-		<ul>
-		<li class="biteSizedLI">
-		<a href="Community"><img src="images/bs-medallion-contribute.png" width="53" height="53" alt="Bs Medallion Contribute" /></a>
-		<h5><a href="Community">Contributing</a></h5>
-		Interested in advancing the cause? Then
-		<a href="http://github.com/grails/grails/">get the source</a> and monitor our
-		<a href="http://hudson.grails.org/">continuous integration</a> server. 
-		</li>
-
-		<li class="biteSizedLI">
-		<a href="Plugins"><img src="images/bs-medallion-plugin.png" width="53" height="53" alt="Bs Medallion Plugin" /></a>
-		<h5><a href="Plugins">Plugins</a></h5>
-		Our energetic and skilled community of
-		developers have been busy creating plugins
-		to Grails. Here is where you can browse and
-		download them.
-		</li>
-
-		<li class="biteSizedLI">
-		<a href="Mailing+lists"><img src="images/bs-medallion-mail.png" width="53" height="53" alt="Bs Medallion Mail" /></a>
-		<h5><a href="Mailing+lists">Mailing Lists</a></h5>
-		Subscribe (or manage your subscription) to
-		one of several mailing lists. These are great for
-		discussions and learning more about Grails.
-		</li>
-		</ul>
-		<!-- / community -->
-
-	</div><!-- / biteSized -->
-
-	<div class="push"></div>
-
-	</div><!-- /container -->
-
-    <g:render template="/content/footer" />
+<div id="footer">
+    <div align="center">
+        <div class="innerFooter">
+            <a href="http://twitter.com/grailsframework"><div class="twitter"></div></a>
+            <a href="http://www.springsource.com"><div class="springSource"></div></a>
+            <p>&copy; Copyright 2009 SpringSource.<br/>All Rights Reserved.</p>
+        </div><!-- innerFooter -->
+    </div><!-- center -->
+</div><!-- footer -->
 
 </body>
 </html>
