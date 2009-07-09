@@ -4,8 +4,8 @@
     <g:javascript library="diff_match_patch"/>
     <g:javascript library="scriptaculous"/>
     <rateable:resources />
-    <link rel="stylesheet" href="${createLinkTo(dir: 'css', file: 'ratings.css')}"/>
-    <link rel="stylesheet" href="${createLinkTo(dir: 'css/new', file: 'comments.css')}"/>
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'ratings.css')}"/>
+
     <title>Grails Plugins</title>
     <meta content="pluginLayout" name="layout"/>
     <g:render template="../content/wikiJavaScript"/>

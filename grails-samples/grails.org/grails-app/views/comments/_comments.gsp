@@ -1,10 +1,4 @@
 <div class="comments">
-    <%
-        def commentHeader = "No Comments Yet"
-        if (comments.size == 1) commentHeader = "1 Comment"
-        if (comments.size > 1) commentHeader = "${comments.size()} Comments"
-    %>
-    <h2><a class='anchor' name='comments'>${commentHeader}</a></h2>
     <cache:text id="comments_for_${commentType}_${parentId}">
         <ul id="commentList">
             <li></li>

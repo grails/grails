@@ -1,0 +1,17 @@
+#pluginMenu {
+    position:absolute;
+	left:100px;
+    width: 308px;
+    font-size: 10pt;
+}
+#searchBar .searchButton {
+	top:-5px;
+}
+#pluginMenu .createPlugin .detail {
+    padding: 18px;
+    height: 30px;
+}
+#paginationPlugins {
+	margin-bottom:80px;
+}
+

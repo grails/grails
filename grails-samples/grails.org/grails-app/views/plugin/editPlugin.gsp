@@ -1,19 +1,5 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-    <title>Edit ${plugin.title} Plugin</title>
-    <meta content="subpage" name="layout"/>
-    <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'plugins.css')}" />
-</head>
-<body>
+<g:applyLayout name="pluginDetails">
 <div id="contentPane">
-    <ul id="infoLinks">
-        <li class="home">
-            <g:link controller="plugin" action="index">Plugins Home</g:link><br/>
-        </li>
-        <li class="show">
-            <g:link controller="plugin" action="show" params="${[name:plugin.name]}">Show Plugin</g:link>
-        </li>
-    </ul>
 
     <h1>Edit Plugin</h1>
     <g:if test="${flash.message}">
@@ -92,5 +78,6 @@
     </g:form>
 
 </div>
-</body>
-</html>
+
+
+</g:applyLayout>

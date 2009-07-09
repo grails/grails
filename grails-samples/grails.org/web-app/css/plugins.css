@@ -113,7 +113,41 @@ ul#infoLinks .cloud {
 
 /* alterations to the wiki style within tab view */
 .yui-content .code {
-    background-color: #e3e3e3;
+	background-color:#F7F8F2;
+	width:90%;
+	padding:10px;
+	border:2px solid white;
+}
+
+/* code styles
+------------------------------------------------------- */
+
+.java-keyword {
+    font-weight: bold;
+    color: darkblue;
+}
+
+.code .code-object {
+    font-weight: bold;
+    color: purple;
+}
+
+.java-quote {
+    color: darkred;
+    font-weight: normal;
+}
+
+.java-quote .java-keyword {
+    color: inherit;
+    font-weight: inherit;
+}
+
+.code .xml-tag {
+    color: #222;
+}
+
+.code .xml-quote {
+    color: darkred;
 }
 
 /* rounded corner table */
