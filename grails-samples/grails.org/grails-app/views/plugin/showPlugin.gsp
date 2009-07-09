@@ -1,67 +1,73 @@
 <%@ page import="org.grails.plugin.Plugin" %>
 <g:applyLayout name="pluginDetails">
-	<gui:dialog id='loginDialog' title="Login required" modal="true">
-	    <div id='loginFormDiv'></div>
-	</gui:dialog>
+	<div id="pluginDetailsBox" align="center">
+		<div id="pluginDetailsContainer">
+			<gui:dialog id='loginDialog' title="Login required" modal="true">
+			    <div id='loginFormDiv'></div>
+			</gui:dialog>
 
-	<div id="downloadBox">
-		<a href="${plugin.downloadUrl}"><img src="${resource(dir:'images/new/plugins/Buttons', file:'downloadBox_btn.png')}" alt="Download" border="0"></a>
+			<div id="downloadBox">
+				<a href="${plugin.downloadUrl}"><img src="${resource(dir:'images/new/plugins/Buttons', file:'downloadBox_btn.png')}" alt="Download" border="0"></a>
+			</div>
+
+			<h1 id="pluginBoxTitle">${plugin?.title}</h1>
+
+			<div class="ratingBox">
+				<rateable:ratings bean="${plugin}"/>						
+			</div>
+
+
+		    <div class="pluginDetail">
+		        <table>
+		            <tr>
+		                <th>Author(s):</th>
+		                <td>${plugin.author}</td>
+		            </tr>
+		            <tr>
+		                <th>Current Release:</th>
+		                <td>${plugin.currentRelease}</td>
+		            </tr>
+		            <tr>
+		                <th>Grails Version:</th>
+		                <td>${plugin.grailsVersion ?: '?'}</td>
+		            </tr>
+		            <tr>
+		                <th>Tags</th>
+		                <td class='tags'>
+		                    <span id='pluginTags'>
+		                        <g:render template='tags' var='plugin' bean="${plugin}"/>
+		                    </span>
+		                    <span id='addTagTrigger'><img src="${createLinkTo(dir: 'images/famfamfam', file: 'add.png')}"/></span>
+		                </td>
+		            </tr>
+		        </table>
+		    </div>
+		    <div class="links">
+		        <a href="${plugin.fisheye}">
+					<div class="fisheye">
+						<img src="${resource(dir:'images/new/plugins/icons', file:'fisheye.png')}" border="0" /> 
+						Fisheye
+					</div>
+				</a>
+		        <a href="${plugin.documentationUrl}">
+					<div class="docs">
+						<img src="${resource(dir:'images/new/plugins/icons', file:'doc.png')}" border="0" /> 
+						Docs
+					</div>
+
+		        </a>
+		        <g:link controller="plugin" action="editPlugin" id="${plugin.id}">
+					<div class="edit">
+						<img src="${resource(dir:'images/new/plugins/icons/16x16_icons', file:'edit.png')}" border="0" /> 
+						Edit Plugin
+					</div>
+				</g:link>
+		    </div>
+			
+		</div>
+		
 	</div>
 
-	<h1 id="pluginBoxTitle">${plugin?.title}</h1>
-
-	<div class="ratingBox">
-		<rateable:ratings bean="${plugin}"/>						
-	</div>
-
-
-    <div class="pluginDetail">
-        <table>
-            <tr>
-                <th>Author(s):</th>
-                <td>${plugin.author}</td>
-            </tr>
-            <tr>
-                <th>Current Release:</th>
-                <td>${plugin.currentRelease}</td>
-            </tr>
-            <tr>
-                <th>Grails Version:</th>
-                <td>${plugin.grailsVersion ?: '?'}</td>
-            </tr>
-            <tr>
-                <th>Tags</th>
-                <td class='tags'>
-                    <span id='pluginTags'>
-                        <g:render template='tags' var='plugin' bean="${plugin}"/>
-                    </span>
-                    <span id='addTagTrigger'><img src="${createLinkTo(dir: 'images/famfamfam', file: 'add.png')}"/></span>
-                </td>
-            </tr>
-        </table>
-    </div>
-    <div class="links">
-        <a href="${plugin.fisheye}">
-			<div class="fisheye">
-				<img src="${resource(dir:'images/new/plugins/icons', file:'fisheye.png')}" border="0" /> 
-				Fisheye
-			</div>
-		</a>
-        <a href="${plugin.documentationUrl}">
-			<div class="docs">
-				<img src="${resource(dir:'images/new/plugins/icons', file:'doc.png')}" border="0" /> 
-				Docs
-			</div>
-
-        </a>
-        <g:link controller="plugin" action="editPlugin" id="${plugin.id}">
-			<div class="edit">
-				<img src="${resource(dir:'images/new/plugins/icons/16x16_icons', file:'edit.png')}" border="0" /> 
-				Edit Plugin
-			</div>
-		</g:link>
-
-    </div>
 	
 </div>
 
@@ -119,17 +125,20 @@
         </script>
     </jsec:isNotLoggedIn>
 
-    <cache:text id="pluginTabs_${plugin.id}">
-        <gui:tabView>
-            <g:each var="wiki" in="${Plugin.WIKIS}">
-                <gui:tab id="${wiki}Tab" label="${wiki[0].toUpperCase() + wiki[1..-1]}" active="${wiki == 'description'}">
-                    <g:render template="../content/viewActions" model="${[content: plugin[wiki], update: wiki + 'Tab', editFormName: wiki + 'EditForm']}"/>
-                    <div class='${wiki}, wikiPage'><wiki:text page="${plugin[wiki]?.title}" /></div>
+	<div id="pluginContent" align="center">
+	    <cache:text id="pluginTabs_${plugin.id}">
+	        <gui:tabView>
+	            <g:each var="wiki" in="${Plugin.WIKIS}">
+	                <gui:tab id="${wiki}Tab" label="${wiki[0].toUpperCase() + wiki[1..-1]}" active="${wiki == 'description'}">
+	                    <g:render template="../content/viewActions" model="${[content: plugin[wiki], update: wiki + 'Tab', editFormName: wiki + 'EditForm']}"/>
+	                    <div class='${wiki}, wikiPage'><wiki:text page="${plugin[wiki]?.title}" /></div>
 
 
-                </gui:tab>
-            </g:each>
-        </gui:tabView>
-	</cache:text>
+	                </gui:tab>
+	            </g:each>
+	        </gui:tabView>
+		</cache:text>		
+	</div>
+
 
 </g:applyLayout>

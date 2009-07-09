@@ -10,10 +10,11 @@ li.odd {
 
 .comments {
     clear: all;
-    width: 100%;
+    width: 88%;
 	min-height:400px;
 	background:transparent url(../../images/new/bottom_section_stretch.png) repeat-x scroll left top;
-	padding-top:10px
+	padding-top:10px;
+	padding-left:12%;
 }
 
 .comments .comment {

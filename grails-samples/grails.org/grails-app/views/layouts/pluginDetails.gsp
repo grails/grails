@@ -53,7 +53,8 @@
 				
 				</div><!-- btmSectionGraphicsWrapper-->				
 
-		        <g:render template="../comments/comments" model="${[commentType:'plugin', parentId:plugin.id, comments:plugin.comments]}"/>
+        		<g:render template="../comments/comments" model="${[commentType:'plugin', parentId:plugin.id, comments:plugin.comments]}"/>						
+
 				
 				<div id="footer">
 				    <div align="center">
