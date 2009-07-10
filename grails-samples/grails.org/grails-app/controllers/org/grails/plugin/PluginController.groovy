@@ -54,6 +54,11 @@ class PluginController extends BaseWikiController {
 				defaults()
 				break			
 			break
+			case 'supported':
+	            currentPlugins = Plugin.findAllByOfficial(true, params)
+				totalPlugins = Plugin.countByOfficial(true)
+	            break;			
+			break
             case 'featured':
                 currentPlugins = Plugin.findAllByFeatured(true, params)
 				totalPlugins = Plugin.countByFeatured(true)

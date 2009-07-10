@@ -57,6 +57,7 @@ body {
 #pluginSorters .popular { background: url(../../images/new/plugins/icons/mostpopular.png) no-repeat top left; }
 #pluginSorters .recentlyUpdated { background: url(../../images/new/plugins/icons/updated.png) no-repeat top left; }
 #pluginSorters .newest { background: url(../../images/new/plugins/icons/newest.png) no-repeat top left; }
+#pluginSorters .supported { background: url(../../images/new/plugins/icons/supported.jpg) no-repeat top left; }
 
 #pluginMenu .createPlugin {
     background: url(../../images/new/plugins/left_nav_mid.png) repeat-y;

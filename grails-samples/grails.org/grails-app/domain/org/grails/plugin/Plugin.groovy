@@ -47,7 +47,7 @@ class Plugin implements Taggable, Commentable, Rateable {
         screenshots component: true
     }
 
-    static transients = ['avgRating','official', 'fisheye']
+    static transients = ['avgRating', 'fisheye']
 
     static constraints = {
         name unique: true
@@ -65,9 +65,6 @@ class Plugin implements Taggable, Commentable, Rateable {
         cache 'nonstrict-read-write'
     }
 
-    def getOfficial() {
-        authorEmail.trim().endsWith('@springsource.com') || authorEmail.trim().endsWith('@g2one.com')
-    }
     
     def getFisheye() {
         downloadUrl ? "${ConfigurationHolder.config.plugins.fisheye}/grails-${name}" : ''
