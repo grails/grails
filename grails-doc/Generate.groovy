@@ -5,12 +5,13 @@ import org.grails.doc.DocEngine;
 
 def ant = new AntBuilder()
 
+BASEDIR = System.getProperty("base.dir") ?: '.'
 GRAILS_HOME = "../grails"
 CONTEXT_PATH = DocEngine.CONTEXT_PATH
 SOURCE_FILE = DocEngine.SOURCE_FILE
 
 props = new Properties()
-new File("./resources/doc.properties").withInputStream {input ->
+new File("${BASEDIR}/resources/doc.properties").withInputStream {input ->
     props.load(input)
 }
 new File("${GRAILS_HOME}/build.properties").withInputStream {input ->
@@ -42,7 +43,7 @@ def compare = [compare: {o1, o2 ->
 },
         equals: { false }] as Comparator
 
-files = new File("./src/guide").listFiles().findAll { it.name.endsWith(".gdoc") }.sort(compare)
+files = new File("${BASEDIR}/src/guide").listFiles().findAll { it.name.endsWith(".gdoc") }.sort(compare)
 context = new BaseInitialRenderContext();
 context.set(CONTEXT_PATH, "..")
 
@@ -66,15 +67,15 @@ chapterContents = new StringBuffer()
 chapterTitle = null
 
 void writeChapter(String title, StringBuffer content) {
-    new File("output/guide/${title}.html").withWriter {
+    new File("${BASEDIR}/output/guide/${title}.html").withWriter {
         template.make(title: title, content: content.toString()).writeTo(it)
     }
     content.delete(0, content.size()) // clear buffer
 }
 
-ant.mkdir(dir: "output/guide")
-ant.mkdir(dir: "output/guide/pages")
-new File("resources/style/guideItem.html").withReader {reader ->
+ant.mkdir(dir: "${BASEDIR}/output/guide")
+ant.mkdir(dir: "${BASEDIR}/output/guide/pages")
+new File("${BASEDIR}/resources/style/guideItem.html").withReader {reader ->
     template = templateEngine.createTemplate(reader)
 
     for (entry in book) {
@@ -111,7 +112,7 @@ new File("resources/style/guideItem.html").withReader {reader ->
         fullContents << header << body
         chapterContents << header << body
 
-        new File("output/guide/pages/${title}.html").withWriter {
+        new File("${BASEDIR}/output/guide/pages/${title}.html").withWriter {
             template.make(title: title, content: body).writeTo(it)
         }
     }
@@ -120,20 +121,20 @@ if (chapterTitle) // write final chapter collected (if any seen)
     writeChapter(chapterTitle, chapterContents)
 
 
-ant.mkdir(dir: "output")
-ant.mkdir(dir: "output/img")
-ant.mkdir(dir: "output/css")
-ant.mkdir(dir: "output/ref")
+ant.mkdir(dir: "${BASEDIR}/output")
+ant.mkdir(dir: "${BASEDIR}/output/img")
+ant.mkdir(dir: "${BASEDIR}/output/css")
+ant.mkdir(dir: "${BASEDIR}/output/ref")
 
-ant.copy(file: "resources/style/index.html", todir: "output")
-ant.copy(todir: "output/img") {
-    fileset(dir: "resources/img")
+ant.copy(file: "${BASEDIR}/resources/style/index.html", todir: "${BASEDIR}/output")
+ant.copy(todir: "${BASEDIR}/output/img") {
+    fileset(dir: "${BASEDIR}/resources/img")
 }
-ant.copy(todir: "output/css") {
-    fileset(dir: "resources/css")
+ant.copy(todir: "${BASEDIR}/output/css") {
+    fileset(dir: "${BASEDIR}/resources/css")
 }
-ant.copy(todir: "output/ref") {
-    fileset(dir: "resources/style/ref")
+ant.copy(todir: "${BASEDIR}/output/ref") {
+    fileset(dir: "${BASEDIR}/resources/style/ref")
 }
 
 vars = [
@@ -148,29 +149,29 @@ vars = [
         body: fullContents.toString()
 ]
 
-new File("./resources/style/layout.html").withReader {reader ->
+new File("${BASEDIR}/resources/style/layout.html").withReader {reader ->
     template = templateEngine.createTemplate(reader)
-    new File("output/guide/single.html").withWriter {out ->
+    new File("${BASEDIR}/output/guide/single.html").withWriter {out ->
         template.make(vars).writeTo(out)
     }
     vars.toc = soloToc
     vars.body = ""
-    new File("output/guide/index.html").withWriter {out ->
+    new File("${BASEDIR}/output/guide/index.html").withWriter {out ->
         template.make(vars).writeTo(out)
     }
 }
 
 menu = new StringBuffer()
-files = new File("src/ref").listFiles().toList().sort()
+files = new File("${BASEDIR}/src/ref").listFiles().toList().sort()
 reference = [:]
-new File("resources/style/referenceItem.html").withReader {reader ->
+new File("${BASEDIR}/resources/style/referenceItem.html").withReader {reader ->
     template = templateEngine.createTemplate(reader)
     for (f in files) {
         if (f.directory && !f.name.startsWith(".")) {
             def section = f.name
             reference."${section}" = [:]
             menu << "<h1 class=\"menuTitle\">${f.name}</h1>"
-            new File("output/ref/${f.name}").mkdirs()
+            new File("${BASEDIR}/output/ref/${f.name}").mkdirs()
             def textiles = f.listFiles().findAll { it.name.endsWith(".gdoc")}.sort()
             def usageFile = new File("src/ref/${f.name}.gdoc")
             if (usageFile.exists()) {
@@ -179,7 +180,7 @@ new File("resources/style/referenceItem.html").withReader {reader ->
                 context.set(SOURCE_FILE, usageFile.name)
                 context.set(CONTEXT_PATH, "../..")
                 def contents = engine.render(data, context)
-                new File("output/ref/${f.name}/Usage.html").withWriter {out ->
+                new File("${BASEDIR}/output/ref/${f.name}/Usage.html").withWriter {out ->
                     template.make(content: contents).writeTo(out)
                 }
                 menu << "<div class=\"menuUsageItem\"><a href=\"${f.name}/Usage.html\" target=\"mainFrame\">Usage</a></div>"
@@ -193,7 +194,7 @@ new File("resources/style/referenceItem.html").withReader {reader ->
                 context.set(CONTEXT_PATH, "../..")
                 def contents = engine.render(data, context)
                 //println "Generating reference item: ${name}"
-                new File("output/ref/${f.name}/${name}.html").withWriter {out ->
+                new File("${BASEDIR}/output/ref/${f.name}/${name}.html").withWriter {out ->
                     template.make(content: contents).writeTo(out)
                 }
             }
@@ -202,9 +203,9 @@ new File("resources/style/referenceItem.html").withReader {reader ->
 
 }
 vars.menu = menu
-new File("./resources/style/menu.html").withReader {reader ->
+new File("${BASEDIR}/resources/style/menu.html").withReader {reader ->
     template = templateEngine.createTemplate(reader)
-    new File("output/ref/menu.html").withWriter {out ->
+    new File("${BASEDIR}/output/ref/menu.html").withWriter {out ->
         template.make(vars).writeTo(out)
     }
 }

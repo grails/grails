@@ -1,12 +1,14 @@
 <project name="grails-docs" default="dist">
 
+	<property name="base.dir" value="." />
+	
     <target name="grails-javadoc" 
             description="Generate most current javadoc for Grails">
         <ant dir="../grails" target="jar" />
         <ant dir="../grails" target="javadoc" />
 
-        <mkdir dir="output" />
-        <copy todir="output" failonerror="false">
+        <mkdir dir="${base.dir}/output" />
+        <copy todir="${base.dir}/output" failonerror="false">
             <fileset dir="../grails/doc" />
         </copy>
     </target>
@@ -19,8 +21,8 @@
 
     <target name="distclean" depends="clean"
             description="Delete everything generated and retrieved">
-        <delete dir="bin" />
-        <delete dir="dist" />
+        <delete dir="${base.dir}/bin" />
+        <delete dir="${base.dir}/dist" />
     </target>
 
     <target name="docs"
@@ -28,42 +30,47 @@
         <taskdef name="groovyc"  classname="org.codehaus.groovy.ant.Groovyc">
             <classpath>
                 <fileset dir="../grails/lib" includes="*.jar"  />
-                <fileset dir="lib" />
-                <pathelement location="bin" />
+                <fileset dir="${base.dir}/lib" />
+                <pathelement location="${base.dir}/bin" />
             </classpath>
         </taskdef>
 
 
-        <mkdir dir="bin" />
-        <copy todir="bin" file="resources/log4j.properties"/>
-        <groovyc srcdir="src/groovy" destdir="bin">
+        <mkdir dir="${base.dir}/bin" />
+        <copy todir="${base.dir}/bin" file="resources/log4j.properties"/>
+        <groovyc srcdir="${base.dir}/src/groovy" destdir="bin">
             <classpath>
                 <fileset dir="../grails/lib" includes="*.jar"  />
-                <fileset dir="lib" />
-                <pathelement location="bin" />
+                <fileset dir="${base.dir}/lib" />
+                <pathelement location="${base.dir}/bin" />
             </classpath>
         </groovyc>
 
-        <mkdir dir="output" />
+        <mkdir dir="${base.dir}/output" />
+
         <java classname="groovy.ui.GroovyMain" failonerror="true">
-            <arg value="Generate" />
+            <arg value="${base.dir}/Generate.groovy" />
+			<sysproperty key="base.dir" value="${base.dir}"/>
             <classpath>
                 <fileset dir="../grails/lib" includes="*.jar"  />
-                <fileset dir="lib" />
-                <pathelement location="bin" />
+                <fileset dir="${base.dir}/lib" />
+                <pathelement location="${base.dir}/bin" />
             </classpath>
         </java>
     </target>
 
-    <target name="dist" depends="grails-javadoc,docs"
-            description="Build documentation and create a zip for distibution">
+	<target name="dist-nojavadoc" depends="docs">
         <property file="../grails/build.properties"/>
 
-        <mkdir dir="dist" />
+        <mkdir dir="${base.dir}/dist" />
         <delete failonerror="false">
-            <fileset dir="dist" includes="*.zip" />
+            <fileset dir="${base.dir}/dist" includes="*.zip" />
         </delete>
-        <zip destfile="dist/grails-docs-${grails.version}.zip" basedir="output"/>
+        <zip destfile="${base.dir}/dist/grails-docs-${grails.version}.zip" basedir="output"/>		
+	</target>
+
+    <target name="dist" depends="grails-javadoc,docs"
+            description="Build documentation and create a zip for distibution">
     </target>
 
 </project>

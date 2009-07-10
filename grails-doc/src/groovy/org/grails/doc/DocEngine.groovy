@@ -28,12 +28,13 @@ class DocEngine extends BaseRenderEngine implements WikiRenderEngine {
     static GRAILS_HOME = ""
     static EXTERNAL_DOCS = 	[:]
 	static ALIAS = [:]
-
+	static BASEDIR
     static {
 	   def ant = new AntBuilder()
 	   ant.property(environment:"env")       
+	   BASEDIR = System.getProperty("base.dir") ?: '.'
 	   GRAILS_HOME = "../grails"
-	   new File("./resources/doc.properties").withInputStream {
+	   new File("${BASEDIR}/resources/doc.properties").withInputStream {
 			def props = new Properties()
 			props.load(it)
 			props.findAll { it.key.startsWith("api.")}.each {
@@ -63,7 +64,7 @@ class DocEngine extends BaseRenderEngine implements WikiRenderEngine {
 				if(ALIAS[alias]) {
 					alias = ALIAS[alias]
 				}
-                def ref = "src/guide/${alias}.gdoc"
+                def ref = "${BASEDIR}/src/guide/${alias}.gdoc"
                 def file = new File(ref)
                 if(file.exists()) {
                     return true 
@@ -92,7 +93,7 @@ class DocEngine extends BaseRenderEngine implements WikiRenderEngine {
 			}
             else {
                 String dir = getNaturalName(refCategory)
-                def ref = "src/ref/${dir}/${refItem}.gdoc"
+                def ref = "${BASEDIR}/src/ref/${dir}/${refItem}.gdoc"
                 File file = new File(ref)
                 if(file.exists()) {
                     return true
