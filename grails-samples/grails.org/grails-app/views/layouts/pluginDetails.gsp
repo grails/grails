@@ -2,9 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
     <rateable:resources />
-    <gui:resources components="['tabView','dialog','autoComplete']" javascript='animation'/>
+    <gui:resources components="['tabView','dialog','autoComplete','paginator']" javascript='animation'/>
     <g:javascript library="diff_match_patch" />
     <g:javascript library="scriptaculous" />
+	<yui:javascript dir="paginator" file="paginator-debug.js" />
+	
     <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'tabview.css')}" />
 
     <link rel="stylesheet" type="text/css" href="${resource(dir:'css',file:'content.css')}" />
@@ -22,6 +24,7 @@
 		.yui-navset .yui-nav li a em, .yui-navset-top .yui-nav li a em, .yui-navset-bottom .yui-nav li a em {
 			display:inline;
 		}		
+		
 	</style>
 </head>
 <body>

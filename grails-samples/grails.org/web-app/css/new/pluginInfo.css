@@ -9,6 +9,18 @@
 }
 
 
+#previewContainer {
+     position:absolute;
+		background-color:#F7F8F2;
+		border:2px solid white;
+     top:400px;
+     width:950px;
+     height:600px;
+     overflow:scroll;
+     left:20%;
+     padding:10px;
+}
+
 body {
 	margin-left:0px;
 	margin-right:0px;

@@ -1,18 +1,70 @@
+<%
+def transform = { list, bucketSize ->
+   def total = list.size()
+   def nbBuckets = total.intdiv(bucketSize)
+   def remainder = total%bucketSize
+   def newList = (0..<nbBuckets).collect { [*list[(it*bucketSize)..<((it+1)*bucketSize)]] }
+   newList << list[(total-1)-remainder..-1]
+}		
+commentsTotal = comments.size()		
+comments = transform(comments, 5)
+%>
+
 <div class="comments">
-    <cache:text id="comments_for_${commentType}_${parentId}">
-        <ul id="commentList">
-            <li></li>
-            <g:each var="comment" status='i' in="${comments}">
-                <g:set var='oddEven'>
-                    <g:if test="${i % 2 == 0}">even</g:if>
-                    <g:else>odd</g:else>
-                </g:set>
-                <li class="comment ${oddEven}">
-                    <g:render template="/comments/comment" var='comment' bean="${comment}"/>
-                </li>
+
+        <div id="commentList">
+            
+            <g:each var="commentGroup" status='i' in="${comments}">
+                <div id="commentsGroup${i+1}" class="commentsBox ${ i == 0 ? 'commentShown' : 'commentHidden'}">
+					<g:each var="comment" in="${commentGroup}">
+						<div class="comment">
+	                    	<g:render template="/comments/comment" var='comment' bean="${comment}"/>						
+						</div>
+					
+					</g:each>
+
+                </div>
             </g:each>
-        </ul>
-    </cache:text>
+        </div>
+		<div id="commentPaginator" class="yui-skin-sam">
+			
+		</div>
+
+		<script type="text/javascript" charset="utf-8">
+			YAHOO.util.Event.onDOMReady(function () {
+
+				// Set up the application under the YAHOO.example namespace
+				var Ex = YAHOO.namespace('paginator');
+
+				Ex.content = YAHOO.util.Dom.get('commentList');
+				
+				Ex.handlePagination = function (state) {
+				    // Show the appropriate content for the requested page
+					var toShow = 'commentsGroup'+state.page
+					var el = $(toShow)
+					el.style.display = 'block'
+					var rest = document.getElementsByClassName("commentsBox")
+
+					for(var i = 0; i < rest.length; i++) {
+						if(rest[i].id!=toShow) {							
+							rest[i].style.display='none';
+						}
+					}
+				    // Update the Paginator's state, confirming change
+				    Ex.paginator.setState(state);
+				};
+	
+
+
+				Ex.paginator = new YAHOO.widget.Paginator({
+				    rowsPerPage : 5, // one div per page
+				    totalRecords : ${commentsTotal},
+				    containers : 'commentPaginator' // controls will be rendered into this element
+				});
+				Ex.paginator.subscribe('changeRequest', Ex.handlePagination); 
+				Ex.paginator.render(); 
+			});
+		</script>
 
     <div id="nextComment" class="hidden"></div>
 
