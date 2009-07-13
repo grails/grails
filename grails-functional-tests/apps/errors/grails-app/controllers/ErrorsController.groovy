@@ -48,4 +48,8 @@ class ErrorsController {
 		render "not there"
 	}
 	
+	def warDeployed = {
+		render "war=${grailsApplication.warDeployed}"
+	}
+	
 }

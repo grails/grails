@@ -44,39 +44,54 @@ class ErrorHandlingFunctionalTests extends functionaltestplugin.FunctionalTestCa
 	}
 	
 	void testErrorFromTagExpression() {
-		get('/errors/tagExpressionError')
-        assertStatus 500		
+		get('/errors/warDeployed')
+		
+		if(response.contentAsString!='war=true') {
+			get('/errors/tagExpressionError')
+	        assertStatus 500		
 
-        assertContentContains 'Grails Runtime Exception'
-        assertContentContains 'tagExpressionError.gsp '
-		assertContentContains '<strong>Exception Message:</strong> Cannot get property \'bar\' on null object'
-		assertContentContains '<strong>Caused by:</strong> Error evaluating expression [foo.bar] on line [14]: java.lang.NullPointerException: Cannot get property \'bar\' on null object'
-        assertContentContains '<strong>At Line:</strong> [14]'
-		assertContentContains '&lt;g:each var=&quot;c&quot; in=&quot;${foo.bar}&quot;&gt;'		
+
+	        assertContentContains 'Grails Runtime Exception'
+	        assertContentContains 'tagExpressionError.gsp '
+			assertContentContains '<strong>Exception Message:</strong> Cannot get property \'bar\' on null object'
+			assertContentContains '<strong>Caused by:</strong> Error evaluating expression [foo.bar] on line [14]: java.lang.NullPointerException: Cannot get property \'bar\' on null object'
+	        assertContentContains '<strong>At Line:</strong> [14]'
+			assertContentContains '&lt;g:each var=&quot;c&quot; in=&quot;${foo.bar}&quot;&gt;'					
+		}
 	}
 	
 	void testErrorFromRegularExpression() {
-		get('/errors/regularExpressionError')
-        assertStatus 500		
+		get('/errors/warDeployed')
+		
+		if(response.contentAsString!='war=true') {
+		
+			get('/errors/regularExpressionError')
+	        assertStatus 500		
 
-        assertContentContains 'Grails Runtime Exception'
-        assertContentContains 'regularExpressionError.gsp '
-		assertContentContains '<strong>Exception Message:</strong> No signature of method: org.codehaus.groovy.grails.commons.DefaultGrailsControllerClass.dummy() is applicable for argument types: () values: []'
-		assertContentContains '<strong>Caused by:</strong> Error evaluating expression [c.dummy()] on line [15]: groovy.lang.MissingMethodException: No signature of method: org.codehaus.groovy.grails.commons.DefaultGrailsControllerClass.dummy() is applicable for argument types: () values: []'
-        assertContentContains '<strong>At Line:</strong> [15]'
-		assertContentContains '&lt;li class=&quot;controller&quot;&gt;This will throw MPE ${c.dummy()}&lt;/li&gt;'		
+	        assertContentContains 'Grails Runtime Exception'
+	        assertContentContains 'regularExpressionError.gsp '
+			assertContentContains '<strong>Exception Message:</strong> No signature of method: org.codehaus.groovy.grails.commons.DefaultGrailsControllerClass.dummy() is applicable for argument types: () values: []'
+			assertContentContains '<strong>Caused by:</strong> Error evaluating expression [c.dummy()] on line [15]: groovy.lang.MissingMethodException: No signature of method: org.codehaus.groovy.grails.commons.DefaultGrailsControllerClass.dummy() is applicable for argument types: () values: []'
+	        assertContentContains '<strong>At Line:</strong> [15]'
+			assertContentContains '&lt;li class=&quot;controller&quot;&gt;This will throw MPE ${c.dummy()}&lt;/li&gt;'		
+		}
 	}	
 	
 	void testErrorFromInternalTag() {
-		get('/errors/internalTagError')
-        assertStatus 500		
+		get('/errors/warDeployed')
+		
+		if(response.contentAsString!='war=true') {
+		
+			get('/errors/internalTagError')
+	        assertStatus 500		
 
-        assertContentContains 'Grails Runtime Exception'
-        assertContentContains 'internalTagError.gsp '
-		assertContentContains '<strong>Exception Message:</strong> Tag [submitButton] is missing required attribute [name] or [field] '
-		assertContentContains '<strong>Caused by:</strong> Error processing GroovyPageView: Tag [submitButton] is missing required attribute [name] or [field]'
-        assertContentContains '<strong>At Line:</strong> [16]'
-		assertContentContains '&lt;g:submitButton&gt;&lt;/g:submitButton&gt;'		
+	        assertContentContains 'Grails Runtime Exception'
+	        assertContentContains 'internalTagError.gsp '
+			assertContentContains '<strong>Exception Message:</strong> Tag [submitButton] is missing required attribute [name] or [field] '
+			assertContentContains '<strong>Caused by:</strong> Error processing GroovyPageView: Tag [submitButton] is missing required attribute [name] or [field]'
+	        assertContentContains '<strong>At Line:</strong> [16]'
+			assertContentContains '&lt;g:submitButton&gt;&lt;/g:submitButton&gt;'		
+		}
 	}
 	
 	void testErrorFromInvalidFinder() {
