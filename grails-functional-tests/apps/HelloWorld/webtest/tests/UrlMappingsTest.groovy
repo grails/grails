@@ -39,25 +39,4 @@ class UrlMappingsTest extends grails.util.WebTest {
         }
     }
 
-    void testMultipleVariablesPerPathElement() {
-        webtest("Regression test for GRAILS-3087") {
-            // Test foward mapping.
-            invoke     (url: "files/download/my-picture.jpg")
-            verifyText (text: "Downloading file 'my-picture.jpg'...")
-
-            // Test reverse mapping.
-            verifyXPath(xpath: "//div[@id='link']/a/@href", text: "/HelloWorld/files/download/dooby.pdf")
-
-            // This is a mapping has an optional variable.
-            invoke     (url: "3087/prefix-main/list-12")
-            verifyText (text: "Link for stem main")
-
-            // Test reverse mapping.
-            verifyXPath(xpath: "//a/@href", text: "/HelloWorld/3087/prefix-fixed/show-12")
-
-            // The optional stuff doesn't work yet.
-//            invoke     (url: "3087/prefix-main/show-")
-//            verifyText (text: "Show - ID =  - Stem = main")
-        }
-    }
 }
