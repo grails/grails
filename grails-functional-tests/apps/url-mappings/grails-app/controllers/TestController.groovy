@@ -5,4 +5,8 @@ class TestController {
 	}
 	
 	def testAbsolutePaths = {}
+	
+	def testExtension = {
+		render "${params.file}.${params.ext}"
+	}
 }

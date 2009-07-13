@@ -27,4 +27,11 @@ class UrlMappingsFunctionalTests extends functionaltestplugin.FunctionalTestCase
         assertContentContains 'image = http://www.changeme.com/images/foo.jpg'
         assertContentContains 'link = http://www.changeme.com/test/index'        
 	}
+	
+	void testFileExtensions() {
+		get('/path/foo.bar')
+		assertStatus 200
+        assertContentContains 'foo.bar'
+		
+	}
 }
