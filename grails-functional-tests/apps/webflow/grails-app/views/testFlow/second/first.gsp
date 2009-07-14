@@ -6,7 +6,7 @@
 	</head>
 	
 	<body id="first">
-		<g:form name="testForm" action="my">
+		<g:form name="testForm" action="second">
 		
 			<g:submitButton name="go" value="Go"></g:submitButton>
 		</g:form>
