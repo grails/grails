@@ -31,13 +31,13 @@ Fired Events:
 
 The @install-plugin@ command is a versatile command that allows the installation of plug-ins from a remote URL, a local file or from the Grails central SVN repository at http://plugins.grails.org
 
-To install from a URL simply specify the absolute URL to the plug-in package:
+To install from a URL, simply specify the absolute URL to the plug-in package:
 
 {code:java}
 grails install-plugin http://foo.com/grails-bar-1.0.zip
 {code}
 
-To install from a local file specify the absolute or relative path to the file:
+To install from a local file, specify the absolute or relative path to the file:
 
 {code:java}
 grails install-plugin ../grails-bar-1.0.zip
@@ -45,7 +45,7 @@ grails install-plugin ../grails-bar-1.0.zip
 
 You can also install plug-ins provided via the remote central repository. To find out what plug-ins are available use [list-plugins|commandLine]
 
-If you want to install a plug-in. Say the "jsecurity" plug-in you can use the install-plugin command followed by the plugin name:
+If you want to install a plug-in, say the "jsecurity" plug-in, you can use the install-plugin command followed by the plugin name:
 
 {code:java}
 grails install-plugin jsecurity
