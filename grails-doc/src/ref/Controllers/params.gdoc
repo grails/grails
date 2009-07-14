@@ -2,7 +2,7 @@ h1. params
 
 h2. Purpose
 
-A mutable multi-dimensional map (hash) of request (CGI) parameters 
+A mutable multi-dimensional map (hash) of request (CGI) parameters.
 
 h2. Examples
 

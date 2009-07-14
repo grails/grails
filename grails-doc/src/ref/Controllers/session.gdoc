@@ -2,7 +2,7 @@ h1. session
 
 h2. Purpose
 
-The [session|servletAPI] object is an instance of the Servlet API's [HttpSession|api:javax.servlet.http.HttpSession] class
+The [session|servletAPI] object is an instance of the Servlet API's [HttpSession|api:javax.servlet.http.HttpSession] class.
 
 h2. Examples
 

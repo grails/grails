@@ -2,7 +2,7 @@ h1. controllerName
 
 h2. Purpose
 
-Returns the name of the currently executing controller
+Returns the name of the currently executing controller.
 
 h2. Examples
 
