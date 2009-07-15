@@ -10,6 +10,9 @@
 	
     <link rel="stylesheet" href="${createLinkTo(dir: 'css/new', file: 'master.css')}" type="text/css" />
     <link rel="stylesheet" href="${createLinkTo(dir: 'css/new', file: 'pluginInfo.css')}" type="text/css" />
+	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+	<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
 
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 	<meta name="robots" content="NOODP">	
@@ -42,11 +45,9 @@
 </div><!-- center -->
 
 <div id="contentWrapper">
-	<div id="contentLogo">
-		<a href="http://grails.org"><img src="${resource(dir:'images/new', file:'grailslogo_topNav.png')}" border="0"></a>			
-	</div>
 
     <div id="contentCenter" >
+	
         <g:layoutBody/>
     </div><!-- contentCenter -->
 </div><!-- contentWrapper -->

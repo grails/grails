@@ -12,9 +12,10 @@ h1, h2, h3, h4, h5, h6 {
     width: 100%;
 }
 #contentLogo {
+	float:left;
 	position:absolute;
-	left:11%;
-	top:120px;
+	margin-top:27px;
+
 	height:55px;
 	width:300px;
 	text-align:center;

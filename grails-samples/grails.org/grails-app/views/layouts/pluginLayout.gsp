@@ -8,6 +8,9 @@
     
     <link rel="stylesheet" href="${createLinkTo(dir: 'css/new', file: 'master.css')}" type="text/css" />
     <link rel="stylesheet" href="${createLinkTo(dir: 'css/new', file: 'plugins.css')}" type="text/css" />
+	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+	<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
 	<!--[if IE]>
     <link rel="stylesheet" href="${resource(dir: 'css/new', file: 'ie.css')}"/>
 	<![endif]-->
@@ -42,14 +45,7 @@
     </div><!-- mainMenuBarWrapper -->
 </div><!-- center -->
 
-<div id="contentWrapper">
-	<div id="contentLogo">
-		<a href="http://grails.org"><img src="${resource(dir:'images/new', file:'grailslogo_topNav.png')}" border="0"></a>			
-	</div>
-	<div id="pluginsLogo">
-		<a href="http://grails.org"><img src="${resource(dir:'images/new/plugins', file:'plugins_topnav2.png')}" border="0"></a>			
-	</div>
-	
+<div id="contentWrapper">	
     <div id="contentCenter" align="center">
         <g:layoutBody/>
     </div><!-- contentCenter -->

@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="${createLinkTo(dir: 'css/new', file: 'master.css')}" type="text/css" />
     <link rel="stylesheet" href="${createLinkTo(dir: 'css/new', file: 'subpage.css')}" type="text/css" />
     <link rel="stylesheet" type="text/css" href="${resource(dir:'css/new',file:'comments.css')}" />
-
+	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+	<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 	<meta name="robots" content="NOODP">	
@@ -47,14 +48,15 @@
 
 <div id="contentWrapper" align="center">
 	<div id="contentInnerWrapper">
-		<div id="contentLogo">
-			<a href="http://grails.org"><img src="${resource(dir:'images/new', file:'grailslogo_topNav.png')}" border="0"></a>			
-		</div>
-		<div id="contentTitle">
-			<h1><g:layoutTitle default=""></g:layoutTitle></h1>
-		</div> 
 		
-	    <div id="contentCenter" >		
+	    <div id="contentCenter" >
+			<div id="contentLogo">
+				<a href="http://grails.org"><img src="${resource(dir:'images/new', file:'grailslogo_topNav.png')}" border="0"></a>			
+			</div>
+			<div id="contentTitle">
+				<h1><g:layoutTitle default=""></g:layoutTitle></h1>
+			</div> 
+				
 			<div id="navMenu">
 				<g:render template="/content/nav"></g:render>
 				<div id="navFooter">

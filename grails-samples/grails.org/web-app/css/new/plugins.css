@@ -12,6 +12,11 @@ body {
     background: url(../../images/new/plugins/background.jpg) no-repeat left top;
 	min-height:800px;
 }
+#contentLogo {
+	width:380px;
+	padding-left:35px;
+	text-align:left;
+}
 
 #contentArea {
 	width:1008px;

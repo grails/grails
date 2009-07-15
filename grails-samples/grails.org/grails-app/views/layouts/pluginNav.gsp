@@ -1,4 +1,11 @@
 <div id="contentArea">
+	<div id="contentLogo">
+		<a href="http://grails.org"><img src="${resource(dir:'images/new', file:'grailslogo_topNav.png')}" border="0"></a>			
+	</div>
+	<div id="pluginsLogo">
+		<a href="http://grails.org"><img src="${resource(dir:'images/new/plugins', file:'plugins_topnav2.png')}" border="0"></a>			
+	</div>	
+	
     <div id="pluginMenu">
         <h1>Plugins</h1>
         <div class="description">

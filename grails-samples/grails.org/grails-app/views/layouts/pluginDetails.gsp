@@ -32,6 +32,7 @@
 <div id="contentPane">
 
 	<div id="pluginBigBox">
+		
 		<div id="pluginBgTop"></div>
 		<div id="pluginBox">
 			<div id="pluginDetailWrapper">

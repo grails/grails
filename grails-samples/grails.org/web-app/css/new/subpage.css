@@ -16,7 +16,11 @@ p {
 
 }
 
-
+#contentLogo {
+	width:380px;
+	padding-left:30px;
+	text-align:left;
+}
 #contentTitle {
 	position:absolute;
 	left:34%;
