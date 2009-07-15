@@ -28,10 +28,6 @@
 		<div id="springSourceLogo">
     		<a href="http://www.springsource.com/"><img src="${resource(dir:'images/new', file:'springsource-logo.jpg')}" border="0"></a>			
 		</div>
-		<div id="grailsLogo">
-			<a href="http://grails.org"><img src="${resource(dir:'images/new', file:'grailslogo_topNav.png')}" border="0"></a>
-		</div>
-
     </div>
 
     <div class="mainMenuBarWrapper">
@@ -47,6 +43,13 @@
 </div><!-- center -->
 
 <div id="contentWrapper">
+	<div id="contentLogo">
+		<a href="http://grails.org"><img src="${resource(dir:'images/new', file:'grailslogo_topNav.png')}" border="0"></a>			
+	</div>
+	<div id="pluginsLogo">
+		<a href="http://grails.org"><img src="${resource(dir:'images/new/plugins', file:'plugins_topnav2.png')}" border="0"></a>			
+	</div>
+	
     <div id="contentCenter" align="center">
         <g:layoutBody/>
     </div><!-- contentCenter -->

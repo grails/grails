@@ -7,7 +7,7 @@ def transform = { list, bucketSize ->
    newList << list[(total-1)-remainder..-1]
 }		
 commentsTotal = comments.size()		
-comments = transform(comments, 5)
+comments = comments ? transform(comments, 5) : []
 %>
 
 <div class="comments">
@@ -15,7 +15,7 @@ comments = transform(comments, 5)
         <div id="commentList">
             
             <g:each var="commentGroup" status='i' in="${comments}">
-                <div id="commentsGroup${i+1}" class="commentsBox ${ i == 0 ? 'commentShown' : 'commentHidden'}">
+                <div id="commentsGroup${i+1}" class="commentsBox ${ i == (comments.size()-1) ? 'commentShown' : 'commentHidden'}">
 					<g:each var="comment" in="${commentGroup}">
 						<div class="comment">
 	                    	<g:render template="/comments/comment" var='comment' bean="${comment}"/>						
@@ -26,10 +26,9 @@ comments = transform(comments, 5)
                 </div>
             </g:each>
         </div>
-		<div id="commentPaginator" class="yui-skin-sam">
-			
+		<div id="commentPaginator" class="yui-skin-sam">			
 		</div>
-
+		<g:if test="${comments}">
 		<script type="text/javascript" charset="utf-8">
 			YAHOO.util.Event.onDOMReady(function () {
 
@@ -61,10 +60,14 @@ comments = transform(comments, 5)
 				    totalRecords : ${commentsTotal},
 				    containers : 'commentPaginator' // controls will be rendered into this element
 				});
+
 				Ex.paginator.subscribe('changeRequest', Ex.handlePagination); 
 				Ex.paginator.render(); 
+				Ex.paginator.setPage(${comments.size()})								
 			});
 		</script>
+		
+		</g:if>
 
     <div id="nextComment" class="hidden"></div>
 

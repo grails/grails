@@ -85,39 +85,46 @@ body {
 
 #events {
     background: url(../../images/new/events_back.jpg) no-repeat top left;
-    width: 325px;
+    width: 320px;
     height: 200px;
-    overflow: hidden;
+    overflow: auto !important;  
     position: absolute;
     top: 2px;
     left: 3px;
 }
 
+#events a {
+    color: #48802C;
+	text-decoration:none;
+}
+#grailsAttributes a{
+    color: #48802C;
+	text-decoration:none;
+	
+}
 #events h3 {
     color: #363636;
     margin: 9px 0px 0px 27px;
     padding: 0px;
     font-weight: normal;
     font-size: 16pt;
+	margin-bottom:10px;
 }
 
-#events ul {
-    margin: 0px 3px 0px 28px;
-    padding: 0px;
-    line-height: 0px;
-    height: 157px;
-    overflow: auto !important;  
-    overflow-x: hidden !important;
-}
+#events p {
 
-#events li {
+	margin:0px;	
+	margin-left:20px;	
     font-size: 8pt;
     color: #6B6B6B;
     list-style: none;
     margin-bottom: 23px;
 }
 
-#events li h4 {
+#events h4 {
+	
+	margin:0px;
+	margin-left:20px;	
     font-size: 9pt;
     font-weight: bold;
     color: #48802C;

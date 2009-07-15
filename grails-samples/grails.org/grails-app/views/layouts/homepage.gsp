@@ -64,32 +64,18 @@
             <div class="eventDownloadWrapper">
                 <div id="events">
                     <h3>Training Events</h3>
-                    <ul>
-                        <li>
-                            <h4>June 17-19, 2009</h4>
-                            Groovy and Grails - Belgium, Brussels
-                        </li>
-                        <li>
-                            <h4>June 17-19, 2009</h4>
-                            Groovy and Grails - Belgium, Brussels
-                        </li>
-                        <li>
-                            <h4>June 17-19, 2009</h4>
-                            Groovy and Grails - Belgium, Brussels
-                        </li>
-                        <li>
-                            <h4>June 17-19, 2009</h4>
-                            Groovy and Grails - Belgium, Brussels
-                        </li>
-                        <li>
-                            <h4>June 17-19, 2009</h4>
-                            Groovy and Grails - Belgium, Brussels
-                        </li>
-                        <li>
-                            <h4>June 17-19, 2009</h4>
-                            Groovy and Grails - Belgium, Brussels
-                        </li>
-                    </ul>
+                    <h4>June 17-19, 2009</h4>
+                    <p>Groovy and Grails - Belgium, Brussels</p>
+                    <h4>June 17-19, 2009</h4>
+                    <p>Groovy and Grails - Belgium, Brussels</p>
+                    <h4>June 17-19, 2009</h4>
+                    <p>Groovy and Grails - Belgium, Brussels</p>
+                    <h4>June 17-19, 2009</h4>
+                    <p>Groovy and Grails - Belgium, Brussels</p>
+                    <h4>June 17-19, 2009</h4>
+                    <p>Groovy and Grails - Belgium, Brussels</p>
+                    <h4>June 17-19, 2009</h4>
+                    <p>Groovy and Grails - Belgium, Brussels</p>
                 </div><!-- events -->
                 
                 <div id="globeGraphic"></div>
@@ -115,8 +101,8 @@
 								</g:else>
 							</h3>
 							<p>
-                            	A short description of what I am downloading and some fluffy text highlighting grails key features.  Should not be longer than this.</p>
-                            <h4><g:link controller="content" id="Download">Learn More</g:link></h4>
+                            	Download the latest Grails&#8482 binary release to experience a new level of productivity on the Java&#8482 platform.</p>
+                            <h4><g:link controller="content" id="Download">More Downloads</g:link></h4>
                         </div><!-- download -->
                         <div id="plugins">
                             <h3>

@@ -6,6 +6,8 @@
     <g:javascript src="common/application.js"/>
     <g:javascript src="common/tracking.js"/>
     
+	<g:layoutHead />
+	
     <link rel="stylesheet" href="${createLinkTo(dir: 'css/new', file: 'master.css')}" type="text/css" />
     <link rel="stylesheet" href="${createLinkTo(dir: 'css/new', file: 'pluginInfo.css')}" type="text/css" />
 
@@ -15,7 +17,7 @@
 	
 	<title>Grails - The search is over.</title>
 
-	<g:layoutHead />
+
 
 </head>
 <body>
@@ -25,10 +27,6 @@
 		<div id="springSourceLogo">
     		<a href="http://www.springsource.com/"><img src="${resource(dir:'images/new', file:'springsource-logo.jpg')}" border="0"></a>			
 		</div>
-		<div id="grailsLogo">
-			<a href="http://grails.org"><img src="${resource(dir:'images/new', file:'grailslogo_topNav.png')}" border="0"></a>
-		</div>
-
     </div>
 
     <div class="mainMenuBarWrapper">
@@ -44,8 +42,11 @@
 </div><!-- center -->
 
 <div id="contentWrapper">
+	<div id="contentLogo">
+		<a href="http://grails.org"><img src="${resource(dir:'images/new', file:'grailslogo_topNav.png')}" border="0"></a>			
+	</div>
 
-    <div id="contentCenter" align="center">
+    <div id="contentCenter" >
         <g:layoutBody/>
     </div><!-- contentCenter -->
 </div><!-- contentWrapper -->

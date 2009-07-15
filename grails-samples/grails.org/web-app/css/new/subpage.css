@@ -1,0 +1,442 @@
+* {
+margin: 0;
+}
+p {
+	margin-top:10px;
+	margin-bottom:10px;
+}
+#contentWrapper {
+    background: url(../../images/new/plugins/background_stretch.jpg) repeat-x top;
+	margin:0px;
+	width:100%;
+
+}
+#contentInnerWrapper {
+    background: url(../../images/new/plugins/background.jpg) no-repeat left top;
+
+}
+
+
+#contentTitle {
+	position:absolute;
+	left:34%;
+	top:150px;
+	color:#094B00;
+}
+#contentCenter {
+	width:1008px;
+	min-height:800px;
+	z-index:3;
+}
+
+body {
+	margin:0px;
+	margin-top:10px;
+}
+
+#navMenu {
+	z-index:99;
+	width:250px;
+	text-align:left;
+	float:left;
+	margin-top:110px;
+} 
+#navMenu .header a {
+	font-size:13pt;
+	color:#006D00;
+	border: inherit; text-decoration: none;
+}
+#reference {
+	margin-left:10px;
+	list-style-image:url(../../images/new/content/icon_ref.png);
+}
+#start {
+	margin-left:10px;
+	list-style-image:url(../../images/new/content/icon_get_strt.png);
+}
+
+#community {
+	margin-left:10px;
+	list-style-image:url(../../images/new/content/icon_communt.png);
+}
+
+#navMenu .header {
+	padding-top:10px;
+	padding-bottom:10px;
+
+}
+#navMenu .header ul {
+	margin-left:0px;
+	padding-left:0px;
+	text-align:left;
+	list-style:none;
+
+}
+#navMenu .header li a {
+	font-size:11pt;
+	color: black; border: inherit; text-decoration: none;	
+}
+.wikiActionMenu a{
+	color: black; border: inherit; text-decoration: none;	
+}
+
+#search {
+    background: url(../../images/new/content/leftnav_searchtop.png) no-repeat top;	
+	height:48px;
+}
+#nav {
+    background: url(../../images/new/content/leftnav_midstretch.png) repeat-y top;	
+}
+#navFooter {
+    background: url(../../images/new/content/leftnav_btm.png) no-repeat top;	
+	height:20px;
+	
+}
+/* code styles
+------------------------------------------------------- */
+
+.java-keyword {
+    font-weight: bold;
+    color: darkblue;
+}
+
+.code .code-object {
+    font-weight: bold;
+    color: purple;
+}
+
+.java-quote {
+    color: darkred;
+    font-weight: normal;
+}
+
+.java-quote .java-keyword {
+    color: inherit;
+    font-weight: inherit;
+}
+
+.code .xml-tag {
+    color: #222;
+}
+
+.code .xml-quote {
+    color: darkred;
+}
+.code {
+	background-color:#F7F8F2;
+	border:2px solid white;
+	padding:10px;
+	width:90%;
+	overflow:auto;
+	margin-top:20px;
+	margin-bottom:20px;	
+}
+textarea {
+	margin-top:30px;
+	width:640px;
+}
+#contentPane {
+	
+}
+#contentWindow {
+	margin-left:230px;
+	padding-top:80px;
+}
+#contentBody h1,#contentBody h2,#contentBody h3,#contentBody h4,#contentBody h5,#contentBody p, #contentBody ul, #contentBody ol, #contentBody table {
+	margin-bottom:20px;	
+	font-weight:normal;
+}
+#contentBody a {
+		color: #48802C; border: inherit; text-decoration: none;		
+}
+#contentBody h2 {
+	font-size:1.2em;
+	font-weight:normal;
+	color:black;
+}
+#postComment h2 {
+		color: #48802C; border: inherit; text-decoration: none;			
+}
+
+#contentBody h3, #contentBody h4 {
+	color:black;
+	font-size:1.0em;	
+	border-bottom:1px solid #48802C;
+}
+#viewLinks {
+	padding-bottom:20px;
+}
+
+#contentWindow h1 {
+	margin-left:0px;
+	font-size:1.4em;
+	font-weight:normal;
+}
+#loginForm {
+	margin-left:20px;
+}
+#contentWindowTop {
+	height:21px;
+	position:relative;
+	top:30px;
+	width:706px;
+    background: url(../../images/new/content/mainbox_top.png) no-repeat top;		
+}
+#contentDecoration {
+	float:right;
+	height:44px;
+	width:82px;
+	position:relative;
+	margin-right:70px;
+	z-index:99;
+	top:30px;
+    background: url(../../images/new/content/decrtn_1.png) no-repeat top;		
+	
+}
+#contentBody {
+	width:660px;
+    background: url(../../images/new/content/mainbox_midstretch.png) repeat-y top;		
+	position:relative;
+	top:30px;
+	min-height:450px;
+	text-align:left;
+	padding:10px;
+	padding-right:20px;
+	padding-left:30px;
+}
+#contentFooter {
+	height:21px;
+	position:relative;
+	top:30px;
+	width:706px;
+    background: url(../../images/new/content/mainbox_btm.png) no-repeat top;		
+	
+}
+#search input {
+    margin: 15px 10px 15px 15px;
+    height: 20px;
+    width: 170px;
+    border: none;
+    background: transparent;
+    color: #48802C;
+    font-size: 0.9em;
+    font-weight: bold;
+    padding: 3px;
+	padding-top:1px;
+	padding-left:15px;
+	margin-bottom:3px;
+}
+
+.screencastControls a {
+	color: black; border: inherit; text-decoration: none;		
+}
+.screencastControls div, .blogControls div {
+	display:inline;
+	padding-right:20px;
+}
+.screencastControls, .blogControls {
+	margin-bottom:20px;
+}
+.blogControls .show  {
+	text-align:right;
+	padding-left:20px;
+	background: url(../images/icon-cancel.png)  left no-repeat;
+	
+}
+.screencastControls .list, .blogControls .list  {
+	text-align:right;
+	padding-left:20px;
+	background: url(../../images/famfamfam/application_view_list.png)  left no-repeat;
+}
+.screencastControls .edit, .screencastControls .create, .blogControls .create, .blogControls .edit{
+	text-align:right;
+	padding-left:20px;
+	background: url(../../images/icon-edit.png)  left no-repeat;
+}
+.screencastControls .feed, .blogControls .feed {
+	text-align:right;
+	padding-left:20px;
+	background: url(../../images/famfamfam/feed.png)  left no-repeat;
+}
+
+.screencastForm {
+	padding:15px;
+	background-color:#F7F8F2;
+	border:2px solid white;
+	padding:10px;	
+	
+}
+
+#contentBody #searchBox {
+	margin-bottom:30px;
+}
+.screencasts .screencast h2 a {
+	color: #48802C; border: inherit; text-decoration: none;	
+}
+.screencastTitle a {
+	color: #48802C; border: inherit; text-decoration: none;	
+	font-size:1.4em;
+}
+.screencastTags a {
+	color: #48802C; border: inherit; text-decoration: none;	
+}
+.screencastThumbnail a {
+	color: #48802C; text-decoration: none;	
+}
+.screencasts .screencast {
+	margin-bottom:30px;
+	width:90%;
+	padding:15px;
+	background-color:#F7F8F2;
+	border:2px solid white;
+	padding:10px;	
+	overflow:auto;
+	
+}
+
+.screencast .screencastDownloads a { 
+	color: black; border: inherit; text-decoration: none;
+	font-size:0.9em;
+	font-weight:normal;
+}
+.screencast .screencastDownloads {
+	display:none;
+}
+.screencastComments {
+	padding-top:30px;
+	
+}
+.screencastComments h1 {
+	color:#48802C;
+	border: inherit; text-decoration: none;
+	
+}
+
+.blogEntry {
+	margin-bottom:10px;
+	margin-top:10px;	
+}
+.blogEntry .entryDetails{
+	color:grey;
+	margin-bottom:20px;
+}
+.blogQuickLinks {
+	display:none;
+}
+.blogEntryDisplay {
+	font-size:12pt;
+}
+#blogEntries h2 {
+	color:#48802C;
+	border: inherit; text-decoration: none;
+	
+}
+#blogEntries .recentEntries {
+   padding-top:60px;	
+   background: url(../../images/new/content/mainbox_area2_top.png) no-repeat top;		
+}
+#blogEntries .entryTitle {
+	font-size:13pt;
+	margin-bottom:0px;
+}
+#createEntry input {
+	margin:5px;
+	display:block;
+}
+.screencastComments .comment, .blogEntryDisplay .entryComments .comment {
+	margin-top:15px;
+	border-bottom:1px dashed #265c8f;
+} 
+.screencastComments .comment .permalink, .blogEntryDisplay .entryComments .comment .permalink {
+	text-align:right;
+	font-size:1.2em;
+}
+.screencastComments .comment .avatar, .blogEntryDisplay .entryComments .comment .avatar {
+	display:block;
+	position:relative;
+	top:-15px;
+}
+.screencastComments .comment .commentBody, .blogEntryDisplay .entryComments .comment .commentBody {
+	font-size:1.2em;
+}
+.screencastComments .comment .commentDetails, .blogEntryDisplay .entryComments .comment .commentDetails {
+	margin-top:10px;
+	color:grey;
+}
+.screencastComments textarea,, .blogEntryDisplay .entryComments textarea {
+	width:400px;
+	height:200px;
+	margin-bottom:10px;
+}
+.screencastComments #addComment, .blogEntryDisplay .entryComments #addComment {
+	margin-top:20px;	
+}
+.screencastComments #addComment a, .blogEntryDisplay .entryComments #addComment a {
+
+	color: #48802C; border: inherit; text-decoration: none;		
+}
+
+.screencastComments h2, .blogEntryDisplay .entryComments h2 {
+	color: #48802C; border: inherit; text-decoration: none;		
+}
+
+
+.screencastForm label {
+	display:block;
+	font-size:1.2em;
+}
+.screencastForm input {
+	display:block;
+	margin-bottom:10px;
+}
+.screencastForm textarea {
+	display:block;
+	width:400px;
+	height:100px;
+}
+.screencast .screencastDescription{
+	margin-top:5px;
+	margin-bottom:5px;	
+	font-size:1.1em;
+	padding:15px;	
+}
+.screencast .screencastTags{
+	font-size:1.2em;
+	margin-bottom:10px;
+	color:grey;
+}
+.screencast .screencastDownloads {
+	padding:10px;	
+	font-weight:bold;
+	font-size:1.2em;
+}
+.screencast .screencastInfo {
+	color:grey;
+	text-align:center;
+}
+.screencast .screencastTitle {
+	font-size:1.4em;
+	text-align:center;
+	
+}
+.screencasts .screencast .screencastTitle {
+	text-align:left;	
+}
+.screencasts .screencast .screencastInfo {
+	text-align:left;	
+}
+
+.screencast .screencastThumbnail {
+	text-align:center;
+}
+#btmSectionGraphicsWrapper h2 {
+margin-left:25%;
+}
+#contentComments #commentList {
+margin-left:15%;	
+width:850px;
+}
+#contentComments #commentPaginator {
+margin-left:15%;	
+margin-bottom:30px;	
+}

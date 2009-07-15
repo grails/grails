@@ -14,9 +14,13 @@ body {
 }
 
 #contentArea {
-
+	width:1008px;
 }
-
+#pluginsLogo {
+	position:absolute;
+	left:38%;
+	top:105px;
+}
 #pluginMenu {
     float:left;
     width: 308px;
@@ -25,7 +29,6 @@ body {
 
 #pluginMenu h1 {
     text-indent : -9999px;     
-    background: url(../../images/new/plugins/plugins_topnav.png) no-repeat left top;
     width: 469px;
     height: 269px;
     margin: -13px 0 -146px -110px;
@@ -250,6 +253,10 @@ body {
 #latestComments #commentList .comment .author {
 	font-weight:bold;
 	margin-left:70px;
+}
+#latestComments #commentList .comment .date a {
+	color:#003E00;
+	border: inherit; text-decoration: none;
 }
 #latestComments #commentList .comment .date {
 	color:#003E00;

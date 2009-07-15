@@ -31,36 +31,40 @@ class PluginService {
     }
     
     def generateMasterPlugins() {
-        def pluginLoc = ConfigurationHolder.config?.plugins?.pluginslist
-        def listFile = new URL(pluginLoc)
-        def listText = listFile.text
-        // remove the first line of <?xml blah/>
-        listText = listText.replaceAll(/\<\?xml ([^\<\>]*)\>/, '')
-        def plugins = new XmlSlurper().parseText(listText)
-        
-        log.info "Found ${plugins.plugin.size()} master plugins."
+		try {
+	        def pluginLoc = ConfigurationHolder.config?.plugins?.pluginslist
+	        def listFile = new URL(pluginLoc)
+	        def listText = listFile.text
+	        // remove the first line of <?xml blah/>
+	        listText = listText.replaceAll(/\<\?xml ([^\<\>]*)\>/, '')
+	        def plugins = new XmlSlurper().parseText(listText)
 
-        plugins.plugin.inject([]) { pluginsList, pxml ->
-            if (!pxml.release.size()) return pluginsList
-            def latestRelease = pxml.@'latest-release'
-            def latestReleaseNode = pxml.release.find { releaseNode ->
-                releaseNode.@version == latestRelease
-            }
-            def p = new Plugin()
-            p.with {
-                name = pxml.@name
-                grailsVersion = (latestReleaseNode.documentation.toString().startsWith('http://grails.org') ? getGrailsVersion(p) : '')
-                title = latestReleaseNode.title.toString() ?: pxml.@name
-                description = new WikiPage(body:latestReleaseNode.description.toString() ?: '')
-                author = latestReleaseNode.author
-                authorEmail = latestReleaseNode.authorEmail
-                documentationUrl = replaceOldDocsWithNewIfNecessary(latestReleaseNode.documentation, name)
-                downloadUrl = latestReleaseNode.file
-                currentRelease = latestRelease
-            }
+	        log.info "Found ${plugins.plugin.size()} master plugins."
 
-            pluginsList << p
-        }
+	        plugins.plugin.inject([]) { pluginsList, pxml ->
+	            if (!pxml.release.size()) return pluginsList
+	            def latestRelease = pxml.@'latest-release'
+	            def latestReleaseNode = pxml.release.find { releaseNode ->
+	                releaseNode.@version == latestRelease
+	            }
+	            def p = new Plugin()
+	            p.with {
+	                name = pxml.@name
+	                grailsVersion = (latestReleaseNode.documentation.toString().startsWith('http://grails.org') ? getGrailsVersion(p) : '')
+	                title = latestReleaseNode.title.toString() ?: pxml.@name
+	                description = new WikiPage(body:latestReleaseNode.description.toString() ?: '')
+	                author = latestReleaseNode.author
+	                authorEmail = latestReleaseNode.authorEmail
+	                documentationUrl = replaceOldDocsWithNewIfNecessary(latestReleaseNode.documentation, name)
+	                downloadUrl = latestReleaseNode.file
+	                currentRelease = latestRelease
+	            }
+
+	            pluginsList << p
+	        }			
+		}catch(e) {
+			log.error "Error parsing master plugin list: ${e.message}",e
+		}
     }
 
     private def replaceOldDocsWithNewIfNecessary(oldDocs, name) {
@@ -69,54 +73,64 @@ class PluginService {
     }
 
     def translateMasterPlugins(masters) {
-        masters.each { master ->
-            def plugin = Plugin.findByName(master.name)
-            if (!plugin) {
-                // injecting a unique wiki page name for description
-                // pull off the desc so we don't try to save it
-                def descWiki = master.description
-                master.description = null
-                // so we need to save the master first to get its id
-                if (!master.save()) {
-                    log.error "Could not save master plugin: $master.name ($master.title), version $master.currentRelease"
-                    master.errors.allErrors.each { log.error "\t$it" }
-                    
-                }
-                // put the wiki page back with a unique title
-                descWiki.title = "description-${master.id}"
-                master.description = descWiki
-                log.info "No existing plugin, creating new ==> ${master.name}"
-                // before saving the master, we need to save the description wiki page
-                if (!master.description.save() && master.description.hasErrors()) {
-                    master.description.errors.allErrors.each { log.error it }
-                } else {
-                    def v = master.description.createVersion()
-                    v.author = User.findByLogin('admin')
-                    if(!v.save(flush:true)) {
-                        log.warn "Can't save version ${v.title} (${v.number})"
-                        v.errors.allErrors.each { log.warn it }
-                    }
-                }
-                //inject dummy wikis for users to fill in
-                (Plugin.WIKIS - 'description').each { wiki ->
-                    master."$wiki" = new WikiPage(title:"$wiki-${master.id}", body:'')
-                    assert master."$wiki".save()
-                }
-                // give an initial release date of now
-                master.lastReleased = new Date()
-                // save new master plugin
-                if (!master.save()) {
-                    log.error "Could not save master plugin: $master.name ($master.title), version $master.currentRelease"
-                    master.errors.allErrors.each { log.error "\t$it" }
-                } else {
-                    log.info "New plugin was saved from master: $master.name"
-                    log.info "There are now ${Plugin.count()} plugins."
-                }
-            } else {
-                // update existing plugin
-                updatePlugin(plugin, master)
-            }
-        }
+		Plugin.withSession { session ->
+	        masters.each { master ->
+				try {
+		            def plugin = Plugin.findByName(master.name)
+		            if (!plugin) {
+		                // injecting a unique wiki page name for description
+		                // pull off the desc so we don't try to save it
+		                def descWiki = master.description
+		                master.description = null
+		                // so we need to save the master first to get its id
+		                if (!master.save()) {
+		                    log.error "Could not save master plugin: $master.name ($master.title), version $master.currentRelease"
+		                    master.errors.allErrors.each { log.error "\t$it" }
+
+		                }
+		                // put the wiki page back with a unique title
+		                descWiki.title = "description-${master.id}"
+		                master.description = descWiki
+		                log.info "No existing plugin, creating new ==> ${master.name}"
+		                // before saving the master, we need to save the description wiki page
+		                if (!master.description.save() && master.description.hasErrors()) {
+		                    master.description.errors.allErrors.each { log.error it }
+		                } else {
+		                    def v = master.description.createVersion()
+		                    v.author = User.findByLogin('admin')
+		                    if(!v.save(flush:true)) {
+		                        log.warn "Can't save version ${v.title} (${v.number})"
+		                        v.errors.allErrors.each { log.warn it }
+		                    }
+		                }
+		                //inject dummy wikis for users to fill in
+		                (Plugin.WIKIS - 'description').each { wiki ->
+		                    master."$wiki" = new WikiPage(title:"$wiki-${master.id}", body:'')
+		                    assert master."$wiki".save()
+		                }
+		                // give an initial release date of now
+		                master.lastReleased = new Date()
+		                // save new master plugin
+		                if (!master.save()) {
+		                    log.error "Could not save master plugin: $master.name ($master.title), version $master.currentRelease"
+		                    master.errors.allErrors.each { log.error "\t$it" }
+		                } else {
+		                    log.info "New plugin was saved from master: $master.name"
+		                    log.info "There are now ${Plugin.count()} plugins."
+		                }
+		            } else {
+		                // update existing plugin
+		                updatePlugin(plugin, master)
+		            }
+					
+				}
+				finally {
+					session.flush()
+					session.clear()
+				}
+	        }
+			
+		}
     }
 
     def updatePlugin(plugin, master) {

@@ -36,7 +36,7 @@ body {
 }
 #pluginBgTop {
 	background:url(../../images/new/plugins/plugins_topnav.png) no-repeat center bottom;	
-	height:140px;
+	height:114px;
 	margin-bottom:0px;
 }
 #pluginBox {
@@ -157,6 +157,9 @@ body {
 	height:286px;
 }
 
+.yui-content h1,.yui-content h2,.yui-content h3,.yui-content h4,.yui-content h5 {
+	font-weight:normal;
+}
 .yui-content h1 {
 	font-size:1.6em;
 	font-weight:normal;
@@ -164,8 +167,13 @@ body {
 .yui-content h2 {
 	font-size:1.4em;
 	font-weight:normal;
+	color:black;
 }
 
+.yui-content h3, .yui-content h4 {
+	color:black;
+	border-bottom:1px solid #48802C;
+}
 
 .yui-nav li a {
  color: black; border: inherit; text-decoration: none;

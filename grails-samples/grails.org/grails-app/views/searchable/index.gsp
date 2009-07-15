@@ -78,5 +78,6 @@
             </div>
         </g:elseif>
     </div>
+</div>
 </body>
 </html>

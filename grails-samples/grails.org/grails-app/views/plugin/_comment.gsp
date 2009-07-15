@@ -5,7 +5,7 @@
     ${comment?.poster.login}
 </div>
 <div class="date">
-    <g:formatDate format="MMM dd, yyyy HH:MM a" date="${comment.dateCreated}"/>
+    <g:link controller="plugin" action="showComment" id="${comment?.id}"><g:formatDate format="MMM dd, yyyy HH:MM a" date="${comment.dateCreated}"/></g:link>
 </div>
 
 <div class='commentBody'>

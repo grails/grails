@@ -1,21 +1,11 @@
 <div id="footer">
-
-    <div id="footerContent">
-    Powered by <strong>Grails <g:meta name="app.grails.version" /></strong>. <br> Copyright 2003-2008. All rights reserved unless otherwise noted. Hosting sponsored by <a href="http://www.contegix.com/">Contegix</a>.<br />
-
-        <ul id="footerNav">
-            <li><g:link controller="content" id="Home">Home</g:link></li>
-            <li><g:link controller="content" id="Installation">Getting Started</g:link></li>
-            <li><a href="http://grails.org/doc/1.0.x">Reference</a></li>
-            <li><g:link controller="content" id="Community">Community</g:link></li>
-        </ul><!-- / footerNav -->
-
-        <div id="partners">
-            <a href="http://codehaus.org/"><img src="${createLinkTo(dir:'images', file:'codehaus_logo.jpg')}" width="145" height="41" border="0" alt="Codehaus Logo" /></a>
-                <a href="http://www.contegix.com/"><img src="${createLinkTo(dir:'images', file:'contegix_logo.jpg')}" width="145" height="41" border="0" alt="Hosted by Contegix" /></a>    
-
-        </div><!-- partners -->
-
-    </div><!-- / footerContent -->
-
-</div><!-- / footer -->
+    <div align="center">
+        <div class="innerFooter">
+			<a href="http://contegix.com"><img src="${resource(dir:'images',file:'contegix_logo.jpg')}" alt="Hosted by Contegix" border="0"></a>
+	
+            <a href="http://twitter.com/grailsframework"><div class="twitter"></div></a>
+            <a href="http://www.springsource.com"><div class="springSource"></div></a>
+            <p>&copy; Copyright 2009 SpringSource.<br/>All Rights Reserved.</p>
+        </div><!-- innerFooter -->
+    </div><!-- center -->
+</div><!-- footer -->

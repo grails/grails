@@ -4,11 +4,19 @@
     <title>${content?.title}</title>
     <meta content="subpage" name="layout" />
     <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'content.css')}" />
-    <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'comments.css')}" />
-    <g:javascript library="scriptaculous" />
+    <gui:resources components="['tabView','dialog','autoComplete','paginator']" javascript='animation'/>
     <g:javascript library="diff_match_patch" />
+    <g:javascript library="scriptaculous" />
+	<yui:javascript dir="paginator" file="paginator-debug.js" />
     <yui:javascript dir='yahoo-dom-event' file='yahoo-dom-event.js'/>
     <g:render template="wikiJavaScript"/>
+	<style type="text/css" media="screen">
+		body {
+		    font-family: Lucida Grande, Lucida, sans-serif;
+		    font-size: 12pt;
+		}
+		
+	</style>
 
 </head>
 <body>
@@ -23,7 +31,6 @@
 
     <g:render template="previewPane"/>
 
-    <g:render template="../comments/comments" model="${[commentType:'content', parentId:content.id, comments:comments, locked:content.locked]}"/>
 
 </body>
 </html>

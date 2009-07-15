@@ -25,7 +25,7 @@
             border-top:0px;
             margin:10px;
             padding:5px;
-            color:#014684;
+            color:#48802C;
         }
 
 
@@ -34,7 +34,6 @@
 </head>
 <body>
     <div id="contentPane">
-        <h1>Download Grails</h1>
 		<g:render template="download" model="[downloadObj:stableDownload, docDownload:docDownload, title:'Current Stable Release']"></g:render>
 
 		<g:if test="${betaDownload}">
@@ -43,7 +42,6 @@
  
 
 
-        <p>Got a mirror? <a href="http://www.g2one.com/company.html#contactus">Contact G2One Inc.</a> to get it posted. </p>
 
         <p>Past releases can be found at the <g:link controller="download" action="archive" id="Grails">Archive</g:link>.</p>
         <br />
@@ -51,7 +49,7 @@
         <h3>Grails Development Builds</h3>
         <p>
 
-            You can obtain a development build of Grails from our Bamboo continuous integration server at <a href="http://bamboo.ci.codehaus.org/browse/GRAILS" class="pageLink">http://bamboo.ci.codehaus.org/browse/GRAILS</a>
+            You can obtain a development build of Grails from our Hudson continuous integration server at <a href="http://hudson.grails.org" class="pageLink">http://hudson.grails.org</a>
         </p>
         <p class="paragraph">Follow these steps:
         </p>

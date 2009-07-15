@@ -1,6 +1,6 @@
 body {
     font-family: Lucida Grande, Lucida, sans-serif;
-    font-size: 12pt;
+    font-size: 11pt;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -11,7 +11,16 @@ h1, h2, h3, h4, h5, h6 {
     background: url(../../images/new/top_bar.png) repeat-x scroll center top;
     width: 100%;
 }
-
+#contentLogo {
+	position:absolute;
+	left:11%;
+	top:120px;
+	height:55px;
+	width:300px;
+	text-align:center;
+	padding-top:30px;
+    background: url(/images/new/content/title_bg.png) no-repeat left top;	
+}
 #contentArea {
     width: 910px;
     text-align: left;
@@ -105,7 +114,10 @@ h1, h2, h3, h4, h5, h6 {
     background: url(../../images/new/footer_stretch.png) repeat-x top;
     font-size: 10pt;
 }
-
+#footer img {
+	float:right;
+	margin-top:20px;
+}
 .innerFooter {
     position: relative;
     width: 880px;
@@ -168,3 +180,24 @@ h1, h2, h3, h4, h5, h6 {
 .hidden {
 	display:none;
 }
+.userForm {
+	background-color:#F7F8F2;
+	border:2px solid white;
+	padding:10px;	
+}
+#loginForm {
+	width:400px;
+	padding-left:20px;
+}
+#registerForm p {
+	margin-bottom:30px;
+}
+#loginForm form {
+	margin-bottom:20px;
+}
+
+#btmSectionGraphicsWrapper {
+	margin-top:30px;
+}
+
+

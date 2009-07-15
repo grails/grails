@@ -53,7 +53,8 @@ li.odd {
 }
 
 .comments #postComment {
-	margin-left:30px;
+	margin-left:15%;
+	margin-bottom:20px;
 }
 #postComment form {
     width: 510px;

@@ -4,6 +4,11 @@
 	  <title>Grails.org Error</title>
       <meta content="subpage" name="layout" />
 	  <style type="text/css">
+	body {
+	    font-family: Lucida Grande, Lucida, sans-serif;
+	    font-size: 12pt;
+	}
+	
 	  		.message {
 	  			border: 1px solid black;
 	  			padding: 5px;

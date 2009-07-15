@@ -37,7 +37,7 @@
 
        <div class="formButtons" style="margin-top:100px;">
             <g:submitButton name="Submit" value="Register" />
-        <div class="formButtons">
+        </div>
     </g:set>
 
 

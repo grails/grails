@@ -3,70 +3,95 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <g:javascript src="common/application.js"/>
+    <g:javascript src="common/tracking.js"/>
+    
+    <link rel="stylesheet" href="${createLinkTo(dir: 'css/new', file: 'master.css')}" type="text/css" />
+    <link rel="stylesheet" href="${createLinkTo(dir: 'css/new', file: 'subpage.css')}" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="${resource(dir:'css/new',file:'comments.css')}" />
+
+
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 	<meta name="robots" content="NOODP">	
 	<meta name="Description" content="Grails is a high-productivity web framework based on the Groovy language that embraces the coding by convention paradigm, but is designed specifically for the Java platform.">	
 	
-	<title>Grails - <g:layoutTitle default="The search is over." /></title>
+	<title>Grails - The search is over.</title>
 
-	<link rel="stylesheet" href="${createLinkTo(dir:'css', file:'master.css')}" type="text/css" media="screen" title="Master screen stylesheet" charset="utf-8" />
-	<style type="text/css">@import url("${createLinkTo(dir:'css', file:'subpage.css')}");</style>
-	<script type="text/javascript">
-	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-	</script>
-	<script type="text/javascript">
-	try {
-	var pageTracker = _gat._getTracker("UA-2728886-12");
-	pageTracker._trackPageview();
-	} catch(err) {}</script>	
-
-	<!--[if IE]>
-		<link rel="stylesheet" href="${createLinkTo(dir:'css/ie', file:'master.css')}" type="text/css" media="screen" title="Primary screen stylesheet" charset="utf-8" />
-	<![endif]-->
-    <g:javascript base="/js/" library="prototype" />
-
-    <g:layoutHead />
+	<g:layoutHead />
 
 </head>
-<body class="subpage yui-skin-sam">
+<body>
+    
+<div align="center">
+    <div id="springSourceBar">
+		<div id="springSourceLogo">
+    		<a href="http://www.springsource.com/"><img src="${resource(dir:'images/new', file:'springsource-logo.jpg')}" border="0"></a>			
+		</div>
+		<!-- <div id="grailsLogo">
+			<a href="http://grails.org"><img src="${resource(dir:'images/new', file:'grailslogo_topNav.png')}" border="0"></a>
+		</div> -->
 
-	<div id="container">
-        <jsec:isLoggedIn>
-            <div id="statusbox">Welcome <strong><jsec:principal /></strong> | <g:link controller="user" action="profile">Profile</g:link> | <g:link controller="user" action="logout">Logout</g:link></div>    
-        </jsec:isLoggedIn>
-		<div id="floatBox">
-            <g:render template="/content/nav" />
-		</div><!-- / floatBox -->
+    </div>
 
-        <g:render template="/content/ads" />
+    <div class="mainMenuBarWrapper">
+        <ul id="mainMenuBar">
+            <li><a href="http://www.springsource.com/products">Products</a></li>
+            <li><a href="http://www.springsource.com/services">Support and Services</a></li>
+            <li><a href="http://www.springsource.com/training">Training</a></li>
+            <li><a href="http://www.springsource.com/customer/casestudies">Case Studies</a></li>
+            <li><g:link controller="content" id="Download">Downloads</g:link></li>
+            <li><g:link controller="content" id="Documentation">Documentation</g:link></li>
+        </ul><!-- mainMenuBar -->
+    </div><!-- mainMenuBarWrapper -->
+</div><!-- center -->
 
-		<!-- logo -->
-		<g:link controller="content" id="Home"><img src="${createLinkTo(dir:'images',file:'grails-logo-sm.png')}" width="196" height="53" alt="Smaller Grails Logo" class="logo" border="0" /></g:link>
-		<!-- / logo -->
-        <g:set var="title" value="${layoutTitle()}" />
-        <g:if test="${title?.size() < 20}">
-            <h1>${title}</h1>
-        </g:if>
+<div id="contentWrapper" align="center">
+	<div id="contentInnerWrapper">
+		<div id="contentLogo">
+			<a href="http://grails.org"><img src="${resource(dir:'images/new', file:'grailslogo_topNav.png')}" border="0"></a>			
+		</div>
+		<div id="contentTitle">
+			<h1><g:layoutTitle default=""></g:layoutTitle></h1>
+		</div> 
+		
+	    <div id="contentCenter" >		
+			<div id="navMenu">
+				<g:render template="/content/nav"></g:render>
+				<div id="navFooter">
+				</div>
+			</div>
+			<div id="contentWindow">
+				<div id="contentWindowTop">				
+				</div>
+				<div id="contentDecoration">				
+				</div>
+				<div id="contentBody">
+	        		<g:layoutBody/>						
+				</div>
+				<div id="contentFooter">
 
-		<div id="breadcrumb">
-		<ul>
-			<li>> <a href=""><g:layoutTitle /></a>
-			</li>
-		</ul>
-		</div><!-- / breadcrumb -->
+				</div>
+			</div>
 
-		<div id="content">
-			<div id="content-container">
-                 <g:layoutBody />
-		    </div>
-		</div><!-- / content -->
+	    </div><!-- contentCenter -->		
+	</div>
+</div><!-- contentWrapper -->
 
-		<div class="push"></div>
-
-	</div><!-- /container -->
-
-    <g:render template="/content/footer" />
+<g:if test="${content}">
+	<div id="contentComments">
+		<g:render template="/content/commentsFooter" model="[commentType:'content', commentObject:content, comments:content?.comments]"></g:render>
+		
+	</div>
+</g:if>
+<g:else>
+<div id="btmSectionGraphicsWrapper">
+    <div id="mountainLeft"></div>
+    <div id="knight"></div>
+    <div id="mountainRight"></div>
+    <div id="castle"></div>
+</div><!-- btmSectionGraphicsWrapper-->
+</g:else>
+	<g:render template="/content/footer" />
 
 </body>
 </html>
