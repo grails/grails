@@ -2,7 +2,7 @@ h1. response
 
 h2. Purpose
 
-The [response|servletAPI] object is an instance of the Servlet API's [HttpServletResponse|api:javax.servlet.http.HttpServletResponse] class
+The [response|servletAPI] object is an instance of the Servlet API's [HttpServletResponse|api:javax.servlet.http.HttpServletResponse] class.
 
 h2. Examples
 

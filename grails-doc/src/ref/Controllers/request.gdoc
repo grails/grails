@@ -2,7 +2,7 @@ h1. request
 
 h2. Purpose
 
-The [request|servletAPI] object is an instance of the Servlet API's [HttpServletRequest|api:javax.servlet.http.HttpServletRequest] class
+The [request|servletAPI] object is an instance of the Servlet API's [HttpServletRequest|api:javax.servlet.http.HttpServletRequest] class.
 
 h2. Examples
 

@@ -2,7 +2,7 @@ h1. grailsApplication
 
 h2. Purpose
 
-An instance of the [org.codehaus.groovy.grails.commons.GrailsApplication|api:org.codehaus.groovy.grails.commons.GrailsApplication] class
+An instance of the [org.codehaus.groovy.grails.commons.GrailsApplication|api:org.codehaus.groovy.grails.commons.GrailsApplication] class.
 
 h2. Examples
 

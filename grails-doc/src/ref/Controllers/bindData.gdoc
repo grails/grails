@@ -2,7 +2,7 @@ h1. bindData
 
 h2. Purpose
 
-Allows fine grained control of binding request parameters from strings onto objects and the necessary types (data binding)
+Allows fine grained control of binding request parameters from strings onto objects and the necessary types (data binding).
 
 h2. Examples
 

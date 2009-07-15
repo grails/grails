@@ -25,7 +25,7 @@ Results in a search for the following files:
 * @GLOBAL_PLUGINS_HOME/*/scripts/RunApp.groovy@
 * @GRAILS_HOME/scripts/RunApp.groovy@
 
-If multiple matches are found Grails will give you a choice of which one to execute. When Grails executes a Gant script is executed, it invokes the "default" target defined in that script. If there is no default, Grails will quit with an error.
+If multiple matches are found Grails will give you a choice of which one to execute. When Grails executes a Gant script, it invokes the "default" target defined in that script. If there is no default, Grails will quit with an error.
 
 To get a list and some help about the available commands type:
 

@@ -48,6 +48,9 @@ render(contentType:"text/json") {
 
 }
 
+// render with status code
+render(status: 503, text: 'Failed to update book ${b.id}')
+
 // Automatic marshalling of XML and JSON
 import grails.converters.*
 ...
@@ -75,3 +78,4 @@ Parameters:
 * @encoding@ (optional) - The encoding of the response
 * @converter@ (as single non-named first parameter) - A Converter that should be rendered as Response
 * @plugin@ (optional) - The plug-in to look for the template in
+* @status@ (optional) - The HTTP status code to use

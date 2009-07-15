@@ -1,6 +1,6 @@
 Although there is no current default mechanism for authentication as it is possible to implement authentication in literally thousands of different ways. It is however, trivial to implement a simple authentication mechanism using either [interceptors|guide:interceptors] or [filters|guide:filters].
 
-Filters allow you to apply authentication across a all controllers or across a URI space. For example you can create a new set of filters in a class called @grails-app/conf/SecurityFilters.groovy@:
+Filters allow you to apply authentication across all controllers or across a URI space. For example you can create a new set of filters in a class called @grails-app/conf/SecurityFilters.groovy@:
 
 {code:java}
 class SecurityFilters {
