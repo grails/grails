@@ -6,7 +6,6 @@
     <g:javascript src="common/application.js"/>
     <g:javascript src="common/tracking.js"/>
     
-	<g:layoutHead />
 	
     <link rel="stylesheet" href="${createLinkTo(dir: 'css/new', file: 'master.css')}" type="text/css" />
     <link rel="stylesheet" href="${createLinkTo(dir: 'css/new', file: 'pluginInfo.css')}" type="text/css" />
@@ -21,6 +20,7 @@
 	<title>Grails - The search is over.</title>
 
 
+	<g:layoutHead />
 
 </head>
 <body>

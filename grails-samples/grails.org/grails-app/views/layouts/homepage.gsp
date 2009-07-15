@@ -181,15 +181,24 @@
                 <div id="grailsOptions">
                     <div class="left">
             	        <h3>Training</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ut risus in eros consectetur feugiat. Fusce elementum convallis porttitor. Nulla facilisi. Morbi at erat felis. Aenean ante nisl, pulvinar nec varius ut, egestas sit amet dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vitae fermentum odio. Quisque quis lacus id dolor rhoncus placerat ut eu odio. Duis nec ipsum est. Proin congue faucibus risus, at blandit libero rutrum at. Vivamus ac laoreet lectus. Nam et nisi est. Aliquam hendrerit tristique lectus sit amet fringilla. Aenean pretium lacus vitae massa bibendum feugiat. Suspendisse a mi mauris. Etiam fermentum lacus nec lectus luctus vitae porta nisl ultrices.</p>		
+                        <p><a href="http://www.springsource.com/training">SpringSource University</a> provides a comprehensive education and certification program for SpringSource software products as well as Spring, Groovy, Grails, and Apache open source technologies.
+	<br><br>
+	 We offer both public and customized private training and have trained over 4,000 people. Whichever course you decide to take, you are guaranteed to experience what many before you refer to as “The best Enterprise Software Class I have ever attended”.
+						</p>		
                     </div><!-- left column -->
                     <div class="center">
             			<h3>Support</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ut risus in eros consectetur feugiat. Fusce elementum convallis porttitor. Nulla facilisi. Morbi at erat felis. Aenean ante nisl, pulvinar nec varius ut, egestas sit amet dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vitae fermentum odio. Quisque quis lacus id dolor rhoncus placerat ut eu odio. Duis nec ipsum est. Proin congue faucibus risus, at blandit libero rutrum at. Vivamus ac laoreet lectus. Nam et nisi est. Aliquam hendrerit tristique lectus sit amet fringilla. Aenean pretium lacus vitae massa bibendum feugiat. Suspendisse a mi mauris. Etiam fermentum lacus nec lectus luctus vitae porta nisl ultrices.</p>
+                        <p>SpringSource enterprise software and <a href="http://www.springsource.com/services/enterprisesupport">support subscriptions</a> are the way to get developer and production support for Grails and other SpringSource software products and certified versions of our open source technologies including patches, updates, security fixes, and legal indemnification. 
+	<br><br>
+	Support plans provide unlimited support incidents across three different service levels ranging from developer support to business-critical 24x7 production support.</p>
                     </div><!-- center column -->
                     <div class="right">
             			<h3>Services</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ut risus in eros consectetur feugiat. Fusce elementum convallis porttitor. Nulla facilisi. Morbi at erat felis. Aenean ante nisl, pulvinar nec varius ut, egestas sit amet dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vitae fermentum odio. Quisque quis lacus id dolor rhoncus placerat ut eu odio. Duis nec ipsum est. Proin congue faucibus risus, at blandit libero rutrum at. Vivamus ac laoreet lectus. Nam et nisi est. Aliquam hendrerit tristique lectus sit amet fringilla. Aenean pretium lacus vitae massa bibendum feugiat. Suspendisse a mi mauris. Etiam fermentum lacus nec lectus luctus vitae porta nisl ultrices.</p>
+                        <p>SpringSource <a href="http://www.springsource.com/support/professional-services">consulting services</a> are available to companies that wish to leverage the knowledge and expertise of SpringSource’s Grails technology experts. We provide client-driven engagements that focus on knowledge transfer, not creating dependencies. 
+	<br><br>
+Our custom professional services are highly flexible to address specific issues such as onsite troubleshooting and other services tailored to suit your Grails needs. 
+						</p>
+						
                     </div><!-- right column -->
                 </div><!-- grailsOptions -->
             </div><!-- center -->

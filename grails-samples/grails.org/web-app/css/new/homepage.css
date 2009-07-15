@@ -21,7 +21,10 @@ body {
 #grailsAttributes {
     margin-bottom: -220px;
 }
-
+#btmSectionBackgroundStretch a {
+	
+	color:#094B00;;
+}
 #grailsAttributes div {
     background: url(../../images/new/top_box.png) no-repeat top left;
     position: relative;
