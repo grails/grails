@@ -1,3 +1,5 @@
+h3. Default Declarative Transactions
+
 Services are typically involved with co-ordinating logic between [domain classes|guide:GORM], and hence often involved with persistence that spans large operations. Given the nature of services they frequently require transactional behaviour. You can of course use programmatic transactions with the [withTransaction|domainClasses] method, however this is repetitive and doesn't fully leverage the power of Spring's underlying transaction abstraction.
 
 Services allow the enablement of transaction demarcation, which is essentially a declarative way of saying all methods within this service are to be made transactional. All services have transaction demarcation enabled by default - to disable it, simply set the @transactional@ property to @false@:
@@ -16,3 +18,13 @@ Warning: [dependency injection|guide:8.3 Dependency Injection and Services] is t
 
 
 The result is all methods are wrapped in a transaction and automatic rollback occurs if an exception is thrown in the body of one of the methods. The propagation level of the transaction is by default set to [PROPAGATION_REQUIRED|http://static.springframework.org/spring/docs/2.0.x/api/org/springframework/transaction/TransactionDefinition.html#PROPAGATION_REQUIRED].
+
+h3. Custom Transaction Configuration
+
+Grails also fully supports Spring's @Transactional@ annotation for cases whereyou need more fine-grained control over transactions at a per-method level or need specify an alternative propagation level.
+
+For more information refer to the section of the Spring user guide on [Using @Transactional|http://static.springsource.org/spring/docs/2.5.x/reference/transaction.html#transaction-declarative-annotations].
+
+{note}
+Unlike Spring you do not need any prior configuration to use @Transactional@, just specify the annotation as needed and Grails will pick them up automatically.
+{note}
