@@ -48,4 +48,9 @@ class TestController implements ApplicationContextAware {
 		render "Resolver class = ${appCtx.getBean('localeResolver').class.name}"
 	}
 
+	def testScannedValidateable = {
+		def t = new beans.ValidateMe(name:"joebloggs")
+		
+		render "valid = ${t.validate()}"
+	}
 }
