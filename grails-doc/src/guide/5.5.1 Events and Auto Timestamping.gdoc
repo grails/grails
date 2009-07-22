@@ -10,6 +10,10 @@ GORM supports the registration of events as methods that get fired when certain 
 
 To add an event simply register the relevant closure with your domain class.
 
+{warning}
+Do not attempt to flush the session within an event (such as with obj.save(flush:true)). Since events are fired during flushing this will cause a StackOverflowError.
+{warning}
+
 h3. Event types
 
 h4. The beforeInsert event
@@ -56,11 +60,17 @@ class Person {
    Date lastUpdated
 
    def beforeDelete() {
-      new ActivityTrace(eventName:"Person Deleted",data:name).save()
+	  ActivityTrace.withNewSession {
+	 	  new ActivityTrace(eventName:"Person Deleted",data:name).save()
+	  }      
    }
 }
 
 {code}
+
+Notice the usage of @withNewSession@ method above. Since events are triggered whilst Hibernate is flushing using persistence methods like @save()@ and @delete()@ won't result in objects being saved unless you run your operations with a new @Session@.
+
+Fortunately the @withNewSession@ method allows you to share the same transactional JDBC connection even though you're using a different underlying @Session@.
 
 h4. The onLoad event
 
