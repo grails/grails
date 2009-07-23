@@ -10,24 +10,22 @@ class Nose {
 }
 {code}
 
-In this case we have unidirectional one-to-one relationship from @Face@ to @Nose@. To make this relationship bidirectional define the other side as follows:
-
-h5. Example B
+In this case we have unidirectional many-to-one relationship from @Face@ to @Nose@. To make it a true one-to-one you should make @nose@ unique:
 
 {code}
 class Face {
     Nose nose
+	static constraints = {
+		nose unique:true
+	}
 }
 class Nose {	
-	Face face
 }
 {code}
 
-This is bidirectional relationship. However, in this case no updates are cascading from either side of the relationship.
+To make this relationship bidirectional define the other side as follows:
 
-Consider this variation: 
-
-h5. Example C
+h5. Example B
 
 {code}
 class Face {
@@ -58,30 +56,17 @@ def f = Face.get(1)
 f.delete() // both Face and Nose deleted
 {code}
 
-Without @belongsTo@ deletes would *not* be cascading and you would get a foreign key constraint error unless you explicitly deleted the Nose:
-{code}
-// error here without belongsTo
-def f = Face.get(1)
-f.delete() 
+In the previous example the foreign key associated the @Face@ with the @Nose@ is stored in the parent as column called @nose_id@. If you want the foreign key to be stored in the child you need a @hasOne@ association:
 
-// no error as we explicitly delete both
-def f = Face.get(1)
-f.nose.delete()
-f.delete()
-{code}
-
-You could keep the previous relationship as unidirectional and allow saves/updates to cascade down by doing the following:
+h5. Example C
 
 {code}
 class Face {
-    Nose nose
+    static hasOne = [nose:Nose]
 }
 class Nose {	
-	static belongsTo = Face
+	Face face
 }
 {code}
 
-Note in this case because we are not using the map syntax in the @belongsTo@ declaration and explicitly naming the association. Grails will assume it is unidirectional. The diagram below summarizes the 3 examples:
-
-
-!GORM-1to1.png!
+In this example you get a bidirectional one-to-one where the foreign key column is stored in the @nose@ table inside a column called @face_id@.
