@@ -96,8 +96,12 @@ body {
     left: 3px;
 }
 
+#events a:hover {
+	text-decoration:underline;
+}
 #events a {
-    color: #48802C;
+    color: #767676;
+	font-size:9pt;
 	text-decoration:none;
 }
 #grailsAttributes a{
@@ -113,7 +117,12 @@ body {
     font-size: 16pt;
 	margin-bottom:10px;
 }
-
+#events ul {
+	margin:0;
+	margin-top:7px;
+	margin-bottom:7px;	
+	list-style:none;
+}
 #events p {
 
 	margin:0px;	
@@ -127,7 +136,7 @@ body {
 #events h4 {
 	
 	margin:0px;
-	margin-left:20px;	
+	margin-left:30px;	
     font-size: 9pt;
     font-weight: bold;
     color: #48802C;
