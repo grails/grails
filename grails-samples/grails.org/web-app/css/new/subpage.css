@@ -444,3 +444,7 @@ margin-bottom:30px;
 #editLinks a,#viewLinks a{
 	color: black; border: inherit; text-decoration: none;	
 }
+#navAds {
+	padding-top:20px;
+	text-align:center;
+}

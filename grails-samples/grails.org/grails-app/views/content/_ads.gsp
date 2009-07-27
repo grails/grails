@@ -1,3 +1,3 @@
-<div id="sidebarAds" style="text-align:center;width:300px;">
+<div id="sidebarAds">
 	<wiki:text page="SidePanelAdverts" />
 </div><!-- / sidebarAds -->

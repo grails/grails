@@ -67,6 +67,9 @@
 				<g:render template="/content/nav"></g:render>
 				<div id="navFooter">
 				</div>
+				<div id="navAds">
+					<g:render template="/content/ads"></g:render>					
+				</div>
 			</div>
 			<div id="contentWindow">
 				<div id="contentWindowTop">				
