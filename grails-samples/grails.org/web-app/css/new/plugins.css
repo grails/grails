@@ -314,3 +314,7 @@ body {
     top: -17px;
     left: 20px;
 }
+#pluginTags .tag a {
+	color:#48802C;
+	padding:100px;
+}

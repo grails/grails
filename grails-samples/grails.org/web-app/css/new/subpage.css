@@ -448,3 +448,9 @@ margin-bottom:30px;
 	padding-top:20px;
 	text-align:center;
 }
+
+#previewContainer {
+     top:200px;
+	 width:700px;
+     left:50px;
+}

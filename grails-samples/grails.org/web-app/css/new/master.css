@@ -229,5 +229,21 @@ h1, h2, h3, h4, h5, h6 {
 #btmSectionGraphicsWrapper {
 	margin-top:30px;
 }
+#previewContainer a {
+	color:#48802C;
+	text-decoration:none;	
+}
+#previewContainer {
+     position:absolute;
+		background-color:#F7F8F2;
+		border:2px solid white;
+     top:400px;
+     width:950px;
+     height:600px;
+     overflow:scroll;
+     left:20%;
+     padding:10px;
+	z-index:9999;
+}
 
 
