@@ -14,4 +14,60 @@
 #paginationPlugins {
 	margin-bottom:80px;
 }
+#newsBox .calendar .day {
+	margin-bottom:30px;
+}
 
+#newsBox li {
+	height:55px;
+}
+#newsBox .actions {
+	padding-bottom:20px;
+}
+#download h4 a,#download h4 a, #plugins h4 a {
+	font-size:10pt;
+}
+#contentLogo {
+	position:absolute;
+	float:none;
+	left:100px;
+}
+#nav {
+	padding-bottom:30px;
+}
+#nav #start,#nav #reference,#nav #community {
+	margin-left:40px;
+}
+
+#nav #start ul,#nav #reference ul,#nav #community ul {
+	list-style-image:none;
+}
+#contentBody {
+	position:relative;
+	top:-14px;
+}
+#contentFooter {
+	position:relative;
+	top:-14px;
+	left:10px;	
+}
+#contentBody ul {
+	margin-left:30px;
+}
+#pluginsLogo {
+	top:120px;
+}
+#editLinks,#viewLinks{
+	position:relative;
+	left:-40px;
+}
+#editLinks a,#viewLinks a {
+	color:black;
+	padding:30px;
+	padding-right:0px;
+}
+#statusbox {
+	position:absolute;
+	right:120px;
+	width:260px;
+}

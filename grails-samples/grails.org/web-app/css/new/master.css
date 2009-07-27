@@ -11,6 +11,19 @@ h1, h2, h3, h4, h5, h6 {
     background: url(../../images/new/top_bar.png) repeat-x scroll center top;
     width: 100%;
 }
+.message {
+	border:1px solid #48802C;
+	background-color:white;
+	padding:10px;
+	width:90%;
+}
+
+.error {
+	border:1px solid red;
+	background-color:white;
+	padding:10px;
+	width:90%;
+}
 #contentLogo {
 	float:left;
 	position:absolute;

@@ -193,9 +193,9 @@ body {
 }
 
 #plugins a {
-    text-decoration: inherit;
-    border: inherit;
-    color: inherit;
+    text-decoration: none;
+    border: none;
+    color:  #48802C;
 }
 
 #plugins a:hover {
@@ -207,7 +207,7 @@ body {
 #download p {
 	margin-left:20px;
 }
-#download h4 a:visited,#download h4 a:link, #plugins h4 a:link {
+#download h4 a,#download h4 a, #plugins h4 a {
     color: #48802C;
 	text-decoration:none;
 }
@@ -245,7 +245,7 @@ body {
 }
 
 #newsBox a {
-    color: inherit;
+    color: #96937D;
 }
 
 #newsBox a:hover {
@@ -278,6 +278,10 @@ body {
     padding-left: 6px;
 }
 
+#newsBox .detail h4 a {
+	color: #3C4D2B;
+	text-decoration:none;
+}
 #newsBox .detail h4 {
     color: #3C4D2B;
     font-size: 12pt;
@@ -304,6 +308,9 @@ body {
     font-weight: bold;
 }
 
+#newsBox .calendar .month a {
+	color: #FFF;
+}
 #newsBox .calendar .month {
     color: #FFF;
     font-size: 10pt;

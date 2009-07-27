@@ -8,6 +8,10 @@
     
     <link rel="stylesheet" href="${resource(dir: 'css/new', file: 'master.css')}" type="text/css" />
     <link rel="stylesheet" href="${resource(dir: 'css/new', file: 'homepage.css')}" type="text/css" />
+	<!--[if IE]>
+    <link rel="stylesheet" href="${resource(dir: 'css/new', file: 'ie.css')}"/>
+	<![endif]-->
+
 	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
 	<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 
@@ -106,7 +110,7 @@
 							</h3>
                             <ul>
                                 <g:each var="plugin" in="${newestPlugins}">
-                                    <li><g:link controller="plugin" action="show" params="[name:plugin.name]">${plugin.title}</g:link></li>
+                                    <li><g:link controller="plugin" action="show" params="[name:plugin.name]"><wiki:shorten text="${plugin.title}" /></g:link></li>
                                 </g:each>
                             </ul>
                             <h4><g:link controller="plugin">View All</g:link></h4>
@@ -124,7 +128,7 @@
                                 <li>
                                     <g:link controller="blog"  action="showEntry" params="[author:newsItem.author, title: newsItem.title]">
                                         <div class="detail">
-                                            <h4>${newsItem.title}</h4>
+                                            <h4><wiki:shorten length="50" text="${newsItem.title}" /></h4>
                                             <div class="author">by ${newsItem.author} | ${newsItem.tags.join(', ')}</div>
                                             <div class="comments">${newsItem.comments.size()} comments</div>
                                         </div>

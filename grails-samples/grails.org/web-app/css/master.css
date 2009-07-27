@@ -16,7 +16,7 @@ Version:  02 Feb 2008
 
 	h1,h2,h3,h4,h5,h6,pre,form,body,html,p,blockquote,fieldset,input { margin: 0px; padding: 0px; } /* remove the inconsistent (among browsers) default ul,ol padding or margin; the default spacing on headings does not match nor align with normal interline spacing at all, so let's get rid of it; zero out the spacing around pre, form, body, html, p, blockquote as well; form elements are oddly inconsistent, and not quite CSS emulatable; nonetheless strip their margin and padding as well */
 		
-	img { behavior: url(http://grails.org/css/iepngfix.htc); } /* gives png support to IE 6 (in conjunction with iepngfix.htc and blak.gif in the CSS directory) */
+	img { behavior: url(/css/iepngfix.htc); } /* gives png support to IE 6 (in conjunction with iepngfix.htc and blak.gif in the CSS directory) */
 
 	a img,:link img,:visited img { border: none; } /* whoever thought blue linked image borders were a good idea? */
 

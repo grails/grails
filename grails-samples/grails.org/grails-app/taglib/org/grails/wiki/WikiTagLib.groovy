@@ -21,7 +21,18 @@ class WikiTagLib implements ApplicationContextAware  {
     ApplicationContext applicationContext
 
 	
-
+	def shorten = { attrs, body ->
+		def text = attrs.text
+		def length = attrs.length?.toInteger() ?: 25
+		
+		if(text.length() > length) {
+			out << "${text[0..length]}..."
+		}
+		else {
+			out << text
+		}
+	}
+	
     def preview = { attrs, body ->
         def engine = applicationContext.getBean('wikiEngine')
         def context = applicationContext.getBean('wikiContext')

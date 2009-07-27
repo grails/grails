@@ -8,6 +8,10 @@
     
     <link rel="stylesheet" href="${createLinkTo(dir: 'css/new', file: 'master.css')}" type="text/css" />
     <link rel="stylesheet" href="${createLinkTo(dir: 'css/new', file: 'subpage.css')}" type="text/css" />
+	<!--[if IE]>
+    <link rel="stylesheet" href="${resource(dir: 'css/new', file: 'ie.css')}"/>
+	<![endif]-->
+
     <link rel="stylesheet" type="text/css" href="${resource(dir:'css/new',file:'comments.css')}" />
 	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
 	<link rel="icon" href="/images/favicon.ico" type="image/x-icon">

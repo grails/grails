@@ -80,9 +80,6 @@ body {
 	font-size:11pt;
 	color: black; border: inherit; text-decoration: none;	
 }
-.wikiActionMenu a{
-	color: black; border: inherit; text-decoration: none;	
-}
 
 #search {
     background: url(../../images/new/content/leftnav_searchtop.png) no-repeat top;	
@@ -443,4 +440,7 @@ width:850px;
 #contentComments #commentPaginator {
 margin-left:15%;	
 margin-bottom:30px;	
+}
+#editLinks a,#viewLinks a{
+	color: black; border: inherit; text-decoration: none;	
 }

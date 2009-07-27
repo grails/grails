@@ -5,7 +5,7 @@
 	
             <a href="http://twitter.com/grailsframework"><div class="twitter"></div></a>
             <a href="http://www.springsource.com"><div class="springSource"></div></a>
-            <p>&copy; Copyright 2009 SpringSource.<br/>All Rights Reserved.</p>
+            <p>Running Grails <g:meta name="app.grails.version"></g:meta> &copy; Copyright 2009 SpringSource.<br/>All Rights Reserved. </p>
         </div><!-- innerFooter -->
     </div><!-- center -->
 </div><!-- footer -->
