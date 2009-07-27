@@ -6,8 +6,8 @@
     <g:javascript src="common/application.js"/>
     <g:javascript src="common/tracking.js"/>
     
-    <link rel="stylesheet" href="${createLinkTo(dir: 'css/new', file: 'master.css')}" type="text/css" />
-    <link rel="stylesheet" href="${createLinkTo(dir: 'css/new', file: 'homepage.css')}" type="text/css" />
+    <link rel="stylesheet" href="${resource(dir: 'css/new', file: 'master.css')}" type="text/css" />
+    <link rel="stylesheet" href="${resource(dir: 'css/new', file: 'homepage.css')}" type="text/css" />
 	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
 	<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 
@@ -67,18 +67,7 @@
             <div class="eventDownloadWrapper">
                 <div id="events">
                     <h3>Training Events</h3>
-                    <h4>June 17-19, 2009</h4>
-                    <p>Groovy and Grails - Belgium, Brussels</p>
-                    <h4>June 17-19, 2009</h4>
-                    <p>Groovy and Grails - Belgium, Brussels</p>
-                    <h4>June 17-19, 2009</h4>
-                    <p>Groovy and Grails - Belgium, Brussels</p>
-                    <h4>June 17-19, 2009</h4>
-                    <p>Groovy and Grails - Belgium, Brussels</p>
-                    <h4>June 17-19, 2009</h4>
-                    <p>Groovy and Grails - Belgium, Brussels</p>
-                    <h4>June 17-19, 2009</h4>
-                    <p>Groovy and Grails - Belgium, Brussels</p>
+		 			<wiki:text page="Training Events" />
                 </div><!-- events -->
                 
                 <div id="globeGraphic"></div>

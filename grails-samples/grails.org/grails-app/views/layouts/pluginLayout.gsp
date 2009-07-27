@@ -47,32 +47,11 @@
 
 <div id="contentWrapper">	
     <div id="contentCenter" align="center">
+		<g:render template="/user/profileBox" />	
         <g:layoutBody/>
     </div><!-- contentCenter -->
 </div><!-- contentWrapper -->
-<g:if test="${latestComments}">
-	<div id="latestComments">
-	    <h2><img src="${resource(dir:'images/new/plugins/icons', file:'comments.png')}" border="0" /> Most Recent Comments</h2>
-	    <div id='commentList'>
-	        <g:each var='comment' status='i' in="${latestComments}">
-	            <g:set var='oddEven' value="${(i%2==0) ? 'even' : 'odd'}"/>
-	            <div class='comment ${oddEven}'>
-	                <g:render template="comment" var="comment" bean="${comment}"/>
-	            </div>
-	        </g:each>
-	    </div>
-	</div>
-</g:if>
 
-<div id="footer">
-    <div align="center">
-        <div class="innerFooter">
-            <a href="http://twitter.com/grailsframework"><div class="twitter"></div></a>
-            <a href="http://www.springsource.com"><div class="springSource"></div></a>
-            <p>&copy; Copyright 2009 SpringSource.<br/>All Rights Reserved.</p>
-        </div><!-- innerFooter -->
-    </div><!-- center -->
-</div><!-- footer -->
-
+	<g:render template="/content/footer" />
 </body>
 </html>

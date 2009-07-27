@@ -211,7 +211,7 @@ body {
 	bottom:80px;
 
 	padding-right:55px;
-	padding-top:20px;
+	padding-top:40px;
 	padding-bottom:10px;
 	background: url(../../images/new/plugins/Buttons/download_btn.png) no-repeat right bottom;
 }
@@ -286,7 +286,13 @@ body {
 	color:#767676;
 
 }
+#statusbox {
+	margin-left:950px;
+}
 
+#paginationPlugins {
+	margin-top:30px;
+}
 #paginationPlugins .currentStep {
 	font-size:0.8em;
 	padding:5px;	

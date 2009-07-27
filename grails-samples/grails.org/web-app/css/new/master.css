@@ -22,6 +22,22 @@ h1, h2, h3, h4, h5, h6 {
 	padding-top:30px;
     background: url(/images/new/content/title_bg.png) no-repeat left top;	
 }
+#statusbox a {
+	color:#48802C;
+	text-decoration:none;
+}
+#statusbox {
+	background-color:white;
+	font-size:10pt;
+	padding:5px;
+	position:absolute;
+	margin-left:730px;
+	float:right;
+	border: 2px solid #e6e6e6;
+}
+#message {
+	margin-bottom:10px;
+}
 #contentArea {
     width: 910px;
     text-align: left;

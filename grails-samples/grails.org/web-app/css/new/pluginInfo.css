@@ -61,12 +61,16 @@ body {
 #pluginContent {
 	background: url(../../images/new/plugins/fullpagePlugin_mid.png) repeat-y center top;	
 	background-position: center;
+	margin-top:22px;
+}
+#statusbox {
+	margin-left:950px;
 }
 .yui-content {
 	text-align:left;
 	width:1008px;
 	min-height:200px;
-	padding-top:15px;
+	padding-top:0px;
 	padding-left:50px;
 	padding-bottom:15px;
 }
@@ -155,6 +159,8 @@ body {
 }
 
 .tabOuter  {
+	position:relative;
+	top:-20px;
 	padding-left:30px;
 	text-align:left;
 	width:1008px;

@@ -32,7 +32,7 @@
 <div id="contentPane">
 
 	<div id="pluginBigBox">
-		
+		<g:render template="/user/profileBox" />		
 		<div id="pluginBgTop"></div>
 		<div id="pluginBox">
 			<div id="pluginDetailWrapper">
@@ -43,8 +43,12 @@
 
 				</div>
 				
-				<g:render template="/content/commentsFooter" model="[commentType:'plugin', commentObject:plugin, comments:plugin?.comments]"></g:render>
-
+				<div id="btmSectionGraphicsWrapper">
+				    <div id="mountainLeft"></div>
+				    <div id="knight"></div>
+				    <div id="mountainRight"></div>
+				    <div id="castle"></div>
+				</div><!-- btmSectionGraphicsWrapper-->
 				<g:render template="/content/footer"></g:render>
 		        <g:render template="../content/previewPane"/>
 

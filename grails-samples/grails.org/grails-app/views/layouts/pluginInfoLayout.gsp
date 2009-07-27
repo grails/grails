@@ -47,7 +47,7 @@
 <div id="contentWrapper">
 
     <div id="contentCenter" >
-	
+
         <g:layoutBody/>
     </div><!-- contentCenter -->
 </div><!-- contentWrapper -->

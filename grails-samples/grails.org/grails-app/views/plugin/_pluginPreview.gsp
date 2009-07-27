@@ -42,11 +42,6 @@
 			</g:link>
 		
 		</div>
-        <div class="comments">
-			<g:link fragment="comments" action="show" params="${[name:plugin.name]}">${plugin.comments.size()} Comments 
-				<img src="${resource(dir:'images/new/plugins/icons', file:'comments.png')}" border="0" />
-			</g:link>
-		</div>
 		<div class="download">
         	<a href="${plugin.downloadUrl}">Download</a>
 		</div>

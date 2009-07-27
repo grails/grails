@@ -18,6 +18,32 @@ class UserController {
     def scaffold = User
 
     def jsecSecurityManager
+    def mailService
+
+	String randomPass() {
+		UUID uuid = UUID.randomUUID()
+		uuid.toString()[0..7]
+	}
+	
+	def passwordReminder = {
+		if(request.method == 'POST') {
+			def user = User.findByLogin(params.login)
+			if(user && user.login!='admin') {
+				def newPassword = randomPass()
+				user.password = DigestUtils.shaHex(newPassword)
+				user.save()
+				mailService.sendMail {
+					from "wiki@grails.org"
+					to user.email
+					title "Grails.org password reset"
+					body "Your password has been reset. Please login with the following password: ${newPassword}"
+				}
+			}
+			else {
+				flash.message = "Username not found"
+			}
+		}
+	}
 
     def profile = {
         def userInfo = UserInfo.findByUser(request.user)
@@ -25,7 +51,10 @@ class UserController {
             if(!userInfo) userInfo = new UserInfo(user:request.user)
             userInfo.properties = params
             userInfo.save()
-
+			if(params.password) {
+				request.user.password = DigestUtils.shaHex(params.password) 
+				request.user.save()
+			}
         }
         return [user:request.user, userInfo:userInfo]
 

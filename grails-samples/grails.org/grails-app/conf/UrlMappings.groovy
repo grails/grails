@@ -42,6 +42,7 @@ class UrlMappings {
         "/upload/$id?"(controller: "content", action: "uploadImage")
         "/register"(controller: "user", action: "register")
         "/login"(controller: "user", action: "login")
+        "/reminder"(controller: "user", action: "passwordReminder")
         "/profile"(controller: "user", action: "profile")
         "/logout"(controller: "user", action: "logout")
         "/edit/$id"(controller: "content", action: "editWikiPage")

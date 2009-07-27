@@ -74,8 +74,7 @@ class PluginController extends BaseWikiController {
 			break
         }
         
-        def latestComments = commentService.getLatestComments('plugin', PORTAL_MAX_RESULTS)
-        [currentPlugins:currentPlugins, category:category,latestComments:latestComments, totalPlugins:totalPlugins]
+        [currentPlugins:currentPlugins, category:category,totalPlugins:totalPlugins]
         
     }
 

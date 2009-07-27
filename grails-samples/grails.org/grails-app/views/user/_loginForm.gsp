@@ -44,7 +44,7 @@
             <g:if test="${true == async}"><a href="#" onclick="new Ajax.Updater('${updateElement}','${createLink(controller:'user', action:'register')}',{method:'GET',asynchronous:true,evalScripts:true,parameters:Form.serialize('login')});return false;">click here</a></g:if>
             <g:else><g:link controller="user" action="register">click here</g:link></g:else>
          </g:set>
-         If you do not have an account ${registerLink} to register.
+         If you do not have an account ${registerLink} to register. If you have forgotten your password visit the <g:link controller="user" action="passwordReminder">password</g:link> reminder page.
      </div>
 </div>
 

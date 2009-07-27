@@ -47,9 +47,11 @@
 </div><!-- center -->
 
 <div id="contentWrapper" align="center">
+	
 	<div id="contentInnerWrapper">
 		
 	    <div id="contentCenter" >
+			<g:render template="/user/profileBox" />
 			<div id="contentLogo">
 				<a href="http://grails.org"><img src="${resource(dir:'images/new', file:'grailslogo_topNav.png')}" border="0"></a>			
 			</div>
@@ -79,20 +81,12 @@
 	</div>
 </div><!-- contentWrapper -->
 
-<g:if test="${content}">
-	<div id="contentComments">
-		<g:render template="/content/commentsFooter" model="[commentType:'content', commentObject:content, comments:content?.comments]"></g:render>
-		
-	</div>
-</g:if>
-<g:else>
 <div id="btmSectionGraphicsWrapper">
     <div id="mountainLeft"></div>
     <div id="knight"></div>
     <div id="mountainRight"></div>
     <div id="castle"></div>
 </div><!-- btmSectionGraphicsWrapper-->
-</g:else>
 	<g:render template="/content/footer" />
 
 </body>
