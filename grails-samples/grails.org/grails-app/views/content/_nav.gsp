@@ -28,7 +28,8 @@
 	                        <li><g:link controller="job" action="list">Job Listings</g:link></li>    
 	                    </plugin:isAvailable>
 	                    <li><g:link controller="content" id="Testimonials">Testimonials</g:link></li>
-	                    <li><g:link controller="content" id="Community">Contributing</g:link></li>
+	                    <li><a href="http://jira.codehaus.org/browse/GRAILS">Issue Tracker</a></li>
+	                    <li><a href="http://github.com/grails/grails/tree/master">Source code</a></li>	
 	                    <li><g:link controller="content" id="Plugins">Plugins</g:link></li>
 	                    <li><g:link controller="content" id="Mailing lists">Mailing Lists</g:link></li>
 	                </ul>

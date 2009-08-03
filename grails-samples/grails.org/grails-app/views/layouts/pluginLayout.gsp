@@ -27,21 +27,9 @@
 <body>
     
 <div align="center">
-    <div id="springSourceBar">
-		<div id="springSourceLogo">
-    		<a href="http://www.springsource.com/"><img src="${resource(dir:'images/new', file:'springsource-logo.jpg')}" border="0"></a>			
-		</div>
-    </div>
-
+	<g:render template="/content/logos"></g:render>
     <div class="mainMenuBarWrapper">
-        <ul id="mainMenuBar">
-            <li><a href="http://www.springsource.com/products">Products</a></li>
-            <li><a href="http://www.springsource.com/services">Support and Services</a></li>
-            <li><a href="http://www.springsource.com/training">Training</a></li>
-            <li><a href="http://www.springsource.com/customer/casestudies">Case Studies</a></li>
-            <li><g:link controller="content" id="Download">Downloads</g:link></li>
-            <li><g:link controller="content" id="Documentation">Documentation</g:link></li>
-        </ul><!-- mainMenuBar -->
+		<g:render template="/content/mainMenuBar"></g:render>
     </div><!-- mainMenuBarWrapper -->
 </div><!-- center -->
 

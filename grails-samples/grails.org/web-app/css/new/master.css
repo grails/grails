@@ -24,17 +24,6 @@ h1, h2, h3, h4, h5, h6 {
 	padding:10px;
 	width:90%;
 }
-#contentLogo {
-	float:left;
-	position:absolute;
-	margin-top:27px;
-
-	height:55px;
-	width:300px;
-	text-align:center;
-	padding-top:30px;
-    background: url(/images/new/content/title_bg.png) no-repeat left top;	
-}
 #statusbox a {
 	color:#48802C;
 	text-decoration:none;
@@ -58,11 +47,11 @@ h1, h2, h3, h4, h5, h6 {
 
 #springSourceBar #grailsLogo {
 	margin-top:10px;
-	float:right;
+	float:left;
 }
 #springSourceBar #springSourceLogo {
 	margin-top:5px;
-	float:left;
+	float:right;
 }
 
 #springSourceBar {

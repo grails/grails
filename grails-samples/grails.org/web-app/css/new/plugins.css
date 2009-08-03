@@ -8,6 +8,12 @@ body {
 	margin-left:0px;
 	margin-right:0px;
 }
+#content {
+    margin: 0px 0px 0px 350px;
+    padding: 100px 0 0 0;
+}
+
+
 #contentCenter {
     background: url(../../images/new/plugins/background.jpg) no-repeat left top;
 	min-height:800px;
@@ -23,8 +29,9 @@ body {
 }
 #pluginsLogo {
 	position:absolute;
+
+	top:85px;
 	left:38%;
-	top:105px;
 }
 #pluginMenu {
     float:left;
@@ -36,7 +43,7 @@ body {
     text-indent : -9999px;     
     width: 469px;
     height: 269px;
-    margin: -13px 0 -146px -110px;
+    margin: -13px 0 -165px -110px;
 }
 
 #pluginMenu .description {
@@ -99,11 +106,6 @@ body {
     background: url(../../images/new/plugins/icons/link_icon.png) no-repeat top left; 
     padding-left: 20px;
     padding-bottom: 12px;
-}
-
-#content {
-    margin: 0px 0px 0px 350px;
-    padding: 120px 0 0 0;
 }
 
 #searchBar {

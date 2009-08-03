@@ -16,21 +16,40 @@ p {
 
 }
 
-#contentLogo {
-	width:380px;
-	padding-left:30px;
-	text-align:left;
-}
 #contentTitle {
 	position:absolute;
-	left:34%;
-	top:150px;
+	left:30%;
+	top:70px;
 	color:#094B00;
+    background: url(/images/new/content/title_bg.png) no-repeat left top;	
+	margin-top:27px;
+
+	height:55px;
+	width:300px;
+	text-align:left;
+	padding-top:30px;
+	padding-left:70px;
 }
 #contentCenter {
 	width:1008px;
 	min-height:800px;
 	z-index:3;
+}
+#contentWindow {
+	margin-left:230px;
+	padding-top:50px;
+}
+#contentBody h1,#contentBody h2,#contentBody h3,#contentBody h4,#contentBody h5,#contentBody p, #contentBody ul, #contentBody ol, #contentBody table {
+	margin-bottom:20px;	
+	font-weight:normal;
+}
+#contentBody a {
+		color: #48802C; border: inherit; text-decoration: none;		
+}
+#contentBody h2 {
+	font-size:1.2em;
+	font-weight:normal;
+	color:black;
 }
 
 body {
@@ -43,7 +62,7 @@ body {
 	width:250px;
 	text-align:left;
 	float:left;
-	margin-top:110px;
+	margin-top:80px;
 } 
 #navMenu .header a {
 	font-size:13pt;
@@ -138,22 +157,6 @@ textarea {
 }
 #contentPane {
 	
-}
-#contentWindow {
-	margin-left:230px;
-	padding-top:80px;
-}
-#contentBody h1,#contentBody h2,#contentBody h3,#contentBody h4,#contentBody h5,#contentBody p, #contentBody ul, #contentBody ol, #contentBody table {
-	margin-bottom:20px;	
-	font-weight:normal;
-}
-#contentBody a {
-		color: #48802C; border: inherit; text-decoration: none;		
-}
-#contentBody h2 {
-	font-size:1.2em;
-	font-weight:normal;
-	color:black;
 }
 #postComment h2 {
 		color: #48802C; border: inherit; text-decoration: none;			

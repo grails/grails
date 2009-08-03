@@ -3,9 +3,6 @@
 	<div id="pluginDetailsBox" align="center">
 		
 		<div id="pluginDetailsContainer">
-			<div id="contentLogo">
-				<a href="http://grails.org"><img src="${resource(dir:'images/new', file:'grailslogo_topNav.png')}" border="0"></a>			
-			</div>
 			
 			<gui:dialog id='loginDialog' title="Login required" modal="true">
 			    <div id='loginFormDiv'></div>
