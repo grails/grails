@@ -28,20 +28,9 @@
 <body>
     
 <div align="center">
-    <div id="springSourceBar">
-		<div id="springSourceLogo">
-    		<a href="http://www.springsource.com/"><img src="${resource(dir:'images/new', file:'springsource-logo.jpg')}" border="0"></a>			
-		</div>
-    </div>
+	<g:render template="/content/logos"></g:render>
     <div class="mainMenuBarWrapper">
-        <ul id="mainMenuBar">
-            <li><a href="http://www.springsource.com/products">Products</a></li>
-            <li><a href="http://www.springsource.com/services">Support and Services</a></li>
-            <li><a href="http://www.springsource.com/training">Training</a></li>
-            <li><a href="http://www.springsource.com/customer/casestudies">Case Studies</a></li>
-            <li><g:link controller="content" id="Download">Downloads</g:link></li>
-            <li><g:link controller="content" id="Documentation">Documentation</g:link></li>
-        </ul><!-- mainMenuBar -->
+		<g:render template="/content/mainMenuBar" />
     </div><!-- mainMenuBarWrapper -->
 </div><!-- center -->
 
@@ -141,6 +130,7 @@
                             </g:each>
                         </ul>
                         <div class="actions">
+                            <g:link controller="blog" action="home">More news</g:link> |	
                             <g:link controller="blog" action="createEntry">Add news</g:link> | <g:link controller="blog" action="feed" params="[format:'rss']">Subscribe</g:link>
                         </div><!-- actions -->
                     </div><!-- newsBox -->
@@ -180,18 +170,19 @@
 						</p>		
                     </div><!-- left column -->
                     <div class="center">
-            			<h3>Support</h3>
+            			<h3>Support &amp; Services</h3>
                         <p>SpringSource enterprise software and <a href="http://www.springsource.com/services/enterprisesupport">support subscriptions</a> are the way to get developer and production support for Grails and other SpringSource software products and certified versions of our open source technologies including patches, updates, security fixes, and legal indemnification. 
-	<br><br>
-	Support plans provide unlimited support incidents across three different service levels ranging from developer support to business-critical 24x7 production support.</p>
+	<br><br><a href="http://www.springsource.com/support/professional-services">Consulting services</a> are available to companies that wish to leverage the knowledge and expertise of SpringSource’s Grails technology experts. We provide client-driven engagements that focus on knowledge transfer, not creating dependencies. </p>
                     </div><!-- center column -->
                     <div class="right">
-            			<h3>Services</h3>
-                        <p>SpringSource <a href="http://www.springsource.com/support/professional-services">consulting services</a> are available to companies that wish to leverage the knowledge and expertise of SpringSource’s Grails technology experts. We provide client-driven engagements that focus on knowledge transfer, not creating dependencies. 
-	<br><br>
-Our custom professional services are highly flexible to address specific issues such as onsite troubleshooting and other services tailored to suit your Grails needs. 
+            			<h3>Community</h3>
+						<p>
+Get involved! Grails has a vibrant and buzzing community. You can grab the <a href="http://github.com/grails/grails/tree/master">source code</a> from Github, report issues on the Grails  <a href="http://jira.codehaus.org/browse/GRAILS">JIRA issue tracker</a>, participate at the <a href="http://grails.org/Mailing+lists">mailing lists</a> or <a href="http://www.nabble.com/grails---user-f11861.html">Nabble forums</a> or catch-up on the latest news on the <g:link controller="blog" action="home">Grails blog</g:link>.							
+<br></br><br></br>
+
+The whole Grails site is written in Grails <g:meta name="app.grails.version" /> and is an open wiki,  the <a href="http://github.com/grails/grails/tree/6590710d84f1167031be8399c5cc8ce0b0982ba3/grails-samples/grails.org">source code</a> for which is available from Github.
+Visit the Grails <g:link controller="content" id="Community">community pages</g:link> for more ways to participate. 
 						</p>
-						
                     </div><!-- right column -->
                 </div><!-- grailsOptions -->
             </div><!-- center -->
