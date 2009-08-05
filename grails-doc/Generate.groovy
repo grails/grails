@@ -189,7 +189,7 @@ new File("${BASEDIR}/resources/style/referenceItem.html").withReader {reader ->
                 def name = txt.name[0..-6]
                 menu << "<div class=\"menuItem\"><a href=\"${f.name}/${name}.html\" target=\"mainFrame\">${name}</a></div>"
                 def data = txt.text
-                reference."${section}"."$name" = data
+                reference."${section}".put(name, data)
                 context.set(SOURCE_FILE, txt.name)
                 context.set(CONTEXT_PATH, "../..")
                 def contents = engine.render(data, context)
