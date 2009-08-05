@@ -74,12 +74,12 @@ For example to configure a rolling file appender you can do:
 {code:java}
 log4j = {
 	appenders {
-		rollingFile name:"myAppender", maxFileSize:1024, fileName:"/tmp/logs/myApp.log"
+		rollingFile name:"myAppender", maxFileSize:1024, file:"/tmp/logs/myApp.log"
 	}
 }
 {code}
 
-Each argument passed to the appender maps to a property of underlying [Appender|http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/Appender.html] class. The example above sets the @name@, @maxFileSize@ and @fileName@ properties of the [RollingFileAppender|http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/RollingFileAppender.html] class.
+Each argument passed to the appender maps to a property of underlying [Appender|http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/Appender.html] class. The example above sets the @name@, @maxFileSize@ and @file@ properties of the [RollingFileAppender|http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/RollingFileAppender.html] class.
 
 If you prefer to simply create the appender programmatically yourself, or you have your own appender implementation then you can simply call the @appender@ method and appender instance:
 
@@ -89,7 +89,7 @@ import org.apache.log4j.*
 
 log4j = {
 	appenders {
-		appender new RollingFileAppender(name:"myAppender", maxFileSize:1024, fileName:"/tmp/logs/myApp.log")
+		appender new RollingFileAppender(name:"myAppender", maxFileSize:1024, file:"/tmp/logs/myApp.log")
 	}
 }
 {code}
