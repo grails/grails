@@ -1,0 +1,221 @@
+Since Grails 1.2, the documentation engine that powers the creation of this documentation is available to your Grails projects. 
+
+The documentation engine uses a variation on the Textile syntax to automatically create project documentation with smart linking, formatting etc.
+
+h4. Creating project documentation
+
+To use the engine you need to follow a few conventions. Firstly you need to create a @src/docs/guide@ directory and then have numbered text files using the @gdoc@ format. For example:
+
+{code}
++ src/docs/guide/1. Introduction.gdoc
++ src/docs/guide/2. Getting Started.gdoc
+{code}
+
+The title of each chapter is taken from the file name. The order is dictated by the numerical value at the beginning of the file name.
+
+h4. Creating reference items
+
+Reference items appear in the left menu on the documentation and are useful for quick reference documentation. Each reference item belongs to a category and a category is a directory located in the @src/docs/ref@ directory. For example say you defined a new method called @renderPDF@, that belongs to a category called @Controllers@ this can be done by creating a gdoc text file at the following location:
+
+{code}
++ src/ref/Controllers/renderPDF.gdoc
+{code}
+
+h4. Configuring Output Properties
+
+There are various properties you can set within your @grails-app/conf/Config.groovy@ file that customize the output of the documentation such as:
+
+* *grails.doc.authors* - The authors of the documentation
+* *grails.doc.license* - The license of the software
+* *grails.doc.copyright* - The copyright message to display
+* *grails.doc.footer* - The footer to use
+
+Other properties such as the name of the documentation and the version are pulled from your project itself.
+
+h4. Generating Documentation
+
+Once you have created some documentation (refer to the syntax guide in the next chapter) you can generate an HTML version of the documentation using the command:
+
+{code}
+grails docs
+{code}
+
+This command will output an @docs/manual/index.html@ which can be opened to view your documentation.
+
+
+h4. Documentation Syntax
+
+As mentioned the syntax is largely similar to Textile or Confluence style wiki markup. The following sections walk you through the syntax basics.
+
+h5. Basic Formatting
+
+Monospace: @monospace@ 
+{code}
+\@monospace\@
+{code}
+
+Italic: _italic_
+{code}
+\_italic\_
+{code}
+
+Bold: *bold*
+{code}
+*bold*
+{code}
+
+Image: 
+!http://grails.org/images/new/grailslogo_topNav.png!
+
+{code:xml}
+\!http://grails.org/images/new/grailslogo_topNav.png\!
+{code}
+
+h5. Linking
+
+There are several ways to create links with the documentation generator. A basic external link can either be defined using confluence or textile style markup:
+
+{code}
+[SpringSource|http://www.springsource.com/] or "SpringSource":http://www.springsource.com/
+{code}
+
+For links to other sections inside the user guide you can use the @guide:@ prefix:
+
+{code}
+[Intro|guide:1. Introduction]
+{code}
+
+The documentation engine will warn you if any links to sections in your guide break. Sometimes though it is preferable not to hard code the actual names of guide sections since you may move them around. To get around this you can create an alias inside @grails-app/conf/Config.groovy@:
+
+{code}
+grails.doc.alias.intro="1. Introduction"
+{code}
+
+And then the link becomes:
+
+{code}
+[Intro|guide:intro]
+{code}
+
+This is useful since if you linked the to "1. Introduction" chapter many times you would have to change all of those links.
+
+To link to reference items you can use a special syntax:
+
+{code}
+[controllers|renderPDF]
+{code}
+
+In this case the category of the reference item is on the left hand side of the | and the name of the reference item on the right. 
+
+Finally, to link to external APIs you can use the @api:@ prefix. For example:
+
+{code}
+[String|api:java.lang.String]
+{code}
+
+The documentation engine will automatically create the appropriate javadoc link in this case. If you want to add additional APIs to the engine you can configure them in @grails-app/conf/Config.groovy@. For example:
+
+{code}
+grails.doc.api.org.hibernate="http://www.hibernate.org/hib_docs/v3/api"
+{code}
+
+The above example configures classes within the @org.hibernate@ package to link to the Hibernate website's API docs.
+
+h5. Lists and Headings
+
+Headings can be created by specifying the letter 'h' followed by a number and then a dot:
+
+{code}
+h3.<space>Heading3
+h4.<space>Heading4
+{code}
+
+Unordered lists are defined with the use of the * character:
+
+{code}
+* item 1
+** subitem 1
+** subitem 2
+* item 2
+{code}
+
+Numbered lists can be defined with the # character:
+
+{code}
+# item 1
+{code}
+
+Tables can be created using the @table@ macro:
+
+{table}
+ *Name* | *Number* 
+ Albert | 46
+ Wilma | 1348
+ James | 12
+{table}
+
+{code}
+\{table}
+ *Name* | *Number* 
+ Albert | 46
+ Wilma | 1348
+ James | 12
+\{table}
+{code}
+
+h5. Code and Notes
+
+You can define code blocks with the @code@ macro:
+
+{code}
+class Book {
+    String title
+}
+{code}
+
+{code}
+\{code\}
+class Book {
+    String title
+}
+\{code\}
+{code}
+
+The example above provides syntax highlighting for Java and Groovy code, but you can also highlight XML markup:
+
+{code:xml}
+<hello>world</hello>
+{code}
+
+{code}
+\{code:xml\}
+<hello>world</hello>
+\{code\}
+{code}
+
+There are also a couple of macros for displaying notes and warnings:
+
+Note:
+{note}
+This is a note!
+{note}
+
+{code}
+\{note\}
+This is a note!
+\{note\}
+{code}
+
+Warning:
+
+{warning}
+This is a warning!
+{warning}
+
+{code}
+\{warning\}
+This is a warning!
+\{warning\}
+{code}
+
+

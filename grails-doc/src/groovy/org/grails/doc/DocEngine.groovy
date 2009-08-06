@@ -356,8 +356,13 @@ class ImageFilter  extends RegexTokenFilter {
 
     public void handleMatch(StringBuffer buffer, MatchResult result, FilterContext context) {
         def img = result.group(1)
-        def path = context.renderContext.get("contextPath") ?: "."
-        buffer << "<img border=\"0\" class=\"center\" src=\"$path/img/$img\"></img>"
+        if(img.startsWith("http://")) {
+            buffer << "<img border=\"0\" class=\"center\" src=\"$img\"></img>"
+        }
+        else {            
+            def path = context.renderContext.get("contextPath") ?: "."
+            buffer << "<img border=\"0\" class=\"center\" src=\"$path/img/$img\"></img>"
+        }
     }
 }
 class TextileLinkFilter extends RegexTokenFilter {
