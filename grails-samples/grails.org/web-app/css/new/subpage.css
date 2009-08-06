@@ -101,8 +101,8 @@ body {
 }
 
 #search {
-    background: url(../../images/new/content/leftnav_searchtop.png) no-repeat top;	
-	height:48px;
+    background: url(../../images/new/content/leftnav_top.png) no-repeat top;	
+	height:10px;
 }
 #nav {
     background: url(../../images/new/content/leftnav_midstretch.png) repeat-y top;	

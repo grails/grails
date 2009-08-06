@@ -44,11 +44,33 @@ h1, h2, h3, h4, h5, h6 {
     width: 910px;
     text-align: left;
 }
+#springSourceBar #searchbar {
+	float:right;
+	position:relative;
+	width:210px;
+	left:190px;
+	top:59px;
+    background: url(../../images/new/searchbar.png) no-repeat top;		
+}
+ #searchbar input {
+	margin-top:5px;
+	width:160px;
+    border: none;
+    background: transparent;
+    color: #48802C;
+    font-size: 0.9em;
+    font-weight: bold;
+    padding: 3px;
+	margin-right:20px;
+	padding-top:1px;
+	margin-bottom:3px;
+}
 
 #springSourceBar #grailsLogo {
 	margin-top:10px;
 	float:left;
 }
+
 #springSourceBar #springSourceLogo {
 	margin-top:5px;
 	float:right;
