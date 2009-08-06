@@ -130,7 +130,7 @@
                             </g:each>
                         </ul>
                         <div class="actions">
-                            <g:link controller="blog" action="home">More news</g:link> |	
+                            <g:link controller="blog" action="list">More news</g:link> |	
                             <g:link controller="blog" action="createEntry">Add news</g:link> | <g:link controller="blog" action="feed" params="[format:'rss']">Subscribe</g:link>
                         </div><!-- actions -->
                     </div><!-- newsBox -->
