@@ -15,6 +15,7 @@ class Book {
    String title
    Date releaseDate
    String author
+   Boolean paperback
 }
 {code}
 
@@ -30,6 +31,8 @@ results = Book.findAllByTitleIlike("%Hobbit%") // (since 0.5) - ignorecase
 results = Book.findAllByTitleNotEqual("Harry Potter")
 results = Book.findAllByReleaseDateIsNull()
 results = Book.findAllByReleaseDateIsNotNull()
+results = Book.findAllPaperbackByAuthor("Douglas Adams")
+results = Book.findAllNotPaperbackByAuthor("Douglas Adams")
 {code}
 
 h2. Description
