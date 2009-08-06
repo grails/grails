@@ -2,7 +2,7 @@ h1. run-app
 
 h2. Purpose
 
-Runs Grails uses an embedded "Jetty":http://www.mortbay.org/ container on port @8080@
+Runs Grails using the installed container on port @8080@
 
 h2. Examples
 
@@ -31,7 +31,6 @@ Supported system properties:
 * @grails.server.port.http@/@server.port@ - Specifies the HTTP port to run the server on (defaults to 8080)
 * @grails.server.port.https@ - Specifies the HTTPS port to run the server on (defaults to 8443)
 * @grails.server.host@/@server.host@ - Specifies the host name to run the server on (defaults to localhost)
-* @enable.jndi@ - Specifies whether Jetty should run with the Java Naming and Directory Interface (JNDI) enabled
 
 
 Fired Events:
@@ -39,5 +38,12 @@ Fired Events:
 * @StatusFinal@ - When the container has been started
 * @StatusUpdate@ - When the container is reloading
 
-This command will start Grails up in an embedded Jetty Container that can serve HTTP requests. This target is not intended for deployment as the container in development mode is configured to auto-reload changes at runtime which has an overhead attached to it and will not scale well.
+This command will start Grails up in an embedded servlet container that can serve HTTP requests. The default container used is "Tomcat":http://tomcat.apache.org. However, alternative containers are supported via the plugin system. For example to run Grails with Jetty run the following two commands:
+
+{code}
+grails uninstall-plugin tomcat
+grails install-plugin jetty
+{code}
+
+This target is not intended for deployment as the container in development mode is configured to auto-reload changes at runtime which has an overhead attached to it and will not scale well.
 

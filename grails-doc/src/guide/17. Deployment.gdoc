@@ -2,7 +2,7 @@ Grails applications can be deployed in a number of ways, each of which has its p
 
 h3. "grails run-app"
 
-You should be very familiar with this approach by now, since it is the most common method of running an application during the development phase. An embedded Jetty server is launched that loads the web application from the development sources, thus allowing it to pick up an changes to application files.
+You should be very familiar with this approach by now, since it is the most common method of running an application during the development phase. An embedded Tomcat server is launched that loads the web application from the development sources, thus allowing it to pick up an changes to application files.
 
 This approach is not recommended at all for production deployment because the performance is poor. Checking for and loading changes places a sizable overhead on the server. Having said that, @grails prod run-app@ removes the per-request overhead and allows you to fine tune how frequently the regular check takes place.
 
@@ -10,7 +10,7 @@ Setting the system property "disable.auto.recompile" to @true@ disables this reg
 
 h3. "grails run-war"
 
-This is very similar to the previous option, but Jetty runs against the packaged WAR file rather than the development sources. Hot-reloading is disabled, so you get good performance without the hassle of having to deploy the WAR file elsewhere.
+This is very similar to the previous option, but Tomcat runs against the packaged WAR file rather than the development sources. Hot-reloading is disabled, so you get good performance without the hassle of having to deploy the WAR file elsewhere.
 
 h3. WAR file
 

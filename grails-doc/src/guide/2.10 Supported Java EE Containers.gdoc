@@ -1,4 +1,4 @@
-Grails supports a pretty wide range of containers including:
+Grails runs on any Servlet 2.4 and above container and is known to work on the following specific container products:
 
 * Tomcat 5.5 	  	
 * Tomcat 6.0 		

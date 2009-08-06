@@ -37,6 +37,6 @@ Fired Events:
 * @StatusFinal@ - When the container has been started
 * @StatusUpdate@ - When the container is reloading
 
-This command will package Grails inside a WAR file and then run it with a Jetty container. Useful for quick deployment and/or testing. However, unlike [run-app|commandLine] this command does not support reloading as a Grails WAR archive does not ship with Groovy sources, but only compiled byte code.
+This command will package Grails inside a WAR file and then run it with the installed container. Useful for quick deployment and/or testing. However, unlike [run-app|commandLine] this command does not support reloading as a Grails WAR archive does not ship with Groovy sources, but only compiled byte code.
 
 

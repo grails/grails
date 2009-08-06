@@ -8,7 +8,7 @@ Grails is a full stack framework and attempts to solve as many pieces of the web
 * An expressive view technology called Groovy Server Pages (GSP)
 * A controller layer built on "Spring":http://www.springframework.org MVC                                 
 * A command line scripting environment built on the Groovy-powered "Gant":http://groovy.codehaus.org/Gant
-* An embedded Jetty container which is configured for on the fly reloading
+* An embedded "Tomcat":http://tomcat.apache.org container which is configured for on the fly reloading
 * Dependency injection with the inbuilt "Spring":http://www.springframework.org container
 * Support for internationalization (i18n) built on Spring's core MessageSource concept
 * A transactional service layer built on Spring's transaction abstraction
