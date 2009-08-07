@@ -1,14 +1,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <gui:resources javascript='yahoo-dom-event,animation'/>
     <title>${content?.title}</title>
     <meta content="subpage" name="layout" />
-    <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'content.css')}" />
-    <gui:resources components="['tabView','dialog','autoComplete','paginator']" javascript='animation'/>
+    <link rel="stylesheet" href="${resource(dir:'css',file:'content.css')}" />
     <g:javascript library="diff_match_patch" />
     <g:javascript library="scriptaculous" />
-	<yui:javascript dir="paginator" file="paginator-debug.js" />
-    <yui:javascript dir='yahoo-dom-event' file='yahoo-dom-event.js'/>
     <g:render template="wikiJavaScript"/>
 	<style type="text/css" media="screen">
 		body {

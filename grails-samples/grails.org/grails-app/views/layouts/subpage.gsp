@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="${resource(dir: 'css/new', file: 'ie.css')}"/>
 	<![endif]-->
 
-    <link rel="stylesheet" type="text/css" href="${resource(dir:'css/new',file:'comments.css')}" />
+    <!-- <link rel="stylesheet" type="text/css" href="${resource(dir:'css/new',file:'comments.css')}" /> -->
 	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
 	<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 
@@ -39,12 +39,13 @@
 	<div id="contentInnerWrapper">
 		
 	    <div id="contentCenter" >
-			<g:render template="/user/profileBox" />
+
 			<div id="contentTitle">
 				<h1><g:layoutTitle default=""></g:layoutTitle></h1>
 			</div> 
 				
 			<div id="navMenu">
+				<g:render template="/user/profileBox" />				
 				<g:render template="/content/nav"></g:render>
 				<div id="navFooter">
 				</div>

@@ -34,8 +34,7 @@
 </div><!-- center -->
 
 <div id="contentWrapper">	
-    <div id="contentCenter" align="center">
-		<g:render template="/user/profileBox" />	
+    <div id="contentCenter" align="center">	
         <g:layoutBody/>
     </div><!-- contentCenter -->
 </div><!-- contentWrapper -->

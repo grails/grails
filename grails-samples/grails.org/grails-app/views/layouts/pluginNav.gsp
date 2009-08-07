@@ -1,9 +1,11 @@
 <div id="contentArea">
+	
 	<div id="pluginsLogo">
 		<a href="http://grails.org"><img src="${resource(dir:'images/new/plugins', file:'plugins_topnav2.png')}" border="0"></a>			
 	</div>	
 	
     <div id="pluginMenu">
+		<g:render template="/user/profileBox" />	
         <h1>Plugins</h1>
         <div class="description">
             <p/>Welcome to the Grails plugin portal. The place where you can find information about the latest plugins available for the Grails framework.

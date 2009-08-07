@@ -32,10 +32,12 @@ h1, h2, h3, h4, h5, h6 {
 	background-color:white;
 	font-size:10pt;
 	padding:5px;
-	position:absolute;
-	margin-left:730px;
-	float:right;
 	border: 2px solid #e6e6e6;
+	position:absolute;
+	width:207px;
+	margin-left:14px;
+	top:110px;
+	text-align:center;
 }
 #message {
 	margin-bottom:10px;
@@ -57,12 +59,12 @@ h1, h2, h3, h4, h5, h6 {
 	width:160px;
     border: none;
     background: transparent;
-    color: #48802C;
+    color: #CDE5C4;
     font-size: 0.9em;
     font-weight: bold;
     padding: 3px;
 	margin-right:20px;
-	padding-top:1px;
+	padding-top:2px;
 	margin-bottom:3px;
 }
 
@@ -255,6 +257,19 @@ h1, h2, h3, h4, h5, h6 {
      left:20%;
      padding:10px;
 	z-index:9999;
+}
+.warning {
+	border:1px solid red;
+    background: white url("/images/icon-warn.png") 13px 12px no-repeat;
+    padding: 10px 10px 10px 39px;
+    margin:10px 10px;
+}
+
+.note {
+	border:1px solid #48802c;
+    background: white url("/images/icon-info.png") 13px 12px no-repeat;
+    padding: 10px 10px 10px 39px;
+    margin:10px 10px;
 }
 
 

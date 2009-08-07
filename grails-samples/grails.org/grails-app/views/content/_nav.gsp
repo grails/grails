@@ -1,7 +1,7 @@
 	<div id="search">
-	    <g:form method="GET" url="[controller:'content', action:'search']" name="searchForm">
-	        <input type="text" accessKey="s" name="q" ${params.q ? 'value="' + params.q + '"' : ''}/></g:form>
-	</div><!-- / search -->	
+	    <!-- <g:form method="GET" url="[controller:'content', action:'search']" name="searchForm">
+	        <input type="text" accessKey="s" name="q" ${params.q ? 'value="' + params.q + '"' : ''}/></g:form> -->
+	</div><!-- search -->	 
 	<div id="nav">
 	            <ul>
 	                <li id="start" class="header"><g:link controller="content" id="Installation">Get Started</g:link>
@@ -15,7 +15,7 @@
 						</plugin:isAvailable>
 	                </ul>
 	                </li>
-	                <li id="reference" class="header"><g:link controller="content" id="Reference">Reference</g:link>
+	                <li id="reference" class="header"><a href="http://grails.org/doc/latest">Reference</a>
 	                <ul>
 	                    <li><g:link controller="content" id="Documentation">Documentation</g:link></li>
 	                    <li><g:link controller="content" id="FAQ">FAQs</g:link></li>
@@ -32,6 +32,7 @@
 	                    <li><a href="http://github.com/grails/grails/tree/master">Source code</a></li>	
 	                    <li><g:link controller="content" id="Plugins">Plugins</g:link></li>
 	                    <li><g:link controller="content" id="Mailing lists">Mailing Lists</g:link></li>
+						<li><a href="http://www.nabble.com/grails---user-f11861.html">Nabble Forums</a></li>
 	                </ul>
 	                </li>
 	    <!--			<li><a href="">Weblog</a></li>-->
