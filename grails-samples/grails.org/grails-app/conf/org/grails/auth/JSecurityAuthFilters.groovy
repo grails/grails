@@ -119,7 +119,7 @@ class JSecurityAuthFilters {
 				before = {
 					def subject = SecurityUtils.getSubject() 
 					if(subject && subject?.principal) {
-						request.user = User.findByLogin(subject.principal)						
+						request.user = User.findByLogin(subject.principal, [cache:true])						
 					}
 				}
 			}

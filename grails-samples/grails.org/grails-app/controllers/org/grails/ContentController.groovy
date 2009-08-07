@@ -118,7 +118,8 @@ class ContentController extends BaseWikiController {
                     if(request.xhr) {
                         render(template:"wikiShow", model:[content:wikiPage, update:params.update])
                     } else {
-                        render(view:"contentPage", model:[content:wikiPage, comments: wikiPage.comments.sort { it.dateCreated }])
+						// disable comments
+						render(view:"contentPage", model:[content:wikiPage])
                     }
                 }
                 else {

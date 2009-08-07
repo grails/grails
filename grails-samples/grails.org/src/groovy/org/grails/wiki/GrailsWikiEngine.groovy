@@ -95,7 +95,7 @@ class GrailsWikiEngine extends BaseRenderEngine implements WikiRenderEngine{
         field.set(this, filterPipe)
     }
 
-
+	private existingPages = new java.util.concurrent.ConcurrentHashMap()
     public boolean exists(String name) {
         if(name.startsWith('#')) {
             // its an anchor link
@@ -112,12 +112,22 @@ class GrailsWikiEngine extends BaseRenderEngine implements WikiRenderEngine{
                 name = name[0..name.indexOf('#')-1]
             }
 
+			if(existingPages.containsKey(name)) return true
+			else {
+				WikiPage page =  Environment.current == Environment.PRODUCTION ?
+			 						  WikiPage.findByTitle(name, [cache:true]) :
+									  WikiPage.findByTitle(name)				
+									
+				if(page) {
+					existingPages.put(page.title, page.title)
+				}
+            	return page != null				
+			}
+			
 		
-            WikiPage page =  Environment.current == Environment.PRODUCTION ?
- 								  WikiPage.findByTitle(name, [cache:true]) :
-								  WikiPage.findByTitle(name)
+    
 
-            return page != null
+
         }
     }
 

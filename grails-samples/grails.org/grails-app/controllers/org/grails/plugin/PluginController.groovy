@@ -37,7 +37,10 @@ class PluginController extends BaseWikiController {
 		def totalPlugins = 0
 		def defaults = {
             currentPlugins = Plugin.list(params)
-			totalPlugins = Plugin.count()			
+			totalPlugins = Plugin.createCriteria().get {
+				projections { count 'id' }
+				cache true
+			}
 		}
         switch (category) {
             case 'all':

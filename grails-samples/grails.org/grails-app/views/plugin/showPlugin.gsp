@@ -128,12 +128,12 @@
     </jsec:isNotLoggedIn>
 
 	<div id="pluginContent" align="center">
-	    <cache:text id="pluginTabs_${plugin.id}">
+	    <cache:text key="pluginTabs_${plugin.id}">
 	        <gui:tabView>
 	            <g:each var="wiki" in="${Plugin.WIKIS}">
 	                <gui:tab id="${wiki}Tab" label="${wiki[0].toUpperCase() + wiki[1..-1]}" active="${wiki == 'description'}">
 	                    <g:render template="../content/viewActions" model="${[content: plugin[wiki], update: wiki + 'Tab', editFormName: wiki + 'EditForm']}"/>
-	                    <div class='${wiki}, wikiPage'><wiki:text page="${plugin[wiki]?.title}" /></div>
+	                    <div class='${wiki}, wikiPage'><wiki:text>${plugin[wiki]?.body}</wiki:text></div>
 
 
 	                </gui:tab>
