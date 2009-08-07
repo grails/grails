@@ -1,3 +1,9 @@
+#pluginsLogo {
+	position:absolute;
+
+	top:65px;
+	left:38%;
+}
 #pluginMenu {
     position:absolute;
 	left:100px;
