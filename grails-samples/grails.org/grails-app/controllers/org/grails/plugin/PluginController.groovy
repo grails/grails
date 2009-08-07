@@ -293,7 +293,8 @@ class PluginController extends BaseWikiController {
 			join 'description'
 			join 'installation'			
 			join 'faq'						
-			join 'screenshots'			
+			join 'screenshots'		
+			maxResults 1	
 			cache true
 		}
     }
