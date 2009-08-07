@@ -11,7 +11,7 @@
 		    <input
 		 		onblur="this.style.color = '#CDE5C4';" 
 				onfocus="this.style.color = '#48802C';this.value='';"
-				type="text" accessKey="s" name="q" value="${params.q ?: 'Search Grails.org'}"/>		
+				type="text" accessKey="s" name="q" value="${params.q ?: ''}"/>		
 		</g:form>		
 	</div>
 </div>

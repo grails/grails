@@ -2,16 +2,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
     <rateable:resources />
-    <gui:resources components="['tabView','dialog','autoComplete','paginator']" javascript='animation'/>
+    <gui:resources components="['tabView','dialog','autoComplete']" javascript='animation'/>
     <g:javascript library="diff_match_patch" />
     <g:javascript library="scriptaculous" />
-	<yui:javascript dir="paginator" file="paginator-debug.js" />
 	
-    <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'tabview.css')}" />
+    <link rel="stylesheet" href="${resource(dir:'css',file:'tabview.css')}" />
 
     <link rel="stylesheet" type="text/css" href="${resource(dir:'css',file:'content.css')}" />
     <link rel="stylesheet" type="text/css" href="${resource(dir:'css',file:'plugins.css')}" />
-    <link rel="stylesheet" type="text/css" href="${resource(dir:'css/new',file:'comments.css')}" />
+    <!-- <link rel="stylesheet" type="text/css" href="${resource(dir:'css/new',file:'comments.css')}" /> -->
 
     <title>Plugin: ${plugin.title}</title>
     <meta content="pluginInfoLayout" name="layout"/>
