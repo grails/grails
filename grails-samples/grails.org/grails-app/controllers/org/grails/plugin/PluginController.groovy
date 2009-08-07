@@ -285,6 +285,13 @@ class PluginController extends BaseWikiController {
     }
 
     private def byName(params) {
-        Plugin.findByName(params.name, [cache:true])
+		Plugin.createCriteria().get {
+			eq 'name', params.name
+			join 'description'
+			join 'installation'			
+			join 'faq'						
+			join 'screenshots'			
+			cache true
+		}
     }
 }
