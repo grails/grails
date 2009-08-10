@@ -40,3 +40,8 @@ def numberOfRecentPubs = Publication.recentPublications.count()
 def pub = Publication.recentPublications.get(42)
 {code}
 
+{note}
+Note that calling something like @Publication.recentPublications.get(42)@ is not the same thing as
+calling something like @Publication.get(42)@.  The former will only return a @Publication@ if the @Publication@
+with id 42 meets all the criteria defined in the @recentPublications@ named query.
+{note}
