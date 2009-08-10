@@ -1,4 +1,4 @@
-Since Grails is built on Spring MVC, you can use normal Spring MVC mechanics to implement controllers if you so choose. A Spring MVC controller can be written in Java or Groovy and simply has to use Spring MVC annotations. For example:
+Since Grails is built on Spring MVC, you can use normal Spring MVC mechanics to implement controllers if you so choose. A Spring MVC controller can be written in Java or Groovy and need to use Spring MVC annotations. For example:
 
 {code}
 package foo
@@ -22,3 +22,6 @@ In this case the URI @/test.dispatch@ will be mapped to the above Spring MVC con
 {code}
 "/pretty"(uri:'/test.dispatch')
 {code}
+
+The Spring @View@ to use is determined based on conventions. So in the above case a view called @grails-app/views/test.gsp@ will be rendered. The view can also be a JSP rather than a GSP.
+
