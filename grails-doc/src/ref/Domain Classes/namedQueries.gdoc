@@ -33,6 +33,10 @@ def recentPubs = Publication.recentPublications()
 // get all recent publications (alternate syntax)...
 def recentPubs = Publication.recentPublications.list()
 
+// get up to 10 recent publications, skip the first 5...
+def recentPubs = Publication.recentPublications(max: 10, offset: 5)
+def recentPubs = Publication.recentPublications.list(max: 10, offset: 5)
+
 // get the number of recent publications...
 def numberOfRecentPubs = Publication.recentPublications.count()
 
