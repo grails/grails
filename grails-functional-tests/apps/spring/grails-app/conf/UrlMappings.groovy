@@ -6,6 +6,8 @@ class UrlMappings {
 		  }
 	  }
       "/"(view:"/index")
+
+	  "/hello"(uri:"/hello.dispatch")
 	  "500"(view:'/error')
 	}
 }

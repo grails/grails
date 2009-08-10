@@ -8,6 +8,8 @@ class BootStrap {
 			
 			
 			assert appCtx != null
+			
+			new mvc.Person(name:"Fred").save(flush:true)
      }
      def destroy = {
      }
