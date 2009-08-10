@@ -1,0 +1,24 @@
+Since Grails is built on Spring MVC, you can use normal Spring MVC mechanics to implement controllers if you so choose. A Spring MVC controller can be written in Java or Groovy and simply has to use Spring MVC annotations. For example:
+
+{code}
+package foo
+
+import org.springframework.stereotype.*
+import org.springframework.web.bind.annotation.*
+
+@Controller
+class SpringController {
+
+	@RequestMapping("/test.dispatch")
+	void handleRequest() {
+		println "Hello from Spring MVC"
+	}
+
+}
+{code}
+
+In this case the URI @/test.dispatch@ will be mapped to the above Spring MVC controller. If you want a nicer URI you can use URL mappings to re-write the URI:
+
+{code}
+"/pretty"(uri:'/test.dispatch')
+{code}
