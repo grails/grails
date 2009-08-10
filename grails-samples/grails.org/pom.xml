@@ -4,7 +4,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
   <groupId>org.grails</groupId>
   <artifactId>site</artifactId>
   <packaging>war</packaging>
-  <version>2.6</version>
+  <version>3.2</version>
 
   <dependencies>
     <dependency>
