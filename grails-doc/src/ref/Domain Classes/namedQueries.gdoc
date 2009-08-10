@@ -1,0 +1,42 @@
+h1. namedQueries 
+
+h2. Purpose
+
+The @namedQueries@ static property is used to defined named queries.  Named queries support the criteria builder 
+syntax.  See the section on the [Criteria Builder|guide:criteria] in the user guide for more information.
+
+h2. Examples
+
+{code:java}
+class Publication {
+   String title
+   Date datePublished
+
+   static namedQueries = {
+       recentPublications {
+           def now = new Date()
+           gt 'datePublished', now - 365
+       }
+
+       publicationsWithBookInTitle {
+           like 'title', '%Book%'
+       }
+   }
+
+}
+{code}
+
+{code:java}
+// get all recent publications...
+def recentPubs = Publication.recentPublications()
+
+// get all recent publications (alternate syntax)...
+def recentPubs = Publication.recentPublications.list()
+
+// get the number of recent publications...
+def numberOfRecentPubs = Publication.recentPublications.count()
+
+// get a recent publication with a specific id...
+def pub = Publication.recentPublications.get(42)
+{code}
+
