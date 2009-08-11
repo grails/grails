@@ -194,8 +194,7 @@ class DownloadController {
     }
 
     def create = {
-        def download = new Download()
-        download.properties = params
+        def download = new Download(params)
         return ['download':download]
     }
 
