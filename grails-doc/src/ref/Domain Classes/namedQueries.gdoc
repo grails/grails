@@ -42,6 +42,12 @@ def numberOfRecentPubs = Publication.recentPublications.count()
 
 // get a recent publication with a specific id...
 def pub = Publication.recentPublications.get(42)
+
+// get all recent publications where title = 'Some Title'
+def pubs = Publication.recentPublications.findAllWhere(title: 'Some Title')
+
+// get a recent publication where title = 'Some Title'
+def pub = Publication.recentPublications.findWhere(title: 'Some Title')
 {code}
 
 {note}
