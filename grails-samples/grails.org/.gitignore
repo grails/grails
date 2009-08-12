@@ -1,3 +1,4 @@
+*.iws
 stacktrace.log
 target
 plugins
