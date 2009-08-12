@@ -30,6 +30,7 @@ environments {
 	production {
 		dataSource {
 			dbCreate = "update"
+			jndiName = 'java:comp/env/grailsSiteDS'
 		}
 	}
 }
