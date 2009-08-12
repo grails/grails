@@ -11,8 +11,8 @@ class PersonController {
   // action1 may be invoked via a POST
   // action2 has no restrictions
   // action3 may be invoked via a POST or DELETE
-  static allowedMethods = [action1:'POST',
-                           action3:['POST', 'DELETE']]
+  static allowedMethods = \[action1:'POST',
+                           action3:\['POST', 'DELETE'\]\]
   def action1 = { ... }
   def action2 = { ... }
   def action3 = { ... }
