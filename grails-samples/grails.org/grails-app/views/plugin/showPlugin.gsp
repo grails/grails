@@ -134,7 +134,7 @@
 	                <gui:tab id="${wiki}Tab" label="${wiki[0].toUpperCase() + wiki[1..-1]}" active="${wiki == 'description'}">
 	                    <g:render template="../content/viewActions" model="${[content: plugin[wiki], update: wiki + 'Tab', editFormName: wiki + 'EditForm']}"/>
 	                    <div class='${wiki}, wikiPage'><wiki:text page="${plugin[wiki]?.title}" /></div>
-m	                </gui:tab>
+	                </gui:tab>
 	            </g:each>
 	        </gui:tabView>
 		</cache:text>		
