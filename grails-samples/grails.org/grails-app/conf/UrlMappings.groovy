@@ -6,10 +6,6 @@ class UrlMappings {
         "/wiki/latest"(controller: "content", action: "latest")
         "/auth/$action"(controller: "auth")
 
-        "/news/$id"(controller: "news", action: "showNews")
-        "/news/create"(controller: "news", action: "createNews")
-        "/news/edit/$id"(controller: "news", action: "editNews")
-        "/news/latest"(controller: "news", action: "latest")
         
         "/Plugins"(controller: "plugin", action: "index")
         "/plugins"(controller: "plugin", action: "index")
