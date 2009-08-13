@@ -46,7 +46,7 @@ class PluginController extends BaseWikiController {
         switch (category) {
             case 'all':
 				def allPlugins = Plugin.executeQuery("select p.name, p.title from Plugin p order by p.name", [cache:true])
-				currentPlugins = allPlugins.groupBy { it ? it[0][0].toUpperCase() : 'A' }
+				currentPlugins = allPlugins.groupBy { it[0] ? it[0][0].toUpperCase() : 'A' }
 				totalPlugins = allPlugins.size()
 				viewType = "all"
                 break;
