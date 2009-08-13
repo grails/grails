@@ -148,6 +148,14 @@ body {
     width: 658px;
 }
 
+.currentPlugin a {
+    border: none;
+	text-decoration:none;
+    background: transparent;
+    color: #48802C;
+	
+}
+
 .currentPlugin .header {
     background: url(../../images/new/plugins/pluginbox_top.png) no-repeat left top;
 	margin:0px;
@@ -204,8 +212,18 @@ body {
 #contentArea {
 	min-height:800px;
 }
+#contentBody a {
+	border: none;
+	text-decoration:none;
+    background: transparent;
+    color: #48802C;
+}
+#contentBody {
+	position:relative;
+	left:-2px;
+}
 
-.currentPlugin .bottom .download a { color: black; border: inherit; text-decoration: none;}
+.currentPlugin .bottom a { color: black; border: inherit; text-decoration: none;}
 .currentPlugin .bottom .download {
 	float:right;
 	position:relative;

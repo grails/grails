@@ -35,6 +35,7 @@ class PluginController extends BaseWikiController {
         
         def currentPlugins
 		def totalPlugins = 0
+		def viewType = "normal"
 		def defaults = {
             currentPlugins = Plugin.list(params)
 			totalPlugins = Plugin.createCriteria().get {
@@ -44,7 +45,10 @@ class PluginController extends BaseWikiController {
 		}
         switch (category) {
             case 'all':
-				defaults()
+				def allPlugins = Plugin.executeQuery("select p.name, p.title from Plugin p order by p.name", [cache:true])
+				currentPlugins = allPlugins.groupBy { it ? it[0][0].toUpperCase() : 'A' }
+				totalPlugins = allPlugins.size()
+				viewType = "all"
                 break;
 			case 'popular':
 	            currentPlugins = Plugin.listOrderByAverageRating([cache:true, offset:params.offset, max:5])
@@ -77,7 +81,7 @@ class PluginController extends BaseWikiController {
 			break
         }
         
-        [currentPlugins:currentPlugins, category:category,totalPlugins:totalPlugins]
+        [currentPlugins:currentPlugins, category:category,totalPlugins:totalPlugins, viewType:viewType]
         
     }
 
@@ -258,7 +262,6 @@ class PluginController extends BaseWikiController {
         params.newTag.trim().split(',').each { newTag ->
             plugin.addTag(newTag.trim())
         }
-        assert plugin.save()
         render(template:'tags', var:'plugin', bean:plugin)
     }
 

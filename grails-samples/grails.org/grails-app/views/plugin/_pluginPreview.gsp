@@ -3,7 +3,7 @@
 		<div class="ratings">
 			<rateable:ratings id="rating${plugin.id}" bean="${plugin}" active="false"/>
 		</div>						
-    	<h4>${plugin.title}</h4>						
+    	<h4><g:link action="show" params="${[name:plugin.name]}">${plugin.title}</g:link></h4>						
         <g:if test="${plugin.official}">
             <div class="supported">supported by SpringSource</div>
         </g:if>
@@ -24,7 +24,7 @@
 			<div class="fisheye">
 				<img src="${resource(dir:'images/new/plugins/icons', file:'fisheye.png')}" border="0" /> 
 				Fisheye
-			</div>
+			</div>	
 		</a>
         <a href="${plugin.documentationUrl}">
 			<div class="docs">
@@ -42,8 +42,10 @@
 			</g:link>
 		
 		</div>
-		<div class="download">
-        	<a href="${plugin.downloadUrl}">Download</a>
-		</div>
+		<a href="${plugin.downloadUrl}">
+			<div class="download">
+	        	Download
+			</div>
+		</a>
     </div>
 </div>

@@ -85,6 +85,44 @@ h1, h2, h3, h4, h5, h6 {
     margin-top: -8px;
 }
 
+#contentWindowTop {
+	height:21px;
+	position:relative;
+	top:30px;
+	width:706px;
+    background: url(../../images/new/content/mainbox_top.png) no-repeat top;		
+}
+#contentDecoration {
+	float:right;
+	height:44px;
+	width:82px;
+	position:relative;
+	margin-right:70px;
+	z-index:99;
+	top:30px;
+    background: url(../../images/new/content/decrtn_1.png) no-repeat top;		
+	
+}
+#contentBody {
+	width:660px;
+    background: url(../../images/new/content/mainbox_midstretch.png) repeat-y top;		
+	position:relative;
+	top:30px;
+	min-height:450px;
+	text-align:left;
+	padding:10px;
+	padding-right:20px;
+	padding-left:30px;
+}
+#contentFooter {
+	height:21px;
+	position:relative;
+	top:30px;
+	width:706px;
+    background: url(../../images/new/content/mainbox_btm.png) no-repeat top;		
+	
+}
+
 .mainMenuBarWrapper {
     background: url(../../images/new/topnav_menubar.png) repeat scroll top;
     width: 100%;

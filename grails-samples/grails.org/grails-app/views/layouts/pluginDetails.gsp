@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="${resource(dir:'css',file:'plugins.css')}" />
     <!-- <link rel="stylesheet" type="text/css" href="${resource(dir:'css/new',file:'comments.css')}" /> -->
 
-    <title>Plugin: ${plugin.title}</title>
+    <title>Grails Plugin - ${plugin.title}</title>
     <meta content="pluginInfoLayout" name="layout"/>
     <g:render template="../content/wikiJavaScript"/>    
 

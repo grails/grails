@@ -8,7 +8,7 @@
 				width:1008px;
 			}
 			#pluginDetailWrapper {
-				height:50px;
+				height:28px;
 				padding-left:30px;
 			}
 			#pluginDetailWrapper h1 {
@@ -37,10 +37,6 @@
 					<div id="pluginDetailsBox" align="center">
 
 						<div id="pluginDetailsContainer">
-							<div id="contentLogo">
-								<a href="http://grails.org"><img src="${resource(dir:'images/new', file:'grailslogo_topNav.png')}" border="0"></a>			
-							</div>
-							
 							<div id="pluginContent">
 
 							    <g:if test="${flash.message}">

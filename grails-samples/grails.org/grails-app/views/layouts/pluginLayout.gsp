@@ -19,7 +19,7 @@
 	<meta name="robots" content="NOODP">	
 	<meta name="Description" content="Grails is a high-productivity web framework based on the Groovy language that embraces the coding by convention paradigm, but is designed specifically for the Java platform.">	
 	
-	<title>Grails - The search is over.</title>
+	<title>Grails - Plugins Portal</title>
 
 	<g:layoutHead />
 

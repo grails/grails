@@ -14,8 +14,8 @@ class Plugin implements Taggable, Commentable, Rateable {
     static final def WIKIS = ['installation','description','faq','screenshots']
     static final def VERSION_PATTERN = /^(\d{1,}(\.\d+)*)(-\w*$)?/
 
-    def cacheService
-    def pluginService
+    transient cacheService
+    transient pluginService
     
     String name
     String title

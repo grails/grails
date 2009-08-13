@@ -5,6 +5,8 @@
 <head>
     <g:javascript src="common/application.js"/>
     <g:javascript src="common/tracking.js"/>
+
+	
     
     <link rel="stylesheet" href="${createLinkTo(dir: 'css/new', file: 'master.css')}" type="text/css" />
     <link rel="stylesheet" href="${createLinkTo(dir: 'css/new', file: 'subpage.css')}" type="text/css" />
@@ -20,7 +22,7 @@
 	<meta name="robots" content="NOODP">	
 	<meta name="Description" content="Grails is a high-productivity web framework based on the Groovy language that embraces the coding by convention paradigm, but is designed specifically for the Java platform.">	
 	
-	<title>Grails - The search is over.</title>
+	<title>Grails - <g:layoutTitle default="The search is over."></g:layoutTitle></title>
 
 	<g:layoutHead />
 
@@ -41,7 +43,7 @@
 	    <div id="contentCenter" >
 
 			<div id="contentTitle">
-				<h1><g:layoutTitle default=""></g:layoutTitle></h1>
+				<h1><wiki:shorten text="${g.layoutTitle(default:'')}" length="35" /></h1>
 			</div> 
 				
 			<div id="navMenu">

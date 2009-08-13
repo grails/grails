@@ -177,43 +177,7 @@ textarea {
 #loginForm {
 	margin-left:20px;
 }
-#contentWindowTop {
-	height:21px;
-	position:relative;
-	top:30px;
-	width:706px;
-    background: url(../../images/new/content/mainbox_top.png) no-repeat top;		
-}
-#contentDecoration {
-	float:right;
-	height:44px;
-	width:82px;
-	position:relative;
-	margin-right:70px;
-	z-index:99;
-	top:30px;
-    background: url(../../images/new/content/decrtn_1.png) no-repeat top;		
-	
-}
-#contentBody {
-	width:660px;
-    background: url(../../images/new/content/mainbox_midstretch.png) repeat-y top;		
-	position:relative;
-	top:30px;
-	min-height:450px;
-	text-align:left;
-	padding:10px;
-	padding-right:20px;
-	padding-left:30px;
-}
-#contentFooter {
-	height:21px;
-	position:relative;
-	top:30px;
-	width:706px;
-    background: url(../../images/new/content/mainbox_btm.png) no-repeat top;		
-	
-}
+
 #search input {
     margin: 15px 10px 15px 15px;
     height: 20px;
