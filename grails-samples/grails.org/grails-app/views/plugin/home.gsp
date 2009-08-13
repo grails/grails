@@ -20,10 +20,13 @@
 				<div id="currentPlugins">
 					<g:each var="entry" in="${currentPlugins}">
 						<div class="pluginGroup">
-							<h3>${entry.key}</h3>
+							
+							<h3><a name="${entry.key}">${entry.key}</a></h3>
 							<ul>
 								<g:each var="plugin" in="${entry.value}">
-									<li><g:link action="show" params="${[name:plugin[0]]}">${plugin[0]}</g:link> - <wiki:shorten text="${plugin[1]}" length="50" /></li>
+									<g:if test="${plugin[0]}">
+										<li><g:link action="show" params="${[name:plugin[0]]}">${plugin[0]}</g:link> - <wiki:shorten text="${plugin[1]}" length="50" /></li>
+									</g:if>									
 								</g:each>						
 							</ul>
 						</div>
