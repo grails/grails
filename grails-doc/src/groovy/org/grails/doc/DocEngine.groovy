@@ -277,7 +277,7 @@ public class SourceMacro extends BaseMacro {
                 def className = name[0..j-1]
                 def tagName = name[j+1..-1]
                 Pattern regex = ~/(?s)(\s*?def\s+?$tagName\s*?=\s*?\{\s*?attrs\s*?,{0,1}\s*?(body){0,1}\s*?->.+?)(\/\*\*|def\s*[a-zA-Z]+?\s*=\s*\{)/
-                def text = new File("${base}/src/groovy/org/codehaus/groovy/grails/plugins/web/taglib/${className}.groovy").text
+                def text = new File("${base}/src/java/org/codehaus/groovy/grails/plugins/web/taglib/${className}.groovy").text
                 def matcher = regex.matcher(text)
                 if(matcher.find()) {
                     out << '<p><a href="#" onclick="document.getElementById(\''+tagName+'\').style.display=\'inline\'">Show Source</a></p>'
