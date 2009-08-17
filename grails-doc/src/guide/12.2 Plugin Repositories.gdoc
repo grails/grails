@@ -51,6 +51,23 @@ Additionally, if you want to distribute a plugin within the configured repositor
 grails release-plugin -repository=myRepository
 {code}
 
+h4. Secured Plugin Repositories
+
+By default when using a repository URL starting with the @https://@ protocol, Grails will prompt you for a username and password. If you prefer 
+not to get these prompts then you can specify the username and password to use in your @~/.grails/settings.groovy@ file as follows:
+
+{code}
+grails.plugin.repos.discovery.myRepo="https://user01:password01@myserver.com"
+{code}
+
+The format is: 
+
+{code}
+PROTOCOL://USERNAME:PASSWORD@SERVER
+{code}
+
+With this set Grails will use the specified username and password rather than prompting you for one.
+
 h4. Configuring Repository Search Order
 
 A common use case for having your own plugin repository is when you want to override or provide a modified version of an existing plugin within the central repository.
