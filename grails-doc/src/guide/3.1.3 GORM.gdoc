@@ -1,4 +1,4 @@
 Grails provides the following GORM configuration options:
 
-* @grails.gorm.save.failOnError@  - If set to @true@, causes the save() method on domain classes to throw a @grails.validation.ValidationException@ if [validation|guide:validation] fails during a save.  See the [save|domainClasses] method docs for more information.
+* @grails.gorm.failOnError@  - If set to @true@, causes the save() method on domain classes to throw a @grails.validation.ValidationException@ if [validation|guide:validation] fails during a save.  See the [save|domainClasses] method docs for more information.
 * @grails.gorm.autoFlush@ = If set to @true@, causes the [merge|domainClasses], [save|domainClasses] and [delete|domainClasses] methods to flush the session, replacing the need to do something like @save(flush: true)@.
