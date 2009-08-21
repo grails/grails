@@ -74,12 +74,21 @@ public abstract class AbstractGrailsMojo extends AbstractMojo {
     protected String env;
 
     /**
-     * The directory where is launched the mvn command.
+     * Whether to run Grails in non-interactive mode or not. The default
+     * is to run interactively, just like the Grails command-line.
      *
      * @parameter expression="${nonInteractive}" default-value="false"
      * @required
      */
     protected boolean nonInteractive;
+
+    /**
+     * The directory where plugins are stored.
+     *
+     * @parameter expression="${pluginsDirectory}" default-value="${basedir}/plugins"
+     * @required
+     */
+    protected File pluginsDir;
 
     /**
      * POM
@@ -320,7 +329,7 @@ public abstract class AbstractGrailsMojo extends AbstractMojo {
         helper.setClassesDir(new File(targetDir, "classes"));
         helper.setTestClassesDir(new File(targetDir, "test-classes"));
         helper.setResourcesDir(new File(targetDir, "resources"));
-        helper.setProjectPluginsDir(new File(this.project.getBasedir(), "plugins"));
+        helper.setProjectPluginsDir(this.pluginsDir);
     }
 
     private Set getPluginDependencies(Artifact pom) throws MojoExecutionException {
