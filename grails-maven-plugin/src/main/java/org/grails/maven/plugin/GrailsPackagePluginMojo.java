@@ -30,6 +30,7 @@ import java.io.File;
  * @description Packages the Grails plugin.
  * @goal package-plugin
  * @requiresProject true
+ * @requiresDependencyResolution runtime
  * @since 0.4
  */
 public class GrailsPackagePluginMojo extends AbstractGrailsMojo {
