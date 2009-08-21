@@ -17,11 +17,14 @@ package org.grails.maven.plugin;
 
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.artifact.Artifact;
+import org.apache.maven.artifact.handler.ArtifactHandler;
 
 import java.io.File;
 
 /**
- * Creates a WAR archive and register it in maven.
+ * Creates a WAR archive for the project and puts it in the usual Maven
+ * place.
  *
  * @author <a href="mailto:aheritier@gmail.com">Arnaud HERITIER</a>
  * @version $Id$
@@ -32,6 +35,7 @@ import java.io.File;
  * @since 0.1
  */
 public class MvnWarMojo extends AbstractGrailsMojo {
+    protected File warFile;
 
     /**
      * Executes the MvnWarMojo on the current project.
@@ -43,12 +47,12 @@ public class MvnWarMojo extends AbstractGrailsMojo {
         String warFileName = project.getArtifactId() + "-" + project.getVersion() + ".war";
         File warGeneratedByGrails = new File(getBasedir(), warFileName);
 
-        File mavenWarFile = new File(project.getBuild().getDirectory(), warFileName);
-        mavenWarFile.delete();
-        if (!warGeneratedByGrails.renameTo(mavenWarFile)) {
+        warFile = new File(project.getBuild().getDirectory(), warFileName);
+        warFile.delete();
+        if (!warGeneratedByGrails.renameTo(warFile)) {
             throw new MojoExecutionException("Unable to copy the WAR file to the target directory");
         } else {
-            getLog().info("Moved WAR file to '" + mavenWarFile + "'.");
+            getLog().info("Moved WAR file to '" + warFile + "'.");
         }
     }
 }

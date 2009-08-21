@@ -56,7 +56,7 @@
               <generate-sources>org.grails:grails-maven-plugin:config-directories</generate-sources>
               <compile>org.grails:grails-maven-plugin:maven-compile</compile>
               <test>org.grails:grails-maven-plugin:maven-test</test>
-              <package>org.grails:grails-maven-plugin:maven-war</package>
+              <package>org.grails:grails-maven-plugin:maven-grails-app-war</package>
               <integration-test>org.grails:grails-maven-plugin:maven-functional-test</integration-test>
               <install>org.apache.maven.plugins:maven-install-plugin:install</install>
               <deploy>org.apache.maven.plugins:maven-deploy-plugin:deploy</deploy>
