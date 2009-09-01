@@ -192,14 +192,14 @@
         <property name="newWebApp.dir" value="${target}/${newWebApp}"/>
         <delete dir="${newWebApp.dir}"/>
             <mkdir dir="${target}"/>
-            <grails command="create-app ${newWebApp}" dir="${target}" failonerror="true"/>
-            <grails command="clean" dir="${newWebApp.dir}" failonerror="true"/>
-            <grails command="compile" dir="${newWebApp.dir}" failonerror="true"/>
-            <grails command="generate-all blog" dir="${newWebApp.dir}" failonerror="true"/>
+            <grails projectName="${newWebApp}" command="create-app ${newWebApp}" dir="${target}" failonerror="true"/>
+            <grails projectName="${newWebApp}" command="clean" dir="${newWebApp.dir}" failonerror="true"/>
+            <grails projectName="${newWebApp}" command="compile" dir="${newWebApp.dir}" failonerror="true"/>
+            <grails projectName="${newWebApp}" command="generate-all blog" dir="${newWebApp.dir}" failonerror="true"/>
 
             <parallel>
                 <daemons>
-                    <grails command="run-app" dir="${newWebApp.dir}" failonerror="true"/>
+                    <grails projectName="${newWebApp}" command="run-app" dir="${newWebApp.dir}" failonerror="true"/>
                 </daemons>
                 <sequential>
                     <waitfor maxwait="2" maxwaitunit="minute" checkevery="500">
