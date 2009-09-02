@@ -11,11 +11,18 @@ h2. Examples
 class Publication {
    String title
    Date datePublished
+   Integer numberOfPages
 
    static namedQueries = {
        recentPublications {
            def now = new Date()
            gt 'datePublished', now - 365
+       }
+
+       oldPublicationsLargerThan { pageCount ->
+           def now = new Date()
+           lt 'datePublished', now - 365
+           gt 'numberOfPages', pageCount
        }
 
        publicationsWithBookInTitle {
@@ -48,6 +55,9 @@ def pubs = Publication.recentPublications.findAllWhere(title: 'Some Title')
 
 // get a recent publication where title = 'Some Title'
 def pub = Publication.recentPublications.findWhere(title: 'Some Title')
+
+// get all old publications with more than 350 pages
+def pubs = Publication.oldPublicationsLargerThan(350)
 {code}
 
 {note}

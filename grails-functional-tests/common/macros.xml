@@ -16,9 +16,9 @@
                 <arg value="-Dfile.encoding=utf-8"/>
                 <arg value="-Dserver.port=@{serverPort}"/>
                 <arg value="-Djava.util.logging.manager=java.util.logging.LogManager"/>
-                <arg value="-Dgrails.work.dir=${basedir}/work-global"/>
-                <arg value="-Dgrails.project.work.dir=work"/>
-                <arg value="-Dgrails.project.plugins.dir=plugins"/>
+                <arg value="-Dgrails.work.dir=${basedir}/work-global/@{projectName}_grailsWorkDir/"/>
+                <arg value="-Dgrails.project.work.dir=${basedir}/work-global/@{projectName}_grailsProjectWorkDir/"/>
+                <arg value="-Dgrails.project.plugins.dir=${basedir}/work-global/@{projectName}_grailsProjectPluginsDir/"/>
                 <arg value="@{environment}"/>
                 <arg value="@{command}"/>
                 <arg value="--non-interactive"/>
