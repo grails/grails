@@ -1,0 +1,15 @@
+The way in which you specify dependencies for a [plugin:guide:plugins] is identical to how you specify dependencies in an application. When a plugin is installed into an application the application automatically inherits the dependencies of the plugin.
+
+If a plugin is using a JAR which conflicts with another plugin, or an application dependency then you can override how a plugin resolves its dependencies inside an application:
+
+{code}
+plugin("hibernate") {
+    compile( 'org.hibernate:hibernate-core:3.3.1.GA') {
+		excludes 'ehcache', 'xml-apis', 'commons-logging'
+	}
+    compile 'org.hibernate:hibernate-annotations:3.4.0.GA',
+			'org.hibernate:hibernate-commons-annotations:3.3.0.ga'
+			
+	runtime 'javassist:javassist:3.4.GA'	
+}
+{code}
