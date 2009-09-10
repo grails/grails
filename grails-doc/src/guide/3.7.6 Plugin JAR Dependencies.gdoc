@@ -1,6 +1,6 @@
-The way in which you specify dependencies for a [plugin:guide:plugins] is identical to how you specify dependencies in an application. When a plugin is installed into an application the application automatically inherits the dependencies of the plugin.
+The way in which you specify dependencies for a [plugin|guide:plugins] is identical to how you specify dependencies in an application. When a plugin is installed into an application the application automatically inherits the dependencies of the plugin.
 
-If a plugin is using a JAR which conflicts with another plugin, or an application dependency then you can override how a plugin resolves its dependencies inside an application:
+If a plugin is using a JAR which conflicts with another plugin, or an application dependency then you can override how a plugin resolves its dependencies inside an application using the @plugin@ method:
 
 {code}
 plugin("hibernate") {
@@ -13,3 +13,5 @@ plugin("hibernate") {
 	runtime 'javassist:javassist:3.4.GA'	
 }
 {code}
+
+In this case the application is controlling how the @hibernate@ plugin resolves dependencies and not the @hibernate@ plugin.
