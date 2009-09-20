@@ -28,7 +28,7 @@ With a range literal - note how the literal must be enclosed in parentheses:
 
 {code:xml}
 <ul>
-  <g:each var="i" in="${ (0..<100) }>
+  <g:each var="i" in="${ (0..<100) }">
     <li>Item ${i}</li>
   </g:each>
 </ul>
