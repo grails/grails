@@ -14,4 +14,11 @@ plugin("hibernate") {
 }
 {code}
 
-In this case the application is controlling how the @hibernate@ plugin resolves dependencies and not the @hibernate@ plugin.
+In this case the application is controlling how the @hibernate@ plugin resolves dependencies and not the @hibernate@ plugin. If you wish to simply exclude a single dependency resolved by a plugin then you can do so:
+
+{code}
+plugin("hibernate") {
+    runtime "cglib:cglib-nodep:2.1_3"
+	excludes 'javassist:javassist:3.4.GA'	
+}
+{code}
