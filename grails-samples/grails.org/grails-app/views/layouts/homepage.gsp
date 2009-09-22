@@ -140,9 +140,12 @@
                     <h2>Recent Screencasts</h2>
                     <div class="castBox">
                         <div class="castScreen">
-                            <g:link controller="screencast" action="show" id="${latestScreencastId}">
-                                <img src="/images/new/play_icon.png"/>
-                            </g:link>
+							<a href="http://www.cloudfoundry.com/video.html">
+								<img src="/images/new/play_icon.png"/>
+							</a>
+                            <%--<g:link controller="screencast" action="show" id="${latestScreencastId}">
+                                
+                            </g:link> --%>
                         </div><!-- castScreen -->
                         <h4><g:link controller="screencast" action="list">View All</g:link></h4>
                     </div><!-- castBox -->
