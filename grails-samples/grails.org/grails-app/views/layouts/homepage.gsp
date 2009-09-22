@@ -172,7 +172,7 @@
                     <div class="center">
             			<h3>Support &amp; Services</h3>
                         <p>SpringSource enterprise software and <a href="http://www.springsource.com/services/enterprisesupport">support subscriptions</a> are the way to get developer and production support for Grails and other SpringSource software products and certified versions of our open source technologies including patches, updates, security fixes, and legal indemnification. 
-	<br><br><a href="http://www.springsource.com/support/professional-services">Consulting services</a> are available to companies that wish to leverage the knowledge and expertise of SpringSource’s Grails technology experts. We provide client-driven engagements that focus on knowledge transfer, not creating dependencies. </p>
+	<br><br><a href="http://www.springsource.com/groovy-grails-consulting">Consulting services</a> are available to companies that wish to leverage the knowledge and expertise of SpringSource’s Grails technology experts. We provide client-driven engagements that focus on knowledge transfer, not creating dependencies. </p>
                     </div><!-- center column -->
                     <div class="right">
             			<h3>Community</h3>
