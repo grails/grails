@@ -322,6 +322,7 @@ public abstract class AbstractGrailsMojo extends AbstractMojo {
             throws ClassNotFoundException, IllegalAccessException,
             InstantiationException, MojoExecutionException, NoSuchMethodException, InvocationTargetException {
         String targetDir = this.project.getBuild().getDirectory();
+        helper.setDependenciesExternallyConfigured(true);
         helper.setCompileDependencies(artifactsToFiles(this.project.getCompileArtifacts()));
         helper.setTestDependencies(artifactsToFiles(this.project.getTestArtifacts()));
         helper.setRuntimeDependencies(artifactsToFiles(this.project.getRuntimeArtifacts()));
