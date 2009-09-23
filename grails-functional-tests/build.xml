@@ -42,12 +42,43 @@
         <mkdir dir="reports" />
         <antcall target="-functional-test-apps" />
         <antcall target="-functional-test-scripts" />
+		<antcall target="show-failures" />
     </target>
 
     <target name="run-test-scripts" depends="clean-reports,init">
         <antcall target="-functional-test-scripts" />
     </target>
 
+	<target name="show-failures">
+        <groovy>
+			def reportsDir = new File('reports')
+			if(reportsDir.exists()) {
+				reportsDir.eachDir { dir ->
+					def reportFile = new File("$dir/TESTS-TestSuites.xml")
+					
+					if(reportFile.exists()) {
+						def xml = new XmlSlurper().parse(reportFile)
+						def errors = xml.testsuite.@errors.text()
+						if(errors) {
+							errors = errors.toInteger()
+							if(errors > 0) {
+								println "$dir.name has $errors errors"
+							}
+						}
+						def failures = xml.testsuite.@failures.text()
+						if(failures) {
+							failures = failures.toInteger()
+							if(failures > 0) {
+								println "$dir.name has $failures failures"
+							}
+						}
+						
+					}
+					
+				}
+			}
+		</groovy>
+	</target>
     <target name="-functional-test-scripts">
          <delete dir="target/scripts" failonerror="false" />
          <mkdir dir="target/scripts" />
