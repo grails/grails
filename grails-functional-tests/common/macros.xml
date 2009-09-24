@@ -14,7 +14,7 @@
             <echo message="Executing: grails @{command} @{args}"/>
             <exec executable="${grailsCmd.absolute}" dir="@{dir}" resultproperty="testResult_@{resultID}" failonerror="@{failonerror}">
                 <arg value="-Dfile.encoding=utf-8"/>
-                <arg value="-Dserver.port=@{serverPort}"/>
+                <arg value="-Dgrails.server.port.http=@{serverPort}"/>
                 <arg value="-Djava.util.logging.manager=java.util.logging.LogManager"/>
                 <arg value="-Dgrails.work.dir=${basedir}/work-global/@{projectName}_grailsWorkDir/"/>
                 <arg value="-Dgrails.project.work.dir=${basedir}/work-global/@{projectName}_grailsProjectWorkDir/"/>
