@@ -1,5 +1,5 @@
 class MainFunctionalTests extends functionaltestplugin.FunctionalTestCase {
-    void testSomeWebsiteFeature() {
+    void testSwitchLanguages() {
         // Here call get(uri) or post(uri) to start the session
         // and then use the custom assertXXXX calls etc to check the response
         //
