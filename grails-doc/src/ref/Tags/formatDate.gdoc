@@ -10,13 +10,31 @@ h2. Examples
 <g:formatDate format="yyyy-MM-dd" date="${date}"/>
 {code}
 
+{code:xml}
+<g:formatDate date="${date}" type="datetime" style="MEDIUM"/>
+{code}
+
+{code:xml}
+<g:formatDate date="${date}" type="datetime" style="LONG" timeStyle="SHORT"/>
+{code}
+
+{code:xml}
+<g:formatDate date="${date}" type="time" style="SHORT"/>
+{code}
+
+
 h2. Description
 
 Attributes
 
-* @format@ (required) - The format to use for the date
 * @date@ (required) - The date object to format
-
+* @format@ (required, if type is empty) - The format to use for the date
+* @type@ (required, if format is empty) - The type of format to use for the date / time. Possible values: 'date' - shows only date part, 'time' - shows only time part, 'both'/'datetime' - shows date and time
+* @timeZone@ (optional) - Sets the time zone for formatting. See [TimeZone|http://java.sun.com/javase/6/docs/api/java/util/TimeZone.html] class.
+* @locale@ (optional) - Force the locale for formatting.
+* @style@ (optional) - Use default date/time formatting of the country specified by the locale. Possible values: SHORT (default), MEDIUM, LONG, FULL . See [DateFormat|http://java.sun.com/javase/6/docs/api/java/text/DateFormat.html] for explanation.
+* @dateStyle@ (optional) - Set separate @style@ for the date part. 
+* @timeStyle@ (optional) - Set separate @style@ for the time part.
 
 h2. Source
 
