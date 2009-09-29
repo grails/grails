@@ -28,8 +28,9 @@ h2. Description
 Attributes
 
 * @date@ (required) - The date object to format
-* @format@ (required, if type is empty) - The format to use for the date
-* @type@ (required, if format is empty) - The type of format to use for the date / time. Possible values: 'date' - shows only date part, 'time' - shows only time part, 'both'/'datetime' - shows date and time
+* @format@ (optional) - The formatting pattern to use for the date, see [SimpleDateFormat|http://java.sun.com/j2se/1.4.2/docs/api/java/text/SimpleDateFormat.html]
+* @formatName@ (optional) - Look up @format@ from the default MessageSource / ResourceBundle (i18n/*.properties file) with this key. If @format@ and @formatName@ are empty, @format@ is looked up with '@default.date.format@' key. If the key is missing, 'yyyy-MM-dd HH:mm:ss z' formatting pattern is used.
+* @type@ (optional) - The type of format to use for the date / time. @format@ or @formatName@ aren't used when @type@ is specified. Possible values: 'date' - shows only date part, 'time' - shows only time part, 'both'/'datetime' - shows date and time
 * @timeZone@ (optional) - Sets the time zone for formatting. See [TimeZone|http://java.sun.com/javase/6/docs/api/java/util/TimeZone.html] class.
 * @locale@ (optional) - Force the locale for formatting.
 * @style@ (optional) - Use default date/time formatting of the country specified by the locale. Possible values: SHORT (default), MEDIUM, LONG, FULL . See [DateFormat|http://java.sun.com/javase/6/docs/api/java/text/DateFormat.html] for explanation.

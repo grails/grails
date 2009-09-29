@@ -42,9 +42,10 @@ h2. Description
 
 Attributes
 
-* @format@ (required if type is empty) - The format to use for the number
-* @type@ (required if format is empty) - The type of formatter to use: 'number', 'currency' or 'percent'
 * @number@ (required) - The number object to formate
+* @format@ (optional) - The formatting pattern to use for the number, see [DecimalFormat|http://java.sun.com/javase/6/docs/api/java/text/DecimalFormat.html]
+* @formatName@ (optional) - Look up @format@ from the default MessageSource / ResourceBundle (i18n/*.properties file) with this key.Look up @format@ from the default MessageSource / ResourceBundle (i18n/*.properties file) with this key. If @format@ and @formatName@ are empty, @format@ is looked up with '@default.number.format@' key. If the key is missing, '0' formatting pattern is used.
+* @type@ (optional) - The type of formatter to use: 'number', 'currency' or 'percent' . @format@ or @formatName@ aren't used when @type@ is specified.
 * @locale@ (optional) - Override the locale of the request , String or java.util.Locale value
 * @groupingUsed@ (optional) - Set whether or not grouping will be used in this format. 
 * @minIntegerDigits@ (optional) - Sets the minimum number of digits allowed in the integer portion of a number. 
