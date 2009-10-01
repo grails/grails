@@ -24,6 +24,14 @@ class SecurityFilters {
 }
 {code}
 
+Filter rule attributes:
+@controller@ - controller matching pattern, by default * is replaced with .* and a regex is compiled
+@action@ - action matching pattern, by default * is replaced with .* and a regex is compiled
+@regex@ (true/false) - use regex syntax (don't replace '*' with '.*')
+@find@ (true/false) - rule matches with partial match (see java.util.regex.Matcher.find())
+@invert@ (true/false) - invert the rule (NOT rule)
+
+
 h2. Description
 
 Refer to the section on [Filters|guide:filters] in the Grails user guide which details how filters work.
