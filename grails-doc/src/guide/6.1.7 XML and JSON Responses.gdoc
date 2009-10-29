@@ -52,9 +52,9 @@ The @render@ method can also be used to output JSON:
 def list = {
 	def results = Book.list()
 	render(contentType:"text/json") {
-		books {
+		books = array {
 			for(b in results) {
-				book(title:b.title)
+				book title:b.title
 			}
 		}	
 	}
