@@ -4,10 +4,10 @@ h4. JSONBuilder and Grails versions
 
 JSONBuilder behaves different depending on the version of Grails you use. For version below 1.2 there deprecated [grails.util.JSonBuilder|api:grails.util.JSonBuilder] class is used. This section covers the usage of the Grails 1.2 JSONBuilder
 
-If you wish to use the older @JSonBuilder@ class with the @render@ method then you can do so by setting the following in @Config.groovy@:
+For backwards compatibility the old @JSonBuilder@ class is used with the @render@ method, if you want to use the newer/better @JSONBuilder@ class then you can do so by setting the following in @Config.groovy@:
 
 {code}
-grails.json.legacy.builder=true
+grails.json.legacy.builder=false
 {code}
 
 
