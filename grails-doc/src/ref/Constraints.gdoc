@@ -16,3 +16,33 @@ class User {
 {code}
 
 Refer to the user guide topic on [Constraints|guide:constraints] for more information.
+
+h1. Global Constraints
+
+You can apply constraints globally inside @grails-app/conf/Config.groovy@ as follows:
+
+{code}
+grails.gorm.default.constraints = {
+   '*'(nullable:true, size:1..20)
+}
+{code}
+
+The wildcard signifies that the constraints apply to all properties. You can also define shared constraints:
+
+{code}
+grails.gorm.default.constraints = {
+   myShared(nullable:true, size:1..20)
+}
+{code}
+
+That can be reused in your class:
+
+{code:java}
+class User {
+    ...
+
+    static constraints = {
+        login(shared:"myShared")
+    }
+}
+{code}

@@ -12,4 +12,12 @@ This uses the [javascript|tags] tag to automatically place the correct reference
 <g:javascript library="scriptaculous" />
 {code}	
 
+This works because of Grails' support for adaptive tag libraries. Thanks to Grails' plugin system there is support for a number of different Ajax libraries including (but not limited to):
+
+* prototype
+* dojo
+* yui
+* mootools
+
+
 
