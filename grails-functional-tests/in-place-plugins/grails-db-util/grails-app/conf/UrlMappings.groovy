@@ -1,5 +1,5 @@
 class UrlMappings {
-    def mappings = {
+    static mappings = {
         "$controller/$action?/$id?"()
     }
 }

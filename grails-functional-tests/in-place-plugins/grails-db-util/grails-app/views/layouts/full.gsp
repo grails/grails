@@ -1,8 +1,8 @@
 <html>
 <head>
   <title><g:layoutTitle default="DB Util Plugin"/></title>
-  <link rel="stylesheet" href="${createLinkTo(dir: pluginContextPath, file: 'css/dbUtil.css')}"/>
-  <link rel="shortcut icon" href="${createLinkTo(dir: 'images', file: 'favicon.ico')}" type="image/x-icon"/>
+  <link rel="stylesheet" href="${resource(dir: '', file: 'css/dbUtil.css', plugin: 'db-util')}"/>
+  <link rel="shortcut icon" href="${resource(dir: 'images', file: 'favicon.ico', plugin: 'db-util')}" type="image/x-icon"/>
   <g:layoutHead/>
   <g:javascript library="application"/>
 </head>

@@ -1,4 +1,4 @@
-<plugin name='db-util' version='0.3' grailsVersion='1.1-SNAPSHOT &gt; *'>
+<plugin name='db-util' version='0.3' grailsVersion='1.1.1 &gt; *'>
   <author>Tyler Williams</author>
   <authorEmail>kaerfredoc@gmail.com</authorEmail>
   <title>DB Utils - Embedded</title>
@@ -19,10 +19,10 @@ info.gsp
 sql.gsp</description>
   <documentation>http://grails.org/DbUtil+Plugin</documentation>
   <resources>
-    <resource>UrlMappings</resource>
     <resource>Config</resource>
-    <resource>BuildConfig</resource>
+    <resource>UrlMappings</resource>
     <resource>BootStrap</resource>
+    <resource>BuildConfig</resource>
     <resource>org.codehaus.groovy.grails.plugins.dbutil.DbUtilController</resource>
   </resources>
   <dependencies />

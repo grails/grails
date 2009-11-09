@@ -1,8 +1,10 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="layout" content="full"/>
+    <meta name="layout" content="main"/>
     <title>Database Info</title>
+    <link rel="stylesheet" href="${resource(dir:'css',file:'other.css', plugin: 'db-util')}" />
+    <g:javascript src="prototype/scriptaculous.js" />
 </head>
 <body>
 <div class="body">
