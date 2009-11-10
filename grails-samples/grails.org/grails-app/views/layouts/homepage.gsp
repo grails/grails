@@ -140,7 +140,7 @@
                     <h2>Recent Screencasts</h2>
                     <div class="castBox">
                         <div class="castScreen">
-							<a href="http://www.cloudfoundry.com/video.html">
+							<a href="https://www.cloudfoundry.com/screencasts.html#grails">
 								<img src="/images/new/play_icon.png"/>
 							</a>
                             <%--<g:link controller="screencast" action="show" id="${latestScreencastId}">
