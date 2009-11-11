@@ -43,7 +43,7 @@ class MailerJob {
 	                    myTitle = "${plugin.title} (${wikiType[0].toUpperCase() + wikiType[1..-1]} tab)"
 	                }
 
-	                def pageVersions = Version.findAllByCurrent(c, [sort:'number',order:'desc', max:1, cache:true])
+	                def pageVersions = Version.findAllByCurrent(content, [sort:'number',order:'desc', max:1, cache:true])
 
 					if(pageVersions) {
 		                def version = pageVersions[-1] //last version
