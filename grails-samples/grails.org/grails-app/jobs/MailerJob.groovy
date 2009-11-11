@@ -29,7 +29,7 @@ class MailerJob {
 	            def engine = new GrailsWikiEngine(context)
 
 	            context.setRenderEngine engine
-	            def emails = UserInfo.executeQuery("select ui.user.email from UserInfo as ui where ui.emailSubscribed = ?", [false] )
+	            def emails = UserInfo.executeQuery("select ui.user.email from UserInfo as ui where ui.emailSubscribed = ?", [true] )
 	            while (content) {
 	                def plugin = pluginService.resolvePossiblePlugin(content)
 	                def text = new StringBuffer()
