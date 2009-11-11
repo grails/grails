@@ -11,7 +11,7 @@ class TagCleanupJob {
         	tagService.removeEmptyTags()			
 		}
 		finally {
-			DomainClassGrailsPlugin.PROPERTY_INSTANCE_MAP.clear()			
+			DomainClassGrailsPlugin.PROPERTY_INSTANCE_MAP.get().clear()
 		}
     }
 

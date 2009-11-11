@@ -72,7 +72,7 @@ class MailerJob {
 	        }		
 		}
 		finally {
-			DomainClassGrailsPlugin.PROPERTY_INSTANCE_MAP.clear()			
+			DomainClassGrailsPlugin.PROPERTY_INSTANCE_MAP.get().clear()
 		}
     }
 }
