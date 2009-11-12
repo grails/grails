@@ -19,7 +19,8 @@ abstract class AbstractCliTestCase extends GroovyTestCase {
 
     private String commandOutput
     private String grailsHome = new File(System.getProperty("grails.home") ?: "../grails").absolutePath
-    private String grailsVersion = System.getProperty("grails.version") ?: "1.2-SNAPSHOT"
+    private String grailsVersion = System.getProperty("grails.version") ?:
+            new File(grailsHome, "build.properties").withReader { def p = new Properties(); p.load(it); p.'grails.version' }
 
     private File baseWorkDir = new File(System.getProperty("cli.test.dir") ?: "cli-tests", "tmp")
     private File workDir = baseWorkDir
@@ -67,6 +68,10 @@ abstract class AbstractCliTestCase extends GroovyTestCase {
             // the main thread.
             signalDone()
         }
+    }
+
+    String getGrailsVersion() {
+        return grailsVersion
     }
 
     /**

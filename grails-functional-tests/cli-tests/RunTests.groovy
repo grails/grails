@@ -22,7 +22,7 @@ System.setProperty("grails.work.dir", workDir.canonicalFile.absolutePath)
 System.setProperty("cli.test.dir", cliTestPath)
 
 // Configure and run the tests. Note that the order is important!
-def tests = [ "Help", "ListPlugins", "CreateApp", "Compile" ]
+def tests = [ "Help", "ListPlugins", "CreateApp", "Compile", "War" ]
 
 def exitCode = 0
 tests.each {
