@@ -4,7 +4,7 @@
   <meta name="layout" content="main"/>
   <title>Execute SQL</title>
   <link rel="stylesheet" href="${resource(dir:'css',file:'other.css')}" />
-  <g:javascript src="prototype/animation.js" />
+  <g:javascript src="app.js" />
 </head>
 <body>
 <div class="body">

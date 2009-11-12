@@ -3,8 +3,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="main"/>
     <title>Database Info</title>
-    <link rel="stylesheet" href="${resource(dir:'css',file:'other.css', plugin: 'db-util')}" />
-    <g:javascript src="prototype/scriptaculous.js" />
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'other.css', plugin: 'db-util')}" />
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'other-2.css')}" />
+    <link rel="stylesheet" href="${resource(dir: pluginContextPath, file: 'css/other-3.css')}" />
+    <g:javascript src="plugin-info.js" />
 </head>
 <body>
 <div class="body">
