@@ -67,7 +67,7 @@ chapterContents = new StringBuffer()
 chapterTitle = null
 
 void writeChapter(String title, StringBuffer content) {
-    new File("${BASEDIR}/output/guide/${title}.html").withWriter {
+    new File("${BASEDIR}/output/guide/${title}.html").withWriter("UTF-8") {
         template.make(title: title, content: content.toString()).writeTo(it)
     }
     content.delete(0, content.size()) // clear buffer
@@ -75,7 +75,7 @@ void writeChapter(String title, StringBuffer content) {
 
 ant.mkdir(dir: "${BASEDIR}/output/guide")
 ant.mkdir(dir: "${BASEDIR}/output/guide/pages")
-new File("${BASEDIR}/resources/style/guideItem.html").withReader {reader ->
+new File("${BASEDIR}/resources/style/guideItem.html").withReader("UTF-8") {reader ->
     template = templateEngine.createTemplate(reader)
 
     for (entry in book) {
@@ -112,7 +112,7 @@ new File("${BASEDIR}/resources/style/guideItem.html").withReader {reader ->
         fullContents << header << body
         chapterContents << header << body
 
-        new File("${BASEDIR}/output/guide/pages/${title}.html").withWriter {
+        new File("${BASEDIR}/output/guide/pages/${title}.html").withWriter("UTF-8") {
             template.make(title: title, content: body).writeTo(it)
         }
     }
@@ -149,14 +149,14 @@ vars = [
         body: fullContents.toString()
 ]
 
-new File("${BASEDIR}/resources/style/layout.html").withReader {reader ->
+new File("${BASEDIR}/resources/style/layout.html").withReader("UTF-8") {reader ->
     template = templateEngine.createTemplate(reader)
-    new File("${BASEDIR}/output/guide/single.html").withWriter {out ->
+    new File("${BASEDIR}/output/guide/single.html").withWriter("UTF-8") {out ->
         template.make(vars).writeTo(out)
     }
     vars.toc = soloToc
     vars.body = ""
-    new File("${BASEDIR}/output/guide/index.html").withWriter {out ->
+    new File("${BASEDIR}/output/guide/index.html").withWriter("UTF-8") {out ->
         template.make(vars).writeTo(out)
     }
 }
@@ -164,7 +164,7 @@ new File("${BASEDIR}/resources/style/layout.html").withReader {reader ->
 menu = new StringBuffer()
 files = new File("${BASEDIR}/src/ref").listFiles().toList().sort()
 reference = [:]
-new File("${BASEDIR}/resources/style/referenceItem.html").withReader {reader ->
+new File("${BASEDIR}/resources/style/referenceItem.html").withReader("UTF-8") {reader ->
     template = templateEngine.createTemplate(reader)
     for (f in files) {
         if (f.directory && !f.name.startsWith(".")) {
@@ -180,7 +180,7 @@ new File("${BASEDIR}/resources/style/referenceItem.html").withReader {reader ->
                 context.set(SOURCE_FILE, usageFile.name)
                 context.set(CONTEXT_PATH, "../..")
                 def contents = engine.render(data, context)
-                new File("${BASEDIR}/output/ref/${f.name}/Usage.html").withWriter {out ->
+                new File("${BASEDIR}/output/ref/${f.name}/Usage.html").withWriter("UTF-8") {out ->
                     template.make(content: contents).writeTo(out)
                 }
                 menu << "<div class=\"menuUsageItem\"><a href=\"${f.name}/Usage.html\" target=\"mainFrame\">Usage</a></div>"
@@ -194,7 +194,7 @@ new File("${BASEDIR}/resources/style/referenceItem.html").withReader {reader ->
                 context.set(CONTEXT_PATH, "../..")
                 def contents = engine.render(data, context)
                 //println "Generating reference item: ${name}"
-                new File("${BASEDIR}/output/ref/${f.name}/${name}.html").withWriter {out ->
+                new File("${BASEDIR}/output/ref/${f.name}/${name}.html").withWriter("UTF-8") {out ->
                     template.make(content: contents).writeTo(out)
                 }
             }
@@ -203,9 +203,9 @@ new File("${BASEDIR}/resources/style/referenceItem.html").withReader {reader ->
 
 }
 vars.menu = menu
-new File("${BASEDIR}/resources/style/menu.html").withReader {reader ->
+new File("${BASEDIR}/resources/style/menu.html").withReader("UTF-8") {reader ->
     template = templateEngine.createTemplate(reader)
-    new File("${BASEDIR}/output/ref/menu.html").withWriter {out ->
+    new File("${BASEDIR}/output/ref/menu.html").withWriter("UTF-8") {out ->
         template.make(vars).writeTo(out)
     }
 }
