@@ -63,10 +63,17 @@ class DownloadController {
 
     def downloadFile = {
 
-        def mirror = params.mirror? Mirror.lock(params.mirror) : null
+        def mirror = params.mirror? Mirror.get(params.mirror) : null
         if(mirror) {
 
-            def download = mirror.file.download
+			def download = Download.createCriteria().get {
+				files {
+					mirrors {
+						eq 'id', mirror.id
+					}					
+				}
+				lock true
+			}
             download.count++
             download.save(flush:true)
 
