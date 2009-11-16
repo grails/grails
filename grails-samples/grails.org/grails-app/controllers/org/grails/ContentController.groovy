@@ -395,7 +395,9 @@ class ContentController extends BaseWikiController {
                 model:[
                     newestPlugins:newestPlugins, 
                     newsItems:newsItems,
-                    latestScreencastId: latestScreencastId
+                    latestScreencastId: latestScreencastId,
+					newsComments:newsItems?.collect { it.comments },
+					newsTags:newsItems?.collect { it.tags }
                 ]
         )
     }
