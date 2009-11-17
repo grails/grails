@@ -6,8 +6,8 @@
     <g:javascript src="common/application.js"/>
 	<g:render template="/content/analytics" />
     
-    <link rel="stylesheet" href="${createLinkTo(dir: 'css/new', file: 'master.css')}" type="text/css" />
-    <link rel="stylesheet" href="${createLinkTo(dir: 'css/new', file: 'plugins.css')}" type="text/css" />
+    <link rel="stylesheet" href="${resource(dir: 'css/new', file: 'master.css')}" type="text/css" />
+    <link rel="stylesheet" href="${resource(dir: 'css/new', file: 'plugins.css')}" type="text/css" />
 	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
 	<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 

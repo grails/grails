@@ -15,7 +15,14 @@
 			<h1 id="pluginBoxTitle">${plugin?.title}</h1>
 
 			<div class="ratingBox">
-				<rateable:ratings bean="${plugin}"/>						
+			    <jsec:isLoggedIn>
+					<rateable:ratings bean="${plugin}"/>						
+			    </jsec:isLoggedIn>
+			    <jsec:isNotLoggedIn>
+					<div id="ratingDisplay">
+						<rateable:ratings bean="${plugin}" active="false" href="${createLink(controller:'user', action:'login', params:[originalURI:request.forwardURI])}"/>																							
+					</div>
+			    </jsec:isNotLoggedIn>
 			</div>
 
 
@@ -81,7 +88,7 @@
     <jsec:isLoggedIn>
         <gui:dialog id='addTagDialog'
             title='Add Tags'
-            form='true' controller='plugin' action='addTag' params="${[id:plugin.id]}"
+            form='true' url="${ '\''+createLink(controller:'plugin', action:'addTag', params:[id:plugin.id])+'\'' }"
             triggers="[show:[id:'addTagTrigger',on:'click']]"
             update='pluginTags'
         >

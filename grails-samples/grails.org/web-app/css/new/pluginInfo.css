@@ -237,3 +237,9 @@ color: black; border: inherit; text-decoration: none;
 	background-color:#E8E8E8;
 	padding:3px;
 }
+#ratingDisplay {
+	z-index:999;
+}
+#ratingDisplay table{
+	width:100px;
+}
