@@ -49,6 +49,10 @@
         <antcall target="-functional-test-scripts" />
     </target>
 
+    <target name="run-test-apps" depends="clean-reports,init">
+        <antcall target="-functional-test-apps" />
+    </target>
+
 	<target name="show-failures">
         <groovy>
 			def reportsDir = new File('reports')
@@ -116,6 +120,9 @@
 		               properties.projectName = appDir.name
 					   // skip webtest based tests until plugin is fixed
 					   if(properties.projectName == 'HelloWorld') return
+					
+					   def appName = ant.antProject.properties."test.app.name"
+					   if(appName && appName != appDir.name) return
 
 
                        // Clear any existing webtest and functional test plugins.
@@ -135,7 +142,7 @@
 		               // Install the appropriate testing plugin, run the tests, and check the reports..
                        if (new File(appDir, "test/functional").exists()) {
                            // Install the Functional Test plugin.
-                           ant.grails(command:"install-plugin", args:"functional-test 1.2.2", projectName:properties.projectName, resultID:grailsInvocationCounter++)
+                           ant.grails(command:"install-plugin", args:"functional-test 1.2.7", projectName:properties.projectName, resultID:grailsInvocationCounter++)
                            if (properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) {
                                outcomes << "Couldn't install functional-test plugin into application ${properties.projectName}"
                                failure = true
