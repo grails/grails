@@ -26,19 +26,19 @@ class DownloadController {
         }
 
 		def betaDownload = getCachedOr("GrailsBeta") {
-            def downloads = Download.findAllBySoftwareNameAndBetaRelease('Grails', true,[max:1, order:'desc', sort:'releaseDate'])
+            def downloads = Download.findAllBySoftwareNameAndBetaRelease('Grails', true,[max:1, order:'desc', sort:'releaseDate', cache:true])
             downloads ? downloads[0] : null
         }
 		
 
 
         def doc = getCachedOr("Grails Documentation") {
-            def docs = Download.findAllBySoftwareNameAndBetaRelease('Grails Documentation',false,[max:1, order:'desc', sort:'releaseDate'])
+            def docs = Download.findAllBySoftwareNameAndBetaRelease('Grails Documentation',false,[max:1, order:'desc', sort:'releaseDate', cache:true])
             docs? docs[0] : null
         }
 
         def betaDoc = getCachedOr("GrailsBeta Documentation") {
-            def docs = Download.findAllBySoftwareNameAndBetaRelease('Grails Documentation',true,[max:1, order:'desc', sort:'releaseDate'])
+            def docs = Download.findAllBySoftwareNameAndBetaRelease('Grails Documentation',true,[max:1, order:'desc', sort:'releaseDate', cache:true])
             docs? docs[0] : null
         } 
 
@@ -55,7 +55,7 @@ class DownloadController {
     }
 
     def archive = {
-        def downloads = Download.findAllBySoftwareName(params.id, [order:'desc', sort:'releaseDate'])
+        def downloads = Download.findAllBySoftwareName(params.id, [order:'desc', sort:'releaseDate', cache:true])
 
         return [downloads:downloads]
     }
