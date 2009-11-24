@@ -56,6 +56,9 @@ def pubs = Publication.recentPublications.findAllWhere(title: 'Some Title')
 // get a recent publication where title = 'Some Title'
 def pub = Publication.recentPublications.findWhere(title: 'Some Title')
 
+// dynamic finders are supported
+def pubs = Publication.recentPublications.findAllByTitle('Some Title')
+
 // get all old publications with more than 350 pages
 def pubs = Publication.oldPublicationsLargerThan(350)
 {code}
