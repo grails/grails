@@ -32,6 +32,7 @@
         <ant dir="${grails.home}" antfile="build.xml" target="jar">
             <property name="skipTests" value="true"/>
             <property name="skipExamples" value="true"/>
+            <property name="disable.bundlor" value="true"/>
         </ant>
     </target>
 
