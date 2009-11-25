@@ -35,13 +35,9 @@ class Publication {
 
 {code:java}
 // get all recent publications...
-def recentPubs = Publication.recentPublications()
-
-// get all recent publications (alternate syntax)...
 def recentPubs = Publication.recentPublications.list()
 
 // get up to 10 recent publications, skip the first 5...
-def recentPubs = Publication.recentPublications(max: 10, offset: 5)
 def recentPubs = Publication.recentPublications.list(max: 10, offset: 5)
 
 // get the number of recent publications...
@@ -60,7 +56,7 @@ def pub = Publication.recentPublications.findWhere(title: 'Some Title')
 def pubs = Publication.recentPublications.findAllByTitle('Some Title')
 
 // get all old publications with more than 350 pages
-def pubs = Publication.oldPublicationsLargerThan(350)
+def pubs = Publication.oldPublicationsLargerThan(350).list()
 {code}
 
 {note}
