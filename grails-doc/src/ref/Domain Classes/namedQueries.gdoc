@@ -57,6 +57,9 @@ def pubs = Publication.recentPublications.findAllByTitle('Some Title')
 
 // get all old publications with more than 350 pages
 def pubs = Publication.oldPublicationsLargerThan(350).list()
+
+// get all old publications with more than 350 pages and the word 'Grails' in the title
+def pubs = Publication.oldPublicationsLargerThan(350).findAllByTitleLike('%Grails%')
 {code}
 
 {note}
