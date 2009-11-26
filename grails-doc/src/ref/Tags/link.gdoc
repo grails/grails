@@ -53,6 +53,7 @@ Attributes
 
 * @action@ (optional) - the name of the action to use in the link, if not specified the default action will be linked
 * @controller@ (optional) - the name of the controller to use in the link, if not specified the current controller will be linked
+* @elementId@ (optional) - this value will be used to populate the @id@ attribute of the generated href
 * @id@ (optional) - the id to use in the link
 * @params@ (optional) - a map containing request parameters
 * @url@ (optional) - a map containing the action, controller, id etc.
