@@ -106,6 +106,26 @@ def numberOfBranches = c.get {
 
 {code}
 
+h4. Using SQL Restrictions
+
+You can access Hibernate's SQL Restrictions capabilities.
+
+{code:java}
+def c = Person.createCriteria()
+
+def peopleWithShortFirstNames = c.list {
+    sqlRestriction "char_length( first_name ) <= 4"
+}
+{code}
+
+{note}
+Note that the parameter there is SQL.  The @first_name@ attribute referenced in the example relates to the persistence model, 
+not the object model.  The @Person@ class may have a property named @firstName@ which is mapped to a column in the database
+named @first_name@.
+
+Also note that the SQL used here is not necessarily portable across databases.
+{note}
+
 h4. Using Scrollable Results
 
 You can use Hibernate's [ScrollableResults|api:org.hibernate.ScrollableResults] feature by calling the scroll method:
