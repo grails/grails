@@ -28,7 +28,7 @@ Arguments:
 * @dir@ - The target directory to resolve JAR files to
 
 
-The @install-dependency@ command allows the installation of the a JAR dependency into the Ivy cache so that it can be resolved locally (without needing to configure a repository explicitly).
+The @install-dependency@ command allows the installation of a JAR dependency into the Ivy cache so that it can be resolved locally (without needing to configure a repository explicitly).
 
 In its most simple form you can pass a single argument that defines the dependency in the form "group:name:version":
 
