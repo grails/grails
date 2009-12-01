@@ -8,7 +8,9 @@ grails create-controller simple
 
 Not only will Grails create a controller at @grails-app/controllers/SimpleController.groovy@, but also an integration test at @test/integration/SimpleControllerTests.groovy@. What Grails won't do however is populate the logic inside the test! That is left up to you.
 
-Once you have done this, you can then execute all the tests with the [test-app|commandLine] command:
+h4. Running Tests
+
+Test are run with the [test-app|commandLine] command:
 
 {code:java}
 grails test-app
@@ -26,15 +28,48 @@ Unit Tests Completed in 464ms ...
 Tests failed: 0 errors, 1 failures
 {code}
 
-Whilst reports will have been written out the @target/test-reports@ directory. You can also run an individual test by specifying the name of the test (without the @Tests@ suffix) to run:
+Whilst reports will have been written out the @target/test-reports@ directory. 
 
-{code:java}
+h5. Targeting Tests
+
+You can selectively target the test(s) to be run in different ways. To run all tests for a controller named @SimpleController@ you would run:
+
+{code}
 grails test-app SimpleController
 {code}
 
-In addition, you can run a number of tests by specifying each ones name separated by a space:
+This will run any tests for the class named @SimpleController@. Wildcards can be used...
 
-{code:java}
-grails test-app SimpleController BookController
+{code}
+grails test-app *Controller
 {code}
 
+This will test all classes ending in @Controller@. Package names can optionally be specified...
+
+{code}
+grails test-app some.org.*Controller
+{code}
+
+or to run all tests in a package...
+
+{code}
+grails test-app some.org.*
+{code}
+
+or to run all tests in a package including subpackages...
+
+{code}
+grails test-app some.org.**
+{code}
+
+You can also target particular test methods...
+
+{code}
+grails test-app SimpleController.testLogin
+{code}
+
+This will run the @testLogin@ test in the @SimpleController@ tests. You can specify as many patterns in combination as you like...
+
+{code}
+grails test-app some.org.* SimpleController.testLogin BookController
+{code}
