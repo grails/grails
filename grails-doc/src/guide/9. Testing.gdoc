@@ -30,6 +30,10 @@ Tests failed: 0 errors, 1 failures
 
 Whilst reports will have been written out the @target/test-reports@ directory. 
 
+{note}
+You can force a clean before running tests by passing @-clean@ to the @test-app@ command.
+{note}
+
 h5. Targeting Tests
 
 You can selectively target the test(s) to be run in different ways. To run all tests for a controller named @SimpleController@ you would run:
