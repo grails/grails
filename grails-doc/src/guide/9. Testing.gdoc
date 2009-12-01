@@ -73,3 +73,55 @@ This will run the @testLogin@ test in the @SimpleController@ tests. You can spec
 {code}
 grails test-app some.org.* SimpleController.testLogin BookController
 {code}
+
+h5. Targeting Test Types and/or Phases
+
+In addition to targeting certain tests, you can also target test _types_ and/or _phases_ by using the «phase»:«type» syntax.
+
+{note}
+Grails organises tests by phase and by type. A test phase relates to the state of the Grails application during the tests, and the type relates to the testing mechanism. 
+
+Grails comes with support for 4 test phases (@unit@, @integration@, @functional@ and @other@) and JUnit test types for the @unit@ and @integration@ phases. These test types have the same name as the phase. 
+
+Testing plugins may provide new test phases or new test types for existing phases. Refer to the plugin documentation.
+{note}
+
+To execute the JUnit @integration@ tests you can run:
+
+{code}
+grails test-app integration:integration
+{code}
+
+Both «phase» and «type» are optional. Their absence acts as a wildcard. The following command will run all test types in the @unit@ phase:
+
+{code}
+grails test-app unit:
+{code}
+
+The Grails [Spock Plugin|http://grails.org/plugin/spock] is one plugin that adds new test types to Grails. It adds a @spock@ test type to the @unit@, @integration@ and @functional@ phases. To run all spock tests in all phases you would run the following:
+
+{code}
+grails test-app :spock
+{code}
+
+To run the all of the spock tests in the @functional@ phase you would run...
+
+{code}
+grails test-app functional:spock
+{code}
+
+More than one pattern can be specified...
+
+{code}
+grails test-app unit:spock integration:spock
+{code}
+
+h5. Targeting Tests in Types and/or Phases
+
+Test and type/phase targetting can be applied at the same time:
+
+{code}
+grails test-app integration: unit: some.org.**
+{code}
+
+This would run all tests in the @integration@ and @unit@ phases that are in the page @some.org@ or a subpackage of.
