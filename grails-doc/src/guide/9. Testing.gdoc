@@ -26,7 +26,7 @@ Unit Tests Completed in 464ms ...
 Tests failed: 0 errors, 1 failures
 {code}
 
-Whilst reports will have been written out the @test/reports@ directory. You can also run an individual test by specifying the name of the test (without the @Tests@ suffix) to run:
+Whilst reports will have been written out the @target/test-reports@ directory. You can also run an individual test by specifying the name of the test (without the @Tests@ suffix) to run:
 
 {code:java}
 grails test-app SimpleController
