@@ -28,7 +28,7 @@ grails.mime.types = [ html: ['text/html','application/xhtml+xml'],
 grails.views.default.codec="none" // none, html, base64
 grails.views.gsp.encoding="UTF-8"
 grails.converters.encoding="UTF-8"
-
+grails.spring.bean.packages=['beans', 'mvc']
 // enabled native2ascii conversion of i18n properties files
 grails.enable.native2ascii = true
 
