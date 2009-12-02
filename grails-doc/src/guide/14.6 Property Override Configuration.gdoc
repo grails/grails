@@ -1,20 +1,22 @@
-Grails supports the notion of property override configuration through an extended version of Spring's [PropertyOverrideConfigurer|api:org.springframework.beans.factory.config.PropertyOverrideConfigurer], which is often useful when used in combination with [externalized configuration|guide:3.4 Externalized Configuration].
+Grails supports setting of bean properties via [configuration|guide:3. Configuration]. This is often useful when used in combination with [externalized configuration|guide:3.4 Externalized Configuration].
 
-Essentially you can supply "ConfigSlurper":http://groovy.codehaus.org/ConfigSlurper scripts that define a @beans@ block that can override settings on a bean:
+Essentially you define a @beans@ block with the names of beans and their values:
 
 {code:java}
 beans {
-   bookService.webServiceURL = "http://www.amazon.com"
+    bookService {
+        webServiceURL = "http://www.amazon.com"
+    }
 }
 {code}
 
-The overrides are applied before the Spring @ApplicationContext@ is constructed. The format is:
+The general format is:
 
 {code:java}
 [bean name].[property name] = [value]
 {code}
 
-You can also provide a regular Java properties file with each entry prefixed with @beans@:
+The same configuration in a Java properties file would be:
 
 {code:java}
 beans.bookService.webServiceURL=http://www.amazon.com
