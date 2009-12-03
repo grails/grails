@@ -1,4 +1,20 @@
+h4. Specifying Plugin JAR dependencies
+
 The way in which you specify dependencies for a [plugin|guide:plugins] is identical to how you specify dependencies in an application. When a plugin is installed into an application the application automatically inherits the dependencies of the plugin.
+
+If you want to define a dependency that is resolved for use with the plugin but not _exported_ to the application then you can set the @exported@ property of the dependency:
+
+{code}
+compile( 'org.hibernate:hibernate-core:3.3.1.GA') {
+	exported = false
+}
+
+{code}
+
+In this can the @hibernate-core@ dependency will be available only to the plugin and not resolved as an application dependency.
+
+
+h4. Overriding Plugin JAR Dependencies in Your Application
 
 If a plugin is using a JAR which conflicts with another plugin, or an application dependency then you can override how a plugin resolves its dependencies inside an application using the @plugin@ method:
 
