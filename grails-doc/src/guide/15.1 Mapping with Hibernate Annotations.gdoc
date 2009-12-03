@@ -1,14 +1,6 @@
-Grails also supports creating domain classes mapped with Hibernate's Java 5.0 Annotations support. To do so you need to tell Grails that you are using an annotation configuration by setting the @configClass@  in your [DataSource|guide:dataSources] as follows:
+Grails also supports creating domain classes mapped with Hibernate's Java 5.0 Annotations support. 
 
-{code:java}
-import org.codehaus.groovy.grails.orm.hibernate.cfg.GrailsAnnotationConfiguration
-dataSource {
-	configClass = GrailsAnnotationConfiguration.class
-   ... // remaining properties
-}
-{code}
-
-That's it for the configuration! Make sure you have Java 5.0 installed as this is required to use annotations. Now to create an annotated class we simply create a new Java class in @src/java@ and use the annotations defined as part of the EJB 3.0 spec (for more info on this see the [Hibernate Annotations Docs|http://annotations.hibernate.org/]): 
+Now to create an annotated class we simply create a new Java class in @src/java@ and use the annotations defined as part of the EJB 3.0 spec (for more info on this see the [Hibernate Annotations Docs|http://annotations.hibernate.org/]): 
 
 {code:java}
 package com.books;
@@ -58,6 +50,22 @@ Once that is done you need to register the class with the Hibernate @sessionFact
         <mapping class="com.books.Book" />
     </session-factory>
 </hibernate-configuration>
+{code}
+
+By default the @hibernate.cfg.xml@ file is located in the @grails-app/conf/hibernate@ directory. If you wish to change this you can do so by specifying an alternative location in @grails-app/conf/DataSource.groovy@:
+
+{code}
+hibernate {
+	config.location = "file:/path/to/my/hibernate.cfg.xml"
+}
+{code}
+
+Or even a list of locations:
+
+{code}
+hibernate {
+	config.location = ["file:/path/to/one/hibernate.cfg.xml","file:/path/to/two/hibernate.cfg.xml"]
+}
 {code}
 
 When Grails loads it will register the necessary dynamic methods with the class. To see what else you can do with a Hibernate domain class see the section on [Scaffolding|guide:scaffolding].
