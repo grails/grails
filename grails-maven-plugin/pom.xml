@@ -18,7 +18,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.grails</groupId>
   <artifactId>grails-maven-plugin</artifactId>
-  <version>1.2.0.BUILD-SNAPSHOT</version>
+  <version>1.2.0.RC1</version>
   <packaging>maven-plugin</packaging>
   <name>Maven plugin for GRAILS applications</name>
   <description>This plugin allows you to integrate GRAILS applications into maven 2 builds.</description>
@@ -96,12 +96,12 @@
     <dependency>
       <groupId>org.grails</groupId>
       <artifactId>grails-bootstrap</artifactId>
-      <version>1.2.0.BUILD-SNAPSHOT</version>
+      <version>1.2.0.RC1</version>
     </dependency>
     <dependency>
       <groupId>org.grails</groupId>
       <artifactId>grails-scripts</artifactId>
-      <version>1.2.0.BUILD-SNAPSHOT</version>
+      <version>1.2.0.RC1</version>
       <scope>runtime</scope>
     </dependency>
 

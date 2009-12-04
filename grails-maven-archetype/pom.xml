@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.grails</groupId>
   <artifactId>grails-maven-archetype</artifactId>
-  <version>1.2.0.BUILD-SNAPSHOT</version>
+  <version>1.2.0.RC1</version>
   <name>Maven archetype for Grails projects</name>
   <url>http://grails.org</url>
   <distributionManagement>
