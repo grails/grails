@@ -17,11 +17,21 @@ def results =
 
 {code}
 
+{code:java}
+def author = Author.findByName("Stephen King")
+def books = Book.findAll("from Book as book where book.author = ?", [author])
+{code}
+
 Or even named parameters:
 
 {code:java}
 def results =
       Book.findAll("from Book as b where b.title like :search or b.author like :search", [search:"The Shi%"])
+{code}
+
+{code:java}
+def author = Author.findByName("Stephen King")
+def books = Book.findAll("from Book as book where book.author = :author", [author: author])
 {code}
 
 h4. Multiline Queries
