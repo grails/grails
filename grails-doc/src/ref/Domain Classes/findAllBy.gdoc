@@ -63,7 +63,6 @@ The following operator names can be used within the respective dynamic methods:
 * @IsNotNull@
 * @IsNull@
 * @Not@
-* @Equal@
 * @NotEqual@
 * @And@
 * @Or@ 
