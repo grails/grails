@@ -92,8 +92,7 @@
              String scriptName = ant.antProject.properties."test.script.name"
              def scriptFiles = new File("scripts").listFiles().findAll { 
                  it.name.endsWith('.xml') &&
-                 // TODO skip these for now while working on the build...
-                 (!it.name.startsWith('run-https')) &&
+                 // TODO skip this for now while working on the build...
                  (!it.name.startsWith('plugin-view-rendering'))
              }
 			 if(scriptName) {
