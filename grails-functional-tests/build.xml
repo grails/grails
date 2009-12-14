@@ -125,10 +125,8 @@
 					   // skip webtest based tests until plugin is fixed
 					   if(properties.projectName == 'HelloWorld') return
 					
-					   // TODO skip these for now while working on the build...
-					   if(properties.projectName in ['view-resolution', 'webflow']) {
-					       return
-                       }
+					   // TODO skip this for now while working on the build...
+					   if(properties.projectName  == 'view-resolution') return
 
 					   def appName = ant.antProject.properties."test.app.name"
 					   if(appName && appName != appDir.name) return
