@@ -93,7 +93,6 @@
              def scriptFiles = new File("scripts").listFiles().findAll { 
                  it.name.endsWith('.xml') &&
                  // TODO skip these for now while working on the build...
-                 (!it.name.startsWith('enable-dynamic-scaffolding')) &&
                  (!it.name.startsWith('run-https')) &&
                  (!it.name.startsWith('plugin-view-rendering'))
              }
