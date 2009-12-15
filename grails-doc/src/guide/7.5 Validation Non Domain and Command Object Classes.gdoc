@@ -2,7 +2,7 @@
 
 h4. The Validateable Annotation
 
-Any class which defines the static constraints property and is marked with the @Validateable interface will made validateable by the framework.  Consider this example:
+Classes which define the static constraints property and are marked with the @Validateable annotation may be made validateable by the framework.  Consider this example:
 
 {code:java}
 // src/groovy/com/mycompany/myapp/User.groovy
@@ -23,7 +23,7 @@ class User {
 }
 {code}
 
-By default the framework will search all classes for the @Validateable annotation.  You may instruct the framework to only search in certain packages by assigning a list of Strings to the grails.validateable.packages property in Config.groovy.
+You need to tell the framework which packages to search for @Validateable classes by assigning a list of Strings to the grails.validateable.packages property in Config.groovy.
 
 {code:java}
 // grails-app/conf/Config.groovy
@@ -35,7 +35,7 @@ grails.validateable.packages = ['com.mycompany.dto', 'com.mycompany.util']
 ...
 {code}
 
-If the grails.validateable.packages property is set then the framework will only search those packages (and child packages of those) for classes marked with @Validateable.
+The framework will only search those packages (and child packages of those) for classes marked with @Validateable.
 
 h4. Registering Validateable Classes
 
