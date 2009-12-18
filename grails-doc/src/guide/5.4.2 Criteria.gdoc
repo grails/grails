@@ -202,8 +202,9 @@ c.list { ... }
 
  *list* | This is the default method. It returns all matching rows.  
  *get* | Returns a unique result set, i.e. just one row. The criteria has to be formed that way, that it only queries one row. This method is not to be confused with a limit to just the first row.  
- *scroll* | Returns a scrollable result set  
- *listDistinct* | If subqueries or associations are used, one may end up with the same row multiple times in the result set, this allows listing only distinct entities and is equivalent to @DISTINCT_ROOT_ENTITY@ of the [CriteriaSpecification|api:org.hibernate.criterion.CriteriaSpecification] class
+ *scroll* | Returns a scrollable result set.  
+ *listDistinct* | If subqueries or associations are used, one may end up with the same row multiple times in the result set, this allows listing only distinct entities and is equivalent to @DISTINCT_ROOT_ENTITY@ of the [CriteriaSpecification|api:org.hibernate.criterion.CriteriaSpecification] class.
+*count* | Returns the number of matching rows.
 {table}
 
 
