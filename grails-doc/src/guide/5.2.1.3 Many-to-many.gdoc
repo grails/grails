@@ -1,4 +1,4 @@
-Grails supports many-to-many relationships by defining a @hasMany@ on both sides of the relationship and having a @belongsTo@ on the side that owns the relationship:
+Grails supports many-to-many relationships by defining a @hasMany@ on both sides of the relationship and having a @belongsTo@ on the owned side of the relationship:
 
 {code}
 class Book {
