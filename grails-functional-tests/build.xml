@@ -91,8 +91,7 @@
 <![CDATA[
              String scriptName = ant.antProject.properties."test.script.name"
              def scriptFiles = new File("scripts").listFiles().findAll { 
-                 it.name.endsWith('.xml') &&
-                 (!it.name.startsWith('plugin-view'))
+                 it.name.endsWith('.xml')
              }
 			 if(scriptName) {
 				 println "Running functional test script: $scriptName"
