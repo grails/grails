@@ -93,21 +93,13 @@
              def scriptFiles = new File("scripts").listFiles().findAll { 
                  it.name.endsWith('.xml')
              }
-			 if(scriptName) {
-				 println "Running functional test script: $scriptName"
-				 def file = scriptFiles.find{ it.name.startsWith(scriptName) }
-				 if(file) {
-	                ant.ant(antfile:file, inheritRefs:true)				
-				 }
-				 else {
-				   ant.fail("No test script found for name $scriptName") 
-				 }
-			 }
-			 else {
-             	 println "Running all functional test scripts!"			
-	             scriptFiles.each { file ->
-	                ant.ant(antfile:file, inheritRefs:true)
-	             }			
+             println "Running functional test scripts"
+             scriptFiles.each { file ->
+                 if(scriptName && !file.name.startsWith(scriptName)) {
+                     ant.echo message: "Skipping script: ${file.name}"
+                 } else {
+                     ant.ant(antfile:file, inheritRefs:true)
+                 }
 			 }
 			]]>
          </groovy>
