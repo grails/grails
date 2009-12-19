@@ -127,7 +127,7 @@
 					   if(properties.projectName == 'HelloWorld') return
 					
 					   // TODO skip these for now while working on the build...
-					   if(properties.projectName  in ['webflow', 'view-resolution']) return
+					   if(properties.projectName  == 'view-resolution') return
 
                        // if the appToTest system property is set, then skip all other apps
 					   if(properties.appToTest && !properties.appToTest.equals(properties.projectName)) {
