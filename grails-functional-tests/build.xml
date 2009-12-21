@@ -27,7 +27,7 @@
 
     </target>
 
-    <target name="-build-grails">
+    <target name="-build-grails" unless="skipGrailsBuild">
         <echo>GRAILS_HOME=${grails.home}</echo>
         <ant dir="${grails.home}" antfile="build.xml" target="jar">
             <property name="skipTests" value="true"/>
@@ -84,37 +84,28 @@
 			}
 		</groovy>
 	</target>
-    <target name="-functional-test-scripts">
+    <target name="-functional-test-scripts" unless="skipScripts">
          <delete dir="target/scripts" failonerror="false" />
          <mkdir dir="target/scripts" />
          <groovy>
 <![CDATA[
              String scriptName = ant.antProject.properties."test.script.name"
              def scriptFiles = new File("scripts").listFiles().findAll { 
-                 it.name.endsWith('.xml') &&
-                 (!it.name.startsWith('plugin-view'))
+                 it.name.endsWith('.xml')
              }
-			 if(scriptName) {
-				 println "Running functional test script: $scriptName"
-				 def file = scriptFiles.find{ it.name.startsWith(scriptName) }
-				 if(file) {
-	                ant.ant(antfile:file, inheritRefs:true)				
-				 }
-				 else {
-				   ant.fail("No test script found for name $scriptName") 
-				 }
-			 }
-			 else {
-             	 println "Running all functional test scripts!"			
-	             scriptFiles.each { file ->
-	                ant.ant(antfile:file, inheritRefs:true)
-	             }			
+             println "Running functional test scripts"
+             scriptFiles.each { file ->
+                 if(scriptName && !file.name.startsWith(scriptName)) {
+                     ant.echo message: "Skipping script: ${file.name}"
+                 } else {
+                     ant.ant(antfile:file, inheritRefs:true)
+                 }
 			 }
 			]]>
          </groovy>
     </target>
 
-    <target name="-functional-test-apps">
+    <target name="-functional-test-apps" unless="skipApps">
         <groovy><![CDATA[
 			try {
 		           def outcomes = []
@@ -126,9 +117,11 @@
 					   // skip webtest based tests until plugin is fixed
 					   if(properties.projectName == 'HelloWorld') return
 					
-					   // TODO skip these for now while working on the build...
-					   if(properties.projectName  in ['webflow', 'view-resolution']) return
-					   
+                       // if the appToTest system property is set, then skip all other apps
+					   if(properties.appToTest && !properties.appToTest.equals(properties.projectName)) {
+					       ant.echo message: "Skipping app: ${properties.projectName}"
+					       return
+					   }
 					   def appName = ant.antProject.properties."test.app.name"
 					   if(appName && appName != appDir.name) return
 
@@ -233,7 +226,7 @@
     </target>
 
 
-    <target name="-testsWithNewApp">
+    <target name="-testsWithNewApp" unless="skipNewApp">
         <echo>Creating new Grails app ${newWebApp} and running some tests on it</echo>
         <property name="newWebApp.dir" value="${target}/${newWebApp}"/>
         <delete dir="${newWebApp.dir}"/>
