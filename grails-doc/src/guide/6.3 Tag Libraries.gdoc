@@ -23,7 +23,7 @@ The @attrs@ argument is a simple map of the attributes of the tag, whilst the @b
 {code:java}
 class SimpleTagLib {
 	def emoticon = { attrs, body ->
-	   out << body() << attrs.happy == 'true' ? " :-)" : " :-("	
+	   out << body() << (attrs.happy == 'true' ? " :-)" : " :-(")	
     }
 }
 {code}
