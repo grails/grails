@@ -1,8 +1,10 @@
-Although the Grails development team have tried to keep breakages to a minimum there are a number of items to consider when upgrading a Grails 1.0.x application to Grails 1.1. The major changes are described in detail below.
+Although the Grails development team have tried to keep breakages to a minimum there are a number of items to consider when upgrading a Grails 1.0.x or 1.1.x application to Grails 1.2. The major changes are described in detail below.
+
+h3. Upgrading from Grails 1.0
 
 h3. Groovy 1.6
 
-Grails 1.1 now ships with Groovy 1.6 and no longer supports code compiled against Groovy 1.5. If you have a library that is written in Groovy 1.5 you will need to recompile it against Groovy 1.6 before using it with Grails 1.1.
+Grails 1.1 and above ship with Groovy 1.6 and no longer supports code compiled against Groovy 1.5. If you have a library that is written in Groovy 1.5 you will need to recompile it against Groovy 1.6 before using it with Grails 1.1.
 
 h3. Java 5.0
 
@@ -31,7 +33,7 @@ grails.views.enable.jsessionid=true
 
 h3. Plugin Changes 
 
-Grails 1.1 no longer stores plugins inside your @PROJECT_HOME/plugins@ directory by default. This may result in compilation errors in your application unless you either re-install all your plugins or set the following property in @grails-app/conf/BuildConfig.groovy@:
+Since 1.1, Grails no longer stores plugins inside your @PROJECT_HOME/plugins@ directory by default. This may result in compilation errors in your application unless you either re-install all your plugins or set the following property in @grails-app/conf/BuildConfig.groovy@:
 
 {code}
 grails.project.plugins.dir="./plugins"

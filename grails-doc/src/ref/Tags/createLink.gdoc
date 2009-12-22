@@ -26,6 +26,7 @@ Example usages for above controller:
 <g:createLink url="[action:'list',controller:'book']" /> == /shop/book/list
 <g:createLink controller="book" absolute="true"/> == http://portal.mygreatsite.com/book
 <g:createLink controller="book" base="http://admin.mygreatsite.com"/> == http://admin.mygreatsite.com/book
+<g:createLink controller = "book" action="list" params="[title:'The Shining', author:'Stephen King', id:'1']"/> == /shop/book/list/1?title=The+Shining&author=Stephen+King
 {code}
 
 Example as a method call in GSP:
