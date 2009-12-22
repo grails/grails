@@ -80,7 +80,7 @@ grails test-app some.org.* SimpleController.testLogin BookController
 
 h5. Targeting Test Types and/or Phases
 
-In addition to targeting certain tests, you can also target test _types_ and/or _phases_ by using the «phase»:«type» syntax.
+In addition to targeting certain tests, you can also target test _types_ and/or _phases_ by using the @phase:type@ syntax.
 
 {note}
 Grails organises tests by phase and by type. A test phase relates to the state of the Grails application during the tests, and the type relates to the testing mechanism. 
@@ -96,7 +96,7 @@ To execute the JUnit @integration@ tests you can run:
 grails test-app integration:integration
 {code}
 
-Both «phase» and «type» are optional. Their absence acts as a wildcard. The following command will run all test types in the @unit@ phase:
+Both @phase@ and @type@ are optional. Their absence acts as a wildcard. The following command will run all test types in the @unit@ phase:
 
 {code}
 grails test-app unit:
