@@ -1,4 +1,11 @@
-Grails supports SOAP through the "XFire":http://xfire.codehaus.org/ plug-in which uses the popular XFire SOAP stack to integrate SOAP support into Grails. The XFire plug-in allows you to expose Grails [services|guide:services] as SOAP services using a special @expose@ property:
+There are several plugins that add SOAP support to Grails depending on your preferred approach. For Contract First SOAP services there is a [Spring WS|http://grails.org/plugin/springws] plugin, whilst if you want to generate a SOAP API from Grails services there are several plugins that do this including:
+
+* "XFire":http://xfire.codehaus.org/ plugin which uses the "XFire":http://xfire.codehaus.org/ SOAP stack
+* "CXF":http://grails.org/plugin/cxf/ plugin which uses the "CXF":http://cxf.apache.org/ SOAP stack
+* "Axis2":http://grails.org/plugin/axis2 plugin which uses "Axis2":http://ws.apache.org/axis2/
+* "Metro":https://jax-ws-commons.dev.java.net/grails/ plugin which uses the "Metro":https://jax-ws-commons.dev.java.net/grails/ framework (and can also be used for [Contract First|http://docs.codehaus.org/pages/viewpage.action?pageId=88342530])
+
+Most of the SOAP integrations integrate with Grails [services|guide:services] via the @exposes@ static property. The below example is taken from the XFire plugin:
 
 {code:java}
 class BookService {
