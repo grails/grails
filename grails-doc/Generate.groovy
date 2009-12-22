@@ -75,7 +75,7 @@ chapterHeader = null
 chapterToc = new StringBuffer()
 
 void writeChapter() {
-    new File("output/guide/${chapterTitle}.html").withWriter {
+    new File("${BASEDIR}/output/guide/${chapterTitle}.html").withWriter {
         template.make(title:chapterTitle, 
                       header:chapterHeader,
                       toc:chapterToc.toString(), 
@@ -209,9 +209,9 @@ new File("${BASEDIR}/resources/style/referenceItem.html").withReader("UTF-8") {r
 
             def section = f.name
             menu << "<h1 class=\"menuTitle\">${section}</h1>"
-            new File("output/ref/${section}").mkdirs()
+            new File("${BASEDIR}/output/ref/${section}").mkdirs()
 
-            def usageFile = new File("./src/ref/${section}.gdoc")
+            def usageFile = new File("${BASEDIR}/src/ref/${section}.gdoc")
             if (usageFile.exists()) {
                 writeReferenceItem(usageFile, "../..", section, "Usage")
             }
