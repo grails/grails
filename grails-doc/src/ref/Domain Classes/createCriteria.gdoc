@@ -116,7 +116,7 @@ sizeLe("transactions", 10)
 sizeNe("transactions", 10)
 {code}
  *sqlRestriction* | Use arbitrary SQL to modify the resultset  | {code}
-sqlRestriction "char_length( first_name ) == 4"
+sqlRestriction "char_length( first_name ) = 4"
 {code}
 {table}
 
