@@ -38,6 +38,36 @@ However, unlike the @resource@ argument used previously, in this case Grails wil
 }	
 {code}
 
+h4. HTTP Methods
+
+In the previous section you saw how you can easily define URL mappings that map specific HTTP methods onto specific controller actions. Writing a REST client that then sends a specific HTTP method is then trivial (example in Groovy's HTTPBuilder module):
+
+{code}
+import groovyx.net.http.*
+import static groovyx.net.http.ContentType.JSON
+
+def http = new HTTPBuilder("http://localhost:8080/amazon")
+
+ http.request(Method.GET, JSON) {
+     url.path = '/book/list'
+     response.success = {resp, json ->
+         json.books.each { book ->
+             println book.title
+         }
+     }
+ }
+{code}
+
+However, issuing a request with a method other than @GET@ or @POST@ from a regular browser is not possible without some help from Grails. When defining a [form|tags] you can specify an alternative method such as @DELETE@:
+
+{code}
+<g:form controller="book" method="DELETE">
+	..	
+</g:form>
+{code}
+
+Grails will send a hidden parameter called @_method@, which will be used as the request's HTTP method. Another alternative for changing the method for non-browser clients is to use the @X-HTTP-Method-Override@ to specify the alternative method name.
+
 h4. XML Marshaling - Reading
 
 The controller implementation itself can use Grails' [XML marshaling|guide:XML] support to implement the GET method:	
