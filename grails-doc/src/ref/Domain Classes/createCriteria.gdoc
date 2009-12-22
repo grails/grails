@@ -115,6 +115,9 @@ sizeLe("transactions", 10)
  *sizeNe* | Where a collection property's size is not equal to a particular value | {code}
 sizeNe("transactions", 10)
 {code}
+ *sqlRestriction* | Use arbitrary SQL to modify the resultset  | {code}
+sqlRestriction "char_length( first_name ) == 4"
+{code}
 {table}
 
 Criteria also support the notion of projections. A projection is used to change the nature of the results. For example the following query using a projection to count the number of distinct @branch@ names there are for each @Account@:
@@ -152,6 +155,5 @@ min("age"){code}
 sum("balance"){code}
 *rowCount* | Returns count of the number of rows returned | {code:java}
 rowCount(){code}
-
 
 {table}
