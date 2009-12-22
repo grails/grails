@@ -1,6 +1,12 @@
 h4. IntelliJ IDEA
 
-The most mature Groovy & Grails IDE is [IntelliJ IDEA 7.0|http://www.jetbrains.com/idea] and the [JetGroovy|http://www.jetbrains.net/confluence/display/GRVY/Groovy+Home] plug-in. Refer to the section on [Groovy and Grails|http://www.jetbrains.com/idea/features/groovy_grails.html] support on the JetBrains website for a feature overview.
+[IntelliJ IDEA|http://www.jetbrains.com/idea] and the [JetGroovy|http://www.jetbrains.net/confluence/display/GRVY/Groovy+Home] plug-in offer good support for Groovy & Grails developer. Refer to the section on [Groovy and Grails|http://www.jetbrains.com/idea/features/groovy_grails.html] support on the JetBrains website for a feature overview.
+
+To integrate Grails 1.2 to with IntelliJ run the following command to generate appropriate project files:
+
+{code}
+grails integrate-with --intellij
+{code}
 
 h4. NetBeans 
 
@@ -8,18 +14,23 @@ A good Open Source alternative is Sun's NetBeans, which provides a Groovy/Grails
 
 h4. Eclipse
 
-For "Eclipse":http://www.eclipse.org/ there is also the "Groovy Eclipse Plugin":http://groovy.codehaus.org/Eclipse+Plugin that offers syntax highlighting, code completion and so on. 
-
-{note}
-There are some quirks with the Groovy Eclipse plug-in which are [covered in detail|http://grails.org/Eclipse+IDE+Integration] on the Grails wiki.
-{note}
-
-Grails automatically creates Eclipse @.project@ and @.classpath@ files for you, so to import a Grails project just right-click in the "Package Explorer" and select "Import" then "Existing project into Workspace" and "Browse" to the location of your project.
-
-Then immediately click "Ok" followed by "Finish" and your project will be set-up.
-
-Grails will also automatically set-up an appropriate Eclipse "Run Configuration", that can be accessed from the "Run" menu in Eclipse.
+We recommend that users of "Eclipse":http://www.eclipse.org/ looking to develop Grails application take a look at [SpringSource Tool Suite|http://www.springsource.com/products/sts], which offers built in support for Grails including automatic classpath management, a GSP editor and quick access to Grails commands. See the [STS Integration|http://www.grails.org/STS+Integration] page for an overview.
 
 h4. TextMate
 
 Since Grails' focus is on simplicity it is often possible to utilize more simple editors and "TextMate":http://macromates.com/ on the Mac has an excellent Groovy/Grails bundle available from the [Texmate bundles SVN|http://wiki.macromates.com/Main/SubversionCheckout].
+
+To integrate Grails 1.2 to with TextMate run the following command to generate appropriate project files:
+
+{code}
+grails integrate-with --textmate
+{code}
+
+Alternatively TextMate can easily open any project with its command line integration by issuing the following command from the root of your project:
+
+{code}
+mate .
+{code}
+
+
+
