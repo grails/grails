@@ -1,4 +1,4 @@
-h4. Creating Plug-ins
+h4. Creating Plugins
 
 Creating a Grails plugin is a simple matter of running the command:
 
@@ -8,9 +8,9 @@ grails create-plugin [PLUGIN NAME]
 
 This will create a plugin project for the name you specify. Say for example you run @grails create-plugin example@. This would create a new plugin project called @example@. 
 
-The structure of a Grails plugin is exactly the same as a regular Grails project's directory structure, except that in the root of the plugin directory you will find a plugin Groovy file called the "plug-in descriptor".
+The structure of a Grails plugin is exactly the same as a regular Grails project's directory structure, except that in the root of the plugin directory you will find a plugin Groovy file called the "plugin descriptor".
 
-Being a regular Grails project has a number of benefits in that you can immediately get going testing your plug-in by running:
+Being a regular Grails project has a number of benefits in that you can immediately get going testing your plugin by running:
 
 {code:java}
 grails run-app
@@ -87,7 +87,6 @@ Although the [create-plugin|commandLine] command creates certain files for you s
 
 * @grails-app/conf/DataSource.groovy@
 * @grails-app/conf/UrlMappings.groovy@
-* @grails-app/conf/DataSource.groovy@
 * @build.xml@
 * Everything within @/web-app/WEB-INF@
 
