@@ -71,3 +71,36 @@ switch(Environment.current) {
 	break 
 }
 {code}
+
+h4. Per Environment Bootstrapping
+
+Its often desirable to run code when your application starts up on a per-environment basis. To do so you can use the @grails-app/conf/BootStrap.groovy@ file's support for per-environment execution:
+
+{code}
+def init = { ServletContext ctx ->
+        environments {
+            production {
+                ctx.setAttribute("env", "prod")
+            }
+            development {
+                ctx.setAttribute("env", "dev")
+            }
+        }
+        ctx.setAttribute("foo", "bar")
+}
+{code}
+
+h4. Generic Per Environment Execution
+
+The previous @BootStrap@ example uses the @grails.util.Environment@ class internally to execute. You can also use this class yourself to execute your own environment specific logic:
+
+{code}
+Environment.executeForCurrentEnvironment {
+	production {
+		// do something in production
+	}
+	development {
+		// do something only in development
+	}
+}
+{code}

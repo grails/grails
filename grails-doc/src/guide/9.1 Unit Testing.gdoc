@@ -36,8 +36,7 @@ import grails.test.GrailsUnitTestCase
 class MyServiceTests extends GrailsUnitTestCase { 
 	void testCreateSomething() { 
 		// Mock the domain class. 
-		def testInstances = [] 
-		mockDomain(Item, testInstances)
+		mockDomain(Item)
 
 		// Mock the "other" service. 
 		String testId = "NH-12347686" 
@@ -53,8 +52,9 @@ class MyServiceTests extends GrailsUnitTestCase {
 		// Check that the method returns the identifier returned by the 
 		// mock "other" service and also that a new Item instance has 
 		// been saved. 
+		def testInstances = Item.list() 		
 		assertEquals testId, retval 
-		assertEquals 1, testInstances 
+		assertEquals 1, testInstances.size() 
 		assertTrue testInstances[0] instanceof Item 
 	}
 

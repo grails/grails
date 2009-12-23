@@ -16,21 +16,16 @@ As as mentioned previously, a plugin is merely a regular Grails application with
 
 Essentially when a plugin is installed into a project, the contents of the @grails-app@ directory will go into a directory such as @plugins/example-1.0/grails-app@. They *will not* be copied into the main source tree. A plugin never interferes with a project's primary source tree.
 
-However, static resources such as those inside the @web-app@ directory will be copied into the project's web-app directory under a special @plugins@ directory. For example @web-app/plugins/example-1.0/js@. 
-
-It is therefore the responsibility of the plugin to make sure that it references static resources from the correct place. For example if you were referencing a JavaScript source from a GSP you could use:
+Dealing with static resources is slightly different. When developing a plugin, just like an application, all static resources can go in the @web-app@ directory. You can then link to static resources just like in an application (example below links to a javascript source):
 
 {code:xml}
-<g:resource dir="/plugins/example/js" file="mycode.js" />{code}
-
-However this may cause a problem during development as the relative link when installed differs from when you're running the plugin standalone. 
-
-To make this easier there is a special @pluginContextPath@ variable available that changes whether you're executing the plugin standalone or whether you've installed it into an application:
-
-{code:xml}
-<g:resource dir="${pluginContextPath}/js" file="mycode.js" />
+<g:resource dir="js" file="mycode.js" />
 {code}
 
-At runtime the @pluginContextPath@ will either evaluate to an empty string or @/plugins/example@ depending on whether the plugin is running standalone or has been installed in an application
+When you run the plugin in development mode the link to the resource will resolve to something like @/js/mycode.js@. However, when the plugin is installed into an application the path will automatically change to something like @/plugin/example-0.1/js/mycode.js@ and Grails will deal with making sure the resources are in the right place.
+
+There is a special @pluginContextPath@ variable that can be used whilst both developing the plugin and when in the plugin is installed into the application to find out what the correct path to the plugin is.
+
+At runtime the @pluginContextPath@ variable will either evaluate to an empty string or @/plugins/example@ depending on whether the plugin is running standalone or has been installed in an application
 
 Java & Groovy code that the plugin provides within the lib and @src/java@ and @src/groovy@ directories will be compiled into the main project's @web-app/WEB-INF/classes@ directory so that they are made available at runtime.
