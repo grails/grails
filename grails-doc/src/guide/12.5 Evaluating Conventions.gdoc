@@ -19,7 +19,6 @@ The dynamic method conventions are as follows:
 * @*Classes@ - Retrieves all the classes for a particular artefact name. Example @application.controllerClasses@.
 * @get*Class@ - Retrieves a named class for a particular artefact. Example @application.getControllerClass("ExampleController")@
 * @is*Class@ - Returns true if the given class is of the given artefact type. Example @application.isControllerClass(ExampleController.class)@
-* @add*Class@ - Adds a class for the given artefact type and returns the added @GrailsClass@ instance - Example @application.addControllerClass(ExampleController.class)@
 
 The @GrailsClass@ interface itself provides a number of useful methods that allow you to further evaluate and work with the conventions. These include:
 
