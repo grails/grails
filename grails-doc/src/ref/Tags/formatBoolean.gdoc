@@ -20,8 +20,8 @@ then the boolean is output using the default label.
 Attributes:
 
 @boolean@ - the boolean to output
-@true@ (optional) - text label for boolean true value
-@false@ (optional) - text label for boolean false value
+@true@ (optional) - text label for boolean true value . @boolean.true@ or @default.boolean.true@ key is looked up from the Message Source / ResourceBundle (i18n/*.properties) if this attribute is not given. 
+@false@ (optional) - text label for boolean false value . @boolean.false@ or @default.boolean.false@ key is looked up from the Message Source / ResourceBundle (i18n/*.properties) if this attribute is not given.
 
 
 h2. Source

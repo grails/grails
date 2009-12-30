@@ -46,6 +46,7 @@ def compare = [compare: {o1, o2 ->
 files = new File("${BASEDIR}/src/guide").listFiles().findAll { it.name.endsWith(".gdoc") }.sort(compare)
 context = new BaseInitialRenderContext();
 context.set(CONTEXT_PATH, "..")
+context.setParameters(new HashMap()) // required by some macros
 
 ant = new AntBuilder()
 cache = [:]
@@ -54,28 +55,41 @@ engine = new DocEngine(context)
 templateEngine = new groovy.text.SimpleTemplateEngine()
 context.setRenderEngine(engine)
 
+
+/* Guide documentation */
+
 book = [:]
 for (f in files) {
     def chapter = f.name[0..-6]
     book[chapter] = f
 }
 
+chaptersOnlyToc = new StringBuffer()
+fullToc = new StringBuffer()
 toc = new StringBuffer()
 soloToc = new StringBuffer()
 fullContents = new StringBuffer()
 chapterContents = new StringBuffer()
 chapterTitle = null
+chapterHeader = null
+chapterToc = new StringBuffer()
 
-void writeChapter(String title, StringBuffer content) {
-    new File("${BASEDIR}/output/guide/${title}.html").withWriter {
-        template.make(title: title, content: content.toString()).writeTo(it)
+void writeChapter() {
+    new File("${BASEDIR}/output/guide/${chapterTitle}.html").withWriter {
+        template.make(title:chapterTitle, 
+                      header:chapterHeader,
+                      toc:chapterToc.toString(), 
+                      content:chapterContents.toString(),
+                      path:"..").writeTo(it)
     }
-    content.delete(0, content.size()) // clear buffer
+    chapterToc.delete(0,chapterToc.size()) // clear buffer
+    chapterContents.delete(0,chapterContents.size()) // clear buffer
+
 }
 
 ant.mkdir(dir: "${BASEDIR}/output/guide")
 ant.mkdir(dir: "${BASEDIR}/output/guide/pages")
-new File("${BASEDIR}/resources/style/guideItem.html").withReader {reader ->
+new File("${BASEDIR}/resources/style/guideItem.html").withReader("UTF-8") {reader ->
     template = templateEngine.createTemplate(reader)
 
     for (entry in book) {
@@ -88,38 +102,47 @@ new File("${BASEDIR}/resources/style/guideItem.html").withReader {reader ->
         }
         def margin = level * 10
 
+        // level 0=h1, (1..n)=h2
+        def hLevel = level==0 ? 1 : 2
+        def header = "<h$hLevel><a name=\"${title}\">${title}</a></h$hLevel>"
+
+        // links to anchor, not page
+        def tocEntry = "<div class=\"tocItem\" style=\"margin-left:${margin}px\"><a href=\"#${title}\">${title}</a></div>"
+
         if (level == 0) {
             if (chapterTitle) // initially null, to collect sections
-                writeChapter(chapterTitle, chapterContents)
+                writeChapter()
 
             chapterTitle = title // after previous used to write prev chapter
+			chapterHeader = header
 
-            soloToc << "<div class=\"tocItem\" style=\"margin-left:${margin}px\"><a href=\"${chapterTitle}.html\">${chapterTitle}</a></div>"
+			// links to page, not anchor
+			chaptersOnlyToc << "<div class=\"tocItem\" style=\"margin-left:${margin}px\"><a href=\"${chapterTitle}.html\">${chapterTitle}</a></div>"
         }
         else {
-            soloToc << "<div class=\"tocItem\" style=\"margin-left:${margin}px\"><a href=\"${chapterTitle}.html#${entry.key}\">${entry.key}</a></div>"
+            chapterToc << tocEntry
+            chapterContents << header
         }        // level 0=h1, (1..n)=h2
 
 
-        def hLevel = level == 0 ? 1 : 2
-        def header = "<h$hLevel><a name=\"${title}\">${title}</a></h$hLevel>"
-
+		fullToc << tocEntry
         context.set(SOURCE_FILE, entry.value)
         context.set(CONTEXT_PATH, "..")
         def body = engine.render(entry.value.text, context)
 
-        toc << "<div class=\"tocItem\" style=\"margin-left:${margin}px\"><a href=\"#${title}\">${title}</a></div>"
         fullContents << header << body
-        chapterContents << header << body
+        chapterContents <<  body
 
-        new File("${BASEDIR}/output/guide/pages/${title}.html").withWriter {
-            template.make(title: title, content: body).writeTo(it)
+        new File("${BASEDIR}/output/guide/pages/${title}.html").withWriter("UTF-8") {
+            template.make(title:title, header:header, 
+                          toc:"", content:body, path:"../..").writeTo(it)
         }
     }
 }
 if (chapterTitle) // write final chapter collected (if any seen)
-    writeChapter(chapterTitle, chapterContents)
+    writeChapter()
 
+/* Resources */
 
 ant.mkdir(dir: "${BASEDIR}/output")
 ant.mkdir(dir: "${BASEDIR}/output/img")
@@ -137,6 +160,7 @@ ant.copy(todir: "${BASEDIR}/output/ref") {
     fileset(dir: "${BASEDIR}/resources/style/ref")
 }
 
+/* Reference documentation */
 vars = [
         title: props.title,
         subtitle: props.subtitle,
@@ -145,67 +169,65 @@ vars = [
         version: props."grails.version",
         copyright: props.copyright,
 
-        toc: toc.toString(),
+        toc: fullToc.toString(),
         body: fullContents.toString()
 ]
 
-new File("${BASEDIR}/resources/style/layout.html").withReader {reader ->
+new File("${BASEDIR}/resources/style/layout.html").withReader("UTF-8") {reader ->
     template = templateEngine.createTemplate(reader)
-    new File("${BASEDIR}/output/guide/single.html").withWriter {out ->
+    new File("${BASEDIR}/output/guide/single.html").withWriter("UTF-8") {out ->
         template.make(vars).writeTo(out)
     }
-    vars.toc = soloToc
+	vars.toc = chaptersOnlyToc
     vars.body = ""
-    new File("${BASEDIR}/output/guide/index.html").withWriter {out ->
+    new File("${BASEDIR}/output/guide/index.html").withWriter("UTF-8") {out ->
         template.make(vars).writeTo(out)
     }
 }
 
 menu = new StringBuffer()
+
+void writeReferenceItem(File file, String path, String section, String name) {
+    context.set(SOURCE_FILE, file)
+    context.set(CONTEXT_PATH, path)
+
+    def divClass = (name == "Usage") ? "menuUsageItem" : "menuItem"
+    menu << "<div class='${divClass}'><a href=\"${section}/${name}.html\" target=\"mainFrame\">${name}</a></div>"
+
+    def content = engine.render(file.text, context)
+    new File("${BASEDIR}/output/ref/${section}/${name}.html").withWriter("UTF-8") {
+        template.make(content:content).writeTo(it)
+    }
+}
+
 files = new File("${BASEDIR}/src/ref").listFiles().toList().sort()
 reference = [:]
-new File("${BASEDIR}/resources/style/referenceItem.html").withReader {reader ->
-    template = templateEngine.createTemplate(reader)
-    for (f in files) {
-        if (f.directory && !f.name.startsWith(".")) {
+new File("${BASEDIR}/resources/style/referenceItem.html").withReader("UTF-8") {reader ->
+    template = templateEngine.createTemplate(reader)		
+    for(f in files) {
+        if(f.directory && !f.name.startsWith(".")) {
+
             def section = f.name
-            reference."${section}" = [:]
-            menu << "<h1 class=\"menuTitle\">${f.name}</h1>"
-            new File("${BASEDIR}/output/ref/${f.name}").mkdirs()
-            def textiles = f.listFiles().findAll { it.name.endsWith(".gdoc")}.sort()
-            def usageFile = new File("src/ref/${f.name}.gdoc")
+            menu << "<h1 class=\"menuTitle\">${section}</h1>"
+            new File("${BASEDIR}/output/ref/${section}").mkdirs()
+
+            def usageFile = new File("${BASEDIR}/src/ref/${section}.gdoc")
             if (usageFile.exists()) {
-                def data = usageFile.text
-                reference."${section}".usage = data
-                context.set(SOURCE_FILE, usageFile.name)
-                context.set(CONTEXT_PATH, "../..")
-                def contents = engine.render(data, context)
-                new File("${BASEDIR}/output/ref/${f.name}/Usage.html").withWriter {out ->
-                    template.make(content: contents).writeTo(out)
-                }
-                menu << "<div class=\"menuUsageItem\"><a href=\"${f.name}/Usage.html\" target=\"mainFrame\">Usage</a></div>"
+                writeReferenceItem(usageFile, "../..", section, "Usage")
             }
-            for (txt in textiles) {
-                def name = txt.name[0..-6]
-                menu << "<div class=\"menuItem\"><a href=\"${f.name}/${name}.html\" target=\"mainFrame\">${name}</a></div>"
-                def data = txt.text
-                reference."${section}".put(name, data)
-                context.set(SOURCE_FILE, txt.name)
-                context.set(CONTEXT_PATH, "../..")
-                def contents = engine.render(data, context)
+
+            def items = f.listFiles().findAll{it.name.endsWith(".gdoc")}.sort()
+            for(item in items) {
                 //println "Generating reference item: ${name}"
-                new File("${BASEDIR}/output/ref/${f.name}/${name}.html").withWriter {out ->
-                    template.make(content: contents).writeTo(out)
-                }
+                writeReferenceItem(item, "../..", section, item.name[0..-6])
             }
         }
     }
-
 }
 vars.menu = menu
-new File("${BASEDIR}/resources/style/menu.html").withReader {reader ->
+new File("${BASEDIR}/resources/style/menu.html").withReader("UTF-8") {reader ->
     template = templateEngine.createTemplate(reader)
-    new File("${BASEDIR}/output/ref/menu.html").withWriter {out ->
+    new File("${BASEDIR}/output/ref/menu.html").withWriter("UTF-8") {out ->
         template.make(vars).writeTo(out)
     }
 }

@@ -101,7 +101,7 @@ class ErrorHandlingFunctionalTests extends functionaltestplugin.FunctionalTestCa
         assertContentContains 'Grails Runtime Exception'
         assertContentContains 'ErrorsController'
 		assertContentContains '<strong>Exception Message:</strong> No property found for name [rubbish] for class [class Book]'
-		assertContentContains '<strong>Caused by:</strong> org.codehaus.groovy.grails.exceptions.InvalidPropertyException: No property found for name [rubbish] for class [class Book] <br />'
+		assertContentContains '<strong>Caused by:</strong> Executing action [invalidGormMethod] of controller [ErrorsController]  caused exception: org.codehaus.groovy.grails.exceptions.InvalidPropertyException: No property found for name [rubbish] for class [class Book] <br />'
         assertContentContains '<strong>At Line:</strong> [32]'
 		assertContentContains '[books:Book.findAllByRubbish(&quot;yes&quot;)]'		
 		

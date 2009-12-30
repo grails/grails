@@ -34,7 +34,9 @@ class Author {
 }
 {code}
 
-Here all persistence operations will cascade from the @Author@ domain to the @Book@ domain. So when a @Author@ is deleted so will all his books. If the association doesn't define an owner (a "belong to" relationship):
+Here all persistence operations will cascade from the @Author@ domain to the @Book@ domain. So when a @Author@ is deleted so will all his books. 
+
+If the association doesn't define an owner (a "belong to" relationship):
 
 {code}
 class Book {

@@ -43,16 +43,9 @@ public class MvnWarMojo extends AbstractGrailsMojo {
      * @throws MojoExecutionException if an error occured while building the webapp
      */
     public void execute() throws MojoExecutionException, MojoFailureException {
-        runGrails("War");
         String warFileName = project.getArtifactId() + "-" + project.getVersion() + ".war";
-        File warGeneratedByGrails = new File(getBasedir(), warFileName);
-
         warFile = new File(project.getBuild().getDirectory(), warFileName);
-        warFile.delete();
-        if (!warGeneratedByGrails.renameTo(warFile)) {
-            throw new MojoExecutionException("Unable to copy the WAR file to the target directory");
-        } else {
-            getLog().info("Moved WAR file to '" + warFile + "'.");
-        }
+
+        runGrails("War", warFile.toString(), true);
     }
 }

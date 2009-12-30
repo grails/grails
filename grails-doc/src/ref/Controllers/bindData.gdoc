@@ -6,7 +6,7 @@ Allows fine grained control of binding request parameters from strings onto obje
 
 h2. Examples
 
-bc.
+{code}
 // binds request parameters to a target object
 bindData(target, params) 
 // exclude firstName and lastName (since 0.4)
@@ -14,6 +14,12 @@ bindData(target, params, ['firstName', 'lastName'])
 // only use parameters starting with "author." e.g. author.email (since 0.5.5)
 bindData(target, this.params, "author") 
 bindData(target, this.params, ['firstName', 'lastName'], "author")
+
+// using inclusive map
+bindData(target, this.params, [include:['firstName', 'lastName']], "author")
+// using exclusive map
+bindData(target, this.params, [exclude:['firstName', 'lastName']], "author")
+{code}
 
 h2. Description
 

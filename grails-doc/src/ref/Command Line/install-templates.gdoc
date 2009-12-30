@@ -23,7 +23,7 @@ Fired Events:
 * @StatusUpdate@ - When the templates are successfully installed
 
 
-The @install-plugin@ command will install the set of templates Grails uses for all code generation activities to the @src/templates@ directory. The templates installed are as follows:
+The @install-templates@ command will install the set of templates Grails uses for all code generation activities to the @src/templates@ directory. The templates installed are as follows:
 
 {code:java}
 src

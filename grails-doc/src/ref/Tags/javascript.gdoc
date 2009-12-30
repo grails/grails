@@ -20,9 +20,11 @@ h2. Description
 
 Attributes
 
+* @contextPath@ (optional) - the context path to use (relative to the application context path). Defaults to "" or path to the plugin for a plugin view or template.
 *  @library@ (optional) - The name of the library to include. Either "prototype", "scriptaculous", "yahoo" or "dojo"
 *  @src@ (optional) - The name of the javascript file to import. Will look in /app/js dir
 *  @base@ (optional - Since 0.6) - specifies the full base url to prepend to the library name
+* @plugin@ (optional) - The plugin to look for the javascript in
 
 h2. Source
 

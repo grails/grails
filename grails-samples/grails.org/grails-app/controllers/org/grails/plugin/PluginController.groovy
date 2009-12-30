@@ -90,39 +90,6 @@ class PluginController extends BaseWikiController {
 								  pluginList:Plugin.list(max:10, offset: params.offset?.toInteger(), cache:true, sort:"name")]
 	}
 	
-	def pluginListCache
-    def list = {
-        def pluginMap = pluginListCache?.get("fullPluginList")?.value
-		if(!pluginMap) {
-			pluginMap = [:]
-	        Tag.list(sort:'name', cache:true).each { tag ->
-	            pluginMap[tag.name] = []
-	            def links = TagLink.findAllByTagAndType(tag, 'plugin', [cache:true]) 
-				if(links) {
-					pluginMap[tag.name] = Plugin.withCriteria {
-						inList 'id', links*.tagRef
-						cache true
-					}				
-				}
-	            pluginMap[tag.name].sort { it.title }
-	        }
-			
-			pluginListCache.put new Element("fullPluginList", pluginMap)
-		}
-
-        // remove empty tags
-        pluginMap = pluginMap.findAll { it.value.size() }
-        def taggedIds = TagLink.withCriteria {
-            eq('type', 'plugin')
-            projections {
-                distinct('tagRef')
-            }
-			cache true
-        }
-        pluginMap.untagged = Plugin.findAllByIdNotInList(taggedIds, [cache:true])
-        render view:'listPlugins', model:[pluginMap: pluginMap]
-    }
-
     def show = {
         def plugin = byName(params)
         if (!plugin) {

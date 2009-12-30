@@ -53,7 +53,10 @@ Attributes
 
 * @action@ (optional) - the name of the action to use in the link, if not specified the default action will be linked
 * @controller@ (optional) - the name of the controller to use in the link, if not specified the current controller will be linked
+* @elementId@ (optional) - this value will be used to populate the @id@ attribute of the generated href
 * @id@ (optional) - the id to use in the link
+* @fragment@ (optional) - The link fragment (often called anchor tag) to use
+* @mapping@ (optional) - The [named URL mapping|guide:namedMappings] to use to rewrite the link
 * @params@ (optional) - a map containing request parameters
 * @url@ (optional) - a map containing the action, controller, id etc.
 * @absolute@ (optional) - If set to "true" will prefix the link target address with the value of the grails.serverURL property from Config, or http://localhost:<port> if no value in Config and not running in production.

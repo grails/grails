@@ -8,18 +8,28 @@ import org.radeox.engine.context.BaseInitialRenderContext
 beans = {
     textCache(EhCacheFactoryBean) {
         timeToLive = 300
+		maxElementsInMemory = 100
+		overflowToDisk=false
     }
     downloadCache(EhCacheFactoryBean) {
         timeToLive = 300
+		maxElementsInMemory = 100
+		overflowToDisk=false		
     }
     contentCache(EhCacheFactoryBean) {
         timeToLive = 300
+		maxElementsInMemory = 200
+		overflowToDisk=false		
     }
     wikiCache(EhCacheFactoryBean) {
         timeToLive = 300
+		maxElementsInMemory = 200
+		overflowToDisk=false		
     }
 	pluginListCache(EhCacheFactoryBean) {
 		timeToLive = 600
+		maxElementsInMemory = 100		
+		overflowToDisk=false		
 	}
     contentToMessage(ContentAlertStack)
     wikiContext(BaseInitialRenderContext)

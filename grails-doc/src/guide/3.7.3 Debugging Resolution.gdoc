@@ -1,0 +1,7 @@
+If you are having trouble getting a dependency to resolve you can enable more verbose debugging from the underlying engine using the @log@ method:
+
+{code}
+// log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
+log "warn" 
+{code}
+

@@ -5,7 +5,7 @@ import org.grails.content.Version
 
 class WikiPage extends Content {
 
-    def cacheService
+    transient cacheService
     
 	Version createVersion() {
         def verObject = new Version(number:version, current:this)
@@ -24,7 +24,7 @@ class WikiPage extends Content {
 	}
 
     def onAddComment = { comment ->
-        cacheService.flushWikiCache()
+        cacheService?.flushWikiCache()
     }
 
     String toString() {

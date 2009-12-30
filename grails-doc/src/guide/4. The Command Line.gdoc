@@ -1,4 +1,4 @@
-Grails' command line system is built on [Gant|http://groovy.codehaus.org/Gant] - a simple Groovy wrapper around [Apache Ant|http://ant.apache.org].
+Grails' command line system is built on [Gant|http://gant.codehaus.org/] - a simple Groovy wrapper around [Apache Ant|http://ant.apache.org].
 
 However, Grails takes it a bit further through the use of convention and the @grails@ command. When you type:
 {code}

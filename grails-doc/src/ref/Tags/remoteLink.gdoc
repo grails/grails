@@ -53,6 +53,8 @@ Attributes
 * @action@ (optional) - the name of the action to use in the link, if not specified the default action will be linked
 * @controller@ (optional) - the name of the controller to use in the link, if not specified the current controller will be linked
 * @id@ (optional) - The id to use in the link
+* @fragment@ (optional) - The link fragment (often called anchor tag) to use
+* @mapping@ (optional) - The [named URL mapping|guide:namedMappings] to use to rewrite the link
 * @params@ (optional) - a map containing request parameters
 * @update@ (optional) - Either a map containing the elements to update for 'success' or 'failure' states, or a string with the element to update in which cause failure events would be ignored
 * @before@ (optional) - The javascript function to call before the remote function call

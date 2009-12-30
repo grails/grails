@@ -32,7 +32,7 @@ When a plug-in provides a controller it may also provide default views to be ren
 
 For example given a @AmazonGrailsPlugin@ plug-n provided controller called @BookController@ if the action being executed is @list@, Grails will first look for a view called @grails-app/views/book/list.gsp@ then if that fails will look for the same view relative to the plug-in.
 
-Note however that if the view uses templates that are also provided by the plugin then the following syntax is necessary:
+Note however that if the view uses templates that are also provided by the plugin then the following syntax may be necessary:
 
 {code}
 <g:render template="fooTemplate" plugin="amazon"/>

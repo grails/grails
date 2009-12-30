@@ -2,7 +2,8 @@ h1. formatNumber
 
 h2. Purpose
 
-Allows the formatting of numbers using the same patterns defined by the [DecimalFormat|http://java.sun.com/j2se/1.4.2/docs/api/java/text/DecimalFormat.html] class.
+Allows the formatting of numbers using the same patterns defined by the [DecimalFormat|http://java.sun.com/javase/6/docs/api/java/text/DecimalFormat.html] class.
+Supports also attributes that are used in the JSTL formatNumber tag.
 
 h2. Examples
 
@@ -10,14 +11,50 @@ h2. Examples
 <g:formatNumber number="${myNumber}" format="\\$###,##0" />
 {code}
 
+Example of formatting an EUR currency amount:
+{code:xml}
+<g:formatNumber number="${myCurrencyAmount}" type="currency" currencyCode="EUR" />
+{code}
+
+Example of formatting a USD currency amount:
+{code:xml}
+<g:formatNumber number="${myCurrencyAmount}" type="currency" currencyCode="USD" />
+{code}
+For USD, the currency symbol will be based on the locale of the request. For the "en_US" locale, the result is "$123.45" and 
+for "fi_FI" locale, the formatting is "123,45 USD". The formatting rules come from the [java.util.Currency|http://java.sun.com/javase/6/docs/api/java/util/Currency.html] class.
+
+Example of left padding a number with zeros:
+{code:xml}
+<g:formatNumber number="${myNumber}" type="number" minIntegerDigits="9" />
+{code}
+
+Example of formatting a number showing 2 fraction digits:
+{code:xml}
+<g:formatNumber number="${myNumber}" type="number" maxFractionDigits="2" />
+{code}
+
+Example of formatting a number showing 2 fraction digits, rounding with RoundingMode.HALF_DOWN:
+{code:xml}
+<g:formatNumber number="${myNumber}" type="number" maxFractionDigits="2" roundingMode="HALF_DOWN" />
+{code}
+
 h2. Description
 
 Attributes
 
-* @format@ (required) - The format to use for the number
 * @number@ (required) - The number object to formate
-
-
+* @format@ (optional) - The formatting pattern to use for the number, see [DecimalFormat|http://java.sun.com/javase/6/docs/api/java/text/DecimalFormat.html]
+* @formatName@ (optional) - Look up @format@ from the default MessageSource / ResourceBundle (i18n/*.properties file) with this key.Look up @format@ from the default MessageSource / ResourceBundle (i18n/*.properties file) with this key. If @format@ and @formatName@ are empty, @format@ is looked up with '@default.number.format@' key. If the key is missing, '0' formatting pattern is used.
+* @type@ (optional) - The type of formatter to use: 'number', 'currency' or 'percent' . @format@ or @formatName@ aren't used when @type@ is specified.
+* @locale@ (optional) - Override the locale of the request , String or java.util.Locale value
+* @groupingUsed@ (optional) - Set whether or not grouping will be used in this format. 
+* @minIntegerDigits@ (optional) - Sets the minimum number of digits allowed in the integer portion of a number. 
+* @maxIntegerDigits@ (optional) - Sets the maximum number of digits allowed in the integer portion of a number.
+* @minFractionDigits@ (optional) - Sets the minimum number of digits allowed in the fraction portion of a number.
+* @maxFractionDigits@ (optional) - Sets the maximum number of digits allowed in the fraction portion of a number.
+* @currencyCode@ (optional) - The standard currency code ('EUR', 'USD', etc.), uses formatting settings for the currency. type='currency' attribute is recommended.  
+* @currencySymbol@ (optional) - Force the currency symbol to some symbol, recommended way is to use @currencyCode@ attribute instead (takes symbol information from [java.util.Currency|http://java.sun.com/javase/6/docs/api/java/util/Currency.html])
+* @roundingMode@ (optional) - Sets the [RoundingMode|http://java.sun.com/javase/6/docs/api/java/math/RoundingMode.html] used in this DecimalFormat. Usual values: HALF_UP, HALF_DOWN. If roundingMode is UNNECESSARY and ArithemeticException raises, the original number formatted with default number formatting will be returned.
 
 h2. Source
 

@@ -1,0 +1,37 @@
+In order to control how JAR dependencies are resolved Grails features (since version 1.2) a dependency resolution DSL that allows you to control how dependencies for applications and plugins are resolved.
+
+Inside the @grails-app/conf/BuildConfig.groovy@ file you can specify a @grails.project.dependency.resolution@ property that configures how dependencies are resolved:
+
+{code}
+grails.project.dependency.resolution = {
+   // config here
+}
+{code}
+
+The default configuration looks like the following:
+
+{code}
+grails.project.dependency.resolution = {
+    inherits "global" // inherit Grails' default dependencies
+    log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
+    repositories {
+        grailsHome()
+
+        // uncomment the below to enable remote dependency resolution
+        // from public Maven repositories
+        //mavenCentral()
+        //mavenRepo "http://snapshots.repository.codehaus.org"
+        //mavenRepo "http://repository.codehaus.org"
+        //mavenRepo "http://download.java.net/maven/2/"
+        //mavenRepo "http://repository.jboss.com/maven2/
+    }
+    dependencies {
+        // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
+        // runtime 'com.mysql:mysql-connector-java:5.1.5'
+    }
+
+}
+{code}
+
+The details of the above will be explained in the next few sections.
+

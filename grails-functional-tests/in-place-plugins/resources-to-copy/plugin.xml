@@ -6,8 +6,11 @@ Brief description of the plugin.
 </description>
   <documentation>http://grails.org/ResourcesToCopy+Plugin</documentation>
   <resources>
-    <resource>UrlMappings</resource>
     <resource>DataSource</resource>
+    <resource>UrlMappings</resource>
   </resources>
-  <dependencies />
+  <dependencies>
+    <resolvers />
+  </dependencies>
+  <behavior />
 </plugin>

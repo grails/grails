@@ -21,15 +21,19 @@
 </g:if>
 <g:if test="${versions}">
 <p>
-    <strong>First Created:</strong> ${wikiPage?.dateCreated} by <strong>${versions[0].author.login}</strong>
+    <strong>First Created:</strong> ${wikiPage?.dateCreated} by <strong>${first.author.login}</strong>
 </p>
 <p>
-    <strong>Last Updated:</strong> ${wikiPage?.lastUpdated} by <strong>${versions[-1].author.login}</strong>
+    <strong>Last Updated:</strong> ${wikiPage?.lastUpdated} by <strong>${last.author.login}</strong>
 </p>
 
-<h3>Versions:</h3>
-<div id="versions">
-    <g:render template="versionList" model="[versions:versions, wikiPage:wikiPage, update:updateElement]" />
-</div>
-</g:if>
-<g:else>No Versions</g:else>
+
+	<h3>Versions:</h3>
+	<div id="versions">
+		<cache:text id="${'versionList'+wikiPage?.id}">		
+	    	<g:render template="versionList" model="[versions:versions,authors:authors, wikiPage:wikiPage, update:updateElement]" />
+		</cache:text>
+	</div>
+	</g:if>
+	<g:else>No Versions</g:else>
+

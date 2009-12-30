@@ -2,7 +2,7 @@ h1. namedQueries
 
 h2. Purpose
 
-The @namedQueries@ static property is used to defined named queries.  Named queries support the criteria builder 
+The @namedQueries@ static property is used to define named queries.  Named queries support the criteria builder 
 syntax.  See the section on the [Criteria Builder|guide:criteria] in the user guide for more information.
 
 h2. Examples
@@ -35,13 +35,9 @@ class Publication {
 
 {code:java}
 // get all recent publications...
-def recentPubs = Publication.recentPublications()
-
-// get all recent publications (alternate syntax)...
 def recentPubs = Publication.recentPublications.list()
 
 // get up to 10 recent publications, skip the first 5...
-def recentPubs = Publication.recentPublications(max: 10, offset: 5)
 def recentPubs = Publication.recentPublications.list(max: 10, offset: 5)
 
 // get the number of recent publications...
@@ -56,8 +52,14 @@ def pubs = Publication.recentPublications.findAllWhere(title: 'Some Title')
 // get a recent publication where title = 'Some Title'
 def pub = Publication.recentPublications.findWhere(title: 'Some Title')
 
+// dynamic finders are supported
+def pubs = Publication.recentPublications.findAllByTitle('Some Title')
+
 // get all old publications with more than 350 pages
-def pubs = Publication.oldPublicationsLargerThan(350)
+def pubs = Publication.oldPublicationsLargerThan(350).list()
+
+// get all old publications with more than 350 pages and the word 'Grails' in the title
+def pubs = Publication.oldPublicationsLargerThan(350).findAllByTitleLike('%Grails%')
 {code}
 
 {note}

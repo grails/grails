@@ -22,7 +22,7 @@
             </daemons>
             <sequential>
                 <waitfor maxwait="2" maxwaitunit="minute" checkevery="1" checkeveryunit="second">
-                    <http url="http://localhost:8084/test-plugins-views"/>
+                    <http url="http://localhost:8084/test-plugin-views"/>
                 </waitfor>
                 <groovy><![CDATA[
 

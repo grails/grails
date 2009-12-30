@@ -183,4 +183,9 @@ class DbUtilController {
     conn.close()
     render(view: "sql", model: [dataList: retList, sqlText: sql])
   }
+  
+  /**
+   * Custom action for the 'test-plugin' functional tests.
+   */
+  def testWithPluginLayout = {}
 }

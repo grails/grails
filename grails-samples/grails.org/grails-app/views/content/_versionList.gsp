@@ -4,23 +4,22 @@
 </g:if>
 <ul>
 
-<g:each in="${versions}" var="v">
+<g:each in="${versions}" var="v" status="i">
     <li>
         <g:remoteLink update="${updateElement}"
                 controller="content"
                 action="showWikiVersion" id="${wikiPage?.title}"
-                params="[number:v.number, update:updateElement]">
-            Version ${v.number}</g:remoteLink> (Updated by <strong>${v.author.login}</strong>)
+                params="[number:v, update:updateElement]">
+            Version ${v}</g:remoteLink> (Updated by <strong>${authors[i].login}</strong>)
 
         <jsec:authenticated>
-            - Created: ${v.dateCreated} -
-            <g:if test="${v.number != wikiPage.version}">
+            <g:if test="${v != wikiPage.version}">
                 <jsec:hasRole name="Administrator">
                     <g:remoteLink update="versions"
                             controller="content"
                             action="rollbackWikiVersion"
                             id="${wikiPage?.title}"
-                            params="[number:v.number]">Rollback to here</g:remoteLink>
+                            params="[number:v]">Rollback to here</g:remoteLink>
                 </jsec:hasRole>
             </g:if>
             <g:else>Latest Version</g:else>
@@ -31,7 +30,7 @@
                         action="diffWikiVersion"
                         id="${wikiPage?.title}"
                         options="[method:'POST']"
-                        params="[number:v.number,diff:previous.number]"
+                        params="[number:v,diff:previous]"
                         onComplete="showDiff();">Diff with previous</g:remoteLink></li>
             </g:if>
             <g:else>

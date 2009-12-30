@@ -35,7 +35,8 @@ Consider the below example from the @ControllersPlugin@:
 {code:java}
 def doWithWebDescriptor = { webXml ->
 	def mappingElement = webXml.'servlet-mapping'
-	mappingElement + {
+	def lastMapping = mappingElement[mappingElement.size()-1]
+	lastMapping + {
 		'servlet-mapping' {
 			'servlet-name'("grails")
 			'url-pattern'("*.dispatch")

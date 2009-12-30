@@ -1,0 +1,187 @@
+Although the Grails development team have tried to keep breakages to a minimum there are a number of items to consider when upgrading a Grails 1.0.x or 1.1.x application to Grails 1.2. The major changes are described in detail below.
+
+h3. Upgrading from Grails 1.1.x
+
+h4. Plugin paths
+
+In Grails 1.1.x typically a @pluginContextPath@ variable was used to establish paths to plugin resources. For example:
+
+{code}
+<g:resource dir="${pluginContextPath}/images" file="foo.jpg" />
+{code}
+
+In Grails 1.2 views have been made plugin aware and this is no longer necessary:
+
+{code}
+<g:resource dir="images" file="foo.jpg" />
+{code}
+
+Additionally the above example will no longer link to an application image from a plugin view. To do so you need to change the above to:
+
+{code}
+<g:resource contextPath="" dir="images" file="foo.jpg" />
+{code}
+
+The same rules apply to the [javascript|tags] and [render|tags]
+
+h4. Tag and Body return values
+
+Tags no longer return @java.lang.String@ instances but instead return a @StreamCharBuffer@ instance. The @StreamCharBuffer@ class implements all the same methods as @String@, however code like this may break:
+
+{code}
+def foo = body()
+if(foo instanceof String) {
+	// do something
+}
+{code}
+
+In these cases you should use the @java.lang.CharSequence@ interface, which both @String@ and @StreamCharBuffer@ implement:
+
+{code}
+def foo = body()
+if(foo instanceof CharSequence) {
+	// do something
+}
+{code}
+
+h4. New JSONBuilder
+
+There is a new version of @JSONBuilder@ which is semantically different to earlier versions of Grails. However, if your application depends on the older semantics you can still use the now deprecated implementation by settings the following property to @true@ in Config.groovy:
+
+{code}
+grails.json.legacy.builder=true
+{code}
+
+h4. Validation on Flush
+
+Grails now executes validation routines when the underlying Hibernate session is flushed to ensure that no invalid objects are persisted. If one of your constraints (such as a custom validator) is executing a query then this can cause an addition flush resulting in a @StackOverflowError@. Example:
+
+{code}
+static constraints = {
+	author(validator: { a ->
+		assert a != Book.findByTitle("My Book").author		
+	})
+}
+{code}
+
+The above code can lead to a @StackOverflowError@ in Grails 1.2. The solution is to run the query in a new Hibernate @session@ (which is recommended in general as doing Hibernate work during flushing can cause other issues):
+
+{code}
+{code}
+static constraints = {
+	author(validator: { a ->
+		Book.withNewSession {
+			assert a != Book.findByTitle("My Book").author					
+		}
+	})
+}
+{code}
+
+{code}
+
+
+h3. Upgrading from Grails 1.0.x
+
+h4. Groovy 1.6
+
+Grails 1.1 and above ship with Groovy 1.6 and no longer supports code compiled against Groovy 1.5. If you have a library that is written in Groovy 1.5 you will need to recompile it against Groovy 1.6 before using it with Grails 1.1.
+
+h4. Java 5.0
+
+Grails 1.1 now no longer supports JDK 1.4, if you wish to continue using Grails then it is recommended you stick to the Grails 1.0.x stream until you are able to upgrade your JDK.
+
+h4. Configuration Changes
+
+1) The setting @grails.testing.reports.destDir@ has been renamed to @grails.project.test.reports.dir@ for consistency.
+
+2) The following settings have been moved from @grails-app/conf/Config.groovy@ to @grails-app/conf/BuildConfig.groovy@:
+** @grails.config.base.webXml@
+** @grails.war.destFile@
+** @grails.war.dependencies@
+** @grails.war.copyToWebApp@
+** @grails.war.resources@
+
+3) The @grails.war.java5.dependencies@ option is no longer supported, since Java 5.0 is now the baseline (see above).
+
+4) The use of jsessionid (now considered harmful) is disabled by default. If your application requires jsessionid you can re-enable its usage by adding the following to @grails-app/conf/Config.groovy@:
+
+{code}
+grails.views.enable.jsessionid=true
+{code}
+
+5) The syntax used to configure Log4j has changed. See the user guide section on [Logging|guide:logging] for more information.
+
+h4. Plugin Changes 
+
+Since 1.1, Grails no longer stores plugins inside your @PROJECT_HOME/plugins@ directory by default. This may result in compilation errors in your application unless you either re-install all your plugins or set the following property in @grails-app/conf/BuildConfig.groovy@:
+
+{code}
+grails.project.plugins.dir="./plugins"
+{code}
+
+h4. Script Changes
+
+1) If you were previously using Grails 1.0.3 or below the following syntax is no longer support for importing scripts from GRAILS_HOME:
+
+{code}
+Ant.property(environment:"env")                             
+grailsHome = Ant.antProject.properties."env.GRAILS_HOME"    
+
+includeTargets << new File ( "${grailsHome}/scripts/Bootstrap.groovy" )
+{code}
+
+Instead you should use the new @grailsScript@ method to import a named script:
+
+{code}
+includeTargets << grailsScript( "Bootstrap.groovy" )
+{code}
+
+2) Due to an upgrade to Gant all references to the variable @Ant@ should be changed to @ant@.
+
+3) The root directory of the project is no long on the classpath, the result is that loading a resource like this will no longer work:
+
+{code}
+def stream = getClass().classLoader.getResourceAsStream("grails-app/conf/my-config.xml")
+{code}
+
+Instead you should use the Java File APIs with the @basedir@ property:
+
+{code}
+new File("${basedir}/grails-app/conf/my-config.xml").withInputStream { stream -> 
+      // read the file	
+}
+{code}
+
+h4. Command Line Changes
+
+The @run-app-https@ and @run-war-https@ commands no longer exist and have been replaced by an argument to [run-app|commandLine]:
+
+{code}
+grails run-app -https
+{code}
+
+h4. Data Mapping Changes
+
+1) Enum types are now mapped using their String value rather than the ordinal value. You can revert to the old behavior by changing your mapping as follows:
+
+{code}
+static mapping = {
+      someEnum enumType:"ordinal"
+}
+{code}
+
+2) Bidirectional one-to-one associations are now mapped with a single column on the owning side and a foreign key reference. You shouldn't need to change anything, however you may want to drop the column on the inverse side as it contains duplicate data.
+
+h4. REST Support
+
+Incoming XML requests are now no longer automatically parsed. To enable parsing of REST requests you can do so using the @parseRequest@ argument inside a URL mapping:
+
+{code}
+"/book"(controller:"book",parseRequest:true)
+{code}
+
+Alternatively, you can use the new @resource@ argument, which enables parsing by default:
+
+{code}
+"/book"(resource:"book")
+{code}

@@ -4,7 +4,6 @@
 	
     <target name="grails-javadoc" 
             description="Generate most current javadoc for Grails">
-        <ant dir="../grails" target="jar" />
         <ant dir="../grails" target="javadoc" />
 
         <mkdir dir="${base.dir}/output" />

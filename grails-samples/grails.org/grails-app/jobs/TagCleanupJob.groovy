@@ -1,3 +1,4 @@
+import org.codehaus.groovy.grails.plugins.*
 class TagCleanupJob {
     def tagService
 
@@ -6,7 +7,12 @@ class TagCleanupJob {
 
     def execute() {
         log.info "Starting tag cleanup..."
-        tagService.removeEmptyTags()
+		try {
+        	tagService.removeEmptyTags()			
+		}
+		finally {
+			DomainClassGrailsPlugin.PROPERTY_INSTANCE_MAP.get().clear()
+		}
     }
 
 }

@@ -27,11 +27,12 @@
 
     </target>
 
-    <target name="-build-grails">
+    <target name="-build-grails" unless="skipGrailsBuild">
         <echo>GRAILS_HOME=${grails.home}</echo>
         <ant dir="${grails.home}" antfile="build.xml" target="jar">
             <property name="skipTests" value="true"/>
             <property name="skipExamples" value="true"/>
+            <property name="disable.bundlor" value="true"/>
         </ant>
     </target>
 
@@ -42,39 +43,69 @@
         <mkdir dir="reports" />
         <antcall target="-functional-test-apps" />
         <antcall target="-functional-test-scripts" />
+		<antcall target="show-failures" />
     </target>
 
     <target name="run-test-scripts" depends="clean-reports,init">
         <antcall target="-functional-test-scripts" />
     </target>
 
-    <target name="-functional-test-scripts">
+    <target name="run-test-apps" depends="clean-reports,init">
+        <antcall target="-functional-test-apps" />
+    </target>
+
+	<target name="show-failures">
+        <groovy>
+			def reportsDir = new File('reports')
+			if(reportsDir.exists()) {
+				reportsDir.eachDir { dir ->
+					def reportFile = new File("$dir/TESTS-TestSuites.xml")
+					
+					if(reportFile.exists()) {
+						def xml = new XmlSlurper().parse(reportFile)
+						def errors = xml.testsuite.@errors.text()
+						if(errors) {
+							errors = errors.toInteger()
+							if(errors > 0) {
+								println "$dir.name has $errors errors"
+							}
+						}
+						def failures = xml.testsuite.@failures.text()
+						if(failures) {
+							failures = failures.toInteger()
+							if(failures > 0) {
+								println "$dir.name has $failures failures"
+							}
+						}
+						
+					}
+					
+				}
+			}
+		</groovy>
+	</target>
+    <target name="-functional-test-scripts" unless="skipScripts">
          <delete dir="target/scripts" failonerror="false" />
          <mkdir dir="target/scripts" />
          <groovy>
-
+<![CDATA[
              String scriptName = ant.antProject.properties."test.script.name"
-             def scriptFiles = new File("scripts").listFiles().findAll { it.name.endsWith('.xml') }
-			 if(scriptName) {
-				 println "Running functional test script: $scriptName"
-				 def file = scriptFiles.find{ it.name.startsWith(scriptName) }
-				 if(file) {
-	                ant.ant(antfile:file, inheritRefs:true)				
-				 }
-				 else {
-				   ant.fail("No test script found for name $scriptName") 
-				 }
+             def scriptFiles = new File("scripts").listFiles().findAll { 
+                 it.name.endsWith('.xml')
+             }
+             println "Running functional test scripts"
+             scriptFiles.each { file ->
+                 if(scriptName && !file.name.startsWith(scriptName)) {
+                     ant.echo message: "Skipping script: ${file.name}"
+                 } else {
+                     ant.ant(antfile:file, inheritRefs:true)
+                 }
 			 }
-			 else {
-             	 println "Running all functional test scripts!"			
-	             scriptFiles.each { file ->
-	                ant.ant(antfile:file, inheritRefs:true)
-	             }			
-			 }
+			]]>
          </groovy>
     </target>
 
-    <target name="-functional-test-apps">
+    <target name="-functional-test-apps" unless="skipApps">
         <groovy><![CDATA[
 			try {
 		           def outcomes = []
@@ -85,6 +116,14 @@
 		               properties.projectName = appDir.name
 					   // skip webtest based tests until plugin is fixed
 					   if(properties.projectName == 'HelloWorld') return
+					
+                       // if the appToTest system property is set, then skip all other apps
+					   if(properties.appToTest && !properties.appToTest.equals(properties.projectName)) {
+					       ant.echo message: "Skipping app: ${properties.projectName}"
+					       return
+					   }
+					   def appName = ant.antProject.properties."test.app.name"
+					   if(appName && appName != appDir.name) return
 
 
                        // Clear any existing webtest and functional test plugins.
@@ -104,7 +143,7 @@
 		               // Install the appropriate testing plugin, run the tests, and check the reports..
                        if (new File(appDir, "test/functional").exists()) {
                            // Install the Functional Test plugin.
-                           ant.grails(command:"install-plugin", args:"functional-test 1.2.2", projectName:properties.projectName, resultID:grailsInvocationCounter++)
+                           ant.grails(command:"install-plugin", args:"functional-test 1.2.7", projectName:properties.projectName, resultID:grailsInvocationCounter++)
                            if (properties["testResult_${grailsInvocationCounter-1}"].toInteger() != 0) {
                                outcomes << "Couldn't install functional-test plugin into application ${properties.projectName}"
                                failure = true
@@ -187,7 +226,7 @@
     </target>
 
 
-    <target name="-testsWithNewApp">
+    <target name="-testsWithNewApp" unless="skipNewApp">
         <echo>Creating new Grails app ${newWebApp} and running some tests on it</echo>
         <property name="newWebApp.dir" value="${target}/${newWebApp}"/>
         <delete dir="${newWebApp.dir}"/>

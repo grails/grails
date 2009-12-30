@@ -1,0 +1,37 @@
+h1. integrate-with 
+
+h2. Purpose
+
+The @integrate-with@ command allows Grails to be integrated with a variety of IDEs and build systems.
+
+h2. Examples
+
+{code}
+grails integrate-with --eclipse --intellij --textmate --ant
+{code}
+
+h2. Description
+
+Usage: 
+{code:java}
+grails integrate-with [ARGUMENTS]
+{code}
+
+The @integrate-with@ command will integrate Grails with different IDEs and build systems based on the arguments provided. For example the @--eclipse@ command will produce Eclipse @project@ and @classpath@ for use with [SpringSource STS|http://www.springsource.com/products/sts].
+
+The command is however extensible. For example if you want to provide a @--myide@ command you can do so by creating an @_Events.groovy@ file and handling the @IntegrateWithStart@ event:
+
+{code}
+eventIntegrateWithStart = {
+	binding.integrateMyide = {
+		// your code here
+	}
+}
+{code}
+
+Fired Events: 
+
+* @IntegrateWithStart@ - Fired when the script is first run
+* @Integrate[NAME]Start@ - Fired when each integration starts (eg. IntegrateEclipseStart)
+* @Integrate[NAME]End@ - Fired when each integration ends (eg. IntegrateIntellijEnd)
+* @IntegrateWithEnd@ - Fired when the script finishes

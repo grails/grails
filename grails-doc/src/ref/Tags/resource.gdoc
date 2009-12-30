@@ -34,10 +34,12 @@ h2. Description
 
 Attributes
 
+* @base@ (optional) - Sets the prefix to be added to the link target address, typically an absolute server URL. This overrides the behaviour of the @absolute@ property, if both are specified.x≈
+* @contextPath@ (optional) - the context path to use (relative to the application context path). Defaults to "" or path to the plugin for a plugin view or template.
 * @dir@ (optional) - the name of the directory within the grails app to link to
 * @file@ (optional) - the name of the file within the grails app to link to
 * @absolute@ (optional) - If set to "true" will prefix the link target address with the value of the grails.serverURL property from Config, or http://localhost:<port> if no value in Config and not running in production.
-* @base@ (optional) - Sets the prefix to be added to the link target address, typically an absolute server URL. This overrides the behaviour of the @absolute@ property, if both are specified.
+* @plugin@ (optional) - The plugin to look for the resource in
 
 h2. Source
 

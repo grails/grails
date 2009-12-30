@@ -10,47 +10,52 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
     <dependency>
       <groupId>org.grails</groupId>
       <artifactId>grails-crud</artifactId>
-      <version>1.1-RC2</version>
+      <version>1.2.0</version>
     </dependency>
     <dependency>
       <groupId>org.grails</groupId>
       <artifactId>grails-gorm</artifactId>
-      <version>1.1-RC2</version>
+      <version>1.2.0</version>
     </dependency>
 
-    <!-- Grails defaults to OSCache for the second-level Hibernate cache. -->
-    <dependency>
-      <groupId>opensymphony</groupId>
-      <artifactId>oscache</artifactId>
-      <version>2.4</version>
+    <!-- Grails defaults to Ehache for the second-level Hibernate cache. -->
+	<dependency>
+	  <groupId>org.hibernate</groupId>
+	  <artifactId>hibernate-ehcache</artifactId>
+	  <version>3.3.1.GA</version>
+	</dependency>
+	
+	<dependency>
+	  <groupId>net.sf.ehcache</groupId>
+	  <artifactId>ehcache-core</artifactId>
+	  <version>1.7.1</version>
       <exclusions>
-        <exclusion>
-          <groupId>commons-logging</groupId>
-          <artifactId>commons-logging</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>javax.jms</groupId>
-          <artifactId>jms</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>javax.servlet</groupId>
-          <artifactId>servlet-api</artifactId>
-        </exclusion>
+          <exclusion>
+              <artifactId>jms</artifactId>
+          </exclusion>
+          <exclusion>
+              <artifactId>servlet-api</artifactId>
+          </exclusion>
+
+          <!-- We have JCL-over-SLF4J instead. -->
+          <exclusion>
+              <artifactId>commons-logging</artifactId>
+          </exclusion>
       </exclusions>
-    </dependency>
+	</dependency>
 
     <!-- For ease of development and testing, we include the HSQLDB database. -->
     <dependency>
       <groupId>hsqldb</groupId>
       <artifactId>hsqldb</artifactId>
-      <version>1.8.0.5</version>
+      <version>1.8.0.10</version>
     </dependency>
 
     <!-- Use Log4J for logging. This artifact also pulls in the Log4J JAR. -->
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-log4j12</artifactId>
-      <version>1.5.5</version>
+      <version>1.5.8</version>
       <scope>runtime</scope>
     </dependency>
 
@@ -100,7 +105,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
       <plugin>
         <groupId>org.grails</groupId>
         <artifactId>grails-maven-plugin</artifactId>
-        <version>1.0-RC2</version>
+        <version>1.2.0</version>
         <extensions>true</extensions>
         <executions>
           <execution>

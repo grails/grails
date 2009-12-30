@@ -162,14 +162,26 @@ class ContentController extends BaseWikiController {
     }
 
 	def infoWikiPage = {
-        def page = WikiPage.findByTitle(params.id.decodeURL())
+        def page = WikiPage.findByTitle(params.id.decodeURL(), [cache:true])
 
         if(page) {
 
-            def pageVersions = Version.findAllByCurrent(page)
-            pageVersions = pageVersions.sort { it.number }                        
+            def pageVersions = Version.withCriteria {
+				projections {
+					distinct 'number', 'version'
+					property 'author'
+				}
+				eq 'current', page
+				order 'number', 'asc'
+				cache true
+			}
+			def first = pageVersions ? Version.findByNumberAndCurrent(pageVersions[0][0], page, [cache:true]) : null
+			def last  = pageVersions ? Version.findByNumberAndCurrent(pageVersions[-1][0], page, [cache:true]) : null
 
-            render(template:'wikiInfo',model:[wikiPage:page, versions:pageVersions, update:params.update])
+            render(template:'wikiInfo',model:[first:first, last:last,wikiPage:page, 
+											 versions:pageVersions.collect { it[0]}, 
+ 											 authors:pageVersions.collect { it[1]}, 
+											 update:params.update])
         }
 
     }
@@ -395,7 +407,9 @@ class ContentController extends BaseWikiController {
                 model:[
                     newestPlugins:newestPlugins, 
                     newsItems:newsItems,
-                    latestScreencastId: latestScreencastId
+                    latestScreencastId: latestScreencastId,
+					newsComments:newsItems?.collect { it.comments },
+					newsTags:newsItems?.collect { it.tags }
                 ]
         )
     }
