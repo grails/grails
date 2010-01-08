@@ -42,6 +42,18 @@ justBook(controller:'book', action:'*') {
 
 }
 {code}
+* All controllers except the @BookController@
+{code:java}
+notBook(controller:'book', invert:true) {
+
+}
+{code}
+* All actions containing 'save' in the action name
+{code:java}
+saveInActionName(action:'save', find:true) {
+
+}
+{code}
 * Applied to a URI space
 {code:java}
 someURIs(uri:'/book/**') {
