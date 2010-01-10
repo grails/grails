@@ -84,5 +84,9 @@ where
     this_.PRICE * this_.TAX_RATE>?
 {code}
 
-
+{note}
+Note that because the value of a derived property is generated in the database and depends
+on the execution of SQL code, derived properties may not have GORM constraints applied
+to them.  If constraints are specified for a derived property, they will be ignored.
+{note}
 
