@@ -25,6 +25,7 @@ Filter rule attributes:
 * @controller@ - controller matching pattern, by default \* is replaced with .\* and a regex is compiled
 * @action@ - action matching pattern, by default \* is replaced with .\* and a regex is compiled
 * @regex@ (true/false) - use regex syntax (don't replace '\*' with '.\*')
+* @uri@ - a uri to match, expressed with as Ant style path (e.g. /book/\*\*)
 * @find@ (true/false) - rule matches with partial match (see java.util.regex.Matcher.find())
 * @invert@ (true/false) - invert the rule (NOT rule)
 
