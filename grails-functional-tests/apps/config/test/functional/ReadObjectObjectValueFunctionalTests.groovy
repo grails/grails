@@ -5,6 +5,6 @@ class ReadObjectObjectValueFunctionalTests extends functionaltestplugin.Function
         //
         get('/test/read')
         assertStatus 200
-        assertContentContains 'one = first, two = second'
+        assertContentContains 'one = first, two = second, three = third'
     }
 }
