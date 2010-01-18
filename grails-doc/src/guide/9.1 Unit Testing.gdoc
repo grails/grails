@@ -82,7 +82,17 @@ def testInstances = []
 mockDomain(Item, testInstances)
 {code}
 
-It adds all the common domain methods (both instance and static) to the given class so that any code using it sees it as a full-blown domain class. So for example, once the @Item@ class has been mocked, we can safely call the @save()@ method on instances of it. Speaking of which, what happens when we call that method on a mocked domain class? Simple: the new instance is added to the @testInstances@ list we passed into the @mockDomain()@ method.
+It adds all the common domain methods (both instance and static) to the given class so that any code using it sees it as a full-blown domain class. So for example, once the @Item@ class has been mocked, we can safely call the @save()@ method on instances of it. Invoking the @save()@ method doesn't really save the instance to any database but it will cache the object in the testing framework so the instance will be visible to certain queries.  The following code snippet demonstrates the effect of calling the @save()@ method.
+
+{code:java}
+void testSomething() {
+    def testInstances=[]
+    mockDomain(Song, testInstances)
+    assertEquals(0, Song.count())
+    new Song(name:"Supper's Ready").save()
+    assertEquals(1, Song.count())
+}
+{code}
 
 The next bit we want to look at is centered on the @mockFor@ method:
 
