@@ -22,9 +22,10 @@ The scope of the filter can be one of the following things:
 * A URI, with Ant path matching syntax
 
 Filter rule attributes:
-* @controller@ - controller matching pattern, by default * is replaced with .* and a regex is compiled
-* @action@ - action matching pattern, by default * is replaced with .* and a regex is compiled
-* @regex@ (true/false) - use regex syntax (don't replace '*' with '.*')
+* @controller@ - controller matching pattern, by default \* is replaced with .\* and a regex is compiled
+* @action@ - action matching pattern, by default \* is replaced with .\* and a regex is compiled
+* @regex@ (true/false) - use regex syntax (don't replace '\*' with '.\*')
+* @uri@ - a uri to match, expressed with as Ant style path (e.g. /book/\*\*)
 * @find@ (true/false) - rule matches with partial match (see java.util.regex.Matcher.find())
 * @invert@ (true/false) - invert the rule (NOT rule)
 
@@ -39,6 +40,18 @@ all(controller:'*', action:'*') {
 * Only for the @BookController@
 {code:java}
 justBook(controller:'book', action:'*') {
+
+}
+{code}
+* All controllers except the @BookController@
+{code:java}
+notBook(controller:'book', invert:true) {
+
+}
+{code}
+* All actions containing 'save' in the action name
+{code:java}
+saveInActionName(action:'save', find:true) {
 
 }
 {code}
