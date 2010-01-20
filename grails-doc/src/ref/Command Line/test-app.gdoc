@@ -23,21 +23,21 @@ Fired Events:
 
 * @StatusFinal@ - When the test cycle completes
 
-Executes the Grails unit and integration tests located in the @test/unit@ and @test/integration@ directories. By default all tests are executed, but you can specify the names of the tests (without the "Tests" suffix) as argument to the command:
+Executes the Grails unit and integration tests located in the @test/unit@ and @test/integration@ directories. By default all tests are executed, but you can specify the names of the tests (without the "Tests" or other test type suffix) as argument to the command:
 
 {code:java}
 grails test-app Foo
 grails test-app Foo Bar
 {code}
 
+The first example will execute a test called @FooTests.groovy@ whilst the second will execute @FooTests.groovy@ and @BarTests.groovy@ if they exist.
+
 You can also choose to only run the unit or integration tests:
 
 {code:java}
-grails test-app -unit
-grails test-app -integration
+grails test-app unit:
+grails test-app integration:
 {code}
-
-The first example will execute a test called @FooTests.groovy@ whilst the second will execute @FooTests.groovy@ and @BarTests.groovy@ if they exist.
 
 If you only wish to re-run failed tests use the -rerun flag
 
@@ -45,4 +45,4 @@ If you only wish to re-run failed tests use the -rerun flag
 grails test-app -rerun
 {code}
 
-
+See the [Testing|guide:testing] section for examples on how to combine the different options to target tests.
