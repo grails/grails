@@ -26,6 +26,18 @@ Arguments:
 * @model@ - The model to chain to the next action
 * @params@ (optional) - Parameters to pass to the action chained to.
 
-The chain method stores the passed model in flash scope and then performs an HTTP redirect. The model is then restored for the next request. 
+The chain method stores the passed model in flash scope and then performs an HTTP redirect. The model is then restored for the next request.  The model that will eventually be passed to the view will be created by starting with the model that was passed to the chain method and then adding to that all of the data that is in the model returned by the next action, which may replace some of the data that was in the model originally passed to the chain method.  As an example:
+
+{code:java}
+def one = {
+ chain action: 'two', model: [name: 'Tony', town: 'Birmingham']
+}
+
+def two = {
+ [name: 'Anthony', country: 'England']
+}
+{code}
+
+If a request is sent to the @one@ action, that action chains to the @two@ action which returns a model.  The model that is passed to the view would contain @\[name: 'Anthony', town: 'Birmingham', country: 'England'\]@
 
 The chain method requires either a URI to redirect to *or* a controller/action/id name combination
