@@ -5,31 +5,40 @@ Criteria can be used either via the [createCriteria|domainClasses] or [withCrite
 {code}
 def c = Account.createCriteria()
 def results = c {
-	like("holderFirstName", "Fred%")
-	and {
-		between("balance", 500, 1000)
-		eq("branch", "London")
-	}
-	maxResults(10)
-	order("holderLastName", "desc")
+    between("balance", 500, 1000)
+    eq("branch", "London")
+    or {
+        like("holderFirstName", "Fred%")
+        like("holderFirstName", "Barney%")
+    }
+    maxResults(10)
+    order("holderLastName", "desc")
 }
 {code}
 
+This criteria will select up to 10 @Account@ objects matching the following criteria:
+
+* @balance@ is between 500 and 1000
+* @branch@ is 'London'
+* @holderFirstName@ starts with 'Fred' or 'Barney'
+
+The results will be sorted in descending ordery by @holderLastName@.
+
 h4. Conjunctions and Disjunctions
 
-As demonstrated in the previous example you can group criteria in a logical AND using a @and { }@ block:
+As demonstrated in the previous example you can group criteria in a logical OR using a @or { }@ block:
 
 {code:java}
-and {
+or {
 	between("balance", 500, 1000)
 	eq("branch", "London")
 }
 {code}
 
-This also works with logical OR:
+This also works with logical AND:
 
 {code:java}
-or {
+and {
 	between("balance", 500, 1000)
 	eq("branch", "London")
 }
@@ -43,6 +52,8 @@ not {
 	eq("branch", "London")
 }
 {code}
+
+All top level conditions are implied to be AND'd together.
 
 h4. Querying Associations
 
