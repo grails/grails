@@ -10,6 +10,7 @@ h2. Examples
 {code:java}
 class Publication {
    String title
+   String author
    Date datePublished
    Integer numberOfPages
 
@@ -67,3 +68,22 @@ Note that calling something like @Publication.recentPublications.get(42)@ is not
 calling something like @Publication.get(42)@.  The former will only return a @Publication@ if the @Publication@
 with id 42 meets all the criteria defined in the @recentPublications@ named query.
 {note}
+
+Named criteria support additional criteria being supplied at invocation time in the form of a criteria closure:
+
+{code:java}
+// get all recent publications with author names beginning with Tony or Phil...
+def books = Publication.recentPublications {
+    or {
+        like 'author', 'Tony%'
+        like 'author', 'Phil%'
+    }
+}
+// get the number of recent publications with author names beginning with Tony or Phil...
+def numberOfBooks = Publication.recentPublications.count {
+    or {
+        like 'author', 'Tony%'
+        like 'author', 'Phil%'
+    }
+}
+{code}

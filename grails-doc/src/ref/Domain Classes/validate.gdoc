@@ -4,6 +4,12 @@ h2. Purpose
 
 Validates a domain class against the applied constraints (see [Validation|guide:validation])
 
+h2. Description
+
+The @validate@ method will validate a domain class based on its defined [constraints|guide:constraints]. The errors will be stored within the [errors|domainClasses] object.
+
+The @validate@ method accepts an optional @List@ argument which may contain the names of the properties that should be validated.  When a @List@ is passed to the @validate@ method, only the properties defined in the @List@ will be validated.
+
 h2. Examples
 
 {code:java}
@@ -15,6 +21,14 @@ if( !b.validate() ) {
 }
 {code}
 
-h2. Description
+{code:java}
+def a = new Album(artist: "Genesis", title: "Nursery Cryme", releaseDate: 1971)
 
-The @validate@ method will validate a domain class based on its defined [constraints|guide:constraints]. The errors will be stored within the [errors|domainClasses] object.
+// only validate title and releaseDate
+if( !a.validate(["title", "releaseDate"]) ) {
+   a.errors.each {
+        println it
+   }
+}
+{code}
+
