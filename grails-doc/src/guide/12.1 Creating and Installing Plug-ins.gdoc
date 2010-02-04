@@ -92,5 +92,24 @@ Although the [create-plugin|commandLine] command creates certain files for you s
 
 If you need artefacts within @WEB-INF@ it is recommended you use the @_Install.groovy@ script (covered later), which is executed when a plug-in is installed, to provide such artefacts. In addition, although @UrlMappings.groovy@ is excluded you are allowed to include a @UrlMappings@ definition with a different name, such as @FooUrlMappings.groovy@.
 
+h4. Modular Application Development With Plugins
+
+An application can load plugins from anywhere on the file system, even if they have not been installed. Simply add the location of the (unpacked) plugin to the application's @grails-app/conf/BuildConfig.groovy@ file:
+
+{code:java}
+// Useful to test plugins you are developing.
+grails.plugin.location.jsecurity = "/home/dilbert/dev/plugins/grails-jsecurity"
+
+// Useful for modular applications where all plugins and
+// applications are in the same directory.
+grails.plugin.location.'grails-ui' = "../grails-grails-ui"
+{code}
+
+This is particularly useful in two cases:
+
+* You are developing a plugin and want to test it in a real application without packaging and installing it first.
+* You have split an application into a set of plugins and an application, all in the same "super-project" directory.
+
+
 
 	
