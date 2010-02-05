@@ -1,0 +1,34 @@
+apply id: 'groovy'
+apply id: 'maven'
+
+group = 'org.grails'
+version = '1.0-SNAPSHOT'
+
+configurations {
+    deploy
+}
+
+repositories {
+    mavenCentral()
+    mavenRepo urls: [ 'http://download.java.net/maven/2/' ]
+}
+
+dependencies {
+    compile gradleApi(), 'org.grails:grails-bootstrap:1.2.0'
+    groovy  'org.codehaus.groovy:groovy:1.6.7'
+    deploy 'org.apache.maven.wagon:wagon-webdav:1.0-beta-2'
+}
+
+uploadArchives {
+    repositories.mavenDeployer {
+        configuration = configurations.deploy
+
+        repository(url: 'dav:https://dav.codehaus.org/repository/grails') {
+            authentication(userName: codehausUsername, password: codehausPassword)
+        }
+
+        snapshotRepository(url: 'dav:https://dav.codehaus.org/snapshots.repository/grails') {
+            authentication(userName: codehausUsername, password: codehausPassword)
+        }
+    }
+}
