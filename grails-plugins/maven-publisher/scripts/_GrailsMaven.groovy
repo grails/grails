@@ -113,13 +113,36 @@ if(!basePom.exists()) {
 target(mavenInstall:"Installs a plugin or application into your local Maven cache") {
 	def deployFile = plugin ? new File(pluginZip) : grailsSettings.projectWarFile
 	def ext = plugin ? "zip" : "war"
+	installOrDeploy(deployFile, ext, false)
+}
+
+private installOrDeploy(File file, ext, boolean deploy, repos = [:]) {
+	if(deploy) {
+		parseArguments()
+	}
 	ant.checksum file:pom, algorithm:"sha1", todir:projectTargetDir
-	ant.checksum file:deployFile, algorithm:"sha1", todir:projectTargetDir		
-    artifact.install(file: deployFile) {
-           attach file:"${projectTargetDir}/pom.xml.sha1",type:"pom.sha1"
-           attach file:"${projectTargetDir}/${deployFile.name}.sha1",type:"${ext}.sha1"
+	ant.checksum file:file, algorithm:"sha1", todir:projectTargetDir		
+    artifact."${ deploy ? 'deploy' : 'install' }"(file: file) {
+		if(ext == 'zip') {
+			attach file:"${basedir}/plugin.xml",type:"plugin.xml"
+		}			
+        attach file:"${projectTargetDir}/pom.xml.sha1",type:"pom.sha1"
+        attach file:"${projectTargetDir}/${file.name}.sha1",type:"${ext}.sha1"
         pom(file: pom)
-    }			
+		if(repos.remote) {
+			def repo = repos.remote
+			if(repo.configurer) {
+				remoteRepository(repo.args, repo.configurer)
+			}
+			else {
+				remoteRepository(repo.args)							
+			}
+		}
+		if(repos.local) {
+			localRepository(path:repos.local)
+		}
+
+    }	
 }
 
 target(mavenDeploy:"Deploys the plugin to a Maven repository") {
@@ -166,22 +189,7 @@ target(mavenDeploy:"Deploys the plugin to a Maven repository") {
 	def ext = plugin ? "zip" : "war"	
 	ant.checksum file:deployFile, algorithm:"sha1", todir:projectTargetDir		
 	try {
-	    artifact.deploy(file: deployFile) {
-            attach file:"${projectTargetDir}/pom.xml.sha1",type:"pom.sha1"
-            attach file:"${projectTargetDir}/${deployFile.name}.sha1",type:"${ext}.sha1"
-	        pom(file: pom)
-			if(repo) {
-				if(repo.configurer) {
-					remoteRepository(repo.args, repo.configurer)
-				}
-				else {
-					remoteRepository(repo.args)							
-				}
-			}
-			if(distInfo.local) {
-				localRepository(path:distInfo.local)
-			}
-	    }					
+		installOrDeploy(deployFile, ext, true, [remote:repo, local:distInfo.local])
 	}
 	catch(e) {
 		println "Error deploying artifact: ${e.message}"
