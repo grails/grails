@@ -145,8 +145,11 @@ class GrailsPlugin implements Plugin<Project> {
             toolsJar = new File(javaHome, "tools.jar");
         }
 
-        // If there is no tools.jar, fail the build.
-        if (!toolsJar.exists()) throw new RuntimeException("[GrailsPlugin] Cannot find tools.jar in JAVA_HOME.")
+        // There is no tools.jar, so native2ascii may not work. Note
+        // that on Mac OS X, native2ascii is already on the classpath.
+        if (!toolsJar.exists() && !System.getProperty('os.name') == 'Mac OS X') {
+            project.logger.warn "[GrailsPlugin] Cannot find tools.jar in JAVA_HOME, so native2ascii may not work."
+        }
 
         // Get the 'grails_bootstrap' configuration as a list of URLs
         // and add tools.jar to it.
