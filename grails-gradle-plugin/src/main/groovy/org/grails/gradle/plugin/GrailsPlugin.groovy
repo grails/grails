@@ -23,6 +23,26 @@ class GrailsPlugin implements Plugin<Project> {
             test.extendsFrom compile
         }
 
+        // Provide a task that allows the user to create a fresh Grails
+        // project from a basic Gradle build file.
+        project.task("init") << {
+            // First make sure that a project version has been configured.
+            if (project.version == "unspecified") {
+                throw new RuntimeException("[GrailsPlugin] Build file must specify a 'version' property.")
+            }
+
+            // Don't create a new project if one already exists.
+            if (project.file("application.properties").exists() && project.file("grails-app").exists()) {
+                logger.warn "Grails project already exists - SKIPPING"
+                return
+            }
+
+            // The project name comes from the name of the project
+            // directory, but this can be overridden by an argument.
+            def projName = project.hasProperty("args") ? project.args : project.projectDir.name
+            runGrails("CreateApp", project, "--inplace --appVersion=" + project.version + " " + projName)
+        }
+
         // Most people are used to a "test" target or task, but Grails
         // has "test-app". So we hard-code a "test" task.
         project.task("test") << {
