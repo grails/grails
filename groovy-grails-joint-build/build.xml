@@ -1,7 +1,7 @@
 
 <project name="groovy-grails-build" default="build">
 
-    <property name="groovy.checkout.dir" value="../../GROOVY_1_6_X"></property>
+    <property name="groovy.checkout.dir" value="../../GROOVY_1_7_X"></property>
 
     <property environment="env" />
 
