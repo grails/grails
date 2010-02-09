@@ -30,8 +30,11 @@ Refer to the user guide section on [Criteria|guide:criteria] for usage instructi
  *between* | Where the property value is between to distinct values | {code}
 between("balance", 500, 1000)
 {code}       
- *eq* | Where a property equals a particular value | {code}
+ *eq* | Where a property equals a particular value.| {code}
 eq("branch", "London")
+{code}
+ *eq* (case-insensitive) | A version of *eq* that supports an optional 3rd Map parameter to specify that the query be case-insensitive. | {code}
+eq("branch", "london", [ignoreCase: true])
 {code}       
  *eqProperty* | Where one property must equal another | {code}
 eqProperty("lastTransaction","firstTransaction")
