@@ -1,6 +1,0 @@
-<archetype>
-  <id>maven-project</id>
-  <resources>
-    <resource>src/main/webapp/WEB-INF/web.xml</resource>
-  </resources>
-</archetype>

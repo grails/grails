@@ -1,1 +1,0 @@
-grails.config.locations = []

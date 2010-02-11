@@ -1,4 +1,0 @@
-Grails committer, Jason Rudolph, took the time to write many useful articles about using Grails with custom Hibernate mappings including:
-
-* [Hoisting Grails to Your Legacy DB|http://jasonrudolph.com/blog/2006/06/20/hoisting-grails-to-your-legacy-db/] - An excellent article about using Grails with Hibernate XML
-* [Grails + EJB3 Domain Models|http://www.infoq.com/articles/grails-ejb-tutorial] - Another great article about using Grails with EJB3-style annotated domain models

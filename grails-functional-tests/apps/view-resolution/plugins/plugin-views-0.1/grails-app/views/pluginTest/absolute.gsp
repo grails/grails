@@ -1,1 +1,0 @@
-absolute plugin = ${foo}

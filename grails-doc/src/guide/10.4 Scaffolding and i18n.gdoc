@@ -1,9 +1,0 @@
-Grails does not ship with i18n aware [scaffolding|guide:scaffolding] templates to generate the controller and views. However, i18n aware templates are available via the i18n templates plugin. The templates are identical to the default scaffolding templates, except that they are i18n aware using the [message|tags] tag for labels, buttons etc.
-
-To get started install the i18n templates with the following command:
-
-{code}
-grails install-plugin i18n-templates
-{code}
-
-Then refer to the [reference on the wiki|http://grails.org/I18n+Templates+Plugin] which explains how to use the i18n templates.

@@ -1,7 +1,0 @@
-A controller handles requests and creates or prepares the response and is request-scoped.  In other words a new instance is created for each [request|controllers]. A controller can generate the response or delegate to a view. To create a controller simply create a class whose name ends with @Controller@ and place it within the @grails-app/controllers@ directory.
-
-The default [URL Mapping|guide:mapping] setup ensures that the first part of your controller name is mapped to a URI and each action defined within your controller maps to URI within the controller name URI.
-
-
-
-
