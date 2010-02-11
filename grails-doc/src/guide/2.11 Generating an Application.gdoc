@@ -1,6 +1,0 @@
-To get started quickly with Grails it is often useful to use a feature called [Scaffolding|guide:scaffolding] to generate the skeleton of an application. To do this use one of the @generate-*@ commands such as [generate-all|commandLine], which will generate a [controller|guide:controllers] and the relevant [views|guide:gsp]:
-
-{code}
-grails generate-all Book
-{code}
-
