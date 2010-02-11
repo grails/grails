@@ -1,6 +1,0 @@
-A key thing to remember about Grails is that under the surface Grails is using "Hibernate":http://www.hibernate.org/ for persistence. If you are coming from a background of using "ActiveRecord":http://wiki.rubyonrails.org/rails/pages/ActiveRecord or "iBatis":http://ibatis.apache.org/, Hibernate's "session" model may feel a little strange.
-
-Essentially, Grails automatically binds a Hibernate session to the currently executing request. This allows you to use the [save|domainClasses] and [delete|domainClasses] methods as well as other GORM methods transparently.
-
-
-

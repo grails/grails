@@ -1,7 +1,0 @@
-Grails supports Internationalization (i18n) out of the box through the underlying Spring MVC support for internationalization. With Grails you are able to customize the text that appears in any view based on the users Locale. To quote the javadoc for the [Locale|api:java.util.Locale] class in Java:
-
-{quote}
-A Locale object represents a specific geographical, political, or cultural region. An operation that requires a Locale to perform its task is called locale-sensitive and uses the Locale  to tailor information for the user. For example, displaying a number is a locale-sensitive operation--the number should be formatted according to the customs/conventions of the user's native country, region, or culture.
-{quote}
-
-A Locale is made up of a [language code|http://www.loc.gov/standards/iso639-2/englangn.html] and a [country code|http://www.iso.ch/iso/en/prods-services/iso3166ma/02iso-3166-code-lists/list-en1.html]. For example "en_US" is the code for US english, whilst "en_GB" is the for British English.

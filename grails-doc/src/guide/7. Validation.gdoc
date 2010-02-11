@@ -1,6 +1,0 @@
-Grails validation capability is built on [Spring's Validator API|http://static.springframework.org/spring/docs/2.0.x/api/org/springframework/validation/package-summary.html] and data binding capabilities. However Grails takes this further and provides a unified way to define validation "constraints" with its constraints mechanism.
-
-Constraints in Grails are a way to declaratively specify validation rules. Most commonly they are applied to [domain classes|guide:GORM], however [URL Mappings|guide:mappings] and [Command Objects|guide:commandObjects] also support constraints.
-
-
-

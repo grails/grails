@@ -1,3 +1,0 @@
-class HomeController {
-    def index = {}
-}
